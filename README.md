@@ -11,6 +11,6 @@ Follow us on [twitter](https://twitter.com/vanilo_io).
 
 See the foundations of Vanilo, that have already been settled:
 
-- Concord: Laravel Extension for building modular applications. See [repo](https://github.com/artkonekt/concord) and [documentation](artkonekt.github.io/concord).
+- Concord: Laravel Extension for building modular applications. See [repo](https://github.com/artkonekt/concord) and [documentation](https://artkonekt.github.io/concord).
 - AppShell: Admin, [users](https://github.com/artkonekt/user) (Laravel's default slightly extended), [acl](https://github.com/artkonekt/acl), [menus](https://github.com/artkonekt/menu), [clients](https://github.com/artkonekt/client), [addressing](https://github.com/artkonekt/address)
 
