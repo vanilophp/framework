@@ -74,5 +74,4 @@ abstract class TestCase extends Orchestra
             ProductModule::class
         ]);
     }
-
 }

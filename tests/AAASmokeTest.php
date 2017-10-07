@@ -12,7 +12,6 @@
 
 namespace Konekt\Product\Tests;
 
-
 class AAASmokeTest extends TestCase
 {
     const MIN_PHP_VERSION = '7.0.0';
@@ -37,5 +36,4 @@ class AAASmokeTest extends TestCase
             'PHP version ' . self::MIN_PHP_VERSION . ' or greater is required but only '
             . PHP_VERSION . ' found.');
     }
-
 }
