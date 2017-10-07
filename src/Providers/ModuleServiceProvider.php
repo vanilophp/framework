@@ -13,14 +13,16 @@
 namespace Konekt\Product\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Konekt\Product\Models\Product;
+use Konekt\Product\Models\ProductState;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-
+        Product::class
     ];
 
     protected $enums = [
-
+        ProductState::class
     ];
 }

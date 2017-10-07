@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Konekt\Product\Models\ProductStateProxy;
 
 class CreateProductsTable extends Migration
 {
@@ -13,10 +14,17 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->char('id', 2);
+            $table->increments('id');
             $table->string('name');
-            $table->boolean('is_active');
-            $table->primary('id');
+            $table->string('slug')->nullable();
+            $table->string('sku');
+            $table->text('excerpt')->nullable();
+            $table->text('description')->nullable();
+            $table->enum('state', ProductStateProxy::values())->default(ProductStateProxy::defaultValue());
+            $table->text('meta_keywords')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
