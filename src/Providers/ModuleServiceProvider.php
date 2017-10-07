@@ -23,5 +23,4 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $enums = [
 
     ];
-
 }
