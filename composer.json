@@ -28,5 +28,10 @@
         "psr-4": {
             "Konekt\\Product\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
