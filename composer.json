@@ -1,0 +1,32 @@
+{
+    "name": "konekt/product",
+    "description": "Product Module",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["product", "ecommerce", "konekt", "artkonekt", "laravel", "eloquent"],
+    "support": {
+        "source": "https://github.com/artkonekt/product"
+    },
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "konekt/concord": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.3",
+        "orchestra/testbench": "~3.5"
+    },
+    "autoload": {
+        "psr-4": { "Konekt\\Product\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Konekt\\Product\\Tests\\": "tests/"
+        }
+    }
+}
