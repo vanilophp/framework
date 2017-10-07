@@ -12,7 +12,6 @@
 
 namespace Konekt\Product\Tests;
 
-
 use Konekt\Product\Models\Product;
 use Konekt\Product\Models\ProductProxy;
 
@@ -54,13 +53,13 @@ class BaseProductAttributesTest extends TestCase
     public function all_fields_can_be_properly_set()
     {
         $product = Product::create([
-            'name' => 'Maxi Baxi 2000',
-            'sku' => 'MXB-2000',
-            'slug' => 'maxi-baxi-2000',
-            'excerpt' => 'Maxi Baxi 2000 is the THING you always have dreamt of',
-            'description' => 'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
-            'state' => 'active',
-            'meta_keywords' => 'maxi, baxi, dreams',
+            'name'             => 'Maxi Baxi 2000',
+            'sku'              => 'MXB-2000',
+            'slug'             => 'maxi-baxi-2000',
+            'excerpt'          => 'Maxi Baxi 2000 is the THING you always have dreamt of',
+            'description'      => 'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
+            'state'            => 'active',
+            'meta_keywords'    => 'maxi, baxi, dreams',
             'meta_description' => 'The THING you always have dreamt of'
         ]);
 
@@ -74,5 +73,4 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('maxi, baxi, dreams', $product->meta_keywords);
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
     }
-
 }

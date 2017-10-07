@@ -12,7 +12,6 @@
 
 namespace Konekt\Product\Models;
 
-
 use Konekt\Enum\Enum;
 use Konekt\Product\Contracts\ProductState as ProductStateContract;
 
@@ -35,5 +34,4 @@ class ProductState extends Enum implements ProductStateContract
     {
         return in_array($this->value, $this->activeStates);
     }
-
 }

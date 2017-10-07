@@ -12,7 +12,6 @@
 
 namespace Konekt\Product\Tests;
 
-
 use Konekt\Enum\Enum;
 use Konekt\Product\Models\Product;
 use Konekt\Product\Models\ProductState;
@@ -119,5 +118,4 @@ class ProductStateTest extends TestCase
 
         $this->assertFalse($product->is_active);
     }
-
 }

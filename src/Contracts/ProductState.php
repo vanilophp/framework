@@ -12,7 +12,6 @@
 
 namespace Konekt\Product\Contracts;
 
-
 interface ProductState
 {
     /**
@@ -21,5 +20,4 @@ interface ProductState
      * @return boolean
      */
     public function isActive();
-
 }
