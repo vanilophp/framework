@@ -1,12 +1,12 @@
 language: php
-
 php:
-  - 7.0
-  - 7.1
-
-
+- 7.0
+- 7.1
 before_script:
-  - composer install --no-interaction
-
+- composer install --no-interaction
 script:
-  - vendor/bin/phpunit -c phpunit.xml tests/
+- vendor/bin/phpunit -c phpunit.xml tests/
+notifications:
+  email: false
+  slack:
+    secure: WFYBK246OuWygeoDv1WDDqGh0SZPnpx84WavJy1a7pwer8kI0t4D1NashC7qXO+AKw5FhyrehJBCTlH973IziI03j/ky1PZI1pE302WpKWNP+IZ7eLgvqvJjw1YFfyrGblBzdIdkE8L2pp7cFWS7E1nyuIs6Q5Xsa1nwcdy+VQS7ioSStDWQaUx/NjEPW8VecWZqE6m9yp67wdZEd4nqaAxzN7zBPGlLnZgvlDbaA6DbJGAkY/utKqfOA5E7vmO28a3g2G6UaxqLIs0tf/dG25qlWv81y/J0ZySZ6zM1Q3xJqHtCWAM/PZfZKinltlYR2duc+Re/jAfjb/3QWBG1TuWwMwhTTFf68xW3F+OGf0uBBrvZPHqI8PFr4c6ZLCDdLxurTOBXPy+DCiMAwjCDLykd31KPy5n+jR8NroIQ5YS86FFtbTXRdxQCaBGSme1wpGqyTea2F8t3XAQnPSuFlL6KiYNyErBdsYfWdjcXJnJCbStXn/vK3ksFB2NiZa1Lfw3W1Tzfx8YR4O/lkP+LWwheKRpeFdwZs3zF5M5Sp3nPSTsibnmw7yqkpE1K5BopFq08iMKfIJdUX225quQ9eRYv3hTdyZKbrCJTMRzQny6w17/ARX/K7KGkE2s/UDiOss+AL5zXcnROogasilmnimoPVxv1oWyT9FO+iaZzuOw=
