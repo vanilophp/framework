@@ -1,0 +1,30 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//unpkg.com/docsify/themes/vue.css">
+    <title>Vanilo Documentation</title>
+</head>
+<body>
+<div id="app">Loading documentation...</div>
+</body>
+<script>
+    window.$docsify = {
+        name: 'Vanilo E-commerce',
+        loadSidebar: true
+    }
+</script>
+<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-php.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-php-extras.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
+
+<script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('sw.js')
+    }
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+{
+    "name": "konekt/vanilo",
+    "description": "E-commerce Framework for Laravel",
+    "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/artkonekt/vanilo"
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "konekt/appshell": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Konekt\\Vanilo\\": "src"
+        }
+    },
+    "require-dev": {
+        "monolog/monolog": "^1.22",
+        "orchestra/testbench": "~3.4.2",
+        "phpunit/phpunit" : "~6.2"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Konekt\\Vanilo\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
