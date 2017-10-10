@@ -16,7 +16,8 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "konekt/appshell": "dev-master"
+        "konekt/appshell": "dev-master",
+        "konekt/product": "dev-master"
     },
     "autoload": {
         "psr-4": {
