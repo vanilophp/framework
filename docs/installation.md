@@ -25,8 +25,9 @@ Edit `config/concord.php` to have this content:
 
 return [
     'modules' => [
+        Konekt\AppShell\Providers\ModuleServiceProvider::class,
         Konekt\Vanilo\Providers\ModuleServiceProvider::class,
-        Konekt\AppShell\Providers\ModuleServiceProvider::class
+        Konekt\Product\Providers\ModuleServiceProvider::class   
     ]
 ];
 ```
