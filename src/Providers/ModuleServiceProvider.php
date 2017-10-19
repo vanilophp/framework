@@ -12,13 +12,35 @@
 
 namespace Konekt\Vanilo\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
+use Konekt\Concord\BaseBoxServiceProvider;
+use Konekt\Vanilo\Http\Requests\CreateProduct;
+use Konekt\Vanilo\Http\Requests\UpdateProduct;
+use Menu;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends BaseBoxServiceProvider
 {
-    protected $models = [
+    use HasBreadcrumbs;
+
+    protected $requests = [
+        CreateProduct::class,
+        UpdateProduct::class
     ];
 
-    protected $enums = [
-    ];
+    public function boot()
+    {
+        parent::boot();
+
+        $this->loadBreadcrumbs();
+
+        if ($menu = Menu::get('appshell')) {
+            $menu->addItem('vanilo', __('Vanilo'));
+
+            $catalog = $menu->addItem('catalog', __('Catalog'))->data('icon', 'view-dashboard');
+            $catalog->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
+
+        }
+    }
+
+
 }
