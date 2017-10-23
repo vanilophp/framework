@@ -34,9 +34,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->loadBreadcrumbs();
 
         if ($menu = Menu::get('appshell')) {
-            $menu->addItem('vanilo', __('Vanilo'));
-
-            $catalog = $menu->addItem('catalog', __('Catalog'))->data('icon', 'view-dashboard');
+            $catalog = $menu->addItem('catalog', __('Catalog'));
             $catalog->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
 
         }
