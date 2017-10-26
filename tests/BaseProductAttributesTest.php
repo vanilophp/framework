@@ -95,12 +95,34 @@ class BaseProductAttributesTest extends TestCase
     public function the_title_method_returns_the_title_if_the_field_is_set()
     {
         $product = Product::create([
-            'name'  => 'Hello Why?',
-            'sku'   => 'NEEDED-2',
-            'title' => 'Buy the book Hello Why? with discount'
+            'name'      => 'Hello Why?',
+            'sku'       => 'NEEDED-2',
+            'ext_title' => 'Buy the book Hello Why? with discount'
         ]);
 
         $this->assertEquals('Buy the book Hello Why? with discount', $product->title());
+    }
 
+    /**
+     * @test
+     */
+    public function the_title_can_be_returned_via_property_returns_as_well()
+    {
+        $productWithTitle = Product::create([
+            'name'      => 'Hello When?',
+            'sku'       => 'NEEDED-3',
+            'ext_title' => 'Buy Kitty Kats'
+        ]);
+
+        $productWithoutTitle = Product::create([
+            'name'      => 'Hello Where?',
+            'sku'       => 'NEEDED-4'
+        ]);
+
+        $this->assertEquals('Buy Kitty Kats', $productWithTitle->title);
+        $this->assertEquals($productWithTitle->title(), $productWithTitle->title);
+
+        $this->assertEquals('Hello Where?', $productWithoutTitle->title);
+        $this->assertEquals($productWithoutTitle->title(), $productWithoutTitle->title);
     }
 }
