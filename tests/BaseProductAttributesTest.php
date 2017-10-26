@@ -68,7 +68,8 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('MXB-2000', $product->sku);
         $this->assertEquals('maxi-baxi-2000', $product->slug);
         $this->assertEquals('Maxi Baxi 2000 is the THING you always have dreamt of', $product->excerpt);
-        $this->assertEquals('Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc', $product->description);
+        $this->assertEquals('Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
+            $product->description);
         $this->assertEquals('active', $product->state->value());
         $this->assertEquals('maxi, baxi, dreams', $product->meta_keywords);
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
@@ -81,7 +82,8 @@ class BaseProductAttributesTest extends TestCase
     public function the_title_method_returns_name_if_no_title_was_set()
     {
         $product = Product::create([
-            'name' => 'Hello What?'
+            'name' => 'Hello What?',
+            'sku'  => 'NEEDED-1'
         ]);
 
         $this->assertEquals('Hello What?', $product->title());
@@ -94,6 +96,7 @@ class BaseProductAttributesTest extends TestCase
     {
         $product = Product::create([
             'name'  => 'Hello Why?',
+            'sku'   => 'NEEDED-2',
             'title' => 'Buy the book Hello Why? with discount'
         ]);
 
