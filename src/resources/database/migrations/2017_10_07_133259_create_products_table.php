@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('excerpt')->nullable();
             $table->text('description')->nullable();
             $table->enum('state', ProductStateProxy::values())->default(ProductStateProxy::defaultValue());
+            $table->string('title', 511)->nullable();
             $table->text('meta_keywords')->nullable();
             $table->text('meta_description')->nullable();
             $table->softDeletes();

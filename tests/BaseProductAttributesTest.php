@@ -73,4 +73,31 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('maxi, baxi, dreams', $product->meta_keywords);
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
     }
+
+
+    /**
+     * @test
+     */
+    public function the_title_method_returns_name_if_no_title_was_set()
+    {
+        $product = Product::create([
+            'name' => 'Hello What?'
+        ]);
+
+        $this->assertEquals('Hello What?', $product->title());
+    }
+
+    /**
+     * @test
+     */
+    public function the_title_method_returns_the_title_if_the_field_is_set()
+    {
+        $product = Product::create([
+            'name'  => 'Hello Why?',
+            'title' => 'Buy the book Hello Why? with discount'
+        ]);
+
+        $this->assertEquals('Buy the book Hello Why? with discount', $product->title());
+
+    }
 }
