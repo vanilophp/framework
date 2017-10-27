@@ -15,7 +15,13 @@
                 </div>
                 <div class="card-block">
 
-                    {!! Form::model($product, ['route' => ['vanilo.product.update', $product], 'method' => 'PUT']) !!}
+                    <?php $formClass = $errors->isEmpty() ? '' : 'was-walidated'; ?>
+                    {!! Form::model($product, [
+                            'route'  => ['vanilo.product.update', $product],
+                            'method' => 'PUT',
+                            'class' => $formClass
+                            ]
+                    ) !!}
 
                     @include('vanilo::product._form')
 
