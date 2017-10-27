@@ -13,6 +13,7 @@
 namespace Konekt\Vanilo\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
+use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
 use Konekt\Vanilo\Providers\ModuleServiceProvider as VaniloModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -77,6 +78,7 @@ abstract class TestCase extends Orchestra
     {
         parent::resolveApplicationConfiguration($app);
         $app['config']->set('concord.modules', [
+            AppShellModule::class,
             VaniloModule::class
         ]);
     }
