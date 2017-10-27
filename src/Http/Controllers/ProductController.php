@@ -12,7 +12,6 @@
 
 namespace Konekt\Vanilo\Http\Controllers;
 
-
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Konekt\Product\Contracts\Product;
 use Konekt\Product\Models\ProductProxy;
@@ -129,7 +128,6 @@ class ProductController extends BaseController
             $product->delete();
 
             flash()->warning(__(':name has been deleted', ['name' => $name]));
-
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
@@ -138,5 +136,4 @@ class ProductController extends BaseController
 
         return redirect(route('vanilo.product.index'));
     }
-
 }

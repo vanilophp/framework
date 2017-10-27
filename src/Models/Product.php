@@ -11,7 +11,6 @@
 
 namespace Konekt\Vanilo\Models;
 
-
 use Cviebrock\EloquentSluggable\Sluggable;
 
 class Product extends \Konekt\Product\Models\Product
@@ -26,6 +25,4 @@ class Product extends \Konekt\Product\Models\Product
             ]
         ];
     }
-
-
 }

@@ -12,7 +12,6 @@
 
 namespace Konekt\Vanilo\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Konekt\Product\Models\ProductStateProxy;
@@ -39,5 +38,4 @@ class CreateProduct extends FormRequest implements CreateProductContract
     {
         return true;
     }
-
 }

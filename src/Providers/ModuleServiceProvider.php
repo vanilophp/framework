@@ -41,9 +41,6 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         if ($menu = Menu::get('appshell')) {
             $catalog = $menu->addItem('catalog', __('Catalog'));
             $catalog->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
-
         }
     }
-
-
 }
