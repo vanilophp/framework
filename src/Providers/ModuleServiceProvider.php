@@ -12,12 +12,13 @@
 
 namespace Konekt\Cart\Providers;
 
+use Konekt\Cart\Models\Cart;
 use Konekt\Concord\BaseModuleServiceProvider;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-
+        Cart::class
     ];
 
     protected $enums = [
