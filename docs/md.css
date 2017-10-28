@@ -1,0 +1,105 @@
+/**
+ * Stylesheet for markdown docs
+ */
+@import url('https://fonts.googleapis.com/css?family=Miriam+Libre:400|Source+Sans+Pro:400,700,400italic,700italic');
+
+#readme > h3 {
+    display: none;
+}
+
+html {
+    background-color: #d5d3d3;
+    margin: 1em;
+}
+
+body {
+    width: 60rem;
+    max-width: 95%;
+    margin: auto;
+    background-color: white;
+    padding: 1em;
+}
+
+body, p, ul, ol, table {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    color: #2c2d30;
+}
+
+a, a:visited {
+    color: #A50B5E;
+}
+
+table {
+    font-size: 0.87em;
+    width: 100%;
+    border-spacing: 0;
+}
+
+td, th {
+    padding: 3px;
+}
+
+th {
+    border-bottom: 1px solid #d5d3d3;
+}
+
+table, pre {
+    margin: 1em 0.83em;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Miriam Libre", sans-serif;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+h4, h5, h6 {
+    color: #6e6e6e;
+}
+
+h1 {
+    font-size: 2em;
+    border-bottom: 1px solid #A50B5E;
+    padding-bottom: 0.5em;
+    color: #A50B5E;
+}
+
+h1:first-of-type {
+    text-align: center;
+}
+
+h2 {
+    border-bottom: 1px solid #7e7e7e;
+    padding-bottom: 0.5em;
+    color: #2c2d30;
+}
+
+h3 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5em;
+    color: #555;
+}
+
+code {
+    font-family: 'DejaVu Sans Mono', monospace;
+}
+
+pre {
+    font-size: 0.83em;
+    padding: 0.625em;
+    background-color: #d5d3d3;
+    border-radius: 4px
+}
+
+blockquote {
+    border-left: 4px solid #A50B5E;
+    margin: 0;
+    padding: 0.83em 1.83em;
+}
+
+blockquote p {
+    color: #777;
+    margin: 0;
+}
+
