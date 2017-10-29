@@ -10,7 +10,7 @@
  */
 
 
-namespace Konekt\Vanilo\Tests;
+namespace Vanilo\VaniloFramework\Tests;
 
 class AAASmokeTest extends TestCase
 {

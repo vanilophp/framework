@@ -10,11 +10,11 @@
  */
 
 
-namespace Konekt\Vanilo\Tests;
+namespace Vanilo\VaniloFramework\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
-use Konekt\Vanilo\Providers\ModuleServiceProvider as VaniloModule;
+use Vanilo\VaniloFramework\Providers\ModuleServiceProvider as VaniloModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 

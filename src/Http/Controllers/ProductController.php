@@ -10,14 +10,14 @@
  */
 
 
-namespace Konekt\Vanilo\Http\Controllers;
+namespace Vanilo\VaniloFramework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
-use Konekt\Product\Contracts\Product;
-use Konekt\Product\Models\ProductProxy;
-use Konekt\Product\Models\ProductStateProxy;
-use Konekt\Vanilo\Contracts\Requests\CreateProduct;
-use Konekt\Vanilo\Contracts\Requests\UpdateProduct;
+use Vanilo\Product\Contracts\Product;
+use Vanilo\Product\Models\ProductProxy;
+use Vanilo\Product\Models\ProductStateProxy;
+use Vanilo\VaniloFramework\Contracts\Requests\CreateProduct;
+use Vanilo\VaniloFramework\Contracts\Requests\UpdateProduct;
 
 class ProductController extends BaseController
 {

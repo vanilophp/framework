@@ -27,7 +27,7 @@ return [
     'modules' => [
         Konekt\AppShell\Providers\ModuleServiceProvider::class,
         Konekt\Vanilo\Providers\ModuleServiceProvider::class,
-        Konekt\Product\Providers\ModuleServiceProvider::class   
+        Vanilo\Product\Providers\ModuleServiceProvider::class   
     ]
 ];
 ```

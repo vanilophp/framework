@@ -2,7 +2,7 @@
 
 return [
     'modules' => [
-        Konekt\Product\Providers\ModuleServiceProvider::class => []
+        Vanilo\Product\Providers\ModuleServiceProvider::class => []
     ],
     'views' => [
         'namespace' => 'vanilo'

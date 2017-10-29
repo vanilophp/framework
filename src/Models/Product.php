@@ -9,11 +9,11 @@
  *
  */
 
-namespace Konekt\Vanilo\Models;
+namespace Vanilo\VaniloFramework\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Product extends \Konekt\Product\Models\Product
+class Product extends \Vanilo\Product\Models\Product
 {
     use Sluggable;
 

@@ -10,12 +10,12 @@
  */
 
 
-namespace Konekt\Vanilo\Http\Requests;
+namespace Vanilo\VaniloFramework\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Konekt\Product\Models\ProductStateProxy;
-use Konekt\Vanilo\Contracts\Requests\UpdateProduct as UpdateProductContract;
+use Vanilo\Product\Models\ProductStateProxy;
+use Vanilo\VaniloFramework\Contracts\Requests\UpdateProduct as UpdateProductContract;
 
 class UpdateProduct extends FormRequest implements UpdateProductContract
 {

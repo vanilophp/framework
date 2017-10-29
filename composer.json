@@ -1,5 +1,5 @@
 {
-    "name": "konekt/vanilo",
+    "name": "vanilo/framework",
     "description": "E-commerce Framework for Laravel",
     "type": "library",
     "minimum-stability": "dev",
@@ -17,11 +17,12 @@
     "require": {
         "php": ">=7.0.0",
         "konekt/appshell": "dev-master",
-        "konekt/product": "dev-master"
+        "vanilo/product": "dev-master",
+        "vanilo/cart": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Konekt\\Vanilo\\": "src"
+            "Vanilo\\VaniloFramework\\": "src"
         }
     },
     "require-dev": {
@@ -31,7 +32,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Konekt\\Vanilo\\Tests\\": "tests"
+            "Vanilo\\VaniloFramework\\Tests\\": "tests"
         }
     },
     "scripts": {
