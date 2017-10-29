@@ -25,8 +25,8 @@ class UpdateProduct extends FormRequest implements UpdateProductContract
     public function rules()
     {
         return [
-            'name'  => 'required|min:2|max:255',
-            'sku'   => [
+            'name' => 'required|min:2|max:255',
+            'sku'  => [
                 'required',
                 Rule::unique('products')->ignore($this->route('product')->id),
                 ],
