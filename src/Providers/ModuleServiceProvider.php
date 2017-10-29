@@ -12,7 +12,8 @@
 
 namespace Vanilo\Cart\Providers;
 
-use Vanilo\Cart\Contracts\CartManager;
+use Vanilo\Cart\CartManager;
+use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;
 use Konekt\Concord\BaseModuleServiceProvider;
 
@@ -30,8 +31,10 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     {
         parent::register();
 
+        $this->app->bind(CartManagerContract::class, CartManager::class);
+
         $this->app->singleton('vanilo.cart', function ($app) {
-            return $app->make(CartManager::class);
+            return $app->make(CartManagerContract::class);
         });
     }
 

@@ -13,14 +13,17 @@
 namespace Vanilo\Cart\Tests;
 
 
+use Vanilo\Cart\Facades\Cart;
+
 class CartFacadeTest extends TestCase
 {
     /**
      * @test
      */
-    public function the_cart_facade_returns_a_proper_instance()
+    public function the_cart_facade_returns_a_nonexistent_cart_by_default()
     {
-        //$this->assertInstanceOf();
+        $this->assertFalse(Cart::exists());
+        $this->assertNull(Cart::model());
     }
 
 }

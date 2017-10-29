@@ -37,6 +37,13 @@ abstract class TestCase extends Orchestra
         ];
     }
 
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Cart' => 'Vanilo\Cart\Facades\Cart'
+        ];
+    }
+
     /**
      * Set up the environment.
      *
