@@ -43,4 +43,19 @@ class Product extends Model implements ProductContract
     {
         return $this->isActive();
     }
+
+    public function title()
+    {
+        return isset($this->ext_title) ? $this->ext_title : $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitleAttribute()
+    {
+        return $this->title();
+    }
+
+
 }

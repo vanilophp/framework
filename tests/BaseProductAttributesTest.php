@@ -68,9 +68,61 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('MXB-2000', $product->sku);
         $this->assertEquals('maxi-baxi-2000', $product->slug);
         $this->assertEquals('Maxi Baxi 2000 is the THING you always have dreamt of', $product->excerpt);
-        $this->assertEquals('Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc', $product->description);
+        $this->assertEquals('Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
+            $product->description);
         $this->assertEquals('active', $product->state->value());
         $this->assertEquals('maxi, baxi, dreams', $product->meta_keywords);
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
+    }
+
+
+    /**
+     * @test
+     */
+    public function the_title_method_returns_name_if_no_title_was_set()
+    {
+        $product = Product::create([
+            'name' => 'Hello What?',
+            'sku'  => 'NEEDED-1'
+        ]);
+
+        $this->assertEquals('Hello What?', $product->title());
+    }
+
+    /**
+     * @test
+     */
+    public function the_title_method_returns_the_title_if_the_field_is_set()
+    {
+        $product = Product::create([
+            'name'      => 'Hello Why?',
+            'sku'       => 'NEEDED-2',
+            'ext_title' => 'Buy the book Hello Why? with discount'
+        ]);
+
+        $this->assertEquals('Buy the book Hello Why? with discount', $product->title());
+    }
+
+    /**
+     * @test
+     */
+    public function the_title_can_be_returned_via_property_returns_as_well()
+    {
+        $productWithTitle = Product::create([
+            'name'      => 'Hello When?',
+            'sku'       => 'NEEDED-3',
+            'ext_title' => 'Buy Kitty Kats'
+        ]);
+
+        $productWithoutTitle = Product::create([
+            'name'      => 'Hello Where?',
+            'sku'       => 'NEEDED-4'
+        ]);
+
+        $this->assertEquals('Buy Kitty Kats', $productWithTitle->title);
+        $this->assertEquals($productWithTitle->title(), $productWithTitle->title);
+
+        $this->assertEquals('Hello Where?', $productWithoutTitle->title);
+        $this->assertEquals($productWithoutTitle->title(), $productWithoutTitle->title);
     }
 }
