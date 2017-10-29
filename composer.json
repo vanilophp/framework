@@ -1,9 +1,9 @@
 {
-    "name": "konekt/cart",
+    "name": "vanilo/cart",
     "description": "Cart Module",
     "type": "library",
     "license": "MIT",
-    "keywords": ["cart", "ecommerce", "konekt", "artkonekt", "laravel", "eloquent"],
+    "keywords": ["cart", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
         "source": "https://github.com/artkonekt/cart"
     },
@@ -22,11 +22,11 @@
         "orchestra/testbench": "^3.4.2"
     },
     "autoload": {
-        "psr-4": { "Konekt\\Cart\\": "src/" }
+        "psr-4": { "Vanilo\\Cart\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "Konekt\\Cart\\Tests\\": "tests/"
+            "Vanilo\\Cart\\Tests\\": "tests/"
         }
     },
     "extra": {

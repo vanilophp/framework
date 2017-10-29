@@ -10,7 +10,7 @@
  */
 
 
-namespace Konekt\Cart\Facades;
+namespace Vanilo\Cart\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
@@ -24,6 +24,6 @@ class Cart extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'konekt.cart';
+        return 'vanilo.cart';
     }
 }

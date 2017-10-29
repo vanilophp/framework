@@ -10,10 +10,10 @@
  */
 
 
-namespace Konekt\Cart;
+namespace Vanilo\Cart;
 
 
-use Konekt\Cart\Contracts\CartManager as CartManagerContract;
+use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 
 class CartManager implements CartManagerContract
 {

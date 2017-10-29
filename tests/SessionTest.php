@@ -10,7 +10,7 @@
  */
 
 
-namespace Konekt\Cart\Tests;
+namespace Vanilo\Cart\Tests;
 
 
 /**

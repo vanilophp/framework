@@ -9,7 +9,7 @@
  *
  */
 
-namespace Konekt\Cart\Contracts;
+namespace Vanilo\Cart\Contracts;
 
 
 interface Buyable

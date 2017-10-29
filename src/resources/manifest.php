@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'name'    => 'Konekt Cart Module',
+    'name'    => 'Vanilo Cart Module',
     'version' => '0.1.0'
 ];

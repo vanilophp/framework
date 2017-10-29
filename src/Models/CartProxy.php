@@ -10,7 +10,7 @@
  */
 
 
-namespace Konekt\Cart\Models;
+namespace Vanilo\Cart\Models;
 
 
 use Konekt\Concord\Proxies\ModelProxy;

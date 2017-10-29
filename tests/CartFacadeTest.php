@@ -10,15 +10,17 @@
  */
 
 
-namespace Konekt\Cart\Tests;
+namespace Vanilo\Cart\Tests;
 
 
 class CartFacadeTest extends TestCase
 {
+    /**
+     * @test
+     */
     public function the_cart_facade_returns_a_proper_instance()
     {
-        $this->assertInstanceOf();
-
+        //$this->assertInstanceOf();
     }
 
 }

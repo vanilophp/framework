@@ -10,10 +10,10 @@
  */
 
 
-namespace Konekt\Cart\Providers;
+namespace Vanilo\Cart\Providers;
 
-use Konekt\Cart\Contracts\CartManager;
-use Konekt\Cart\Models\Cart;
+use Vanilo\Cart\Contracts\CartManager;
+use Vanilo\Cart\Models\Cart;
 use Konekt\Concord\BaseModuleServiceProvider;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -30,7 +30,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     {
         parent::register();
 
-        $this->app->singleton('konekt.cart', function ($app) {
+        $this->app->singleton('vanilo.cart', function ($app) {
             return $app->make(CartManager::class);
         });
     }
