@@ -1,6 +1,6 @@
 {
     "name": "vanilo/cart",
-    "description": "Cart Module",
+    "description": "Vanilo Cart Module",
     "type": "library",
     "license": "MIT",
     "keywords": ["cart", "ecommerce", "vanilo", "artkonekt", "laravel"],

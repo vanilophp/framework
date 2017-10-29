@@ -16,11 +16,13 @@ use Vanilo\Cart\CartManager;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Cart\Models\CartItem;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-        Cart::class
+        Cart::class,
+        CartItem::class
     ];
 
     protected $enums = [

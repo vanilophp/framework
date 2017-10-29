@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the CartFacade Test class.
+ * Contains the NonexistentCart Test class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -15,15 +15,23 @@ namespace Vanilo\Cart\Tests;
 
 use Vanilo\Cart\Facades\Cart;
 
-class CartFacadeTest extends TestCase
+class NonexistentCartTest extends TestCase
 {
     /**
      * @test
      */
     public function the_cart_facade_returns_a_nonexistent_cart_by_default()
     {
-        $this->assertFalse(Cart::exists());
+        $this->assertTrue(Cart::doesNotExist());
         $this->assertNull(Cart::model());
+    }
+
+    /**
+     * @test
+     */
+    public function item_count_is_zero_for_nonexistent_carts()
+    {
+        $this->assertEquals(0, Cart::itemCount());
     }
 
 }

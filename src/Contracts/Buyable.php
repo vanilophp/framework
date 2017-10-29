@@ -15,6 +15,13 @@ namespace Vanilo\Cart\Contracts;
 interface Buyable
 {
     /**
+     * Returns the id of the _thing_
+     *
+     * @return int
+     */
+    public function getId();
+
+    /**
      * Returns the name of the _thing_
      *
      * @return string
