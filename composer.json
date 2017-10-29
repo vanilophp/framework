@@ -1,9 +1,9 @@
 {
-    "name": "konekt/product",
-    "description": "Product Module",
+    "name": "vanilo/product",
+    "description": "Vanilo Product Module",
     "type": "library",
     "license": "MIT",
-    "keywords": ["product", "ecommerce", "konekt", "artkonekt", "laravel", "eloquent"],
+    "keywords": ["product", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
         "source": "https://github.com/artkonekt/product"
     },
@@ -22,11 +22,11 @@
         "orchestra/testbench": "~3.5"
     },
     "autoload": {
-        "psr-4": { "Konekt\\Product\\": "src/" }
+        "psr-4": { "Vanilo\\Product\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "Konekt\\Product\\Tests\\": "tests/"
+            "Vanilo\\Product\\Tests\\": "tests/"
         }
     },
     "extra": {

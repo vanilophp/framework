@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the AAASmokeTest.php class.
+ * Contains the AAASmokeTest class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,7 +10,7 @@
  */
 
 
-namespace Konekt\Product\Tests;
+namespace Vanilo\Product\Tests;
 
 class AAASmokeTest extends TestCase
 {

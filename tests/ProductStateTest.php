@@ -10,12 +10,12 @@
  */
 
 
-namespace Konekt\Product\Tests;
+namespace Vanilo\Product\Tests;
 
 use Konekt\Enum\Enum;
-use Konekt\Product\Models\Product;
-use Konekt\Product\Models\ProductState;
-use Konekt\Product\Models\ProductStateProxy;
+use Vanilo\Product\Models\Product;
+use Vanilo\Product\Models\ProductState;
+use Vanilo\Product\Models\ProductStateProxy;
 
 class ProductStateTest extends TestCase
 {

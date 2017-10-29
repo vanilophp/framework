@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ProductState interface.
+ * Contains the ProductState enum interface.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,7 +10,7 @@
  */
 
 
-namespace Konekt\Product\Contracts;
+namespace Vanilo\Product\Contracts;
 
 interface ProductState
 {

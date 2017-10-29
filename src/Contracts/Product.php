@@ -10,7 +10,7 @@
  */
 
 
-namespace Konekt\Product\Contracts;
+namespace Vanilo\Product\Contracts;
 
 interface Product
 {

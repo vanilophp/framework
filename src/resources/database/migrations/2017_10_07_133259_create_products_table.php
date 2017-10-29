@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Konekt\Product\Models\ProductStateProxy;
+use Vanilo\Product\Models\ProductStateProxy;
 
 class CreateProductsTable extends Migration
 {

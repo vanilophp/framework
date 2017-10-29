@@ -10,10 +10,10 @@
  */
 
 
-namespace Konekt\Product\Models;
+namespace Vanilo\Product\Models;
 
 use Konekt\Enum\Enum;
-use Konekt\Product\Contracts\ProductState as ProductStateContract;
+use Vanilo\Product\Contracts\ProductState as ProductStateContract;
 
 class ProductState extends Enum implements ProductStateContract
 {

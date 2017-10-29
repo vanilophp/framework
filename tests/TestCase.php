@@ -10,9 +10,9 @@
  */
 
 
-namespace Konekt\Product\Tests;
+namespace Vanilo\Product\Tests;
 
-use Konekt\Product\Providers\ModuleServiceProvider as ProductModule;
+use Vanilo\Product\Providers\ModuleServiceProvider as ProductModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 

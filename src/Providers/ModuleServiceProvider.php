@@ -10,11 +10,11 @@
  */
 
 
-namespace Konekt\Product\Providers;
+namespace Vanilo\Product\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
-use Konekt\Product\Models\Product;
-use Konekt\Product\Models\ProductState;
+use Vanilo\Product\Models\Product;
+use Vanilo\Product\Models\ProductState;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {

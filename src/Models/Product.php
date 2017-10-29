@@ -10,11 +10,11 @@
  */
 
 
-namespace Konekt\Product\Models;
+namespace Vanilo\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
-use Konekt\Product\Contracts\Product as ProductContract;
+use Vanilo\Product\Contracts\Product as ProductContract;
 
 class Product extends Model implements ProductContract
 {

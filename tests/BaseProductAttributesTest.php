@@ -10,10 +10,10 @@
  */
 
 
-namespace Konekt\Product\Tests;
+namespace Vanilo\Product\Tests;
 
-use Konekt\Product\Models\Product;
-use Konekt\Product\Models\ProductProxy;
+use Vanilo\Product\Models\Product;
+use Vanilo\Product\Models\ProductProxy;
 
 class BaseProductAttributesTest extends TestCase
 {
