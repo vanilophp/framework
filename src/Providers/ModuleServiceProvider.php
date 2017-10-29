@@ -12,6 +12,7 @@
 
 namespace Konekt\Cart\Providers;
 
+use Konekt\Cart\Contracts\CartManager;
 use Konekt\Cart\Models\Cart;
 use Konekt\Concord\BaseModuleServiceProvider;
 
@@ -24,4 +25,15 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $enums = [
 
     ];
+
+    public function register()
+    {
+        parent::register();
+
+        $this->app->singleton('konekt.cart', function ($app) {
+            return $app->make(CartManager::class);
+        });
+    }
+
+
 }

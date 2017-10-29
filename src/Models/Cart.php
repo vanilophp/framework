@@ -20,40 +20,4 @@ class Cart extends Model implements CartContract
 {
     protected $guarded = ['id'];
 
-    public function addItem($product, $qty = 1, $params = [])
-    {
-        // TODO: Implement addItem() method.
-    }
-
-    public function removeItem($item)
-    {
-        // TODO: Implement removeItem() method.
-    }
-
-    public function removeProduct($product)
-    {
-        // TODO: Implement removeProduct() method.
-    }
-
-    public function clear()
-    {
-        // TODO: Implement clear() method.
-    }
-
-    public function itemCount()
-    {
-        // TODO: Implement itemCount() method.
-    }
-
-    public static function doesExist()
-    {
-        // TODO: Implement doesExist() method.
-    }
-
-    public static function doesNotExist()
-    {
-        // TODO: Implement doesNotExist() method.
-    }
-
-
 }
