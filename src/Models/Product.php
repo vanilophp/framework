@@ -9,7 +9,7 @@
  *
  */
 
-namespace Vanilo\VaniloFramework\Models;
+namespace Vanilo\Framework\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 

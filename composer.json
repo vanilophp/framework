@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vanilo\\VaniloFramework\\": "src"
+            "Vanilo\\Framework\\": "src"
         }
     },
     "require-dev": {
@@ -32,7 +32,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Vanilo\\VaniloFramework\\Tests\\": "tests"
+            "Vanilo\\Framework\\Tests\\": "tests"
         }
     },
     "scripts": {

@@ -10,12 +10,12 @@
  */
 
 
-namespace Vanilo\VaniloFramework\Http\Requests;
+namespace Vanilo\Framework\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Vanilo\Product\Models\ProductStateProxy;
-use Vanilo\VaniloFramework\Contracts\Requests\CreateProduct as CreateProductContract;
+use Vanilo\Framework\Contracts\Requests\CreateProduct as CreateProductContract;
 
 class CreateProduct extends FormRequest implements CreateProductContract
 {

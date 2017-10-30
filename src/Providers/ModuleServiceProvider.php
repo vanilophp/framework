@@ -10,14 +10,14 @@
  */
 
 
-namespace Vanilo\VaniloFramework\Providers;
+namespace Vanilo\Framework\Providers;
 
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Vanilo\Product\Contracts\Product as ProductContract;
-use Vanilo\VaniloFramework\Http\Requests\CreateProduct;
-use Vanilo\VaniloFramework\Http\Requests\UpdateProduct;
-use Vanilo\VaniloFramework\Models\Product as VaniloProduct;
+use Vanilo\Framework\Http\Requests\CreateProduct;
+use Vanilo\Framework\Http\Requests\UpdateProduct;
+use Vanilo\Framework\Models\Product as VaniloProduct;
 use Menu;
 
 class ModuleServiceProvider extends BaseBoxServiceProvider

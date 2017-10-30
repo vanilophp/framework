@@ -10,7 +10,7 @@
  */
 
 
-namespace Vanilo\VaniloFramework\Contracts\Requests;
+namespace Vanilo\Framework\Contracts\Requests;
 
 use Konekt\AppShell\Contracts\Requests\BaseRequest;
 
