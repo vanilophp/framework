@@ -12,7 +12,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/artkonekt/vanilo"
+        "issues": "https://github.com/vanilophp/framework/issues"
     },
     "require": {
         "php": ">=7.0.0",
