@@ -20,4 +20,11 @@ interface ProductState
      * @return boolean
      */
     public function isActive();
+
+    /**
+     * Returns an array of states that represent an active product state
+     *
+     * @return array
+     */
+    public static function getActiveStates();
 }

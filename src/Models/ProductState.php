@@ -25,13 +25,21 @@ class ProductState extends Enum implements ProductStateContract
     const UNAVAILABLE = 'unavailable';
     const RETIRED     = 'retired';
 
-    protected $activeStates = [self::ACTIVE];
+    protected static $activeStates = [self::ACTIVE];
 
     /**
      * @inheritdoc
      */
     public function isActive()
     {
-        return in_array($this->value, $this->activeStates);
+        return in_array($this->value, static::$activeStates);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getActiveStates()
+    {
+        return static::$activeStates;
     }
 }
