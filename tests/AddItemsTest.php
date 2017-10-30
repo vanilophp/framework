@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests;
 
-
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
@@ -106,5 +105,4 @@ class AddItemsTest extends TestCase
         $this->product1 = new Product('Random Product', 178, 157);
         $this->product2 = new Product('Another Product', 87, 158);
     }
-
 }

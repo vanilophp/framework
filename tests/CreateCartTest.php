@@ -62,4 +62,3 @@ class CreateCartTest extends TestCase
         $this->assertEquals(10, Cart::itemCount());
     }
 }
-
