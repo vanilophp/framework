@@ -115,8 +115,8 @@ class BaseProductAttributesTest extends TestCase
         ]);
 
         $productWithoutTitle = Product::create([
-            'name'      => 'Hello Where?',
-            'sku'       => 'NEEDED-4'
+            'name' => 'Hello Where?',
+            'sku'  => 'NEEDED-4'
         ]);
 
         $this->assertEquals('Buy Kitty Kats', $productWithTitle->title);

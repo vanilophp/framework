@@ -56,6 +56,4 @@ class Product extends Model implements ProductContract
     {
         return $this->title();
     }
-
-
 }

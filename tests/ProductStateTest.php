@@ -80,8 +80,8 @@ class ProductStateTest extends TestCase
     public function the_products_is_active_method_returns_the_states_active_status()
     {
         $product = Product::create([
-            'name'  => 'The Tiny Enums Book',
-            'sku'   => 'BOOK-004'
+            'name' => 'The Tiny Enums Book',
+            'sku'  => 'BOOK-004'
         ]);
 
         $defaultState = new ProductState();
