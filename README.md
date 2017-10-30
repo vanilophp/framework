@@ -53,7 +53,7 @@ associated.
 
 `Cart::exists()` returns whether a cart exists for the current session.
 
-`Cart::doesNotExists()` is the opposite of `exists()` ;)
+`Cart::doesNotExist()` is the opposite of `exists()` ;)
 
 **Example:**
 
@@ -72,6 +72,15 @@ var_dump(Cart::exists());
 `Cart::itemCount()` returns the number of items in the cart.
 
 It also returns 0 for non-existing carts.
+
+### Is Empty Or Not?
+
+To have a cleaner code, there are two methods to check if cart is empty:
+
+- `Cart::isEmpty()`
+- `Cart::isNotEmpty()`
+
+Their result is based on the `itemCount()` method.
 
 ### Adding An Item
 
@@ -98,14 +107,56 @@ echo Cart::itemCount();
 // 3
 ```
 
+### Removing Items
+
+There are two methods for removing specific items:
+
+1. `Cart::removeProduct($product)`
+2. `Cart::removeItem($cartItem)`
+
+**`removeProduct()` example:**
+```php
+$product = Product::find(12345);
+
+Cart::removeProduct($product); // Finds the item based on the product, and removes it
+```
+
+**`removeItem()` example:**
+```php
+
+//Remove the first item from the cart
+$item = Cart::model()->items->first();
+
+Cart::removeItem($item);
+```
+
+### Clearing The Cart
+
+The `Cart::clear()` method removes everything from the cart, but it
+doesn't destroy it, unless the `vanilo.cart.auto_destroy` config option is true.
+
+So the entry in the `cart` table will remain, and it will be assigned to
+the current session later on.
+
+### Destroying The Cart
+
+In case you want to get rid of the cart use the `Cart::destroy()` method.
+
+It clears the cart, removes the record from the `cart` table, and unsets
+the association with the current session.
+
+Thus, using destroy, you'll have a non-existent cart.
+
+## To-do
+
 Methods left to implement/doc:
 
-```
-Cart::addItem(prod(obj|int=id|str=sku), qty=1, params=[] (eg. coupon code))
-Cart::removeItem(prod(obj|int|str))
-Cart::clear()
-Cart::addCoupon(obj|int|str)
-Cart::removeCoupon(obj|int|str)
-Cart::refresh()
-Cart::destroy()
+```php
+Cart::addItem(int $product);         // product = id
+Cart::addItem(string $product);      // product = sku
+Cart::removeProduct(int $product);   // product = id
+Cart::removeProduct(string $product);// product = sku
+//v0.2 | v0.3
+//Cart::addCoupon(obj|int|str)
+//Cart::removeCoupon(obj|int|str)
 ```

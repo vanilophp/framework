@@ -23,6 +23,7 @@ abstract class TestCase extends Orchestra
         parent::setUp();
 
         $this->setUpDatabase($this->app);
+        $this->startSession();
     }
 
     /**

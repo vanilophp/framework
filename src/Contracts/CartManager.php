@@ -35,4 +35,23 @@ interface CartManager extends Cart
      * @return Cart|null
      */
     public function model();
+
+    /**
+     * Returns true if the cart is empty (doesn't contain items)
+     *
+     * @return bool
+     */
+    public function isEmpty();
+
+    /**
+     * Returns true if the cart is not empty (contains items)
+     *
+     * @return bool
+     */
+    public function isNotEmpty();
+
+    /**
+     * Completely destroys the cart: removes all related models (cart, item, etc) from the DB
+     */
+    public function destroy();
 }

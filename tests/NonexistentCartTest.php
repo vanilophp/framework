@@ -32,4 +32,12 @@ class NonexistentCartTest extends TestCase
     {
         $this->assertEquals(0, Cart::itemCount());
     }
+
+    /**
+     * @test
+     */
+    public function cart_reports_is_empty_for_nonexistent_carts()
+    {
+        $this->assertTrue(Cart::isEmpty());
+    }
 }

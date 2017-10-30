@@ -45,7 +45,6 @@ class Cart extends Model implements CartContract
         if ($item) {
             $item->quantity += $qty;
             $item->save();
-            $this->load('items');
         } else {
             $this->items()->create([
                 'product_type' => classpath_to_slug(get_class($product)),
@@ -54,6 +53,8 @@ class Cart extends Model implements CartContract
                 'price'        => $product->getPrice()
             ]);
         }
+
+        $this->load('items');
     }
 
     /**
@@ -61,7 +62,11 @@ class Cart extends Model implements CartContract
      */
     public function removeItem($item)
     {
-        // TODO: Implement removeItem() method.
+        if ($item) {
+            $item->delete();
+        }
+
+        $this->load('items');
     }
 
     /**
@@ -69,7 +74,9 @@ class Cart extends Model implements CartContract
      */
     public function removeProduct($product)
     {
-        // TODO: Implement removeProduct() method.
+        $item = $this->items()->ofCart($this)->byProduct($product)->first();
+
+        $this->removeItem($item);
     }
 
     /**
@@ -77,6 +84,8 @@ class Cart extends Model implements CartContract
      */
     public function clear()
     {
-        // TODO: Implement clear() method.
+        $this->items()->ofCart($this)->delete();
+
+        $this->load('items');
     }
 }

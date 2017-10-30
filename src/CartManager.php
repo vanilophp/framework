@@ -44,7 +44,9 @@ class CartManager implements CartManagerContract
      */
     public function removeItem($item)
     {
-        // TODO: Implement removeItem() method.
+        if ($cart = $this->model()) {
+            $cart->removeItem($item);
+        }
     }
 
     /**
@@ -52,7 +54,9 @@ class CartManager implements CartManagerContract
      */
     public function removeProduct($product)
     {
-        // TODO: Implement removeProduct() method.
+        if ($cart = $this->model()) {
+            $cart->removeProduct($product);
+        }
     }
 
     /**
@@ -60,7 +64,9 @@ class CartManager implements CartManagerContract
      */
     public function clear()
     {
-        // TODO: Implement clear() method.
+        if ($cart = $this->model()) {
+            $cart->clear();
+        }
     }
 
     /**
@@ -102,6 +108,36 @@ class CartManager implements CartManagerContract
 
         return null;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function isEmpty()
+    {
+        return $this->itemCount() == 0;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isNotEmpty()
+    {
+        return !$this->isEmpty();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function destroy()
+    {
+        $this->clear();
+
+        $this->model()->delete();
+        $this->cart = null;
+
+        session()->forget($this->sessionKey);
+    }
+
 
     /**
      * Returns the model id of the cart for the current session

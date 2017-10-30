@@ -61,11 +61,5 @@ class CreateCartTest extends TestCase
 
         $this->assertEquals(10, Cart::itemCount());
     }
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->startSession();
-    }
 }
+

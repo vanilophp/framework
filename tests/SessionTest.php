@@ -26,11 +26,4 @@ class SessionTest extends TestCase
     {
         $this->assertFalse(Cart::exists());
     }
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->startSession();
-    }
 }
