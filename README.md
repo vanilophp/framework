@@ -1,8 +1,9 @@
 # Vanilo
+
 ## The Truly Laravel E-commerce Framework
 
 
-[![Travis](https://img.shields.io/travis/artkonekt/vanilo.svg?style=flat-square)](https://travis-ci.org/artkonekt/vanilo)
+[![Travis](https://img.shields.io/travis/vanilophp/framework.svg?style=flat-square)](https://travis-ci.org/vanilophp/framework)
 [![Packagist version](https://img.shields.io/packagist/vpre/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
 [![StyleCI](https://styleci.io/repos/101036876/shield?branch=master)](https://styleci.io/repos/101036876)
@@ -12,8 +13,8 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 
 Vanilo is in an early development stage. It's expected to have the first working version (0.1) in October 2017.
 
-Feel free to submit your questions, suggestions by adding a [new issue](https://github.com/artkonekt/vanilo/issues/new) here.
+Feel free to submit your questions, suggestions by adding a [new issue](https://github.com/vanilophp/framework/issues/new) here.
 
 Follow us on [twitter](https://twitter.com/vanilo_io).
 
-For more details read the [Vanilo Documentation](https://artkonekt.github.io/vanilo).
+For more details read the [Vanilo Documentation](https://vanilophp.github.io/framework/#/).
