@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Contracts;
 
-
 interface Cart
 {
     /**
@@ -49,5 +48,4 @@ interface Cart
      * @return int
      */
     public function itemCount();
-
 }

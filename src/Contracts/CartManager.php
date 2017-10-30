@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Contracts;
 
-
 interface CartManager extends Cart
 {
 
@@ -36,5 +35,4 @@ interface CartManager extends Cart
      * @return Cart|null
      */
     public function model();
-
 }

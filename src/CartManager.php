@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart;
 
-
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
@@ -136,6 +135,4 @@ class CartManager implements CartManagerContract
 
         return $this->cart;
     }
-
-
 }

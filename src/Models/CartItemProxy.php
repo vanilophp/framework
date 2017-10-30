@@ -12,10 +12,8 @@
 
 namespace Vanilo\Cart\Models;
 
-
 use Konekt\Concord\Proxies\ModelProxy;
 
 class CartItemProxy extends ModelProxy
 {
-
 }

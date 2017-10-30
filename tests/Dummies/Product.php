@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests\Dummies;
 
-
 use Vanilo\Cart\Contracts\Buyable;
 
 class Product implements Buyable
@@ -53,6 +52,4 @@ class Product implements Buyable
     {
         return $this->price;
     }
-
-
 }

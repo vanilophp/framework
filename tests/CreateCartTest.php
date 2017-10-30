@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests;
 
-
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
@@ -21,7 +20,7 @@ class CreateCartTest extends TestCase
     /**
      * @test
      */
-    function a_cart_gets_created_if_you_add_an_item_to_it()
+    public function a_cart_gets_created_if_you_add_an_item_to_it()
     {
         $this->assertTrue(Cart::doesNotExist());
         $product = new Product('Tusnad Mineral Water 0.5', 1.25);
@@ -34,7 +33,7 @@ class CreateCartTest extends TestCase
     /**
      * @test
      */
-    function item_count_returns_the_number_of_items_in_the_cart()
+    public function item_count_returns_the_number_of_items_in_the_cart()
     {
         $product = new Product('S8 Mineral Water 0.5', 1.35);
 
@@ -50,7 +49,7 @@ class CreateCartTest extends TestCase
     /**
      * @test
      */
-    function number_of_items_to_add_can_be_specified()
+    public function number_of_items_to_add_can_be_specified()
     {
         $product = new Product('V8 Mineral Water 2L', 1.95);
 

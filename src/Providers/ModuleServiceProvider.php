@@ -39,6 +39,4 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
             return $app->make(CartManagerContract::class);
         });
     }
-
-
 }

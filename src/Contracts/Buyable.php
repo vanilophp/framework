@@ -11,7 +11,6 @@
 
 namespace Vanilo\Cart\Contracts;
 
-
 interface Buyable
 {
     /**

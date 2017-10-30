@@ -12,8 +12,6 @@
 
 namespace Vanilo\Cart\Contracts;
 
-
 interface CartItem
 {
-
 }

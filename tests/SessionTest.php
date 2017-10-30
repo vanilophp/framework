@@ -14,7 +14,6 @@ namespace Vanilo\Cart\Tests;
 
 use Vanilo\Cart\Facades\Cart;
 
-
 /**
  * @test
  */
@@ -23,7 +22,7 @@ class SessionTest extends TestCase
     /**
      * @test
      */
-    function a_session_has_no_cart_by_default()
+    public function a_session_has_no_cart_by_default()
     {
         $this->assertFalse(Cart::exists());
     }

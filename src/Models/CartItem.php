@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 
@@ -47,10 +46,10 @@ class CartItem extends Model implements CartItemContract
             $productId   = $product->getId();
             $productType = classpath_to_slug(get_class($product));
         } elseif (is_string($product)) {
-            $productId = $product; // should lookup by SKU?
+            $productId   = $product; // should lookup by SKU?
             $productType = 'product';
         } else {
-            $productId = $product;
+            $productId   = $product;
             $productType = 'product';
         }
 

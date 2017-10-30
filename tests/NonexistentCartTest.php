@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests;
 
-
 use Vanilo\Cart\Facades\Cart;
 
 class NonexistentCartTest extends TestCase
@@ -33,5 +32,4 @@ class NonexistentCartTest extends TestCase
     {
         $this->assertEquals(0, Cart::itemCount());
     }
-
 }

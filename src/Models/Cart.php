@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 
@@ -80,6 +79,4 @@ class Cart extends Model implements CartContract
     {
         // TODO: Implement clear() method.
     }
-
-
 }
