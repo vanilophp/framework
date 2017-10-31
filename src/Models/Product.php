@@ -16,16 +16,15 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
-use Vanilo\Cart\Contracts\Buyable;
 use Vanilo\Product\Contracts\Product as ProductContract;
 
-class Product extends Model implements ProductContract, Buyable
+class Product extends Model implements ProductContract
 {
     use CastsEnums, Sluggable, SluggableScopeHelpers;
 
     protected $table = 'products';
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $enums = [
         'state' => ProductState::class
@@ -44,22 +43,6 @@ class Product extends Model implements ProductContract, Buyable
     {
         return $this->getSlugKeyName();
     }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function name()
-    {
-        return $this->name;
-    }
-
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
 
     /**
      * @inheritdoc
