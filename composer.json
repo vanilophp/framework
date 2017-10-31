@@ -23,7 +23,10 @@
     "autoload": {
         "psr-4": {
             "Vanilo\\Framework\\": "src"
-        }
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
     },
     "require-dev": {
         "monolog/monolog": "^1.22",

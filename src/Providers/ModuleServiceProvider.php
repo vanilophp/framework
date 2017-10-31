@@ -17,6 +17,8 @@ use Konekt\Concord\BaseBoxServiceProvider;
 use Vanilo\Framework\Http\Requests\CreateProduct;
 use Vanilo\Framework\Http\Requests\UpdateProduct;
 use Menu;
+use Vanilo\Framework\Models\Product;
+use Vanilo\Product\Contracts\Product as ProductContract;
 
 class ModuleServiceProvider extends BaseBoxServiceProvider
 {
@@ -30,6 +32,10 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     public function boot()
     {
         parent::boot();
+
+        // Use the frameworks's extended product class
+        $this->concord->registerModel(ProductContract::class, Product::class);
+
 
         $this->loadBreadcrumbs();
 

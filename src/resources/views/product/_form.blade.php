@@ -18,22 +18,42 @@
 
 <hr>
 
-
-<div class="form-group">
-    <div class="input-group">
-        <span class="input-group-addon">
-            <i class="zmdi zmdi-code-setting"></i>
-        </span>
-        {{ Form::text('sku', null,
-                [
-                    'class' => 'form-control' . ($errors->has('sku') ? ' is-invalid' : ''),
-                    'placeholder' => __('SKU (product code)')
-                ]
-        ) }}
+<div class="form-row">
+    <div class="form-group col-12 col-md-6 col-xl-4">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-code-setting"></i>
+            </span>
+            {{ Form::text('sku', null,
+                    [
+                        'class' => 'form-control' . ($errors->has('sku') ? ' is-invalid' : ''),
+                        'placeholder' => __('SKU (product code)')
+                    ]
+            ) }}
+        </div>
+        @if ($errors->has('sku'))
+            <div class="invalid-feedback">{{ $errors->first('sku') }}</div>
+        @endif
     </div>
-    @if ($errors->has('sku'))
-        <div class="invalid-feedback">{{ $errors->first('sku') }}</div>
-    @endif
+</div>
+
+<div class="form-row">
+    <div class="form-group col-12 col-md-6 col-xl-4">
+        <div class="input-group">
+            {{ Form::text('price', null,
+                    [
+                        'class' => 'form-control' . ($errors->has('price') ? ' is-invalid' : ''),
+                        'placeholder' => __('Price')
+                    ]
+            ) }}
+            <span class="input-group-addon">
+            {{ config('vanilo.framework.currency.code') }}
+        </span>
+        </div>
+        @if ($errors->has('price'))
+            <div class="invalid-feedback">{{ $errors->first('price') }}</div>
+        @endif
+    </div>
 </div>
 
 
