@@ -198,6 +198,35 @@ $item = Cart::model()->items->first();
 Cart::removeItem($item);
 ```
 
+### Totals
+
+The item total can be accessed with the `total()` method or the `total`
+property.
+
+The cart total can be accessed with the `Cart::total()` method:
+
+```php
+use Vanilo\Cart\Facades\Cart;
+use App\Product;
+
+$productX = Product::create(['name' => 'X', 'price' => 100]);
+$productY = Product::create(['name' => 'Y', 'price' => 70]);
+
+$item1 = Cart::addItem($productX, 3);
+
+echo $item1->total();
+// 300
+echo $item1->total;
+// 300
+
+$item2 = Cart::addItem($productY, 2);
+echo $item2->total();
+// 140
+
+echo Cart::total();
+// 440
+```
+
 ### Clearing The Cart
 
 The `Cart::clear()` method removes everything from the cart, but it

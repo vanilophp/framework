@@ -12,16 +12,25 @@
 
 namespace Vanilo\Cart\Tests;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Blueprint;
 use Vanilo\Cart\Providers\ModuleServiceProvider as CartModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vanilo\Cart\Tests\Dummies\Product;
 
 abstract class TestCase extends Orchestra
 {
     public function setUp()
     {
         parent::setUp();
+
+        // The cart module is unaware of any actual Buyables,
+        // so the mapping gets defined here. Any consumers
+        // of this module need to add their mapping too
+        Relation::morphMap([
+            shorten(Product::class) => Product::class
+        ]);
 
         $this->setUpDatabase($this->app);
         $this->startSession();

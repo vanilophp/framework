@@ -91,4 +91,14 @@ class Cart extends Model implements CartContract
 
         $this->load('items');
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function total()
+    {
+        return $this->items->sum('total');
+    }
+
+
 }

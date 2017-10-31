@@ -50,4 +50,11 @@ interface Cart
      * @return int
      */
     public function itemCount();
+
+    /**
+     * Returns the grand total of the cart (will contain future adjustments)
+     *
+     * @return float
+     */
+    public function total();
 }

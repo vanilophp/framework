@@ -14,4 +14,10 @@ namespace Vanilo\Cart\Contracts;
 
 interface CartItem
 {
+    /**
+     * Returns the (final) total of the row (will contain future adjustments)
+     *
+     * @return float
+     */
+    public function total();
 }

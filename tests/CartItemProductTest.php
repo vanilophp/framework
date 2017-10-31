@@ -13,7 +13,6 @@
 namespace Vanilo\Cart\Tests;
 
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Course;
 use Vanilo\Cart\Tests\Dummies\Product;
@@ -55,13 +54,6 @@ class CartItemProductTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
-        // The cart module is unaware of any actual Buyables,
-        // so the mapping gets defined here. Any consumers
-        // of this module need to add their mapping too
-        Relation::morphMap([
-            shorten(Product::class) => Product::class
-        ]);
 
         $this->alaskaSnow = Product::create([
             'name'  => 'Alaska Snow 34oz',

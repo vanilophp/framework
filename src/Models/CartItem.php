@@ -19,6 +19,7 @@ use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 
 /**
  * @property Buyable $product
+ * @property float   $total
  */
 class CartItem extends Model implements CartItemContract
 {
@@ -28,7 +29,26 @@ class CartItem extends Model implements CartItemContract
     {
         return $this->morphTo();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
+    public function total()
+    {
+        return $this->price * $this->quantity;
+    }
+
+    /**
+     * Property accessor alias to the total() method
+     *
+     * @return float
+     */
+    public function getTotalAttribute()
+    {
+        return $this->total();
+    }
+
+
     /**
      * Scope to query items of a cart
      *

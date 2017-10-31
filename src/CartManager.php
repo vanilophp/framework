@@ -82,6 +82,15 @@ class CartManager implements CartManagerContract
     /**
      * @inheritDoc
      */
+    public function total()
+    {
+        return $this->exists() ? $this->model()->total() : 0;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function exists()
     {
         return (bool) $this->getCartId();
