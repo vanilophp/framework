@@ -12,6 +12,7 @@
 
 namespace Vanilo\Framework\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Vanilo\Framework\Http\Requests\CreateProduct;
@@ -19,6 +20,7 @@ use Vanilo\Framework\Http\Requests\UpdateProduct;
 use Menu;
 use Vanilo\Framework\Models\Product;
 use Vanilo\Product\Contracts\Product as ProductContract;
+use Vanilo\Product\Models\ProductProxy;
 
 class ModuleServiceProvider extends BaseBoxServiceProvider
 {
@@ -35,6 +37,11 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
         // Use the frameworks's extended product class
         $this->concord->registerModel(ProductContract::class, Product::class);
+
+        // This is ugly, but it does the job for v0.1
+        Relation::morphMap([
+            app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass()
+        ]);
 
 
         $this->loadBreadcrumbs();

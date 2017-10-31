@@ -20,5 +20,4 @@ use Vanilo\Product\Models\Product as BaseProduct;
 class Product extends BaseProduct implements Buyable
 {
     use BuyableModel;
-
 }
