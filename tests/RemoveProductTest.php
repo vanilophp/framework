@@ -61,7 +61,13 @@ class RemoveProductTest extends TestCase
     {
         parent::setUp();
 
-        $this->product3 = new Product('Saint George Pizza', 9.79, 159);
-        $this->product4 = new Product('Pizza With Goose Liver', 8.89, 160);
+        $this->product3 = Product::create([
+            'name'  => 'Saint George Pizza',
+            'price' => 9.79]);
+
+        $this->product4 = Product::create([
+            'name'  => 'Pizza With Goose Liver',
+            'price' => 8.89
+        ]);
     }
 }

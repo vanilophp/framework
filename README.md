@@ -107,6 +107,74 @@ echo Cart::itemCount();
 // 3
 ```
 
+### Retrieving The Item's Associated Product
+
+The `CartItem` defines a [polymorphic relationship](https://laravel.com/docs/5.5/eloquent-relationships#polymorphic-relations)
+to the Buyable object named `product`.
+
+So you have a reference to the item's product:
+
+```php
+$product = \App\Product::find(203);
+$cartItem = Cart::addItem($product);
+
+echo $cartItem->product->id;
+// 203
+echo get_class($cartItem->product);
+// "App\Product"
+
+$course = \App\Course::findBySku('REACT-001');
+$cartItem = Cart::addItem($course);
+
+echo $cartItem->product->sku;
+// "REACT-001"
+echo get_class($cartItem->product);
+// "App\Course"
+```
+
+### Buyables (products)
+
+You can add any Eloquent model to the cart that implements the `Buyable` interface.
+
+Buyable classes must implement these methods:
+
+```
+function getId(); // the id of the entry
+function name(); // the name to display in the cart
+function getPrice(); // the price
+function morphTypeName(); // the type name to store in the db
+```
+#### Buyable Morph Maps
+
+In order to decouple the database from the application's internal
+structure, it is possible to not save the Buyable's full class name
+in the DB.
+When the cart associates a product (Buyable) with a cart item, it fetches
+the type name from the `Buyable::morphTypeName()` method.
+
+The `morphTypeName()` method, can either return the full class name
+(Eloquent's default behavior), or some shorter version like:
+
+| Full Class Name               | Short Version (Saved In DB) |
+|:------------------------------|:----------------------------|
+| Vanilo\Product\Models\Product | product                     |
+| App\Course                    | course                      |
+
+If your not using the FQCN, then you have to add the mapping during
+boot time:
+
+```php
+use Illuminate\Database\Eloquent\Relations\Relation;
+
+Relation::morphMap([
+    'product' => 'Vanilo\Product\Models\Product',
+    'course'  => 'App\Course',
+]);
+```
+
+For more information refer to the [Polymorphic Relation](https://laravel.com/docs/5.5/eloquent-relationships#polymorphic-relations)
+section in the Laravel Documentation.
+
 ### Removing Items
 
 There are two methods for removing specific items:
@@ -149,14 +217,9 @@ Thus, using destroy, you'll have a non-existent cart.
 
 ## To-do
 
-Methods left to implement/doc:
+Future methods for v0.2 | v0.3:
 
 ```php
-Cart::addItem(int $product);         // product = id
-Cart::addItem(string $product);      // product = sku
-Cart::removeProduct(int $product);   // product = id
-Cart::removeProduct(string $product);// product = sku
-//v0.2 | v0.3
 //Cart::addCoupon(obj|int|str)
 //Cart::removeCoupon(obj|int|str)
 ```

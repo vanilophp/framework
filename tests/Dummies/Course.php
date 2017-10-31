@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the BuyableModel trait.
+ * Contains the Course model class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,13 +10,16 @@
  */
 
 
-namespace Vanilo\Cart\Traits;
+namespace Vanilo\Cart\Tests\Dummies;
 
-/**
- * Trait for Eloquent Models to implement the Buyable interface
- */
-trait BuyableModel
+
+use Illuminate\Database\Eloquent\Model;
+use Vanilo\Cart\Contracts\Buyable;
+
+class Course extends Model implements Buyable
 {
+    protected $guarded = ['id'];
+
     public function getId()
     {
         return $this->id;
@@ -24,7 +27,7 @@ trait BuyableModel
 
     public function name()
     {
-        return $this->name;
+        return $this->title;
     }
 
     public function getPrice()
@@ -34,6 +37,7 @@ trait BuyableModel
 
     public function morphTypeName(): string
     {
-        return shorten(static::class);
+        return static::class;
     }
+
 }

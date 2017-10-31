@@ -12,6 +12,7 @@
 
 namespace Vanilo\Cart\Tests;
 
+use Illuminate\Database\Schema\Blueprint;
 use Vanilo\Cart\Providers\ModuleServiceProvider as CartModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -70,6 +71,21 @@ abstract class TestCase extends Orchestra
     protected function setUpDatabase($app)
     {
         \Artisan::call('migrate', ['--force' => true]);
+
+        $app['db']->connection()->getSchemaBuilder()->create('products', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('sku')->nullable();
+            $table->string('name');
+            $table->decimal('price', 15, 2);
+            $table->timestamps();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('courses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->decimal('price', 15, 2);
+            $table->timestamps();
+        });
     }
 
     /**

@@ -79,7 +79,14 @@ class ClearCartTest extends TestCase
     {
         parent::setUp();
 
-        $this->product5 = new Product('Spicy Ketchup', 1.29, 161);
-        $this->product6 = new Product('Curry Sauce', 1.09, 162);
+        $this->product5 = Product::create([
+            'name'  => 'Spicy Ketchup',
+            'price' => 1.29
+        ]);
+
+        $this->product6 = Product::create([
+            'name'  => 'Curry Sauce',
+            'price' => 1.09
+        ]);
     }
 }

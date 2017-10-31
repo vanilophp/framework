@@ -23,7 +23,10 @@ class CreateCartTest extends TestCase
     public function a_cart_gets_created_if_you_add_an_item_to_it()
     {
         $this->assertTrue(Cart::doesNotExist());
-        $product = new Product('Tusnad Mineral Water 0.5', 1.25);
+        $product = Product::create([
+            'name'  => 'Tusnad Mineral Water 0.5',
+            'price' => 1.25
+        ]);
 
         Cart::addItem($product);
 
@@ -35,7 +38,10 @@ class CreateCartTest extends TestCase
      */
     public function item_count_returns_the_number_of_items_in_the_cart()
     {
-        $product = new Product('S8 Mineral Water 0.5', 1.35);
+        $product = Product::create([
+            'name'  => 'S8 Mineral Water 0.5',
+            'price' => 1.35
+        ]);
 
         Cart::addItem($product);
 
@@ -51,7 +57,10 @@ class CreateCartTest extends TestCase
      */
     public function number_of_items_to_add_can_be_specified()
     {
-        $product = new Product('V8 Mineral Water 2L', 1.95);
+        $product = Product::create([
+            'name'  => 'V8 Mineral Water 2L',
+            'price' => 1.95
+        ]);
 
         Cart::addItem($product, 8);
 

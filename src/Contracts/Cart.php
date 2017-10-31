@@ -15,13 +15,15 @@ namespace Vanilo\Cart\Contracts;
 interface Cart
 {
     /**
-     * Add an item to the cart
+     * Add an item to the cart (or adds the quantity if the product is already in the cart)
      *
-     * @param Buyable|int|string    $product    Either a Buyable object or int = product id or string = SKU
-     * @param int                   $qty        The quantity to add
-     * @param array                 $params     Additional parameters, eg. coupon code
+     * @param Buyable $product Any Buyable object
+     * @param int $qty The quantity to add
+     * @param array $params Additional parameters, eg. coupon code
+     *
+     * @return CartItem Returns the item object that has been created (or updated)
      */
-    public function addItem($product, $qty = 1, $params = []);
+    public function addItem(Buyable $product, $qty = 1, $params = []) : CartItem;
 
     /**
      * Removes an item from the cart
@@ -33,9 +35,9 @@ interface Cart
     /**
      * Removes a product from the cart
      *
-     * @param Buyable|int|string    $product    Either a Buyable object or int = product id or string = SKU
+     * @param Buyable $product
      */
-    public function removeProduct($product);
+    public function removeProduct(Buyable $product);
 
     /**
      * Clears the entire cart

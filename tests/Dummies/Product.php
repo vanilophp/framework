@@ -12,44 +12,14 @@
 
 namespace Vanilo\Cart\Tests\Dummies;
 
+use Illuminate\Database\Eloquent\Model;
 use Vanilo\Cart\Contracts\Buyable;
+use Vanilo\Cart\Traits\BuyableModel;
 
-class Product implements Buyable
+class Product extends Model implements Buyable
 {
-    protected $name;
+    use BuyableModel;
 
-    protected $price;
+    protected $guarded = ['id'];
 
-    public $id;
-
-    public function __construct($name, $price, $id = null)
-    {
-        $this->name  = $name;
-        $this->price = $price;
-        $this->id    = $id ?: 1;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function name()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
 }

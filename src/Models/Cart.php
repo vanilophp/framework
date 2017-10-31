@@ -13,6 +13,7 @@
 namespace Vanilo\Cart\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Vanilo\Cart\Contracts\Buyable;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 
 class Cart extends Model implements CartContract
@@ -38,7 +39,7 @@ class Cart extends Model implements CartContract
     /**
      * @inheritDoc
      */
-    public function addItem($product, $qty = 1, $params = [])
+    public function addItem(Buyable $product, $qty = 1, $params = []): \Vanilo\Cart\Contracts\CartItem
     {
         $item = $this->items()->ofCart($this)->byProduct($product)->first();
 
@@ -46,8 +47,8 @@ class Cart extends Model implements CartContract
             $item->quantity += $qty;
             $item->save();
         } else {
-            $this->items()->create([
-                'product_type' => classpath_to_slug(get_class($product)),
+            $item = $this->items()->create([
+                'product_type' => $product->morphTypeName(),
                 'product_id'   => $product->getId(),
                 'quantity'     => $qty,
                 'price'        => $product->getPrice()
@@ -55,6 +56,8 @@ class Cart extends Model implements CartContract
         }
 
         $this->load('items');
+
+        return $item;
     }
 
     /**
@@ -72,7 +75,7 @@ class Cart extends Model implements CartContract
     /**
      * @inheritDoc
      */
-    public function removeProduct($product)
+    public function removeProduct(Buyable $product)
     {
         $item = $this->items()->ofCart($this)->byProduct($product)->first();
 

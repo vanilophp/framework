@@ -12,6 +12,8 @@
 
 namespace Vanilo\Cart;
 
+use Vanilo\Cart\Contracts\Buyable;
+use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
@@ -32,11 +34,11 @@ class CartManager implements CartManagerContract
     /**
      * @inheritDoc
      */
-    public function addItem($product, $qty = 1, $params = [])
+    public function addItem(Buyable $product, $qty = 1, $params = []): CartItem
     {
         $cart = $this->findOrCreateCart();
 
-        $cart->addItem($product, $qty, $params);
+        return $cart->addItem($product, $qty, $params);
     }
 
     /**
@@ -52,7 +54,7 @@ class CartManager implements CartManagerContract
     /**
      * @inheritDoc
      */
-    public function removeProduct($product)
+    public function removeProduct(Buyable $product)
     {
         if ($cart = $this->model()) {
             $cart->removeProduct($product);

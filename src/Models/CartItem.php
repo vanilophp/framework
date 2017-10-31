@@ -12,13 +12,23 @@
 
 namespace Vanilo\Cart\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Vanilo\Cart\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 
+/**
+ * @property Buyable $product
+ */
 class CartItem extends Model implements CartItemContract
 {
     protected $fillable = ['cart_id','product_type', 'product_id', 'quantity', 'price'];
 
+    public function product()
+    {
+        return $this->morphTo();
+    }
+    
     /**
      * Scope to query items of a cart
      *
@@ -37,25 +47,16 @@ class CartItem extends Model implements CartItemContract
     /**
      * Scope to query items by product (Buyable)
      *
-     * @param $query
-     * @param $product
+     * @param Builder $query
+     * @param Buyable $product
+     *
+     * @return Builder
      */
-    public function scopeByProduct($query, $product)
+    public function scopeByProduct($query, Buyable $product)
     {
-        if (is_object($product)) {
-            $productId   = $product->getId();
-            $productType = classpath_to_slug(get_class($product));
-        } elseif (is_string($product)) {
-            $productId   = $product; // should lookup by SKU?
-            $productType = 'product';
-        } else {
-            $productId   = $product;
-            $productType = 'product';
-        }
-
         return $query->where([
-            ['product_id', '=', $productId],
-            ['product_type', '=', $productType]
+            ['product_id', '=', $product->getId()],
+            ['product_type', '=', $product->morphTypeName()]
         ]);
     }
 }

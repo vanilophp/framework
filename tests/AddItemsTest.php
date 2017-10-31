@@ -12,6 +12,7 @@
 
 namespace Vanilo\Cart\Tests;
 
+use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
@@ -98,11 +99,41 @@ class AddItemsTest extends TestCase
         $this->assertCount(1, Cart::model()->items);
     }
 
+    /**
+     * @test
+     */
+    public function adding_an_item_returns_the_item_object()
+    {
+        $this->assertInstanceOf(
+            CartItem::class,
+            Cart::addItem($this->product2)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function adding_a_product_twice_also_returns_the_item_object()
+    {
+        Cart::addItem($this->product1);
+
+        $this->assertInstanceOf(
+            CartItem::class,
+            Cart::addItem($this->product1)
+        );
+    }
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->product1 = new Product('Random Product', 178, 157);
-        $this->product2 = new Product('Another Product', 87, 158);
+        $this->product1 = Product::create([
+            'name'  => 'Random Product',
+            'price' => 178
+        ]);
+        $this->product2 = Product::create([
+            'name'  => 'Another Product',
+            'price' => 87
+        ]);
     }
 }

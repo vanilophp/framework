@@ -68,7 +68,14 @@ class DestroyCartTest extends TestCase
     {
         parent::setUp();
 
-        $this->product7 = new Product('Yellow Laptop', 899, 163);
-        $this->product8 = new Product('Orange Laptop', 949, 164);
+        $this->product7 = Product::create([
+            'name'  => 'Yellow Laptop',
+            'price' => 899
+        ]);
+
+        $this->product8 = Product::create([
+            'name'  => 'Orange Laptop',
+            'price' => 949
+        ]);
     }
 }
