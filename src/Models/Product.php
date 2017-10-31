@@ -86,6 +86,5 @@ class Product extends Model implements ProductContract
             'state',
             ProductStateProxy::getActiveStates()
         );
-
     }
 }
