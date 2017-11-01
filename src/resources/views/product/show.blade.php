@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-4">
             @component('appshell::widgets.card_with_icon', [
                     'icon' => $product->is_active ? 'account-circle' : 'account-o',
                     'type' => $product->is_active ? 'success' : 'warning'
@@ -15,7 +15,7 @@
                 {{ $product->name }}
                 @if (!$product->is_active)
                     <small>
-                        <span class="badge badge-default">
+                        <span class="badge badge-secondary">
                             {{ __('inactive') }}
                         </span>
                     </small>
@@ -26,7 +26,7 @@
             @endcomponent
         </div>
 
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-5">
             @component('appshell::widgets.card_with_icon', [
                     'icon' => 'shield-security',
                     'type' => 'info'
@@ -34,17 +34,9 @@
                 {{ $product->state }}
 
                 @slot('subtitle')
-
-                @endslot
-            @endcomponent
-        </div>
-
-        <div class="col-sm-6 col-md-3">
-            @component('appshell::widgets.card_with_icon', ['icon' => 'time-countdown'])
-                {{ __('Last update') }}
-                {{ $product->updated_at->diffForHumans() }}
-
-                @slot('subtitle')
+                    {{ __('Updated') }}
+                    {{ $product->updated_at->diffForHumans() }}
+                    |
                     {{ __('Created at') }}
                     {{ $product->created_at->format(__('Y-m-d H:i')) }}
                 @endslot
@@ -53,7 +45,7 @@
 
         <div class="col-sm-6 col-md-3">
             @component('appshell::widgets.card_with_icon', ['icon' => 'star-circle'])
-                {{ $product->sold_count }}
+                {{ $product->sold_count or 0 }}
                 @slot('subtitle')
                     {{ __('Sold items') }}
                 @endslot
