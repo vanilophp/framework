@@ -3,7 +3,7 @@
 return [
     'modules' => [
         Vanilo\Product\Providers\ModuleServiceProvider::class => [],
-        Vanilo\Cart\Providers\ModuleServiceProvider::class => []
+        Vanilo\Cart\Providers\ModuleServiceProvider::class    => []
     ],
     'views' => [
         'namespace' => 'vanilo'
@@ -15,7 +15,7 @@ return [
         'files'      => ['admin']
     ],
     'breadcrumbs' => true,
-    'currency' => [
+    'currency'    => [
         'code'   => 'USD',
         'sign'   => '$',
         'format' => '%2$s%1$g' // see sprintf. Amount is the first argument, currency is the second

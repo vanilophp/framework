@@ -12,7 +12,6 @@
 
 namespace Vanilo\Framework\Models;
 
-
 use Vanilo\Cart\Contracts\Buyable;
 use Vanilo\Cart\Traits\BuyableModel;
 use Vanilo\Product\Models\Product as BaseProduct;
