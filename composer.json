@@ -1,0 +1,37 @@
+{
+    "name": "vanilo/checkout",
+    "description": "Vanilo Checkout Module",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["checkout", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "support": {
+        "source": "https://github.com/artkonekt/checkout"
+    },
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "konekt/concord": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.2",
+        "orchestra/testbench": "^3.4.2"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Checkout\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vanilo\\Checkout\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
