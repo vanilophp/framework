@@ -11,7 +11,6 @@
 
 namespace Vanilo\Checkout\Models;
 
-
 use Konekt\Enum\Enum;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 

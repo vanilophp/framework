@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Contracts;
 
-
 interface CheckoutState
 {
     /**
@@ -28,5 +27,4 @@ interface CheckoutState
      * @return array
      */
     public static function getSubmittableStates();
-
 }

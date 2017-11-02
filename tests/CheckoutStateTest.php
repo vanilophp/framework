@@ -11,7 +11,6 @@
 
 namespace Vanilo\Checkout\Tests;
 
-
 use Vanilo\Checkout\Models\CheckoutState;
 
 class CheckoutStateTest extends TestCase
