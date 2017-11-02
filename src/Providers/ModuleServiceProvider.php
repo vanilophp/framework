@@ -13,10 +13,13 @@
 namespace Vanilo\Checkout\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Checkout\Models\CheckoutState;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [];
 
-    protected $enums = [];
+    protected $enums = [
+        CheckoutState::class
+    ];
 }

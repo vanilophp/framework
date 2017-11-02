@@ -14,3 +14,32 @@ This is the checkout module for [Vanilo](https://vanilo.io).
 composer require vanilo/checkout
 php artisan migrate
 ```
+
+## Anatomy Of A Checkout
+
+It has:
+
+- a cart
+- a billing address
+- a shipping address (if cart needs shipping)
+- a user (optional)
+- a shipping method
+- a payment method
+- a state
+
+Attributes:
+
+- requires login?
+
+## API Draft
+
+```php
+
+$checkout->cart; //vanilo/cart
+$checkout->billingAddress; //konekt/address ?? billing/address
+$checkout->shippingAddress; //konekt/address ?? shipping/address
+$checkout->user; //konekt/user
+$checkout->shippingMethod; // ?? name, fee => shipping module?
+$checkout->paymentMethod; // ?? name, gw => billing module?
+$checkout->state; // CheckoutState
+```
