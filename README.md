@@ -35,10 +35,10 @@ Attributes:
 
 ```php
 
-$checkout->cart; //vanilo/cart
+$checkout->cart; // CheckoutSubject (vanilo/contracts) getter/setter
 $checkout->billingAddress; //konekt/address ?? billing/address
 $checkout->shippingAddress; //konekt/address ?? shipping/address
-$checkout->user; //konekt/user
+$checkout->user; // laravel user | null
 $checkout->shippingMethod; // ?? name, fee => shipping module?
 $checkout->paymentMethod; // ?? name, gw => payment module?
 $checkout->state; // CheckoutState
