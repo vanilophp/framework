@@ -24,7 +24,7 @@ class Course extends Model implements Buyable
         return $this->id;
     }
 
-    public function name()
+    public function getName()
     {
         return $this->title;
     }
