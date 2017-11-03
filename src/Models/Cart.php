@@ -99,6 +99,4 @@ class Cart extends Model implements CartContract
     {
         return $this->items->sum('total');
     }
-
-
 }

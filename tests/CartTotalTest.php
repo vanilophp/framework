@@ -11,7 +11,6 @@
 
 namespace Vanilo\Cart\Tests;
 
-
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
@@ -39,15 +38,14 @@ class CartTotalTest extends TestCase
         $item1 = Cart::addItem($this->whiteCat, 2);
         $item2 = Cart::addItem($this->blackCat);
 
-        $manualCheckSum =
-            $this->blackCat->getPrice()
+        $manualCheckSum = $this->blackCat->getPrice()
             +
             2 * $this->whiteCat->getPrice()
         ;
 
         $this->assertEquals($item1->total() + $item2->total(), Cart::total());
 
-        $this->assertEquals($manualCheckSum, Cart::total() );
+        $this->assertEquals($manualCheckSum, Cart::total());
     }
 
     /**
@@ -88,7 +86,6 @@ class CartTotalTest extends TestCase
         Cart::clear();
 
         $this->assertEquals(0, Cart::total());
-
     }
 
     public function setUp()

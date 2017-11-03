@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests\Dummies;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Buyable;
 
@@ -39,5 +38,4 @@ class Course extends Model implements Buyable
     {
         return static::class;
     }
-
 }

@@ -21,5 +21,4 @@ class Product extends Model implements Buyable
     use BuyableModel;
 
     protected $guarded = ['id'];
-
 }

@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests;
 
-
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Course;
 use Vanilo\Cart\Tests\Dummies\Product;
