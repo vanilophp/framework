@@ -22,7 +22,7 @@ trait BuyableModel
         return $this->id;
     }
 
-    public function name()
+    public function getName()
     {
         return $this->name;
     }
