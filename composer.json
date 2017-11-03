@@ -17,8 +17,11 @@
     "require": {
         "php": ">=7.0.0",
         "konekt/appshell": "dev-master",
+        "vanilo/contracts": "dev-master",
+        "vanilo/support": "dev-master",
         "vanilo/product": "dev-master",
-        "vanilo/cart": "dev-master"
+        "vanilo/cart": "dev-master",
+        "vanilo/checkout": "dev-master"
     },
     "autoload": {
         "psr-4": {
