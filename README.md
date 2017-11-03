@@ -134,6 +134,9 @@ echo get_class($cartItem->product);
 
 ### Buyables (products)
 
+> The `Buyable` interface is located in the
+> [Vanilo Contracts](https://github.com/vanilophp/contracts) package.
+
 You can add any Eloquent model to the cart that implements the `Buyable` interface.
 
 Buyable classes must implement these methods:

@@ -12,6 +12,8 @@
 
 namespace Vanilo\Cart\Contracts;
 
+use Vanilo\Contracts\Buyable;
+
 interface Cart
 {
     /**

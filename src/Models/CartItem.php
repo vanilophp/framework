@@ -14,7 +14,7 @@ namespace Vanilo\Cart\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Vanilo\Cart\Contracts\Buyable;
+use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 
 /**

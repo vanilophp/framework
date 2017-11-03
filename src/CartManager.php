@@ -12,7 +12,7 @@
 
 namespace Vanilo\Cart;
 
-use Vanilo\Cart\Contracts\Buyable;
+use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;

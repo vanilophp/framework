@@ -13,8 +13,8 @@
 namespace Vanilo\Cart\Tests\Dummies;
 
 use Illuminate\Database\Eloquent\Model;
-use Vanilo\Cart\Contracts\Buyable;
-use Vanilo\Cart\Traits\BuyableModel;
+use Vanilo\Contracts\Buyable;
+use Vanilo\Support\Traits\BuyableModel;
 
 class Product extends Model implements Buyable
 {

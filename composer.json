@@ -7,6 +7,8 @@
     "support": {
         "source": "https://github.com/artkonekt/cart"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Attila Fulop",
@@ -15,7 +17,9 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "konekt/concord": "dev-master"
+        "konekt/concord": "dev-master",
+        "vanilo/contracts": "dev-master",
+        "vanilo/support": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2",
