@@ -25,7 +25,7 @@ interface Buyable
      *
      * @return string
      */
-    public function name();
+    public function getName();
 
     /**
      * Returns the price of the item; float is temporary!!
