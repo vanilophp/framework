@@ -5,7 +5,7 @@
     "license": "MIT",
     "keywords": ["checkout", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
-        "source": "https://github.com/artkonekt/checkout"
+        "source": "https://github.com/vanilophp/checkout"
     },
     "authors": [
         {
@@ -15,7 +15,8 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "konekt/concord": "dev-master"
+        "konekt/concord": "dev-master",
+        "vanilo/contracts": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2",

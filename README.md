@@ -40,6 +40,6 @@ $checkout->billingAddress; //konekt/address ?? billing/address
 $checkout->shippingAddress; //konekt/address ?? shipping/address
 $checkout->user; //konekt/user
 $checkout->shippingMethod; // ?? name, fee => shipping module?
-$checkout->paymentMethod; // ?? name, gw => billing module?
+$checkout->paymentMethod; // ?? name, gw => payment module?
 $checkout->state; // CheckoutState
 ```
