@@ -12,12 +12,8 @@
 
 namespace Vanilo\Cart\Contracts;
 
-interface CartItem
+use Vanilo\Contracts\CheckoutSubjectItem;
+
+interface CartItem extends CheckoutSubjectItem
 {
-    /**
-     * Returns the (final) total of the row (will contain future adjustments)
-     *
-     * @return float
-     */
-    public function total();
 }

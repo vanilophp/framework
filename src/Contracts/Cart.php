@@ -13,8 +13,9 @@
 namespace Vanilo\Cart\Contracts;
 
 use Vanilo\Contracts\Buyable;
+use Vanilo\Contracts\CheckoutSubject;
 
-interface Cart
+interface Cart extends CheckoutSubject
 {
     /**
      * Add an item to the cart (or adds the quantity if the product is already in the cart)
@@ -52,11 +53,4 @@ interface Cart
      * @return int
      */
     public function itemCount();
-
-    /**
-     * Returns the grand total of the cart (will contain future adjustments)
-     *
-     * @return float
-     */
-    public function total();
 }

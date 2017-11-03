@@ -13,6 +13,7 @@
 namespace Vanilo\Cart\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 
@@ -27,6 +28,15 @@ class Cart extends Model implements CartContract
     {
         return $this->hasMany(CartItemProxy::modelClass(), 'cart_id', 'id');
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
 
     /**
      * @inheritDoc

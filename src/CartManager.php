@@ -12,6 +12,7 @@
 
 namespace Vanilo\Cart;
 
+use Illuminate\Support\Collection;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
@@ -30,6 +31,15 @@ class CartManager implements CartManagerContract
     {
         $this->sessionKey = config('vanilo.cart.session_key');
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getItems(): Collection
+    {
+        return $this->exists() ? $this->model()->getItems() : collect();
+    }
+
 
     /**
      * @inheritDoc
