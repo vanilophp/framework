@@ -13,6 +13,8 @@
 namespace Vanilo\Checkout\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
+use Vanilo\Checkout\Models\Checkout;
 use Vanilo\Checkout\Models\CheckoutState;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -22,4 +24,13 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $enums = [
         CheckoutState::class
     ];
+
+    public function register()
+    {
+        parent::register();
+
+        $this->app->bind(CheckoutContract::class, Checkout::class);
+    }
+
+
 }

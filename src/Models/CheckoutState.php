@@ -16,11 +16,12 @@ use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 
 class CheckoutState extends Enum implements CheckoutStateContract
 {
-    const __default = self::STARTED;
+    const __default = self::VIRGIN;
 
-    const STARTED   = 'started';
-    const READY     = 'ready';
-    const COMPLETED = 'completed';
+    const VIRGIN    = null;        // There was no interaction with the checkout process yet
+    const STARTED   = 'started';   // The checkout process has been started
+    const READY     = 'ready';     // Checkout data is valid and ready to submit
+    const COMPLETED = 'completed'; // Checkout has been completed
 
     protected static $submittableStates = [self::READY];
 

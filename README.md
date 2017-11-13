@@ -19,13 +19,13 @@ php artisan migrate
 
 It has:
 
-- a cart
-- a billing address
-- a shipping address (if cart needs shipping)
-- a user (optional)
-- a shipping method
-- a payment method
-- a state
+- Cart (Checkout Subject)
+- Billing information (client, address, contact)
+- Payment method
+- Shipping information (if cart needs shipping; address, contact)
+- Shipping method
+- User (optional)
+- State
 
 Attributes:
 
@@ -43,3 +43,9 @@ $checkout->shippingMethod; // ?? name, fee => shipping module?
 $checkout->paymentMethod; // ?? name, gw => payment module?
 $checkout->state; // CheckoutState
 ```
+
+### Billing Information
+
+1. Client: Org|Person
+2. (Postal) Address
+3. Contact Data (Phone, name, E-mail) -> Person ... ie. 1 if 1 is not org... aaargh!
