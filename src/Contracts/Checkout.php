@@ -41,9 +41,9 @@ interface Checkout
     /**
      * Sets the state of the checkout
      *
-     * @param CheckoutState $state
+     * @param CheckoutState|string $state
      */
-    public function setState(CheckoutState $state);
+    public function setState($state);
 
     /**
      * Returns the grand total of the checkout
