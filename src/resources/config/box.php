@@ -2,8 +2,9 @@
 
 return [
     'modules' => [
-        Vanilo\Product\Providers\ModuleServiceProvider::class => [],
-        Vanilo\Cart\Providers\ModuleServiceProvider::class    => []
+        Vanilo\Product\Providers\ModuleServiceProvider::class  => [],
+        Vanilo\Cart\Providers\ModuleServiceProvider::class     => [],
+        Vanilo\Checkout\Providers\ModuleServiceProvider::class => []
     ],
     'views' => [
         'namespace' => 'vanilo'
