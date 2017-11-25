@@ -13,7 +13,6 @@
 namespace Vanilo\Checkout;
 
 
-use Konekt\Client\Contracts\Client;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 use Vanilo\Checkout\Contracts\CheckoutStore;
@@ -21,16 +20,12 @@ use Vanilo\Contracts\CheckoutSubject;
 
 class CheckoutManager implements CheckoutContract
 {
-    protected $client;
-
     /** @var  CheckoutStore */
     protected $store;
 
-    //public function __construct($client = null, $billingAddress = null, $shippingAddress = null)
     public function __construct(CheckoutStore $store)
     {
         $this->store = $store;
-        $this->client = app(Client::class);
     }
 
     /**
@@ -67,7 +62,7 @@ class CheckoutManager implements CheckoutContract
 
     public function getClient()
     {
-        return $this->client;
+        return $this->store->getClient();
     }
 
     public function getBillingAddress()

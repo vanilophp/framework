@@ -15,6 +15,9 @@ namespace Vanilo\Checkout\Drivers;
 
 use Konekt\Address\Contracts\Address;
 use Konekt\Address\Models\AddressType;
+use Konekt\Client\Contracts\Client;
+use Konekt\Client\Models\ClientProxy;
+use Konekt\Client\Models\ClientTypeProxy;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Checkout\Traits\HasCheckoutState;
@@ -36,27 +39,27 @@ class RequestStore implements CheckoutStore
     /** @var  Address */
     protected $shippingAddress;
 
+    /** @var  Client */
+    protected $client;
+
     public function __construct($config)
     {
-        if (!$this->billingAddress) {
-            $this->billingAddress = app(Address::class);
-            $this->billingAddress->type = AddressType::BILLING;
-        }
+        $this->billingAddress = app(Address::class);
+        $this->billingAddress->type = AddressType::BILLING;
 
-        if (!$this->shippingAddress) {
-            $this->shippingAddress = app(Address::class);
-            $this->shippingAddress->type = AddressType::SHIPPING;
-        }
+        $this->shippingAddress = app(Address::class);
+        $this->shippingAddress->type = AddressType::SHIPPING;
+
+        $this->client = ClientProxy::newClient(ClientTypeProxy::create(), []);
     }
 
     public function update(array $data)
     {
-        if (isset($data['billingAddress'])) {
-            $this->updateBillingAddress($data['billingAddress']);
-        }
-
-        if (isset($data['shippingAddress'])) {
-            $this->updateShippingAddress($data['shippingAddress']);
+        foreach (array_keys($data) as $key) {
+            $method = sprintf('update%s', ucfirst($key));
+            if (method_exists($this, $method)) {
+                $this->{$method}($data[$key]);
+            }
         }
     }
 
@@ -78,6 +81,11 @@ class RequestStore implements CheckoutStore
         return $this->shippingAddress;
     }
 
+    public function getClient()
+    {
+        return $this->client;
+    }
+
     protected function updateBillingAddress($data)
     {
         $this->billingAddress->country_id = $data['country_id'];
@@ -92,5 +100,11 @@ class RequestStore implements CheckoutStore
         $this->shippingAddress->address    = $data['address'];
         $this->shippingAddress->city       = $data['city'];
         $this->shippingAddress->name       = array_get($data, 'name');
+    }
+
+    protected function updateClient($data)
+    {
+        die('This would save data to the DB. Continue coding here!');
+        $this->client->updateClient($data);
     }
 }
