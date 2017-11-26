@@ -104,7 +104,6 @@ class RequestStore implements CheckoutStore
 
     protected function updateClient($data)
     {
-        die('This would save data to the DB. Continue coding here!');
-        $this->client->updateClient($data);
+        $this->client->fill($data);
     }
 }
