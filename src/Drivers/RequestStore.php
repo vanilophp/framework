@@ -13,14 +13,12 @@
 namespace Vanilo\Checkout\Drivers;
 
 
-use Konekt\Address\Contracts\Address;
-use Konekt\Address\Models\AddressType;
-use Konekt\Client\Contracts\Client;
-use Konekt\Client\Models\ClientProxy;
-use Konekt\Client\Models\ClientTypeProxy;
+use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Checkout\Traits\HasCheckoutState;
+use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Customer;
 
 /**
  * Stores & fetches checkout data across http requests.
@@ -39,18 +37,19 @@ class RequestStore implements CheckoutStore
     /** @var  Address */
     protected $shippingAddress;
 
-    /** @var  Client */
-    protected $client;
+    /** @var  Customer */
+    protected $customer;
 
-    public function __construct($config)
+    /** @var  CheckoutDataFactory */
+    protected $dataFactory;
+
+    public function __construct($config, CheckoutDataFactory $dataFactory)
     {
-        $this->billingAddress = app(Address::class);
-        $this->billingAddress->type = AddressType::BILLING;
+        $this->dataFactory = $dataFactory;
 
-        $this->shippingAddress = app(Address::class);
-        $this->shippingAddress->type = AddressType::SHIPPING;
-
-        $this->client = ClientProxy::newClient(ClientTypeProxy::create(), []);
+        $this->billingAddress  = $dataFactory->createBillingAddress();
+        $this->shippingAddress = $dataFactory->createShippingAddress();
+        $this->customer        = $dataFactory->createCustomer();
     }
 
     public function update(array $data)
@@ -81,29 +80,23 @@ class RequestStore implements CheckoutStore
         return $this->shippingAddress;
     }
 
-    public function getClient()
+    public function getCustomer()
     {
-        return $this->client;
+        return $this->customer;
     }
 
     protected function updateBillingAddress($data)
     {
-        $this->billingAddress->country_id = $data['country_id'];
-        $this->billingAddress->address    = $data['address'];
-        $this->billingAddress->city       = $data['city'];
-        $this->billingAddress->name       = array_get($data, 'name');
+        $this->billingAddress->fill($data);
     }
 
     protected function updateShippingAddress($data)
     {
-        $this->shippingAddress->country_id = $data['country'];
-        $this->shippingAddress->address    = $data['address'];
-        $this->shippingAddress->city       = $data['city'];
-        $this->shippingAddress->name       = array_get($data, 'name');
+        $this->shippingAddress->fill($data);
     }
 
-    protected function updateClient($data)
+    protected function updateCustomer($data)
     {
-        $this->client->fill($data);
+        $this->customer->fill($data);
     }
 }

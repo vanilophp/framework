@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the Checkout model class.
+ * Contains the Checkout Manager class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -16,6 +16,7 @@ namespace Vanilo\Checkout;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 use Vanilo\Checkout\Contracts\CheckoutStore;
+use Vanilo\Checkout\Models\CheckoutState;
 use Vanilo\Contracts\CheckoutSubject;
 
 class CheckoutManager implements CheckoutContract
@@ -60,9 +61,9 @@ class CheckoutManager implements CheckoutContract
         $this->store->setState($state);
     }
 
-    public function getClient()
+    public function getCustomer()
     {
-        return $this->store->getClient();
+        return $this->store->getCustomer();
     }
 
     public function getBillingAddress()
@@ -78,6 +79,7 @@ class CheckoutManager implements CheckoutContract
     public function update(array $data)
     {
         $this->store->update($data);
+        //$this->setState(CheckoutState::READY());
     }
 
     /**

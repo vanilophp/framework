@@ -45,6 +45,14 @@ interface Checkout
      */
     public function setState($state);
 
+    public function getBillingAddress();
+
+    public function getShippingAddress();
+
+    public function getCustomer();
+
+    public function update(array $data);
+
     /**
      * Returns the grand total of the checkout
      *

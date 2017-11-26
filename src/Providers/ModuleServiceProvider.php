@@ -15,6 +15,7 @@ namespace Vanilo\Checkout\Providers;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\CheckoutManager;
+use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Models\CheckoutState;
 
@@ -31,6 +32,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         parent::register();
 
         $this->app->bind(CheckoutContract::class, CheckoutManager::class);
+
         $this->app->bind(CheckoutStore::class, function ($app) {
             $driverClass = $app['config']->get('vanilo.checkout.store.driver');
             if (false === strpos($driverClass, '\\')) {
@@ -40,7 +42,10 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
                 );
             }
 
-            return new $driverClass($app['config']->get('vanilo.checkout.store'));
+            return new $driverClass(
+                $app['config']->get('vanilo.checkout.store'),
+                $app->make(CheckoutDataFactory::class)
+            );
         });
 
         $this->app->singleton('vanilo.checkout', function ($app) {
