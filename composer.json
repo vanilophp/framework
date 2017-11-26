@@ -1,0 +1,41 @@
+{
+    "name": "vanilo/order",
+    "description": "Vanilo Order Module",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["order", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "support": {
+        "source": "https://github.com/artkonekt/order"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "konekt/concord": "dev-master",
+        "vanilo/contracts": "dev-master",
+        "vanilo/support": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.2",
+        "orchestra/testbench": "^3.4.2"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Order\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vanilo\\Order\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
