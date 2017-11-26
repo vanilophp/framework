@@ -10,7 +10,7 @@ return [
         'namespace' => 'vanilo'
     ],
     'routes' => [
-        'prefix'     => 'vanilo',
+        'prefix'     => 'admin',
         'as'         => 'vanilo.',
         'middleware' => ['web', 'auth', 'acl'],
         'files'      => ['admin']
