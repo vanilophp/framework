@@ -18,6 +18,11 @@ use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 
 class OrderItem extends Model implements OrderItemContract
 {
-    protected $fillable = ['product_type', 'product_id', 'quantity', 'price'];
+    protected $fillable = ['order_id', 'product_type', 'product_id', 'name', 'quantity', 'price'];
+
+    public function order()
+    {
+        return $this->belongsTo(OrderProxy::modelClass());
+    }
 
 }

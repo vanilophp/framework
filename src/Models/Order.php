@@ -45,12 +45,16 @@ class Order extends Model implements OrderContract
         parent::__construct($attributes);
     }
 
-
     /**
      * @inheritdoc
      */
     public function getNumber()
     {
         return $this->number;
+    }
+
+    public function items()
+    {
+        return $this->hasMany(OrderItemProxy::modelClass());
     }
 }

@@ -17,9 +17,15 @@ class CreateOrderItemsTable extends Migration
             $table->integer('order_id')->unsigned();
             $table->string('product_type');
             $table->integer('product_id')->unsigned();
-            $table->integer('quantity')->unsigned();
+            $table->string('name')->nullable()->comment('The product name at the moment of buying');
+            $table->integer('quantity');
             $table->decimal('price', 15, 4);
             $table->timestamps();
+
+            $table->foreign('order_id')
+                ->references('id')
+                ->on('orders')
+                ->onDelete('cascade');
         });
     }
 
