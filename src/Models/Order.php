@@ -21,11 +21,30 @@ class Order extends Model implements OrderContract
 {
     use CastsEnums;
 
-    protected $fillable = ['status', 'user_id', 'billing_address_id', 'shipping_address_id', 'notes'];
+    protected $fillable = ['number', 'status', 'user_id', 'billing_address_id', 'shipping_address_id', 'notes'];
 
     protected $enums = [
         'status' => 'OrderStatusProxy@enumClass'
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        // Set default status in case there was none given
+        if (!isset($attributes['status'])) {
+            $this->setRawAttributes(
+                array_merge(
+                    $this->attributes, [
+                        'status' => OrderStatusProxy::defaultValue()
+                    ]
+                ),
+                true
+            );
+
+        }
+
+        parent::__construct($attributes);
+    }
+
 
     /**
      * @inheritdoc

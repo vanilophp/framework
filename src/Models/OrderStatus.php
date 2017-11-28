@@ -14,8 +14,9 @@ namespace Vanilo\Order\Models;
 
 
 use Konekt\Enum\Enum;
+use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
 
-class OrderStatus extends Enum
+class OrderStatus extends Enum implements OrderStatusContract
 {
     const __default = self::PENDING;
 

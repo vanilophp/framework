@@ -1,7 +1,5 @@
 # Order Module
 
-## Happy 4th Birthday Titusz! 🎂
-
 This is the order module for [Vanilo](https://vanilo.io).
 
 [![Travis](https://img.shields.io/travis/vanilophp/order.svg?style=flat-square)](https://travis-ci.org/vanilophp/order)

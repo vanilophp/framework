@@ -15,12 +15,17 @@ namespace Vanilo\Order\Providers;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Models\OrderItem;
+use Vanilo\Order\Models\OrderStatus;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
         Order::class,
         OrderItem::class
+    ];
+
+    protected $enums = [
+        OrderStatus::class
     ];
 }
 
