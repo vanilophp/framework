@@ -7,8 +7,6 @@ This is the order module for [Vanilo](https://vanilo.io).
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/order.svg?style=flat-square)](https://packagist.org/packages/vanilo/order)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-touch
-
 ## Installation
 
 ```bash
