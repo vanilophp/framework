@@ -14,4 +14,7 @@ Currently it incorporates the following components:
     - [Address Module](address.md)
     - An extensible admin
 - [Product Module](product.md)
+- [Cart Module](cart.md)
+- [Checkout Module](checkout.md)
+- [Order Module](order.md)
 

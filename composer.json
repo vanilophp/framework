@@ -16,12 +16,14 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "konekt/appshell": ">=0.9.0",
+        "konekt/appshell": ">=0.9.1",
+        "vanilo/address": "dev-master",
         "vanilo/contracts": "dev-master",
         "vanilo/support": "dev-master",
         "vanilo/product": "dev-master",
         "vanilo/cart": "dev-master",
-        "vanilo/checkout": "dev-master"
+        "vanilo/checkout": "dev-master",
+        "vanilo/order": "dev-master"
     },
     "autoload": {
         "psr-4": {

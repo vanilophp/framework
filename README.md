@@ -11,7 +11,7 @@
 
 Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce applications with **pleasure**.
 
-Vanilo is in an early development stage. It's expected to have the first working version (0.1) in October 2017.
+Vanilo is in an early development stage. It's expected to have the first working version (0.1) in December 2017.
 
 Feel free to submit your questions, suggestions by adding a [new issue](https://github.com/vanilophp/framework/issues/new) here.
 
