@@ -13,6 +13,9 @@
 namespace Vanilo\Order\Contracts;
 
 
+use Traversable;
+use Vanilo\Contracts\Address;
+
 interface Order
 {
     /**
@@ -21,5 +24,13 @@ interface Order
      * @return string
      */
     public function getNumber();
+
+    public function getStatus(): OrderStatus;
+
+    public function getBillingAddress(): Address;
+
+    public function getShippingAddress(): Address;
+
+    public function getItems(): Traversable;
 
 }

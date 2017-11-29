@@ -80,6 +80,17 @@ abstract class TestCase extends Orchestra
             $table->decimal('price', 15, 2);
             $table->timestamps();
         });
+
+        $app['db']->connection()->getSchemaBuilder()->create('addresses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->char('country_id', 2);
+            $table->string('province')->nullable();
+            $table->string('postalcode', 12)->nullable();
+            $table->string('city')->nullable();
+            $table->string('address', 384);
+            $table->timestamps();
+        });
     }
 
     /**

@@ -15,7 +15,10 @@ namespace Vanilo\Order\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Traversable;
+use Vanilo\Contracts\Address;
 use Vanilo\Order\Contracts\Order as OrderContract;
+use Vanilo\Order\Contracts\OrderStatus;
 
 class Order extends Model implements OrderContract
 {
@@ -52,6 +55,32 @@ class Order extends Model implements OrderContract
     {
         return $this->number;
     }
+
+    public function getStatus(): OrderStatus
+    {
+        return $this->status;
+    }
+
+    public function getBillingAddress(): Address
+    {
+        return $this->billingAddress;
+    }
+
+    public function getShippingAddress(): Address
+    {
+        return $this->shippingAddress;
+    }
+
+    public function getItems(): Traversable
+    {
+        return $this->items;
+    }
+
+    public function billingAddress()
+    {
+        return $this->hasOne('--> Continue here <--');
+    }
+
 
     public function items()
     {
