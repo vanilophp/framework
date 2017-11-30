@@ -13,6 +13,8 @@
 namespace Vanilo\Order\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
+use Vanilo\Order\Factories\OrderFactory;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Models\OrderItem;
 use Vanilo\Order\Models\OrderStatus;
@@ -27,5 +29,14 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $enums = [
         OrderStatus::class
     ];
+
+    public function boot()
+    {
+        parent::boot();
+
+        // Bind the default implementation to the interface
+        $this->app->bind(OrderFactoryContract::class, OrderFactory::class);
+    }
 }
+
 
