@@ -14,8 +14,10 @@ namespace Vanilo\Order\Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Blueprint;
+use Konekt\Address\Providers\ModuleServiceProvider as KonektAddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vanilo\Address\Providers\ModuleServiceProvider as VaniloAddressModule;
 use Vanilo\Order\Providers\ModuleServiceProvider as OrderModule;
 use Vanilo\Order\Tests\Dummies\Product;
 
@@ -25,9 +27,6 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        // The cart module is unaware of any actual Buyables,
-        // so the mapping gets defined here. Any consumers
-        // of this module need to add their mapping too
         Relation::morphMap([
             shorten(Product::class) => Product::class
         ]);
@@ -80,17 +79,6 @@ abstract class TestCase extends Orchestra
             $table->decimal('price', 15, 2);
             $table->timestamps();
         });
-
-        $app['db']->connection()->getSchemaBuilder()->create('addresses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->char('country_id', 2);
-            $table->string('province')->nullable();
-            $table->string('postalcode', 12)->nullable();
-            $table->string('city')->nullable();
-            $table->string('address', 384);
-            $table->timestamps();
-        });
     }
 
     /**
@@ -101,6 +89,8 @@ abstract class TestCase extends Orchestra
         parent::resolveApplicationConfiguration($app);
 
         $app['config']->set('concord.modules', [
+            KonektAddressModule::class,
+            VaniloAddressModule::class,
             OrderModule::class
         ]);
     }

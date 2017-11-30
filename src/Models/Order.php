@@ -14,9 +14,9 @@ namespace Vanilo\Order\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Traversable;
-use Vanilo\Contracts\Address;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus;
 
@@ -34,15 +34,7 @@ class Order extends Model implements OrderContract
     {
         // Set default status in case there was none given
         if (!isset($attributes['status'])) {
-            $this->setRawAttributes(
-                array_merge(
-                    $this->attributes, [
-                        'status' => OrderStatusProxy::defaultValue()
-                    ]
-                ),
-                true
-            );
-
+            $this->setDefaultOrderStatus();
         }
 
         parent::__construct($attributes);
@@ -61,12 +53,18 @@ class Order extends Model implements OrderContract
         return $this->status;
     }
 
-    public function getBillingAddress(): Address
+    /**
+     * @inheritdoc
+     */
+    public function getBillingAddress()
     {
         return $this->billingAddress;
     }
 
-    public function getShippingAddress(): Address
+    /**
+     * @inheritdoc
+     */
+    public function getShippingAddress()
     {
         return $this->shippingAddress;
     }
@@ -78,12 +76,33 @@ class Order extends Model implements OrderContract
 
     public function billingAddress()
     {
-        return $this->hasOne('--> Continue here <--');
+        return $this->belongsTo(AddressProxy::modelClass());
+    }
+
+    public function shippingAddress()
+    {
+        return $this->belongsTo(AddressProxy::modelClass());
     }
 
 
     public function items()
     {
         return $this->hasMany(OrderItemProxy::modelClass());
+    }
+
+    /**
+     * Sets the default order status in raw attributes
+     *
+     */
+    protected function setDefaultOrderStatus()
+    {
+        $this->setRawAttributes(
+            array_merge(
+                $this->attributes, [
+                    'status' => OrderStatusProxy::defaultValue()
+                ]
+            ),
+            true
+        );
     }
 }

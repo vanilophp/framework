@@ -27,9 +27,15 @@ interface Order
 
     public function getStatus(): OrderStatus;
 
-    public function getBillingAddress(): Address;
+    /**
+     * @return Address|null
+     */
+    public function getBillingAddress();
 
-    public function getShippingAddress(): Address;
+    /**
+     * @return Address|null
+     */
+    public function getShippingAddress();
 
     public function getItems(): Traversable;
 

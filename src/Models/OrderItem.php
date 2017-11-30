@@ -25,4 +25,9 @@ class OrderItem extends Model implements OrderItemContract
         return $this->belongsTo(OrderProxy::modelClass());
     }
 
+    public function product()
+    {
+        return $this->morphTo();
+    }
+
 }
