@@ -13,9 +13,15 @@
 namespace Vanilo\Order\Events;
 
 
+use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderAwareEvent;
 
 abstract class BaseOrderEvent implements OrderAwareEvent
 {
     use HasOrder;
+
+    public function __construct(Order $order)
+    {
+        $this->order = $order;
+    }
 }

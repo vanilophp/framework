@@ -13,8 +13,10 @@
 namespace Vanilo\Order\Tests;
 
 
+use Illuminate\Support\Facades\Event;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
+use Vanilo\Order\Events\OrderWasCreated;
 use Vanilo\Order\Exceptions\CreateOrderException;
 use Vanilo\Order\Models\OrderStatusProxy;
 use Vanilo\Order\Tests\Dummies\Product;
@@ -103,5 +105,28 @@ class OrderFactoryTest extends TestCase
         ]);
 
         $this->assertNotEmpty($order->getNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function order_was_created_event_gets_emitted_when_creating_an_order()
+    {
+        Event::fake();
+
+        $order = $this->factory->createFromDataArray([], [
+            [
+                'product_type' => 'product',
+                'product_id'   => $this->mazdaRX8->getId(),
+                'name'         => $this->mazdaRX8->getName(),
+                'quantity'     => 1,
+                'price'        => $this->mazdaRX8->getPrice()
+            ]
+        ]);
+
+        Event::assertDispatched(OrderWasCreated::class, function ($event) use ($order) {
+            return $event->getOrder()->getNumber() === $order->getNumber();
+        });
+
     }
 }

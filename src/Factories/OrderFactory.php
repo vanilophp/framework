@@ -16,11 +16,20 @@ namespace Vanilo\Order\Factories;
 use Illuminate\Support\Facades\DB;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
+use Vanilo\Order\Contracts\OrderNumberGenerator;
 use Vanilo\Order\Events\OrderWasCreated;
 use Vanilo\Order\Exceptions\CreateOrderException;
 
 class OrderFactory implements OrderFactoryContract
 {
+    /** @var OrderNumberGenerator */
+    protected $orderNumberGenerator;
+
+    public function __construct(OrderNumberGenerator $generator)
+    {
+        $this->orderNumberGenerator = $generator;
+    }
+
     /**
      * @inheritDoc
      */
@@ -36,7 +45,7 @@ class OrderFactory implements OrderFactoryContract
             $order = app(Order::class);
 
             $order->fill($data);
-            $order->number = $data['number'] ?? 'AAAA1111';
+            $order->number = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
             $order->save();
 
             $order->items()->createMany($items);
