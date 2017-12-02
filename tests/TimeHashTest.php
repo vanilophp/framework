@@ -131,7 +131,7 @@ class TimeHashTest extends TestCase
     {
         Carbon::setTestNow($date);
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $this->assertEquals(13, strlen($this->generator->generateNumber()));
         }
     }

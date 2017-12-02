@@ -26,6 +26,9 @@ class OrderFactoryTest extends TestCase
     /** @var Product */
     protected $mazdaRX8;
 
+    /** @var Product */
+    protected $volvoV90;
+
     /** @var OrderFactoryContract */
     protected $factory;
 
@@ -37,6 +40,12 @@ class OrderFactoryTest extends TestCase
             'name'  => 'Mazda RX-8',
             'sku'   => 'SE3P',
             'price' => 10899
+        ]);
+
+        $this->volvoV90 = Product::create([
+            'name'  => 'Volvo V90',
+            'sku'   => 'B4204T20',
+            'price' => 59600
         ]);
 
         $this->factory = app(OrderFactoryContract::class);
@@ -127,6 +136,138 @@ class OrderFactoryTest extends TestCase
         Event::assertDispatched(OrderWasCreated::class, function ($event) use ($order) {
             return $event->getOrder()->getNumber() === $order->getNumber();
         });
+    }
 
+    /**
+     * @test
+     */
+    public function item_quantity_is_1_by_default_if_none_gets_passed()
+    {
+        $order = $this->factory->createFromDataArray([],
+            [
+                [
+                    'product_type' => 'product',
+                    'product_id'   => $this->mazdaRX8->getId(),
+                    'name'         => $this->mazdaRX8->getName(),
+                    'price'        => $this->mazdaRX8->getPrice()
+                ]
+            ]
+        );
+
+        $item = $order->getItems()->first();
+        $this->assertEquals(1, $item->quantity);
+
+        // Let's see if DB was properly hit
+        $order = $order->fresh();
+
+        $item = $order->getItems()->first();
+        $this->assertEquals(1, $item->quantity);
+    }
+
+    /**
+     * @test
+     */
+    public function item_quantity_does_not_get_altered_if_a_value_was_passed()
+    {
+        $order = $this->factory->createFromDataArray([],
+            [
+                [
+                    'product'  => $this->mazdaRX8,
+                    'quantity' => 3
+                ]
+            ]
+        );
+
+        $item = $order->getItems()->first();
+        $this->assertEquals(3, $item->quantity);
+
+        // Let's see if DB was properly hit
+        $order = $order->fresh();
+
+        $item = $order->getItems()->first();
+        $this->assertEquals(3, $item->quantity);
+    }
+
+    /**
+     * @test
+     */
+    public function item_can_be_created_from_a_buyable()
+    {
+        $order = $this->factory->createFromDataArray([], [
+            [
+                'product'  => $this->mazdaRX8
+            ]
+        ]);
+
+        $item = $order->getItems()->first();
+        $this->assertEquals(1, $item->quantity);
+        $this->assertEquals($this->mazdaRX8->getName(), $item->name);
+        $this->assertEquals($this->mazdaRX8->getPrice(), $item->price);
+        $this->assertEquals($this->mazdaRX8->getId(), $item->product_id);
+        $this->assertEquals($this->mazdaRX8->morphTypeName(), $item->product_type);
+
+        // Let's see if DB was properly hit
+        $order = $order->fresh();
+
+        $item = $order->getItems()->first();
+        $this->assertEquals(1, $item->quantity);
+        $this->assertEquals($this->mazdaRX8->getName(), $item->name);
+        $this->assertEquals($this->mazdaRX8->getPrice(), $item->price);
+        $this->assertEquals($this->mazdaRX8->getId(), $item->product_id);
+        $this->assertEquals($this->mazdaRX8->morphTypeName(), $item->product_type);
+    }
+
+    /**
+     * @test
+     */
+    public function items_can_be_passed_in_a_mixed_manner_so_that_one_is_a_buyable_another_is_simple_attributes()
+    {
+        $order = $this->factory->createFromDataArray([], [
+            [
+                'product_type' => 'product',
+                'product_id'   => $this->mazdaRX8->getId(),
+                'name'         => $this->mazdaRX8->getName(),
+                'price'        => $this->mazdaRX8->getPrice()
+            ],
+            [
+                'product'  => $this->volvoV90
+            ],
+
+        ]);
+
+        $this->assertCount(2, $order->getItems());
+
+        $mazda = $order->getItems()->first();
+        $this->assertEquals(1, $mazda->quantity);
+        $this->assertEquals($this->mazdaRX8->getName(), $mazda->name);
+        $this->assertEquals($this->mazdaRX8->getPrice(), $mazda->price);
+        $this->assertEquals($this->mazdaRX8->getId(), $mazda->product_id);
+        $this->assertEquals($this->mazdaRX8->morphTypeName(), $mazda->product_type);
+
+        $volvo = $order->getItems()->last();
+        $this->assertEquals(1, $volvo->quantity);
+        $this->assertEquals($this->volvoV90->getName(), $volvo->name);
+        $this->assertEquals($this->volvoV90->getPrice(), $volvo->price);
+        $this->assertEquals($this->volvoV90->getId(), $volvo->product_id);
+        $this->assertEquals($this->volvoV90->morphTypeName(), $volvo->product_type);
+
+        // Let's see if DB was properly hit
+        $order = $order->fresh();
+
+        $this->assertCount(2, $order->getItems());
+
+        $mazda = $order->getItems()->first();
+        $this->assertEquals(1, $mazda->quantity);
+        $this->assertEquals($this->mazdaRX8->getName(), $mazda->name);
+        $this->assertEquals($this->mazdaRX8->getPrice(), $mazda->price);
+        $this->assertEquals($this->mazdaRX8->getId(), $mazda->product_id);
+        $this->assertEquals($this->mazdaRX8->morphTypeName(), $mazda->product_type);
+
+        $volvo = $order->getItems()->last();
+        $this->assertEquals(1, $volvo->quantity);
+        $this->assertEquals($this->volvoV90->getName(), $volvo->name);
+        $this->assertEquals($this->volvoV90->getPrice(), $volvo->price);
+        $this->assertEquals($this->volvoV90->getId(), $volvo->product_id);
+        $this->assertEquals($this->volvoV90->morphTypeName(), $volvo->product_type);
     }
 }
