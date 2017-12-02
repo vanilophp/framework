@@ -20,11 +20,13 @@ use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Address\Models\Address;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
 use Vanilo\Framework\Factories\CheckoutDataFactory;
+use Vanilo\Framework\Factories\OrderFactory;
 use Vanilo\Framework\Http\Requests\CreateProduct;
 use Vanilo\Framework\Http\Requests\UpdateProduct;
 use Menu;
 use Vanilo\Framework\Models\Customer;
 use Vanilo\Framework\Models\Product;
+use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
 
@@ -59,6 +61,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass()
         ]);
 
+        // Use the framework's extended order factory
+        $this->app->bind(OrderFactoryContract::class, OrderFactory::class);
 
         $this->loadBreadcrumbs();
 
