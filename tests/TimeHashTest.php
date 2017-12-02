@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the CompactHashTest class.
+ * Contains the TimeHashTest class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -13,6 +13,7 @@
 namespace Vanilo\Order\Tests;
 
 
+use Carbon\Carbon;
 use Vanilo\Order\Generators\TimeHashGenerator;
 
 class TimeHashTest extends TestCase
@@ -101,5 +102,35 @@ class TimeHashTest extends TestCase
         }
 
         $this->assertEquals(count($numbers), count(array_unique($numbers)));
+    }
+
+    /**
+     * @test
+     * @dataProvider edgeCaseDateProvider
+     */
+    public function length_is_13_in_edge_cases_as_well($date)
+    {
+        Carbon::setTestNow($date);
+
+        for ($i = 0; $i < 100; $i++) {
+            $this->assertEquals(13, strlen($this->generator->generateNumber()));
+        }
+    }
+
+    public function edgeCaseDateProvider()
+    {
+        return [
+            ['2017-01-01 00:00:00'],
+            ['2017-12-31 23:59:59'],
+            ['2018-01-01 00:00:00'],
+            ['2018-01-01 00:00:01'],
+            ['2020-02-29 00:00:01'],
+            ['2020-02-29 23:59:59'],
+            ['2046-12-31 23:59:59'],
+            ['2009-01-01 00:00:00'],
+            ['2100-01-01 00:00:00'],
+            ['2100-01-01 23:59:59'],
+            ['2100-01-02 00:00:59'],
+        ];
     }
 }

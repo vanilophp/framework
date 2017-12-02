@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the CompactHashGenerator class.
+ * Contains the TimeHashGenerator class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -13,6 +13,7 @@
 namespace Vanilo\Order\Generators;
 
 
+use Carbon\Carbon;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderNumberGenerator;
 
@@ -55,20 +56,39 @@ class TimeHashGenerator implements OrderNumberGenerator
     /**
      * Returns an order number for an order with a time + random based hash
      *
-     * Format is:
-     *   - 3 digits: current year as 2 digits(eg 2016 -> 16) + day of the year (eg. 365) => 16365 converted to 36 scale => cml
-     *   - 4 digits: second of the day in 36 scale, 0 padded (eg. 82300 -> 1ri4)
-     *   - 2 digits: microtime digits 4-6 in 36scale, (eg. 271 -> 7j, 240 -> 6o)
-     *   - 1 digits: random letter 0-z (0-35)
-     * Example:
-     *  1. ordering product with id 283 on 2016 aug 3 at 19:11:18 => cif       1hdt   7v  6 5  cif-1hdt-7v65
-     *                                                                 ^          ^    ^  ^ ^
-     *                                                                 │          │    │  │ └──── microtime slow first char
-     *                                                       2016 aug 3┘  69185sec┘ 283┘  └6 <- random nr
-     *                                                                                ^
-     *                                                                                │
-     *                                                                 microtime rapid┘
-     *
+     * ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+     * │ Format is:                                                                                   │
+     * │  - 3 digits: current year as 2 digits(eg 2016 -> 16)                                         │
+     * │              + day of the year (eg. 365)                                                     │
+     * │              => 16365 converted to 36 scale => cml                                           │
+     * │  - dash                                                                                      │
+     * │  - 4 digits: second of the day in 36 scale, 0 padded (eg. 82300 -> 1ri4)                     │
+     * │  - dash                                                                                      │
+     * │  - 2 digits: microtime digits 4-6 in 36scale, (eg. 271 -> 7j, 240 -> 6o)                     │
+     * │  - 1 digits: random letter 0-z (0-35)                                                        │
+     * │  - 1 digit:  microtime first digit (slowest changing part of microtime)                      │
+     * │  If *high_variance* is enabled:                                                              │
+     * │  - dash                                                                                      │
+     * │  - 2 digits: microtime digits 1-3 in 36scale, (eg. 171 -> 4r)                                │
+     * │  - 2 digits: random 2 chars 00-zz                                                            │
+     * │                                                                                              │
+     * │ N O T E S                                                                                    │
+     * │   - The first part turns into 4 digits long after 2047 jan 1st                               │
+     * │   - The first part will be 3 digits again after 2100 jan 1st                                 │
+     * │                                                                                              │
+     * │ Example 1                                                                                    │
+     * │ =========                                                                                    │
+     * │ ┌───────────────┐                                                                            │
+     * │ │ cif-1hdt-7v65 │                                                                            │
+     * │ └───────────────┘                                                                            │
+     * │  1. Ordering on 2016 aug 3 at 19:11:18 => cif-1hdt   -  7v 6 5                               │
+     * │                                          ▲   ▲         ▲  ▲ ▲                                │
+     * │                                          │   │         │  │ └──── microtime slow first char  │
+     * │                                2016 aug 3┘   └69185sec │  └6 <- random nr                    │
+     * │                                                        │                                     │
+     * │                                    283, microtime rapid┘                                     │
+     * │                                                                                              │
+     * └──────────────────────────────────────────────────────────────────────────────────────────────┘
      *
      * @param Order $order
      *
@@ -76,24 +96,39 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     public function generateNumber(Order $order = null)
     {
-        $date = time();
+        $date = Carbon::now();
 
         $number =  sprintf('%s-%s-%s%s%s',
-            base_convert(date('yz', $date), 10, 36),
-            base_convert($date  - strtotime("today"), 10, 36),
-            base_convert($this->getRapidMicroNumber(), 10, 36),
-            base_convert(mt_rand(0, 35), 10, 36),
+            $this->getYearAndDayHash($date),
+            str_pad(base_convert($date->secondsSinceMidnight(), 10, 36), 4, '0', STR_PAD_LEFT),
+            str_pad(base_convert($this->getRapidMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT),
+            base_convert(mt_rand(0, 35), 10, 36), //always one char
             ((string)$this->getSlowMicroNumber())[0]
         );
 
         if ($this->highVariance) {
             $number .= '-'
-                . base_convert($this->getSlowMicroNumber(), 10, 36)
-                . base_convert(mt_rand(36, 72), 10, 36);
+                . str_pad(base_convert($this->getSlowMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT)
+                . str_pad(base_convert(mt_rand(0, 1295), 10, 36), 2, '0', STR_PAD_LEFT);
         }
 
         return $number;
     }
+
+    /**
+     * @param Carbon $date
+     *
+     * @return string
+     */
+    protected function getYearAndDayHash(Carbon $date)
+    {
+        $number = (int)$date->format('y');
+        $number *= 1000;
+        $number += $date->dayOfYear;
+
+        return str_pad(base_convert($number, 10, 36), 3, '0', STR_PAD_LEFT);
+    }
+
 
     /**
      * Returns the rapidly changing part of microtime, and makes sure it is >= 36 & < 1296
