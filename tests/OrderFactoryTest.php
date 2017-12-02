@@ -14,6 +14,7 @@ namespace Vanilo\Order\Tests;
 
 
 use Illuminate\Support\Facades\Event;
+use Vanilo\Address\Models\Address;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Events\OrderWasCreated;
@@ -269,5 +270,30 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals($this->volvoV90->getPrice(), $volvo->price);
         $this->assertEquals($this->volvoV90->getId(), $volvo->product_id);
         $this->assertEquals($this->volvoV90->morphTypeName(), $volvo->product_type);
+    }
+
+    /**
+     * @test
+     */
+    public function separate_billing_address_entry_gets_created_for_the_order()
+    {
+        $address = new Address([
+            'name'       => 'Johnny Bravo',
+            'country_id' => 'US',
+            'city'       => 'Aron City',
+            'address'    => '12 Sandy Baker Street'
+        ]);
+
+        $order = $this->factory->createFromDataArray(
+        [
+            'billingAddress' => $address
+        ],
+        [
+            [
+                'product'  => $this->volvoV90
+            ],
+        ]);
+
+        $this->assertNotEmpty($order->billing_address_id);
     }
 }

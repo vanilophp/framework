@@ -14,6 +14,10 @@ namespace Vanilo\Order\Factories;
 
 
 use Illuminate\Support\Facades\DB;
+use Konekt\Address\Contracts\AddressType;
+use Konekt\Address\Models\AddressProxy;
+use Konekt\Address\Models\AddressTypeProxy;
+use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
@@ -49,6 +53,8 @@ class OrderFactory implements OrderFactoryContract
             $order->number = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
             $order->save();
 
+            $this->createAddresses($order, $data);
+
             $this->createItems($order,
                 array_map(function($item) {
                     // Default quantity is 1 if unspecified
@@ -66,6 +72,21 @@ class OrderFactory implements OrderFactoryContract
         event(new OrderWasCreated($order));
 
         return $order;
+    }
+
+    protected function createAddresses(Order $order, array $data)
+    {
+        if (isset($data['billingAddress']) && $data['billingAddress'] instanceof Address) {
+            $order->billingAddress()->associate(
+                $this->cloneAddress($data['billingAddress'], AddressTypeProxy::BILLING())
+            );
+        }
+
+        if (isset($data['shippingAddress']) && $data['shippingAddress'] instanceof Address) {
+            $order->shippingAddress()->associate(
+                $this->cloneAddress($data['shippingAddress'], AddressTypeProxy::SHIPPING())
+            );
+        }
     }
 
     protected function createItems(Order $order, array $items)
@@ -119,5 +140,26 @@ class OrderFactory implements OrderFactoryContract
         return isset($item['product']) && $item['product'] instanceof Buyable;
     }
 
+    private function addressToAttributes(Address $address)
+    {
+        return [
+            'name'       => $address->getName(),
+            'postalcode' => $address->getPostalCode(),
+            'country_id' => $address->getCountryCode(),
+            /** @todo Convert Province code to province_id */
+            'city'       => $address->getCity(),
+            'address'    => $address->getAddress(),
+        ];
+    }
+
+    private function cloneAddress(Address $address, AddressType $type)
+    {
+        return AddressProxy::create(
+            array_merge(
+                ['type' => $type],
+                $this->addressToAttributes($address)
+            )
+        );
+    }
 
 }
