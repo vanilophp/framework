@@ -10,7 +10,9 @@ return [
             'pad_string'          => '0'
         ],
         'time_hash' => [
-            'high_variance' => false
+            'high_variance'   => false,
+            'start_base_date' => '2000-01-01',
+            'uppercase'       => false
         ]
     ]
 ];

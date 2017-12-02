@@ -32,9 +32,16 @@ class TimeHashGenerator implements OrderNumberGenerator
     /** @var bool */
     protected $highVariance;
 
+    protected $startBaseDate = '2000-01-01';
+
+    /** @var bool */
+    protected $uppercase;
+
     public function __construct()
     {
-        $this->highVariance = $this->config('high_variance', false);
+        $this->highVariance  = $this->config('high_variance', false);
+        $this->uppercase     = $this->config('uppercase', false);
+        $this->startBaseDate = Carbon::parse($this->config('start_base_date', $this->startBaseDate));
     }
 
     /**
@@ -58,9 +65,8 @@ class TimeHashGenerator implements OrderNumberGenerator
      *
      * ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
      * │ Format is:                                                                                   │
-     * │  - 3 digits: current year as 2 digits(eg 2016 -> 16)                                         │
-     * │              + day of the year (eg. 365)                                                     │
-     * │              => 16365 converted to 36 scale => cml                                           │
+     * │  - 3 digits: Days since 2000-01-01 (configurable) converted to 36 scale.                     │
+     * │              eg. 2017-12-02: 6545 days => '51t'                                              │
      * │  - dash                                                                                      │
      * │  - 4 digits: second of the day in 36 scale, 0 padded (eg. 82300 -> 1ri4)                     │
      * │  - dash                                                                                      │
@@ -73,18 +79,17 @@ class TimeHashGenerator implements OrderNumberGenerator
      * │  - 2 digits: random 2 chars 00-zz                                                            │
      * │                                                                                              │
      * │ N O T E S                                                                                    │
-     * │   - The first part turns into 4 digits long after 2047 jan 1st                               │
-     * │   - The first part will be 3 digits again after 2100 jan 1st                                 │
+     * │   - The first part turns into 4 digits long after 2127-09-27                                 │
      * │                                                                                              │
      * │ Example 1                                                                                    │
      * │ =========                                                                                    │
      * │ ┌───────────────┐                                                                            │
-     * │ │ cif-1hdt-7v65 │                                                                            │
+     * │ │ 4ob-1hau-bzf4 │                                                                            │
      * │ └───────────────┘                                                                            │
-     * │  1. Ordering on 2016 aug 3 at 19:11:18 => cif-1hdt   -  7v 6 5                               │
+     * │    Ordering on 2016 aug 3 at 19:11:18 => 4ob-1hau   -  bz f 4                                │
      * │                                          ▲   ▲         ▲  ▲ ▲                                │
      * │                                          │   │         │  │ └──── microtime slow first char  │
-     * │                                2016 aug 3┘   └69185sec │  └6 <- random nr                    │
+     * │                                2016 aug 3┘   └69078sec │  └─ random nr (0-z)                 │
      * │                                                        │                                     │
      * │                                    283, microtime rapid┘                                     │
      * │                                                                                              │
@@ -112,7 +117,7 @@ class TimeHashGenerator implements OrderNumberGenerator
                 . str_pad(base_convert(mt_rand(0, 1295), 10, 36), 2, '0', STR_PAD_LEFT);
         }
 
-        return $number;
+        return $this->uppercase ? strtoupper($number) : $number;
     }
 
     /**
@@ -122,11 +127,7 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     protected function getYearAndDayHash(Carbon $date)
     {
-        $number = (int)$date->format('y');
-        $number *= 1000;
-        $number += $date->dayOfYear;
-
-        return str_pad(base_convert($number, 10, 36), 3, '0', STR_PAD_LEFT);
+        return str_pad(base_convert($date->diffInDays($this->startBaseDate), 10, 36), 3, '0', STR_PAD_LEFT);
     }
 
 

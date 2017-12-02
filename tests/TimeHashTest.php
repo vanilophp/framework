@@ -106,6 +106,25 @@ class TimeHashTest extends TestCase
 
     /**
      * @test
+     */
+    public function can_be_configured_to_return_numbers_in_uppercase()
+    {
+        $number =  $this->generator->generateNumber();
+        $this->assertEquals($number, strtolower($number));
+        $this->assertNotEquals($number, strtoupper($number));
+
+        config(['vanilo.order.number.time_hash.uppercase' => true]);
+        // Generate a new one to reread configuration
+        $this->generator = new TimeHashGenerator();
+
+        $number = $this->generator->generateNumber();
+
+        $this->assertEquals($number, strtoupper($number));
+        $this->assertNotEquals($number, strtolower($number));
+    }
+
+    /**
+     * @test
      * @dataProvider edgeCaseDateProvider
      */
     public function length_is_13_in_edge_cases_as_well($date)
@@ -120,6 +139,8 @@ class TimeHashTest extends TestCase
     public function edgeCaseDateProvider()
     {
         return [
+            ['2000-01-01 00:00:00'],
+            ['2009-01-01 00:00:00'],
             ['2017-01-01 00:00:00'],
             ['2017-12-31 23:59:59'],
             ['2018-01-01 00:00:00'],
@@ -127,10 +148,25 @@ class TimeHashTest extends TestCase
             ['2020-02-29 00:00:01'],
             ['2020-02-29 23:59:59'],
             ['2046-12-31 23:59:59'],
-            ['2009-01-01 00:00:00'],
+            ['2047-01-01 03:00:00'],
             ['2100-01-01 00:00:00'],
             ['2100-01-01 23:59:59'],
             ['2100-01-02 00:00:59'],
+            ['2127-09-27 23:59:59']
         ];
+    }
+
+    /**
+     * @test
+     */
+    public function start_base_date_can_be_changed_in_config()
+    {
+        config(['vanilo.order.number.time_hash.start_base_date' => '2013-11-27']);
+        // Generate a new one to reread configuration
+        $this->generator = new TimeHashGenerator();
+
+        Carbon::setTestNow('2013-11-28');
+
+        $this->assertStringStartsWith('001-', $this->generator->generateNumber());
     }
 }
