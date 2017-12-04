@@ -13,7 +13,7 @@
 namespace Vanilo\Checkout\Tests;
 
 
-use Vanilo\Checkout\Models\Checkout;
+use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Checkout\Tests\Mocks\Cart;
 use Vanilo\Checkout\Tests\Mocks\Product;
 use Vanilo\Contracts\CheckoutSubject;
@@ -31,12 +31,11 @@ class CartTest extends TestCase
      */
     public function an_arbitrary_object_implementing_checkoutsubject_can_be_set_as_cart()
     {
-        $checkout = new Checkout();
-        $cart     = new Cart();
+        $cart = new Cart();
 
-        $checkout->setCart($cart);
+        Checkout::setCart($cart);
 
-        $this->assertInstanceOf(CheckoutSubject::class, $checkout->getCart());
+        $this->assertInstanceOf(CheckoutSubject::class, Checkout::getCart());
     }
 
     /**

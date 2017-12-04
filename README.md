@@ -19,11 +19,11 @@ php artisan migrate
 
 It has:
 
-- Cart (Checkout Subject)
-- Billing information (client, address, contact)
-- Payment method
+- Cart (`CheckoutSubject`)
+- Billing information (`BillingSubject`)
+- Payment method (TBD)
 - Shipping information (if cart needs shipping; address, contact)
-- Shipping method
+- Shipping method (TBD)
 - User (optional)
 - State
 
@@ -36,8 +36,8 @@ Attributes:
 ```php
 
 $checkout->cart; // CheckoutSubject (vanilo/contracts) getter/setter
-$checkout->billingAddress; //konekt/address ?? billing/address
-$checkout->shippingAddress; //konekt/address ?? shipping/address
+$checkout->billingSubject; // BillingSubject
+$checkout->shippingAddress; // Address
 $checkout->user; // laravel user | null
 $checkout->shippingMethod; // ?? name, fee => shipping module?
 $checkout->paymentMethod; // ?? name, gw => payment module?
@@ -46,6 +46,4 @@ $checkout->state; // CheckoutState
 
 ### Billing Information
 
-1. Client: Org|Person
-2. (Postal) Address
-3. Contact Data (Phone, name, E-mail) -> Person ... ie. 1 if 1 is not org... aaargh!
+`\Vanilo\Contracts\BillingSubject`

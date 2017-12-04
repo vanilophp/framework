@@ -13,6 +13,8 @@
 namespace Vanilo\Checkout\Contracts;
 
 
+use Vanilo\Contracts\Address;
+use Vanilo\Contracts\BillingSubject;
 use Vanilo\Contracts\CheckoutSubject;
 
 interface Checkout
@@ -45,11 +47,9 @@ interface Checkout
      */
     public function setState($state);
 
-    public function getBillingAddress();
+    public function getBillingSubject(): BillingSubject;
 
-    public function getShippingAddress();
-
-    public function getCustomer();
+    public function getShippingAddress(): Address;
 
     public function update(array $data);
 

@@ -18,7 +18,7 @@ use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Checkout\Traits\HasCheckoutState;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\Customer;
+use Vanilo\Contracts\BillingSubject;
 
 /**
  * Stores & fetches checkout data across http requests.
@@ -31,14 +31,11 @@ class RequestStore implements CheckoutStore
 
     protected $state;
 
-    /** @var  Address */
-    protected $billingAddress;
+    /** @var  BillingSubject */
+    protected $billingSubject;
 
     /** @var  Address */
     protected $shippingAddress;
-
-    /** @var  Customer */
-    protected $customer;
 
     /** @var  CheckoutDataFactory */
     protected $dataFactory;
@@ -47,9 +44,8 @@ class RequestStore implements CheckoutStore
     {
         $this->dataFactory = $dataFactory;
 
-        $this->billingAddress  = $dataFactory->createBillingAddress();
+        $this->billingSubject  = $dataFactory->createBillingSubject();
         $this->shippingAddress = $dataFactory->createShippingAddress();
-        $this->customer        = $dataFactory->createCustomer();
     }
 
     public function update(array $data)
@@ -70,24 +66,19 @@ class RequestStore implements CheckoutStore
         return $this->cart->total();
     }
 
-    public function getBillingAddress()
+    public function getBillingSubject(): BillingSubject
     {
-        return $this->billingAddress;
+        return $this->billingSubject;
     }
 
-    public function getShippingAddress()
+    public function getShippingAddress(): Address
     {
         return $this->shippingAddress;
     }
 
-    public function getCustomer()
+    protected function updateBillingSubject($data)
     {
-        return $this->customer;
-    }
-
-    protected function updateBillingAddress($data)
-    {
-        $this->billingAddress->fill($data);
+        $this->billingSubject->fill($data);
     }
 
     protected function updateShippingAddress($data)
@@ -95,8 +86,4 @@ class RequestStore implements CheckoutStore
         $this->shippingAddress->fill($data);
     }
 
-    protected function updateCustomer($data)
-    {
-        $this->customer->fill($data);
-    }
 }
