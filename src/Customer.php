@@ -13,7 +13,7 @@
 namespace Vanilo\Contracts;
 
 
-interface Customer
+interface Customer extends Organization, Person
 {
     /**
      * Returns the name of the customer (either company or person's name)
@@ -23,45 +23,17 @@ interface Customer
     public function getName();
 
     /**
-     * Returns the first name of the client
+     * Returns whether the client is an organization (company, GO, NGO, foundation, etc)
      *
-     * @return string|null
+     * @return bool
      */
-    public function getFirstName();
+    public function isOrganization();
 
     /**
-     * Returns the last name of the client
+     * Returns whether the client is a natural person
      *
-     * @return string|null
+     * @return bool
      */
-    public function getLastName();
-
-    /**
-     * Returns the Company name
-     *
-     * @return string|null
-     */
-    public function getCompanyName();
-
-    /**
-     * Customer's email address
-     *
-     * @return string|null
-     */
-    public function getEmail();
-
-    /**
-     * Customer's phone number
-     *
-     * @return string|null
-     */
-    public function getPhone();
-
-    /**
-     * Customer's tax number (VAT id, tax id, etc)
-     *
-     * @return string|null
-     */
-    public function getTaxNumber();
+    public function isIndividual();
 
 }
