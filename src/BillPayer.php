@@ -17,7 +17,7 @@ namespace Vanilo\Contracts;
  * receives an Invoice
  *
  */
-interface BillingSubject extends Customer
+interface BillPayer extends Customer
 {
     /**
      * Returns whether the customer is registered in the EU
@@ -27,9 +27,9 @@ interface BillingSubject extends Customer
     public function isEuRegistered();
 
     /**
-     * Returns the physical address
+     * Returns the billing address
      *
      * @return Address
      */
-    public function getAddress() : Address;
+    public function getBillingAddress() : Address;
 }
