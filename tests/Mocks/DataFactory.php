@@ -16,12 +16,13 @@ namespace Vanilo\Checkout\Tests\Mocks;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Tests\Mocks\Address as MockAddress;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillingSubject;
+use Vanilo\Contracts\BillPayer;
 
 class DataFactory implements CheckoutDataFactory
 {
-    public function createBillingSubject(): BillingSubject
+    public function createBillPayer(): BillPayer
     {
+        return new \Vanilo\Checkout\Tests\Mocks\BillPayer();
 
     }
 

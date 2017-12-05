@@ -15,7 +15,7 @@ namespace Vanilo\Checkout\Tests\Mocks;
 
 use Vanilo\Contracts\Address;
 
-class BillingSubject implements \Vanilo\Contracts\BillingSubject
+class BillPayer implements \Vanilo\Contracts\BillPayer
 {
     protected $data;
 
@@ -29,7 +29,7 @@ class BillingSubject implements \Vanilo\Contracts\BillingSubject
         return $this->data['is_eu_registered'] ?? null;
     }
 
-    public function getAddress(): Address
+    public function getBillingAddress(): Address
     {
         // TODO: Implement getAddress() method.
     }
