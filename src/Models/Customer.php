@@ -18,9 +18,6 @@ use Vanilo\Contracts\Customer as CustomerContract;
 
 class Customer extends BaseCustomer implements CustomerContract
 {
-    protected $enums = [
-        'type' => 'Konekt\Customer\Models\CustomerTypeProxy@enumClass'
-    ];
 
     /**
      * @inheritDoc
@@ -69,4 +66,21 @@ class Customer extends BaseCustomer implements CustomerContract
     {
         return $this->tax_nr;
     }
+
+    public function isOrganization()
+    {
+        return $this->type->isOrganization();
+    }
+
+    public function isIndividual()
+    {
+        return $this->type->isIndividual();
+    }
+
+    public function getFullName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName(); // This is temporary. My ass.
+    }
+
+
 }
