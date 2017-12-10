@@ -183,7 +183,7 @@ config('vanilo.order.number.time_hash', [
 
 #### Setting Order Status
 
-If you omit setting an order status the default value will be used, that
+If you omit setting an order status then the default value will be used, that
 comes from the `OrderStatus` enum class:
 
 ```php
@@ -211,8 +211,8 @@ $factory->createFromDataArray($orderData, $items);
 
 #### Setting The User
 
-In case you don't pass set a `user_id` in the array, the currently
-authenticated user's id will be automatically inserted.
+In case you don't pass `user_id` in the array, the currently
+authenticated user's id will automatically be inserted.
 
 ### Setting Order Items
 
@@ -248,8 +248,8 @@ $factory->createFromDataArray([], [$item]);
 
 ## Events
 
-If you create an order with the factory an `OrderWasCreated` event gets
-fired. The underlying order can be accessed as follows:
+If you create an order with the factory, an `OrderWasCreated` event gets
+fired. The underlying order can be obtained as follows:
 
 ```php
 $event->getOrder();
