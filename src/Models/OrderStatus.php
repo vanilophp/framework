@@ -28,7 +28,7 @@ class OrderStatus extends Enum implements OrderStatusContract
     /**
      * Orders fulfilled completely.
      */
-    const COMPLETED = 'complete';
+    const COMPLETED = 'completed';
 
     /**
      * Order that has been cancelled.

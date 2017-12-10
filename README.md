@@ -59,7 +59,7 @@ OrderStatus::values();
 
 //=> [
 //     "pending", <- default
-//     "complete",
+//     "completed",
 //     "cancelled",
 //   ]
 ```
