@@ -50,7 +50,8 @@ class OrderFactory implements OrderFactoryContract
             $order = app(Order::class);
 
             $order->fill($data);
-            $order->number = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
+            $order->number  = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
+            $order->user_id = $data['user_id'] ?? auth()->id();
             $order->save();
 
             $this->createAddresses($order, $data);

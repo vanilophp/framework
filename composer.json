@@ -17,7 +17,8 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "konekt/concord": "dev-master",
+        "konekt/concord": ">=0.9.9",
+        "konekt/user": "dev-master",
         "vanilo/contracts": "dev-master",
         "vanilo/support": "dev-master",
         "vanilo/address": "dev-master"

@@ -16,6 +16,7 @@ namespace Vanilo\Order\Models;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Konekt\User\Models\UserProxy;
 use Traversable;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus;
@@ -51,6 +52,11 @@ class Order extends Model implements OrderContract
     public function getStatus(): OrderStatus
     {
         return $this->status;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(UserProxy::modelClass());
     }
 
     /**
