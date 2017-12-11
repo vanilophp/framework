@@ -3,7 +3,7 @@
 This is the cart module for [Vanilo](https://vanilo.io).
 
 [![Travis](https://img.shields.io/travis/vanilophp/cart.svg?style=flat-square)](https://travis-ci.org/vanilophp/cart)
-[![Packagist version](https://img.shields.io/packagist/vpre/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
+[![Packagist version](https://img.shields.io/packagist/v/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
 [![StyleCI](https://styleci.io/repos/108638279/shield?branch=master)](https://styleci.io/repos/108638279)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
