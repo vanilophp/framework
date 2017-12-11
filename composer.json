@@ -17,11 +17,11 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "konekt/concord": ">=0.9.9",
+        "konekt/concord": ">=0.9.10",
         "konekt/user": "dev-master",
-        "vanilo/contracts": "dev-master",
-        "vanilo/support": "dev-master",
-        "vanilo/address": "dev-master"
+        "vanilo/contracts": "^0.1",
+        "vanilo/support": "^0.1",
+        "vanilo/address": "^0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2",
