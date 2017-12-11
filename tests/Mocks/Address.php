@@ -53,4 +53,12 @@ class Address implements AddressContract
     {
         return $this->data['address'] ?? null;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
+    }
 }

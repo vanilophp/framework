@@ -14,7 +14,7 @@ namespace Vanilo\Checkout\Contracts;
 
 
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillingSubject;
+use Vanilo\Contracts\BillPayer;
 use Vanilo\Contracts\CheckoutSubject;
 
 interface Checkout
@@ -47,10 +47,39 @@ interface Checkout
      */
     public function setState($state);
 
-    public function getBillingSubject(): BillingSubject;
+    /**
+     * Returns the bill payer details
+     *
+     * @return BillPayer
+     */
+    public function getBillPayer(): BillPayer;
 
+    /**
+     * Sets the bill payer details
+     *
+     * @param BillPayer $billPayer
+     */
+    public function setBillPayer(BillPayer $billPayer);
+
+    /**
+     * Returns the shipping address
+     *
+     * @return Address
+     */
     public function getShippingAddress(): Address;
 
+    /**
+     * Sets the shipping address
+     *
+     * @param Address $address
+     */
+    public function setShippingAddress(Address $address);
+
+    /**
+     * Update checkout data with an array of attributes
+     *
+     * @param array $data
+     */
     public function update(array $data);
 
     /**

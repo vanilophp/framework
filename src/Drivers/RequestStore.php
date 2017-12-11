@@ -15,10 +15,11 @@ namespace Vanilo\Checkout\Drivers;
 
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
+use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Checkout\Traits\HasCheckoutState;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillingSubject;
+use Vanilo\Contracts\BillPayer;
 
 /**
  * Stores & fetches checkout data across http requests.
@@ -27,12 +28,12 @@ use Vanilo\Contracts\BillingSubject;
  */
 class RequestStore implements CheckoutStore
 {
-    use HasCheckoutState, HasCart;
+    use HasCheckoutState, HasCart, EmulatesFillAttributes;
 
     protected $state;
 
-    /** @var  BillingSubject */
-    protected $billingSubject;
+    /** @var  BillPayer */
+    protected $billPayer;
 
     /** @var  Address */
     protected $shippingAddress;
@@ -42,12 +43,14 @@ class RequestStore implements CheckoutStore
 
     public function __construct($config, CheckoutDataFactory $dataFactory)
     {
-        $this->dataFactory = $dataFactory;
-
-        $this->billingSubject  = $dataFactory->createBillingSubject();
+        $this->dataFactory     = $dataFactory;
+        $this->billPayer       = $dataFactory->createBillPayer();
         $this->shippingAddress = $dataFactory->createShippingAddress();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function update(array $data)
     {
         foreach (array_keys($data) as $key) {
@@ -66,24 +69,60 @@ class RequestStore implements CheckoutStore
         return $this->cart->total();
     }
 
-    public function getBillingSubject(): BillingSubject
+    /**
+     * @inheritdoc
+     */
+    public function getBillPayer(): BillPayer
     {
-        return $this->billingSubject;
+        return $this->billPayer;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function setBillPayer(BillPayer $billPayer)
+    {
+        $this->billPayer = $billPayer;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getShippingAddress(): Address
     {
         return $this->shippingAddress;
     }
 
-    protected function updateBillingSubject($data)
+    /**
+     * @inheritdoc
+     */
+    public function setShippingAddress(Address $address)
     {
-        $this->billingSubject->fill($data);
+        return $this->shippingAddress = $address;
     }
 
+    /**
+     * @inheritdoc
+     */
+    protected function updateBillPayer($data)
+    {
+        $this->fill($this->billPayer, $data);
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function updateShippingAddress($data)
     {
-        $this->shippingAddress->fill($data);
+        $this->fill($this->shippingAddress, $data);
     }
 
+    private function fill($target, array $attributes)
+    {
+        if (method_exists($target, 'fill')) {
+            $target->fill($attributes);
+        } else {
+            $this->fillAttributes($target, $attributes);
+        }
+    }
 }

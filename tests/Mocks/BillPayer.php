@@ -13,15 +13,20 @@
 namespace Vanilo\Checkout\Tests\Mocks;
 
 
-use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Address as AddressContract;
 
 class BillPayer implements \Vanilo\Contracts\BillPayer
 {
     protected $data;
 
+    /** @var Address */
+    protected $address;
+
     public function __construct(array $data = null)
     {
-        $this->data = $data ?: [];
+        $this->data = $data ? array_except($data, 'billingAddress'): [];
+
+        $this->address = new Address($data['billingAddress'] ?? []);
     }
 
     public function isEuRegistered()
@@ -29,9 +34,9 @@ class BillPayer implements \Vanilo\Contracts\BillPayer
         return $this->data['is_eu_registered'] ?? null;
     }
 
-    public function getBillingAddress(): Address
+    public function getBillingAddress(): AddressContract
     {
-        // TODO: Implement getAddress() method.
+        return $this->address;
     }
 
     public function getEmail()
@@ -82,5 +87,19 @@ class BillPayer implements \Vanilo\Contracts\BillPayer
     public function getFullName()
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __set($name, $value)
+    {
+        if ('billingAddress' == $name) {
+            foreach ($value as $key => $value) {
+                $this->getBillingAddress()->{$key} = $value;
+            }
+        } else {
+            $this->data[$name] = $value;
+        }
     }
 }

@@ -43,22 +43,21 @@ class CartTest extends TestCase
      */
     public function checkout_total_matches_cart_total()
     {
-        $checkout = new Checkout();
-        $cart     = new Cart();
+        $cart = new Cart();
 
-        $checkout->setCart($cart);
-
-        $cart->addItem($this->productEarly2018);
-        $this->assertEquals(399, $checkout->total());
+        Checkout::setCart($cart);
 
         $cart->addItem($this->productEarly2018);
-        $this->assertEquals(798, $checkout->total());
+        $this->assertEquals(399, Checkout::total());
+
+        $cart->addItem($this->productEarly2018);
+        $this->assertEquals(798, Checkout::total());
 
         $cart->addItem($this->productEarly2018, 2);
-        $this->assertEquals(1596, $checkout->total());
+        $this->assertEquals(1596, Checkout::total());
 
         $cart->addItem($this->productNormal2018);
-        $this->assertEquals(2195, $checkout->total());
+        $this->assertEquals(2195, Checkout::total());
     }
 
     /**
@@ -66,15 +65,14 @@ class CartTest extends TestCase
      */
     public function checkout_can_return_products()
     {
-        $checkout = new Checkout();
-        $cart     = new Cart();
+        $cart = new Cart();
 
         $cart->addItem($this->productEarly2018);
         $cart->addItem($this->productNormal2018);
 
-        $checkout->setCart($cart);
+        Checkout::setCart($cart);
 
-        $this->assertCount(2, $checkout->getCart()->getItems());
+        $this->assertCount(2, Checkout::getCart()->getItems());
     }
 
     public function setUp()

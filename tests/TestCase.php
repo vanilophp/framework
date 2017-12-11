@@ -14,13 +14,17 @@ namespace Vanilo\Checkout\Tests;
 
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Providers\ModuleServiceProvider as CheckoutModule;
+use Vanilo\Checkout\Tests\Mocks\DataFactory;
 
 abstract class TestCase extends Orchestra
 {
     public function setUp()
     {
         parent::setUp();
+
+        $this->app->bind(CheckoutDataFactory::class, DataFactory::class);
 
         $this->setUpDatabase($this->app);
         $this->startSession();
