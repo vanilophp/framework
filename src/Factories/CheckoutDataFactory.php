@@ -15,19 +15,20 @@ namespace Vanilo\Framework\Factories;
 
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Address\Models\AddressType;
-use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\Customer;
+use Vanilo\Contracts\BillPayer;
 
 class CheckoutDataFactory implements CheckoutDataFactoryContract
 {
-    public function createBillingAddress(): Address
+    public function createBillPayer(): BillPayer
     {
-        $address = app(AddressContract::class);
+        $billPayer = new \Vanilo\Framework\Models\BillPayer();
+
+        $address = app(Address::class);
         $address->type = AddressType::BILLING;
 
-        return $address;
+        $billPayer->billingAddress()->associate($address);
     }
 
     public function createShippingAddress(): Address
@@ -36,10 +37,5 @@ class CheckoutDataFactory implements CheckoutDataFactoryContract
         $address->type = AddressType::SHIPPING;
 
         return $address;
-    }
-
-    public function createCustomer(): Customer
-    {
-        return app(CustomerContract::class);
     }
 }
