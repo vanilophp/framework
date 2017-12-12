@@ -25,10 +25,12 @@ class CheckoutDataFactory implements CheckoutDataFactoryContract
     {
         $billPayer = new \Vanilo\Framework\Models\BillPayer();
 
-        $address = app(Address::class);
+        $address = app(AddressContract::class);
         $address->type = AddressType::BILLING;
 
         $billPayer->billingAddress()->associate($address);
+
+        return $billPayer;
     }
 
     public function createShippingAddress(): Address
