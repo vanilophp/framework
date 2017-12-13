@@ -17,7 +17,7 @@ namespace Vanilo\Contracts;
  * receives an Invoice
  *
  */
-interface BillPayer extends Customer
+interface Billpayer extends Customer
 {
     /**
      * Returns whether the customer is registered in the EU
