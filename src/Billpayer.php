@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the BillingDetails interface.
+ * Contains the Billpayer interface.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
