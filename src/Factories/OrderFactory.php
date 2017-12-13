@@ -66,6 +66,8 @@ class OrderFactory implements OrderFactoryContract
 
         } catch (\Exception $e) {
             DB::rollBack();
+
+            throw $e;
         }
 
         DB::commit();
@@ -77,9 +79,9 @@ class OrderFactory implements OrderFactoryContract
 
     protected function createAddresses(Order $order, array $data)
     {
-        if (isset($data['billingAddress']) && $data['billingAddress'] instanceof Address) {
-            $order->billingAddress()->associate(
-                $this->cloneAddress($data['billingAddress'], AddressTypeProxy::BILLING())
+        if (isset($data['billpayer']) && $data['billpayer'] instanceof Address) {
+            $order->billpayer()->associate(
+                $this->createBillpayer($data['billpayer'])
             );
         }
 
@@ -88,6 +90,12 @@ class OrderFactory implements OrderFactoryContract
                 $this->cloneAddress($data['shippingAddress'], AddressTypeProxy::SHIPPING())
             );
         }
+    }
+
+    protected function createBillpayer(array $data)
+    {
+
+
     }
 
     protected function createItems(Order $order, array $items)

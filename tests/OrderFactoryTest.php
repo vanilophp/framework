@@ -19,6 +19,7 @@ use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Events\OrderWasCreated;
 use Vanilo\Order\Exceptions\CreateOrderException;
+use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\OrderStatusProxy;
 use Vanilo\Order\Tests\Dummies\Product;
 
@@ -284,9 +285,12 @@ class OrderFactoryTest extends TestCase
             'address'    => '12 Sandy Baker Street'
         ]);
 
+        $billpayer = new Billpayer();
+        $billpayer->billingAddress()->associate($address);
+
         $order = $this->factory->createFromDataArray(
         [
-            'billingAddress' => $address
+            'billpayer' => $billpayer
         ],
         [
             [
@@ -294,6 +298,6 @@ class OrderFactoryTest extends TestCase
             ],
         ]);
 
-        $this->assertNotEmpty($order->billing_address_id);
+        $this->assertNotEmpty($order->billpayer_id);
     }
 }

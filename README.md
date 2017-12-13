@@ -26,7 +26,7 @@ php artisan migrate
 | number              | string(32)                                               | See [Order Number Generators](#order-number-generators) |
 | status              | [OrderStatus](#orderstatus)                              | enum                                                    |
 | user_id             | int (User object via the `user` relation)                |                                                         |
-| billpayer_id        | int (BillPayer via the `billPayer` relation              |                                                         |
+| billpayer_id        | int (Billpayer via the `billpayer` relation              |                                                         |
 | shipping_address_id | int (ShippingAddress via the `shippingAddress` relation) |                                                         |
 | notes               | text                                                     |                                                         |
 

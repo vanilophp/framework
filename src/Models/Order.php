@@ -62,9 +62,9 @@ class Order extends Model implements OrderContract
     /**
      * @inheritdoc
      */
-    public function getBillingAddress()
+    public function getBillpayer()
     {
-        return $this->billingAddress;
+        return $this->billpayer;
     }
 
     /**
@@ -80,7 +80,7 @@ class Order extends Model implements OrderContract
         return $this->items;
     }
 
-    public function billingAddress()
+    public function billpayer()
     {
         return $this->belongsTo(AddressProxy::modelClass());
     }

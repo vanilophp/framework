@@ -16,6 +16,7 @@ use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Contracts\OrderNumberGenerator;
 use Vanilo\Order\Factories\OrderFactory;
+use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Models\OrderItem;
 use Vanilo\Order\Models\OrderStatus;
@@ -23,6 +24,7 @@ use Vanilo\Order\Models\OrderStatus;
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
+        Billpayer::class,
         Order::class,
         OrderItem::class
     ];

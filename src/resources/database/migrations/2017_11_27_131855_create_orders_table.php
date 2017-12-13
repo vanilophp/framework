@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->string('number', 32);
             $table->string('status', 32);
             $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('billing_address_id')->unsigned()->nullable();
+            $table->integer('billpayer_id')->unsigned()->nullable();
             $table->integer('shipping_address_id')->unsigned()->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
@@ -25,6 +25,10 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+
+            $table->foreign('billpayer_id')
+                  ->references('id')
+                  ->on('billpayers');
         });
     }
 

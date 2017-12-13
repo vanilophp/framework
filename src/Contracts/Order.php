@@ -15,6 +15,7 @@ namespace Vanilo\Order\Contracts;
 
 use Traversable;
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\BillPayer;
 
 interface Order
 {
@@ -28,9 +29,9 @@ interface Order
     public function getStatus(): OrderStatus;
 
     /**
-     * @return Address|null
+     * @return BillPayer|null
      */
-    public function getBillingAddress();
+    public function getBillpayer();
 
     /**
      * @return Address|null
