@@ -19,11 +19,13 @@ use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\AddressTypeProxy;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Order\Contracts\Billpayer;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Contracts\OrderNumberGenerator;
 use Vanilo\Order\Events\OrderWasCreated;
 use Vanilo\Order\Exceptions\CreateOrderException;
+use Vanilo\Order\Models\BillpayerProxy;
 
 class OrderFactory implements OrderFactoryContract
 {
@@ -54,7 +56,8 @@ class OrderFactory implements OrderFactoryContract
             $order->user_id = $data['user_id'] ?? auth()->id();
             $order->save();
 
-            $this->createAddresses($order, $data);
+            $this->createBillpayer($order, $data);
+            $this->createShippingAddress($order, $data);
 
             $this->createItems($order,
                 array_map(function($item) {
@@ -77,24 +80,27 @@ class OrderFactory implements OrderFactoryContract
         return $order;
     }
 
-    protected function createAddresses(Order $order, array $data)
+    protected function createShippingAddress(Order $order, array $data)
     {
-        if (isset($data['billpayer']) && $data['billpayer'] instanceof Address) {
-            $order->billpayer()->associate(
-                $this->createBillpayer($data['billpayer'])
-            );
-        }
-
-        if (isset($data['shippingAddress']) && $data['shippingAddress'] instanceof Address) {
+        if ($address = isset($data['shippingAddress'])) {
             $order->shippingAddress()->associate(
-                $this->cloneAddress($data['shippingAddress'], AddressTypeProxy::SHIPPING())
+                $this->createOrCloneAddress($data['shippingAddress'], AddressTypeProxy::SHIPPING())
             );
         }
     }
 
-    protected function createBillpayer(array $data)
+    protected function createBillpayer(Order $order, array $data)
     {
+        if (isset($data['billpayer'])) {
 
+            $address   = $this->createOrCloneAddress($data['billpayer']['address']);
+
+            $billpayer = app(Billpayer::class);
+            $billpayer->address()->associate($address);
+            $billpayer->save();
+
+            $order->billpayer()->associate($billpayer);
+        }
 
     }
 
@@ -161,14 +167,23 @@ class OrderFactory implements OrderFactoryContract
         ];
     }
 
-    private function cloneAddress(Address $address, AddressType $type)
+    private function createOrCloneAddress($address, AddressType $type = null)
     {
-        return AddressProxy::create(
-            array_merge(
-                ['type' => $type],
-                $this->addressToAttributes($address)
-            )
-        );
+        if ($address instanceof Address) {
+            $address = $this->addressToAttributes($address);
+        } elseif (!is_array($address)) {
+            throw new CreateOrderException(
+                sprintf(
+                    'Address data is %s but it should be either an Address or an array',
+                    gettype($address)
+                )
+            );
+        }
+
+        $type = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
+        $address['type'] = $type;
+
+        return AddressProxy::create($address);
     }
 
 }

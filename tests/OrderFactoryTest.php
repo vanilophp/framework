@@ -278,19 +278,16 @@ class OrderFactoryTest extends TestCase
      */
     public function separate_billing_address_entry_gets_created_for_the_order()
     {
-        $address = new Address([
-            'name'       => 'Johnny Bravo',
-            'country_id' => 'US',
-            'city'       => 'Aron City',
-            'address'    => '12 Sandy Baker Street'
-        ]);
-
-        $billpayer = new Billpayer();
-        $billpayer->billingAddress()->associate($address);
-
         $order = $this->factory->createFromDataArray(
         [
-            'billpayer' => $billpayer
+            'billpayer' => [
+                'address' => [
+                    'name'       => 'Johnny Bravo',
+                    'country_id' => 'US',
+                    'city'       => 'Aron City',
+                    'address'    => '12 Sandy Baker Street'
+                ]
+            ]
         ],
         [
             [

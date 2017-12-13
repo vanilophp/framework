@@ -25,7 +25,7 @@ class Order extends Model implements OrderContract
 {
     use CastsEnums;
 
-    protected $fillable = ['number', 'status', 'user_id', 'billing_address_id', 'shipping_address_id', 'notes'];
+    protected $fillable = ['number', 'status', 'user_id', 'billpayer_id', 'shipping_address_id', 'notes'];
 
     protected $enums = [
         'status' => 'OrderStatusProxy@enumClass'
@@ -82,7 +82,7 @@ class Order extends Model implements OrderContract
 
     public function billpayer()
     {
-        return $this->belongsTo(AddressProxy::modelClass());
+        return $this->belongsTo(BillpayerProxy::modelClass());
     }
 
     public function shippingAddress()

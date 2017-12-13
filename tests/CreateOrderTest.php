@@ -95,7 +95,7 @@ class CreateOrderTest extends TestCase
             'number'              => 'UEOIP',
             'status'              => OrderStatus::COMPLETED(),
             'user_id'             => '271',
-            'billing_address_id'  => '19072',
+            'billpayer_id'        => '19072',
             'shipping_address_id' => '19073',
             'notes'               => 'Never fight an inanimate object'
         ]);
@@ -106,7 +106,7 @@ class CreateOrderTest extends TestCase
         $this->assertTrue($order->status->isCompleted());
 
         $this->assertEquals(271, $order->user_id);
-        $this->assertEquals(19072, $order->billing_address_id);
+        $this->assertEquals(19072, $order->billpayer_id);
         $this->assertEquals(19073, $order->shipping_address_id);
 
         $this->assertEquals('Never fight an inanimate object', $order->notes);
@@ -120,7 +120,7 @@ class CreateOrderTest extends TestCase
         $this->assertTrue($order->status->isCompleted());
 
         $this->assertEquals(271, $order->user_id);
-        $this->assertEquals(19072, $order->billing_address_id);
+        $this->assertEquals(19072, $order->billpayer_id);
         $this->assertEquals(19073, $order->shipping_address_id);
 
         $this->assertEquals('Never fight an inanimate object', $order->notes);

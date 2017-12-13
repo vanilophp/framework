@@ -15,7 +15,6 @@ class CreateBillpayersTable extends Migration
     {
         Schema::create('billpayers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type', 24)->default(CustomerTypeProxy::defaultValue());
             $table->string('email')->nullable();
             $table->string('phone', 22)->nullable();
             $table->string('firstname')->nullable()->comment('First name');
@@ -24,6 +23,7 @@ class CreateBillpayersTable extends Migration
             $table->string('tax_nr', 17)->nullable()->comment('Tax/VAT Identification Number'); //https://www.wikiwand.com/en/VAT_identification_number
             $table->string('registration_nr')->nullable()->comment('Company/Trade Registration Number');
             $table->boolean('is_eu_registered')->default(false);
+            $table->boolean('is_organization')->default(false);
             $table->integer('address_id')->unsigned();
             $table->timestamps();
 

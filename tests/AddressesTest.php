@@ -13,7 +13,6 @@
 namespace Vanilo\Order\Tests;
 
 
-use Konekt\Address\Models\AddressType;
 use Vanilo\Contracts\Address as AddressContract;
 use Vanilo\Address\Models\Address;
 use Vanilo\Order\Models\Billpayer;
@@ -30,11 +29,11 @@ class AddressesTest extends TestCase
             'number' => 'OXC904'
         ]);
 
-        $billpayer = Billpayer::create();
+        $billpayer = new Billpayer();
 
         $billpayer
-            ->billingAddress()
-            ->associate(AddressType::create([
+            ->address()
+            ->associate(Address::create([
                 'name'       => 'Karen Blixen',
                 'country_id' => 'DK',
                 'postalcode' => '2960',
@@ -43,6 +42,7 @@ class AddressesTest extends TestCase
             ]
         ));
         $order->billpayer()->associate($billpayer);
+        $billpayer->save();
 
         $order->shippingAddress()->associate(Address::create([
             'name'       => 'Karen Blixen',
@@ -54,7 +54,7 @@ class AddressesTest extends TestCase
 
         $order->save();
 
-        $this->assertInstanceOf(AddressContract::class, $order->billpayer->billingAddress);
+        $this->assertInstanceOf(AddressContract::class, $order->billpayer->address);
         $this->assertInstanceOf(AddressContract::class, $order->shippingAddress);
     }
 
@@ -67,18 +67,25 @@ class AddressesTest extends TestCase
             'number' => 'OXC905'
         ]);
 
-        $order->billingAddress()->associate(Address::create([
-            'name'       => 'Karen Blixen',
-            'country_id' => 'DK',
-            'postalcode' => '2960',
-            'city'       => 'Rungsted',
-            'address'    => 'Strandvej 111'
-        ]));
+        $billpayer = new Billpayer();
 
+        $billpayer
+            ->address()
+            ->associate(Address::create([
+                    'name'       => 'Karen Blixen',
+                    'country_id' => 'DK',
+                    'postalcode' => '2960',
+                    'city'       => 'Rungsted',
+                    'address'    => 'Strandvej 111'
+                ]
+            ));
+        $billpayer->save();
+
+        $order->billpayer()->associate($billpayer);
         $order->save();
 
         /** @var \Vanilo\Contracts\Address $billingAddress */
-        $billingAddress = $order->getBillingAddress();
+        $billingAddress = $order->getBillpayer()->getBillingAddress();
         $this->assertEquals('Karen Blixen', $billingAddress->getName());
         $this->assertEquals('DK', $billingAddress->getCountryCode());
         $this->assertEquals('2960', $billingAddress->getPostalCode());
@@ -88,7 +95,7 @@ class AddressesTest extends TestCase
         // Refetching from db
         $order = $order->fresh();
 
-        $billingAddress = $order->getBillingAddress();
+        $billingAddress = $order->getBillpayer()->getBillingAddress();
         $this->assertEquals('Karen Blixen', $billingAddress->getName());
         $this->assertEquals('DK', $billingAddress->getCountryCode());
         $this->assertEquals('2960', $billingAddress->getPostalCode());

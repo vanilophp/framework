@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the BillPayer model class.
+ * Contains the Billpayer model class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -14,39 +14,32 @@ namespace Vanilo\Order\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Address\Models\AddressProxy;
-use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\Billpayer as VaniloBillPayerContract;
-use Vanilo\Order\Contracts\Billpayer as BillPayerContract;
+use Vanilo\Contracts\Billpayer as VaniloBillpayerContract;
+use Vanilo\Order\Contracts\Billpayer as BillpayerContract;
 
 /**
  * This is a temporary class in order to make checkout and order
  * work temporarily as of v0.1. Probably will be moved to the
  * billing module or another module, if it survives at all
  */
-class Billpayer extends Model implements BillPayerContract, VaniloBillPayerContract
+class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContract
 {
-    use CastsEnums;
-
     protected $guarded = ['id', 'address_id'];
-
-    protected $enums = [
-        'type' => '\Konekt\Customer\Models\CustomerTypeProxy@enumClass'
-    ];
 
     public function isEuRegistered()
     {
         return $this->is_eu_registered;
     }
 
-    public function billingAddress()
+    public function address()
     {
         return $this->belongsTo(AddressProxy::modelClass());
     }
 
     public function getBillingAddress(): Address
     {
-        return $this->billingAddress;
+        return $this->address;
     }
 
     public function getEmail()
@@ -70,12 +63,12 @@ class Billpayer extends Model implements BillPayerContract, VaniloBillPayerContr
 
     public function isOrganization()
     {
-        return $this->type->isOrganization();
+        return $this->is_organization;
     }
 
     public function isIndividual()
     {
-        return $this->type->isIndividual();
+        return !$this->is_organization;
     }
 
     public function getCompanyName()
