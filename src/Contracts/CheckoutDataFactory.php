@@ -14,11 +14,11 @@ namespace Vanilo\Checkout\Contracts;
 
 
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillPayer;
+use Vanilo\Contracts\Billpayer;
 
 interface CheckoutDataFactory
 {
-    public function createBillPayer(): BillPayer;
+    public function createBillpayer(): Billpayer;
 
     public function createShippingAddress(): Address;
 }

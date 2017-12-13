@@ -14,21 +14,21 @@ namespace Vanilo\Checkout\Tests;
 
 
 use Vanilo\Checkout\Facades\Checkout;
-use Vanilo\Checkout\Tests\Mocks\BillPayer;
+use Vanilo\Checkout\Tests\Mocks\Billpayer;
 
 class BillPayerTest extends TestCase
 {
-    /** @var BillPayer */
-    private $billPayer;
+    /** @var Billpayer */
+    private $billpayer;
 
     /** @var array */
-    private $billPayerAttributes;
+    private $billpayerAttributes;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->billPayerAttributes = [
+        $this->billpayerAttributes = [
             'email'            => 'random.joe@trimail.co',
             'phone'            => '1234',
             'is_organization'  => true,
@@ -44,7 +44,7 @@ class BillPayerTest extends TestCase
             ]
         ];
 
-        $this->billPayer = new BillPayer($this->billPayerAttributes);
+        $this->billpayer = new Billpayer($this->billpayerAttributes);
     }
 
 
@@ -53,40 +53,40 @@ class BillPayerTest extends TestCase
      */
     public function bill_payer_data_can_be_set_from_object_implementing_the_interface()
     {
-        Checkout::setBillPayer($this->billPayer);
+        Checkout::setBillPayer($this->billpayer);
 
         $bp = Checkout::getBillPayer();
 
-        $this->assertEquals($this->billPayer->getEmail(), $bp->getEmail());
-        $this->assertEquals($this->billPayer->getPhone(), $bp->getPhone());
-        $this->assertEquals($this->billPayer->isOrganization(), $bp->isOrganization());
-        $this->assertEquals($this->billPayer->isEuRegistered(), $bp->isEuRegistered());
-        $this->assertEquals($this->billPayer->isIndividual(), $bp->isIndividual());
-        $this->assertEquals($this->billPayer->getCompanyName(), $bp->getCompanyName());
-        $this->assertEquals($this->billPayer->getTaxNumber(), $bp->getTaxNumber());
+        $this->assertEquals($this->billpayer->getEmail(), $bp->getEmail());
+        $this->assertEquals($this->billpayer->getPhone(), $bp->getPhone());
+        $this->assertEquals($this->billpayer->isOrganization(), $bp->isOrganization());
+        $this->assertEquals($this->billpayer->isEuRegistered(), $bp->isEuRegistered());
+        $this->assertEquals($this->billpayer->isIndividual(), $bp->isIndividual());
+        $this->assertEquals($this->billpayer->getCompanyName(), $bp->getCompanyName());
+        $this->assertEquals($this->billpayer->getTaxNumber(), $bp->getTaxNumber());
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getCountryCode(),
+            $this->billpayer->getBillingAddress()->getCountryCode(),
             $bp->getBillingAddress()->getCountryCode()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getProvinceCode(),
+            $this->billpayer->getBillingAddress()->getProvinceCode(),
             $bp->getBillingAddress()->getProvinceCode()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getPostalCode(),
+            $this->billpayer->getBillingAddress()->getPostalCode(),
             $bp->getBillingAddress()->getPostalCode()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getCity(),
+            $this->billpayer->getBillingAddress()->getCity(),
             $bp->getBillingAddress()->getCity()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getAddress(),
+            $this->billpayer->getBillingAddress()->getAddress(),
             $bp->getBillingAddress()->getAddress()
         );
     }
@@ -97,40 +97,40 @@ class BillPayerTest extends TestCase
     public function billpayer_can_be_set_from_array_of_attributes()
     {
         Checkout::update([
-            'billPayer' => $this->billPayerAttributes
+            'billpayer' => $this->billpayerAttributes
         ]);
 
         $bp = Checkout::getBillPayer();
 
-        $this->assertEquals($this->billPayerAttributes['email'], $bp->getEmail());
-        $this->assertEquals($this->billPayerAttributes['phone'], $bp->getPhone());
-        $this->assertEquals($this->billPayerAttributes['is_organization'], $bp->isOrganization());
-        $this->assertEquals($this->billPayerAttributes['is_eu_registered'], $bp->isEuRegistered());
-        $this->assertEquals($this->billPayerAttributes['company_name'], $bp->getCompanyName());
-        $this->assertEquals($this->billPayerAttributes['tax_nr'], $bp->getTaxNumber());
+        $this->assertEquals($this->billpayerAttributes['email'], $bp->getEmail());
+        $this->assertEquals($this->billpayerAttributes['phone'], $bp->getPhone());
+        $this->assertEquals($this->billpayerAttributes['is_organization'], $bp->isOrganization());
+        $this->assertEquals($this->billpayerAttributes['is_eu_registered'], $bp->isEuRegistered());
+        $this->assertEquals($this->billpayerAttributes['company_name'], $bp->getCompanyName());
+        $this->assertEquals($this->billpayerAttributes['tax_nr'], $bp->getTaxNumber());
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getCountryCode(),
+            $this->billpayer->getBillingAddress()->getCountryCode(),
             $bp->getBillingAddress()->getCountryCode()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getProvinceCode(),
+            $this->billpayer->getBillingAddress()->getProvinceCode(),
             $bp->getBillingAddress()->getProvinceCode()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getPostalCode(),
+            $this->billpayer->getBillingAddress()->getPostalCode(),
             $bp->getBillingAddress()->getPostalCode()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getCity(),
+            $this->billpayer->getBillingAddress()->getCity(),
             $bp->getBillingAddress()->getCity()
         );
 
         $this->assertEquals(
-            $this->billPayer->getBillingAddress()->getAddress(),
+            $this->billpayer->getBillingAddress()->getAddress(),
             $bp->getBillingAddress()->getAddress()
         );
 

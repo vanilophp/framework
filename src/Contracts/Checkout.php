@@ -14,7 +14,7 @@ namespace Vanilo\Checkout\Contracts;
 
 
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillPayer;
+use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 
 interface Checkout
@@ -50,16 +50,16 @@ interface Checkout
     /**
      * Returns the bill payer details
      *
-     * @return BillPayer
+     * @return Billpayer
      */
-    public function getBillPayer(): BillPayer;
+    public function getBillpayer(): Billpayer;
 
     /**
      * Sets the bill payer details
      *
-     * @param BillPayer $billPayer
+     * @param Billpayer $billpayer
      */
-    public function setBillPayer(BillPayer $billPayer);
+    public function setBillpayer(Billpayer $billpayer);
 
     /**
      * Returns the shipping address

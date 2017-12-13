@@ -19,7 +19,7 @@ use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Checkout\Traits\HasCheckoutState;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillPayer;
+use Vanilo\Contracts\Billpayer;
 
 /**
  * Stores & fetches checkout data across http requests.
@@ -32,8 +32,8 @@ class RequestStore implements CheckoutStore
 
     protected $state;
 
-    /** @var  BillPayer */
-    protected $billPayer;
+    /** @var  Billpayer */
+    protected $billpayer;
 
     /** @var  Address */
     protected $shippingAddress;
@@ -44,7 +44,7 @@ class RequestStore implements CheckoutStore
     public function __construct($config, CheckoutDataFactory $dataFactory)
     {
         $this->dataFactory     = $dataFactory;
-        $this->billPayer       = $dataFactory->createBillPayer();
+        $this->billpayer       = $dataFactory->createBillpayer();
         $this->shippingAddress = $dataFactory->createShippingAddress();
     }
 
@@ -72,17 +72,17 @@ class RequestStore implements CheckoutStore
     /**
      * @inheritdoc
      */
-    public function getBillPayer(): BillPayer
+    public function getBillpayer(): Billpayer
     {
-        return $this->billPayer;
+        return $this->billpayer;
     }
 
     /**
      * @inheritdoc
      */
-    public function setBillPayer(BillPayer $billPayer)
+    public function setBillpayer(Billpayer $billpayer)
     {
-        $this->billPayer = $billPayer;
+        $this->billpayer = $billpayer;
     }
 
     /**
@@ -104,9 +104,9 @@ class RequestStore implements CheckoutStore
     /**
      * @inheritdoc
      */
-    protected function updateBillPayer($data)
+    protected function updateBillpayer($data)
     {
-        $this->fill($this->billPayer, $data);
+        $this->fill($this->billpayer, $data);
     }
 
     /**

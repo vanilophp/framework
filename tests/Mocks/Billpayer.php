@@ -15,7 +15,7 @@ namespace Vanilo\Checkout\Tests\Mocks;
 
 use Vanilo\Contracts\Address as AddressContract;
 
-class BillPayer implements \Vanilo\Contracts\BillPayer
+class Billpayer implements \Vanilo\Contracts\Billpayer
 {
     protected $data;
 

@@ -17,7 +17,7 @@ use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillPayer;
+use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 
 class CheckoutManager implements CheckoutContract
@@ -65,17 +65,17 @@ class CheckoutManager implements CheckoutContract
     /**
      * @inheritdoc
      */
-    public function getBillPayer() : BillPayer
+    public function getBillpayer() : Billpayer
     {
-        return $this->store->getBillPayer();
+        return $this->store->getBillpayer();
     }
 
     /**
      * @inheritdoc
      */
-    public function setBillPayer(BillPayer $billPayer)
+    public function setBillpayer(Billpayer $billpayer)
     {
-        return $this->store->setBillPayer($billPayer);
+        return $this->store->setBillpayer($billpayer);
     }
 
     /**
