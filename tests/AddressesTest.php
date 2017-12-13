@@ -13,8 +13,10 @@
 namespace Vanilo\Order\Tests;
 
 
+use Konekt\Address\Models\AddressType;
 use Vanilo\Contracts\Address as AddressContract;
 use Vanilo\Address\Models\Address;
+use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\Order;
 
 class AddressesTest extends TestCase
@@ -28,13 +30,19 @@ class AddressesTest extends TestCase
             'number' => 'OXC904'
         ]);
 
-        $order->billingAddress()->associate(Address::create([
-            'name'       => 'Karen Blixen',
-            'country_id' => 'DK',
-            'postalcode' => '2960',
-            'city'       => 'Rungsted',
-            'address'    => 'Strandvej 111'
-        ]));
+        $billpayer = Billpayer::create();
+
+        $billpayer
+            ->billingAddress()
+            ->associate(AddressType::create([
+                'name'       => 'Karen Blixen',
+                'country_id' => 'DK',
+                'postalcode' => '2960',
+                'city'       => 'Rungsted',
+                'address'    => 'Strandvej 111'
+            ]
+        ));
+        $order->billpayer()->associate($billpayer);
 
         $order->shippingAddress()->associate(Address::create([
             'name'       => 'Karen Blixen',
@@ -46,7 +54,7 @@ class AddressesTest extends TestCase
 
         $order->save();
 
-        $this->assertInstanceOf(AddressContract::class, $order->billingAddress);
+        $this->assertInstanceOf(AddressContract::class, $order->billpayer->billingAddress);
         $this->assertInstanceOf(AddressContract::class, $order->shippingAddress);
     }
 
