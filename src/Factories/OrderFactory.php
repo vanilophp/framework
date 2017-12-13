@@ -23,7 +23,7 @@ class OrderFactory extends BaseOrderFactory
     public function createFromCheckout(Checkout $checkout)
     {
         $orderData = [
-            'billPayer'       => $checkout->getBillPayer(),
+            'billpayer'       => $checkout->getBillpayer(),
             'shippingAddress' => $checkout->getShippingAddress()
         ];
 
