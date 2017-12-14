@@ -53,12 +53,15 @@ class RequestStore implements CheckoutStore
      */
     public function update(array $data)
     {
-        foreach (array_keys($data) as $key) {
-            $method = sprintf('update%s', ucfirst($key));
-            if (method_exists($this, $method)) {
-                $this->{$method}($data[$key]);
-            }
+        $this->updateBillpayer($data['billpayer'] ??  []);
+
+        if (array_get($data, 'ship_to_billing_address')) {
+            $shippingAddress = $data['billpayer']['address'];
+        } else {
+            $shippingAddress = $data['shippingAddress'];
         }
+
+        $this->updateShippingAddress($shippingAddress);
     }
 
     /**
@@ -106,7 +109,8 @@ class RequestStore implements CheckoutStore
      */
     protected function updateBillpayer($data)
     {
-        $this->fill($this->billpayer, $data);
+        $this->fill($this->billpayer, array_except($data, 'address'));
+        $this->fill($this->billpayer->address, $data['address']);
     }
 
     /**
