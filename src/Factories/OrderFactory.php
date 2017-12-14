@@ -67,6 +67,8 @@ class OrderFactory implements OrderFactoryContract
                 }, $items)
             );
 
+            $order->save();
+
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -93,9 +95,10 @@ class OrderFactory implements OrderFactoryContract
     {
         if (isset($data['billpayer'])) {
 
-            $address   = $this->createOrCloneAddress($data['billpayer']['address']);
+            $address = $this->createOrCloneAddress($data['billpayer']['address'], AddressTypeProxy::BILLING());
 
             $billpayer = app(Billpayer::class);
+            $billpayer->fill(array_except($data['billpayer'], 'address'));
             $billpayer->address()->associate($address);
             $billpayer->save();
 
@@ -182,6 +185,7 @@ class OrderFactory implements OrderFactoryContract
 
         $type = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
         $address['type'] = $type;
+        $address['name'] = empty(array_get($address,'name')) ? '-' : $address['name'];
 
         return AddressProxy::create($address);
     }
