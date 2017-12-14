@@ -29,7 +29,7 @@ class CheckoutDataFactory implements CheckoutDataFactoryContract
         $address = app(AddressContract::class);
         $address->type = AddressType::BILLING;
 
-        $billpayer->billingAddress()->associate($address);
+        $billpayer->address()->associate($address);
 
         return $billpayer;
     }
