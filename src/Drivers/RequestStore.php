@@ -59,7 +59,7 @@ class RequestStore implements CheckoutStore
             $shippingAddress         = $data['billpayer']['address'];
             $shippingAddress['name'] = $this->getShipToName();
         } else {
-            $shippingAddress = $data['shippingAddress'];
+            $shippingAddress = $data['shippingAddress'] ?? [];
         }
 
         $this->updateShippingAddress($shippingAddress);

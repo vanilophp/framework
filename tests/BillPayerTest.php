@@ -35,7 +35,7 @@ class BillPayerTest extends TestCase
             'is_eu_registered' => false,
             'company_name'     => 'Trimail Inc.',
             'tax_nr'           => '5678',
-            'billingAddress'          => [
+            'address'          => [
                 'country_code'  => 'US',
                 'province_code' => 'NY',
                 'postal_code'   => '55555',

@@ -20,13 +20,13 @@ class Billpayer implements \Vanilo\Contracts\Billpayer
     protected $data;
 
     /** @var Address */
-    protected $address;
+    public $address;
 
     public function __construct(array $data = null)
     {
-        $this->data = $data ? array_except($data, 'billingAddress'): [];
+        $this->data = $data ? array_except($data, 'address'): [];
 
-        $this->address = new Address($data['billingAddress'] ?? []);
+        $this->address = new Address($data['address'] ?? []);
     }
 
     public function isEuRegistered()
