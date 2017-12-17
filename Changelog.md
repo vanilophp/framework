@@ -2,6 +2,16 @@
 
 ## 0.1 Series
 
+### 0.1.2
+##### 2017-12-17
+
+- Billing Address => Billpayer
+- Billpayer implemented here (temporary, should be moved in upcoming `billing` module)
+- Order factory works
+- Basic totals can be calculated
+- Order statuses have proper labels
+- Orders are soft delete
+
 ### 0.1.1
 ##### 2017-12-11
 
