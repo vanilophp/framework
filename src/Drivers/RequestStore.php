@@ -56,7 +56,8 @@ class RequestStore implements CheckoutStore
         $this->updateBillpayer($data['billpayer'] ??  []);
 
         if (array_get($data, 'ship_to_billing_address')) {
-            $shippingAddress = $data['billpayer']['address'];
+            $shippingAddress         = $data['billpayer']['address'];
+            $shippingAddress['name'] = $this->getShipToName();
         } else {
             $shippingAddress = $data['shippingAddress'];
         }
@@ -128,5 +129,17 @@ class RequestStore implements CheckoutStore
         } else {
             $this->fillAttributes($target, $attributes);
         }
+    }
+
+    private function getShipToName()
+    {
+        if ($this->billpayer->isOrganization()) {
+            return sprintf('%s (%s)',
+                $this->billpayer->getCompanyName(),
+                $this->billpayer->getFullName()
+            );
+        }
+
+        return $this->billpayer->getName();
     }
 }
