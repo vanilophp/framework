@@ -6,7 +6,7 @@ use Konekt\AppShell\Acl\ResourcePermissions;
 
 class CreateVaniloPermissions extends Migration
 {
-    protected $resources = ['product'];
+    protected $resources = ['product', 'order'];
 
     /**
      * Run the migrations.

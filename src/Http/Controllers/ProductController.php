@@ -75,7 +75,7 @@ class ProductController extends BaseController
      */
     public function show(Product $product)
     {
-        return view('vanilo::product.show', compact('product'));
+        return view('vanilo::product.show', ['product' => $product]);
     }
 
     /**

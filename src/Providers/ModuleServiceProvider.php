@@ -22,6 +22,7 @@ use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract
 use Vanilo\Framework\Factories\CheckoutDataFactory;
 use Vanilo\Framework\Factories\OrderFactory;
 use Vanilo\Framework\Http\Requests\CreateProduct;
+use Vanilo\Framework\Http\Requests\UpdateOrder;
 use Vanilo\Framework\Http\Requests\UpdateProduct;
 use Menu;
 use Vanilo\Framework\Models\Customer;
@@ -36,7 +37,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
     protected $requests = [
         CreateProduct::class,
-        UpdateProduct::class
+        UpdateProduct::class,
+        UpdateOrder::class
     ];
 
     public function register()
@@ -65,10 +67,15 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->app->bind(OrderFactoryContract::class, OrderFactory::class);
 
         $this->loadBreadcrumbs();
+        $this->addMenuItems();
+    }
 
+    protected function addMenuItems()
+    {
         if ($menu = Menu::get('appshell')) {
-            $catalog = $menu->addItem('catalog', __('Catalog'));
-            $catalog->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
+            $shop = $menu->addItem('shop', __('Shop'));
+            $shop->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
+            $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])->data('icon', 'mall');
         }
     }
 }
