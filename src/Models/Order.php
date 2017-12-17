@@ -96,6 +96,11 @@ class Order extends Model implements OrderContract
         return $this->hasMany(OrderItemProxy::modelClass());
     }
 
+    public function total()
+    {
+        return $this->items->sum('total');
+    }
+
     /**
      * Sets the default order status in raw attributes
      *

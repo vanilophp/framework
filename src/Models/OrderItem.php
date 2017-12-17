@@ -30,4 +30,19 @@ class OrderItem extends Model implements OrderItemContract
         return $this->morphTo();
     }
 
+    public function total()
+    {
+        return $this->price * $this->quantity;
+    }
+
+    /**
+     * Property accessor alias to the total() method
+     *
+     * @return float
+     */
+    public function getTotalAttribute()
+    {
+        return $this->total();
+    }
+
 }

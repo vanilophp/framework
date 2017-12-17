@@ -40,4 +40,11 @@ interface Order
 
     public function getItems(): Traversable;
 
+    /**
+     * Returns the final total of the Order
+     *
+     * @return float
+     */
+    public function total();
+
 }

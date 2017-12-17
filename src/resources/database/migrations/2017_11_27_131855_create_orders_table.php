@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('shipping_address_id')->unsigned()->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')
