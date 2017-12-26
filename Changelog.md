@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2 Series
+
+### Unreleased
+##### 2017-12-25
+
+- v0.2 series
+
 ## 0.1 Series
 
 ### 0.1.1
