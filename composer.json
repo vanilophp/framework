@@ -19,9 +19,9 @@
         "php": ">=7.0.0",
         "konekt/concord": ">=0.9.10",
         "konekt/user": ">=0.9.0",
-        "vanilo/contracts": "~0.1.1",
-        "vanilo/support": "^0.1",
-        "vanilo/address": "^0.1"
+        "vanilo/contracts": "0.2.*",
+        "vanilo/support": "0.2.*",
+        "vanilo/address": "0.2.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2",
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.2.x-dev"
         }
     }
 }
