@@ -4,6 +4,8 @@
     "type": "library",
     "license": "MIT",
     "keywords": ["checkout", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "support": {
         "source": "https://github.com/vanilophp/checkout"
     },
@@ -16,7 +18,7 @@
     "require": {
         "php": ">=7.0.0",
         "konekt/concord": ">=0.9.10",
-        "vanilo/contracts": "~0.1.1"
+        "vanilo/contracts": "0.2.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2",
@@ -32,7 +34,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.2.x-dev"
         }
     }
 }

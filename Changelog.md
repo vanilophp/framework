@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2 Series
+
+### Unreleased
+##### 201X-XX-XX
+
+- v0.2 started
+
 ## 0.1 Series
 
 ### 0.1.1
