@@ -17,11 +17,12 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "konekt/concord": ">=0.9.10",
+        "konekt/concord": "~1.0",
         "vanilo/contracts": "0.2.*",
         "vanilo/support": "0.2.*"
     },
     "require-dev": {
+        "ext-sqlite3": "*",
         "phpunit/phpunit": "~6.2",
         "orchestra/testbench": "^3.4.2"
     },
