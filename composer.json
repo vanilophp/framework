@@ -18,10 +18,7 @@
         "illuminate/support": "5.*"
     },
     "autoload": {
-        "psr-4": { "Vanilo\\Support\\": "src/" },
-        "files": [
-            "src/functions.php"
-        ]
+        "psr-4": { "Vanilo\\Support\\": "src/" }
     },
     "extra": {
         "branch-alias": {
