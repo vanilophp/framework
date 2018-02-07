@@ -13,14 +13,27 @@
 namespace Vanilo\Cart\Tests;
 
 
+use Vanilo\Cart\Facades\Cart;
+
 class UserTest extends TestCase
 {
     /**
-     * @ test
+     * @test
      */
     public function it_has_no_user_when_not_logged_in()
     {
-        //Cart::
+        $this->assertNull(Cart::getUser());
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_be_set_manually()
+    {
+        $this->assertNull(Cart::getUser());
+        //$user = new \App\User();
+
+        //Cart::setUser($user);
     }
 
 }

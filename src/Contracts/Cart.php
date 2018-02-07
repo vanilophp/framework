@@ -60,7 +60,7 @@ interface Cart extends CheckoutSubject
      *
      * @return Authenticatable|null
      */
-    public function getUser(): Authenticatable;
+    public function getUser();
 
     /**
      * Set the user of the cart

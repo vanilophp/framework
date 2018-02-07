@@ -15,6 +15,7 @@ namespace Vanilo\Cart\Models;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 
@@ -111,18 +112,22 @@ class Cart extends Model implements CartContract
         return $this->items->sum('total');
     }
 
+    /**
+     * The cart's user relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        //return $this->belongsTo()
-
+        return $this->belongsTo(config('auth.providers.users.model'));
     }
 
     /**
      * @inheritDoc
      */
-    public function getUser(): Authenticatable
+    public function getUser()
     {
-        // TODO: Implement getUser() method.
+        return $this->user;
     }
 
     /**
@@ -130,6 +135,14 @@ class Cart extends Model implements CartContract
      */
     public function setUser($user)
     {
-        // TODO: Implement setUser() method.
+        if ($user instanceof Authenticatable || is_null($user)) {
+            $this->user = $user;
+        } elseif (is_int($user)) {
+            $this->user_id = $user;
+        } else {
+            throw new InvalidArgumentException(
+                __("I don't know how to set a user of type :type", ['type' => gettype($user)])
+            );
+        }
     }
 }
