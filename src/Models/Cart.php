@@ -12,6 +12,7 @@
 
 namespace Vanilo\Cart\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Vanilo\Contracts\Buyable;
@@ -108,5 +109,27 @@ class Cart extends Model implements CartContract
     public function total()
     {
         return $this->items->sum('total');
+    }
+
+    public function user()
+    {
+        //return $this->belongsTo()
+
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUser(): Authenticatable
+    {
+        // TODO: Implement getUser() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setUser($user)
+    {
+        // TODO: Implement setUser() method.
     }
 }

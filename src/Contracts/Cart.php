@@ -12,6 +12,7 @@
 
 namespace Vanilo\Cart\Contracts;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubject;
 
@@ -53,4 +54,18 @@ interface Cart extends CheckoutSubject
      * @return int
      */
     public function itemCount();
+
+    /**
+     * Returns the cart's associated user, or NULL
+     *
+     * @return Authenticatable|null
+     */
+    public function getUser(): Authenticatable;
+
+    /**
+     * Set the user of the cart
+     *
+     * @param Authenticatable|integer $user User object or user id
+     */
+    public function setUser($user);
 }
