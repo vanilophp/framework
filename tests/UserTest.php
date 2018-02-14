@@ -14,6 +14,7 @@ namespace Vanilo\Cart\Tests;
 
 
 use Vanilo\Cart\Facades\Cart;
+use Vanilo\Cart\Tests\Dummies\User;
 
 class UserTest extends TestCase
 {
@@ -30,10 +31,34 @@ class UserTest extends TestCase
      */
     public function user_can_be_set_manually()
     {
-        $this->assertNull(Cart::getUser());
-        //$user = new \App\User();
+        $user = User::create([
+            'email'    => 'ever@green.me',
+            'name'     => 'Molly Green',
+            'password' => bcrypt('brute force')
+        ])->fresh();
 
-        //Cart::setUser($user);
+        Cart::setUser($user);
+
+        $this->assertEquals($user->id, Cart::getUser()->id);
+    }
+
+    /**
+     * @test
+     */
+    public function user_gets_automatically_assigned_when_authenticated()
+    {
+        $user = User::create([
+            'email'    => 'ever@green.me',
+            'name'     => 'Molly Green',
+            'password' => bcrypt('brute force')
+        ])->fresh();
+
+        $this->be($user);
+
+        $this->assertAuthenticatedAs($user);
+
+        $this->assertInstanceOf(User::class, Cart::getUser());
+        $this->assertEquals($user->id, Cart::getUser()->id);
     }
 
 }

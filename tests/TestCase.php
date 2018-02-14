@@ -18,6 +18,7 @@ use Vanilo\Cart\Providers\ModuleServiceProvider as CartModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Cart\Tests\Dummies\Product;
+use Vanilo\Cart\Tests\Dummies\User;
 
 abstract class TestCase extends Orchestra
 {
@@ -81,6 +82,15 @@ abstract class TestCase extends Orchestra
     {
         \Artisan::call('migrate', ['--force' => true]);
 
+        $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
         $app['db']->connection()->getSchemaBuilder()->create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sku')->nullable();
@@ -109,5 +119,8 @@ abstract class TestCase extends Orchestra
         ]);
 
         $app['config']->set('session.drive', 'array');
+
+        // Use the dummy user class
+        $app['config']->set('auth.providers.users.model', User::class);
     }
 }
