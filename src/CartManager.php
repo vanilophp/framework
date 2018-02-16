@@ -12,8 +12,8 @@
 
 namespace Vanilo\Cart;
 
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
@@ -173,8 +173,21 @@ class CartManager implements CartManagerContract
      */
     public function setUser($user)
     {
-        $cart = $this->findOrCreateCart();
-        $cart->setUser($user);
+        if ($this->exists()) {
+            $this->cart->setUser($user);
+            $this->cart->save();
+        }
+    }
+
+    /**
+     * Dissociates a user and a cart
+     */
+    public function removeUser()
+    {
+        if ($this->exists()) {
+            $this->cart->user_id = null;
+            $this->cart->save();
+        }
     }
 
 
@@ -204,7 +217,15 @@ class CartManager implements CartManagerContract
      */
     protected function createCart()
     {
-        $this->cart = CartProxy::create([]);
+        if (config('vanilo.cart.auto_set_user_id') && Auth::check()) {
+            $attributes = [
+                'user_id' => Auth::user()->id
+            ];
+        } else {
+            $attributes = [];
+
+        }
+        $this->cart = CartProxy::create($attributes);
 
         session([$this->sessionKey => $this->cart->id]);
 
