@@ -161,6 +161,19 @@ class CartManager implements CartManagerContract
     }
 
     /**
+     * @inheritdoc
+     */
+    public function create($forceCreateIfExists = false)
+    {
+        if ($this->exists() && !$forceCreateIfExists) {
+            dump('cowardly returning');
+            return;
+        }
+
+        $this->createCart();
+    }
+
+    /**
      * @inheritDoc
      */
     public function getUser()
@@ -176,18 +189,16 @@ class CartManager implements CartManagerContract
         if ($this->exists()) {
             $this->cart->setUser($user);
             $this->cart->save();
+            $this->cart->load('user');
         }
     }
 
     /**
-     * Dissociates a user and a cart
+     * @inheritdoc
      */
     public function removeUser()
     {
-        if ($this->exists()) {
-            $this->cart->user_id = null;
-            $this->cart->save();
-        }
+        $this->setUser(null);
     }
 
 
@@ -217,15 +228,13 @@ class CartManager implements CartManagerContract
      */
     protected function createCart()
     {
-        if (config('vanilo.cart.auto_set_user_id') && Auth::check()) {
+        if (config('vanilo.cart.auto_assign_user') && Auth::check()) {
             $attributes = [
                 'user_id' => Auth::user()->id
             ];
-        } else {
-            $attributes = [];
-
         }
-        $this->cart = CartProxy::create($attributes);
+
+        $this->cart = CartProxy::create($attributes ?? []);
 
         session([$this->sessionKey => $this->cart->id]);
 

@@ -24,7 +24,9 @@ class AssignUserToCart
      */
     public function handle($event)
     {
-        Cart::setUser($event->user);
+        if (config('vanilo.cart.auto_assign_user')) {
+            Cart::setUser($event->user);
+        }
     }
 
 }

@@ -135,14 +135,10 @@ class Cart extends Model implements CartContract
      */
     public function setUser($user)
     {
-        if ($user instanceof Authenticatable || is_null($user)) {
-            $this->user = $user;
-        } elseif (is_int($user)) {
-            $this->user_id = $user;
-        } else {
-            throw new InvalidArgumentException(
-                __("I don't know how to set a user of type :type", ['type' => gettype($user)])
-            );
+        if ($user instanceof Authenticatable) {
+            $user = $user->id;
         }
+
+        $this->user_id = $user;
     }
 }

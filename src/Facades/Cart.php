@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool isEmpty()
  * @method static bool isNotEmpty()
  * @method static destroy()
+ * @method static create($forceCreateIfExists = false)
  * @method static \Illuminate\Contracts\Auth\Authenticatable|null getUser()
  * @method static setUser($user)
  * @method static removeUser()

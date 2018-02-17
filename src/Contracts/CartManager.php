@@ -54,4 +54,16 @@ interface CartManager extends Cart
      * Completely destroys the cart: removes all related models (cart, item, etc) from the DB
      */
     public function destroy();
+
+    /**
+     * Creates a new cart
+     *
+     * @param bool $forceCreateIfExists Creates a new cart even if there's an existing one
+     */
+    public function create($forceCreateIfExists = false);
+
+    /**
+     * Dissociates a user from a cart
+     */
+    public function removeUser();
 }

@@ -15,10 +15,12 @@ namespace Vanilo\Cart\Listeners;
 
 use Vanilo\Cart\Facades\Cart;
 
-class DetachUserFromCart
+class DissociateUserFromCart
 {
     public function handle($event)
     {
-        Cart::removeUser();
+        if (config('vanilo.cart.auto_assign_user')) {
+            Cart::removeUser();
+        }
     }
 }

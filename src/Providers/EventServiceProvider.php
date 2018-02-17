@@ -18,7 +18,7 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Vanilo\Cart\Listeners\AssignUserToCart;
-use Vanilo\Cart\Listeners\DetachUserFromCart;
+use Vanilo\Cart\Listeners\DissociateUserFromCart;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,10 +30,10 @@ class EventServiceProvider extends ServiceProvider
             AssignUserToCart::class,
         ],
         Logout::class => [
-            DetachUserFromCart::class
+            DissociateUserFromCart::class
         ],
         Lockout::class => [
-            DetachUserFromCart::class
+            DissociateUserFromCart::class
         ]
     ];
 }
