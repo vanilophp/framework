@@ -25,6 +25,9 @@ class AssignUserToCart
     public function handle($event)
     {
         if (config('vanilo.cart.auto_assign_user')) {
+            if (Cart::getUser() && Cart::getUser()->id == $event->user->id) {
+                return; // Don't associate to the same user again
+            }
             Cart::setUser($event->user);
         }
     }

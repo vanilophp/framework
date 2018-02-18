@@ -91,7 +91,9 @@ The item is a [Vanilo product](https://github.com/artkonekt/product) by
 default, which can be extended.
 
 You aren't limited to using Vanilo products, you can add any Eloquent
-model to the cart as "product" that implements the `Buyable` interface.
+model to the cart as "product" that implements the
+[Buyable interface](https://github.com/vanilophp/contracts/blob/master/src/Buyable.php) from the
+[vanilo/contracts](https://github.com/vanilophp/contracts) package.
 
 **Example:**
 
@@ -202,6 +204,58 @@ $item = Cart::model()->items->first();
 Cart::removeItem($item);
 ```
 
+### Associating With Users
+
+The cart can be assigned to user automatically and/or manually.
+
+> The cart's user model is not bound to any specific class (like `App\User`), but to Laravel's
+> [authentication system](https://laravel.com/docs/5.6/authentication).
+>
+> See the `auth.providers.users.model` config value for more details.
+
+#### Manual Association
+
+```php
+use Vanilo\Cart\Facades\Cart;
+
+// Assign the currently logged in user:
+Cart::setUser(Auth::user());
+
+// Assign an arbitrary user:
+$user = \App\User::find(1);
+Cart::setUser($user);
+
+// User id can be passed as well:
+Cart::setUser(1);
+
+// Retrieve the cart's assigned user:
+$user = Cart::getUser();
+
+// Remove the user association:
+Cart::removeUser();
+```
+
+#### Automatic Association
+
+The cart (by default) automatically handles cart+user associations in the following cases:
+
+| Event                     | State             | Action                    |
+|:--------------------------|:------------------|:--------------------------|
+| User login/authentication | Cart exists       | Associate cart with user  |
+| User logout & lockout     | Cart exists       | Dissociate cart from user |
+| New cart gets created     | User is logged in | Associate cart with user  |
+
+To prevent this behavior, set the `vanilo.cart.auto_assign_user` config value to false:
+
+```php
+// config/vanilo.php
+return [
+    'cart' => [
+        'auto_assign_user' => false
+    ]
+];
+```
+
 ### Totals
 
 The item total can be accessed with the `total()` method or the `total`
@@ -250,7 +304,7 @@ Thus, using destroy, you'll have a non-existent cart.
 
 ## To-do
 
-Future methods for v0.2 | v0.3:
+Future methods for v0.6:
 
 ```php
 //Cart::addCoupon(obj|int|str)
