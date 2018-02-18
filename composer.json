@@ -17,12 +17,12 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "konekt/concord": ">=0.9.10",
+        "konekt/concord": "~1.1",
         "vanilo/contracts": "0.2.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.2",
-        "orchestra/testbench": "^3.4.2"
+        "phpunit/phpunit": "6.2 - 7.0",
+        "orchestra/testbench": "3.4.2 - 3.6"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Checkout\\": "src/" }

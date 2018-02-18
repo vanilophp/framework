@@ -3,9 +3,10 @@
 ## 0.2 Series
 
 ### Unreleased
-##### 201X-XX-XX
+##### 2012-02-XX
 
-- v0.2 started
+- Laravel 5.6 Support
+- Concord v1.1
 
 ## 0.1 Series
 
