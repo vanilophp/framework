@@ -24,7 +24,7 @@
     "require-dev": {
         "ext-sqlite3": "*",
         "phpunit/phpunit": "6.2 - 7.0",
-        "orchestra/testbench": "3.4.2 - 3.6"
+        "orchestra/testbench": "^3.4.2"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Cart\\": "src/" }
