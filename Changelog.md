@@ -3,9 +3,9 @@
 ## 0.2 Series
 
 ### Unreleased
-##### 201X-XX-XX
+##### 2018-02-XX
 
-- 0.2 changes here
+- Laravel 5.6 compatible
 
 ## 0.1 Series
 
