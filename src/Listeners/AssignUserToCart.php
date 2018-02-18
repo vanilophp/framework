@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Listeners;
 
-
 use Vanilo\Cart\Facades\Cart;
 
 class AssignUserToCart
@@ -31,5 +30,4 @@ class AssignUserToCart
             Cart::setUser($event->user);
         }
     }
-
 }

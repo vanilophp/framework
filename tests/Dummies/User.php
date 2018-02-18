@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests\Dummies;
 
-
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

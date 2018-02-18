@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests;
 
-
 use Illuminate\Support\Facades\Auth;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
@@ -113,7 +112,7 @@ class UserTest extends TestCase
         $this->assertTrue(Cart::doesNotExist());
 
         Cart::addItem(Product::create([
-            'name' => 'Rolls Royce',
+            'name'  => 'Rolls Royce',
             'price' => '100000'
         ]));
 
@@ -129,7 +128,7 @@ class UserTest extends TestCase
         $this->be($this->user);
 
         Cart::addItem(Product::create([
-            'name' => 'Rolls Royce',
+            'name'  => 'Rolls Royce',
             'price' => '100000'
         ]));
 
@@ -146,7 +145,7 @@ class UserTest extends TestCase
         $this->assertGuest();
 
         Cart::addItem(Product::create([
-            'name' => 'Rolls Royce',
+            'name'  => 'Rolls Royce',
             'price' => '100000'
         ]));
 
