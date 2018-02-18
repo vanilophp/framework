@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "konekt/appshell": ">=0.9.5",
+        "konekt/appshell": ">=0.9.6",
         "vanilo/address": "0.2.*",
         "vanilo/contracts": "0.2.*",
         "vanilo/support": "0.2.*",
@@ -35,7 +35,7 @@
     },
     "require-dev": {
         "monolog/monolog": "^1.22",
-        "orchestra/testbench": "3.4.2 - 3.6",
+        "orchestra/testbench": "^3.4.2",
         "phpunit/phpunit" : "6.2 - 7.0"
     },
     "autoload-dev": {
