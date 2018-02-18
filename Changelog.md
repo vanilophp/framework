@@ -3,10 +3,12 @@
 ## 0.2 Series
 
 ### Unreleased
-##### 201X-XX-XX
+##### 2018-02-XX
 
-- 0.2 changes here
-
+- Laravel 5.6 compatible
+- Cart handles user associations
+- Admin UI polishes
+- Concord v1.1
 
 ## 0.1 Series
 
