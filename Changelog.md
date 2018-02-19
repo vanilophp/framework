@@ -1,9 +1,15 @@
 # Changelog
 
+## 0.3 Series
+
+### Unreleased
+##### 2018-XX-XX
+
+
 ## 0.2 Series
 
 ### 0.2.0
-##### 2012-02-19
+##### 2018-02-19
 
 - Laravel 5.6 Support
 - Concord v1.1
