@@ -2,8 +2,8 @@
 
 ## 0.2 Series
 
-### Unreleased
-##### 2012-02-XX
+### 0.2.0
+##### 2012-02-19
 
 - Laravel 5.6 Support
 - Concord v1.1
