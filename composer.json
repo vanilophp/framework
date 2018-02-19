@@ -18,8 +18,8 @@
     "require": {
         "php": ">=7.0.0",
         "konekt/concord": "~1.1",
-        "vanilo/contracts": "0.2.*",
-        "vanilo/support": "0.2.*"
+        "vanilo/contracts": "0.3.*",
+        "vanilo/support": "0.3.*"
     },
     "require-dev": {
         "ext-sqlite3": "*",
@@ -36,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "0.3.x-dev"
         },
         "laravel": {
             "aliases": {
