@@ -12,7 +12,6 @@
 
 namespace Vanilo\Framework\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Vanilo\Framework\Contracts\Requests\UpdateOrder as UpdateOrderContract;

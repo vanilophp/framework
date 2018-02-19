@@ -16,5 +16,4 @@ use Konekt\AppShell\Contracts\Requests\BaseRequest;
 
 interface UpdateOrder extends BaseRequest
 {
-
 }

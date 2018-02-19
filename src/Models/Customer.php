@@ -12,7 +12,6 @@
 
 namespace Vanilo\Framework\Models;
 
-
 use Konekt\Customer\Models\Customer as BaseCustomer;
 use Vanilo\Contracts\Customer as CustomerContract;
 
@@ -81,6 +80,4 @@ class Customer extends BaseCustomer implements CustomerContract
     {
         return $this->getFirstName() . ' ' . $this->getLastName(); // This is temporary. My ass.
     }
-
-
 }

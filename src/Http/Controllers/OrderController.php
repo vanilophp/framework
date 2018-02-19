@@ -61,5 +61,4 @@ class OrderController extends BaseController
 
         return redirect(route('vanilo.order.index'));
     }
-
 }
