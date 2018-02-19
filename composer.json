@@ -17,13 +17,13 @@
     "require": {
         "php": ">=7.0.0",
         "konekt/appshell": ">=0.9.6",
-        "vanilo/address": "^0.2",
-        "vanilo/contracts": "^0.2",
-        "vanilo/support": "^0.2",
-        "vanilo/product": "^0.2",
-        "vanilo/cart": "^0.2",
-        "vanilo/checkout": "^0.2",
-        "vanilo/order": "^0.2"
+        "vanilo/address": "0.3.*",
+        "vanilo/contracts": "0.3.*",
+        "vanilo/support": "0.3.*",
+        "vanilo/product": "0.3.*",
+        "vanilo/cart": "0.3.*",
+        "vanilo/checkout": "0.3.*",
+        "vanilo/order": "0.3.*"
     },
     "autoload": {
         "psr-4": {
@@ -48,7 +48,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2-dev"
+            "dev-master": "0.3-dev"
         }
     }
 }
