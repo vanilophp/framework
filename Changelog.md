@@ -2,10 +2,11 @@
 
 ## 0.2 Series
 
-### Unreleased
-##### 2018-02-XX
+### 0.2.0
+##### 2018-02-19
 
 - Laravel 5.6 compatible
+- Fixed Laravel 5.4 compatibility
 
 ## 0.1 Series
 
