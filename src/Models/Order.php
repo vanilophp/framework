@@ -25,7 +25,7 @@ class Order extends Model implements OrderContract
 {
     use CastsEnums;
 
-    protected $fillable = ['number', 'status', 'user_id', 'billpayer_id', 'shipping_address_id', 'notes'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $enums = [
         'status' => 'OrderStatusProxy@enumClass'

@@ -18,7 +18,7 @@ use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 
 class OrderItem extends Model implements OrderItemContract
 {
-    protected $fillable = ['order_id', 'product_type', 'product_id', 'name', 'quantity', 'price'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function order()
     {
