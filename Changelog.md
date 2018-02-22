@@ -2,6 +2,11 @@
 
 ## 0.2 Series
 
+### 0.2.1
+##### 2018-02-22
+
+- Custom Order and OrderItem attributes can be mass assigned (without extending the model classes)
+
 ### 0.2.0
 ##### 2018-02-19
 
