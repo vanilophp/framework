@@ -11,10 +11,13 @@ This is the cart module for [Vanilo](https://vanilo.io).
 
 ## Installation
 
-```bash
-composer require vanilo/cart
-php artisan migrate
-```
+(As Standalone Component)
+
+1. `composer require vanilo/cart`
+2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
+3. Add `Vanilo\Cart\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
+4. `php artisan migrate`
+
 
 ### Register Alias (Facade)
 
