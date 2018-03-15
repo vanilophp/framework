@@ -23,7 +23,7 @@ use Vanilo\Cart\Contracts\CartItem as CartItemContract;
  */
 class CartItem extends Model implements CartItemContract
 {
-    protected $fillable = ['cart_id','product_type', 'product_id', 'quantity', 'price'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function product()
     {

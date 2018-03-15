@@ -5,6 +5,7 @@
 ### Unreleased
 ##### 2018-XX-XX
 
+- Custom product attributes can be passed/configured when adding cart items
 
 ## 0.2 Series
 

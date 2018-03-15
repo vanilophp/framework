@@ -113,6 +113,58 @@ echo Cart::itemCount();
 // 3
 ```
 
+#### Setting Custom Item Attributes
+
+First, you need to add your custom fields to `cart_items` (preferably using migrations).
+
+**Example:**
+
+```php
+// The Migration:
+Schema::table('cart_items', function (Blueprint $table) {
+    $table->integer('weight')->nullable();
+});
+```
+
+**Passing fields manually:**
+
+```php
+Cart::addItem($product, 1, [ 'attributes' => [
+        'weight' => 3
+    ]
+]);
+```
+
+**Permanent extra fields**
+
+It is possible to configure the cart to always copy some extra attributes
+from product (Buyable) to cart items:
+
+```php
+//config/vanilo.php:
+//...
+    'cart' => [
+        'extra_product_attributes' => ['weight']
+    ]
+//...
+```
+
+Having this configuration the value of `weight` attribute gets copied
+automatically to cart item:
+
+```php
+$product = Product::create([
+    'name'   => 'Mesh Panel Toning Trainers',
+    'sku'    => 'LS-170161',
+    'price'  => 34.99,
+    'weight' => 9
+]);
+
+$item = Cart::addItem($product);
+echo $item->weight;
+// 9
+```
+
 ### Retrieving The Item's Associated Product
 
 The `CartItem` defines a [polymorphic relationship](https://laravel.com/docs/5.5/eloquent-relationships#polymorphic-relations)
