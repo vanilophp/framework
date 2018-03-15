@@ -188,7 +188,6 @@ class Cart extends Model implements CartContract
         }
 
         foreach ($cfg as $attribute) {
-
             if (!is_string($attribute)) {
                 throw new InvalidCartConfigurationException(
                     sprintf(

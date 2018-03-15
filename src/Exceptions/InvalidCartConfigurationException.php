@@ -11,7 +11,6 @@
 
 namespace Vanilo\Cart\Exceptions;
 
-
 class InvalidCartConfigurationException extends \Exception
 {
 }

@@ -11,7 +11,6 @@
 
 namespace Vanilo\Cart\Tests\Dummies;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\BuyableModel;
@@ -22,4 +21,3 @@ class SizedProduct extends Model implements Buyable
 
     protected $guarded = ['id'];
 }
-

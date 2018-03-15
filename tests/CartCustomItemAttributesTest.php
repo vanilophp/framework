@@ -12,7 +12,6 @@
 
 namespace Vanilo\Cart\Tests;
 
-
 use Illuminate\Database\Schema\Blueprint;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Cart\Facades\Cart;
@@ -154,5 +153,4 @@ class CartCustomItemAttributesTest extends TestCase
             $table->integer('depth')->nullable();
         });
     }
-
 }
