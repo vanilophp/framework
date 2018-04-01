@@ -8,6 +8,12 @@
 
 ## 0.2 Series
 
+### 0.2.2
+##### 2018-04-01
+
+- Fixed a bug introduced with v0.2.1 that prevented from submitting an order with OrderFactory
+
+
 ### 0.2.1
 ##### 2018-02-22
 

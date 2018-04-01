@@ -51,7 +51,7 @@ class OrderFactory implements OrderFactoryContract
         try {
             $order = app(Order::class);
 
-            $order->fill(array_except($data, 'billpayer'));
+            $order->fill(array_except($data, ['billpayer', 'shippingAddress']));
             $order->number  = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
             $order->user_id = $data['user_id'] ?? auth()->id();
             $order->save();
