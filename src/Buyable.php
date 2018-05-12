@@ -38,6 +38,27 @@ interface Buyable
     public function getPrice();
 
     /**
+     * Returns whether the item has an image
+     *
+     * @return bool
+     */
+    public function hasImage();
+
+    /**
+     * Returns the URL of the item's thumbnail image, or null if there's no image
+     *
+     * @return string|null
+     */
+    public function getThumbnailUrl();
+
+    /**
+     * Returns the URL of the item's (main) image, or null if there's no image
+     *
+     * @return string|null
+     */
+    public function getImageUrl();
+
+    /**
      * Return the name to use for saving to the db as type name.
      *
      * It could be either the full class name, or any other string.

@@ -5,6 +5,7 @@
 ### Unreleased
 ##### 2018-XX-XX
 
+- Buyable interface has been extended with image related methods
 
 ## 0.2 Series
 
