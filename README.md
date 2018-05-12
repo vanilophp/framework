@@ -8,3 +8,5 @@
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
 Product module for the [Vanilo E-commerce framework](https://vanilo.io)
+
+[Documentation](https://vanilo.io/docs/master/products)

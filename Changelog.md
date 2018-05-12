@@ -1,4 +1,4 @@
-# Concord Changelog
+# Vanilo Product Module Changelog
 
 ## 0.3 Series
 
