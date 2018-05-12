@@ -12,11 +12,14 @@
 
 namespace Vanilo\Framework\Models;
 
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Support\Traits\BuyableImageSpatieV7;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Product\Models\Product as BaseProduct;
 
-class Product extends BaseProduct implements Buyable
+class Product extends BaseProduct implements Buyable, HasMedia
 {
-    use BuyableModel;
+    use BuyableModel, BuyableImageSpatieV7, HasMediaTrait;
 }

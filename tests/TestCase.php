@@ -14,6 +14,7 @@ namespace Vanilo\Framework\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
+use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -35,7 +36,8 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ConcordServiceProvider::class
+            ConcordServiceProvider::class,
+            MediaLibraryServiceProvider::class
         ];
     }
 

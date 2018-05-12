@@ -5,6 +5,8 @@
 ### Unreleased
 ##### 2018-XX-XX
 
+- Product Image support via Spatie Laravel Media Library v7
+- Laravel 5.4 support dropped (due to Spatie Media Library v7 conflicts)
 
 ## 0.2 Series
 

@@ -15,8 +15,9 @@
         "issues": "https://github.com/vanilophp/framework/issues"
     },
     "require": {
-        "php": ">=7.0.0",
+        "php": "^7.1.3",
         "konekt/appshell": ">=0.9.6",
+        "spatie/laravel-medialibrary": "^7.3",
         "vanilo/address": "0.3.*",
         "vanilo/contracts": "0.3.*",
         "vanilo/support": "0.3.*",
@@ -36,7 +37,7 @@
     "require-dev": {
         "monolog/monolog": "^1.22",
         "orchestra/testbench": "^3.4.2",
-        "phpunit/phpunit" : "6.2 - 7.0"
+        "phpunit/phpunit" : "6.2 - 7.1"
     },
     "autoload-dev": {
         "psr-4": {
