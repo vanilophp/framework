@@ -45,7 +45,7 @@
                             {{ Form::hidden('forType', 'product') }}
                             {{ Form::hidden('forId', $product->id) }}
 
-                            {{ Form::file('images[]', ['multiple']) }}
+                            {{ Form::file('images[]', ['multiple', 'class' => 'form-control-file']) }}
                         </div>
                         {{--<i class="zmdi zmdi-collection-plus font-2xl mr-3 bg-success p-3"></i>--}}
                         <div class="w-25 p-2 bg-success">

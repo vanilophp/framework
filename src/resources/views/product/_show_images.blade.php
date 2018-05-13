@@ -4,7 +4,10 @@
         <div class="card">
             <div class="card-block">
 
-                <h6 class="card-title">{{ __('Images') }}</h6>
+                <h6 class="card-title">
+                    {{ __('Images') }}
+                    <span class="badge badge-pill badge-dark">{{ $product->getMedia()->count() }}</span>
+                </h6>
 
                 <div id="product-images" class="carousel slide" data-ride="carousel" data-interval="false">
 
