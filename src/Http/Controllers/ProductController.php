@@ -68,7 +68,6 @@ class ProductController extends BaseController
 
                 return redirect()->route('vanilo.product.edit', ['product' => $product]);
             }
-
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 

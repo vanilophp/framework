@@ -20,7 +20,7 @@ class MediaController extends BaseController
     public function destroy(Media $medium)
     {
         try {
-            $name = $medium->name;
+            $name  = $medium->name;
             $model = $medium->model;
             $medium->delete();
 

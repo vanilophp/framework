@@ -25,13 +25,13 @@ class Product extends BaseProduct implements Buyable, HasMedia
 {
     protected const DEFAULT_THUMBNAIL_WIDTH  = 250;
     protected const DEFAULT_THUMBNAIL_HEIGHT = 250;
-    protected const DEFAULT_THUMBNAIL_FIT = Manipulations::FIT_CROP;
+    protected const DEFAULT_THUMBNAIL_FIT    = Manipulations::FIT_CROP;
 
     use BuyableModel, BuyableImageSpatieV7, HasMediaTrait;
 
     public function registerMediaConversions(Media $media = null)
     {
-        foreach(config('vanilo.framework.image.variants', []) as $name => $settings) {
+        foreach (config('vanilo.framework.image.variants', []) as $name => $settings) {
             $conversion = $this->addMediaConversion($name)
                  ->fit(
                      $settings['fit'] ?? static::DEFAULT_THUMBNAIL_FIT,

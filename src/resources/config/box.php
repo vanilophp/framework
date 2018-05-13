@@ -18,12 +18,12 @@ return [
         'files'      => ['admin']
     ],
     'breadcrumbs' => true,
-    'image' => [
+    'image'       => [
         'variants' => [
             'thumbnail' => [
                 'width'  => 250,
                 'height' => 250,
-                'fit' => 'crop'
+                'fit'    => 'crop'
             ]
         ]
     ],

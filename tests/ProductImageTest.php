@@ -41,5 +41,4 @@ class ProductImageTest extends TestCase
             filesize($product->getFirstMediaPath())
         );
     }
-
 }
