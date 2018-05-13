@@ -54,13 +54,25 @@ class ProductController extends BaseController
     public function store(CreateProduct $request)
     {
         try {
-            $product = ProductProxy::create($request->all());
-
+            $product = ProductProxy::create($request->except('images'));
             flash()->success(__(':name has been created', ['name' => $product->name]));
+
+            try {
+                if (!empty($request->files->filter('images'))) {
+                    $product->addMultipleMediaFromRequest(['images'])->each(function ($fileAdder) {
+                        $fileAdder->toMediaCollection();
+                    });
+                }
+            } catch (\Exception $e) { // Here we already have the product created
+                flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
+
+                return redirect()->route('vanilo.product.edit', ['product' => $product]);
+            }
+
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         return redirect(route('vanilo.product.index'));

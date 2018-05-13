@@ -3,7 +3,7 @@
                     class="badge badge-pill badge-info">{{ $product->getMedia()->count() }}</span>
         </div>
         <div class="card-block">
-            @forelse($product->getMedia() as $media)
+            @foreach($product->getMedia() as $media)
                 <div class="card">
                     <div class="card-body p-0 d-flex align-items-center">
                         <img class="mr-3 w-25" src="{{ $media->getUrl('thumbnail') }}"
@@ -32,11 +32,7 @@
                     </div>
 
                 </div>
-            @empty
-                <div class="col-12">
-                    <div class="alert alert-secondary">{{ __('No image') }}</div>
-                </div>
-            @endforelse
+            @endforeach
 
             @can('create media')
                 {!! Form::open(['route' => 'vanilo.media.store', 'enctype'=>'multipart/form-data', 'class' => 'card']) !!}
@@ -47,11 +43,10 @@
 
                             {{ Form::file('images[]', ['multiple', 'class' => 'form-control-file']) }}
                         </div>
-                        {{--<i class="zmdi zmdi-collection-plus font-2xl mr-3 bg-success p-3"></i>--}}
                         <div class="w-25 p-2 bg-success">
                             <div class="align-content-center text-center">
                                 <button class="btn btn-sm btn-success" title="{{ __('Upload image(s)') }}">
-                                    <i class="zmdi font-2xl zmdi-collection-plus"></i>
+                                    <i class="zmdi font-2xl zmdi-check"></i>
                                 </button>
                             </div>
                         </div>

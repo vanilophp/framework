@@ -25,9 +25,11 @@ class CreateProduct extends FormRequest implements CreateProductContract
     public function rules()
     {
         return [
-            'name'  => 'required|min:2|max:255',
-            'sku'   => 'required|unique:products',
-            'state' => ['required', Rule::in(ProductStateProxy::values())],
+            'name'     => 'required|min:2|max:255',
+            'sku'      => 'required|unique:products',
+            'state'    => ['required', Rule::in(ProductStateProxy::values())],
+            'images'   => 'nullable',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif'
         ];
     }
 
