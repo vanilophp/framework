@@ -11,6 +11,7 @@
 
 namespace Vanilo\Framework\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Spatie\MediaLibrary\Models\Media;
 
@@ -38,5 +39,17 @@ class MediaController extends BaseController
             [$modelName => $model]
             )
         );
+    }
+
+    public function store(Request $request)
+    {
+        // Laravel Black Magic
+        $model = app(concord()->short($request->get('forType')))->find($request->get('forId'));
+
+        $model->addMultipleMediaFromRequest(['images'])->each(function ($fileAdder) {
+            $fileAdder->toMediaCollection();
+        });
+
+        return back()->with('success', __('Images have been added successfully'));
     }
 }
