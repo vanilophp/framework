@@ -18,6 +18,15 @@ return [
         'files'      => ['admin']
     ],
     'breadcrumbs' => true,
+    'image' => [
+        'variants' => [
+            'thumbnail' => [
+                'width'  => 250,
+                'height' => 250,
+                'fit' => 'crop'
+            ]
+        ]
+    ],
     'currency'    => [
         'code'   => 'USD',
         'sign'   => '$',

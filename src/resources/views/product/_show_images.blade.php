@@ -8,6 +8,13 @@
             <div class="card-block">
 
                 <div id="product-images" class="carousel slide" data-ride="carousel" data-interval="false">
+
+                    <ol class="carousel-indicators">
+                        @foreach($product->getMedia() as $media)
+                        <li data-target="#product-images" data-slide-to="{{ $loop->index }}"{{ $loop->first ? ' class="active"' : ''}}></li>
+                        @endforeach
+                    </ol>
+
                     <div class="carousel-inner">
                         @foreach($product->getMedia() as $media)
                             <div class="carousel-item{{ $loop->first ? ' active' : ''}}">
@@ -15,6 +22,7 @@
                             </div>
                         @endforeach
                     </div>
+
                     <a class="carousel-control-prev" href="#product-images" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">{{ __('Previous') }}</span>
