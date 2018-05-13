@@ -19,7 +19,7 @@ Vanilo is in pre-stable development stage. The latest release is v0.2, issued on
 
 #### 0.3
 
-The current development version is 0.3, scheduled to release on March 11, 2018.
+The current development version is 0.3, scheduled to release on May 16, 2018.
 
 Refer to the [Roadmap](https://vanilo.io/docs/master/roadmap) for more details.
 
