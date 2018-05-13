@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-4">
             @component('appshell::widgets.card_with_icon', [
-                    'icon' => $product->is_active ? 'account-circle' : 'account-o',
+                    'icon' => $product->is_active ? 'layers' : 'layers-off',
                     'type' => $product->is_active ? 'success' : 'warning'
             ])
                 {{ $product->name }}
@@ -28,7 +28,7 @@
 
         <div class="col-sm-6 col-md-5">
             @component('appshell::widgets.card_with_icon', [
-                    'icon' => 'shield-security',
+                    'icon' => 'time-restore',
                     'type' => 'info'
             ])
                 {{ $product->state }}
@@ -44,7 +44,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3">
-            @component('appshell::widgets.card_with_icon', ['icon' => 'star-circle'])
+            @component('appshell::widgets.card_with_icon', ['icon' => 'mall'])
                 {{ $product->sold_count or 0 }}
                 @slot('subtitle')
                     {{ __('Sold items') }}
@@ -52,6 +52,10 @@
             @endcomponent
         </div>
 
+    </div>
+
+    <div class="row">
+        @include('vanilo::product._show_images')
     </div>
 
     <div class="card">
