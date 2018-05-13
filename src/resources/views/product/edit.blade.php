@@ -8,7 +8,7 @@
 
     <div class="row">
 
-        <div class="col-xl-9">
+        <div class="col-12 col-lg-8 col-xl-9">
             <div class="card card-accent-secondary">
                 <div class="card-header">
                     {{ __('Product Data') }}
@@ -43,6 +43,10 @@
                     @endcan
                 </div>
             </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-xl-3">
+            @include('vanilo::product._edit_images')
         </div>
 
     </div>

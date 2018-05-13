@@ -52,9 +52,6 @@
             @endcomponent
         </div>
 
-    </div>
-
-    <div class="row">
         @include('vanilo::product._show_images')
     </div>
 

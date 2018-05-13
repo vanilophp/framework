@@ -1,11 +1,10 @@
 @if($product->hasImage())
 
-    <div class="col-sm-12 col-md-9 col-xl-4">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2">
         <div class="card">
-            <div class="card-header">
-                {{ __('Images') }}
-            </div>
             <div class="card-block">
+
+                <h6 class="card-title">{{ __('Images') }}</h6>
 
                 <div id="product-images" class="carousel slide" data-ride="carousel" data-interval="false">
 
@@ -18,7 +17,7 @@
                     <div class="carousel-inner">
                         @foreach($product->getMedia() as $media)
                             <div class="carousel-item{{ $loop->first ? ' active' : ''}}">
-                                <img class="d-block w-100" src="{{ $media->getUrl() }}" alt="{{ $media->name }}">
+                                <img class="d-block w-100" src="{{ $media->getUrl('thumbnail') }}" alt="{{ $media->name }}">
                             </div>
                         @endforeach
                     </div>
