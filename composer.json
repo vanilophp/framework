@@ -5,7 +5,7 @@
     "license": "MIT",
     "keywords": ["cart", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
-        "source": "https://github.com/artkonekt/cart"
+        "source": "https://github.com/vanilophp/cart"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
