@@ -14,6 +14,7 @@ namespace Vanilo\Framework\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
+use Konekt\Gears\Providers\GearsServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;
 use Konekt\Concord\ConcordServiceProvider;
@@ -37,7 +38,8 @@ abstract class TestCase extends Orchestra
     {
         return [
             ConcordServiceProvider::class,
-            MediaLibraryServiceProvider::class
+            MediaLibraryServiceProvider::class,
+            GearsServiceProvider::class
         ];
     }
 

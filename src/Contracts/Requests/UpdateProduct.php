@@ -9,10 +9,9 @@
  *
  */
 
-
 namespace Vanilo\Framework\Contracts\Requests;
 
-use Konekt\AppShell\Contracts\Requests\BaseRequest;
+use Konekt\Concord\Contracts\BaseRequest;
 
 interface UpdateProduct extends BaseRequest
 {
