@@ -14,9 +14,12 @@ namespace Vanilo\Cart\Tests\Dummies;
 
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Support\Traits\BuyableNoImage;
 
 class Course extends Model implements Buyable
 {
+    use BuyableNoImage;
+
     protected $guarded = ['id'];
 
     public function getId()

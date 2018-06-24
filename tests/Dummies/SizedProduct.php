@@ -14,10 +14,11 @@ namespace Vanilo\Cart\Tests\Dummies;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\BuyableModel;
+use Vanilo\Support\Traits\BuyableNoImage;
 
 class SizedProduct extends Model implements Buyable
 {
-    use BuyableModel;
+    use BuyableModel, BuyableNoImage;
 
     protected $guarded = ['id'];
 }
