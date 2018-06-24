@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "konekt/appshell": ">=0.9.6",
+        "konekt/appshell": "0.9.6",
         "vanilo/address": "^0.2",
         "vanilo/contracts": "^0.2",
         "vanilo/support": "^0.2",
