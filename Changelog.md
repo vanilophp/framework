@@ -10,6 +10,11 @@
 
 ## 0.2 Series
 
+### 0.2.1
+##### 2018-06-24
+
+- Fixed breaking change with AppShell > v0.9.6
+
 ### 0.2.0
 ##### 2018-02-19
 
