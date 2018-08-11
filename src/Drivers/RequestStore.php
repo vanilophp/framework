@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Drivers;
 
-
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;

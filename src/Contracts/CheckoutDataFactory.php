@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Contracts;
 
-
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 

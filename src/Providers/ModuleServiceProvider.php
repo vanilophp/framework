@@ -52,6 +52,4 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
             return $app->make(CheckoutContract::class);
         });
     }
-
-
 }

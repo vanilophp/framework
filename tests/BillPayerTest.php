@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Tests;
 
-
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Checkout\Tests\Mocks\Billpayer;
 
@@ -133,7 +132,5 @@ class BillPayerTest extends TestCase
             $this->billpayer->getBillingAddress()->getAddress(),
             $bp->getBillingAddress()->getAddress()
         );
-
     }
-
 }

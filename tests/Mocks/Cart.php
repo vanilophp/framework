@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Tests\Mocks;
 
-
 use Illuminate\Support\Collection;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubject;
@@ -40,7 +39,7 @@ class Cart implements CheckoutSubject
     public function addItem(Buyable $product, $qty = 1)
     {
         // Fetch existing item from cart (if there is)
-        $item = $this->items->first(function($item) use ($product) {
+        $item = $this->items->first(function ($item) use ($product) {
             return $item->getBuyable()->getId() == $product->getId();
         });
 

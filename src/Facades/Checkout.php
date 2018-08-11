@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Facades;
 
-
 use Illuminate\Support\Facades\Facade;
 
 class Checkout extends Facade

@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Tests\Mocks;
 
-
 use Vanilo\Contracts\Address as AddressContract;
 
 class Billpayer implements \Vanilo\Contracts\Billpayer

@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Tests\Mocks;
 
-
 use Vanilo\Contracts\Buyable;
 
 class Product implements Buyable

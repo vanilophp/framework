@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Tests\Mocks;
 
-
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubjectItem;
 

@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Contracts;
 
-
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
@@ -88,5 +87,4 @@ interface Checkout
      * @return float
      */
     public function total();
-
 }

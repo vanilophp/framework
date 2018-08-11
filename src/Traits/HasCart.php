@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Traits;
 
-
 use Vanilo\Contracts\CheckoutSubject;
 
 trait HasCart
@@ -39,5 +38,4 @@ trait HasCart
     {
         $this->cart = $cart;
     }
-
 }

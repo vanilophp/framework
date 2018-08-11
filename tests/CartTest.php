@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Tests;
 
-
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Checkout\Tests\Mocks\Cart;
 use Vanilo\Checkout\Tests\Mocks\Product;

@@ -12,8 +12,6 @@
 
 namespace Vanilo\Checkout\Contracts;
 
-
 interface CheckoutStore extends Checkout
 {
-
 }

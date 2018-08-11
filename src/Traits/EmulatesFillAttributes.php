@@ -12,7 +12,6 @@
 
 namespace Vanilo\Checkout\Traits;
 
-
 trait EmulatesFillAttributes
 {
     protected function fillAttributes($target, array $attributes)
