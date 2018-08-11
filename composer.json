@@ -21,7 +21,7 @@
         "vanilo/contracts": "0.3.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "6.2 - 7.0",
+        "phpunit/phpunit": "6.2 - 7.3",
         "orchestra/testbench": "^3.4.2"
     },
     "autoload": {
