@@ -18,10 +18,8 @@
         "illuminate/support": "5.*"
     },
     "autoload": {
-        "psr-4": { "Vanilo\\Support\\": "src/" }
-    },
-    "autoload-dev": {
         "psr-4": {
+            "Vanilo\\Support\\": "src/",
             "Vanilo\\Support\\Tests\\": "tests/"
         }
     },
