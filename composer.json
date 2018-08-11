@@ -20,6 +20,11 @@
     "autoload": {
         "psr-4": { "Vanilo\\Support\\": "src/" }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Vanilo\\Support\\Tests\\": "tests/"
+        }
+    },
     "suggest": {
         "spatie/laravel-medialibrary": "Allows associating images (or other files) with Eloquent models"
     },
