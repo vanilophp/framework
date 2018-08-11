@@ -14,8 +14,6 @@ namespace Vanilo\Cart\Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithAuthentication;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithSession;
 use Vanilo\Cart\Providers\ModuleServiceProvider as CartModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -24,8 +22,7 @@ use Vanilo\Cart\Tests\Dummies\User;
 
 abstract class TestCase extends Orchestra
 {
-    /** Only needed for Orchestra 3.4.X */
-    use InteractsWithSession, InteractsWithAuthentication;
+    use Laravel54TestCompatibility;
 
     public function setUp()
     {
