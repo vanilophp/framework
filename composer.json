@@ -22,7 +22,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "6.2 - 7.3",
-        "orchestra/testbench": "^3.4.2"
+        "orchestra/testbench": "^3.4.2",
+        "vanilo/support": "^0.3.1"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Checkout\\": "src/" }
