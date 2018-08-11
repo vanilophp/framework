@@ -2,8 +2,8 @@
 
 ## 0.3 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.3.0
+##### 2018-08-11
 
 - Support for Buyable images
 
