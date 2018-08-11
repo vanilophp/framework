@@ -56,6 +56,30 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
+    public function hasImage()
+    {
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getThumbnailUrl()
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getImageUrl()
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function morphTypeName(): string
     {
         return 'product';
