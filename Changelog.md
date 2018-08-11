@@ -2,10 +2,13 @@
 
 ## 0.3 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.3.0
+##### 2018-08-11
 
 - Custom product attributes can be passed/configured when adding cart items
+- Works with product images
+- Test suite improvements for Laravel 5.4 compatibility
+- Doc improvements
 
 ## 0.2 Series
 
