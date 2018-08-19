@@ -11,15 +11,11 @@
 
 Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce applications with **pleasure**.
 
-## Release State
-
-#### 0.2
-
-Vanilo is in pre-stable development stage. The latest release is v0.2, issued on February 19, 2018.
+## Current Version
 
 #### 0.3
 
-The current development version is 0.3, scheduled to release on May 16, 2018.
+The current Vanilo release is **v0.3** and was released on Aug 19, 2018.
 
 Refer to the [Roadmap](https://vanilo.io/docs/master/roadmap) for more details.
 

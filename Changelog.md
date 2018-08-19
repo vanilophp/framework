@@ -2,11 +2,12 @@
 
 ## 0.3 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.3.0
+##### 2018-08-19
 
 - Product Image support via Spatie Laravel Media Library v7
 - Laravel 5.4 support dropped (due to Spatie Media Library v7 conflicts)
+- Concord v1.2, AppShell 0.9.9
 
 ## 0.2 Series
 
