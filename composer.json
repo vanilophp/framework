@@ -18,13 +18,13 @@
         "php": "^7.1.3",
         "konekt/appshell": ">=0.9.9",
         "spatie/laravel-medialibrary": "^7.3",
-        "vanilo/address": "0.3.*",
-        "vanilo/contracts": "0.3.*",
-        "vanilo/support": "0.3.*",
-        "vanilo/product": "0.3.*",
-        "vanilo/cart": "0.3.*",
-        "vanilo/checkout": "0.3.*",
-        "vanilo/order": "0.3.*"
+        "vanilo/address": "0.4.*",
+        "vanilo/contracts": "0.4.*",
+        "vanilo/support": "0.4.*",
+        "vanilo/product": "0.4.*",
+        "vanilo/cart": "0.4.*",
+        "vanilo/checkout": "0.4.*",
+        "vanilo/order": "0.4.*"
     },
     "autoload": {
         "psr-4": {
@@ -49,7 +49,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.3-dev"
+            "dev-master": "0.4-dev"
         }
     }
 }
