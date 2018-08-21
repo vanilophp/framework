@@ -38,7 +38,6 @@ trait Laravel54TestCompatibility
         }
 
         $this->throwBadMethodCallException('assertGuest');
-
     }
 
     private function throwBadMethodCallException(string $methodName)
