@@ -1,5 +1,12 @@
 # Vanilo Product Module Changelog
 
+## 0.4 Series
+
+### Unreleased
+##### 2018-XX-XX
+
+-
+
 ## 0.3 Series
 
 ### 0.3.0
