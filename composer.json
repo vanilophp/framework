@@ -1,0 +1,38 @@
+{
+    "name": "vanilo/category",
+    "description": "Vanilo Category Module",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["category", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "support": {
+        "source": "https://github.com/vanilophp/category"
+    },
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "konekt/concord": "~1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.2 - 7.3",
+        "orchestra/testbench": "^3.4.2",
+        "cviebrock/eloquent-sluggable": "~4.2"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Category\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vanilo\\Category\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.4.x-dev"
+        }
+    }
+}
