@@ -5,7 +5,7 @@
     "license": "MIT",
     "keywords": ["product", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
-        "source": "https://github.com/vanilo/product"
+        "source": "https://github.com/vanilophp/product"
     },
     "authors": [
         {
