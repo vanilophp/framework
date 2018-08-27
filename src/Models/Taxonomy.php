@@ -23,6 +23,13 @@ class Taxonomy extends Model implements TaxonomyContract
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function rootLevelTaxons()
+    {
+        return TaxonProxy::where('taxonomy_id', $this->id)
+                         ->where('parent_id', NULL)
+                         ->get();
+    }
+
     public function sluggable(): array
     {
         return [
@@ -30,10 +37,5 @@ class Taxonomy extends Model implements TaxonomyContract
                 'source' => 'name'
             ]
         ];
-    }
-
-    public function getRouteKeyName()
-    {
-        return $this->getSlugKeyName();
     }
 }

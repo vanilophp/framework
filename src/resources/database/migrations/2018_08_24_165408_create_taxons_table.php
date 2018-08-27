@@ -10,7 +10,7 @@ class CreateTaxonsTable extends Migration
         Schema::create('taxons', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('taxonomy_id')->unsigned();
-            $table->integer('parent_id')->unsigned();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('priority')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();

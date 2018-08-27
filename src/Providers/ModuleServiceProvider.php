@@ -11,11 +11,13 @@
 namespace Vanilo\Category\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Category\Models\Taxon;
 use Vanilo\Category\Models\Taxonomy;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-        Taxonomy::class
+        Taxonomy::class,
+        Taxon::class
     ];
 }
