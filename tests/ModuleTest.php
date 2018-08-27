@@ -37,7 +37,5 @@ class ModuleTest extends TestCase
         // Default model bindings should be registered by default
         $this->assertEquals(Taxonomy::class, $models->get(TaxonomyContract::class));
         $this->assertEquals(Taxon::class, $models->get(TaxonContract::class));
-
     }
-
 }

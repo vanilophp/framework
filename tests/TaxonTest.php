@@ -73,8 +73,8 @@ class TaxonTest extends TestCase
         $taxon = Taxon::create(['name' => 'Parent', 'taxonomy_id' => $taxonomy->id]);
 
         $child = Taxon::create([
-            'name' => 'Child',
-            'parent_id' => $taxon->id,
+            'name'        => 'Child',
+            'parent_id'   => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -89,20 +89,20 @@ class TaxonTest extends TestCase
         $taxon = Taxon::create(['name' => 'Parent', 'taxonomy_id' => $taxonomy->id]);
 
         Taxon::create([
-            'name' => 'Child 1',
-            'parent_id' => $taxon->id,
+            'name'        => 'Child 1',
+            'parent_id'   => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         Taxon::create([
-            'name' => 'Child 2',
-            'parent_id' => $taxon->id,
+            'name'        => 'Child 2',
+            'parent_id'   => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         Taxon::create([
-            'name' => 'Child 3',
-            'parent_id' => $taxon->id,
+            'name'        => 'Child 3',
+            'parent_id'   => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
