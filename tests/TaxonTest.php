@@ -108,4 +108,134 @@ class TaxonTest extends TestCase
 
         $this->assertCount(3, $taxon->children);
     }
+
+    /** @test */
+    public function taxons_can_tell_their_level_in_the_tree()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+
+        $root1 = Taxon::create(['name' => 'Root 1', 'taxonomy_id' => $taxonomy->id]);
+        $root2 = Taxon::create(['name' => 'Root 2', 'taxonomy_id' => $taxonomy->id]);
+
+        $root1Child1 = Taxon::create([
+            'name'        => 'Root 1 Child 1',
+            'parent_id'   => $root1->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $root1Child2 = Taxon::create([
+            'name'        => 'Root 1 Child 2',
+            'parent_id'   => $root1->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $root1Child2Child1 = Taxon::create([
+            'name'        => 'Root 1 Child 2 Child 1',
+            'parent_id'   => $root1Child2->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $root1Child2Child1Child1 = Taxon::create([
+            'name'        => 'Root 1 Child 2 Child 1 Child 1',
+            'parent_id'   => $root1Child2Child1->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $root2Child1 =Taxon::create([
+            'name'        => 'Root 2 Child 1',
+            'parent_id'   => $root2->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertEquals(0, $root1->level);
+
+        $this->assertEquals(1, $root1Child1->level);
+        $this->assertEquals(1, $root1Child2->level);
+
+        $this->assertEquals(2, $root1Child2Child1->level);
+        $this->assertEquals(3, $root1Child2Child1Child1->level);
+
+        $this->assertEquals(0, $root2->level);
+
+        $this->assertEquals(1, $root2Child1->level);
+    }
+
+    /** @test */
+    public function collection_of_parents_can_be_returned()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+
+        $root = Taxon::create(['name' => 'root', 'taxonomy_id' => $taxonomy->id]);
+
+        $child1 = Taxon::create([
+            'name'        => 'child_1',
+            'parent_id'   => $root->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $child2 = Taxon::create([
+            'name'        => 'child_2',
+            'parent_id'   => $child1->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $child3 = Taxon::create([
+            'name'        => 'child_3',
+            'parent_id'   => $child2->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertEmpty($root->parents);
+
+        $this->assertCount(1, $child1->parents);
+        $this->assertArrayHasKey('root', $child1->parents->keyBy('name'));
+
+        $this->assertCount(2, $child2->parents);
+        $this->assertArrayHasKey('root', $child2->parents->keyBy('name'));
+        $this->assertArrayHasKey('child_1', $child2->parents->keyBy('name'));
+
+        $this->assertCount(3, $child3->parents);
+        $this->assertArrayHasKey('root', $child3->parents->keyBy('name'));
+        $this->assertArrayHasKey('child_1', $child3->parents->keyBy('name'));
+        $this->assertArrayHasKey('child_2', $child3->parents->keyBy('name'));
+
+    }
+
+    /** @test */
+    public function changing_the_parent_gets_reflected_in_the_parents_collection()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+
+        $root = Taxon::create(['name' => 'root', 'taxonomy_id' => $taxonomy->id]);
+
+        $child1 = Taxon::create([
+            'name'        => 'child_1',
+            'parent_id'   => $root->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $child2 = Taxon::create([
+            'name'        => 'child_2',
+            'parent_id'   => $child1->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertCount(1, $child1->parents);
+        $this->assertArrayHasKey('root', $child1->parents->keyBy('name'));
+
+        $child1->parent()->dissociate();// = null;
+        $child1->save();
+
+        $this->assertCount(0, $child1->parents);
+
+        $this->assertCount(2, $child2->parents);
+        $this->assertArrayHasKey('root', $child2->parents->keyBy('name'));
+        $this->assertArrayHasKey('child_1', $child2->parents->keyBy('name'));
+    }
+
+    /** @test */
+    public function changing_the_parent_recalculates_the_level()
+    {
+        // todo: implement
+    }
 }

@@ -16,15 +16,46 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 
 class Taxon extends Model implements TaxonContract
 {
     use Sluggable, SluggableScopeHelpers;
 
+    /** @var Collection */
+    private $_parents;
+
     protected $table = 'taxons';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function getParentsAttribute(): Collection
+    {
+        if (!$this->_parents) {
+            $this->_parents = collect();
+
+            $parent = $this->parent;
+            while($parent) {
+                $this->_parents->push($parent);
+                $parent = $parent->parent;
+            }
+        }
+
+        return $this->_parents;
+    }
+
+    public function getLevelAttribute(): int
+    {
+        return $this->parents->count();
+    }
+
+    public function setParentIdAttribute($value)
+    {
+        $this->attributes['parent_id'] = $value;
+
+        $this->_parents = null;
+    }
 
     public function taxonomy(): BelongsTo
     {
@@ -40,6 +71,8 @@ class Taxon extends Model implements TaxonContract
     {
         return $this->hasMany(TaxonProxy::modelClass(), 'parent_id');
     }
+
+
 
     public function sluggable(): array
     {
