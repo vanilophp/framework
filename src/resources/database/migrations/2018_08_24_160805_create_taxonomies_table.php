@@ -12,6 +12,8 @@ class CreateTaxonomiesTable extends Migration
             $table->string('name');
             $table->string('slug')->nullable();
             $table->timestamps();
+
+            $table->unique('slug');
         });
     }
 

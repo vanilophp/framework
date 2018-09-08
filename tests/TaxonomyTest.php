@@ -32,6 +32,32 @@ class TaxonomyTest extends TestCase
         $this->assertEquals('example-category', $taxonomy->slug);
     }
 
+    public function slug_can_be_explicitly_set()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Wine Regions', 'slug' => 'regions']);
+
+        $this->assertEquals('regions', $taxonomy->slug);
+    }
+
+    /** @test */
+    public function slug_must_be_unique()
+    {
+        $this->expectExceptionMessageRegExp('/UNIQUE constraint failed: taxonomies\.slug/');
+
+        Taxonomy::create(['name' => 'Category']);
+        Taxonomy::create(['name' => 'Category', 'slug' => 'category']);
+    }
+
+    /** @test */
+    public function slug_is_automatically_extended_in_case_it_already_exists_to_prevent_duplicate()
+    {
+        $category1 = Taxonomy::create(['name' => 'Category']);
+        $category2 = Taxonomy::create(['name' => 'Category']);
+
+        $this->assertEquals('category', $category1->slug);
+        $this->assertNotEquals('category', $category2->slug);
+    }
+
     /** @test */
     public function can_return_the_root_level_taxons()
     {

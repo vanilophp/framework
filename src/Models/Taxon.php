@@ -50,6 +50,11 @@ class Taxon extends Model implements TaxonContract
         return $this->parents->count();
     }
 
+    public function isRootLevel(): bool
+    {
+        return (bool) ($this->parent_id == null);
+    }
+
     public function setParentIdAttribute($value)
     {
         $this->attributes['parent_id'] = $value;
@@ -67,12 +72,20 @@ class Taxon extends Model implements TaxonContract
         return $this->belongsTo(TaxonProxy::modelClass(), 'parent_id');
     }
 
+    public function removeParent()
+    {
+        $this->parent()->dissociate();
+    }
+
+    public function setParent(Taxon $taxon)
+    {
+        $this->parent()->associate($taxon);
+    }
+
     public function children(): HasMany
     {
         return $this->hasMany(TaxonProxy::modelClass(), 'parent_id');
     }
-
-
 
     public function sluggable(): array
     {

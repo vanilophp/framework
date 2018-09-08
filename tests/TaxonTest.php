@@ -223,19 +223,62 @@ class TaxonTest extends TestCase
         $this->assertCount(1, $child1->parents);
         $this->assertArrayHasKey('root', $child1->parents->keyBy('name'));
 
-        $child1->parent()->dissociate();// = null;
-        $child1->save();
-
+        $child1->removeParent();
         $this->assertCount(0, $child1->parents);
 
-        $this->assertCount(2, $child2->parents);
+        $child2->setParent($root);
+
+        $this->assertCount(1, $child2->parents);
         $this->assertArrayHasKey('root', $child2->parents->keyBy('name'));
-        $this->assertArrayHasKey('child_1', $child2->parents->keyBy('name'));
+        $this->assertArrayNotHasKey('child_1', $child2->parents->keyBy('name'));
     }
 
     /** @test */
     public function changing_the_parent_recalculates_the_level()
     {
-        // todo: implement
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+
+        $root = Taxon::create(['name' => 'root', 'taxonomy_id' => $taxonomy->id]);
+
+        $child1 = Taxon::create([
+            'name'        => 'child_1',
+            'parent_id'   => $root->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $child2 = Taxon::create([
+            'name'        => 'child_2',
+            'parent_id'   => $child1->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertEquals(1, $child1->level);
+        $this->assertEquals(2, $child2->level);
+
+        $child1->removeParent();
+        $this->assertEquals(0, $child1->level);
+
+        $child2->setParent($root);
+        $this->assertEquals(1, $child2->level);
+    }
+
+    /** @test */
+    public function taxons_can_tell_if_they_are_root_level_ones()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+
+        $root = Taxon::create(['name' => 'Parent', 'taxonomy_id' => $taxonomy->id]);
+
+        $child = Taxon::create([
+            'name'        => 'Child',
+            'parent_id'   => $root->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertTrue($root->isRootLevel());
+        $this->assertFalse($child->isRootLevel());
+
+        $child->removeParent();
+        $this->assertTrue($child->isRootLevel());
     }
 }
