@@ -198,7 +198,6 @@ class TaxonTest extends TestCase
         $this->assertArrayHasKey('root', $child3->parents->keyBy('name'));
         $this->assertArrayHasKey('child_1', $child3->parents->keyBy('name'));
         $this->assertArrayHasKey('child_2', $child3->parents->keyBy('name'));
-
     }
 
     /** @test */

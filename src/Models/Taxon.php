@@ -36,7 +36,7 @@ class Taxon extends Model implements TaxonContract
             $this->_parents = collect();
 
             $parent = $this->parent;
-            while($parent) {
+            while ($parent) {
                 $this->_parents->push($parent);
                 $parent = $parent->parent;
             }
