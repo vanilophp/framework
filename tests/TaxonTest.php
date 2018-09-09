@@ -62,8 +62,8 @@ class TaxonTest extends TestCase
     {
         $taxon = Taxon::create([
             'taxonomy_id' => Taxonomy::create(['name' => 'Wine Regions']),
-            'name' => 'Carcavelos DOC',
-            'slug' => 'carcavelos'
+            'name'        => 'Carcavelos DOC',
+            'slug'        => 'carcavelos'
         ]);
 
         $this->assertEquals('carcavelos', $taxon->slug);
@@ -77,12 +77,12 @@ class TaxonTest extends TestCase
 
         $taxon1 = Taxon::create([
             'taxonomy_id' => $taxonomy1->id,
-            'name' => 'Domestic'
+            'name'        => 'Domestic'
         ]);
 
         $taxon2 = Taxon::create([
             'taxonomy_id' => $taxonomy2->id,
-            'name' => 'Domestic'
+            'name'        => 'Domestic'
         ]);
 
         $this->assertEquals('domestic', $taxon1->slug);
@@ -95,13 +95,13 @@ class TaxonTest extends TestCase
         $taxonomy = Taxonomy::create(['name' => 'Category']);
 
         $taxon1 = Taxon::create([
-            'name' => 'Docking Stations',
+            'name'        => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $taxon2 = Taxon::create([
-            'parent_id' => $taxon1->id,
-            'name' => 'Docking Stations',
+            'parent_id'   => $taxon1->id,
+            'name'        => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -114,20 +114,20 @@ class TaxonTest extends TestCase
         $this->expectExceptionMessageRegExp('/UNIQUE constraint failed/');
 
         $taxonomy = Taxonomy::create(['name' => 'Category']);
-        $root = Taxon::create([
-            'name' => 'Accessories',
+        $root     = Taxon::create([
+            'name'        => 'Accessories',
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $taxon1 = Taxon::create([
-            'parent_id' => $root->id,
-            'name' => 'Docking Stations',
+            'parent_id'   => $root->id,
+            'name'        => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $taxon2 = Taxon::create([
-            'parent_id' => $root->id,
-            'name' => 'Docking Stations',
+            'parent_id'   => $root->id,
+            'name'        => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
