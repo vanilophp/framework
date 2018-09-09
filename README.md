@@ -24,7 +24,7 @@ on type.
 Taken from other ecommerce systems, separate category trees are called
 **Taxonomies** and their child branches are called **Taxons**.
 
-*Example 1*:
+**Example 1:**
 
 ```
 Category                <- Taxonomy
@@ -37,7 +37,7 @@ Category                <- Taxonomy
     └> Accessories      <- Taxon
 ```
 
-*Example 2*:
+**Example 2:**
 
 ```
 Region                  <- Taxonomy
@@ -51,7 +51,7 @@ Region                  <- Taxonomy
     └> Piedmont         <- Taxon
 ```
 
-*Example 3*:
+**Example 3:**
 
 ```
 Type                    <- Taxonomy
@@ -223,10 +223,57 @@ echo $speakers->parent->name;
 // Audio
 ```
 
+Other than setting the `parent_id` field directly, it is also possible to call the setter method:
+
+```php
+$childTaxon->setParent($parentTaxon);
+$childTaxon->save();
+```
+
+To dissociate the parent use:
+
+```php
+$childTaxon->removeParent();
+$childTaxon->save();
+
+var_dump($childTaxon->parent_id);
+// NULL
+var_dump($childTaxon->parent);
+// NULL
+```
+
 ### Taxon Children
 
-Since taxons are a tree type of hierarchy, they can have multiple
-children.
+Since taxons are a tree type of hierarchy, they can have multiple children.
+
+The `children` property returns a Collection of child taxons.
+
+```php
+$category = Taxonomy::create(['name' => 'Category']);
+
+$topLevelTaxon = Taxon::create([
+    'taxonomy_id' => $category->id,
+    'name' => 'Rigging'    
+]);
+
+$childTaxon1 = Taxon::create([
+    'taxonomy_id' => $category->id,
+    'parent_id' => $topLevelTaxon->id,
+    'name' => 'Halyards'
+]);
+
+$childTaxon1 = Taxon::create([
+    'taxonomy_id' => $category->id,
+    'parent_id' => $topLevelTaxon->id,
+    'name' => 'Sheets'
+]);
+
+foreach ($topLevelTaxon->children as $child) {
+    echo "{$child->name}\n";
+}
+// Halyards
+// Sheets
+```
 
 ## Known Issues
 
