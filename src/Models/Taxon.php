@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
+use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 
 class Taxon extends Model implements TaxonContract
 {
@@ -77,9 +78,14 @@ class Taxon extends Model implements TaxonContract
         $this->parent()->dissociate();
     }
 
-    public function setParent(Taxon $taxon)
+    public function setParent(TaxonContract $taxon)
     {
         $this->parent()->associate($taxon);
+    }
+
+    public function setTaxonomy(TaxonomyContract $taxonomy)
+    {
+        $this->taxonomy()->associate($taxonomy);
     }
 
     public function children(): HasMany
@@ -91,7 +97,8 @@ class Taxon extends Model implements TaxonContract
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'name',
+                'unique' => false
             ]
         ];
     }

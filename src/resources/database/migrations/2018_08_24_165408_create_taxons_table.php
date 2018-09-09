@@ -28,6 +28,8 @@ class CreateTaxonsTable extends Migration
                   ->references('id')
                   ->on('taxons')
                   ->onDelete('cascade');
+
+            $table->unique(['taxonomy_id', 'slug', 'parent_id']);
         });
     }
 

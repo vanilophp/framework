@@ -25,6 +25,19 @@ class TaxonTest extends TestCase
     }
 
     /** @test */
+    public function taxonomy_can_be_assigned_with_settaxonomy_method()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Regions']);
+
+        $taxon = new Taxon();
+        $taxon->setTaxonomy($taxonomy);
+        $taxon->name = 'Tokaj';
+        $taxon->save();
+
+        $this->assertEquals($taxonomy->id, $taxon->taxonomy->id);
+    }
+
+    /** @test */
     public function taxons_must_have_a_name()
     {
         $taxonomy = Taxonomy::create(['name' => 'Category']);
@@ -42,6 +55,83 @@ class TaxonTest extends TestCase
         $taxon = Taxon::create(['taxonomy_id' => $taxonomy->id, 'name' => 'Example Taxon']);
 
         $this->assertEquals('example-taxon', $taxon->slug);
+    }
+
+    /** @test */
+    public function slug_can_be_explicitely_set()
+    {
+        $taxon = Taxon::create([
+            'taxonomy_id' => Taxonomy::create(['name' => 'Wine Regions']),
+            'name' => 'Carcavelos DOC',
+            'slug' => 'carcavelos'
+        ]);
+
+        $this->assertEquals('carcavelos', $taxon->slug);
+    }
+
+    /** @test */
+    public function same_slug_can_be_used_in_another_taxonomy()
+    {
+        $taxonomy1 = Taxonomy::create(['name' => 'Category']);
+        $taxonomy2 = Taxonomy::create(['name' => 'Regions']);
+
+        $taxon1 = Taxon::create([
+            'taxonomy_id' => $taxonomy1->id,
+            'name' => 'Domestic'
+        ]);
+
+        $taxon2 = Taxon::create([
+            'taxonomy_id' => $taxonomy2->id,
+            'name' => 'Domestic'
+        ]);
+
+        $this->assertEquals('domestic', $taxon1->slug);
+        $this->assertEquals('domestic', $taxon2->slug);
+    }
+
+    /** @test */
+    public function same_slug_can_be_used_in_another_level_of_the_same_taxonomy()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+
+        $taxon1 = Taxon::create([
+            'name' => 'Docking Stations',
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $taxon2 = Taxon::create([
+            'parent_id' => $taxon1->id,
+            'name' => 'Docking Stations',
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertEquals($taxon1->slug, $taxon2->slug);
+    }
+
+    /** @test */
+    public function slugs_must_be_unique_within_the_same_level_of_a_taxonomy()
+    {
+        $this->expectExceptionMessageRegExp('/UNIQUE constraint failed/');
+
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+        $root = Taxon::create([
+            'name' => 'Accessories',
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $taxon1 = Taxon::create([
+            'parent_id' => $root->id,
+            'name' => 'Docking Stations',
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $taxon2 = Taxon::create([
+            'parent_id' => $root->id,
+            'name' => 'Docking Stations',
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertEquals($taxon1->slug, $taxon2->slug);
     }
 
     /** @test */
