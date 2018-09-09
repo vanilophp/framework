@@ -228,4 +228,14 @@ echo $speakers->parent->name;
 Since taxons are a tree type of hierarchy, they can have multiple
 children.
 
+## Known Issues
+
+### Duplicate Taxon Slugs On Root Level
+
+Uniqueness of taxon slugs within a taxonomy level is currently
+guaranteed by unique DB keys. Most
+[contemporary DB engines allow NULLs in composite unique keys](https://sqlite.org/faq.html#q26).
+
+Therefore root level taxons can have duplicate slugs.
+
 
