@@ -18,7 +18,7 @@ class DissociateUserFromCart
 {
     public function handle($event)
     {
-        if (config('vanilo.cart.auto_assign_user')) {
+        if (config('vanilo.cart.destroy_on_logout')) {
             if (!is_null(Cart::getUser())) { // Prevent from surplus db operations
                 Cart::removeUser();
             }

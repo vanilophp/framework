@@ -240,4 +240,21 @@ class CartManager implements CartManagerContract
 
         return $this->cart;
     }
+
+    protected function restoreCart($id)
+    {
+        $this->cart = CartProxy::find($id);
+
+        session([$this->sessionKey => $this->cart->id]);
+
+        return $this->cart;
+    }
+
+    public function restoreLastCart()
+    {
+        if(!Auth::check()) return false;
+        $cart = CartProxy::where('user_id',Auth::id())->latest()->first();
+
+        return $this->restoreCart($cart->id);
+    }
 }
