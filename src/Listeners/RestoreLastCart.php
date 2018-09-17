@@ -23,10 +23,8 @@ class RestoreLastCart
      */
     public function handle($event)
     {   
-        if(Cart::isEmpty()){
-            (Cart::restoreLastCart());
-            // dd(Cart::restoreLastCart());
-            # neuen listener der nur bei login läuft, prüfen wieso der geladene cart nicht in die session geht
+        if(Cart::isEmpty()){ //dont overwrite a not-empty cart
+            Cart::restoreLastCart();
         }
     }
 }
