@@ -252,7 +252,10 @@ class CartManager implements CartManagerContract
 
     public function restoreLastCart()
     {
-        if(!Auth::check()) return false;
+        if (!Auth::check()){
+            return false;
+        }
+
         $cart = CartProxy::where('user_id',Auth::id())->latest()->first();
 
         return $this->restoreCart($cart->id);

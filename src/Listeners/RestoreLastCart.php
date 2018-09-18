@@ -22,8 +22,8 @@ class RestoreLastCart
      * @param $event
      */
     public function handle($event)
-    {   
-        if(Cart::isEmpty()){ //dont overwrite a not-empty cart
+    {
+        if (Cart::isEmpty()){ //dont overwrite a not-empty cart
             Cart::restoreLastCart();
         }
     }
