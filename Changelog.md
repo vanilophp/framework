@@ -5,7 +5,7 @@
 ### Unreleased
 ##### 2018-XX-XX
 
--
+- Laravel 5.7 Compatibility
 
 ## 0.3 Series
 
