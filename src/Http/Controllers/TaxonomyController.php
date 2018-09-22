@@ -38,7 +38,6 @@ class TaxonomyController extends BaseController
         try {
             $taxonomy = TaxonomyProxy::create($request->except('images'));
             flash()->success(__(':name has been created', ['name' => $taxonomy->name]));
-
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 

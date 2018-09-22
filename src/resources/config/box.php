@@ -2,12 +2,12 @@
 
 return [
     'modules' => [
-        Vanilo\Address\Providers\ModuleServiceProvider::class  => [],
+        Vanilo\Address\Providers\ModuleServiceProvider::class   => [],
         Vanilo\Category\Providers\ModuleServiceProvider::class  => [],
-        Vanilo\Product\Providers\ModuleServiceProvider::class  => [],
-        Vanilo\Cart\Providers\ModuleServiceProvider::class     => [],
-        Vanilo\Checkout\Providers\ModuleServiceProvider::class => [],
-        Vanilo\Order\Providers\ModuleServiceProvider::class    => []
+        Vanilo\Product\Providers\ModuleServiceProvider::class   => [],
+        Vanilo\Cart\Providers\ModuleServiceProvider::class      => [],
+        Vanilo\Checkout\Providers\ModuleServiceProvider::class  => [],
+        Vanilo\Order\Providers\ModuleServiceProvider::class     => []
     ],
     'views' => [
         'namespace' => 'vanilo'
