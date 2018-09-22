@@ -22,8 +22,10 @@ use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract
 use Vanilo\Framework\Factories\CheckoutDataFactory;
 use Vanilo\Framework\Factories\OrderFactory;
 use Vanilo\Framework\Http\Requests\CreateProduct;
+use Vanilo\Framework\Http\Requests\CreateTaxonomy;
 use Vanilo\Framework\Http\Requests\UpdateOrder;
 use Vanilo\Framework\Http\Requests\UpdateProduct;
+use Vanilo\Framework\Http\Requests\UpdateTaxonomy;
 use Menu;
 use Vanilo\Framework\Models\Customer;
 use Vanilo\Framework\Models\Product;
@@ -38,7 +40,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     protected $requests = [
         CreateProduct::class,
         UpdateProduct::class,
-        UpdateOrder::class
+        UpdateOrder::class,
+        CreateTaxonomy::class,
+        UpdateTaxonomy::class
     ];
 
     public function register()
@@ -74,6 +78,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     {
         if ($menu = Menu::get('appshell')) {
             $shop = $menu->addItem('shop', __('Shop'));
+            $shop->addSubItem('categories', __('Categorization'), ['route' => 'vanilo.taxonomy.index'])->data('icon', 'folder');
             $shop->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
             $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])->data('icon', 'mall');
         }

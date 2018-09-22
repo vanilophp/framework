@@ -10,6 +10,7 @@
 |--------------------------------------------------------------------------
 */
 
+Route::resource('taxonomy', 'TaxonomyController');
 Route::resource('product', 'ProductController');
 Route::resource('order', 'OrderController');
 Route::resource('media', 'MediaController')->only(['destroy', 'store']);
