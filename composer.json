@@ -21,6 +21,7 @@
         "vanilo/address": "0.4.*",
         "vanilo/contracts": "0.4.*",
         "vanilo/support": "0.4.*",
+        "vanilo/category": "0.4.*",
         "vanilo/product": "0.4.*",
         "vanilo/cart": "0.4.*",
         "vanilo/checkout": "0.4.*",
