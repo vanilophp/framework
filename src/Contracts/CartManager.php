@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Contracts;
 
 interface CartManager extends Cart
