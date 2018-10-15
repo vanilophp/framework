@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Product\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -27,7 +26,7 @@ class Product extends Model implements ProductContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $enums = [
-        'state' => ProductState::class
+        'state' => 'ProductStateProxy@enumClass'
     ];
 
     public function sluggable(): array
