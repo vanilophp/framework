@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Tests;
 
 use Vanilo\Cart\Contracts\Cart as CartContract;

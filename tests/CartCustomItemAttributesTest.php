@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
