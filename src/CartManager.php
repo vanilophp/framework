@@ -9,11 +9,11 @@
  *
  */
 
-
 namespace Vanilo\Cart;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
@@ -40,7 +40,6 @@ class CartManager implements CartManagerContract
     {
         return $this->exists() ? $this->model()->getItems() : collect();
     }
-
 
     /**
      * @inheritDoc
@@ -153,11 +152,8 @@ class CartManager implements CartManagerContract
     public function destroy()
     {
         $this->clear();
-
         $this->model()->delete();
-        $this->cart = null;
-
-        session()->forget($this->sessionKey);
+        $this->forget();
     }
 
     /**
@@ -166,7 +162,6 @@ class CartManager implements CartManagerContract
     public function create($forceCreateIfExists = false)
     {
         if ($this->exists() && !$forceCreateIfExists) {
-            dump('cowardly returning');
             return;
         }
 
@@ -201,6 +196,23 @@ class CartManager implements CartManagerContract
         $this->setUser(null);
     }
 
+    public function restoreLastActiveCart($user)
+    {
+        $cart = CartProxy::ofUser($user)->actives()->latest()->first();
+
+        if ($cart) {
+            $this->setCartModel($cart);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function forget()
+    {
+        $this->cart = null;
+        session()->forget($this->sessionKey);
+    }
 
     /**
      * Returns the model id of the cart for the current session
@@ -234,7 +246,12 @@ class CartManager implements CartManagerContract
             ];
         }
 
-        $this->cart = CartProxy::create($attributes ?? []);
+        return $this->setCartModel(CartProxy::create($attributes ?? []));
+    }
+
+    protected function setCartModel(CartContract $cart): CartContract
+    {
+        $this->cart = $cart;
 
         session([$this->sessionKey => $this->cart->id]);
 

@@ -15,15 +15,22 @@ namespace Vanilo\Cart\Models;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 
 class Cart extends Model implements CartContract
 {
+    use CastsEnums;
+
     const EXTRA_PRODUCT_MERGE_ATTRIBUTES_CONFIG_KEY = 'vanilo.cart.extra_product_attributes';
 
     protected $guarded = ['id'];
+
+    protected $enums = [
+        'state' => 'CartStateProxy@enumClass'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -143,6 +150,16 @@ class Cart extends Model implements CartContract
         }
 
         $this->user_id = $user;
+    }
+
+    public function scopeActives($query)
+    {
+        return $query->whereIn('state', CartStateProxy::getActiveStates());
+    }
+
+    public function scopeOfUser($query, $user)
+    {
+        return $query->where('user_id', $user->id);
     }
 
     /**

@@ -17,6 +17,7 @@ use Vanilo\Cart\CartManager;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartItem;
+use Vanilo\Cart\Models\CartState;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
@@ -26,7 +27,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     ];
 
     protected $enums = [
-
+        CartState::class
     ];
 
     public function register()

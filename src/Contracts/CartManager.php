@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Contracts;
 
 interface CartManager extends Cart
@@ -66,4 +65,9 @@ interface CartManager extends Cart
      * Dissociates a user from a cart
      */
     public function removeUser();
+
+    /**
+     * Forget the cart for the session, but keep it
+     */
+    public function forget();
 }
