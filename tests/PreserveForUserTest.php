@@ -13,6 +13,7 @@ namespace Vanilo\Cart\Tests;
 
 use Illuminate\Support\Facades\Auth;
 use Vanilo\Cart\Models\Cart as CartModel;
+use Vanilo\Cart\Models\CartState;
 use Vanilo\Cart\Tests\Dummies\Product;
 use Vanilo\Cart\Tests\Dummies\User;
 use Vanilo\Cart\Facades\Cart;
@@ -40,24 +41,80 @@ class PreserveForUserTest extends TestCase
         $this->assertCount(1, CartModel::ofUser($this->user)->get());
     }
 
-    public function it_restores_the_cart_if_user_logs_back_int_and_feature_is_enabled()
+    /** @test */
+    public function it_restores_the_cart_if_user_logs_back_in_and_feature_is_enabled()
     {
-        // have logged in user
-        // create cart
-        // logout
-        // Check if cart is empty (?) || destroy session
-        // log back in
-        // see the restored cart
+        $this->be($this->user);
+        $this->assertAuthenticatedAs($this->user);
+
+        Cart::addItem($this->product, 3);
+        $this->assertCount(1, Cart::getItems());
+        $this->assertEquals(3, Cart::getItems()->first()->quantity);
+
+        Auth::logout();
+        $this->assertGuest();
+
+        $this->flushSession();
+        $this->assertTrue(Cart::isEmpty());
+
+        $this->be($this->user);
+        $this->assertAuthenticatedAs($this->user);
+        $this->assertTrue(Cart::isNotEmpty());
+        $this->assertCount(1, Cart::getItems());
+        $this->assertEquals(3, Cart::getItems()->first()->quantity);
     }
 
+    /** @test */
     public function it_does_not_restore_the_saved_cart_if_there_is_another_cart_for_the_session()
     {
-        // have logged in user
+        $this->be($this->user);
+        $this->assertAuthenticatedAs($this->user);
+
         // create cart (A)
-        // logout
+        Cart::addItem($this->product, 3);
+        $this->assertCount(1, Cart::getItems());
+        $this->assertEquals(3, Cart::getItems()->first()->quantity);
+
+        Auth::logout();
+        $this->assertGuest();
+
+        Cart::forget();
+        $this->assertTrue(Cart::isEmpty());
+
         // Create another cart (B)
+        Cart::addItem($this->product, 5);
+        $this->assertTrue(Cart::isNotEmpty());
+        $this->assertEquals(5, Cart::getItems()->first()->quantity);
+
         // log back in
+        $this->be($this->user);
+        $this->assertAuthenticatedAs($this->user);
+
         // see we still have cart B and cart A was not restored
+        $this->assertTrue(Cart::isNotEmpty());
+        $this->assertCount(1, Cart::getItems());
+        $this->assertEquals(5, Cart::getItems()->first()->quantity);
+    }
+
+    /** @test */
+    public function it_does_not_restore_a_checked_out_cart()
+    {
+        $this->be($this->user);
+        $this->assertAuthenticatedAs($this->user);
+
+        Cart::addItem($this->product);
+
+        Cart::model()->update(['state' => CartState::COMPLETED]);
+        Auth::logout();
+        $this->assertGuest();
+
+        Cart::forget();
+        $this->assertTrue(Cart::isEmpty());
+
+        $this->be($this->user);
+        $this->assertAuthenticatedAs($this->user);
+
+        $this->assertTrue(Cart::isEmpty());
     }
 
     public function setUp()

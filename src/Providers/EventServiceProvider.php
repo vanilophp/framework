@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Providers;
 
 use Illuminate\Auth\Events\Authenticated;
@@ -30,6 +29,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         Authenticated::class => [
             AssignUserToCart::class,
+            RestoreCurrentUsersLastActiveCart::class,
         ],
         Logout::class => [
             DissociateUserFromCart::class

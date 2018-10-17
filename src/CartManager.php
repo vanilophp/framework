@@ -152,11 +152,8 @@ class CartManager implements CartManagerContract
     public function destroy()
     {
         $this->clear();
-
         $this->model()->delete();
-        $this->cart = null;
-
-        session()->forget($this->sessionKey);
+        $this->forget();
     }
 
     /**
@@ -165,7 +162,6 @@ class CartManager implements CartManagerContract
     public function create($forceCreateIfExists = false)
     {
         if ($this->exists() && !$forceCreateIfExists) {
-            dump('cowardly returning');
             return;
         }
 
@@ -207,6 +203,15 @@ class CartManager implements CartManagerContract
         if ($cart) {
             $this->setCartModel($cart);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function forget()
+    {
+        $this->cart = null;
+        session()->forget($this->sessionKey);
     }
 
     /**
