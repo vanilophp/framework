@@ -37,23 +37,22 @@ For Laravel 5.4 you need to manually register it in config/app.php:
 
 The Cart is available via the `Cart` facade.
 
-The facade actually returns a `CartManager` object which exposes the
-cart API to be used by applications. It encapsulates the `Cart`
-eloquent model, that also has `CartItem` children.
+The facade actually returns a `CartManager` object which exposes the cart API to be used by
+applications. It encapsulates the `Cart` eloquent model, that also has `CartItem` children.
 
 The `CartManager` was introduced in order to take care of:
 
 - Relation of carts and the session and/or the user
-- Only create carts in the db if it's necessary (aka. don't pollute DB with a cart for every single visitor/hit)
+- Only create carts in the db if it's necessary (aka. don't pollute DB with a cart for every single
+  visitor/hit)
 - Provide a straightforward API
 
 ### Checking Whether A Cart Exists
 
-As written above, the cart manager only creates a cart entry (db) if
-it's needed. Thus you can check whether a cart exists or not.
+As written above, the cart manager only creates a cart entry (db) if it's needed. Thus you can check
+whether a cart exists or not.
 
-A non-existing cart means that the current session has no cart model/db record
-associated.
+A non-existing cart means that the current session has no cart model/db record associated.
 
 `Cart::exists()` returns whether a cart exists for the current session.
 
@@ -90,11 +89,11 @@ Their result is based on the `itemCount()` method.
 
 You can add product to the cart with the `Cart::addItem()` method.
 
-The item is a [Vanilo product](https://github.com/artkonekt/product) by
-default, which can be extended.
+The item is a [Vanilo product](https://github.com/artkonekt/product) by default, which can be
+extended.
 
-You aren't limited to using Vanilo products, you can add any Eloquent
-model to the cart as "product" that implements the
+You aren't limited to using Vanilo products, you can add any Eloquent model to the cart as "product"
+that implements the
 [Buyable interface](https://github.com/vanilophp/contracts/blob/master/src/Buyable.php) from the
 [vanilo/contracts](https://github.com/vanilophp/contracts) package.
 
@@ -137,8 +136,8 @@ Cart::addItem($product, 1, [ 'attributes' => [
 
 **Permanent extra fields**
 
-It is possible to configure the cart to always copy some extra attributes
-from product (Buyable) to cart items:
+It is possible to configure the cart to always copy some extra attributes from product (Buyable) to
+cart items:
 
 ```php
 //config/vanilo.php:
@@ -149,8 +148,7 @@ from product (Buyable) to cart items:
 //...
 ```
 
-Having this configuration the value of `weight` attribute gets copied
-automatically to cart item:
+Having this configuration the value of `weight` attribute gets copied automatically to cart item:
 
 ```php
 $product = Product::create([
@@ -167,7 +165,8 @@ echo $item->weight;
 
 ### Retrieving The Item's Associated Product
 
-The `CartItem` defines a [polymorphic relationship](https://laravel.com/docs/5.5/eloquent-relationships#polymorphic-relations)
+The `CartItem` defines a
+[polymorphic relationship](https://laravel.com/docs/5.5/eloquent-relationships#polymorphic-relations)
 to the Buyable object named `product`.
 
 So you have a reference to the item's product:
@@ -205,24 +204,22 @@ function name(); // the name to display in the cart
 function getPrice(); // the price
 function morphTypeName(); // the type name to store in the db
 ```
+
 #### Buyable Morph Maps
 
-In order to decouple the database from the application's internal
-structure, it is possible to not save the Buyable's full class name
-in the DB.
-When the cart associates a product (Buyable) with a cart item, it fetches
-the type name from the `Buyable::morphTypeName()` method.
+In order to decouple the database from the application's internal structure, it is possible to not
+save the Buyable's full class name in the DB. When the cart associates a product (Buyable) with a
+cart item, it fetches the type name from the `Buyable::morphTypeName()` method.
 
-The `morphTypeName()` method, can either return the full class name
-(Eloquent's default behavior), or some shorter version like:
+The `morphTypeName()` method, can either return the full class name (Eloquent's default behavior),
+or some shorter version like:
 
 | Full Class Name               | Short Version (Saved In DB) |
 |:------------------------------|:----------------------------|
 | Vanilo\Product\Models\Product | product                     |
 | App\Course                    | course                      |
 
-If your not using the FQCN, then you have to add the mapping during
-boot time:
+If your not using the FQCN, then you have to add the mapping during boot time:
 
 ```php
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -233,7 +230,8 @@ Relation::morphMap([
 ]);
 ```
 
-For more information refer to the [Polymorphic Relation](https://laravel.com/docs/5.5/eloquent-relationships#polymorphic-relations)
+For more information refer to the
+[Polymorphic Relation](https://laravel.com/docs/5.5/eloquent-relationships#polymorphic-relations)
 section in the Laravel Documentation.
 
 ### Removing Items
@@ -244,6 +242,7 @@ There are two methods for removing specific items:
 2. `Cart::removeItem($cartItem)`
 
 **`removeProduct()` example:**
+
 ```php
 $product = Product::find(12345);
 
@@ -251,6 +250,7 @@ Cart::removeProduct($product); // Finds the item based on the product, and remov
 ```
 
 **`removeItem()` example:**
+
 ```php
 
 //Remove the first item from the cart
@@ -258,6 +258,20 @@ $item = Cart::model()->items->first();
 
 Cart::removeItem($item);
 ```
+
+### Cart States
+
+Cart has a state field (added in v0.4) which can be by default one of these values:
+
+- active: the cart is active;
+- checkout: the cart is being checked out;
+- completed: the cart has been checked out (order was created);
+- abandoned: the cart hasn't been touched for a while;
+
+If you want to modify the possible states of the cart, follow the instructions for
+[Customizing Enums](https://vanilo.io/docs/master/enums#customizing-enums);
+
+> The state field is not auto-managed, thus you explicitly have to update it's value.
 
 ### Associating With Users
 
@@ -300,7 +314,21 @@ The cart (by default) automatically handles cart+user associations in the follow
 | User logout & lockout     | Cart exists       | Dissociate cart from user |
 | New cart gets created     | User is logged in | Associate cart with user  |
 
-To prevent this behavior, set the `vanilo.cart.auto_assign_user` config value to false:
+To prevent this behavior, set the `vanilo.cart.auto_assign_user` config value to false.
+
+#### Preserve The Cart For Users Across Logins
+
+It is possible to keep the cart for users after logout and restore it after successful login.
+
+> This feature is disabled by default. To achive this behavior, set the
+> `vanilo.cart.preserve_for_user` config value to true
+
+| Event                     | State                                                             | Action                               |
+|:--------------------------|:------------------------------------------------------------------|:-------------------------------------|
+| User login/authentication | Cart for this session doesn't exist, user has a saved active cart | Restore the cart                     |
+| User login/authentication | Cart for this session exists                                      | The current cart will be kept        |
+| User logout & lockout     | Cart for this session exists                                      | Cart will be kept for the user in db |
+
 
 ```php
 // config/vanilo.php
@@ -313,8 +341,7 @@ return [
 
 ### Totals
 
-The item total can be accessed with the `total()` method or the `total`
-property.
+The item total can be accessed with the `total()` method or the `total` property.
 
 The cart total can be accessed with the `Cart::total()` method:
 
@@ -342,20 +369,25 @@ echo Cart::total();
 
 ### Clearing The Cart
 
-The `Cart::clear()` method removes everything from the cart, but it
-doesn't destroy it, unless the `vanilo.cart.auto_destroy` config option is true.
+The `Cart::clear()` method removes everything from the cart, but it doesn't destroy it, unless the
+`vanilo.cart.auto_destroy` config option is true.
 
-So the entry in the `cart` table will remain, and it will be assigned to
-the current session later on.
+So the entry in the `cart` table will remain, and it will be assigned to the current session later
+on.
 
 ### Destroying The Cart
 
 In case you want to get rid of the cart use the `Cart::destroy()` method.
 
-It clears the cart, removes the record from the `cart` table, and unsets
-the association with the current session.
+It clears the cart, removes the record from the `cart` table, and unsets the association with the
+current session.
 
 Thus, using destroy, you'll have a non-existent cart.
+
+### Forgetting The Cart
+
+The `Cart::forget()` method disconnects the current user/session from the current cart, but the cart
+will be kept intact in the database.
 
 ## To-do
 
@@ -365,3 +397,4 @@ Future methods for v0.6:
 //Cart::addCoupon(obj|int|str)
 //Cart::removeCoupon(obj|int|str)
 ```
+
