@@ -12,9 +12,9 @@
 namespace Vanilo\Framework\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Konekt\Concord\Contracts\BaseRequest;
+use Vanilo\Framework\Contracts\Requests\CreateTaxon as CreateTaxonContract;
 
-class CreateTaxon extends FormRequest implements BaseRequest
+class CreateTaxon extends FormRequest implements CreateTaxonContract
 {
     /**
      * @inheritDoc
