@@ -2,7 +2,7 @@
 /**
  * Contains the TaxonController class.
  *
- * @copyright   Copyright (c) 2018 Attila Fulop
+ * @copyright   Copyright (c) 2018 Hunor Kedves
  * @author      Hunor Kedves
  * @license     MIT
  * @since       2018-10-22
@@ -23,7 +23,7 @@ class TaxonController extends BaseController
     public function create(Taxonomy $taxonomy)
     {
         return view('vanilo::taxon.create', [
-            'taxons'   => Taxon::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id'),
+            'taxons'   => TaxonProxy::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id'),
             'taxonomy' => $taxonomy,
             'taxon'    => app(Taxon::class)
         ]);
@@ -46,7 +46,7 @@ class TaxonController extends BaseController
     public function edit(Taxonomy $taxonomy, Taxon $taxon)
     {
         return view('vanilo::taxon.edit', [
-            'taxons'   => Taxon::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id'),
+            'taxons'   => TaxonProxy::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id'),
             'taxonomy' => $taxonomy,
             'taxon'    => $taxon
         ]);

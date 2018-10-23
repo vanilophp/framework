@@ -2,7 +2,7 @@
 /**
  * Contains the CreateTaxon class.
  *
- * @copyright   Copyright (c) 2018 Attila Fulop
+ * @copyright   Copyright (c) 2018 Hunor Kedves
  * @author      Hunor Kedves
  * @license     MIT
  * @since       2018-10-22
