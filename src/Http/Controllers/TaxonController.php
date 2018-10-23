@@ -46,7 +46,7 @@ class TaxonController extends BaseController
     public function edit(Taxonomy $taxonomy, Taxon $taxon)
     {
         return view('vanilo::taxon.edit', [
-            'taxons'   => TaxonProxy::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id'),
+            'taxons'   => TaxonProxy::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id')->except($taxon->id),
             'taxonomy' => $taxonomy,
             'taxon'    => $taxon
         ]);

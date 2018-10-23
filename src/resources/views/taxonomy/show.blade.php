@@ -23,7 +23,7 @@
 
         </div>
         <div class="card-block">
-            @include('vanilo::taxon._tree', ['taxonomies' => $taxonomy->rootLevelTaxons()])
+            @include('vanilo::taxon._tree', ['taxons' => $taxonomy->rootLevelTaxons()])
         </div>
     </div>
 

@@ -18,7 +18,7 @@
 <div class="form-group">
     {{ Form::select('parent_id', $taxons, null,
             [
-                'class' => 'form-control form-control-sm' . ($errors->has('parent_id') ? ' is-invalid': ''),
+                'class' => 'form-control' . ($errors->has('parent_id') ? ' is-invalid': ''),
                 'placeholder' => __('Parent')
             ]
     ) }}
@@ -33,7 +33,7 @@
 <div class="form-group">
     {{ Form::text('slug', null,
             [
-                'class' => 'form-control form-control-sm' . ($errors->has('slug') ? ' is-invalid': ''),
+                'class' => 'form-control' . ($errors->has('slug') ? ' is-invalid': ''),
                 'placeholder' => __('URL')
             ]
     ) }}
@@ -46,7 +46,7 @@
 <div class="form-group">
     {{ Form::text('ext_title', null,
             [
-                'class' => 'form-control form-control-sm' . ($errors->has('ext_title') ? ' is-invalid': ''),
+                'class' => 'form-control' . ($errors->has('ext_title') ? ' is-invalid': ''),
                 'placeholder' => __('Extra Title')
             ]
     ) }}
@@ -61,7 +61,7 @@
 <div class="form-group">
     {{ Form::text('meta_keywords', null,
             [
-                'class' => 'form-control form-control-sm' . ($errors->has('meta_keywords') ? ' is-invalid': ''),
+                'class' => 'form-control' . ($errors->has('meta_keywords') ? ' is-invalid': ''),
                 'placeholder' => __('Meta Keywords')
             ]
     ) }}
@@ -74,7 +74,7 @@
 <div class="form-group">
     {{ Form::text('meta_description', null,
             [
-                'class' => 'form-control form-control-sm' . ($errors->has('meta_description') ? ' is-invalid': ''),
+                'class' => 'form-control' . ($errors->has('meta_description') ? ' is-invalid': ''),
                 'placeholder' => __('Meta Description')
             ]
     ) }}
