@@ -5,7 +5,7 @@
             {{ $taxon->name }}
 
             <span class="float-right">
-                <a class="btn btn-outline-warning btn-xs" href="{{ route('vanilo.taxon.edit', [$taxonomy, $taxon]) }}">
+                <a class="btn btn-outline-primary btn-xs" href="{{ route('vanilo.taxon.edit', [$taxonomy, $taxon]) }}">
                         {{ __('Edit')}}
                 </a>
                 <button type="submit" class="btn btn-outline-danger btn-xs">{{ __('Delete') }}</button>
