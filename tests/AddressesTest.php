@@ -9,12 +9,10 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests;
 
-
 use Vanilo\Contracts\Address as AddressContract;
-use Vanilo\Address\Models\Address;
+use Vanilo\Order\Tests\Dummies\Address;
 use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\Order;
 

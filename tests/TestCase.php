@@ -9,15 +9,14 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Blueprint;
+use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Address\Providers\ModuleServiceProvider as KonektAddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Vanilo\Address\Providers\ModuleServiceProvider as VaniloAddressModule;
 use Vanilo\Order\Providers\ModuleServiceProvider as OrderModule;
 use Vanilo\Order\Tests\Dummies\Product;
 
@@ -32,6 +31,11 @@ abstract class TestCase extends Orchestra
         ]);
 
         $this->setUpDatabase($this->app);
+
+        $this->app->concord->registerModel(
+            AddressContract::class,
+            \Vanilo\Order\Tests\Dummies\Address::class
+        );
     }
 
     /**
@@ -90,7 +94,6 @@ abstract class TestCase extends Orchestra
 
         $app['config']->set('concord.modules', [
             KonektAddressModule::class,
-            VaniloAddressModule::class,
             OrderModule::class
         ]);
     }

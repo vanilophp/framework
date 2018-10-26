@@ -6,6 +6,7 @@
 ##### 2018-XX-XX
 
 - Laravel 5.7 compatible
+- Removed vanilo/address dependency
 
 ## 0.3 Series
 

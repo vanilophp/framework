@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests\Dummies;
 
 use Illuminate\Database\Eloquent\Model;
