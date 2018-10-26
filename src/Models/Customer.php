@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Framework\Models;
 
 use Konekt\Customer\Models\Customer as BaseCustomer;
@@ -17,7 +16,6 @@ use Vanilo\Contracts\Customer as CustomerContract;
 
 class Customer extends BaseCustomer implements CustomerContract
 {
-
     /**
      * @inheritDoc
      */
