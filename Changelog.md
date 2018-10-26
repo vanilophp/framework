@@ -5,7 +5,7 @@
 ### Unreleased
 ##### 2018-XX-XX
 
--
+- Added `AddressModel` trait
 
 ## 0.3 Series
 
