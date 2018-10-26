@@ -17,7 +17,7 @@ use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
-use Vanilo\Address\Models\Address;
+use Vanilo\Framework\Models\Address;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
 use Vanilo\Framework\Factories\CheckoutDataFactory;
 use Vanilo\Framework\Factories\OrderFactory;

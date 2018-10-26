@@ -71,6 +71,14 @@ class AddressTest extends TestCase
         $this->assertCount(1, $address->customers);
     }
 
+    /** @test */
+    public function the_root_address_interface_is_bound_to_this_modules_model()
+    {
+        $address = $this->app->make(\Konekt\Address\Contracts\Address::class);
+
+        $this->assertInstanceOf(Address::class, $address);
+    }
+
     public function setUp()
     {
         parent::setUp();

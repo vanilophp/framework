@@ -2,7 +2,6 @@
 
 return [
     'modules' => [
-        Vanilo\Address\Providers\ModuleServiceProvider::class   => [],
         Vanilo\Category\Providers\ModuleServiceProvider::class  => [],
         Vanilo\Product\Providers\ModuleServiceProvider::class   => [],
         Vanilo\Cart\Providers\ModuleServiceProvider::class      => [],
