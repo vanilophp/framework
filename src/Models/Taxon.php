@@ -105,6 +105,11 @@ class Taxon extends Model implements TaxonContract
         return $query->orderBy('priority');
     }
 
+    public function scopeRoots($query)
+    {
+        return $query->where('parent_id', null);
+    }
+
     public function sluggable(): array
     {
         return [

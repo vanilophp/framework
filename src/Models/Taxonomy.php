@@ -25,8 +25,9 @@ class Taxonomy extends Model implements TaxonomyContract
 
     public function rootLevelTaxons()
     {
-        return TaxonProxy::where('taxonomy_id', $this->id)
-                         ->where('parent_id', null)
+        return TaxonProxy::byTaxonomy($this)
+                         ->roots()
+                         ->sort()
                          ->get();
     }
 

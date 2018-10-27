@@ -424,4 +424,34 @@ class TaxonTest extends TestCase
         $this->assertEquals('Cat 1', $taxons[1]->name);
         $this->assertEquals('Cat 2', $taxons[2]->name);
     }
+
+    /** @test */
+    public function root_level_taxons_can_be_retrieved_by_the_roots_scope()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Category']);
+
+        $root = Taxon::create(['name' => 'Top 1', 'taxonomy_id' => $taxonomy->id]);
+        Taxon::create(['name' => 'Top 2', 'taxonomy_id' => $taxonomy->id]);
+
+        Taxon::create([
+            'name'        => 'Child 1',
+            'parent_id'   => $root->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        Taxon::create([
+            'name'        => 'Child 2',
+            'parent_id'   => $root->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        Taxon::create([
+            'name'        => 'Child 3',
+            'parent_id'   => $root->id,
+            'taxonomy_id' => $taxonomy->id
+        ]);
+
+        $this->assertCount(5, Taxon::get());
+        $this->assertCount(2, Taxon::roots()->get());
+    }
 }
