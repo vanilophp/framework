@@ -58,7 +58,7 @@ class TaxonTest extends TestCase
     }
 
     /** @test */
-    public function slug_can_be_explicitely_set()
+    public function slug_can_be_explicitly_set()
     {
         $taxon = Taxon::create([
             'taxonomy_id' => Taxonomy::create(['name' => 'Wine Regions']),
@@ -369,5 +369,59 @@ class TaxonTest extends TestCase
 
         $child->removeParent();
         $this->assertTrue($child->isRootLevel());
+    }
+
+    /** @test */
+    public function the_by_taxonomy_scope_can_return_taxons_by_taxonomy_object()
+    {
+        $category = Taxonomy::create(['name' => 'Category']);
+
+        Taxon::create(['name' => 'Cat 1', 'taxonomy_id' => $category->id]);
+        Taxon::create(['name' => 'Cat 2', 'taxonomy_id' => $category->id]);
+        Taxon::create(['name' => 'Cat 3', 'taxonomy_id' => $category->id]);
+
+        $brand = Taxonomy::create(['name' => 'Brand']);
+
+        Taxon::create(['name' => 'Brand 1', 'taxonomy_id' => $brand->id]);
+        Taxon::create(['name' => 'Brand 2', 'taxonomy_id' => $brand->id]);
+        Taxon::create(['name' => 'Brand 3', 'taxonomy_id' => $brand->id]);
+        Taxon::create(['name' => 'Brand 4', 'taxonomy_id' => $brand->id]);
+
+        $this->assertCount(3, Taxon::byTaxonomy($category)->get());
+        $this->assertCount(4, Taxon::byTaxonomy($brand)->get());
+    }
+
+    /** @test */
+    public function the_by_taxonomy_scope_can_return_taxons_by_taxonomy_id()
+    {
+        $gadgets = Taxonomy::create(['name' => 'Gadgets']);
+
+        Taxon::create(['name' => 'Smartphones', 'taxonomy_id' => $gadgets->id]);
+        Taxon::create(['name' => 'Smartwatches', 'taxonomy_id' => $gadgets->id]);
+
+        $brand = Taxonomy::create(['name' => 'Brand']);
+
+        Taxon::create(['name' => 'Brand X', 'taxonomy_id' => $brand->id]);
+        Taxon::create(['name' => 'Brand Y', 'taxonomy_id' => $brand->id]);
+        Taxon::create(['name' => 'Brand Z', 'taxonomy_id' => $brand->id]);
+
+        $this->assertCount(2, Taxon::byTaxonomy($gadgets->id)->get());
+        $this->assertCount(3, Taxon::byTaxonomy($brand->id)->get());
+    }
+
+    /** @test */
+    public function can_be_sorted_by_priority()
+    {
+        $category = Taxonomy::create(['name' => 'Category']);
+
+        Taxon::create(['name' => 'Cat 1', 'taxonomy_id' => $category->id, 'priority' => 27]);
+        Taxon::create(['name' => 'Cat 2', 'taxonomy_id' => $category->id, 'priority' => 83]);
+        Taxon::create(['name' => 'Cat 3', 'taxonomy_id' => $category->id, 'priority' => 3]);
+
+        $taxons = Taxon::byTaxonomy($category)->sort()->get();
+
+        $this->assertEquals('Cat 3', $taxons[0]->name);
+        $this->assertEquals('Cat 1', $taxons[1]->name);
+        $this->assertEquals('Cat 2', $taxons[2]->name);
     }
 }

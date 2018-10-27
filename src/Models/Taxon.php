@@ -93,6 +93,18 @@ class Taxon extends Model implements TaxonContract
         return $this->hasMany(TaxonProxy::modelClass(), 'parent_id');
     }
 
+    public function scopeByTaxonomy($query, $taxonomy)
+    {
+        $id = is_object($taxonomy) ? $taxonomy->id : $taxonomy;
+
+        return $query->where('taxonomy_id', $id);
+    }
+
+    public function scopeSort($query)
+    {
+        return $query->orderBy('priority');
+    }
+
     public function sluggable(): array
     {
         return [
