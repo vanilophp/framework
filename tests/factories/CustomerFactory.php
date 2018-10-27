@@ -15,8 +15,7 @@ use Vanilo\Framework\Models\Customer;
 
 $factory->define(Customer::class, function (Faker $faker) {
     return [
-        'type' => CustomerType::ORGANIZATION,
+        'type'         => CustomerType::ORGANIZATION,
         'company_name' => $faker->company
     ];
 });
-
