@@ -1,7 +1,7 @@
 @extends('appshell::layouts.default')
 
 @section('title')
-    {{ __('Categorization') }}
+    {{ __('Category Trees') }}
 @stop
 
 @section('content')

@@ -12,28 +12,38 @@
 namespace Vanilo\Framework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
-use Vanilo\Category\Models\Taxon;
-use Vanilo\Category\Models\Taxonomy;
+use Vanilo\Category\Contracts\Taxon;
+use Vanilo\Category\Contracts\Taxonomy;
 use Vanilo\Category\Models\TaxonProxy;
-use Vanilo\Framework\Http\Requests\CreateTaxon;
-use Vanilo\Framework\Http\Requests\UpdateTaxon;
+use Vanilo\Framework\Contracts\Requests\CreateTaxonForm;
+use Vanilo\Framework\Contracts\Requests\CreateTaxon;
+use Vanilo\Framework\Contracts\Requests\UpdateTaxon;
 
 class TaxonController extends BaseController
 {
-    public function create(Taxonomy $taxonomy)
+    public function create(CreateTaxonForm $request, Taxonomy $taxonomy)
     {
+        $taxon = app(Taxon::class);
+        if ($defaultParent = $request->getDefaultParent()) {
+            $taxon->parent_id = $defaultParent->id;
+        }
+
         return view('vanilo::taxon.create', [
-            'taxons'   => TaxonProxy::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id'),
+            'taxons'   => TaxonProxy::byTaxonomy($taxonomy)->get()->pluck('name', 'id'),
             'taxonomy' => $taxonomy,
-            'taxon'    => app(Taxon::class)
+            'taxon'    => $taxon
         ]);
     }
 
     public function store(Taxonomy $taxonomy, CreateTaxon $request)
     {
         try {
-            $taxon = TaxonProxy::create(array_merge($request->all(), ['taxonomy_id' => $taxonomy->id]));
-            flash()->success(__(':name has been created', ['name' => $taxon->name]));
+            $taxon = TaxonProxy::create(array_merge($request->all(),
+                ['taxonomy_id' => $taxonomy->id]));
+            flash()->success(__(':name :taxonomy has been created', [
+                'name'     => $taxon->name,
+                'taxonomy' => str_singular($taxonomy->name)
+            ]));
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
@@ -46,7 +56,8 @@ class TaxonController extends BaseController
     public function edit(Taxonomy $taxonomy, Taxon $taxon)
     {
         return view('vanilo::taxon.edit', [
-            'taxons'   => TaxonProxy::where('taxonomy_id', $taxonomy->id)->get()->pluck('name', 'id')->except($taxon->id),
+            'taxons'   => TaxonProxy::byTaxonomy($taxonomy)->get()->pluck('name',
+                'id')->except($taxon->id),
             'taxonomy' => $taxonomy,
             'taxon'    => $taxon
         ]);

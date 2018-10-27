@@ -1,7 +1,7 @@
 <div class="form-group">
     <div class="input-group">
         <span class="input-group-addon">
-            <i class="zmdi zmdi-folder"></i>
+            <i class="zmdi zmdi-format-indent-increase"></i>
         </span>
         {{ Form::text('name', null,
                 [
@@ -15,71 +15,66 @@
     @endif
 </div>
 
-<div class="form-group">
-    {{ Form::select('parent_id', $taxons, null,
-            [
-                'class' => 'form-control' . ($errors->has('parent_id') ? ' is-invalid': ''),
-                'placeholder' => __('Parent')
-            ]
-    ) }}
-
-    @if ($errors->has('parent_id'))
-        <div class="invalid-feedback">{{ $errors->first('parent_id') }}</div>
-    @endif
-</div>
-
-<hr>
-
-<div class="form-group">
-    {{ Form::text('slug', null,
-            [
-                'class' => 'form-control' . ($errors->has('slug') ? ' is-invalid': ''),
-                'placeholder' => __('URL')
-            ]
-    ) }}
+<div class="form-group row">
+    <label class="col-form-label col-md-2">{{ __('URL') }}</label>
+    <div class="col-md-10">
+        {{ Form::text('slug', null, [
+                'class' => 'form-control' . ($errors->has('slug') ? ' is-invalid': '')
+           ])
+        }}
+    </div>
 
     @if ($errors->has('slug'))
         <div class="invalid-feedback">{{ $errors->first('slug') }}</div>
     @endif
 </div>
 
-<div class="form-group">
-    {{ Form::text('ext_title', null,
-            [
-                'class' => 'form-control' . ($errors->has('ext_title') ? ' is-invalid': ''),
-                'placeholder' => __('Extra Title')
-            ]
-    ) }}
+<hr>
 
-    @if ($errors->has('ext_title'))
-        <div class="invalid-feedback">{{ $errors->first('ext_title') }}</div>
+<div class="form-group row">
+    <label class="col-form-label col-form-label-sm col-md-2">{{ __('Parent') }}</label>
+    <div class="col-md-10">
+        {{ Form::select('parent_id', $taxons, null, [
+                'class' => 'form-control form-control-sm' . ($errors->has('parent_id') ? ' is-invalid': ''),
+                'placeholder' => __('No parent')
+           ])
+        }}
+    </div>
+
+    @if ($errors->has('parent_id'))
+        <div class="invalid-feedback">{{ $errors->first('parent_id') }}</div>
+    @endif
+</div>
+
+<div class="form-group row">
+    <label class="col-form-label col-form-label-sm col-md-2">{{ __('Priority') }}</label>
+    <div class="col-md-10">
+        {{ Form::text('priority', null, [
+                'class' => 'form-control form-control-sm' . ($errors->has('priority') ? ' is-invalid': '')
+           ])
+        }}
+    </div>
+
+    @if ($errors->has('priority'))
+        <div class="invalid-feedback">{{ $errors->first('priority') }}</div>
     @endif
 </div>
 
 <hr>
 
 <div class="form-group">
-    {{ Form::text('meta_keywords', null,
-            [
-                'class' => 'form-control' . ($errors->has('meta_keywords') ? ' is-invalid': ''),
-                'placeholder' => __('Meta Keywords')
-            ]
-    ) }}
+    <?php $seoHasErrors = any_key_exists($errors->toArray(), ['ext_title', 'meta_description', 'meta_keywords']) ?>
+    <h5><a data-toggle="collapse" href="#taxon-form-seo" class="collapse-toggler-heading"
+           @if ($seoHasErrors)
+           aria-expanded="true"
+                @endif
+        ><i class="zmdi zmdi-chevron-right"></i> {{ __('SEO') }}</a></h5>
 
-    @if ($errors->has('meta_keywords'))
-        <div class="invalid-feedback">{{ $errors->first('meta_keywords') }}</div>
-    @endif
-</div>
+    <div id="taxon-form-seo" class="collapse{{ $seoHasErrors ? ' show' : '' }}">
+        <div class="callout">
 
-<div class="form-group">
-    {{ Form::text('meta_description', null,
-            [
-                'class' => 'form-control' . ($errors->has('meta_description') ? ' is-invalid': ''),
-                'placeholder' => __('Meta Description')
-            ]
-    ) }}
+            @include('vanilo::taxon._form_seo')
 
-    @if ($errors->has('meta_description'))
-        <div class="invalid-feedback">{{ $errors->first('meta_description') }}</div>
-    @endif
+        </div>
+    </div>
 </div>

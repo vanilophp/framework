@@ -17,6 +17,9 @@ use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
+use Vanilo\Framework\Http\Requests\CreateTaxon;
+use Vanilo\Framework\Http\Requests\CreateTaxonForm;
+use Vanilo\Framework\Http\Requests\UpdateTaxon;
 use Vanilo\Framework\Models\Address;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
 use Vanilo\Framework\Factories\CheckoutDataFactory;
@@ -42,7 +45,10 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         UpdateProduct::class,
         UpdateOrder::class,
         CreateTaxonomy::class,
-        UpdateTaxonomy::class
+        UpdateTaxonomy::class,
+        CreateTaxon::class,
+        UpdateTaxon::class,
+        CreateTaxonForm::class
     ];
 
     public function register()

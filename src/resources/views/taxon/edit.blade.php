@@ -9,7 +9,7 @@
         <div class="col-12 col-lg-8 col-xl-9">
             <div class="card card-accent-secondary">
                 <div class="card-header">
-                    {{ __('Category Data') }}
+                    {{ __(':category Data', ['category' => str_singular($taxonomy->name)]) }}
                 </div>
                 <div class="card-block">
 

@@ -11,7 +11,7 @@
         <div class="col-12 col-lg-8 col-xl-9">
             <div class="card card-accent-secondary">
                 <div class="card-header">
-                    {{ __('Category Data') }}
+                    {{ __('Category Tree Data') }}
                 </div>
                 <div class="card-block">
 
