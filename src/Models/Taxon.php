@@ -90,7 +90,7 @@ class Taxon extends Model implements TaxonContract
 
     public function children(): HasMany
     {
-        return $this->hasMany(TaxonProxy::modelClass(), 'parent_id');
+        return $this->hasMany(TaxonProxy::modelClass(), 'parent_id')->sort();
     }
 
     public function scopeByTaxonomy($query, $taxonomy)
@@ -107,7 +107,7 @@ class Taxon extends Model implements TaxonContract
 
     public function scopeRoots($query)
     {
-        return $query->where('parent_id', null);
+        return $query->where('parent_id', null)->sort();
     }
 
     public function sluggable(): array
