@@ -367,6 +367,8 @@ $taxon->neighbours()->sortReverse()->get();
 
 #### Get First And Last Neighbours
 
+> Unlike the `neighbours` relationship, this works properly on root level taxons as well
+
 There are two dedicated methods to retrieve the first or the last neighbour:
 
 - `$taxon->lastNeighbour()` and
@@ -411,7 +413,7 @@ Due to the nature of Eloquent query scopes, these are chainable so it is possibl
 To retrieve all taxons belonging to a taxonomy, use the `byTaxonomy` scope:
 
 ```php
-$category = Taxonomy::findOneByName(['name' => 'Category']);
+$category = Taxonomy::findOneByName('Category');
 
 // Returns a collection of taxons
 $taxons = Taxon::byTaxonomy($category)->get();
@@ -438,7 +440,7 @@ $rootTaxonsForBrands = Taxon::roots()->byTaxonomy($taxonomy)->get();
 
 Taxons have a field called `priority` which is designed to make taxons sortable.
 
-The `sort()` and `sortReverse()` query scope sorts results by priority:
+The `sort()` and `sortReverse()` query scopes sort results by priority:
 
 ```php
 $spirits = Taxonomy::create(['name' => 'Spirits']);
@@ -470,11 +472,11 @@ There are cases when you want to exclude a taxon from the list of taxons.
 For that purpose you can utilize the `except(Taxon $taxon)` scope:
 
 ```php
-$me = Taxon::create(['name' => 'Me', 'parent_id' => $taxonomy->id]);
+$me = Taxon::create(['name' => 'Me']);
 
-Taxon::create(['name' => 'You', 'parent_id' => $taxonomy->id]);
-Taxon::create(['name' => 'She', 'parent_id' => $taxonomy->id]);
-Taxon::create(['name' => 'We', 'parent_id' => $taxonomy->id]);
+Taxon::create(['name' => 'You']);
+Taxon::create(['name' => 'She']);
+Taxon::create(['name' => 'We']);
 
 Taxon::except($me)->get();
 // You
@@ -492,4 +494,7 @@ guaranteed by unique DB keys. Most
 
 Therefore root level taxons can have duplicate slugs.
 
+### Neighbours Relationship On Root Level
 
+The `neighbours()` relationship does not work on root level taxons.
+It returns an empty result set.
