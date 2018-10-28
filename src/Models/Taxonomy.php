@@ -27,6 +27,7 @@ class Taxonomy extends Model implements TaxonomyContract
     {
         return TaxonProxy::byTaxonomy($this)
                          ->roots()
+                         ->sort()
                          ->get();
     }
 
