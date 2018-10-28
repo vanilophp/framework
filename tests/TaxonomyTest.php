@@ -80,4 +80,23 @@ class TaxonomyTest extends TestCase
         $this->assertArrayHasKey($root3->name, $roots->keyBy('name'));
         $this->assertArrayHasKey($root4->name, $roots->keyBy('name'));
     }
+
+    /** @test */
+    public function root_level_taxons_method_returns_an_empty_collection_if_no_taxons_are_defined()
+    {
+        $category = Taxonomy::create(['name' => 'Category']);
+
+        $this->assertCount(0, $category->rootLevelTaxons());
+    }
+
+    /** @test */
+    public function taxonomy_can_be_retrieved_by_name_with_the_dedicated_finder_method()
+    {
+        Taxonomy::create(['name' => 'Category']);
+        Taxonomy::create(['name' => 'Brands']);
+
+        $this->assertEquals('Category', Taxonomy::findOneByName('Category')->name);
+        $this->assertEquals('Brands', Taxonomy::findOneByName('Brands')->name);
+        $this->assertNull(Taxonomy::findOneByName('I dont exist'));
+    }
 }
