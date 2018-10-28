@@ -56,6 +56,38 @@ class Taxon extends Model implements TaxonContract
         return (bool) ($this->parent_id == null);
     }
 
+    /**
+     * Returns the highest priority taxon from the same level
+     *
+     * @param bool $excludeSelf Whether or not to exclude the taxon itself from the neighbours
+     *
+     * @return TaxonContract|null
+     */
+    public function lastNeighbour(bool $excludeSelf = false)
+    {
+        if ($excludeSelf) {
+            return $this->neighbours()->except($this)->sortReverse()->first();
+        }
+
+        return $this->neighbours()->sortReverse()->first();
+    }
+
+    /**
+     * Returns the lowest priority taxon from the same level
+     *
+     * @param bool $excludeSelf Whether or not to exclude the taxon itself from the neighbours
+     *
+     * @return TaxonContract|null
+     */
+    public function firstNeighbour(bool $excludeSelf = false)
+    {
+        if ($excludeSelf) {
+            return $this->neighbours()->except($this)->sort()->first();
+        }
+
+        return $this->neighbours()->sort()->first();
+    }
+
     public function setParentIdAttribute($value)
     {
         $this->attributes['parent_id'] = $value;
@@ -71,6 +103,12 @@ class Taxon extends Model implements TaxonContract
     public function parent(): BelongsTo
     {
         return $this->belongsTo(TaxonProxy::modelClass(), 'parent_id');
+    }
+
+    public function neighbours(): HasMany
+    {
+        return $this->hasMany(TaxonProxy::modelClass(), 'parent_id', 'parent_id')
+                    ->byTaxonomy($this->taxonomy);
     }
 
     public function removeParent()
@@ -105,9 +143,19 @@ class Taxon extends Model implements TaxonContract
         return $query->orderBy('priority');
     }
 
+    public function scopeSortReverse($query)
+    {
+        return $query->orderBy('priority', 'desc');
+    }
+
     public function scopeRoots($query)
     {
-        return $query->where('parent_id', null)->sort();
+        return $query->where('parent_id', null);
+    }
+
+    public function scopeExcept($query, TaxonContract $taxon)
+    {
+        return $query->where('id', '<>', $taxon->id);
     }
 
     public function sluggable(): array

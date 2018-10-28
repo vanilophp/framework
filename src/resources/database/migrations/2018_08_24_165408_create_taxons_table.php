@@ -30,6 +30,7 @@ class CreateTaxonsTable extends Migration
                   ->onDelete('cascade');
 
             $table->unique(['taxonomy_id', 'slug', 'parent_id']);
+            $table->index('priority');
         });
     }
 
