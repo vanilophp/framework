@@ -37,7 +37,7 @@
 
 @can('create taxons')
     <div class="card-footer">
-        <?php $queryParam = $taxon->isRootLevel() ? '' : '?parent=' . $taxon->parent->id; ?>
+        <?php $queryParam = isset($taxon) ? ($taxon->isRootLevel() ? '' : '?parent=' . $taxon->parent->id) : ''; ?>
         <a href="{{ route('vanilo.taxon.create', $taxonomy) }}{{ $queryParam }}"
            class="btn btn-outline-success btn-sm">{{ __('Add :category', ['category' => str_singular($taxonomy->name)]) }}</a>
     </div>

@@ -22,4 +22,11 @@ interface CreateTaxonForm extends BaseRequest
      * @return null|Taxon
      */
     public function getDefaultParent();
+
+    /**
+     * Returns the proposed priority value for a new taxon
+     * @param Taxon $taxon
+     * @return int
+     */
+    public function getNextPriority(Taxon $taxon): int;
 }

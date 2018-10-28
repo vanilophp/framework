@@ -24,9 +24,13 @@ class TaxonController extends BaseController
     public function create(CreateTaxonForm $request, Taxonomy $taxonomy)
     {
         $taxon = app(Taxon::class);
+        $taxon->taxonomy_id = $taxonomy->id;
+
         if ($defaultParent = $request->getDefaultParent()) {
             $taxon->parent_id = $defaultParent->id;
         }
+
+        $taxon->priority = $request->getNextPriority($taxon);
 
         return view('vanilo::taxon.create', [
             'taxons'   => TaxonProxy::byTaxonomy($taxonomy)->get()->pluck('name', 'id'),
@@ -56,8 +60,7 @@ class TaxonController extends BaseController
     public function edit(Taxonomy $taxonomy, Taxon $taxon)
     {
         return view('vanilo::taxon.edit', [
-            'taxons'   => TaxonProxy::byTaxonomy($taxonomy)->get()->pluck('name',
-                'id')->except($taxon->id),
+            'taxons'   => TaxonProxy::byTaxonomy($taxonomy)->except($taxon)->get()->pluck('name', 'id'),
             'taxonomy' => $taxonomy,
             'taxon'    => $taxon
         ]);
