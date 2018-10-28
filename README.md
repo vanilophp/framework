@@ -377,14 +377,14 @@ The order of the taxons is based on the `priority` field.
 ```php
 $gadgets = Taxon::create(['Gadgets']);
 
-$watches = Taxon::create(['name' => 'Watches', 'priority' => 2, 'parent_id' => $gadgets->id]);
 $laptops = Taxon::create(['name' => 'Laptops', 'priority' => 1, 'parent_id' => $gadgets->id]);
+$watches = Taxon::create(['name' => 'Watches', 'priority' => 2, 'parent_id' => $gadgets->id]);
 $phones  = Taxon::create(['name' => 'Phones', 'priority' => 3, 'parent_id' => $gadgets->id]);
 $tablets = Taxon::create(['name' => 'Tablets', 'priority' => 4, 'parent_id' => $gadgets->id]);
 
-echo $phones->lastNeighbour()->name;
-// Laptops
 echo $phones->firstNeighbour()->name;
+// Laptops
+echo $phones->lastNeighbour()->name;
 // Tablets
 
 // It may return itself if that happens to be the case:
