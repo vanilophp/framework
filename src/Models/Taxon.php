@@ -56,13 +56,6 @@ class Taxon extends Model implements TaxonContract
         return (bool) ($this->parent_id == null);
     }
 
-    /**
-     * Returns the highest priority taxon from the same level
-     *
-     * @param bool $excludeSelf Whether or not to exclude the taxon itself from the neighbours
-     *
-     * @return TaxonContract|null
-     */
     public function lastNeighbour(bool $excludeSelf = false)
     {
         if ($excludeSelf) {
@@ -73,11 +66,7 @@ class Taxon extends Model implements TaxonContract
     }
 
     /**
-     * Returns the lowest priority taxon from the same level
-     *
-     * @param bool $excludeSelf Whether or not to exclude the taxon itself from the neighbours
-     *
-     * @return TaxonContract|null
+     * @inheritdoc
      */
     public function firstNeighbour(bool $excludeSelf = false)
     {
