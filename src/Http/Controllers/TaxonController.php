@@ -24,6 +24,7 @@ class TaxonController extends BaseController
     public function create(CreateTaxonForm $request, Taxonomy $taxonomy)
     {
         $taxon = app(Taxon::class);
+
         $taxon->taxonomy_id = $taxonomy->id;
 
         if ($defaultParent = $request->getDefaultParent()) {
