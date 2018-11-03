@@ -5,7 +5,10 @@
 ### Unreleased
 ##### 2018-XX-XX
 
+- Added Product Category Support
 - Laravel 5.7 Compatibility
+- Vanilo Address module has been dropped
+- Using AppShell v1.0
 
 ## 0.3 Series
 

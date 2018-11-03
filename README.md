@@ -2,7 +2,6 @@
 
 ## The Truly Laravel E-commerce Framework
 
-
 [![Travis](https://img.shields.io/travis/vanilophp/framework.svg?style=flat-square)](https://travis-ci.org/vanilophp/framework)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
@@ -17,7 +16,7 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 
 The current Vanilo release is **v0.3** and was released on Aug 19, 2018.
 
-Refer to the [Roadmap](https://vanilo.io/docs/master/roadmap) for more details.
+Refer to the [Roadmap](https://vanilo.io/docs/master/roadmap) for upcoming versions.
 
 ## Further Information
 
