@@ -13,7 +13,7 @@ namespace Vanilo\Category\Tests\Dummies;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Vanilo\Category\Models\Taxon;
+use Vanilo\Category\Models\TaxonProxy;
 
 class Product extends Model
 {
@@ -21,12 +21,6 @@ class Product extends Model
 
     public function taxons(): MorphToMany
     {
-        return $this->morphToMany(
-            Taxon::class,
-            'model',
-            'model_taxons',
-            'model_id',
-            'taxon_id'
-        );
+        return $this->morphToMany(TaxonProxy::modelClass(), 'model', 'model_taxons', 'model_id', 'taxon_id');
     }
 }

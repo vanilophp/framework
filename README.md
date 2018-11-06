@@ -516,11 +516,7 @@ class Subscriber extends Model
     public function taxons(): MorphToMany
     {
         return $this->morphToMany(
-            TaxonProxy::modelClass(),
-            'model',
-            'model_taxons',
-            'model_id',
-            'taxon_id'
+            TaxonProxy::modelClass(), 'model', 'model_taxons', 'model_id', 'taxon_id'
         );
     }
 }
@@ -567,7 +563,9 @@ class Taxon extends \Vanilo\Category\Models\Taxon
 {
     public function subscribers()
     {
-        return $this->morphedByMany('App\Subscriber', 'taxons');
+        return $this->morphedByMany(
+            Subscriber::class, 'model', 'model_taxons', 'taxon_id', 'model_id'
+        );
     }
 }
 ```
@@ -591,6 +589,22 @@ class AppServiceProvider extends ServiceProvider
         );
     }
 }
+```
+
+After this you can get and manipulate the subscribers within a taxon:
+
+```php
+$taxon = \App\Taxon::find(1);
+$subscriber = Subscriber::find(1);
+
+// Add the subscriber to the taxon
+$taxon->subscribers()->save($subscriber);
+// Note that it has exactly the same effect as
+$subscriber->taxons()->save($taxon);
+
+// To retrieve all the subscribers within the taxon:
+$taxon->subscribers;
+// Collection of Subscriber objects
 ```
 
 ## Known Issues
