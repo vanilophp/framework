@@ -491,7 +491,7 @@ The goal of categorization is to define "things" to be categorized.
 The most common use case is to arrange **products** in categories, but the way this module was
 designed allows to categorize any model.
 
->Think of possible use cases like categorizing customers, subscribers, etc.
+> Think of possible use cases like categorizing customers, subscribers, etc.
 
 The assignment can be done with
 [Eloquent Many To Many Polymorphic Relations](https://laravel.com/docs/5.7/eloquent-relationships#many-to-many-polymorphic-relations).
@@ -522,7 +522,7 @@ class Subscriber extends Model
 }
 ```
 
-Assigning taxons to a subscriber:
+#### Assigning Taxons To A Subscriber:
 
 ```php
 $subscriber = Subscriber::find(1);
@@ -535,6 +535,16 @@ $subscriber->taxons->save($taxon1);
 //To assign multiple taxons:
 $subscriber->taxons->saveMany([$taxon1, $taxon2]);
 ```
+#### Removing Taxons From A Subscriber:
+
+```php
+$subscriber = Subscriber::find(1);
+$taxon = Taxon::find(1);
+
+// To assign a single taxon:
+$subscriber->taxons->detach($taxon);
+```
+
 ### Defining The Inverse Of The Relationship
 
 Another common use case is to retrieve all the models within a category (Taxon).
