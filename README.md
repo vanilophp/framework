@@ -484,6 +484,115 @@ Taxon::except($me)->get();
 // We
 ```
 
+## Assign Taxons To Models (eg. Products)
+
+The goal of categorization is to define "things" to be categorized.
+
+The most common use case is to arrange **products** in categories, but the way this module was
+designed allows to categorize any model.
+
+>Think of possible use cases like categorizing customers, subscribers, etc.
+
+The assignment can be done with
+[Eloquent Many To Many Polymorphic Relations](https://laravel.com/docs/5.7/eloquent-relationships#many-to-many-polymorphic-relations).
+This module has prepared the `model_taxons` table for this purpose and is ready to be used without
+any further database change.
+
+### Define Categorization Relationship For Models
+
+Let's say you have a `Subscriber` model and you want to put them in categories.
+
+Here's how to define the relationship on the Subscriber model class:
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Vanilo\Category\Models\TaxonProxy;
+
+class Subscriber extends Model
+{
+    public function taxons(): MorphToMany
+    {
+        return $this->morphToMany(
+            TaxonProxy::modelClass(),
+            'model',
+            'model_taxons',
+            'model_id',
+            'taxon_id'
+        );
+    }
+}
+```
+
+Assigning taxons to a subscriber:
+
+```php
+$subscriber = Subscriber::find(1);
+$taxon1 = Taxon::find(1);
+$taxon2 = Taxon::find(2);
+
+// To assign a single taxon:
+$subscriber->taxons->save($taxon1);
+
+//To assign multiple taxons:
+$subscriber->taxons->saveMany([$taxon1, $taxon2]);
+```
+### Defining The Inverse Of The Relationship
+
+Another common use case is to retrieve all the models within a category (Taxon).
+
+This way you'll be able to do this:
+
+```php
+$taxon = Taxon::find(1);
+
+// To return a collection of subscribers within the taxon:
+$taxon->subscribers();
+```
+
+To do this you need to:
+
+- Extend the Taxon model
+- Define the (inverse) relationship
+- Register the extended Taxon model
+
+**The extended Taxon model with the relationship:**
+
+```php
+namespace App;
+
+class Taxon extends \Vanilo\Category\Models\Taxon
+{
+    public function subscribers()
+    {
+        return $this->morphedByMany('App\Subscriber', 'taxons');
+    }
+}
+```
+
+To register the model:
+
+```php
+// app/Providers/AppServiceProvider.php
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Vanilo\Category\Contracts\Taxon as TaxonContract;
+
+class AppServiceProvider extends ServiceProvider
+{
+
+    public function boot()
+    {
+        $this->app->concord->registerModel(
+            TaxonContract::class, \App\Taxon::class
+        );
+    }
+}
+```
+
 ## Known Issues
 
 ### Duplicate Taxon Slugs On Root Level
