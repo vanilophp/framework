@@ -26,7 +26,7 @@ class TaxonAssignmentTest extends TestCase
     private $taxonomy;
 
     /** @test */
-    public function a_single_taxon_can_be_assigned_to_models()
+    public function a_single_taxon_can_be_assigned_to_a_model()
     {
         $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Jams']);
 
@@ -41,7 +41,26 @@ class TaxonAssignmentTest extends TestCase
     }
 
     /** @test */
-    public function multiple_taxons_can_be_assigned_to_models()
+    public function a_single_taxon_can_be_retracted_from_a_model()
+    {
+        $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Coffee']);
+
+        /** @var Product $product */
+        $product = Product::create(['name' => 'Segafredo Casa']);
+
+        $product->taxons()->attach($taxon);
+        $product = $product->fresh();
+
+        $this->assertCount(1, $product->taxons);
+
+        $product->taxons()->detach($taxon);
+        $product = $product->fresh();
+
+        $this->assertCount(0, $product->taxons);
+    }
+
+    /** @test */
+    public function multiple_taxons_can_be_assigned_to_a_model()
     {
         $jams       = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Jams']);
         $strawberry = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Strawberry Products']);
