@@ -99,7 +99,7 @@ class TaxonAssignmentTest extends TestCase
         Relation::morphMap(['product' => Product::class]);
         concord()->registerModel(TaxonContract::class, TaxonExt::class);
 
-        $taxon = TaxonExt::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Asian Food'])->fresh();
+        $taxon   = TaxonExt::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Asian Food'])->fresh();
         $product = Product::create(['name' => 'Pho Quai']);
 
         $product->taxons()->save($taxon);
