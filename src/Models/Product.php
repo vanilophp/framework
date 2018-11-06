@@ -12,10 +12,12 @@
 
 namespace Vanilo\Framework\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\BuyableImageSpatieV7;
 use Vanilo\Support\Traits\BuyableModel;
@@ -28,6 +30,13 @@ class Product extends BaseProduct implements Buyable, HasMedia
     protected const DEFAULT_THUMBNAIL_FIT    = Manipulations::FIT_CROP;
 
     use BuyableModel, BuyableImageSpatieV7, HasMediaTrait;
+
+    public function taxons(): MorphToMany
+    {
+        return $this->morphToMany(
+            TaxonProxy::modelClass(), 'model', 'model_taxons', 'model_id', 'taxon_id'
+        );
+    }
 
     public function registerMediaConversions(Media $media = null)
     {

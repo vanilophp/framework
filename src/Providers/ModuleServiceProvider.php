@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Framework\Providers;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -17,6 +16,7 @@ use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
+use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
 use Vanilo\Framework\Http\Requests\UpdateTaxon;
@@ -32,6 +32,7 @@ use Vanilo\Framework\Http\Requests\UpdateTaxonomy;
 use Menu;
 use Vanilo\Framework\Models\Customer;
 use Vanilo\Framework\Models\Product;
+use Vanilo\Framework\Models\Taxon;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
@@ -67,6 +68,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(ProductContract::class, Product::class);
         $this->concord->registerModel(AddressContract::class, Address::class);
         $this->concord->registerModel(CustomerContract::class, Customer::class);
+        $this->concord->registerModel(TaxonContract::class, Taxon::class);
 
         // This is ugly, but it does the job for v0.1
         Relation::morphMap([

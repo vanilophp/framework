@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Framework\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
