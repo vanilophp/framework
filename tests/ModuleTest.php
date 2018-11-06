@@ -38,4 +38,11 @@ class ModuleTest extends TestCase
         $this->assertEquals(Taxonomy::class, $models->get(TaxonomyContract::class));
         $this->assertEquals(Taxon::class, $models->get(TaxonContract::class));
     }
+
+    /** @test */
+    public function shorts_are_registered()
+    {
+        $this->assertEquals(TaxonContract::class, concord()->short('taxon'));
+        $this->assertEquals(TaxonomyContract::class, concord()->short('taxonomy'));
+    }
 }
