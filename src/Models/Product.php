@@ -17,6 +17,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\BuyableImageSpatieV7;
@@ -36,6 +37,32 @@ class Product extends BaseProduct implements Buyable, HasMedia
         return $this->morphToMany(
             TaxonProxy::modelClass(), 'model', 'model_taxons', 'model_id', 'taxon_id'
         );
+    }
+
+    public function addTaxon(Taxon $taxon): void
+    {
+        $this->taxons()->attach($taxon);
+    }
+
+    public function addTaxons(iterable $taxons)
+    {
+        foreach ($taxons as $taxon) {
+            if (! $taxon instanceof Taxon) {
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        'Every element passed to addTaxons must be a Taxon object. Given `%s`.',
+                        is_object($taxon) ? get_class($taxon) : gettype($taxon)
+                    )
+                );
+            }
+        }
+
+        return $this->taxons()->saveMany($taxons);
+    }
+
+    public function removeTaxon(Taxon $taxon)
+    {
+        return $this->taxons()->detach($taxon);
     }
 
     public function registerMediaConversions(Media $media = null)

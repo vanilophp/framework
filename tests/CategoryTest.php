@@ -32,13 +32,13 @@ class CategoryTest extends TestCase
     }
 
     /** @test */
-    public function a_single_taxon_can_be_assigned_to_products()
+    public function a_single_taxon_can_be_assigned_to_a_product()
     {
         $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Donuts']);
 
         $product = Product::create(['name' => 'Choco Donut', 'sku' => 'DNT-CHO']);
 
-        $product->taxons()->save($taxon);
+        $product->addTaxon($taxon);
         $product = $product->fresh();
 
         $this->assertCount(1, $product->taxons);
@@ -46,19 +46,50 @@ class CategoryTest extends TestCase
     }
 
     /** @test */
-    public function multiple_taxons_can_be_assigned_to_products()
+    public function a_single_taxon_can_be_retracted_from_a_product()
+    {
+        $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Coffee']);
+
+        $product = Product::create(['name' => 'Segafredo Casa', 'sku' => 'SGFR-CS18']);
+
+        $product->addTaxon($taxon);
+        $product = $product->fresh();
+
+        $this->assertCount(1, $product->taxons);
+
+        $product->removeTaxon($taxon);
+        $product = $product->fresh();
+
+        $this->assertCount(0, $product->taxons);
+    }
+
+    /** @test */
+    public function multiple_taxons_can_be_assigned_to_a_product()
     {
         $dogFood = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Dog Food']);
         $catFood = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Cat Food']);
 
         $product = Product::create(['name' => 'Omni Mammal Conserve Wonder', 'sku' => 'OMMCW']);
 
-        $product->taxons()->saveMany([$dogFood, $catFood]);
+        $product->addTaxons([$dogFood, $catFood]);
         $product = $product->fresh();
 
         $this->assertCount(2, $product->taxons);
         $this->assertEquals('Dog Food', $product->taxons[0]->name);
         $this->assertEquals('Cat Food', $product->taxons[1]->name);
+    }
+
+    /** @test */
+    public function trying_to_add_non_taxons_throws_invalid_argument_exception()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $product = Product::create(['name' => 'Generic Awesome Rubberbread', 'sku' => 'GARB']);
+
+        $product->addTaxons(collect([
+            Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Awesome Products']),
+            new \stdClass()
+        ]));
     }
 
     /** @test */
@@ -70,9 +101,9 @@ class CategoryTest extends TestCase
         $spring = Product::create(['name' => 'Spring Forest Backpack', 'sku' => 'bp002']);
         $pastel = Product::create(['name' => 'Pastel Flowers Backpack', 'sku' => 'bp003']);
 
-        $beetle->taxons()->save($backpacks);
-        $spring->taxons()->save($backpacks);
-        $pastel->taxons()->save($backpacks);
+        $beetle->addTaxon($backpacks);
+        $spring->addTaxon($backpacks);
+        $pastel->addTaxon($backpacks);
 
         $this->assertCount(3, $backpacks->products);
         $this->assertEquals('Beetle Backpack', $backpacks->products[0]->name);
@@ -81,15 +112,30 @@ class CategoryTest extends TestCase
     }
 
     /** @test */
-    public function products_can_be_added_to_taxons()
+    public function a_single_product_can_be_added_to_a_taxon()
     {
         $speakers = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Speakers'])->fresh();
 
         $jbl = Product::create(['name' => 'JBL Flip 4', 'sku' => 'JFL4']);
         $pio = Product::create(['name' => 'JBL Xtreme Blue', 'sku' => 'JXBL']);
 
-        $speakers->products()->save($jbl);
-        $speakers->products()->save($pio);
+        $speakers->addProduct($jbl);
+        $speakers->addProduct($pio);
+
+        $this->assertCount(2, $speakers->products);
+        $this->assertEquals('JBL Flip 4', $speakers->products[0]->name);
+        $this->assertEquals('JBL Xtreme Blue', $speakers->products[1]->name);
+    }
+
+    /** @test */
+    public function multiple_products_can_be_added_to_a_taxon()
+    {
+        $speakers = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Speakers'])->fresh();
+
+        $jbl = Product::create(['name' => 'JBL Flip 4', 'sku' => 'JFL4']);
+        $pio = Product::create(['name' => 'JBL Xtreme Blue', 'sku' => 'JXBL']);
+
+        $speakers->addProducts([$jbl, $pio]);
 
         $this->assertCount(2, $speakers->products);
         $this->assertEquals('JBL Flip 4', $speakers->products[0]->name);
