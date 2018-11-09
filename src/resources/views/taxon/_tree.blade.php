@@ -1,21 +1,35 @@
 @foreach($taxons as $taxon)
     <div class="card-block">
+
+        @if ($taxon->children->isNotEmpty())
+            <a href="#taxon-{{$taxon->id}}" aria-expanded="false"
+               aria-controls="taxon-{{$taxon->id}}" data-toggle="collapse"
+               class="collapse-toggler-heading">
+                &nbsp;<i class="zmdi zmdi-chevron-right"></i>
+            </a>
+        @else
+            &nbsp;<i class="zmdi zmdi-chevron-right text-secondary"></i>
+        @endif
+
         @can('edit taxons')
             <a href="{{ route('vanilo.taxon.edit', [$taxonomy, $taxon]) }}">{{ $taxon->name }}</a>
         @else
             {{ $taxon->name }}
         @endcan
 
-        @if ($taxon->children->isNotEmpty())
-                <a href="#taxon-{{$taxon->id}}" aria-expanded="false"
-                   aria-controls="taxon-{{$taxon->id}}" data-toggle="collapse"
-                   class="collapse-toggler-heading">
-                    &nbsp;<i class="zmdi zmdi-chevron-right"></i>
-                </a>
-        @endif
         <div class="card-actionbar">
+            @can('create taxons')
+                <a href="{{ route('vanilo.taxon.create', $taxonomy) }}?parent={{$taxon->id}}"
+                   class="btn btn-outline-success btn-xs float-right">{{ __('Add Child :category', ['category' => str_singular($taxonomy->name)]) }}</a>
+            @endcan
             @can('delete taxons')
-                {{ Form::open(['url' => route('vanilo.taxon.destroy', [$taxonomy, $taxon]), 'class' => 'form', 'method' => 'DELETE']) }}
+                {{ Form::open([
+                            'url' => route('vanilo.taxon.destroy', [$taxonomy, $taxon]),
+                            'class' => 'form float-right',
+                            'style' => 'display: inline-flex',
+                            'method' => 'DELETE'
+                        ])
+                }}
                 <button type="submit"
                         class="btn btn-outline-danger btn-xs">{{ __('Delete') }}</button>
                 {{ Form::close() }}
@@ -34,11 +48,3 @@
     @endif
 
 @endforeach
-
-@can('create taxons')
-    <div class="card-footer">
-        <?php $queryParam = isset($taxon) ? ($taxon->isRootLevel() ? '' : '?parent=' . $taxon->parent->id) : ''; ?>
-        <a href="{{ route('vanilo.taxon.create', $taxonomy) }}{{ $queryParam }}"
-           class="btn btn-outline-success btn-sm">{{ __('Add :category', ['category' => str_singular($taxonomy->name)]) }}</a>
-    </div>
-@endcan

@@ -10,6 +10,13 @@
         <div class="card-block">
             <div class="card">
                 @include('vanilo::taxon._tree', ['taxons' => $taxonomy->rootLevelTaxons()])
+
+                @can('create taxons')
+                    <div class="card-footer">
+                        <a href="{{ route('vanilo.taxon.create', $taxonomy) }}"
+                           class="btn btn-outline-success btn-sm">{{ __('Add :category', ['category' => str_singular($taxonomy->name)]) }}</a>
+                    </div>
+                @endcan
             </div>
         </div>
     </div>
