@@ -32,6 +32,19 @@ trait BuyableModel
         return $this->price;
     }
 
+    public function addSale(Carbon $date, $units = 1)
+    {
+        $this->last_sale_at = $date;
+        $this->units_sold += $units;
+        $this->save();
+    }
+
+    public function removeSale($units = 1)
+    {
+        $this->units_sold -= $units;
+        $this->save();
+    }
+
     public function morphTypeName(): string
     {
         return shorten(static::class);

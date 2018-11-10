@@ -6,6 +6,7 @@
 ##### 2018-XX-XX
 
 - Added `AddressModel` trait
+- BuyableModel trait supports the new addSale/removeSale sale methods
 
 ## 0.3 Series
 
