@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Contracts;
-
 
 interface Customer extends Organization, Person
 {
@@ -35,5 +33,4 @@ interface Customer extends Organization, Person
      * @return bool
      */
     public function isIndividual();
-
 }

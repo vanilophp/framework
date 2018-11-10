@@ -9,11 +9,9 @@
  *
  */
 
-
 namespace Vanilo\Contracts;
 
 use Illuminate\Support\Collection;
-
 
 /**
  * This one is typically a (readonly) cart

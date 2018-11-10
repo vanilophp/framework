@@ -9,13 +9,11 @@
  *
  */
 
-
 namespace Vanilo\Contracts;
 
 /**
  * A customer (either company or individual person) that
  * receives an Invoice
- *
  */
 interface Billpayer extends Customer
 {

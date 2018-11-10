@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Contracts;
-
 
 interface Organization extends Contactable
 {

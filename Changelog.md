@@ -5,7 +5,7 @@
 ### Unreleased
 ##### 2018-XX-XX
 
--
+- Buyable has been extended with `addSale()` and `removeSale()` methods
 
 ## 0.3 Series
 

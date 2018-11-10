@@ -11,6 +11,8 @@
 
 namespace Vanilo\Contracts;
 
+use Carbon\Carbon;
+
 interface Buyable
 {
     /**
@@ -57,6 +59,10 @@ interface Buyable
      * @return string|null
      */
     public function getImageUrl();
+
+    public function addSale(Carbon $date, $units = 1);
+
+    public function removeSale($units = 1);
 
     /**
      * Return the name to use for saving to the db as type name.
