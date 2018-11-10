@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Contracts;
-
 
 use Traversable;
 use Vanilo\Contracts\Address;
@@ -46,5 +44,4 @@ interface Order
      * @return float
      */
     public function total();
-
 }

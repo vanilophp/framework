@@ -2,15 +2,9 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Konekt\Customer\Models\CustomerTypeProxy;
 
 class CreateBillpayersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('billpayers', function (Blueprint $table) {
@@ -33,11 +27,6 @@ class CreateBillpayersTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('billpayers');

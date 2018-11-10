@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Models;
-
 
 use Konekt\Enum\Enum;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
@@ -46,5 +44,4 @@ class OrderStatus extends Enum implements OrderStatusContract
             self::CANCELLED   => __('Cancelled')
         ];
     }
-
 }

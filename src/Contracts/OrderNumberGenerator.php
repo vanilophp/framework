@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Contracts;
-
 
 interface OrderNumberGenerator
 {
@@ -23,5 +21,4 @@ interface OrderNumberGenerator
      * @return string
      */
     public function generateNumber(Order $order = null);
-
 }

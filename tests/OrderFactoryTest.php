@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests;
-
 
 use Illuminate\Support\Facades\Event;
 use Vanilo\Address\Models\Address;

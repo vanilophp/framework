@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Models;
-
 
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Address\Models\AddressProxy;

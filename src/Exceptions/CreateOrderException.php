@@ -9,11 +9,8 @@
  *
  */
 
-
 namespace Vanilo\Order\Exceptions;
-
 
 class CreateOrderException extends \Exception
 {
-
 }

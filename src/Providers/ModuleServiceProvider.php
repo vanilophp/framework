@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Order\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;

@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Generators;
-
 
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderNumberGenerator;

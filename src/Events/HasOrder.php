@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Events;
-
 
 use Vanilo\Order\Contracts\Order;
 

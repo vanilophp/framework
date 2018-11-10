@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Factories;
-
 
 use Illuminate\Support\Facades\DB;
 use Konekt\Address\Contracts\AddressType;
@@ -25,7 +23,6 @@ use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Contracts\OrderNumberGenerator;
 use Vanilo\Order\Events\OrderWasCreated;
 use Vanilo\Order\Exceptions\CreateOrderException;
-use Vanilo\Order\Models\BillpayerProxy;
 
 class OrderFactory implements OrderFactoryContract
 {
@@ -189,5 +186,4 @@ class OrderFactory implements OrderFactoryContract
 
         return AddressProxy::create($address);
     }
-
 }

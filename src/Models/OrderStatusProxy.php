@@ -9,13 +9,10 @@
  *
  */
 
-
 namespace Vanilo\Order\Models;
-
 
 use Konekt\Concord\Proxies\EnumProxy;
 
 class OrderStatusProxy extends EnumProxy
 {
-
 }

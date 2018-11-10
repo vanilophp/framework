@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Models;
-
 
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;

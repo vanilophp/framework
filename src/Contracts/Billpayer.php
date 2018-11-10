@@ -9,11 +9,8 @@
  *
  */
 
-
 namespace Vanilo\Order\Contracts;
-
 
 interface Billpayer
 {
-
 }

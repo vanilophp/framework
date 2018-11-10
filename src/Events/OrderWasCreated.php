@@ -9,11 +9,8 @@
  *
  */
 
-
 namespace Vanilo\Order\Events;
-
 
 class OrderWasCreated extends BaseOrderEvent
 {
-
 }

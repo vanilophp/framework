@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Order\Models;
 
 use Illuminate\Database\Eloquent\Model;

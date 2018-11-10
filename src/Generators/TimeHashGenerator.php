@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Vanilo\Order\Generators;
-
 
 use Carbon\Carbon;
 use Vanilo\Order\Contracts\Order;
