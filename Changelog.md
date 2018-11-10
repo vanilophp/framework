@@ -7,6 +7,7 @@
 
 - Laravel 5.7 compatible
 - Removed vanilo/address dependency
+- New events: `OrderWasCancelled` and `OrderWasCompleted`
 
 ## 0.3 Series
 
