@@ -37,11 +37,13 @@
                 @foreach($taxonomies as $taxonomy)
                     <tr>
                         <td>
+                            <span class="font-lg mb-3 font-weight-bold">
                             @can('view taxonomies')
                                 <a href="{{ route('vanilo.taxonomy.show', $taxonomy) }}">{{ $taxonomy->name }}</a>
                             @else
                                 {{ $taxonomy->name }}
                             @endcan
+                            </span>
                         </td>
                         <td>{{ $taxonomy->slug }}</td>
                         <td><span title="{{ $taxonomy->created_at }}">{{ $taxonomy->created_at->diffForHumans() }}</span></td>
@@ -53,7 +55,7 @@
 
                             @can('delete taxonomies')
                                 {{ Form::open([
-                                    'url' => route('vanilo.taxonomy.destroy', [$taxonomy]),
+                                    'url' => route('vanilo.taxonomy.destroy', $taxonomy),
                                     'data-confirmation-text' => __('Delete :name?', ['name' => $taxonomy->name]),
                                     'method' => 'DELETE'
                                 ])}}
