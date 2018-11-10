@@ -45,9 +45,15 @@
 
         <div class="col-sm-6 col-md-3">
             @component('appshell::widgets.card_with_icon', ['icon' => 'mall'])
-                {{ $product->sold_count ?: '0' }}
+                {{ $product->units_sold ?: '0' }}
+                {{ __('units sold') }}
                 @slot('subtitle')
-                    {{ __('Sold items') }}
+                    @if ($product->last_sale_at)
+                        {{ __('Last sale at') }}
+                        {{ $product->last_sale_at->format(__('Y-m-d H:i')) }}
+                    @else
+                        {{ __('No sales were registered') }}
+                    @endif
                 @endslot
             @endcomponent
         </div>

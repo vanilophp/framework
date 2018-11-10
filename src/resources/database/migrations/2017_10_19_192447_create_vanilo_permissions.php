@@ -8,11 +8,6 @@ class CreateVaniloPermissions extends Migration
 {
     protected $resources = ['product', 'order'];
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         $adminRole = RoleProxy::where(['name' => 'admin'])->firstOrFail();
@@ -22,11 +17,6 @@ class CreateVaniloPermissions extends Migration
         );
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         ResourcePermissions::deletePermissionsForResource($this->resources);

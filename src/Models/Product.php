@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Framework\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -31,6 +30,8 @@ class Product extends BaseProduct implements Buyable, HasMedia
     protected const DEFAULT_THUMBNAIL_FIT    = Manipulations::FIT_CROP;
 
     use BuyableModel, BuyableImageSpatieV7, HasMediaTrait;
+
+    protected $dates = ['created_at', 'updated_at', 'last_sale_at'];
 
     public function taxons(): MorphToMany
     {

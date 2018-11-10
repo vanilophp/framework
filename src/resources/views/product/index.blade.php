@@ -28,9 +28,9 @@
                 <tr>
                     <th>&nbsp;</th>
                     <th>{{ __('Name') }}</th>
-                    <th>{{ __('SKU') }}</th>
+                    <th>{{ __('Sales') }}</th>
+                    <th>{{ __('Categorization') }}</th>
                     <th>{{ __('State') }}</th>
-                    <th>{{ __('Last update') }}</th>
                     <th style="width: 10%">&nbsp;</th>
                 </tr>
                 </thead>
@@ -45,19 +45,49 @@
                             @can('view products')</a>@endcan
                         </td>
                         <td>
-                            @can('edit products')
-                                <a href="{{ route('vanilo.product.edit', $product) }}">{{ $product->name }}</a>
-                            @else
-                                {{ $product->name }}
-                            @endcan
+                            <span class="font-lg mb-3 font-weight-bold">
+                                @can('view products')<a href="{{ route('vanilo.product.show', $product) }}">@endcan
+                                    {{ $product->name }}
+                                @can('view products')</a>@endcan
+                            </span>
+                            <div class="text-muted" title="{{ __('SKU') }}">{{ $product->sku }}</div>
                         </td>
-                        <td>{{ $product->sku }}</td>
-                        <td>{{ $product->state->label() }}</td>
-                        <td><span title="{{ $product->updated_at }}">{{ $product->updated_at->diffForHumans() }}</span></td>
                         <td>
+                            <span class="mb-3">
+                                {{ $product->units_sold }} {{ __('units sold') }}
+                            </span>
+                            <div class="text-muted" title="{{ $product->last_sale_at ? $product->last_sale_at->format(__('Y-m-d H:i')) : '' }}">
+                                {{ __('Last sale') }}
+                                {{ $product->last_sale_at ? $product->last_sale_at->diffForHumans() : __('never') }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mt-2">
+                                @foreach($product->taxons as $taxon)
+                                    <span class="badge badge-pill badge-secondary">
+                                        {{ $taxon->name }}
+                                    </span>
+                                @endforeach
+                            </div>
+                        </td>
+                        <td>
+                            <div class="mt-2">
+                                <span class="badge badge-pill badge-{{$product->is_active ? 'success' : 'secondary'}}">{{ $product->state->label() }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            @can('edit products')
+                                <a href="{{ route('vanilo.product.edit', $product) }}"
+                                   class="btn btn-xs btn-outline-primary btn-show-on-tr-hover float-right">{{ __('Edit') }}</a>
+                            @endcan
                             @can('delete products')
-                                <a href="{{ route('vanilo.product.destroy', $product) }}"
-                                   class="btn btn-xs btn-outline-danger btn-show-on-tr-hover float-right">{{ __('Delete') }}</a>
+                                {!! Form::open(['route' => ['vanilo.product.destroy', $product],
+                                        'method' => 'DELETE',
+                                        'data-confirmation-text' => __('Are you sure to delete :name?', ['name' => $product->name])
+                                    ])
+                                !!}
+                                <button class="btn btn-xs btn-outline-danger btn-show-on-tr-hover float-right">{{ __('Delete') }}</button>
+                                {!! Form::close() !!}
                             @endcan
                         </td>
                     </tr>

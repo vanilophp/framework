@@ -8,11 +8,6 @@ class CreateCategoryPermissions extends Migration
 {
     protected $resources = ['taxonomy', 'taxon'];
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         $adminRole = RoleProxy::where(['name' => 'admin'])->firstOrFail();
@@ -24,11 +19,6 @@ class CreateCategoryPermissions extends Migration
         }
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         ResourcePermissions::deletePermissionsForResource($this->resources);
