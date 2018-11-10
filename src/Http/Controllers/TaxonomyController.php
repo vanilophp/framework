@@ -15,6 +15,7 @@ use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Category\Contracts\Taxonomy;
 use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Framework\Contracts\Requests\CreateTaxonomy;
+use Vanilo\Framework\Contracts\Requests\SyncModelTaxons;
 use Vanilo\Framework\Contracts\Requests\UpdateTaxonomy;
 
 class TaxonomyController extends BaseController
@@ -86,5 +87,22 @@ class TaxonomyController extends BaseController
         }
 
         return redirect(route('vanilo.taxonomy.index'));
+    }
+
+    public function sync(Taxonomy $taxonomy, SyncModelTaxons $request)
+    {
+        $taxonIds = $request->getTaxonIds();
+        $model    = $request->getFor();
+
+        foreach (TaxonomyProxy::where('id', '<>', $taxonomy->id)->get() as $foreignTaxonomy) {
+            $taxonIds = array_merge(
+                $taxonIds,
+                $model->taxons()->byTaxonomy($foreignTaxonomy)->get(['id'])->pluck('id')->toArray()
+            );
+        }
+
+        $model->taxons()->byTaxonomy($taxonomy)->sync($taxonIds);
+
+        return redirect(route(sprintf('vanilo.%s.show', shorten(get_class($model))), $model));
     }
 }

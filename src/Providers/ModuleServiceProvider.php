@@ -19,6 +19,7 @@ use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
+use Vanilo\Framework\Http\Requests\SyncModelTaxons;
 use Vanilo\Framework\Http\Requests\UpdateTaxon;
 use Vanilo\Framework\Models\Address;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
@@ -49,7 +50,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         UpdateTaxonomy::class,
         CreateTaxon::class,
         UpdateTaxon::class,
-        CreateTaxonForm::class
+        CreateTaxonForm::class,
+        SyncModelTaxons::class
     ];
 
     public function register()

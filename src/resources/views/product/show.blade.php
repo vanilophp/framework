@@ -45,14 +45,20 @@
 
         <div class="col-sm-6 col-md-3">
             @component('appshell::widgets.card_with_icon', ['icon' => 'mall'])
-                {{ $product->sold_count or 0 }}
+                {{ $product->sold_count ?: '0' }}
                 @slot('subtitle')
                     {{ __('Sold items') }}
                 @endslot
             @endcomponent
         </div>
 
-        @include('vanilo::product._show_images')
+        <div class="col-sm-6 col-md-9">
+            @include('vanilo::product._show_categories')
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            @include('vanilo::product._show_images')
+        </div>
     </div>
 
     <div class="card">

@@ -12,6 +12,7 @@
 namespace Vanilo\Framework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
+use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
@@ -85,7 +86,10 @@ class ProductController extends BaseController
      */
     public function show(Product $product)
     {
-        return view('vanilo::product.show', ['product' => $product]);
+        return view('vanilo::product.show', [
+            'product' => $product,
+            'taxonomies' => TaxonomyProxy::all()
+        ]);
     }
 
     /**
