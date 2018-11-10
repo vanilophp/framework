@@ -17,5 +17,4 @@ interface OrderAwareEvent
      * @return Order
      */
     public function getOrder();
-
 }

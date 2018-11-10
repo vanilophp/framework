@@ -12,7 +12,6 @@
 
 namespace Vanilo\Order\Tests;
 
-
 use Vanilo\Order\Models\Order;
 
 class CreateOrderWithItemsTest extends TestCase

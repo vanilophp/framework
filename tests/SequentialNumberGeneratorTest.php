@@ -12,7 +12,6 @@
 
 namespace Vanilo\Order\Tests;
 
-
 use Vanilo\Order\Factories\OrderFactory;
 use Vanilo\Order\Generators\SequentialNumberGenerator;
 
@@ -168,7 +167,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $numbers = [];
 
         for ($i = 0; $i < $generateX; $i++) {
-            $order = $factory->createFromDataArray([], [$this->item]);
+            $order     = $factory->createFromDataArray([], [$this->item]);
             $numbers[] = $order->getNumber();
         }
 
@@ -183,8 +182,5 @@ class SequentialNumberGeneratorTest extends TestCase
             ['PX-', '1', 4, '0', 4, ['PX-0001','PX-0002','PX-0003','PX-0004']],
             ['', '1000', 5, '1K', 2, ['11000','11001']], //because str_pad truncates it
         ];
-
     }
-
-
 }

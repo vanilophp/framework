@@ -42,5 +42,4 @@ class OrderItem extends Model implements OrderItemContract
     {
         return $this->total();
     }
-
 }

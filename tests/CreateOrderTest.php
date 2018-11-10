@@ -12,7 +12,6 @@
 
 namespace Vanilo\Order\Tests;
 
-
 use Konekt\Enum\Enum;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;

@@ -12,7 +12,6 @@
 
 namespace Vanilo\Order\Tests;
 
-
 use Carbon\Carbon;
 use Vanilo\Order\Generators\TimeHashGenerator;
 

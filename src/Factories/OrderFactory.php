@@ -57,7 +57,7 @@ class OrderFactory implements OrderFactoryContract
             $this->createShippingAddress($order, $data);
 
             $this->createItems($order,
-                array_map(function($item) {
+                array_map(function ($item) {
                     // Default quantity is 1 if unspecified
                     $item['quantity'] = $item['quantity'] ?? 1;
                     return $item;
@@ -65,7 +65,6 @@ class OrderFactory implements OrderFactoryContract
             );
 
             $order->save();
-
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -91,7 +90,6 @@ class OrderFactory implements OrderFactoryContract
     protected function createBillpayer(Order $order, array $data)
     {
         if (isset($data['billpayer'])) {
-
             $address = $this->createOrCloneAddress($data['billpayer']['address'], AddressTypeProxy::BILLING());
 
             $billpayer = app(Billpayer::class);
@@ -101,12 +99,11 @@ class OrderFactory implements OrderFactoryContract
 
             $order->billpayer()->associate($billpayer);
         }
-
     }
 
     protected function createItems(Order $order, array $items)
     {
-        $that = $this;
+        $that        = $this;
         $hasBuyables = collect($items)->contains(function ($item) use ($that) {
             return $that->itemContainsABuyable($item);
         });
@@ -115,7 +112,7 @@ class OrderFactory implements OrderFactoryContract
             $order->items()->createMany($items);
         } else {
             foreach ($items as $item) {
-               $this->createItem($order, $item);
+                $this->createItem($order, $item);
             }
         }
     }
@@ -131,7 +128,7 @@ class OrderFactory implements OrderFactoryContract
         if ($this->itemContainsABuyable($item)) {
             /** @var Buyable $product */
             $product = $item['product'];
-            $item = array_merge($item, [
+            $item    = array_merge($item, [
                 'product_type' => $product->morphTypeName(),
                 'product_id'   => $product->getId(),
                 'price'        => $product->getPrice(),
@@ -180,9 +177,9 @@ class OrderFactory implements OrderFactoryContract
             );
         }
 
-        $type = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
+        $type            = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
         $address['type'] = $type;
-        $address['name'] = empty(array_get($address,'name')) ? '-' : $address['name'];
+        $address['name'] = empty(array_get($address, 'name')) ? '-' : $address['name'];
 
         return AddressProxy::create($address);
     }

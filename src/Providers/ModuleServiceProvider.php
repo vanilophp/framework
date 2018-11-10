@@ -45,9 +45,9 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected function registerOrderNumberGenerator()
     {
         $generatorClass = $this->app['config']->get('vanilo.order.number.generator', 'time_hash');
-        $nsRoot = $this->getNamespaceRoot();
+        $nsRoot         = $this->getNamespaceRoot();
 
-        $this->app->bind(OrderNumberGenerator::class, function($app) use ($generatorClass, $nsRoot) {
+        $this->app->bind(OrderNumberGenerator::class, function ($app) use ($generatorClass, $nsRoot) {
             if (!class_exists($generatorClass)) {
                 $generatorClass = sprintf('%s\\Generators\\%sGenerator',
                     $nsRoot, studly_case($generatorClass)
@@ -58,5 +58,3 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         });
     }
 }
-
-

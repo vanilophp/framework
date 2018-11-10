@@ -12,7 +12,6 @@
 
 namespace Vanilo\Order\Tests;
 
-
 use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Tests\Dummies\Product;
@@ -51,7 +50,7 @@ class OrderItemProductTest extends TestCase
             'price'        => $this->theMoonRing->getPrice()
         ]);
 
-        $item = $order->items->first();
+        $item    = $order->items->first();
         $product = $item->product;
         $this->assertInstanceOf(Buyable::class, $product);
         $this->assertInstanceOf(Product::class, $product);
@@ -61,7 +60,7 @@ class OrderItemProductTest extends TestCase
         $order = $order->fresh();
 
         // And repeat the test
-        $item = $order->items->first();
+        $item    = $order->items->first();
         $product = $item->product;
         $this->assertInstanceOf(Buyable::class, $product);
         $this->assertInstanceOf(Product::class, $product);
