@@ -9,8 +9,9 @@
  *
  */
 
-
 namespace Vanilo\Support\Traits;
+
+use Carbon\Carbon;
 
 /**
  * Trait for Eloquent Models with default implementation of the Buyable interface
