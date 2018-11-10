@@ -6,6 +6,17 @@
 
 @section('content')
 
+    <style>
+        .card-actionbar-show-on-hover {
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .card-block:hover > .card-actionbar-show-on-hover {
+            opacity: 1;
+        }
+    </style>
+
     <div class="card">
         <div class="card-block">
             <div class="card">

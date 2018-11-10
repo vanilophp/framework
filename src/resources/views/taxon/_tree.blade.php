@@ -16,8 +16,9 @@
         @else
             {{ $taxon->name }}
         @endcan
+            &nbsp;<span class="badge badge-pill badge-light text-muted">{{ $taxon->products()->count() }}</span>
 
-        <div class="card-actionbar">
+        <div class="card-actionbar card-actionbar-show-on-hover">
             @can('create taxons')
                 <a href="{{ route('vanilo.taxon.create', $taxonomy) }}?parent={{$taxon->id}}"
                    class="btn btn-outline-success btn-xs float-right">{{ __('Add Child :category', ['category' => str_singular($taxonomy->name)]) }}</a>
@@ -27,6 +28,7 @@
                             'url' => route('vanilo.taxon.destroy', [$taxonomy, $taxon]),
                             'class' => 'form float-right',
                             'style' => 'display: inline-flex',
+                            'data-confirmation-text' => __('Delete :name?', ['name' => $taxon->name]),
                             'method' => 'DELETE'
                         ])
                 }}

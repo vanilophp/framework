@@ -52,8 +52,13 @@
                             @endcan
 
                             @can('delete taxonomies')
-                                <a href="{{ route('vanilo.taxonomy.destroy', $taxonomy) }}"
-                                   class="btn btn-xs btn-outline-danger btn-show-on-tr-hover float-right">{{ __('Delete') }}</a>
+                                {{ Form::open([
+                                    'url' => route('vanilo.taxonomy.destroy', [$taxonomy]),
+                                    'data-confirmation-text' => __('Delete :name?', ['name' => $taxonomy->name]),
+                                    'method' => 'DELETE'
+                                ])}}
+                                    <button class="btn btn-xs btn-outline-danger btn-show-on-tr-hover float-right">{{ __('Delete') }}</button>
+                                {{ Form::close() }}
                             @endcan
                         </td>
                     </tr>
