@@ -87,7 +87,7 @@ class ProductController extends BaseController
     public function show(Product $product)
     {
         return view('vanilo::product.show', [
-            'product' => $product,
+            'product'    => $product,
             'taxonomies' => TaxonomyProxy::all()
         ]);
     }
