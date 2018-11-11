@@ -18,6 +18,12 @@ matrix:
       env: L5_VER=6
     - php: 7.2
       env: L5_VER=7
+    - php: 7.3
+      env: L5_VER=5
+    - php: 7.3
+      env: L5_VER=6
+    - php: 7.3
+      env: L5_VER=7
 
 script:
   - vendor/bin/phpunit

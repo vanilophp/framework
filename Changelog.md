@@ -7,8 +7,11 @@
 
 - Added Product Category Support
 - Laravel 5.7 Compatibility
+- PHP 7.3 Compatibility
+- Product sales figures (units sold, last sale date)
+- Using AppShell v1.2
+- Admin UI fixes & improvements
 - Vanilo Address module has been dropped
-- Using AppShell v1.0
 
 ## 0.3 Series
 
