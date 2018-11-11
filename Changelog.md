@@ -2,10 +2,12 @@
 
 ## 0.4 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.4.0
+##### 2018-11-12
 
 - Laravel 5.7 compatible
+- Tested with PHP 7.3
+- Tiny bugfix
 
 ## 0.3 Series
 
@@ -13,7 +15,6 @@
 ##### 2018-08-15
 
 - Bumped version for Vanilo 0.3 series
-
 
 ## 0.2 Series
 
