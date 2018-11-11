@@ -49,3 +49,14 @@ Breadcrumbs::register('vanilo.taxon.edit', function ($breadcrumbs, $taxonomy, $t
     $breadcrumbs->parent('vanilo.taxonomy.show', $taxonomy);
     $breadcrumbs->push($taxon->name);
 });
+
+Breadcrumbs::register('vanilo.order.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(__('Orders'), route('vanilo.order.index'));
+});
+
+Breadcrumbs::register('vanilo.order.show', function ($breadcrumbs, $order) {
+    $breadcrumbs->parent('vanilo.order.index');
+    $breadcrumbs->push($order->getNumber(), route('vanilo.order.show', $order));
+});
+
