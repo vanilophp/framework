@@ -56,7 +56,7 @@
                             @can('delete taxonomies')
                                 {{ Form::open([
                                     'url' => route('vanilo.taxonomy.destroy', $taxonomy),
-                                    'data-confirmation-text' => __('Delete :name?', ['name' => $taxonomy->name]),
+                                    'data-confirmation-text' => __('Delete this categorization: ":name"?', ['name' => $taxonomy->name]),
                                     'method' => 'DELETE'
                                 ])}}
                                     <button class="btn btn-xs btn-outline-danger btn-show-on-tr-hover float-right">{{ __('Delete') }}</button>

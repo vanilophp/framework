@@ -39,7 +39,13 @@
             @endcan
 
             @can('delete taxonomies')
-                {!! Form::open(['route' => ['vanilo.taxonomy.destroy', $taxonomy], 'method' => 'DELETE', 'class' => "float-right"]) !!}
+                {!! Form::open([
+                        'route' => ['vanilo.taxonomy.destroy', $taxonomy],
+                        'method' => 'DELETE',
+                        'class' => 'float-right',
+                        'data-confirmation-text' => __('Delete this categorization: ":name"?', ['name' => $taxonomy->name])
+                    ])
+                !!}
                 <button class="btn btn-outline-danger">
                     {{ __('Delete Category Tree') }}
                 </button>

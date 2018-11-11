@@ -23,7 +23,8 @@ class UpdateTaxon extends FormRequest implements UpdateTaxonContract
     {
         return [
             'name'      => 'required|min:2|max:255',
-            'parent_id' => 'nullable|exists:taxons,id'
+            'parent_id' => 'nullable|exists:taxons,id',
+            'priority'  => 'nullable|integer'
         ];
     }
 

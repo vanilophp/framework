@@ -11,6 +11,7 @@
         ) }}
     </div>
     @if ($errors->has('name'))
+        <input hidden class="form-control is-invalid" />
         <div class="invalid-feedback">{{ $errors->first('name') }}</div>
     @endif
 </div>
@@ -22,11 +23,10 @@
                 'class' => 'form-control' . ($errors->has('slug') ? ' is-invalid': '')
            ])
         }}
+        @if ($errors->has('slug'))
+            <div class="invalid-feedback">{{ $errors->first('slug') }}</div>
+        @endif
     </div>
-
-    @if ($errors->has('slug'))
-        <div class="invalid-feedback">{{ $errors->first('slug') }}</div>
-    @endif
 </div>
 
 <hr>
@@ -39,11 +39,10 @@
                 'placeholder' => __('No parent')
            ])
         }}
+        @if ($errors->has('parent_id'))
+            <div class="invalid-feedback">{{ $errors->first('parent_id') }}</div>
+        @endif
     </div>
-
-    @if ($errors->has('parent_id'))
-        <div class="invalid-feedback">{{ $errors->first('parent_id') }}</div>
-    @endif
 </div>
 
 <div class="form-group row">
@@ -53,11 +52,10 @@
                 'class' => 'form-control form-control-sm' . ($errors->has('priority') ? ' is-invalid': '')
            ])
         }}
+        @if ($errors->has('priority'))
+            <div class="invalid-feedback">{{ $errors->first('priority') }}</div>
+        @endif
     </div>
-
-    @if ($errors->has('priority'))
-        <div class="invalid-feedback">{{ $errors->first('priority') }}</div>
-    @endif
 </div>
 
 <hr>

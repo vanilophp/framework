@@ -22,7 +22,8 @@ class UpdateTaxonomy extends FormRequest implements UpdateTaxonomyContract
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:255'
+            'name' => 'required|min:2|max:191',
+            'slug' => 'nullable|max:191'
         ];
     }
 
