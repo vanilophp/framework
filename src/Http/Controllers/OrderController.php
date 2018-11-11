@@ -22,7 +22,7 @@ class OrderController extends BaseController
     public function index()
     {
         return view('vanilo::order.index', [
-            'orders' => OrderProxy::all()
+            'orders' => OrderProxy::orderBy('created_at', 'desc')->paginate(100)
         ]);
     }
 

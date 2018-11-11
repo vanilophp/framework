@@ -86,6 +86,13 @@
 
             </table>
 
+            @if($orders->hasPages())
+                <hr>
+                <nav>
+                    {{ $orders->links() }}
+                </nav>
+            @endif
+
         </div>
     </div>
 

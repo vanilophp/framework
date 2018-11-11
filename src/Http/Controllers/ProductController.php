@@ -29,7 +29,7 @@ class ProductController extends BaseController
     public function index()
     {
         return view('vanilo::product.index', [
-            'products' => ProductProxy::all()
+            'products' => ProductProxy::paginate(100)
         ]);
     }
 

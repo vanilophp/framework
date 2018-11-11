@@ -96,6 +96,13 @@
 
             </table>
 
+            @if($products->hasPages())
+                <hr>
+                <nav>
+                    {{ $products->links() }}
+                </nav>
+            @endif
+
         </div>
     </div>
 
