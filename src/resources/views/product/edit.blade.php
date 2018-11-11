@@ -5,51 +5,32 @@
 @stop
 
 @section('content')
+<div class="row">
 
-    <div class="row">
-
-        <div class="col-12 col-lg-8 col-xl-9">
-            <div class="card card-accent-secondary">
-                <div class="card-header">
-                    {{ __('Product Data') }}
-                </div>
-                <div class="card-block">
-
-                    <?php $formClass = $errors->isEmpty() ? '' : 'was-walidated'; ?>
-                    {!! Form::model($product, [
-                            'route'  => ['vanilo.product.update', $product],
-                            'method' => 'PUT',
-                            'class' => $formClass
-                            ]
-                    ) !!}
-
-                    @include('vanilo::product._form')
-
-                    <hr>
-                    <div class="form-group">
-                        <button class="btn btn-primary">{{ __('Save') }}</button>
-                        <a href="{{ route('vanilo.product.index') }}" class="btn btn-link text-muted">{{ __('Cancel') }}</a>
-                    </div>
-
-                    {!! Form::close() !!}
-                </div>
-                <div class="card-footer">
-                    @can('delete products')
-                        {!! Form::open(['route' => ['vanilo.product.destroy', $product], 'method' => 'DELETE']) !!}
-                        <button class="btn btn-outline-danger float-right">
-                            {{ __('Delete product') }}
-                        </button>
-                        {!! Form::close() !!}
-                    @endcan
-                </div>
+    <div class="col-12 col-lg-8 col-xl-9">
+        {!! Form::model($product, [
+                'route'  => ['vanilo.product.update', $product],
+                'method' => 'PUT'
+            ])
+        !!}
+        <div class="card card-accent-secondary">
+            <div class="card-header">
+                {{ __('Product Data') }}
+            </div>
+            <div class="card-block">
+                @include('vanilo::product._form')
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary">{{ __('Save') }}</button>
+                <a href="#" onclick="history.back();" class="btn btn-link text-muted">{{ __('Cancel') }}</a>
             </div>
         </div>
-
-        <div class="col-12 col-lg-4 col-xl-3">
-            @include('vanilo::product._edit_images')
-        </div>
-
+        {!! Form::close() !!}
     </div>
 
+    <div class="col-12 col-lg-4 col-xl-3">
+        @include('vanilo::product._edit_images')
+    </div>
 
+</div>
 @stop

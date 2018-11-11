@@ -14,16 +14,11 @@
                     {{ __('Product Details') }}
                 </div>
                 <div class="card-block">
-
-
-
                     @include('vanilo::product._form')
-
-                    <hr>
-                    <div class="form-group">
-                        <button class="btn btn-success">{{ __('Create product') }}</button>
-                        <a href="{{ route('vanilo.product.index') }}" class="btn btn-link text-muted">{{ __('Cancel') }}</a>
-                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success">{{ __('Create product') }}</button>
+                    <a href="#" onclick="history.back();" class="btn btn-link text-muted">{{ __('Cancel') }}</a>
                 </div>
             </div>
         </div>
