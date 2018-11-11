@@ -8,6 +8,7 @@ return [
         Vanilo\Checkout\Providers\ModuleServiceProvider::class  => [],
         Vanilo\Order\Providers\ModuleServiceProvider::class     => []
     ],
+    'event_listeners' => true,
     'views' => [
         'namespace' => 'vanilo'
     ],
