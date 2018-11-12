@@ -9,9 +9,9 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Tests\Mocks;
 
+use Carbon\Carbon;
 use Vanilo\Contracts\Buyable;
 
 class Product implements Buyable
@@ -83,5 +83,15 @@ class Product implements Buyable
     public function morphTypeName(): string
     {
         return 'product';
+    }
+
+    public function addSale(Carbon $date, $units = 1)
+    {
+        // not implemented here
+    }
+
+    public function removeSale($units = 1)
+    {
+        // not implemented here
     }
 }
