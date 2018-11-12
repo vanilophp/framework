@@ -2,10 +2,11 @@
 
 ## 0.4 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.4.0
+##### 2018-11-12
 
 - Laravel 5.7 compatible
+- Tested with PHP 7.3
 - Removed vanilo/address dependency
 - New events: `OrderWasCancelled` and `OrderWasCompleted`
 
