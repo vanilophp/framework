@@ -2,8 +2,8 @@
 
 ## 0.4 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.4.0
+##### 2018-11-12
 
 - Added Product Category Support
 - Laravel 5.7 Compatibility
