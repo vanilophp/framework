@@ -59,4 +59,3 @@ Breadcrumbs::register('vanilo.order.show', function ($breadcrumbs, $order) {
     $breadcrumbs->parent('vanilo.order.index');
     $breadcrumbs->push($order->getNumber(), route('vanilo.order.show', $order));
 });
-

@@ -9,7 +9,7 @@ return [
         Vanilo\Order\Providers\ModuleServiceProvider::class     => []
     ],
     'event_listeners' => true,
-    'views' => [
+    'views'           => [
         'namespace' => 'vanilo'
     ],
     'routes' => [
