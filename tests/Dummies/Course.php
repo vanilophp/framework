@@ -9,9 +9,9 @@
  *
  */
 
-
 namespace Vanilo\Cart\Tests\Dummies;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\BuyableNoImage;
@@ -40,5 +40,15 @@ class Course extends Model implements Buyable
     public function morphTypeName(): string
     {
         return static::class;
+    }
+
+    public function addSale(Carbon $date, $units = 1)
+    {
+        //
+    }
+
+    public function removeSale($units = 1)
+    {
+        //
     }
 }

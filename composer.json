@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "phpunit/phpunit": "6.2 - 7.3",
+        "phpunit/phpunit": "6.2 - 7.4",
         "orchestra/testbench": "^3.4.2"
     },
     "autoload": {
