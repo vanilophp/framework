@@ -2,6 +2,11 @@
 
 ## 0.4 Series
 
+### 0.4.1
+##### 2018-11-15
+
+- Product image upload validation has been improved
+
 ### 0.4.0
 ##### 2018-11-12
 
