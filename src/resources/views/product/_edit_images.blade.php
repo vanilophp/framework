@@ -1,8 +1,11 @@
     <div class="card card-accent-secondary">
-        <div class="card-header">{{ __('Images') }} <span
-                    class="badge badge-pill badge-info">{{ $product->getMedia()->count() }}</span>
+        <div class="card-header">{{ __('Images') }}
+            <span class="badge badge-pill badge-info">{{ $product->getMedia()->count() }}</span>
         </div>
         <div class="card-block">
+            @if($errors->has('images'))
+                <div class="alert alert-danger">{{ $errors->first('images') }}</div>
+            @endif
             @foreach($product->getMedia() as $media)
                 <div class="card">
                     <div class="card-body p-0 d-flex align-items-center">
@@ -38,7 +41,7 @@
                 {!! Form::open(['route' => 'vanilo.media.store', 'enctype'=>'multipart/form-data', 'class' => 'card']) !!}
                     <div class="card-body p-0 d-flex align-items-center">
                         <div class="w-75 p-2">
-                            {{ Form::hidden('forType', 'product') }}
+                            {{ Form::hidden('for', 'product') }}
                             {{ Form::hidden('forId', $product->id) }}
 
                             {{ Form::file('images[]', ['multiple', 'class' => 'form-control-file']) }}

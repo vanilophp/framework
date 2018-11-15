@@ -17,6 +17,7 @@ use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
+use Vanilo\Framework\Http\Requests\CreateMedia;
 use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
 use Vanilo\Framework\Http\Requests\SyncModelTaxons;
@@ -51,7 +52,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         CreateTaxon::class,
         UpdateTaxon::class,
         CreateTaxonForm::class,
-        SyncModelTaxons::class
+        SyncModelTaxons::class,
+        CreateMedia::class
     ];
 
     public function register()
