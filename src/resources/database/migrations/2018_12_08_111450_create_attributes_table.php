@@ -15,6 +15,8 @@ class CreateAttributesTable extends Migration
             $table->json('configuration')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->unique('slug');
         });
     }
 

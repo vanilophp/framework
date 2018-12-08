@@ -11,9 +11,10 @@
 
 namespace Vanilo\Attributes\Tests;
 
-use Vanilo\Attributes\Providers\ModuleServiceProvider as AttributesModule;
+use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vanilo\Attributes\Providers\ModuleServiceProvider as AttributesModule;
 
 abstract class TestCase extends Orchestra
 {
@@ -32,7 +33,8 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ConcordServiceProvider::class
+            ConcordServiceProvider::class,
+            SluggableServiceProvider::class
         ];
     }
 

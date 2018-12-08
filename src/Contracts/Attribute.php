@@ -13,4 +13,5 @@ namespace Vanilo\Attributes\Contracts;
 
 interface Attribute
 {
+    public function getType(): AttributeType;
 }

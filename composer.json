@@ -15,7 +15,8 @@
     ],
     "require": {
         "php": "^7.1.3",
-        "konekt/concord": "~1.1"
+        "konekt/concord": "~1.1",
+        "cviebrock/eloquent-sluggable": "~4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "6.2 - 7.4",
