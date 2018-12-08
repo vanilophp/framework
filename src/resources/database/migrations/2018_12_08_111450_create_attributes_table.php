@@ -12,7 +12,7 @@ class CreateAttributesTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('slug')->nullable();
-            $table->json('configuration');
+            $table->json('configuration')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
