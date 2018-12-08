@@ -21,6 +21,7 @@ class Product extends Model
 
     public function attributeValues(): MorphToMany
     {
-        return $this->morphToMany(AttributeValueProxy::modelClass(), 'model', 'model_attribute_values', 'model_id', 'attribute_value_id');
+        return $this->morphToMany(AttributeValueProxy::modelClass(), 'model',
+            'model_attribute_values', 'model_id', 'attribute_value_id');
     }
 }
