@@ -23,14 +23,14 @@ class AttributeValueTest extends TestCase
 
         $value1 = AttributeValue::create([
             'attribute_id' => $attribute->id,
-            'value' => 1,
-            'title' => '1'
+            'value'        => 1,
+            'title'        => '1'
         ]);
 
         $value2 = AttributeValue::create([
             'attribute_id' => $attribute->id,
-            'value' => 2,
-            'title' => '2'
+            'value'        => 2,
+            'title'        => '2'
         ]);
 
         $this->assertEquals('1', $value1->value);
@@ -44,8 +44,8 @@ class AttributeValueTest extends TestCase
 
         $value3007 = AttributeValue::create([
             'attribute_id' => $attribute->id,
-            'value' => 3007,
-            'title' => '3007'
+            'value'        => 3007,
+            'title'        => '3007'
         ]);
 
         $this->assertEquals(3007, $value3007->getValue());
@@ -59,20 +59,20 @@ class AttributeValueTest extends TestCase
 
         $valueTrue = AttributeValue::create([
             'attribute_id' => $attribute->id,
-            'value' => true,
-            'title' => 'Yes'
+            'value'        => true,
+            'title'        => 'Yes'
         ]);
 
         $valueFalse = AttributeValue::create([
             'attribute_id' => $attribute->id,
-            'value' => false,
-            'title' => 'No'
+            'value'        => false,
+            'title'        => 'No'
         ]);
 
         $valueZero = AttributeValue::create([
             'attribute_id' => $attribute->id,
-            'value' => 0,
-            'title' => 'No'
+            'value'        => 0,
+            'title'        => 'No'
         ]);
 
         $this->assertEquals(true, $valueTrue->getValue());
@@ -92,11 +92,26 @@ class AttributeValueTest extends TestCase
 
         $value11point27 = AttributeValue::create([
             'attribute_id' => $attribute->id,
-            'value' => 11.27,
-            'title' => '11.27'
+            'value'        => 11.27,
+            'title'        => '11.27'
         ]);
 
         $this->assertEquals(11.27, $value11point27->getValue());
         $this->assertInternalType('double', $value11point27->getValue());
+    }
+
+    /** @test */
+    public function the_settings_field_is_an_array()
+    {
+        $attribute = Attribute::create(['name' => 'E', 'type' => 'text']);
+
+        $valueX = AttributeValue::create([
+            'attribute_id' => $attribute->id,
+            'value'        => 'x',
+            'title'        => 'X',
+            'settings'     => ['x' => 123, 'y' => 456]
+        ]);
+
+        $this->assertEquals(['x' => 123, 'y' => 456], $valueX->settings);
     }
 }

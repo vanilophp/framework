@@ -29,6 +29,10 @@ class AttributeValue extends Model implements AttributeValueContract
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'settings' => 'array'
+    ];
+
     public function attribute(): BelongsTo
     {
         return $this->belongsTo(AttributeProxy::modelClass());
