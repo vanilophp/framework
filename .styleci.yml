@@ -1,0 +1,6 @@
+preset: psr2
+
+enabled:
+  - align_phpdoc
+  - align_double_arrow
+  - align_equals
