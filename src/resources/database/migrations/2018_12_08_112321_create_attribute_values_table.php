@@ -13,7 +13,7 @@ class CreateAttributeValuesTable extends Migration
             $table->string('value');
             $table->string('title');
             $table->integer('priority')->nullable();
-            $table->json('settings');
+            $table->json('settings')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

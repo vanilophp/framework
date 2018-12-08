@@ -19,4 +19,9 @@ class Boolean implements AttributeType
     {
         return __('Boolean attribute');
     }
+
+    public function transformValue(string $value, ?array $settings)
+    {
+        return (bool) $value;
+    }
 }

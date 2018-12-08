@@ -19,4 +19,9 @@ class Text implements AttributeType
     {
         return __('Text attribute');
     }
+
+    public function transformValue(string $value, ?array $settings)
+    {
+        return $value;
+    }
 }

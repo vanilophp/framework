@@ -19,4 +19,9 @@ class Number implements AttributeType
     {
         return __('Number attribute');
     }
+
+    public function transformValue(string $value, ?array $settings)
+    {
+        return (float) $value;
+    }
 }

@@ -14,4 +14,6 @@ namespace Vanilo\Attributes\Contracts;
 interface AttributeType
 {
     public function getName(): string;
+
+    public function transformValue(string $value, ?array $settings);
 }

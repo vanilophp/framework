@@ -43,7 +43,7 @@ class Attribute extends Model implements AttributeContract
 
         if (!$class) {
             throw new UnknownAttributeTypeException(
-                sprintf('Unkown attribute type `%s`', $this->type)
+                sprintf('Unknown attribute type `%s`', $this->type)
             );
         }
 

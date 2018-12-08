@@ -19,4 +19,9 @@ class Integer implements AttributeType
     {
         return __('Integer attribute');
     }
+
+    public function transformValue(string $value, ?array $settings)
+    {
+        return (int) $value;
+    }
 }

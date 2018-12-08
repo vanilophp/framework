@@ -19,4 +19,9 @@ class MaterialAttributeType implements AttributeType
     {
         return 'material';
     }
+
+    public function transformValue(string $value, ?array $settings)
+    {
+        return $value;
+    }
 }
