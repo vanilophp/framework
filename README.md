@@ -1,8 +1,8 @@
 # Vanilo Properties Module
 
-[![Travis](https://img.shields.io/travis/vanilophp/attributes.svg?style=flat-square)](https://travis-ci.org/vanilophp/attributes)
-[![Packagist version](https://img.shields.io/packagist/v/vanilo/attributes.svg?style=flat-square)](https://packagist.org/packages/vanilo/attributes)
-[![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/attributes.svg?style=flat-square)](https://packagist.org/packages/vanilo/attributes)
+[![Travis](https://img.shields.io/travis/vanilophp/properties.svg?style=flat-square)](https://travis-ci.org/vanilophp/properties)
+[![Packagist version](https://img.shields.io/packagist/v/vanilo/properties.svg?style=flat-square)](https://packagist.org/packages/vanilo/properties)
+[![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/properties.svg?style=flat-square)](https://packagist.org/packages/vanilo/properties)
 [![StyleCI](https://styleci.io/repos/160932929/shield?branch=master)](https://styleci.io/repos/160932929)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
