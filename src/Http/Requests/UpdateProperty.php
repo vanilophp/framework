@@ -16,7 +16,6 @@ use Illuminate\Validation\Rule;
 use Vanilo\Framework\Contracts\Requests\UpdateProperty as UpdatePropertyContract;
 use Vanilo\Properties\PropertyTypes;
 
-
 class UpdateProperty extends FormRequest implements UpdatePropertyContract
 {
     /**

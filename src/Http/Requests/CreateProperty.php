@@ -16,7 +16,6 @@ use Illuminate\Validation\Rule;
 use Vanilo\Framework\Contracts\Requests\CreateProperty as CreatePropertyContract;
 use Vanilo\Properties\PropertyTypes;
 
-
 class CreateProperty extends FormRequest implements CreatePropertyContract
 {
     /**
