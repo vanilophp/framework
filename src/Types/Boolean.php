@@ -9,15 +9,15 @@
  *
  */
 
-namespace Vanilo\Attributes\Types;
+namespace Vanilo\Properties\Types;
 
-use Vanilo\Attributes\Contracts\AttributeType;
+use Vanilo\Properties\Contracts\PropertyType;
 
-class Boolean implements AttributeType
+class Boolean implements PropertyType
 {
     public function getName(): string
     {
-        return __('Boolean attribute');
+        return __('Boolean property');
     }
 
     public function transformValue(string $value, ?array $settings)

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'name'    => 'Vanilo Attributes Module',
+    'name'    => 'Vanilo Properties Module',
     'version' => '0.5-dev'
 ];

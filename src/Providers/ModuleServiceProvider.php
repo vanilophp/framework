@@ -9,16 +9,16 @@
  *
  */
 
-namespace Vanilo\Attributes\Providers;
+namespace Vanilo\Properties\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
-use Vanilo\Attributes\Models\Attribute;
-use Vanilo\Attributes\Models\AttributeValue;
+use Vanilo\Properties\Models\Property;
+use Vanilo\Properties\Models\PropertyValue;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-        Attribute::class,
-        AttributeValue::class
+        Property::class,
+        PropertyValue::class
     ];
 }

@@ -9,19 +9,19 @@
  *
  */
 
-namespace Vanilo\Attributes\Tests\Examples;
+namespace Vanilo\Properties\Tests\Examples;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Vanilo\Attributes\Models\AttributeValueProxy;
+use Vanilo\Properties\Models\PropertyValueProxy;
 
 class Product extends Model
 {
     protected $guarded = ['id'];
 
-    public function attributeValues(): MorphToMany
+    public function propertyValues(): MorphToMany
     {
-        return $this->morphToMany(AttributeValueProxy::modelClass(), 'model',
-            'model_attribute_values', 'model_id', 'attribute_value_id');
+        return $this->morphToMany(PropertyValueProxy::modelClass(), 'model',
+            'model_property_values', 'model_id', 'property_value_id');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the MaterialAttributeType class.
+ * Contains the MaterialPropertyType class.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,11 +9,11 @@
  *
  */
 
-namespace Vanilo\Attributes\Tests\Examples;
+namespace Vanilo\Properties\Tests\Examples;
 
-use Vanilo\Attributes\Contracts\AttributeType;
+use Vanilo\Properties\Contracts\PropertyType;
 
-class MaterialAttributeType implements AttributeType
+class MaterialPropertyType implements PropertyType
 {
     public function getName(): string
     {

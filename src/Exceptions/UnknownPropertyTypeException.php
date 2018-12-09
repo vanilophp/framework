@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UnknownAttributeTypeException class.
+ * Contains the UnknownPropertyTypeException class.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,10 +9,10 @@
  *
  */
 
-namespace Vanilo\Attributes\Exceptions;
+namespace Vanilo\Properties\Exceptions;
 
 use Exception;
 
-class UnknownAttributeTypeException extends Exception
+class UnknownPropertyTypeException extends Exception
 {
 }

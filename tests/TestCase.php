@@ -9,12 +9,12 @@
  *
  */
 
-namespace Vanilo\Attributes\Tests;
+namespace Vanilo\Properties\Tests;
 
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Vanilo\Attributes\Providers\ModuleServiceProvider as AttributesModule;
+use Vanilo\Properties\Providers\ModuleServiceProvider as PropertiesModule;
 
 abstract class TestCase extends Orchestra
 {
@@ -72,7 +72,7 @@ abstract class TestCase extends Orchestra
         parent::resolveApplicationConfiguration($app);
 
         $app['config']->set('concord.modules', [
-            AttributesModule::class
+            PropertiesModule::class
         ]);
     }
 }

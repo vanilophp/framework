@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the AttributeTypes class.
+ * Contains the PropertyTypes class.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,15 +9,15 @@
  *
  */
 
-namespace Vanilo\Attributes;
+namespace Vanilo\Properties;
 
-use Vanilo\Attributes\Contracts\AttributeType;
-use Vanilo\Attributes\Types\Boolean;
-use Vanilo\Attributes\Types\Integer;
-use Vanilo\Attributes\Types\Number;
-use Vanilo\Attributes\Types\Text;
+use Vanilo\Properties\Contracts\PropertyType;
+use Vanilo\Properties\Types\Boolean;
+use Vanilo\Properties\Types\Integer;
+use Vanilo\Properties\Types\Number;
+use Vanilo\Properties\Types\Text;
 
-class AttributeTypes
+class PropertyTypes
 {
     private const BUILT_IN_TYPES = [
         'text'    => Text::class,
@@ -34,13 +34,13 @@ class AttributeTypes
             return;
         }
 
-        if (!class_implements($class, AttributeType::class)) {
+        if (!class_implements($class, PropertyType::class)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'The class you are trying to register (%s) as attribute type, ' .
+                    'The class you are trying to register (%s) as property type, ' .
                     'must implement the %s interface.',
                     $class,
-                    AttributeType::class
+                    PropertyType::class
                 )
             );
         }

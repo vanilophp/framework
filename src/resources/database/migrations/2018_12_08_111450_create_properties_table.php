@@ -3,11 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributesTable extends Migration
+class CreatePropertiesTable extends Migration
 {
     public function up()
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('type');
@@ -22,6 +22,6 @@ class CreateAttributesTable extends Migration
 
     public function down()
     {
-        Schema::drop('attributes');
+        Schema::drop('properties');
     }
 }

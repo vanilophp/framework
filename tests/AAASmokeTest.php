@@ -9,7 +9,7 @@
  *
  */
 
-namespace Vanilo\Attributes\Tests;
+namespace Vanilo\Properties\Tests;
 
 class AAASmokeTest extends TestCase
 {

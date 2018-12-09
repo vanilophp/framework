@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the Attribute class.
+ * Contains the Property class.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,15 +9,15 @@
  *
  */
 
-namespace Vanilo\Attributes\Models;
+namespace Vanilo\Properties\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
-use Vanilo\Attributes\AttributeTypes;
-use Vanilo\Attributes\Contracts\Attribute as AttributeContract;
-use Vanilo\Attributes\Contracts\AttributeType;
-use Vanilo\Attributes\Exceptions\UnknownAttributeTypeException;
+use Vanilo\Properties\PropertyTypes;
+use Vanilo\Properties\Contracts\Property as PropertyContract;
+use Vanilo\Properties\Contracts\PropertyType;
+use Vanilo\Properties\Exceptions\UnknownPropertyTypeException;
 
 /**
  * @property string $name
@@ -25,11 +25,11 @@ use Vanilo\Attributes\Exceptions\UnknownAttributeTypeException;
  * @property string $type
  * @property array  $configuration
  */
-class Attribute extends Model implements AttributeContract
+class Property extends Model implements PropertyContract
 {
     use Sluggable, SluggableScopeHelpers;
 
-    protected $table = 'attributes';
+    protected $table = 'properties';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -37,13 +37,13 @@ class Attribute extends Model implements AttributeContract
         'configuration' => 'array'
     ];
 
-    public function getType(): AttributeType
+    public function getType(): PropertyType
     {
-        $class = AttributeTypes::getClass($this->type);
+        $class = PropertyTypes::getClass($this->type);
 
         if (!$class) {
-            throw new UnknownAttributeTypeException(
-                sprintf('Unknown attribute type `%s`', $this->type)
+            throw new UnknownPropertyTypeException(
+                sprintf('Unknown property type `%s`', $this->type)
             );
         }
 

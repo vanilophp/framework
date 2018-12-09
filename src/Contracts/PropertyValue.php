@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the AttributeValue interface.
+ * Contains the PropertyValue interface.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,8 +9,8 @@
  *
  */
 
-namespace Vanilo\Attributes\Contracts;
+namespace Vanilo\Properties\Contracts;
 
-interface AttributeValue
+interface PropertyValue
 {
 }

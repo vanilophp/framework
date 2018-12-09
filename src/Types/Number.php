@@ -9,15 +9,15 @@
  *
  */
 
-namespace Vanilo\Attributes\Types;
+namespace Vanilo\Properties\Types;
 
-use Vanilo\Attributes\Contracts\AttributeType;
+use Vanilo\Properties\Contracts\PropertyType;
 
-class Number implements AttributeType
+class Number implements PropertyType
 {
     public function getName(): string
     {
-        return __('Number attribute');
+        return __('Number property');
     }
 
     public function transformValue(string $value, ?array $settings)

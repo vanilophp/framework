@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the AttributeType interface.
+ * Contains the PropertyType interface.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,9 +9,9 @@
  *
  */
 
-namespace Vanilo\Attributes\Contracts;
+namespace Vanilo\Properties\Contracts;
 
-interface AttributeType
+interface PropertyType
 {
     public function getName(): string;
 

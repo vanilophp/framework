@@ -1,9 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
-use Vanilo\Attributes\Models\Attribute;
+use Vanilo\Properties\Models\Property;
 
-$factory->define(Attribute::class, function (Faker $faker) {
+$factory->define(Property::class, function (Faker $faker) {
     return [
         'name' => $faker->unique()->word,
         'type' => 'text'

@@ -1,11 +1,11 @@
 {
-    "name": "vanilo/attributes",
-    "description": "Vanilo Attributes Module",
+    "name": "vanilo/properties",
+    "description": "Vanilo Properties (Attributes) Module",
     "type": "library",
     "license": "MIT",
     "keywords": ["product", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
-        "source": "https://github.com/vanilophp/attributes"
+        "source": "https://github.com/vanilophp/properties"
     },
     "authors": [
         {
@@ -23,11 +23,11 @@
         "orchestra/testbench": "^3.4.2"
     },
     "autoload": {
-        "psr-4": { "Vanilo\\Attributes\\": "src/" }
+        "psr-4": { "Vanilo\\Properties\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vanilo\\Attributes\\Tests\\": "tests/"
+            "Vanilo\\Properties\\Tests\\": "tests/"
         }
     },
     "extra": {

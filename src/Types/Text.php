@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the Text attribute type class.
+ * Contains the Text property type class.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,15 +9,15 @@
  *
  */
 
-namespace Vanilo\Attributes\Types;
+namespace Vanilo\Properties\Types;
 
-use Vanilo\Attributes\Contracts\AttributeType;
+use Vanilo\Properties\Contracts\PropertyType;
 
-class Text implements AttributeType
+class Text implements PropertyType
 {
     public function getName(): string
     {
-        return __('Text attribute');
+        return __('Text property');
     }
 
     public function transformValue(string $value, ?array $settings)

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the AttributeProxy class.
+ * Contains the PropertyValueProxy class.
  *
  * @copyright   Copyright (c) 2018 Attila Fulop
  * @author      Attila Fulop
@@ -9,10 +9,10 @@
  *
  */
 
-namespace Vanilo\Attributes\Models;
+namespace Vanilo\Properties\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
 
-class AttributeProxy extends ModelProxy
+class PropertyValueProxy extends ModelProxy
 {
 }
