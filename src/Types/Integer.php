@@ -17,7 +17,7 @@ class Integer implements PropertyType
 {
     public function getName(): string
     {
-        return __('Integer property');
+        return __('Integer');
     }
 
     public function transformValue(string $value, ?array $settings)

@@ -17,7 +17,7 @@ class Text implements PropertyType
 {
     public function getName(): string
     {
-        return __('Text property');
+        return __('Text');
     }
 
     public function transformValue(string $value, ?array $settings)

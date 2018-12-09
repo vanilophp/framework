@@ -17,7 +17,7 @@ use Vanilo\Properties\Types\Integer;
 use Vanilo\Properties\Types\Number;
 use Vanilo\Properties\Types\Text;
 
-class PropertyTypes
+final class PropertyTypes
 {
     private const BUILT_IN_TYPES = [
         'text'    => Text::class,
@@ -62,5 +62,21 @@ class PropertyTypes
         }
 
         return null;
+    }
+
+    public static function values(): array
+    {
+        return array_keys(self::$registry);
+    }
+
+    public static function choices(): array
+    {
+        $result = [];
+
+        foreach (self::$registry as $type => $class) {
+            $result[$type] = (new $class())->getName();
+        }
+
+        return $result;
     }
 }

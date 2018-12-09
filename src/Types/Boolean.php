@@ -17,7 +17,7 @@ class Boolean implements PropertyType
 {
     public function getName(): string
     {
-        return __('Boolean property');
+        return __('Boolean');
     }
 
     public function transformValue(string $value, ?array $settings)

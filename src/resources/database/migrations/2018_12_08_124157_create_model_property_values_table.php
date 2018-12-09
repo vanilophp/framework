@@ -17,7 +17,7 @@ class CreateModelPropertyValuesTable extends Migration
                 ->on('property_values')
                 ->onDelete('cascade');
 
-            $table->primary(['property_value_id', 'model_id', 'model_type']);
+            $table->primary(['property_value_id', 'model_id', 'model_type'], 'pk_model_property_values');
         });
     }
 

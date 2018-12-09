@@ -17,7 +17,7 @@ class Number implements PropertyType
 {
     public function getName(): string
     {
-        return __('Number property');
+        return __('Number');
     }
 
     public function transformValue(string $value, ?array $settings)
