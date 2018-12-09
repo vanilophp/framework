@@ -28,6 +28,7 @@ class ModulesTest extends TestCase
         $this->assertTrue($modules->has('vanilo.checkout'), 'Checkout module is missing');
         $this->assertTrue($modules->has('vanilo.order'), 'Order module is missing');
         $this->assertTrue($modules->has('vanilo.product'), 'Product module is missing');
+        $this->assertTrue($modules->has('vanilo.properties'), 'Properties module is missing');
         $this->assertTrue($modules->has('vanilo.framework'), 'Framework module is missing');
     }
 }
