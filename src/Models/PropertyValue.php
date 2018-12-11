@@ -38,6 +38,16 @@ class PropertyValue extends Model implements PropertyValueContract
         return $this->belongsTo(PropertyProxy::modelClass());
     }
 
+    public function scopeSort($query)
+    {
+        return $query->orderBy('priority');
+    }
+
+    public function scopeSortReverse($query)
+    {
+        return $query->orderBy('priority', 'desc');
+    }
+
     /**
      * Returns the transformed value according to the underlying type
      */

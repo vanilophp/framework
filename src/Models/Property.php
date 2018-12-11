@@ -14,16 +14,19 @@ namespace Vanilo\Properties\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Vanilo\Properties\PropertyTypes;
 use Vanilo\Properties\Contracts\Property as PropertyContract;
 use Vanilo\Properties\Contracts\PropertyType;
 use Vanilo\Properties\Exceptions\UnknownPropertyTypeException;
 
 /**
- * @property string $name
- * @property string $slug
- * @property string $type
- * @property array  $configuration
+ * @property string     $name
+ * @property string     $slug
+ * @property string     $type
+ * @property array      $configuration
+ * @property Collection $propertyValues
  */
 class Property extends Model implements PropertyContract
 {
@@ -48,6 +51,16 @@ class Property extends Model implements PropertyContract
         }
 
         return new $class();
+    }
+
+    public function values(): Collection
+    {
+        return $this->propertyValues()->sort()->get();
+    }
+
+    public function propertyValues(): HasMany
+    {
+        return $this->hasMany(PropertyValueProxy::modelClass());
     }
 
     public function sluggable(): array
