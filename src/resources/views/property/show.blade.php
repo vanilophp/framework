@@ -7,9 +7,16 @@
 @section('content')
 
     <div class="card">
+        <div class="card-header">
+            @can('create propertyvalues')
+                <div class="card-footer">
+                    <a href="{{ route('vanilo.property_value.create', $property) }}"
+                       class="btn btn-outline-success btn-sm">{{ __('Add :property value', ['property' => $property->name]) }}</a>
+                </div>
+            @endcan
+        </div>
         <div class="card-block">
-            {{ __('Name') }}: {{ $property->name }}<br>
-            {{ __('Type') }}: {{ $property->getType()->getName() }}<br>
+            @include('vanilo::property-value._index', ['propertyValues' => $property->values()])
         </div>
     </div>
 

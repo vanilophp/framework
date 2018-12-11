@@ -19,6 +19,7 @@ use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Framework\Http\Requests\CreateMedia;
 use Vanilo\Framework\Http\Requests\CreateProperty;
+use Vanilo\Framework\Http\Requests\CreatePropertyValueForm;
 use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
 use Vanilo\Framework\Http\Requests\SyncModelTaxons;
@@ -57,7 +58,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         SyncModelTaxons::class,
         CreateMedia::class,
         CreateProperty::class,
-        UpdateProperty::class
+        UpdateProperty::class,
+        CreatePropertyValueForm::class
     ];
 
     public function register()
