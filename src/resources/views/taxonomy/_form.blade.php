@@ -20,7 +20,7 @@
 <div class="form-group">
     {{ Form::text('slug', null, [
             'class' => 'form-control form-control-sm' . ($errors->has('slug') ? ' is-invalid': ''),
-            'placeholder' => __('URL')
+            'placeholder' => __('URL (leave empty to auto-generate from name)')
         ])
     }}
     @if ($errors->has('slug'))

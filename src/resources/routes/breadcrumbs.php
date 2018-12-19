@@ -59,3 +59,33 @@ Breadcrumbs::register('vanilo.order.show', function ($breadcrumbs, $order) {
     $breadcrumbs->parent('vanilo.order.index');
     $breadcrumbs->push($order->getNumber(), route('vanilo.order.show', $order));
 });
+
+Breadcrumbs::register('vanilo.property.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(__('Properties'), route('vanilo.property.index'));
+});
+
+Breadcrumbs::register('vanilo.property.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('vanilo.property.index');
+    $breadcrumbs->push(__('Create'));
+});
+
+Breadcrumbs::register('vanilo.property.show', function ($breadcrumbs, $property) {
+    $breadcrumbs->parent('vanilo.property.index');
+    $breadcrumbs->push($property->name, route('vanilo.property.show', $property));
+});
+
+Breadcrumbs::register('vanilo.property.edit', function ($breadcrumbs, $property) {
+    $breadcrumbs->parent('vanilo.property.show', $property);
+    $breadcrumbs->push(__('Edit'), route('vanilo.property.edit', $property));
+});
+
+Breadcrumbs::register('vanilo.property_value.create', function ($breadcrumbs, $property) {
+    $breadcrumbs->parent('vanilo.property.show', $property);
+    $breadcrumbs->push(__('Create Value'));
+});
+
+Breadcrumbs::register('vanilo.property_value.edit', function ($breadcrumbs, $property, $propertyValue) {
+    $breadcrumbs->parent('vanilo.property.show', $property);
+    $breadcrumbs->push($propertyValue->title);
+});

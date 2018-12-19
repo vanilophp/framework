@@ -17,10 +17,11 @@
 </div>
 
 <div class="form-group row">
-    <label class="col-form-label col-md-2">{{ __('Value') }}</label>
+    <label class="col-form-label col-form-label-sm col-md-2">{{ __('Value') }}</label>
     <div class="col-md-10">
         {{ Form::text('value', null, [
-                'class' => 'form-control' . ($errors->has('value') ? ' is-invalid': '')
+                'class' => 'form-control form-control-sm' . ($errors->has('value') ? ' is-invalid': ''),
+                'placeholder' => __('Leave empty to auto generate from title')
            ])
         }}
         @if ($errors->has('value'))

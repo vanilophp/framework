@@ -19,11 +19,13 @@ use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Framework\Http\Requests\CreateMedia;
 use Vanilo\Framework\Http\Requests\CreateProperty;
+use Vanilo\Framework\Http\Requests\CreatePropertyValue;
 use Vanilo\Framework\Http\Requests\CreatePropertyValueForm;
 use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
 use Vanilo\Framework\Http\Requests\SyncModelTaxons;
 use Vanilo\Framework\Http\Requests\UpdateProperty;
+use Vanilo\Framework\Http\Requests\UpdatePropertyValue;
 use Vanilo\Framework\Http\Requests\UpdateTaxon;
 use Vanilo\Framework\Models\Address;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
@@ -59,7 +61,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         CreateMedia::class,
         CreateProperty::class,
         UpdateProperty::class,
-        CreatePropertyValueForm::class
+        CreatePropertyValueForm::class,
+        CreatePropertyValue::class,
+        UpdatePropertyValue::class
     ];
 
     public function register()
@@ -96,7 +100,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         if ($menu = Menu::get('appshell')) {
             $shop = $menu->addItem('shop', __('Shop'));
             $shop->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
-            $shop->addSubItem('product_properties', __('Product Properties'), ['route' => 'vanilo.property.index'])->data('icon', 'layers');
+            $shop->addSubItem('product_properties', __('Product Properties'), ['route' => 'vanilo.property.index'])->data('icon', 'format-list-bulleted');
             $shop->addSubItem('categories', __('Categorization'), ['route' => 'vanilo.taxonomy.index'])->data('icon', 'folder');
             $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])->data('icon', 'mall');
         }

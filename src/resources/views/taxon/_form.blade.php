@@ -20,7 +20,8 @@
     <label class="col-form-label col-md-2">{{ __('URL') }}</label>
     <div class="col-md-10">
         {{ Form::text('slug', null, [
-                'class' => 'form-control' . ($errors->has('slug') ? ' is-invalid': '')
+                'class' => 'form-control' . ($errors->has('slug') ? ' is-invalid': ''),
+                'placeholder' => __('Leave empty to auto generate from name')
            ])
         }}
         @if ($errors->has('slug'))

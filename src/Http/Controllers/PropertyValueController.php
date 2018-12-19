@@ -3,10 +3,13 @@
 namespace Vanilo\Framework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
+use Vanilo\Framework\Contracts\Requests\CreatePropertyValue;
 use Vanilo\Framework\Contracts\Requests\CreatePropertyValueForm;
+use Vanilo\Framework\Contracts\Requests\UpdatePropertyValue;
 use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyProxy;
+use Vanilo\Properties\Models\PropertyValueProxy;
 
 class PropertyValueController extends BaseController
 {
@@ -23,5 +26,68 @@ class PropertyValueController extends BaseController
             'properties'    => PropertyProxy::get()->pluck('name', 'id'),
             'propertyValue' => $propertyValue
         ]);
+    }
+
+    public function store(Property $property, CreatePropertyValue $request)
+    {
+        try {
+            $propertyValue = PropertyValueProxy::create(
+                array_merge(
+                    $request->all(),
+                    ['property_id' => $property->id]
+                )
+            );
+
+            flash()->success(__(':title :property has been created', [
+                'title'    => $propertyValue->title,
+                'property' => $property->name
+            ]));
+        } catch (\Exception $e) {
+            flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
+
+            return redirect()->back()->withInput();
+        }
+
+        return redirect(route('vanilo.property.show', $property));
+    }
+
+    public function edit(Property $property, PropertyValue $property_value)
+    {
+        return view('vanilo::property-value.edit', [
+            'property'      => $property,
+            'properties'    => PropertyProxy::get()->pluck('name', 'id'),
+            'propertyValue' => $property_value
+        ]);
+    }
+
+    public function update(Property $property, PropertyValue $property_value, UpdatePropertyValue $request)
+    {
+        try {
+            $property_value->update($request->all());
+
+            flash()->success(__(':title has been updated', ['title' => $property_value->title]));
+        } catch (\Exception $e) {
+            flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
+
+            return redirect()->back()->withInput();
+        }
+
+        return redirect(route('vanilo.property.show', $property));
+    }
+
+    public function destroy(Property $property, PropertyValue $property_value)
+    {
+        try {
+            $title = $property_value->title;
+            $property_value->delete();
+
+            flash()->warning(__(':title has been deleted', ['title' => $title]));
+        } catch (\Exception $e) {
+            flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
+
+            return redirect()->back();
+        }
+
+        return redirect(route('vanilo.property.show', $property));
     }
 }

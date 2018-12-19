@@ -26,6 +26,6 @@ Route::put('/taxonomy/{taxonomy}/sync', 'TaxonomyController@sync')->name('taxono
 
 Route::get('/property/{property}/value/create', 'PropertyValueController@create')->name('property_value.create');
 Route::post('/property/{property}/value', 'PropertyValueController@store')->name('property_value.store');
-Route::get('/property/{property}/value/{propertyValue}/edit', 'PropertyValueController@edit')->name('property_value.edit');
-Route::put('/property/{property}/value/{propertyValue}', 'PropertyValueController@update')->name('property_value.update');
-Route::delete('/property/{property}/value/{propertyValue}', 'PropertyValueController@destroy')->name('property_value.destroy');
+Route::get('/property/{property}/value/{property_value}/edit', 'PropertyValueController@edit')->name('property_value.edit');
+Route::put('/property/{property}/value/{property_value}', 'PropertyValueController@update')->name('property_value.update');
+Route::delete('/property/{property}/value/{property_value}', 'PropertyValueController@destroy')->name('property_value.destroy');

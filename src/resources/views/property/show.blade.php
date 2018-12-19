@@ -8,12 +8,7 @@
 
     <div class="card">
         <div class="card-header">
-            @can('create propertyvalues')
-                <div class="card-footer">
-                    <a href="{{ route('vanilo.property_value.create', $property) }}"
-                       class="btn btn-outline-success btn-sm">{{ __('Add :property value', ['property' => $property->name]) }}</a>
-                </div>
-            @endcan
+            <h5>{{ __(':name Values', ['name' => $property->name]) }}</h5>
         </div>
         <div class="card-block">
             @include('vanilo::property-value._index', ['propertyValues' => $property->values()])
