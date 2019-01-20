@@ -17,8 +17,7 @@ class AddSalesAttributesToProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('units_sold');
-            $table->dropColumn('last_sale_at');
+            $table->dropColumn(['units_sold', 'last_sale_at']);
         });
     }
 }
