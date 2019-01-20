@@ -60,6 +60,7 @@
 
         <div class="col-sm-6 col-md-9">
             @include('vanilo::product._show_categories')
+            @include('vanilo::product._show_properties')
         </div>
 
         <div class="col-sm-6 col-md-3">

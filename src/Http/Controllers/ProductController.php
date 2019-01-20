@@ -18,6 +18,7 @@ use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Framework\Contracts\Requests\CreateProduct;
 use Vanilo\Framework\Contracts\Requests\UpdateProduct;
+use Vanilo\Properties\Models\PropertyProxy;
 
 class ProductController extends BaseController
 {
@@ -100,8 +101,9 @@ class ProductController extends BaseController
     public function edit(Product $product)
     {
         return view('vanilo::product.edit', [
-            'product' => $product,
-            'states'  => ProductStateProxy::choices()
+            'product'    => $product,
+            'states'     => ProductStateProxy::choices(),
+            'properties' => PropertyProxy::all()
         ]);
     }
 

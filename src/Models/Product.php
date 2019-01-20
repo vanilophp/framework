@@ -19,6 +19,7 @@ use Spatie\MediaLibrary\Models\Media;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Properties\Models\PropertyValueProxy;
 use Vanilo\Support\Traits\BuyableImageSpatieV7;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Product\Models\Product as BaseProduct;
@@ -37,6 +38,13 @@ class Product extends BaseProduct implements Buyable, HasMedia
     {
         return $this->morphToMany(
             TaxonProxy::modelClass(), 'model', 'model_taxons', 'model_id', 'taxon_id'
+        );
+    }
+
+    public function propertyValues(): MorphToMany
+    {
+        return $this->morphToMany(PropertyValueProxy::modelClass(), 'model',
+            'model_property_values', 'model_id', 'property_value_id'
         );
     }
 
