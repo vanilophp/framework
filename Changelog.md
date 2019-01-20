@@ -2,6 +2,11 @@
 
 ## 0.4 Series
 
+### 0.4.2
+##### 2019-01-20
+
+- Improved SQLite compatibility in migrations (to fix certain testing scenarios)
+
 ### 0.4.1
 ##### 2018-11-15
 
