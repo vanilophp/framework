@@ -18,19 +18,6 @@
                             class="btn btn-outline-success btn-sm">{{ __('Manage') }}</button>
                 </td>
             </tr>
-            {{--@foreach($product->propertyValues as $propertyValue)--}}
-                {{--<tr>--}}
-                    {{--<td>{{ $propertyValue->property->name }}</td>--}}
-                    {{--<td>--}}
-                        {{--<span class="badge badge-pill badge-dark">{{ $propertyValue->title }}</span>--}}
-                    {{--</td>--}}
-                    {{--<td class="text-right">--}}
-                        {{--<button type="button" data-toggle="modal"--}}
-                                {{--data-target="#taxon-assign-to-model-{{$propertyValue->id}}"--}}
-                                {{--class="btn btn-outline-success btn-sm">{{ __('Manage') }}</button>--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
-            {{--@endforeach--}}
         </table>
     </div>
 </div>

@@ -24,10 +24,8 @@
                     <tr v-for="(assignedProperty, id) in assignedProperties" :id="id">
                         <th>@{{ assignedProperty.property.name }}</th>
                         <td>
-                            <select name="propertyValues[]" :value="assignedProperty.id">
-                                <option v-for="value in assignedProperty.values" :value="value.id">
-                                    @{{ value.title }}
-                                </option>
+                            <select name="propertyValues[]" v-model="assignedProperty.value">
+                                <option v-for="value in assignedProperty.values" :value="value.id" v-html="value.title"></option>
                             </select>
                         </td>
                         <td>
