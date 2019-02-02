@@ -1,8 +1,7 @@
 <div id="properties-assign-to-model-modal" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="properties-assign-to-model-modal-title" aria-hidden="true">
 
-
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             {!! Form::open([
                     'url'  => route('vanilo.property_value.sync', [$for, $forId]),
@@ -24,8 +23,10 @@
                     <tr v-for="(assignedProperty, id) in assignedProperties" :id="id">
                         <th>@{{ assignedProperty.property.name }}</th>
                         <td>
-                            <select name="propertyValues[]" v-model="assignedProperty.value">
+                            <select name="propertyValues[]" v-model="assignedProperty.value" @change="onPropertyValueChange($event, id)">
                                 <option v-for="value in assignedProperty.values" :value="value.id" v-html="value.title"></option>
+                                <optgroup label="{{ __('Missing value?') }}"></optgroup>
+                                <option value="+">[+] {{ __('Add value') }}</option>
                             </select>
                         </td>
                         <td>
@@ -53,6 +54,8 @@
         </div>
     </div>
 </div>
+
+@include('vanilo::property-value.assign._create_property_value')
 
 @section('scripts')
 @parent()
@@ -118,6 +121,15 @@
                     this.unassignedProperties[propertyId] = property;
                     Vue.delete(this.assignedProperties, propertyId)
                 }
+            },
+            onPropertyValueChange(event, propertyId) {
+                var selected = this.assignedProperties[propertyId].value;
+                if ('+' !== selected) {
+                    return;
+                }
+
+                $('#create-property-value').modal('show');
+                $('select[name="property_id"]').val(propertyId);
             }
         }
     });
