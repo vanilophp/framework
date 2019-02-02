@@ -23,6 +23,5 @@ interface SyncModelTaxons extends BaseRequest
      */
     public function getFor();
 
-
     public function getTaxonIds(): array;
 }

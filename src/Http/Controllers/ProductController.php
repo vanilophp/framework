@@ -89,7 +89,8 @@ class ProductController extends BaseController
     {
         return view('vanilo::product.show', [
             'product'    => $product,
-            'taxonomies' => TaxonomyProxy::all()
+            'taxonomies' => TaxonomyProxy::all(),
+            'properties' => PropertyProxy::all()
         ]);
     }
 
@@ -102,8 +103,7 @@ class ProductController extends BaseController
     {
         return view('vanilo::product.edit', [
             'product'    => $product,
-            'states'     => ProductStateProxy::choices(),
-            'properties' => PropertyProxy::all()
+            'states'     => ProductStateProxy::choices()
         ]);
     }
 
@@ -117,7 +117,6 @@ class ProductController extends BaseController
      */
     public function update(Product $product, UpdateProduct $request)
     {
-        dd($request);
         try {
             $product->update($request->all());
 

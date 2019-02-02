@@ -1,13 +1,26 @@
-    <div class="card card-accent-secondary">
-        <div class="card-header">{{ __('Properties') }}
-            <span class="badge badge-pill badge-info">{{ $product->propertyValues->count() }}</span>
-        </div>
-        <div class="card-block">
-            @if($errors->has('properties'))
-                <div class="alert alert-danger">{{ $errors->first('properties') }}</div>
-            @endif
-            <table class="table table-condensed table-striped" id="product-properties-table">
-                <tbody>
+<div id="properties-assign-to-model-modal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="properties-assign-to-model-modal-title" aria-hidden="true">
+
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            {!! Form::open([
+                    'url'  => route('vanilo.property_value.sync', [$for, $forId]),
+                    'method' => 'PUT'
+                ])
+            !!}
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="properties-assign-to-model-modal">{{ __('Assign properties') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <table class="table table-condensed table-striped">
+                    <tbody>
                     <tr v-for="(assignedProperty, id) in assignedProperties" :id="id">
                         <th>@{{ assignedProperty.property.name }}</th>
                         <td>
@@ -21,30 +34,37 @@
                             <i class="zmdi zmdi-close text-danger" style="cursor: pointer" @click="removePropertyValue(id)"></i>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            <select id="product-property-add-select" v-model="selected">
-                <option v-for="(unassignedProperty, id) in unassignedProperties" :value="id">
-                    @{{ unassignedProperty.property.name }}
-                </option>
-            </select>
-                <button class="btn btn-secondary btn-sm"
-                        type="button"
-                        :disabled="selected == ''"
-                        @click="addSelectedPropertyValue">{{ __('Add property') }}</button>
+                <select v-model="selected">
+                    <option v-for="(unassignedProperty, id) in unassignedProperties" :value="id">
+                        @{{ unassignedProperty.property.name }}
+                    </option>
+                </select>
+                <button class="btn btn-secondary btn-sm" type="button" :disabled="selected == ''"
+                        @click="addSelectedPropertyValue">
+                    {{ __('Add property') }}
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('Close') }}</button>
+                <button class="btn btn-primary">{{ __('Save properties') }}</button>
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
+</div>
 
 @section('scripts')
 @parent()
 <script>
     new Vue({
-        el: '#app',
+        el: '#properties-assign-to-model-modal',
         data: {
             selected: '',
             assignedProperties: {
-                @foreach($product->propertyValues as $propertyValue)
+                @foreach($assignments as $propertyValue)
                 "{{ $propertyValue->property->id }}": {
                     "value": "{{ $propertyValue->id }}",
                     "property": {
@@ -63,7 +83,7 @@
                 @endforeach
             },
             unassignedProperties: {
-                @foreach($properties->keyBy('id')->except($product->propertyValues->map(function ($propertyValue) {
+                @foreach($properties->keyBy('id')->except($assignments->map(function ($propertyValue) {
                         return $propertyValue->property->id;
                 })->all()) as $unassignedProperty)
                 "{{ $unassignedProperty->id }}": {

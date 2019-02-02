@@ -1,11 +1,11 @@
 <?php
 /**
- * Contains the SyncModelTaxons request class.
+ * Contains the SyncModelPropertyValues class.
  *
- * @copyright   Copyright (c) 2018 Attila Fulop
+ * @copyright   Copyright (c) 2019 Attila Fulop
  * @author      Attila Fulop
  * @license     MIT
- * @since       2018-11-10
+ * @since       2019-02-02
  *
  */
 
@@ -13,9 +13,9 @@ namespace Vanilo\Framework\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Konekt\AppShell\Http\Requests\HasFor;
-use Vanilo\Framework\Contracts\Requests\SyncModelTaxons as SyncModelTaxonsContract;
+use Vanilo\Framework\Contracts\Requests\SyncModelPropertyValues as SyncModelPropertyValuesContract;
 
-class SyncModelTaxons extends FormRequest implements SyncModelTaxonsContract
+class SyncModelPropertyValues extends FormRequest implements SyncModelPropertyValuesContract
 {
     use HasFor;
 
@@ -27,15 +27,13 @@ class SyncModelTaxons extends FormRequest implements SyncModelTaxonsContract
     public function rules()
     {
         return array_merge($this->getForRules(), [
-            'taxons' => 'sometimes|array'
+            'propertyValues' => 'sometimes|array'
         ]);
     }
 
-    public function getTaxonIds(): array
+    public function getPropertyValueIds(): array
     {
-        $taxons = $this->get('taxons') ?: [];
-
-        return array_keys($taxons);
+        return $this->get('propertyValues') ?: [];
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Vanilo\Framework\Http\Controllers;
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Framework\Contracts\Requests\CreatePropertyValue;
 use Vanilo\Framework\Contracts\Requests\CreatePropertyValueForm;
+use Vanilo\Framework\Contracts\Requests\SyncModelPropertyValues;
 use Vanilo\Framework\Contracts\Requests\UpdatePropertyValue;
 use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
@@ -89,5 +90,13 @@ class PropertyValueController extends BaseController
         }
 
         return redirect(route('vanilo.property.show', $property));
+    }
+
+    public function sync(SyncModelPropertyValues $request, $for, $forId)
+    {
+        $model = $request->getFor();
+        $model->propertyValues()->sync($request->getPropertyValueIds());
+
+        return redirect(route(sprintf('vanilo.%s.show', shorten(get_class($model))), $model));
     }
 }

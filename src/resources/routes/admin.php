@@ -29,3 +29,4 @@ Route::post('/property/{property}/value', 'PropertyValueController@store')->name
 Route::get('/property/{property}/value/{property_value}/edit', 'PropertyValueController@edit')->name('property_value.edit');
 Route::put('/property/{property}/value/{property_value}', 'PropertyValueController@update')->name('property_value.update');
 Route::delete('/property/{property}/value/{property_value}', 'PropertyValueController@destroy')->name('property_value.destroy');
+Route::put('/property/sync/{for}/{forId}', 'PropertyValueController@sync')->name('property_value.sync');

@@ -23,6 +23,7 @@ use Vanilo\Framework\Http\Requests\CreatePropertyValue;
 use Vanilo\Framework\Http\Requests\CreatePropertyValueForm;
 use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
+use Vanilo\Framework\Http\Requests\SyncModelPropertyValues;
 use Vanilo\Framework\Http\Requests\SyncModelTaxons;
 use Vanilo\Framework\Http\Requests\UpdateProperty;
 use Vanilo\Framework\Http\Requests\UpdatePropertyValue;
@@ -63,7 +64,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         UpdateProperty::class,
         CreatePropertyValueForm::class,
         CreatePropertyValue::class,
-        UpdatePropertyValue::class
+        UpdatePropertyValue::class,
+        SyncModelPropertyValues::class
     ];
 
     public function register()

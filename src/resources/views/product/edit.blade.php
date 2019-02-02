@@ -21,8 +21,6 @@
                 @include('vanilo::product._form')
             </div>
 
-            @include('vanilo::product._edit_properties')
-
             <div class="card-footer">
                 <button class="btn btn-primary">{{ __('Save') }}</button>
                 <a href="#" onclick="history.back();" class="btn btn-link text-muted">{{ __('Cancel') }}</a>
