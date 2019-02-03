@@ -13,7 +13,9 @@ namespace Vanilo\Framework\Search;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
+use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Product\Models\ProductProxy;
+use Vanilo\Properties\Contracts\PropertyValue;
 
 class ProductFinder
 {
@@ -24,11 +26,55 @@ class ProductFinder
     {
         $this->queryBuilder = ProductProxy::query();
     }
+
+    public function withinTaxon(Taxon $taxon): self
+    {
+        $this->queryBuilder->whereHas('taxons', function ($query) use ($taxon) {
+            $query->where('id', $taxon->id);
+        });
+
+        return $this;
+    }
+
+    public function orWithinTaxon(Taxon $taxon): self
+    {
+        $this->queryBuilder->orWhereHas('taxons', function ($query) use ($taxon) {
+            $query->where('id', $taxon->id);
+        });
+
+        return $this;
+    }
+
     public function withinTaxons(array $taxons): self
     {
+        $taxonIds = collect($taxons)->pluck('id');
+
+        $this->queryBuilder->whereHas('taxons', function ($query) use ($taxonIds) {
+            $query->whereIn('id', $taxonIds);
+        });
+
+        return $this;
+    }
+
+    public function orWithinTaxons(array $taxons): self
+    {
+        $taxonIds = collect($taxons)->pluck('id');
+
+        $this->queryBuilder->orWhereHas('taxons', function ($query) use ($taxonIds) {
+            $query->whereIn('id', $taxonIds);
+        });
+
+        return $this;
     }
 
     public function nameContains(string $term): self
+    {
+        $this->queryBuilder->where('name', 'like', "%$term%");
+
+        return $this;
+    }
+
+    public function orNameContains(string $term): self
     {
         $this->queryBuilder->orWhere('name', 'like', "%$term%");
 
@@ -37,6 +83,13 @@ class ProductFinder
 
     public function nameStartsWith(string $term): self
     {
+        $this->queryBuilder->where('name', 'like', "$term%");
+
+        return $this;
+    }
+
+    public function orNameStartsWith(string $term): self
+    {
         $this->queryBuilder->orWhere('name', 'like', "$term%");
 
         return $this;
@@ -44,13 +97,56 @@ class ProductFinder
 
     public function nameEndsWith(string $term): self
     {
+        $this->queryBuilder->where('name', 'like', "%$term");
+
+        return $this;
+    }
+
+    public function orNameEndsWith(string $term): self
+    {
         $this->queryBuilder->orWhere('name', 'like', "%$term");
+
+        return $this;
+    }
+
+    public function havingPropertyValue(PropertyValue $propertyValue): self
+    {
+        $this->queryBuilder->whereHas('propertyValues', function ($query) use ($propertyValue) {
+            $query->where('id', $propertyValue->id);
+        });
+
+        return $this;
+    }
+
+    public function orHavingPropertyValue(PropertyValue $propertyValue): self
+    {
+        $this->queryBuilder->orWhereHas('propertyValues', function ($query) use ($propertyValue) {
+            $query->where('id', $propertyValue->id);
+        });
 
         return $this;
     }
 
     public function havingPropertyValues(array $propertyValues): self
     {
+        $propertyValueIds = collect($propertyValues)->pluck('id');
+
+        $this->queryBuilder->whereHas('propertyValues', function ($query) use ($propertyValueIds) {
+            $query->whereIn('id', $propertyValueIds);
+        });
+
+        return $this;
+    }
+
+    public function orHavingPropertyValues(array $propertyValues): self
+    {
+        $propertyValueIds = collect($propertyValues)->pluck('id');
+
+        $this->queryBuilder->orWhereHas('propertyValues', function ($query) use ($propertyValueIds) {
+            $query->whereIn('id', $propertyValueIds);
+        });
+
+        return $this;
     }
 
     public function getResults(): Collection

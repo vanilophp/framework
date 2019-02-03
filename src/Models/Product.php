@@ -19,6 +19,7 @@ use Spatie\MediaLibrary\Models\Media;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyValueProxy;
 use Vanilo\Support\Traits\BuyableImageSpatieV7;
 use Vanilo\Support\Traits\BuyableModel;
@@ -72,6 +73,11 @@ class Product extends BaseProduct implements Buyable, HasMedia
     public function removeTaxon(Taxon $taxon)
     {
         return $this->taxons()->detach($taxon);
+    }
+
+    public function addPropertyValue(PropertyValue $propertyValue): void
+    {
+        $this->propertyValues()->attach($propertyValue);
     }
 
     public function registerMediaConversions(Media $media = null)

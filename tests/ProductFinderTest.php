@@ -11,8 +11,10 @@
 
 namespace Vanilo\Framework\Tests;
 
+use Vanilo\Framework\Models\Taxon;
 use Vanilo\Framework\Search\ProductFinder;
 use Vanilo\Framework\Models\Product;
+use Vanilo\Properties\Models\PropertyValue;
 
 class ProductFinderTest extends TestCase
 {
@@ -118,9 +120,195 @@ class ProductFinderTest extends TestCase
         $finder = new ProductFinder();
         $result = $finder
                     ->nameEndsWith('Waka')
-                    ->nameStartsWith('Waka')
+                    ->orNameStartsWith('Waka')
                     ->getResults();
 
         $this->assertCount(2, $result);
+    }
+
+    /** @test */
+    public function returns_products_based_on_a_single_taxon()
+    {
+        // Products without taxons
+        factory(Product::class, 20)->create();
+
+        // Products within taxon 1
+        $taxon1 = factory(Taxon::class)->create();
+        factory(Product::class, 7)->create()->each(function (Product $product) use ($taxon1) {
+            $product->addTaxon($taxon1);
+        });
+
+        // Products within taxon 2
+        $taxon2 = factory(Taxon::class)->create();
+        factory(Product::class, 3)->create()->each(function (Product $product) use ($taxon2) {
+            $product->addTaxon($taxon2);
+        });
+
+        $this->assertCount(7, (new ProductFinder())->withinTaxon($taxon1)->getResults());
+        $this->assertCount(3, (new ProductFinder())->withinTaxon($taxon2)->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_two_taxons_set_in_two_consecutive_calls()
+    {
+        // Products without taxons
+        factory(Product::class, 20)->create();
+
+        // Products within taxon 1
+        $taxon1 = factory(Taxon::class)->create();
+        factory(Product::class, 4)->create()->each(function (Product $product) use ($taxon1) {
+            $product->addTaxon($taxon1);
+        });
+
+        // Products within taxon 2
+        $taxon2 = factory(Taxon::class)->create();
+        factory(Product::class, 2)->create()->each(function (Product $product) use ($taxon2) {
+            $product->addTaxon($taxon2);
+        });
+
+        $finder = new ProductFinder();
+        $finder->withinTaxon($taxon1)->orWithinTaxon($taxon2);
+        $this->assertCount(6, $finder->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_several_taxons()
+    {
+        // Products without taxons
+        factory(Product::class, 10)->create();
+
+        $taxon1 = factory(Taxon::class)->create();
+        factory(Product::class, 11)->create()->each(function (Product $product) use ($taxon1) {
+            $product->addTaxons([$taxon1]);
+        });
+
+        $taxon2 = factory(Taxon::class)->create();
+        factory(Product::class, 5)->create()->each(function (Product $product) use ($taxon2) {
+            $product->addTaxon($taxon2);
+        });
+
+        $this->assertCount(16, (new ProductFinder())->withinTaxons([$taxon1, $taxon2])->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_several_taxons_set_in_consecutive_calls()
+    {
+        // Products without taxons
+        factory(Product::class, 10)->create();
+
+        $taxon1 = factory(Taxon::class)->create();
+        factory(Product::class, 4)->create()->each(function (Product $product) use ($taxon1) {
+            $product->addTaxons([$taxon1]);
+        });
+
+        $taxon2 = factory(Taxon::class)->create();
+        factory(Product::class, 8)->create()->each(function (Product $product) use ($taxon2) {
+            $product->addTaxon($taxon2);
+        });
+
+        $finder = new ProductFinder();
+        $finder->withinTaxons([$taxon1])->orWithinTaxons([$taxon2]);
+        $this->assertCount(12, $finder->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_a_single_property_value()
+    {
+        // Background products without attributes
+        factory(Product::class, 10)->create();
+
+        $red = factory(PropertyValue::class)->create([
+            'value'       => 'red',
+            'title'       => 'Red'
+        ]);
+
+        factory(Product::class, 9)->create()->each(function (Product $product) use ($red) {
+            $product->addPropertyValue($red);
+        });
+
+        $finder = new ProductFinder();
+        $finder->havingPropertyValue($red);
+        $this->assertCount(9, $finder->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_several_property_values()
+    {
+        // Background products without attributes
+        factory(Product::class, 25)->create();
+
+        $value1 = factory(PropertyValue::class)->create();
+        $value2 = factory(PropertyValue::class)->create();
+
+        factory(Product::class, 13)->create()->each(function (Product $product) use ($value1) {
+            $product->addPropertyValue($value1);
+        });
+
+        factory(Product::class, 2)->create()->each(function (Product $product) use ($value2) {
+            $product->addPropertyValue($value2);
+        });
+
+        $finder = new ProductFinder();
+        $finder->havingPropertyValues([$value1, $value2]);
+        $this->assertCount(15, $finder->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_property_values_and_on_taxons()
+    {
+        // Products without taxons
+        factory(Product::class, 90)->create();
+
+        $taxon = factory(Taxon::class)->create();
+        factory(Product::class, 45)->create()->each(function (Product $product) use ($taxon) {
+            $product->addTaxon($taxon);
+        });
+
+        $propertyValue = factory(PropertyValue::class)->create();
+        factory(Product::class, 19)->create()->each(function (Product $product) use ($propertyValue) {
+            $product->addPropertyValue($propertyValue);
+        });
+
+        $finder = new ProductFinder();
+        $finder->withinTaxon($taxon)->orHavingPropertyValue($propertyValue);
+        $this->assertCount(64, $finder->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_property_values_and_on_taxons_with_search_terms()
+    {
+        // Products without taxons
+        factory(Product::class, 37)->create();
+
+        $taxon = factory(Taxon::class)->create();
+        factory(Product::class, 19)->create()->each(function (Product $product) use ($taxon) {
+            $product->addTaxon($taxon);
+        });
+        factory(Product::class, 4)->create([
+            'name' => 'NER Posvany'
+        ])->each(function (Product $product) use ($taxon) {
+            $product->addTaxon($taxon);
+        });
+
+        $propertyValue = factory(PropertyValue::class)->create();
+        factory(Product::class, 7)->create()->each(function (Product $product) use ($propertyValue) {
+            $product->addPropertyValue($propertyValue);
+        });
+        factory(Product::class, 6)->create([
+            'name' => 'Phillip NER'
+        ])->each(function (Product $product) use ($propertyValue) {
+            $product->addPropertyValue($propertyValue);
+        });
+
+        factory(Product::class, 11)->create([
+            'name' => 'Phillip NER'
+        ])->each(function (Product $product) use ($propertyValue, $taxon) {
+            $product->addTaxon($taxon);
+            $product->addPropertyValue($propertyValue);
+        });
+
+        $finder = new ProductFinder();
+        $finder->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER');
+        $this->assertCount(11, $finder->getResults());
     }
 }
