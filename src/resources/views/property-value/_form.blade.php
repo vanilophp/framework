@@ -32,6 +32,7 @@
 
 <hr>
 
+@unless($hideProperties ?? false)
 <div class="form-group row">
     <label class="col-form-label col-form-label-sm col-md-2">{{ __('Property') }}</label>
     <div class="col-md-10">
@@ -45,6 +46,7 @@
         @endif
     </div>
 </div>
+@endunless
 
 <div class="form-group row">
     <label class="col-form-label col-form-label-sm col-md-2">{{ __('Priority') }}</label>

@@ -23,9 +23,10 @@ class PropertyValueController extends BaseController
         $propertyValue->priority = $request->getNextPriority($propertyValue);
 
         return view('vanilo::property-value.create', [
-            'property'      => $property,
-            'properties'    => PropertyProxy::get()->pluck('name', 'id'),
-            'propertyValue' => $propertyValue
+            'property'       => $property,
+            'properties'     => PropertyProxy::get()->pluck('name', 'id'),
+            'hideProperties' => true,
+            'propertyValue'  => $propertyValue
         ]);
     }
 

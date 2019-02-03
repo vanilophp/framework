@@ -1,3 +1,4 @@
+<div id="properties-assign-component">
 <div id="properties-assign-to-model-modal" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="properties-assign-to-model-modal-title" aria-hidden="true">
 
@@ -10,7 +11,7 @@
             !!}
 
             <div class="modal-header">
-                <h5 class="modal-title" id="properties-assign-to-model-modal">{{ __('Assign properties') }}</h5>
+                <h5 class="modal-title" id="properties-assign-to-model-modal">{{ __('Assign Properties') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -21,30 +22,39 @@
                 <table class="table table-condensed table-striped">
                     <tbody>
                     <tr v-for="(assignedProperty, id) in assignedProperties" :id="id">
-                        <th>@{{ assignedProperty.property.name }}</th>
+                        <th class="align-middle">@{{ assignedProperty.property.name }}</th>
                         <td>
-                            <select name="propertyValues[]" v-model="assignedProperty.value" @change="onPropertyValueChange($event, id)">
+                            <select name="propertyValues[]" v-model="assignedProperty.value" @change="onPropertyValueChange($event, id)" class="form-control form-control-sm">
                                 <option v-for="value in assignedProperty.values" :value="value.id" v-html="value.title"></option>
                                 <optgroup label="{{ __('Missing value?') }}"></optgroup>
                                 <option value="+">[+] {{ __('Add value') }}</option>
                             </select>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <i class="zmdi zmdi-close text-danger" style="cursor: pointer" @click="removePropertyValue(id)"></i>
                         </td>
                     </tr>
                     </tbody>
+                    <tfoot>
+                        <tr class="bg-success">
+                            <th class="align-middle">{{ __('Unused properties') }}:</th>
+                            <td>
+                                <select v-model="selected" class="form-control form-control-sm">
+                                    <option v-for="(unassignedProperty, id) in unassignedProperties" :value="id">
+                                        @{{ unassignedProperty.property.name }}
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="align-middle">
+                                <button class="btn btn-light btn-sm" type="button" :disabled="selected == ''"
+                                        @click="addSelectedPropertyValue">
+                                    {{ __('Use property') }}
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
-                <select v-model="selected">
-                    <option v-for="(unassignedProperty, id) in unassignedProperties" :value="id">
-                        @{{ unassignedProperty.property.name }}
-                    </option>
-                </select>
-                <button class="btn btn-secondary btn-sm" type="button" :disabled="selected == ''"
-                        @click="addSelectedPropertyValue">
-                    {{ __('Add property') }}
-                </button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('Close') }}</button>
@@ -57,13 +67,20 @@
 
 @include('vanilo::property-value.assign._create_property_value')
 
+</div>
+
 @section('scripts')
 @parent()
 <script>
     new Vue({
-        el: '#properties-assign-to-model-modal',
+        //el: '#properties-assign-to-model-modal',
+        el: '#properties-assign-component',
         data: {
-            selected: '',
+            selected: "",
+            adding: {
+                "name": "",
+                "property_id": ""
+            },
             assignedProperties: {
                 @foreach($assignments as $propertyValue)
                 "{{ $propertyValue->property->id }}": {
@@ -128,8 +145,12 @@
                     return;
                 }
 
-                $('#create-property-value').modal('show');
-                $('select[name="property_id"]').val(propertyId);
+                this.adding.name = this.assignedProperties[propertyId].property.name;
+                this.adding.property_id = propertyId;
+
+                var url = "{{ route('vanilo.property_value.create', '@@@') }}";
+                window.open(url.replace('@@@', propertyId), '_blank');
+                //$('#create-property-value').modal('show');
             }
         }
     });
