@@ -12,16 +12,11 @@
 namespace Vanilo\Properties\Tests\Examples;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Vanilo\Properties\Models\PropertyValueProxy;
+use Vanilo\Properties\Traits\HasPropertyValues;
 
 class Product extends Model
 {
-    protected $guarded = ['id'];
+    use HasPropertyValues;
 
-    public function propertyValues(): MorphToMany
-    {
-        return $this->morphToMany(PropertyValueProxy::modelClass(), 'model',
-            'model_property_values', 'model_id', 'property_value_id');
-    }
+    protected $guarded = ['id'];
 }

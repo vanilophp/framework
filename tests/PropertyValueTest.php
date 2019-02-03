@@ -65,13 +65,13 @@ class PropertyValueTest extends TestCase
 
         $valueFalse = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => false,
+            'value'       => 'false',
             'title'       => 'No'
         ]);
 
         $valueZero = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => 0,
+            'value'       => '0',
             'title'       => 'No'
         ]);
 
