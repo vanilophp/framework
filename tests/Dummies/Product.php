@@ -12,15 +12,11 @@
 namespace Vanilo\Category\Tests\Dummies;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Vanilo\Category\Models\TaxonProxy;
+use Vanilo\Category\Traits\HasTaxons;
 
 class Product extends Model
 {
-    protected $guarded = ['id'];
+    use HasTaxons;
 
-    public function taxons(): MorphToMany
-    {
-        return $this->morphToMany(TaxonProxy::modelClass(), 'model', 'model_taxons', 'model_id', 'taxon_id');
-    }
+    protected $guarded = ['id'];
 }
