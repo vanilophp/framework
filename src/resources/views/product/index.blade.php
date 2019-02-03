@@ -6,6 +6,8 @@
 
 @section('content')
 
+    @include('vanilo::product._filters')
+
     <div class="card card-accent-secondary">
 
         <div class="card-header">
