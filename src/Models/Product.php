@@ -11,16 +11,13 @@
 
 namespace Vanilo\Framework\Models;
 
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
-use Vanilo\Category\Contracts\Taxon;
-use Vanilo\Category\Models\TaxonProxy;
+use Vanilo\Category\Traits\HasTaxons;
 use Vanilo\Contracts\Buyable;
-use Vanilo\Properties\Contracts\PropertyValue;
-use Vanilo\Properties\Models\PropertyValueProxy;
+use Vanilo\Properties\Traits\HasPropertyValues;
 use Vanilo\Support\Traits\BuyableImageSpatieV7;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Product\Models\Product as BaseProduct;
@@ -31,54 +28,9 @@ class Product extends BaseProduct implements Buyable, HasMedia
     protected const DEFAULT_THUMBNAIL_HEIGHT = 250;
     protected const DEFAULT_THUMBNAIL_FIT    = Manipulations::FIT_CROP;
 
-    use BuyableModel, BuyableImageSpatieV7, HasMediaTrait;
+    use BuyableModel, BuyableImageSpatieV7, HasMediaTrait, HasTaxons, HasPropertyValues;
 
     protected $dates = ['created_at', 'updated_at', 'last_sale_at'];
-
-    public function taxons(): MorphToMany
-    {
-        return $this->morphToMany(
-            TaxonProxy::modelClass(), 'model', 'model_taxons', 'model_id', 'taxon_id'
-        );
-    }
-
-    public function propertyValues(): MorphToMany
-    {
-        return $this->morphToMany(PropertyValueProxy::modelClass(), 'model',
-            'model_property_values', 'model_id', 'property_value_id'
-        );
-    }
-
-    public function addTaxon(Taxon $taxon): void
-    {
-        $this->taxons()->attach($taxon);
-    }
-
-    public function addTaxons(iterable $taxons)
-    {
-        foreach ($taxons as $taxon) {
-            if (! $taxon instanceof Taxon) {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        'Every element passed to addTaxons must be a Taxon object. Given `%s`.',
-                        is_object($taxon) ? get_class($taxon) : gettype($taxon)
-                    )
-                );
-            }
-        }
-
-        return $this->taxons()->saveMany($taxons);
-    }
-
-    public function removeTaxon(Taxon $taxon)
-    {
-        return $this->taxons()->detach($taxon);
-    }
-
-    public function addPropertyValue(PropertyValue $propertyValue): void
-    {
-        $this->propertyValues()->attach($propertyValue);
-    }
 
     public function registerMediaConversions(Media $media = null)
     {
