@@ -15,12 +15,16 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Product\Models\ProductProxy;
+use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Properties\Contracts\PropertyValue;
+use Vanilo\Properties\Models\PropertyValueProxy;
 
 class ProductFinder
 {
     /** @var Builder */
     private $queryBuilder;
+
+    private $excludeInactiveProducts = true;
 
     public function __construct()
     {
@@ -138,6 +142,19 @@ class ProductFinder
         return $this;
     }
 
+    public function havingPropertyValuesByName(string $property, array $values): self
+    {
+        return $this->havingPropertyValues(
+                PropertyValueProxy::query()
+                    ->select('property_values.*')
+                    ->join('properties', 'properties.id', '=', 'property_values.property_id')
+                    ->where('properties.slug', '=', $property)
+                    ->whereIn('value', $values)
+                    ->get()
+                    ->all()
+        );
+    }
+
     public function orHavingPropertyValues(array $propertyValues): self
     {
         $propertyValueIds = collect($propertyValues)->pluck('id');
@@ -149,8 +166,21 @@ class ProductFinder
         return $this;
     }
 
+    public function withInactiveProducts()
+    {
+        $this->excludeInactiveProducts = false;
+
+        return $this;
+    }
+
     public function getResults(): Collection
     {
+        if ($this->excludeInactiveProducts) {
+            $this->queryBuilder->whereIn(
+                'state',
+                ProductStateProxy::getActiveStates()
+            );
+        }
         return $this->queryBuilder->get();
     }
 }

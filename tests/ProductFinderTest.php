@@ -14,10 +14,58 @@ namespace Vanilo\Framework\Tests;
 use Vanilo\Framework\Models\Taxon;
 use Vanilo\Framework\Search\ProductFinder;
 use Vanilo\Framework\Models\Product;
+use Vanilo\Product\Models\ProductState;
+use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
 
 class ProductFinderTest extends TestCase
 {
+    /** @test */
+    public function it_excludes_inactive_products_by_default()
+    {
+        factory(Product::class, 11)->create([
+            'state' => ProductState::ACTIVE
+        ]);
+        factory(Product::class, 3)->create([
+            'state' => ProductState::INACTIVE
+        ]);
+        factory(Product::class, 1)->create([
+            'state' => ProductState::DRAFT
+        ]);
+        factory(Product::class, 2)->create([
+            'state' => ProductState::RETIRED
+        ]);
+        factory(Product::class, 2)->create([
+            'state' => ProductState::UNAVAILABLE
+        ]);
+
+        $finder = new ProductFinder();
+        $this->assertCount(11, $finder->getResults());
+    }
+
+    /** @test */
+    public function inactive_products_can_be_included()
+    {
+        factory(Product::class, 7)->create([
+            'state' => ProductState::ACTIVE
+        ]);
+        factory(Product::class, 1)->create([
+            'state' => ProductState::INACTIVE
+        ]);
+        factory(Product::class, 3)->create([
+            'state' => ProductState::DRAFT
+        ]);
+        factory(Product::class, 2)->create([
+            'state' => ProductState::RETIRED
+        ]);
+        factory(Product::class, 4)->create([
+            'state' => ProductState::UNAVAILABLE
+        ]);
+
+        $finder = new ProductFinder();
+        $this->assertCount(17, $finder->withInactiveProducts()->getResults());
+    }
+
     /** @test */
     public function it_finds_a_product_by_exact_name()
     {
@@ -229,6 +277,42 @@ class ProductFinderTest extends TestCase
         $finder = new ProductFinder();
         $finder->havingPropertyValue($red);
         $this->assertCount(9, $finder->getResults());
+    }
+
+    /** @test */
+    public function returns_products_based_on_a_single_property_name_and_several_value_names()
+    {
+        // Background products without attributes
+        factory(Product::class, 10)->create();
+
+        $property = factory(Property::class)->create([
+            'name' => 'Wheel Size',
+            'slug' => 'wheel'
+        ]);
+
+        $twentyseven = factory(PropertyValue::class)->create([
+            'value'       => '27',
+            'title'       => '27"',
+            'property_id' => $property
+        ]);
+
+        $twentynine = factory(PropertyValue::class)->create([
+            'value'       => '29',
+            'title'       => '29"',
+            'property_id' => $property
+        ]);
+
+        factory(Product::class, 8)->create()->each(function (Product $product) use ($twentyseven) {
+            $product->addPropertyValue($twentyseven);
+        });
+
+        factory(Product::class, 19)->create()->each(function (Product $product) use ($twentynine) {
+            $product->addPropertyValue($twentynine);
+        });
+
+        $finder = new ProductFinder();
+        $finder->havingPropertyValuesByName('wheel', ['27','29']);
+        $this->assertCount(27, $finder->getResults());
     }
 
     /** @test */
