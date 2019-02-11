@@ -2,10 +2,10 @@
 
 ## 0.5 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.5.0
+##### 2019-02-11
 
-- 
+- HasTaxons trait has been added
 
 ## 0.4 Series
 
