@@ -2,10 +2,10 @@
 
 ## 0.5 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.5.0
+##### 2019-02-11
 
--
+- No change, version has been bumped for v0.5 series
 
 ## 0.4 Series
 
