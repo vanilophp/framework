@@ -2,10 +2,12 @@
 
 ## 0.5 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 0.5.0
+##### 2019-02-11
 
--
+- Support for Product Properties has been added (via Properties module)
+- Using AppShell v1.3
+- ProductFinder has been added (supports: taxons, property values and search terms in product name)
 
 ## 0.4 Series
 
