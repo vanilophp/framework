@@ -53,6 +53,11 @@ class Property extends Model implements PropertyContract
         return new $class();
     }
 
+    public static function findOneByName(string $name): ?PropertyContract
+    {
+        return static::where('name', $name)->first();
+    }
+
     public function values(): Collection
     {
         return $this->propertyValues()->sort()->get();
