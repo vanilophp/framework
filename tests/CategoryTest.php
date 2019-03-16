@@ -161,7 +161,7 @@ class CategoryTest extends TestCase
         $this->assertEquals('product', $assignment->model_type);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

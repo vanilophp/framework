@@ -79,7 +79,7 @@ class AddressTest extends TestCase
         $this->assertInstanceOf(Address::class, $address);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
