@@ -9,6 +9,8 @@ This is the cart module for [Vanilo](https://vanilo.io).
 [![StyleCI](https://styleci.io/repos/108638279/shield?branch=master)](https://styleci.io/repos/108638279)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
+> Supports: **Laravel** 5.4 - 5.8; **PHP** 7.1 - 7.3
+
 ## Installation
 
 (As Standalone Component)
