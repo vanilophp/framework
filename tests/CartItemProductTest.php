@@ -49,7 +49,7 @@ class CartItemProductTest extends TestCase
         $this->assertEquals($this->reactForBeginners->id, $course->id);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

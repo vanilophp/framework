@@ -173,7 +173,7 @@ class UserTest extends TestCase
         $this->assertEquals($this->user->id, Cart::getUser()->id);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

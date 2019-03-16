@@ -88,7 +88,7 @@ class CartTotalTest extends TestCase
         $this->assertEquals(0, Cart::total());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -63,7 +63,7 @@ class DestroyCartTest extends TestCase
         $this->assertNull(Cart::model());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

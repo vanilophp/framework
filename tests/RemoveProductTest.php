@@ -56,7 +56,7 @@ class RemoveProductTest extends TestCase
         $this->assertTrue(Cart::isNotEmpty());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

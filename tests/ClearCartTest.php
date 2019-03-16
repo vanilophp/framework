@@ -75,7 +75,7 @@ class ClearCartTest extends TestCase
         $this->assertCount(0, CartItemProxy::ofCart($cartId)->get());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

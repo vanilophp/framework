@@ -117,7 +117,7 @@ class PreserveForUserTest extends TestCase
         $this->assertTrue(Cart::isEmpty());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
