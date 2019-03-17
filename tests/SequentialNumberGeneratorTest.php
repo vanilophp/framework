@@ -19,7 +19,7 @@ class SequentialNumberGeneratorTest extends TestCase
 {
     protected $item;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

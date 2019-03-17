@@ -32,7 +32,7 @@ class OrderFactoryTest extends TestCase
     /** @var OrderFactoryContract */
     protected $factory;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

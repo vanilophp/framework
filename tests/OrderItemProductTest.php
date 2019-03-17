@@ -21,7 +21,7 @@ class OrderItemProductTest extends TestCase
     /** @var Product */
     protected $theMoonRing;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
