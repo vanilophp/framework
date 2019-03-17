@@ -2,6 +2,11 @@
 
 ## 0.5 Series
 
+### 0.5.2
+##### 2019-03-17
+
+- Technical release: fixed inexistent version constraint (other than that same as 0.5.1)
+
 ### 0.5.1
 ##### 2019-03-17
 
