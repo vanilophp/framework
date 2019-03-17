@@ -2,6 +2,11 @@
 
 ## 0.5 Series
 
+### 0.5.1
+##### 2019-03-17
+
+- Complete Laravel 5.8 compatibility (likely works with 0.4.0 & 0.5.0 as well)
+
 ### 0.5.0
 ##### 2019-02-11
 
