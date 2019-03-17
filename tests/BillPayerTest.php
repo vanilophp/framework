@@ -23,7 +23,7 @@ class BillPayerTest extends TestCase
     /** @var array */
     private $billpayerAttributes;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

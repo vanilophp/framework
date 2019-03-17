@@ -74,7 +74,7 @@ class CartTest extends TestCase
         $this->assertCount(2, Checkout::getCart()->getItems());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

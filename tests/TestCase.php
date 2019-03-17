@@ -23,7 +23,7 @@ abstract class TestCase extends Orchestra
     use Laravel54TestCompatibility;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
