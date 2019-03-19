@@ -10,9 +10,8 @@ class CreatePropertyPermissions extends Migration
 
     public function up()
     {
-        $adminRole = RoleProxy::where(['name' => 'admin'])->firstOrFail();
-
         $permissions = ResourcePermissions::createPermissionsForResource($this->resources);
+        $adminRole   = RoleProxy::where(['name' => 'admin'])->first();
 
         if ($adminRole) {
             $adminRole->givePermissionTo($permissions);

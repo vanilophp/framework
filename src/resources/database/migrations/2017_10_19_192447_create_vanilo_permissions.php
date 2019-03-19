@@ -10,11 +10,12 @@ class CreateVaniloPermissions extends Migration
 
     public function up()
     {
-        $adminRole = RoleProxy::where(['name' => 'admin'])->firstOrFail();
+        $permissions = ResourcePermissions::createPermissionsForResource($this->resources);
+        $adminRole   = RoleProxy::where(['name' => 'admin'])->first();
 
-        $adminRole->givePermissionTo(
-            ResourcePermissions::createPermissionsForResource($this->resources)
-        );
+        if ($adminRole) {
+            $adminRole->givePermissionTo($permissions);
+        }
     }
 
     public function down()
