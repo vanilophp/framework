@@ -2,6 +2,11 @@
 
 ## 0.5 Series
 
+### 0.5.3
+##### 2019-03-19
+
+- Fixed migrations fail bug when the `admin` role is not present in the target system
+
 ### 0.5.2
 ##### 2019-03-17
 
