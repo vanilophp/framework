@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0 Series
+
+### Unreleased
+##### 2018-XX-XX
+
+-
+
 ## 0.5 Series
 
 ### 0.5.1
