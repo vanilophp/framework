@@ -2,5 +2,5 @@
 
 return [
     'name'    => 'Vanilo Framework',
-    'version' => '0.5.3'
+    'version' => '1.0-dev'
 ];
