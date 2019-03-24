@@ -3,6 +3,7 @@
     phpunit -c phpunit.xml
 -->
 <phpunit colors="true"
+         convertNoticesToExceptions="true"
          bootstrap="./vendor/autoload.php">
     <testsuites>
         <testsuite name="Vanilo Cart Module Test Suite">

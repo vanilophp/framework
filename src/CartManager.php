@@ -22,6 +22,8 @@ use Vanilo\Cart\Models\CartProxy;
 
 class CartManager implements CartManagerContract
 {
+    const DEFAULT_SESSION_KEY = 'vanilo_cart';
+
     /** @var string The key in session that holds the cart id */
     protected $sessionKey;
 
@@ -31,6 +33,17 @@ class CartManager implements CartManagerContract
     public function __construct()
     {
         $this->sessionKey = config('vanilo.cart.session_key');
+
+        if (empty($this->sessionKey)) {
+            trigger_error(
+                sprintf(
+                    'Vanilo cart session key is empty. Falling back to default session key: "%s"',
+                    self::DEFAULT_SESSION_KEY
+                ),
+                E_USER_NOTICE
+            );
+            $this->sessionKey = self::DEFAULT_SESSION_KEY;
+        }
     }
 
     /**
