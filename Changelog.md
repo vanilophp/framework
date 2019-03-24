@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0 Series
+
+### Unreleased
+##### 2019-XX-XX
+
+- Dropped PHP 7.0 support
+
 ## 0.5 Series
 
 ### 0.5.0

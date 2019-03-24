@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
+        "php": "^7.1.3",
         "illuminate/support": "5.*"
     },
     "autoload": {
@@ -22,7 +22,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.5.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }
