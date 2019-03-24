@@ -2,5 +2,5 @@
 
 return [
     'name'    => 'Vanilo Product Module',
-    'version' => '0.5.1'
+    'version' => '1.0-dev'
 ];
