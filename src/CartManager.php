@@ -14,6 +14,7 @@ namespace Vanilo\Cart;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Vanilo\Cart\Contracts\Cart as CartContract;
+use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
@@ -22,7 +23,7 @@ use Vanilo\Cart\Models\CartProxy;
 
 class CartManager implements CartManagerContract
 {
-    const DEFAULT_SESSION_KEY = 'vanilo_cart';
+    const CONFIG_SESSION_KEY = 'vanilo.cart.session_key';
 
     /** @var string The key in session that holds the cart id */
     protected $sessionKey;
@@ -32,17 +33,15 @@ class CartManager implements CartManagerContract
 
     public function __construct()
     {
-        $this->sessionKey = config('vanilo.cart.session_key');
+        $this->sessionKey = config(self::CONFIG_SESSION_KEY);
 
         if (empty($this->sessionKey)) {
-            trigger_error(
+            throw new InvalidCartConfigurationException(
                 sprintf(
-                    'Vanilo cart session key is empty. Falling back to default session key: "%s"',
-                    self::DEFAULT_SESSION_KEY
-                ),
-                E_USER_NOTICE
+                    'Cart session key (`%s`) is empty. Please provide a valid value.',
+                    self::CONFIG_SESSION_KEY
+                )
             );
-            $this->sessionKey = self::DEFAULT_SESSION_KEY;
         }
     }
 
