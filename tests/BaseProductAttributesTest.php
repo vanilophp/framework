@@ -55,6 +55,7 @@ class BaseProductAttributesTest extends TestCase
         $product = Product::create([
             'name'             => 'Maxi Baxi 2000',
             'sku'              => 'MXB-2000',
+            'stock'            => 123.4567,
             'slug'             => 'maxi-baxi-2000',
             'excerpt'          => 'Maxi Baxi 2000 is the THING you always have dreamt of',
             'description'      => 'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
@@ -66,6 +67,8 @@ class BaseProductAttributesTest extends TestCase
         $this->assertGreaterThanOrEqual(1, $product->id);
         $this->assertEquals('Maxi Baxi 2000', $product->name);
         $this->assertEquals('MXB-2000', $product->sku);
+        $this->assertEquals(123.4567, $product->stock);
+        $this->assertTrue($product->isOnStock());
         $this->assertEquals('maxi-baxi-2000', $product->slug);
         $this->assertEquals('Maxi Baxi 2000 is the THING you always have dreamt of', $product->excerpt);
         $this->assertEquals('Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
