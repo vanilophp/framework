@@ -59,6 +59,14 @@ class Product extends Model implements ProductContract
         return $this->isActive();
     }
 
+    /**
+     * @return bool
+     */
+    public function isOnStock()
+    {
+        return $this->stock > 0;
+    }
+
     public function title()
     {
         return isset($this->ext_title) ? $this->ext_title : $this->name;
