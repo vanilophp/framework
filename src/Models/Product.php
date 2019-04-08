@@ -59,10 +59,7 @@ class Product extends Model implements ProductContract
         return $this->isActive();
     }
 
-    /**
-     * @return bool
-     */
-    public function isOnStock()
+    public function isOnStock(): bool
     {
         return $this->stock > 0;
     }
