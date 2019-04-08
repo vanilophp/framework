@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('sku');
             $table->decimal('price', 15, 4)->nullable();
-            $table->decimal('stock', 15, 4)->default(0);
             $table->text('excerpt')->nullable();
             $table->text('description')->nullable();
             $table->enum('state', ProductStateProxy::values())->default(ProductStateProxy::defaultValue());
