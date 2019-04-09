@@ -5,7 +5,7 @@
 ### Unreleased
 ##### 2019-XX-XX
 
-- 
+- Added product stock feature
 
 ## 0.5 Series
 
