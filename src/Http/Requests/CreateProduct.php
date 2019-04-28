@@ -28,6 +28,7 @@ class CreateProduct extends FormRequest implements CreateProductContract
             'sku'      => 'required|unique:products',
             'state'    => ['required', Rule::in(ProductStateProxy::values())],
             'price'    => 'nullable|numeric',
+            'stock'    => 'nullable|numeric',
             'images'   => 'nullable',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif'
         ];

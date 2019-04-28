@@ -38,6 +38,25 @@
 <div class="form-row">
     <div class="form-group col-12 col-md-6 col-xl-4">
         <div class="input-group">
+            <span class="input-group-addon">
+                <i class="zmdi zmdi-code-setting"></i>
+            </span>
+            {{ Form::number('stock', null, [
+                    'class' => 'form-control' . ($errors->has('stock') ? ' is-invalid' : ''),
+                    'placeholder' => __('Product Stock Count')
+                ])
+            }}
+        </div>
+        @if ($errors->has('stock'))
+            <input hidden class="form-control is-invalid">
+            <div class="invalid-feedback">{{ $errors->first('stock') }}</div>
+        @endif
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-12 col-md-6 col-xl-4">
+        <div class="input-group">
             {{ Form::text('price', null, [
                     'class' => 'form-control' . ($errors->has('price') ? ' is-invalid' : ''),
                     'placeholder' => __('Price')
