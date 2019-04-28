@@ -41,7 +41,7 @@
             <span class="input-group-addon">
                 <i class="zmdi zmdi-code-setting"></i>
             </span>
-            {{ Form::text('stock', null, [
+            {{ Form::number('stock', null, [
                     'class' => 'form-control' . ($errors->has('stock') ? ' is-invalid' : ''),
                     'placeholder' => __('Product Stock Count')
                 ])
