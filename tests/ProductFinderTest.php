@@ -18,6 +18,8 @@ use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductFinderTest extends TestCase
 {
@@ -402,5 +404,29 @@ class ProductFinderTest extends TestCase
     {
         $finder = new ProductFinder();
         $this->assertInstanceOf(Builder::class, $finder->getQueryBuilder());
+    }
+
+    /** @test */
+    public function it_can_simple_paginate()
+    {
+        factory(Product::class, 15)->create();
+
+        $finder = new ProductFinder();
+        $results = $finder->simplePaginate(8);
+
+        $this->assertInstanceOf(Paginator::class, $results);
+        $this->assertCount(8, $results->items());
+    }
+
+    /** @test */
+    public function it_can_paginate()
+    {
+        factory(Product::class, 15)->create();
+
+        $finder = new ProductFinder();
+        $results = $finder->paginate(8);
+
+        $this->assertInstanceOf(LengthAwarePaginator::class, $results);
+        $this->assertCount(8, $results->items());
     }
 }

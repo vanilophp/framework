@@ -18,6 +18,8 @@ use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyValueProxy;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductFinder
 {
@@ -183,6 +185,31 @@ class ProductFinder
         }
         return $this->queryBuilder->get();
     }
+
+    /** @see Builder::simplePaginate() */
+    public function simplePaginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null): Paginator
+    {
+        if ($this->excludeInactiveProducts) {
+            $this->queryBuilder->whereIn(
+                'state',
+                ProductStateProxy::getActiveStates()
+            );
+        }
+        return $this->queryBuilder->simplePaginate($perPage, $columns, $pageName, $page);
+    }
+
+    /** @see Builder::paginate() */
+    public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null): LengthAwarePaginator
+    {
+        if ($this->excludeInactiveProducts) {
+            $this->queryBuilder->whereIn(
+                'state',
+                ProductStateProxy::getActiveStates()
+            );
+        }
+        return $this->queryBuilder->paginate($perPage, $columns, $pageName, $page);
+    }
+
     public function getQueryBuilder(): Builder
     {
         return $this->queryBuilder;
