@@ -11,7 +11,7 @@
 
 namespace Vanilo\Framework\Search;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Product\Models\ProductProxy;
