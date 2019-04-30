@@ -411,7 +411,7 @@ class ProductFinderTest extends TestCase
     {
         factory(Product::class, 15)->create();
 
-        $finder = new ProductFinder();
+        $finder  = new ProductFinder();
         $results = $finder->simplePaginate(8);
 
         $this->assertInstanceOf(Paginator::class, $results);
@@ -423,7 +423,7 @@ class ProductFinderTest extends TestCase
     {
         factory(Product::class, 15)->create();
 
-        $finder = new ProductFinder();
+        $finder  = new ProductFinder();
         $results = $finder->paginate(8);
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $results);
