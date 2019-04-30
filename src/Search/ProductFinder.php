@@ -183,4 +183,8 @@ class ProductFinder
         }
         return $this->queryBuilder->get();
     }
+    public function getQueryBuilder(): Builder
+    {
+        return $this->queryBuilder;
+    }
 }

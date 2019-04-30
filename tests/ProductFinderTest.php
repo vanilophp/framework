@@ -17,6 +17,7 @@ use Vanilo\Framework\Models\Product;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductFinderTest extends TestCase
 {
@@ -394,5 +395,12 @@ class ProductFinderTest extends TestCase
         $finder = new ProductFinder();
         $finder->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER');
         $this->assertCount(11, $finder->getResults());
+    }
+
+    /** @test */
+    public function returns_query_builder()
+    {
+        $finder = new ProductFinder();
+        $this->assertInstanceOf(Builder::class, $finder->getQueryBuilder());
     }
 }
