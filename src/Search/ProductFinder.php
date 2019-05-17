@@ -169,7 +169,7 @@ class ProductFinder
         return $this;
     }
 
-    public function withInactiveProducts()
+    public function withInactiveProducts(): self
     {
         $this->queryBuilder->withoutGlobalScope('withoutInactiveProducts');
 
