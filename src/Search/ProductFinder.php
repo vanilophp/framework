@@ -187,7 +187,7 @@ class ProductFinder
     }
 
     /** @see Builder::simplePaginate() */
-    public function simplePaginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null): Paginator
+    public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
     {
         if ($this->excludeInactiveProducts) {
             $this->queryBuilder->whereIn(
@@ -199,7 +199,7 @@ class ProductFinder
     }
 
     /** @see Builder::paginate() */
-    public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null): LengthAwarePaginator
+    public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): LengthAwarePaginator
     {
         if ($this->excludeInactiveProducts) {
             $this->queryBuilder->whereIn(
