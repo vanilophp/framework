@@ -26,11 +26,12 @@ class ProductFinder
     /** @var Builder */
     private $queryBuilder;
 
-    private $excludeInactiveProducts = true;
-
     public function __construct()
     {
-        $this->queryBuilder = ProductProxy::query();
+        $this->queryBuilder = ProductProxy::query()
+            ->withGlobalScope('withoutInactiveProducts', function (Builder $queryBuilder) {
+                return $queryBuilder->whereIn('state', ProductStateProxy::getActiveStates());
+            });
     }
 
     public function withinTaxon(Taxon $taxon): self
@@ -170,37 +171,30 @@ class ProductFinder
 
     public function withInactiveProducts()
     {
-        $this->excludeInactiveProducts = false;
+        $this->queryBuilder->withoutGlobalScope('withoutInactiveProducts');
 
         return $this;
     }
 
     public function getResults(): Collection
     {
-        return $this->handleInactiveProducts()->get();
+        return $this->queryBuilder->get();
     }
 
     /** @see Builder::simplePaginate() */
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
     {
-        return $this->handleInactiveProducts()->simplePaginate($perPage, $columns, $pageName, $page);
+        return $this->queryBuilder->simplePaginate($perPage, $columns, $pageName, $page);
     }
 
     /** @see Builder::paginate() */
     public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): LengthAwarePaginator
     {
-        return $this->handleInactiveProducts()->paginate($perPage, $columns, $pageName, $page);
+        return $this->queryBuilder->paginate($perPage, $columns, $pageName, $page);
     }
 
     public function getQueryBuilder(): Builder
     {
         return $this->queryBuilder;
-    }
-
-    private function handleInactiveProducts(): Builder
-    {
-        return $this->queryBuilder->when($this->excludeInactiveProducts, function ($query) {
-            return $query->whereIn('state', ProductStateProxy::getActiveStates());
-        });
     }
 }
