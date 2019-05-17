@@ -177,41 +177,30 @@ class ProductFinder
 
     public function getResults(): Collection
     {
-        if ($this->excludeInactiveProducts) {
-            $this->queryBuilder->whereIn(
-                'state',
-                ProductStateProxy::getActiveStates()
-            );
-        }
-        return $this->queryBuilder->get();
+        return $this->handleInactiveProducts()->get();
     }
 
     /** @see Builder::simplePaginate() */
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
     {
-        if ($this->excludeInactiveProducts) {
-            $this->queryBuilder->whereIn(
-                'state',
-                ProductStateProxy::getActiveStates()
-            );
-        }
-        return $this->queryBuilder->simplePaginate($perPage, $columns, $pageName, $page);
+        return $this->handleInactiveProducts()->simplePaginate($perPage, $columns, $pageName, $page);
     }
 
     /** @see Builder::paginate() */
     public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): LengthAwarePaginator
     {
-        if ($this->excludeInactiveProducts) {
-            $this->queryBuilder->whereIn(
-                'state',
-                ProductStateProxy::getActiveStates()
-            );
-        }
-        return $this->queryBuilder->paginate($perPage, $columns, $pageName, $page);
+        return $this->handleInactiveProducts()->paginate($perPage, $columns, $pageName, $page);
     }
 
     public function getQueryBuilder(): Builder
     {
         return $this->queryBuilder;
+    }
+
+    private function handleInactiveProducts(): Builder
+    {
+        return $this->queryBuilder->when($this->excludeInactiveProducts, function ($query) {
+            return $query->whereIn('state', ProductStateProxy::getActiveStates());
+        });
     }
 }
