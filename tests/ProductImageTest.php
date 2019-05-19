@@ -18,10 +18,8 @@ class ProductImageTest extends TestCase
 {
     protected const TEST_IMAGE = __DIR__ . '/img/vanilo_640.png';
 
-    /**
-     * @test
-     */
-    public function image_can_be_addded_to_product()
+    /** @test */
+    public function an_image_can_be_added_to_a_product()
     {
         /** @var Product $product */
         $product = Product::create([

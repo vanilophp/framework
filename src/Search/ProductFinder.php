@@ -11,24 +11,27 @@
 
 namespace Vanilo\Framework\Search;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyValueProxy;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductFinder
 {
     /** @var Builder */
     private $queryBuilder;
 
-    private $excludeInactiveProducts = true;
-
     public function __construct()
     {
-        $this->queryBuilder = ProductProxy::query();
+        $this->queryBuilder = ProductProxy::query()
+            ->withGlobalScope('withoutInactiveProducts', function (Builder $queryBuilder) {
+                return $queryBuilder->whereIn('state', ProductStateProxy::getActiveStates());
+            });
     }
 
     public function withinTaxon(Taxon $taxon): self
@@ -166,21 +169,32 @@ class ProductFinder
         return $this;
     }
 
-    public function withInactiveProducts()
+    public function withInactiveProducts(): self
     {
-        $this->excludeInactiveProducts = false;
+        $this->queryBuilder->withoutGlobalScope('withoutInactiveProducts');
 
         return $this;
     }
 
     public function getResults(): Collection
     {
-        if ($this->excludeInactiveProducts) {
-            $this->queryBuilder->whereIn(
-                'state',
-                ProductStateProxy::getActiveStates()
-            );
-        }
         return $this->queryBuilder->get();
+    }
+
+    /** @see Builder::simplePaginate() */
+    public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
+    {
+        return $this->queryBuilder->simplePaginate($perPage, $columns, $pageName, $page);
+    }
+
+    /** @see Builder::paginate() */
+    public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): LengthAwarePaginator
+    {
+        return $this->queryBuilder->paginate($perPage, $columns, $pageName, $page);
+    }
+
+    public function getQueryBuilder(): Builder
+    {
+        return $this->queryBuilder;
     }
 }
