@@ -22,6 +22,13 @@ class CategoryTest extends TestCase
     /** @var Taxonomy */
     private $taxonomy;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->taxonomy = Taxonomy::create(['name' => 'Category']);
+    }
+
     /** @test */
     public function the_system_uses_the_taxon_model_from_this_module()
     {
@@ -159,12 +166,5 @@ class CategoryTest extends TestCase
         ])->get()->first();
 
         $this->assertEquals('product', $assignment->model_type);
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->taxonomy = Taxonomy::create(['name' => 'Category']);
     }
 }

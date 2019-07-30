@@ -8,7 +8,6 @@
  * @since       2018-10-26
  *
  */
-
 use Faker\Generator as Faker;
 use Vanilo\Framework\Models\Address;
 

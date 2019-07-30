@@ -8,7 +8,6 @@
  * @since       2019-02-03
  *
  */
-
 use Faker\Generator as Faker;
 use Vanilo\Framework\Models\Product;
 use Vanilo\Product\Models\ProductState;

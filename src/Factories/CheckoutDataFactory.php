@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Framework\Factories;
 
 use Konekt\Address\Contracts\Address as AddressContract;

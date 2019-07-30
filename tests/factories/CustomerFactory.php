@@ -8,7 +8,6 @@
  * @since       2018-10-26
  *
  */
-
 use Faker\Generator as Faker;
 use Konekt\Customer\Models\CustomerType;
 use Vanilo\Framework\Models\Customer;

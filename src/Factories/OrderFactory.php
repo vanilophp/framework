@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Framework\Factories;
 
 use Vanilo\Checkout\Contracts\Checkout;

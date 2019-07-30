@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Framework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
