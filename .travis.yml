@@ -36,10 +36,6 @@ matrix:
       env: L5_VER=7
     - php: 7.3
       env: L5_VER=8
-    - php: 7.4snapshot
-      env: L5_VER=7
-    - php: 7.4snapshot
-      env: L5_VER=8
 
 script:
   - vendor/bin/phpunit
