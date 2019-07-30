@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    phpunit -c phpunit.xml
+-->
+<phpunit colors="true"
+         bootstrap="./vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Vanilo Channel Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

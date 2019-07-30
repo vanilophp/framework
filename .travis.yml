@@ -1,0 +1,55 @@
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 7.1
+      env: L5_VER=4
+    - php: 7.1
+      env: L5_VER=5
+    - php: 7.1
+      env: L5_VER=6
+    - php: 7.1
+      env: L5_VER=7
+    - php: 7.1
+      env: L5_VER=8
+    - php: 7.2
+      env: L5_VER=4
+    - php: 7.2
+      env: L5_VER=5
+    - php: 7.2
+      env: L5_VER=6
+    - php: 7.2
+      env: L5_VER=7
+    - php: 7.2
+      env: L5_VER=8
+    - php: 7.3
+      env: L5_VER=4
+    - php: 7.3
+      env: L5_VER=5
+    - php: 7.3
+      env: L5_VER=6
+    - php: 7.3
+      env: L5_VER=7
+    - php: 7.3
+      env: L5_VER=8
+    - php: 7.4
+      env: L5_VER=7
+    - php: 7.4
+      env: L5_VER=8
+
+script:
+  - vendor/bin/phpunit
+
+before_install:
+  - composer require "illuminate/support:5.${L5_VER}.*" --no-update -v
+  - composer require "illuminate/console:5.${L5_VER}.*" --no-update -v
+  - composer require "orchestra/testbench:3.${L5_VER}.*" --no-update -v
+
+install: composer install --no-interaction
+
+notifications:
+  email: false
