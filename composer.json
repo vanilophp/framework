@@ -26,7 +26,8 @@
         "vanilo/cart": "1.0.*",
         "vanilo/checkout": "1.0.*",
         "vanilo/order": "1.0.*",
-        "vanilo/properties": "1.0.*"
+        "vanilo/properties": "1.0.*",
+        "vanilo/channel": "1.0.*"
     },
     "autoload": {
         "psr-4": {
