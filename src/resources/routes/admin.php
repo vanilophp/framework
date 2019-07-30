@@ -10,6 +10,7 @@
 |--------------------------------------------------------------------------
 */
 
+Route::resource('channel', 'ChannelController');
 Route::resource('taxonomy', 'TaxonomyController');
 Route::resource('product', 'ProductController');
 Route::resource('property', 'PropertyController');

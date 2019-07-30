@@ -17,6 +17,7 @@ use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
+use Vanilo\Framework\Http\Requests\CreateChannel;
 use Vanilo\Framework\Http\Requests\CreateMedia;
 use Vanilo\Framework\Http\Requests\CreateProperty;
 use Vanilo\Framework\Http\Requests\CreatePropertyValue;
@@ -25,6 +26,7 @@ use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
 use Vanilo\Framework\Http\Requests\SyncModelPropertyValues;
 use Vanilo\Framework\Http\Requests\SyncModelTaxons;
+use Vanilo\Framework\Http\Requests\UpdateChannel;
 use Vanilo\Framework\Http\Requests\UpdateProperty;
 use Vanilo\Framework\Http\Requests\UpdatePropertyValue;
 use Vanilo\Framework\Http\Requests\UpdateTaxon;
@@ -65,7 +67,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         CreatePropertyValueForm::class,
         CreatePropertyValue::class,
         UpdatePropertyValue::class,
-        SyncModelPropertyValues::class
+        SyncModelPropertyValues::class,
+        CreateChannel::class,
+        UpdateChannel::class
     ];
 
     public function register()
@@ -105,6 +109,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             $shop->addSubItem('product_properties', __('Product Properties'), ['route' => 'vanilo.property.index'])->data('icon', 'format-list-bulleted');
             $shop->addSubItem('categories', __('Categorization'), ['route' => 'vanilo.taxonomy.index'])->data('icon', 'folder');
             $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])->data('icon', 'mall');
+
+            $settings = $menu->getItem('settings_group');
+            $settings->addSubItem('channels', __('Channels'), ['route' => 'vanilo.channel.index'])->data('icon', 'portable-wifi');
         }
     }
 }

@@ -89,3 +89,23 @@ Breadcrumbs::register('vanilo.property_value.edit', function ($breadcrumbs, $pro
     $breadcrumbs->parent('vanilo.property.show', $property);
     $breadcrumbs->push($propertyValue->title);
 });
+
+Breadcrumbs::register('vanilo.channel.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(__('Channels'), route('vanilo.channel.index'));
+});
+
+Breadcrumbs::register('vanilo.channel.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('vanilo.channel.index');
+    $breadcrumbs->push(__('Create'));
+});
+
+Breadcrumbs::register('vanilo.channel.show', function ($breadcrumbs, $channel) {
+    $breadcrumbs->parent('vanilo.channel.index');
+    $breadcrumbs->push($channel->name, route('vanilo.channel.show', $channel));
+});
+
+Breadcrumbs::register('vanilo.channel.edit', function ($breadcrumbs, $channel) {
+    $breadcrumbs->parent('vanilo.channel.show', $channel);
+    $breadcrumbs->push(__('Edit'), route('vanilo.channel.edit', $channel));
+});
