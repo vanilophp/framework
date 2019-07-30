@@ -42,7 +42,8 @@ class ChannelTest extends TestCase
         $this->assertEquals('app', $channel->slug);
 
         $cfg = $channel->configuration;
-        $this->assertIsArray($cfg);
+        // @todo convert to `assertIsArray` once dropping Laravel 5.5 -> PHPUnit < 7.5 support
+        $this->assertInternalType('array', $cfg);
         $this->assertEquals('zdish', $cfg['bam']);
         $this->assertEquals('tsish', $cfg['bumm']);
     }
