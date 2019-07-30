@@ -23,5 +23,4 @@ class Channel extends Model implements ChannelContract
     protected $casts = [
         'configuration' => 'array'
     ];
-
 }
