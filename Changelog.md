@@ -5,7 +5,8 @@
 ### Unreleased
 ##### 2019-XX-XX
 
--
+- Added simple Product stock
+- Added ProductFinder pagination support
 
 ## 0.5 Series
 
