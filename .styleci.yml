@@ -30,7 +30,6 @@ enabled:
   - ordered_class_elements
   - php_unit_construct
   - php_unit_dedicate_assert
-  - php_unit_dedicate_assert_internal_type
   - php_unit_expectation
   - php_unit_no_expectation_annotation
   - php_unit_set_up_tear_down_visibility
