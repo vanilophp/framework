@@ -48,10 +48,16 @@ abstract class TestCase extends Orchestra
      */
     protected function getPackageProviders($app)
     {
-        return [
+        $providers = [
             ConcordServiceProvider::class,
             LaravelMigrationCompatibilityProvider::class
         ];
+
+        if (version_compare($app->version(), '5.6.0', '<')) {
+            $providers[] = \Orchestra\Database\ConsoleServiceProvider::class;
+        }
+
+        return $providers;
     }
 
     /**
