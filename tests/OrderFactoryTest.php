@@ -12,12 +12,12 @@
 namespace Vanilo\Order\Tests;
 
 use Illuminate\Support\Facades\Event;
+use Konekt\Address\Models\Country;
 use Vanilo\Address\Models\Address;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Events\OrderWasCreated;
 use Vanilo\Order\Exceptions\CreateOrderException;
-use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\OrderStatusProxy;
 use Vanilo\Order\Tests\Dummies\Product;
 
@@ -276,12 +276,19 @@ class OrderFactoryTest extends TestCase
      */
     public function separate_billing_address_entry_gets_created_for_the_order()
     {
+        Country::create([
+            'id'           => 'DE',
+            'name'         => 'Germany',
+            'phonecode'    => 49,
+            'is_eu_member' => 1
+        ]);
+
         $order = $this->factory->createFromDataArray(
         [
             'billpayer' => [
                 'address' => [
                     'name'       => 'Johnny Bravo',
-                    'country_id' => 'US',
+                    'country_id' => 'DE',
                     'city'       => 'Aron City',
                     'address'    => '12 Sandy Baker Street'
                 ]

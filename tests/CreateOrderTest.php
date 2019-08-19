@@ -12,10 +12,15 @@
 
 namespace Vanilo\Order\Tests;
 
+use Illuminate\Support\Facades\DB;
+use Konekt\Address\Models\Address;
+use Konekt\Address\Models\AddressType;
+use Konekt\Address\Models\Country;
 use Konekt\Enum\Enum;
 use Konekt\User\Models\User;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
+use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Models\OrderStatus;
 
@@ -40,7 +45,14 @@ class CreateOrderTest extends TestCase
     public function order_cant_be_created_without_order_number()
     {
         $this->expectException(\PDOException::class);
-        $this->expectExceptionMessageRegExp('/NOT NULL/i');
+
+        if ('mysql' == DB::connection()->getPDO()->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
+            DB::connection()->statement('SET sql_mode = \'STRICT_TRANS_TABLES\'');
+            $this->expectExceptionMessageRegExp("/'number' doesn't have a default/i");
+        } else {
+            $this->expectExceptionMessageRegExp('/NOT NULL/i');
+        }
+
 
         Order::create([
             'status' => OrderStatus::__default
@@ -91,15 +103,25 @@ class CreateOrderTest extends TestCase
      */
     public function all_fields_can_be_properly_set()
     {
+        Country::create([
+            'id'           => 'DE',
+            'name'         => 'Germany',
+            'phonecode'    => 49,
+            'is_eu_member' => 1
+        ]);
+
         factory(User::class, 271)->create();
+        factory(Address::class, 8)->create(['type' => AddressType::SHIPPING]);
         $user = User::orderBy('id', 'desc')->first();
+        $shippingAddress = Address::orderBy('id', 'desc')->first();
+        $billpayer = factory(Billpayer::class)->create();
 
         $order = Order::create([
             'number'              => 'UEOIP',
             'status'              => OrderStatus::COMPLETED(),
             'user_id'             => $user->id,
-            'billpayer_id'        => '19072',
-            'shipping_address_id' => '19073',
+            'billpayer_id'        => $billpayer->id,
+            'shipping_address_id' => $shippingAddress->id,
             'notes'               => 'Never fight an inanimate object'
         ]);
 
@@ -109,8 +131,8 @@ class CreateOrderTest extends TestCase
         $this->assertTrue($order->status->isCompleted());
 
         $this->assertEquals($user->id, $order->user_id);
-        $this->assertEquals(19072, $order->billpayer_id);
-        $this->assertEquals(19073, $order->shipping_address_id);
+        $this->assertEquals($billpayer->id, $order->billpayer_id);
+        $this->assertEquals($shippingAddress->id, $order->shipping_address_id);
 
         $this->assertEquals('Never fight an inanimate object', $order->notes);
 
@@ -123,8 +145,8 @@ class CreateOrderTest extends TestCase
         $this->assertTrue($order->status->isCompleted());
 
         $this->assertEquals($user->id, $order->user_id);
-        $this->assertEquals(19072, $order->billpayer_id);
-        $this->assertEquals(19073, $order->shipping_address_id);
+        $this->assertEquals($billpayer->id, $order->billpayer_id);
+        $this->assertEquals($shippingAddress->id, $order->shipping_address_id);
 
         $this->assertEquals('Never fight an inanimate object', $order->notes);
     }
