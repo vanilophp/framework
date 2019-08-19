@@ -13,6 +13,7 @@
 namespace Vanilo\Order\Tests;
 
 use Konekt\Enum\Enum;
+use Konekt\User\Models\User;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
 use Vanilo\Order\Models\Order;
@@ -39,7 +40,7 @@ class CreateOrderTest extends TestCase
     public function order_cant_be_created_without_order_number()
     {
         $this->expectException(\PDOException::class);
-        $this->expectExceptionMessage('NOT NULL constraint failed');
+        $this->expectExceptionMessageRegExp('/NOT NULL/i');
 
         Order::create([
             'status' => OrderStatus::__default
@@ -90,10 +91,13 @@ class CreateOrderTest extends TestCase
      */
     public function all_fields_can_be_properly_set()
     {
+        factory(User::class, 271)->create();
+        $user = User::orderBy('id', 'desc')->first();
+
         $order = Order::create([
             'number'              => 'UEOIP',
             'status'              => OrderStatus::COMPLETED(),
-            'user_id'             => '271',
+            'user_id'             => $user->id,
             'billpayer_id'        => '19072',
             'shipping_address_id' => '19073',
             'notes'               => 'Never fight an inanimate object'
@@ -104,7 +108,7 @@ class CreateOrderTest extends TestCase
 
         $this->assertTrue($order->status->isCompleted());
 
-        $this->assertEquals(271, $order->user_id);
+        $this->assertEquals($user->id, $order->user_id);
         $this->assertEquals(19072, $order->billpayer_id);
         $this->assertEquals(19073, $order->shipping_address_id);
 
@@ -118,7 +122,7 @@ class CreateOrderTest extends TestCase
 
         $this->assertTrue($order->status->isCompleted());
 
-        $this->assertEquals(271, $order->user_id);
+        $this->assertEquals($user->id, $order->user_id);
         $this->assertEquals(19072, $order->billpayer_id);
         $this->assertEquals(19073, $order->shipping_address_id);
 

@@ -12,11 +12,11 @@
 namespace Vanilo\Order\Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Schema\Blueprint;
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Address\Providers\ModuleServiceProvider as KonektAddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
+use Konekt\User\Providers\ModuleServiceProvider as KonektUserModule;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Order\Providers\ModuleServiceProvider as OrderModule;
 use Vanilo\Order\Tests\Dummies\Product;
@@ -31,6 +31,7 @@ abstract class TestCase extends Orchestra
             shorten(Product::class) => Product::class
         ]);
 
+        $this->withFactories(__DIR__ . '/factories');
         $this->setUpDatabase($this->app);
 
         $this->app->concord->registerModel(
@@ -64,7 +65,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('database.default', $engine);
         $app['config']->set('database.connections.' . $engine, [
             'driver'   => $engine,
-            'database' => 'sqlite' == $engine ? ':memory:' : 'user_test',
+            'database' => 'sqlite' == $engine ? ':memory:' : 'order_test',
             'prefix'   => '',
             'host'     => '127.0.0.1',
             'username' => env('TEST_DB_USERNAME', 'pgsql' === $engine ? 'postgres' : 'root'),
@@ -85,15 +86,8 @@ abstract class TestCase extends Orchestra
     {
         $this->artisan('migrate:reset');
         $this->loadLaravelMigrations();
+        $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->artisan('migrate', ['--force' => true]);
-
-        $app['db']->connection()->getSchemaBuilder()->create('products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('sku')->nullable();
-            $table->string('name');
-            $table->decimal('price', 15, 2);
-            $table->timestamps();
-        });
     }
 
     /**
@@ -104,6 +98,7 @@ abstract class TestCase extends Orchestra
         parent::resolveApplicationConfiguration($app);
 
         $app['config']->set('concord.modules', [
+            KonektUserModule::class,
             KonektAddressModule::class,
             OrderModule::class
         ]);

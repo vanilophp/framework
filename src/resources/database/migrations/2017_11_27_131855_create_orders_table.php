@@ -11,7 +11,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('number', 32);
             $table->string('status', 32);
-            $table->intOrBigIntBasedOnRelated('user_id', Schema::connection(null), 'users.id');
+            $table->intOrBigIntBasedOnRelated('user_id', Schema::connection(null), 'users.id')->nullable();
             $table->integer('billpayer_id')->unsigned()->nullable();
             $table->integer('shipping_address_id')->unsigned()->nullable();
             $table->text('notes')->nullable();

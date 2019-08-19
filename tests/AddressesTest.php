@@ -11,6 +11,7 @@
 
 namespace Vanilo\Order\Tests;
 
+use Konekt\Address\Models\Country;
 use Vanilo\Contracts\Address as AddressContract;
 use Vanilo\Order\Tests\Dummies\Address;
 use Vanilo\Order\Models\Billpayer;
@@ -18,9 +19,26 @@ use Vanilo\Order\Models\Order;
 
 class AddressesTest extends TestCase
 {
-    /**
-     * @test
-     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Country::create([
+            'id'           => 'DK',
+            'name'         => 'Denmark',
+            'phonecode'    => 45,
+            'is_eu_member' => 1
+        ]);
+
+        Country::create([
+            'id'           => 'DE',
+            'name'         => 'Germany',
+            'phonecode'    => 49,
+            'is_eu_member' => 1
+        ]);
+    }
+
+    /** @test */
     public function billing_and_shipping_addresses_implement_vanilo_address()
     {
         $order = Order::create([
@@ -56,9 +74,7 @@ class AddressesTest extends TestCase
         $this->assertInstanceOf(AddressContract::class, $order->shippingAddress);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function billing_address_data_can_be_saved()
     {
         $order = Order::create([
@@ -101,9 +117,7 @@ class AddressesTest extends TestCase
         $this->assertEquals('Strandvej 111', $billingAddress->getAddress());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function shipping_address_data_can_be_saved()
     {
         $order = Order::create([
