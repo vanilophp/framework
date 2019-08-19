@@ -5,8 +5,8 @@
 <phpunit colors="true"
          bootstrap="./vendor/autoload.php">
     <testsuites>
-        <testsuite name="Konekt Cart Module Test Suite">
-            <directory suffix=".php">./tests</directory>
+        <testsuite name="Konekt Order Module Test Suite">
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
 

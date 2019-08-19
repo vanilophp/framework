@@ -31,13 +31,14 @@ abstract class TestCase extends Orchestra
             shorten(Product::class) => Product::class
         ]);
 
-        $this->withFactories(__DIR__ . '/factories');
         $this->setUpDatabase($this->app);
 
         $this->app->concord->registerModel(
             AddressContract::class,
             \Vanilo\Order\Tests\Dummies\Address::class
         );
+
+        $this->withFactories(__DIR__ . '/factories');
     }
 
     /**
