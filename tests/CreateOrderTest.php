@@ -112,9 +112,9 @@ class CreateOrderTest extends TestCase
 
         factory(User::class, 271)->create();
         factory(Address::class, 8)->create(['type' => AddressType::SHIPPING]);
-        $user = User::orderBy('id', 'desc')->first();
+        $user            = User::orderBy('id', 'desc')->first();
         $shippingAddress = Address::orderBy('id', 'desc')->first();
-        $billpayer = factory(Billpayer::class)->create();
+        $billpayer       = factory(Billpayer::class)->create();
 
         $order = Order::create([
             'number'              => 'UEOIP',
