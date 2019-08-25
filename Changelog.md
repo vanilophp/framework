@@ -9,12 +9,17 @@
 
 ## 0.5 Series
 
+### 0.5.2
+##### 2019-08-25
+
+- Added the [Laravel Migration Compatibility v1.0](https://konekt.dev/migration-compatibility/1.0/README) package to properly solve the Laravel 5.8 + bigInt problem.
+
 ### 0.5.1
 ##### 2019-03-17
 
 - Complete Laravel 5.8 compatibility (likely works with 0.4.0 & 0.5.0 as well)
 - PHP 7.0 support has been dropped
-- 
+
 ### 0.5.0
 ##### 2019-02-11
 
