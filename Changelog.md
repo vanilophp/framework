@@ -5,7 +5,7 @@
 ### Unreleased
 ##### 2018-XX-XX
 
--
+- Added protection against missing cart session config key value
 
 ## 0.5 Series
 

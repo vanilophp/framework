@@ -131,9 +131,11 @@ class CartManager implements CartManagerContract
      */
     public function model()
     {
-        if ($this->cart) {
+        $id = $this->getCartId();
+
+        if ($id && $this->cart) {
             return $this->cart;
-        } elseif ($id = $this->getCartId()) {
+        } elseif ($id) {
             $this->cart = CartProxy::find($id);
 
             return $this->cart;
@@ -210,10 +212,23 @@ class CartManager implements CartManagerContract
 
     public function restoreLastActiveCart($user)
     {
-        $cart = CartProxy::ofUser($user)->actives()->latest()->first();
+        $lastActiveCart = CartProxy::ofUser($user)->actives()->latest()->first();
 
-        if ($cart) {
-            $this->setCartModel($cart);
+        if ($lastActiveCart) {
+            $this->setCartModel($lastActiveCart);
+        }
+    }
+
+    public function mergeLastActiveCartWithSessionCart($user)
+    {
+        /** @var Cart $lastActiveCart */
+        if ($lastActiveCart = CartProxy::ofUser($user)->actives()->latest()->first()) {
+            /** @var CartItem $item */
+            foreach ($lastActiveCart->getItems() as $item) {
+                $this->addItem($item->getBuyable(), $item->getQuantity());
+            }
+
+            $lastActiveCart->delete();
         }
     }
 

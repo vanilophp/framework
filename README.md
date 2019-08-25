@@ -331,7 +331,7 @@ return [
 
 It is possible to keep the cart for users after logout and restore it after successful login.
 
-> This feature is disabled by default. To achive this behavior, set the
+> This feature is disabled by default. To achieve this behavior, set the
 > `vanilo.cart.preserve_for_user` config value to true
 
 | Event                     | State                                                             | Action                               |
@@ -339,6 +339,19 @@ It is possible to keep the cart for users after logout and restore it after succ
 | User login/authentication | Cart for this session doesn't exist, user has a saved active cart | Restore the cart                     |
 | User login/authentication | Cart for this session exists                                      | The current cart will be kept        |
 | User logout & lockout     | Cart for this session exists                                      | Cart will be kept for the user in db |
+
+##### Merge Anonymous And User Carts On Login
+
+If the `preserve_for_user` feature is enabled, a previously saved cart will be restored if a user
+logs back in.
+
+But what happens when a user already has a new cart with items? By default, the cart gets replaced
+by the previously saved one.
+
+If you set the `vanilo.cart.merge_duplicates` config option to true, then the previously saved
+cart's items will be added to the current cart, preserving the user's new cart as well.
+
+> This option is disabled by default.
 
 ### Totals
 

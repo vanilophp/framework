@@ -18,8 +18,12 @@ class RestoreCurrentUsersLastActiveCart
 {
     public function handle($event)
     {
-        if (Cart::isEmpty() && config('vanilo.cart.preserve_for_user') && Auth::check()) {
-            Cart::restoreLastActiveCart(Auth::user());
+        if (config('vanilo.cart.preserve_for_user') && Auth::check()) {
+            if (Cart::isEmpty()) {
+                Cart::restoreLastActiveCart(Auth::user());
+            } elseif (config('vanilo.cart.merge_duplicates')) {
+                Cart::mergeLastActiveCartWithSessionCart(Auth::user());
+            }
         }
     }
 }

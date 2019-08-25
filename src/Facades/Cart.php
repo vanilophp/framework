@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static removeItem($item)
  * @method static removeProduct(\Vanilo\Contracts\Buyable $product)
  * @method static clear()
+ * @method static restoreLastActiveCart(object|int $user)
+ * @method static mergeLastActiveCartWithSessionCart(object|int $user)
  * @method static int itemCount()
  * @method static total()
  * @method static bool exists()

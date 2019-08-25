@@ -35,6 +35,7 @@ abstract class TestCase extends Orchestra
             shorten(Product::class) => Product::class
         ]);
 
+        $this->withFactories(realpath(__DIR__ . '/factories'));
         $this->setUpDatabase($this->app);
         $this->startSession();
     }

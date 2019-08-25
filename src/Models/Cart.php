@@ -159,7 +159,7 @@ class Cart extends Model implements CartContract
 
     public function scopeOfUser($query, $user)
     {
-        return $query->where('user_id', $user->id);
+        return $query->where('user_id', is_object($user) ? $user->id : $user);
     }
 
     /**
