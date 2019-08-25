@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Models;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -63,7 +62,6 @@ class CartItem extends Model implements CartItemContract
     {
         return $this->total();
     }
-
 
     /**
      * Scope to query items of a cart

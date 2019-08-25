@@ -22,6 +22,20 @@ class RemoveProductTest extends TestCase
     /** @var  Product */
     protected $product4;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->product3 = Product::create([
+            'name'  => 'Saint George Pizza',
+            'price' => 9.79]);
+
+        $this->product4 = Product::create([
+            'name'  => 'Pizza With Goose Liver',
+            'price' => 8.89
+        ]);
+    }
+
     /**
      * @test
      */
@@ -54,19 +68,5 @@ class RemoveProductTest extends TestCase
         $this->assertCount(1, Cart::model()->items);
         $this->assertEquals($this->product4->id, Cart::model()->items->first()->product_id);
         $this->assertTrue(Cart::isNotEmpty());
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->product3 = Product::create([
-            'name'  => 'Saint George Pizza',
-            'price' => 9.79]);
-
-        $this->product4 = Product::create([
-            'name'  => 'Pizza With Goose Liver',
-            'price' => 8.89
-        ]);
     }
 }

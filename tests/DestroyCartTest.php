@@ -23,6 +23,21 @@ class DestroyCartTest extends TestCase
     /** @var  Product */
     protected $product8;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->product7 = Product::create([
+            'name'  => 'Yellow Laptop',
+            'price' => 899
+        ]);
+
+        $this->product8 = Product::create([
+            'name'  => 'Orange Laptop',
+            'price' => 949
+        ]);
+    }
+
     /**
      * @test
      */
@@ -61,20 +76,5 @@ class DestroyCartTest extends TestCase
 
         Cart::destroy();
         $this->assertNull(Cart::model());
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->product7 = Product::create([
-            'name'  => 'Yellow Laptop',
-            'price' => 899
-        ]);
-
-        $this->product8 = Product::create([
-            'name'  => 'Orange Laptop',
-            'price' => 949
-        ]);
     }
 }

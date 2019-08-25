@@ -22,6 +22,21 @@ class CartTotalTest extends TestCase
     /** @var  Product */
     protected $whiteCat;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->blackCat = Product::create([
+            'name'  => 'Black Cat',
+            'price' => 85
+        ]);
+
+        $this->whiteCat = Product::create([
+            'name'  => 'White Cat',
+            'price' => 80
+        ]);
+    }
+
     /**
      * @test
      */
@@ -86,20 +101,5 @@ class CartTotalTest extends TestCase
         Cart::clear();
 
         $this->assertEquals(0, Cart::total());
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->blackCat = Product::create([
-            'name'  => 'Black Cat',
-            'price' => 85
-        ]);
-
-        $this->whiteCat = Product::create([
-            'name'  => 'White Cat',
-            'price' => 80
-        ]);
     }
 }

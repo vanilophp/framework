@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Tests;
 
 use Vanilo\Cart\Facades\Cart;
@@ -23,6 +22,21 @@ class ClearCartTest extends TestCase
 
     /** @var  Product */
     protected $product6;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->product5 = Product::create([
+            'name'  => 'Spicy Ketchup',
+            'price' => 1.29
+        ]);
+
+        $this->product6 = Product::create([
+            'name'  => 'Curry Sauce',
+            'price' => 1.09
+        ]);
+    }
 
     /**
      * @test
@@ -73,20 +87,5 @@ class ClearCartTest extends TestCase
         Cart::clear();
 
         $this->assertCount(0, CartItemProxy::ofCart($cartId)->get());
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->product5 = Product::create([
-            'name'  => 'Spicy Ketchup',
-            'price' => 1.29
-        ]);
-
-        $this->product6 = Product::create([
-            'name'  => 'Curry Sauce',
-            'price' => 1.09
-        ]);
     }
 }

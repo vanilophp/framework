@@ -22,6 +22,21 @@ class CartItemTotalTest extends TestCase
     /** @var  Product */
     protected $blueBook;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->greenBook = Product::create([
+            'name'  => 'Green Book',
+            'price' => 12.50
+        ]);
+
+        $this->blueBook = Product::create([
+            'name'  => 'Blue Book',
+            'price' => 17.50 // blue is more expensive because of Monty Python
+        ]);
+    }
+
     /**
      * @test
      */
@@ -66,20 +81,5 @@ class CartItemTotalTest extends TestCase
             2 * $this->blueBook->getPrice(),
             $item->total
         );
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->greenBook = Product::create([
-            'name'  => 'Green Book',
-            'price' => 12.50
-        ]);
-
-        $this->blueBook = Product::create([
-            'name'  => 'Blue Book',
-            'price' => 17.50 // blue is more expensive because of Monty Python
-        ]);
     }
 }

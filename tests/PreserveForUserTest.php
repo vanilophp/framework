@@ -26,6 +26,24 @@ class PreserveForUserTest extends TestCase
     /** @var Product */
     protected $product;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['vanilo.cart.preserve_for_user' => true]);
+
+        $this->user = User::create([
+            'email'    => 'dude.who@uses-devices.info',
+            'name'     => 'Dude Who',
+            'password' => bcrypt('123456 always works')
+        ])->fresh();
+
+        $this->product = Product::create([
+            'name'  => 'myPad Ultra',
+            'price' => '279'
+        ])->fresh();
+    }
+
     /** @test */
     public function it_preserves_the_cart_for_the_user_after_logout_if_feature_is_enabled()
     {
@@ -115,23 +133,5 @@ class PreserveForUserTest extends TestCase
         $this->assertAuthenticatedAs($this->user);
 
         $this->assertTrue(Cart::isEmpty());
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        config(['vanilo.cart.preserve_for_user' => true]);
-
-        $this->user = User::create([
-            'email'    => 'dude.who@uses-devices.info',
-            'name'     => 'Dude Who',
-            'password' => bcrypt('123456 always works')
-        ])->fresh();
-
-        $this->product = Product::create([
-            'name'  => 'myPad Ultra',
-            'price' => '279'
-        ])->fresh();
     }
 }

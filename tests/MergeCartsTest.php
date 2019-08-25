@@ -18,12 +18,19 @@ use Vanilo\Cart\Tests\Dummies\User;
 
 class MergeCartsTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['vanilo.cart.preserve_for_user' => true]);
+    }
+
     /** @test */
     public function a_users_previous_cart_can_be_merged_with_the_current_sessions_cart()
     {
         config(['vanilo.cart.merge_duplicates' => true]);
 
-        $user = factory(User::class)->create();
+        $user     = factory(User::class)->create();
         $product1 = factory(Product::class)->create();
         $product2 = factory(Product::class)->create();
         $product3 = factory(Product::class)->create();
@@ -64,7 +71,7 @@ class MergeCartsTest extends TestCase
     {
         config(['vanilo.cart.merge_duplicates' => false]);
 
-        $user = factory(User::class)->create();
+        $user     = factory(User::class)->create();
         $product1 = factory(Product::class)->create();
         $product2 = factory(Product::class)->create();
         $product3 = factory(Product::class)->create();
@@ -98,12 +105,5 @@ class MergeCartsTest extends TestCase
         $this->assertNotContains($product1->name, $names);
         $this->assertContains($product2->name, $names);
         $this->assertContains($product3->name, $names);
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        config(['vanilo.cart.preserve_for_user' => true]);
     }
 }

@@ -23,6 +23,20 @@ class AddItemsTest extends TestCase
     /** @var  Product */
     protected $product2;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->product1 = Product::create([
+            'name'  => 'Random Product',
+            'price' => 178
+        ]);
+        $this->product2 = Product::create([
+            'name'  => 'Another Product',
+            'price' => 87
+        ]);
+    }
+
     /**
      * @test
      */
@@ -120,19 +134,5 @@ class AddItemsTest extends TestCase
             CartItem::class,
             Cart::addItem($this->product1)
         );
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->product1 = Product::create([
-            'name'  => 'Random Product',
-            'price' => 178
-        ]);
-        $this->product2 = Product::create([
-            'name'  => 'Another Product',
-            'price' => 87
-        ]);
     }
 }

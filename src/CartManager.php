@@ -109,7 +109,6 @@ class CartManager implements CartManagerContract
         return $this->exists() ? $this->model()->total() : 0;
     }
 
-
     /**
      * @inheritDoc
      */
@@ -149,7 +148,7 @@ class CartManager implements CartManagerContract
      */
     public function isEmpty()
     {
-        return $this->itemCount() == 0;
+        return 0 == $this->itemCount();
     }
 
     /**

@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Tests\Dummies;
 
 use Illuminate\Notifications\Notifiable;

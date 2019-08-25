@@ -23,6 +23,21 @@ class CartItemProductTest extends TestCase
     /** @var  Course */
     protected $reactForBeginners;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->alaskaSnow = Product::create([
+            'name'  => 'Alaska Snow 34oz',
+            'price' => 9
+        ]);
+
+        $this->reactForBeginners = Course::create([
+            'title' => 'React For Beginners',
+            'price' => 89
+        ]);
+    }
+
     /**
      * @test
      */
@@ -47,20 +62,5 @@ class CartItemProductTest extends TestCase
 
         $this->assertInstanceOf(Course::class, $course);
         $this->assertEquals($this->reactForBeginners->id, $course->id);
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->alaskaSnow = Product::create([
-            'name'  => 'Alaska Snow 34oz',
-            'price' => 9
-        ]);
-
-        $this->reactForBeginners = Course::create([
-            'title' => 'React For Beginners',
-            'price' => 89
-        ]);
     }
 }

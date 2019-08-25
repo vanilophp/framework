@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -24,7 +23,7 @@ abstract class TestCase extends Orchestra
 {
     use Laravel54TestCompatibility;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

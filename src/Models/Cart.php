@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -47,7 +46,6 @@ class Cart extends Model implements CartContract
     {
         return $this->items;
     }
-
 
     /**
      * @inheritDoc
@@ -179,7 +177,6 @@ class Cart extends Model implements CartContract
             'price'        => $product->getPrice()
         ];
     }
-
 
     /**
      * Returns the extra product merge attributes for cart_items based on the config

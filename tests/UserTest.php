@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Tests;
 
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +20,17 @@ class UserTest extends TestCase
 {
     /** @var User */
     protected $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::create([
+            'email'    => 'ever@green.me',
+            'name'     => 'Molly Green',
+            'password' => bcrypt('brute force')
+        ])->fresh();
+    }
 
     /**
      * @test
@@ -171,16 +181,5 @@ class UserTest extends TestCase
         $this->assertGuest();
 
         $this->assertEquals($this->user->id, Cart::getUser()->id);
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->user = User::create([
-            'email'    => 'ever@green.me',
-            'name'     => 'Molly Green',
-            'password' => bcrypt('brute force')
-        ])->fresh();
     }
 }

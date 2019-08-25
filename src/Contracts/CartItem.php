@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Contracts;
 
 use Vanilo\Contracts\CheckoutSubjectItem;

@@ -13,7 +13,6 @@ namespace Vanilo\Cart\Contracts;
 
 interface CartManager extends Cart
 {
-
     /**
      * Returns whether a cart exists for this user or session
      *

@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Cart\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -27,7 +26,7 @@ interface Cart extends CheckoutSubject
      *
      * @return CartItem Returns the item object that has been created (or updated)
      */
-    public function addItem(Buyable $product, $qty = 1, $params = []) : CartItem;
+    public function addItem(Buyable $product, $qty = 1, $params = []): CartItem;
 
     /**
      * Removes an item from the cart
