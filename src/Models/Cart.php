@@ -168,7 +168,7 @@ class Cart extends Model implements CartContract
      *
      * @return array
      */
-    private function getDefaultCartItemAttributes(Buyable $product, $qty)
+    protected function getDefaultCartItemAttributes(Buyable $product, $qty)
     {
         return [
             'product_type' => $product->morphTypeName(),
@@ -187,7 +187,7 @@ class Cart extends Model implements CartContract
      *
      * @return array
      */
-    private function getExtraProductMergeAttributes(Buyable $product)
+    protected function getExtraProductMergeAttributes(Buyable $product)
     {
         $result = [];
         $cfg    = config(self::EXTRA_PRODUCT_MERGE_ATTRIBUTES_CONFIG_KEY, []);
