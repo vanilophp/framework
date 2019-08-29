@@ -12,6 +12,7 @@
 
 namespace Vanilo\Checkout\Drivers;
 
+use Illuminate\Support\Arr;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
@@ -54,7 +55,7 @@ class RequestStore implements CheckoutStore
     {
         $this->updateBillpayer($data['billpayer'] ??  []);
 
-        if (array_get($data, 'ship_to_billing_address')) {
+        if (Arr::get($data, 'ship_to_billing_address')) {
             $shippingAddress         = $data['billpayer']['address'];
             $shippingAddress['name'] = $this->getShipToName();
         } else {
