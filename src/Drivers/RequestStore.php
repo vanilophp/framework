@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Support\Arr;
@@ -110,7 +109,7 @@ class RequestStore implements CheckoutStore
      */
     protected function updateBillpayer($data)
     {
-        $this->fill($this->billpayer, array_except($data, 'address'));
+        $this->fill($this->billpayer, Arr::except($data, 'address'));
         $this->fill($this->billpayer->address, $data['address']);
     }
 

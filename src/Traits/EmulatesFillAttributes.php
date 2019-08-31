@@ -9,8 +9,9 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Traits;
+
+use Illuminate\Support\Str;
 
 trait EmulatesFillAttributes
 {
@@ -21,7 +22,7 @@ trait EmulatesFillAttributes
         }
 
         foreach ($attributes as $key => $value) {
-            $setter = 'set' . studly_case($key);
+            $setter = 'set' . Str::studly($key);
 
             if (method_exists($target, $setter)) {
                 $target->{$setter}($value);
