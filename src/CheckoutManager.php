@@ -112,7 +112,6 @@ class CheckoutManager implements CheckoutContract
         return $this->store->getCustomAttributes();
     }
 
-
     /**
      * @inheritdoc
      */
