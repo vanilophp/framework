@@ -102,14 +102,14 @@ class CheckoutManager implements CheckoutContract
         return $this->store->getCustomAttribute($key);
     }
 
-    public function setCustomData(array $data): void
+    public function putCustomAttributes(array $data): void
     {
-        $this->store->setCustomData($data);
+        $this->store->putCustomAttributes($data);
     }
 
-    public function getCustomData(): array
+    public function getCustomAttributes(): array
     {
-        return $this->getCustomData();
+        return $this->store->getCustomAttributes();
     }
 
 

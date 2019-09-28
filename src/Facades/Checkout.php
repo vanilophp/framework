@@ -28,8 +28,8 @@ use Vanilo\Contracts\CheckoutSubject;
  * @method static setShippingAddress(Address $address)
  * @method static setCustomAttribute(string $key, $value): void
  * @method static getCustomAttribute(string $key)
- * @method static setCustomData(array $data): void
- * @method static getCustomData(): array
+ * @method static putCustomAttributes(array $data): void
+ * @method static getCustomAttributes(): array
  * @method static update(array $data);
  * @method static total(): float
  */

@@ -77,9 +77,9 @@ interface Checkout
 
     public function getCustomAttribute(string $key);
 
-    public function setCustomData(array $data): void;
+    public function putCustomAttributes(array $data): void;
 
-    public function getCustomData(): array;
+    public function getCustomAttributes(): array;
 
     /**
      * Update checkout data with an array of attributes

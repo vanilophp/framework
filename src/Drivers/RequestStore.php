@@ -109,20 +109,20 @@ class RequestStore implements CheckoutStore
 
     public function setCustomAttribute(string $key, $value): void
     {
-        $this->customData[$key] = $value;
+        Arr::set($this->customData, $key, $value);
     }
 
     public function getCustomAttribute(string $key)
     {
-        return $this->customData[$key];
+        return Arr::get($this->customData, $key);
     }
 
-    public function setCustomData(array $data): void
+    public function putCustomAttributes(array $data): void
     {
         $this->customData = $data;
     }
 
-    public function getCustomData(): array
+    public function getCustomAttributes(): array
     {
         return $this->customData;
     }
