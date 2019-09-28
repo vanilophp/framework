@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Tests;
 
 use Vanilo\Checkout\Facades\Checkout;
@@ -24,6 +23,14 @@ class CartTest extends TestCase
 
     /** @var  Product */
     protected $productNormal2018;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->productEarly2018  = new Product(1, 'Laracon EU 2018 Ticket Early Bird', 399);
+        $this->productNormal2018 = new Product(2, 'Laracon EU 2018 Ticket', 599);
+    }
 
     /**
      * @test
@@ -72,13 +79,5 @@ class CartTest extends TestCase
         Checkout::setCart($cart);
 
         $this->assertCount(2, Checkout::getCart()->getItems());
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->productEarly2018  = new Product(1, 'Laracon EU 2018 Ticket Early Bird', 399);
-        $this->productNormal2018 = new Product(2, 'Laracon EU 2018 Ticket', 599);
     }
 }

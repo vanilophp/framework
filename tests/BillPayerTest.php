@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Tests;
 
 use Vanilo\Checkout\Facades\Checkout;
@@ -23,7 +22,7 @@ class BillPayerTest extends TestCase
     /** @var array */
     private $billpayerAttributes;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -45,7 +44,6 @@ class BillPayerTest extends TestCase
 
         $this->billpayer = new Billpayer($this->billpayerAttributes);
     }
-
 
     /**
      * @test

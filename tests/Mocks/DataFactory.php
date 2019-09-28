@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Tests\Mocks;
 
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;

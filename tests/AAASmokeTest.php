@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Tests;
 
 class AAASmokeTest extends TestCase

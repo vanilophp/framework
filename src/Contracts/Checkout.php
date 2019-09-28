@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Contracts;
 
 use Vanilo\Contracts\Address;

@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Facades;
 
 use Illuminate\Support\Facades\Facade;

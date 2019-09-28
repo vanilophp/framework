@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout;
 
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
@@ -64,7 +63,7 @@ class CheckoutManager implements CheckoutContract
     /**
      * @inheritdoc
      */
-    public function getBillpayer() : Billpayer
+    public function getBillpayer(): Billpayer
     {
         return $this->store->getBillpayer();
     }

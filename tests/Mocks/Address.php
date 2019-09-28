@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Tests\Mocks;
 
 use Vanilo\Contracts\Address as AddressContract;
@@ -21,6 +20,14 @@ class Address implements AddressContract
     public function __construct(array $data = null)
     {
         $this->data = $data ?: [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
     }
 
     public function getName()
@@ -51,13 +58,5 @@ class Address implements AddressContract
     public function getAddress()
     {
         return $this->data['address'] ?? null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __set($name, $value)
-    {
-        $this->data[$name] = $value;
     }
 }

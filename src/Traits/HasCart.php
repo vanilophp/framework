@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Traits;
 
 use Vanilo\Contracts\CheckoutSubject;

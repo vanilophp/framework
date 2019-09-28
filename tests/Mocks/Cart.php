@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Checkout\Tests\Mocks;
 
 use Illuminate\Support\Collection;
@@ -28,7 +27,6 @@ class Cart implements CheckoutSubject
     {
         $this->items = collect();
     }
-
 
     /**
      * @param Buyable $product
