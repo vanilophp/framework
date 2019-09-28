@@ -12,8 +12,8 @@
 namespace Vanilo\Checkout\Tests;
 
 use Vanilo\Checkout\Facades\Checkout;
-use Vanilo\Checkout\Tests\Mocks\Cart;
-use Vanilo\Checkout\Tests\Mocks\Product;
+use Vanilo\Checkout\Tests\Example\Cart;
+use Vanilo\Checkout\Tests\Example\Product;
 use Vanilo\Contracts\CheckoutSubject;
 
 class CartTest extends TestCase

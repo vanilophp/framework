@@ -5,7 +5,7 @@
 ### Unreleased
 ##### 2019-XX-XX
 
--
+- Added support for custom attributes
 
 ## 0.5 Series
 

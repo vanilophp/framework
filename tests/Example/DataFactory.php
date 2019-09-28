@@ -9,10 +9,10 @@
  *
  */
 
-namespace Vanilo\Checkout\Tests\Mocks;
+namespace Vanilo\Checkout\Tests\Example;
 
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
-use Vanilo\Checkout\Tests\Mocks\Address as MockAddress;
+use Vanilo\Checkout\Tests\Example\Address as MockAddress;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 
@@ -20,7 +20,7 @@ class DataFactory implements CheckoutDataFactory
 {
     public function createBillPayer(): Billpayer
     {
-        return new \Vanilo\Checkout\Tests\Mocks\Billpayer();
+        return new \Vanilo\Checkout\Tests\Example\Billpayer();
     }
 
     public function createShippingAddress(): Address

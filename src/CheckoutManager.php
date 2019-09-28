@@ -92,6 +92,27 @@ class CheckoutManager implements CheckoutContract
         $this->store->setShippingAddress($address);
     }
 
+    public function setCustomAttribute(string $key, $value): void
+    {
+        $this->store->setCustomAttribute($key, $value);
+    }
+
+    public function getCustomAttribute(string $key)
+    {
+        return $this->store->getCustomAttribute($key);
+    }
+
+    public function setCustomData(array $data): void
+    {
+        $this->store->setCustomData($data);
+    }
+
+    public function getCustomData(): array
+    {
+        return $this->getCustomData();
+    }
+
+
     /**
      * @inheritdoc
      */

@@ -9,7 +9,7 @@
  *
  */
 
-namespace Vanilo\Checkout\Tests\Mocks;
+namespace Vanilo\Checkout\Tests\Example;
 
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubjectItem;

@@ -15,7 +15,7 @@ use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Providers\ModuleServiceProvider as CheckoutModule;
-use Vanilo\Checkout\Tests\Mocks\DataFactory;
+use Vanilo\Checkout\Tests\Example\DataFactory;
 use Vanilo\Support\Tests\Traits\Laravel54TestCompatibility;
 
 abstract class TestCase extends Orchestra

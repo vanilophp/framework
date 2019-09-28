@@ -12,7 +12,7 @@
 namespace Vanilo\Checkout\Tests;
 
 use Vanilo\Checkout\Facades\Checkout;
-use Vanilo\Checkout\Tests\Mocks\Billpayer;
+use Vanilo\Checkout\Tests\Example\Billpayer;
 
 class BillPayerTest extends TestCase
 {

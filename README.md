@@ -25,6 +25,7 @@ It has:
 - Shipping information (if cart needs shipping; address, contact)
 - Shipping method (TBD)
 - User (optional)
+- Custom Data (notes, etc)
 - State
 
 Attributes:
@@ -34,7 +35,6 @@ Attributes:
 ## API Draft
 
 ```php
-
 $checkout->cart; // CheckoutSubject (vanilo/contracts) getter/setter
 $checkout->billingSubject; // BillingSubject
 $checkout->shippingAddress; // Address

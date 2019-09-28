@@ -40,6 +40,9 @@ class RequestStore implements CheckoutStore
     /** @var  CheckoutDataFactory */
     protected $dataFactory;
 
+    /** @var array */
+    protected $customData = [];
+
     public function __construct($config, CheckoutDataFactory $dataFactory)
     {
         $this->dataFactory     = $dataFactory;
@@ -102,6 +105,26 @@ class RequestStore implements CheckoutStore
     public function setShippingAddress(Address $address)
     {
         return $this->shippingAddress = $address;
+    }
+
+    public function setCustomAttribute(string $key, $value): void
+    {
+        $this->customData[$key] = $value;
+    }
+
+    public function getCustomAttribute(string $key)
+    {
+        return $this->customData[$key];
+    }
+
+    public function setCustomData(array $data): void
+    {
+        $this->customData = $data;
+    }
+
+    public function getCustomData(): array
+    {
+        return $this->customData;
     }
 
     /**

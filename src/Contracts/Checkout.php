@@ -73,8 +73,18 @@ interface Checkout
      */
     public function setShippingAddress(Address $address);
 
+    public function setCustomAttribute(string $key, $value): void;
+
+    public function getCustomAttribute(string $key);
+
+    public function setCustomData(array $data): void;
+
+    public function getCustomData(): array;
+
     /**
      * Update checkout data with an array of attributes
+     *
+     * @deprecated
      *
      * @param array $data
      */
