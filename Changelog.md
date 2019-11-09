@@ -7,6 +7,7 @@
 
 - Added simple Product stock
 - Added ProductFinder pagination support
+- Added Channel Module
 
 ## 0.5 Series
 
