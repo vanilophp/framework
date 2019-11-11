@@ -16,15 +16,6 @@ use Vanilo\Contracts\Billpayer;
 
 interface CheckoutDataFactory
 {
-    // Payment method
-    // Shipping method
-    // Notes
-    // Other fields like "Chosen Gift"
-    // Accept terms & conditions
-    // Accept GDPR
-    // Some shops apply coupons at checkout - still should apply to Cart though
-    // Newsletter option
-    // Checkbox to register account (maybe even password)
     public function createBillpayer(): Billpayer;
 
     public function createShippingAddress(): Address;

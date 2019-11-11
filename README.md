@@ -47,3 +47,19 @@ $checkout->state; // CheckoutState
 ### Billing Information
 
 `\Vanilo\Contracts\BillingSubject`
+
+### Custom Checkout Attributes
+
+```php
+// Set custom attribute
+Checkout::setCustomAttribute('gift', 'Unisex T-Shirt L');
+// Retrieve custom attribute
+echo Checkout::getCustomAttribute('gift');
+// "Unisex T-Shirt L"
+
+// Retrieve all custom attributes at once
+Checkout::getCustomAttributes();
+// array(2) 
+// 'gift'          => 'Unisex T-Shirt L'
+// 'gdpr_accepted' => true
+```
