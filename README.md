@@ -12,9 +12,9 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 
 ## Current Version
 
-#### 0.5
+#### 1.0
 
-The latest Vanilo version is **v0.5.3** and was released on Mar 19, 2019.
+The latest Vanilo version is **v1.0.0** and was released on Nov 11, 2019.
 
 Refer to the [Roadmap](https://vanilo.io/docs/master/roadmap) for upcoming versions.
 
@@ -31,4 +31,4 @@ Feel free to submit your questions, suggestions by adding a
 
 Follow us on [twitter](https://twitter.com/vanilo_io).
 
-Support [Vanilo on Patreon](https://www.patreon.com/fulopattila122)
+Support [Vanilo on Github](https://github.com/sponsors/fulopattila122)

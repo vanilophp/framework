@@ -19,15 +19,15 @@
         "laravel/framework": "~5.5",
         "konekt/appshell": "~1.4",
         "spatie/laravel-medialibrary": "^7.3",
-        "vanilo/contracts": "1.0.*",
-        "vanilo/support": "1.0.*",
-        "vanilo/category": "1.0.*",
-        "vanilo/product": "1.0.*",
-        "vanilo/cart": "1.0.*",
-        "vanilo/checkout": "1.0.*",
-        "vanilo/order": "1.0.*",
-        "vanilo/properties": "1.0.*",
-        "vanilo/channel": "1.0.*"
+        "vanilo/contracts": "~1.0",
+        "vanilo/support": "~1.0",
+        "vanilo/category": "~1.0",
+        "vanilo/product": "~1.0",
+        "vanilo/cart": "~1.0",
+        "vanilo/checkout": "~1.0",
+        "vanilo/order": "~1.0",
+        "vanilo/properties": "~1.0",
+        "vanilo/channel": "~1.0"
     },
     "autoload": {
         "psr-4": {
