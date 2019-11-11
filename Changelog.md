@@ -2,10 +2,11 @@
 
 ## 1.0 Series
 
-### Unreleased
-##### 2018-XX-XX
+### 1.0.0
+##### 2019-11-11
 
 - Added protection against missing cart session config key value
+- Added merge cart feature on login
 
 ## 0.5 Series
 
