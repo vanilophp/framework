@@ -4,46 +4,34 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+php:
+  - '7.1'
+  - '7.2'
+  - '7.3'
+env:
+  - LARAVEL=5.5
+  - LARAVEL=5.6
+  - LARAVEL=5.7
+  - LARAVEL=5.8
+  - LARAVEL=6.0
+  - LARAVEL=6.5
+
 matrix:
-  include:
-    - php: 7.1
-      env: L5_VER=4
-    - php: 7.1
-      env: L5_VER=5
-    - php: 7.1
-      env: L5_VER=6
-    - php: 7.1
-      env: L5_VER=7
-    - php: 7.1
-      env: L5_VER=8
-    - php: 7.2
-      env: L5_VER=4
-    - php: 7.2
-      env: L5_VER=5
-    - php: 7.2
-      env: L5_VER=6
-    - php: 7.2
-      env: L5_VER=7
-    - php: 7.2
-      env: L5_VER=8
-    - php: 7.3
-      env: L5_VER=4
-    - php: 7.3
-      env: L5_VER=5
-    - php: 7.3
-      env: L5_VER=6
-    - php: 7.3
-      env: L5_VER=7
-    - php: 7.3
-      env: L5_VER=8
+  exclude:
+    - php: '7.1'
+      env: 'LARAVEL=6.0'
+    - php: '7.1'
+      env: 'LARAVEL=6.5'
 
 script:
   - vendor/bin/phpunit
 
 before_install:
-  - composer require "illuminate/support:5.${L5_VER}.*" --no-update -v
-  - composer require "illuminate/console:5.${L5_VER}.*" --no-update -v
-  - composer require "orchestra/testbench:3.${L5_VER}.*" --no-update -v
+  - MINOR=`echo $LARAVEL | sed 's/[5|6]\.\([0-9]\+\)/\1/'`
+  - '[[ $LARAVEL =~ ^6\.[0-9]$ ]] && MAJOR=6 || MAJOR=5'
+  - '[ 6 -eq $MAJOR ] && ORCH=4 || ORCH=3'
+  - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
+  - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
 
 install: composer install --no-interaction
 
