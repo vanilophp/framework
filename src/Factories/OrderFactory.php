@@ -11,6 +11,7 @@
 
 namespace Vanilo\Order\Factories;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Konekt\Address\Contracts\AddressType;
 use Konekt\Address\Models\AddressProxy;
@@ -48,7 +49,7 @@ class OrderFactory implements OrderFactoryContract
         try {
             $order = app(Order::class);
 
-            $order->fill(array_except($data, ['billpayer', 'shippingAddress']));
+            $order->fill(Arr::except($data, ['billpayer', 'shippingAddress']));
             $order->number  = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
             $order->user_id = $data['user_id'] ?? auth()->id();
             $order->save();
@@ -93,7 +94,7 @@ class OrderFactory implements OrderFactoryContract
             $address = $this->createOrCloneAddress($data['billpayer']['address'], AddressTypeProxy::BILLING());
 
             $billpayer = app(Billpayer::class);
-            $billpayer->fill(array_except($data['billpayer'], 'address'));
+            $billpayer->fill(Arr::except($data['billpayer'], 'address'));
             $billpayer->address()->associate($address);
             $billpayer->save();
 
@@ -179,7 +180,7 @@ class OrderFactory implements OrderFactoryContract
 
         $type            = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
         $address['type'] = $type;
-        $address['name'] = empty(array_get($address, 'name')) ? '-' : $address['name'];
+        $address['name'] = empty(Arr::get($address, 'name')) ? '-' : $address['name'];
 
         return AddressProxy::create($address);
     }

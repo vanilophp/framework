@@ -1,111 +1,52 @@
 language: php
+
 cache:
   directories:
   - "$HOME/.composer/cache"
+
+php:
+  - '7.1'
+  - '7.2'
+  - '7.3'
+
+env:
+  - LARAVEL=5.5 TEST_DB_ENGINE=pgsql
+  - LARAVEL=5.5 TEST_DB_ENGINE=mysql
+  - LARAVEL=5.5 TEST_DB_ENGINE=sqlite
+  - LARAVEL=5.6 TEST_DB_ENGINE=sqlite
+  - LARAVEL=5.7 TEST_DB_ENGINE=sqlite
+  - LARAVEL=5.8 TEST_DB_ENGINE=sqlite
+  - LARAVEL=6.0 TEST_DB_ENGINE=sqlite
+  - LARAVEL=6.5 TEST_DB_ENGINE=pgsql
+  - LARAVEL=6.5 TEST_DB_ENGINE=mysql
+  - LARAVEL=6.5 TEST_DB_ENGINE=sqlite
+
 matrix:
-  include:
-    - php: 7.1
-      env: L5_VER=4 TEST_DB_ENGINE=sqlite
-    - php: 7.1
-      env: L5_VER=4 TEST_DB_ENGINE=mysql
-    - php: 7.1
-      env: L5_VER=4 TEST_DB_ENGINE=pgsql
-    - php: 7.1
-      env: L5_VER=5 TEST_DB_ENGINE=sqlite
-    - php: 7.1
-      env: L5_VER=5 TEST_DB_ENGINE=mysql
-    - php: 7.1
-      env: L5_VER=5 TEST_DB_ENGINE=pgsql
-    - php: 7.1
-      env: L5_VER=6 TEST_DB_ENGINE=sqlite
-    - php: 7.1
-      env: L5_VER=6 TEST_DB_ENGINE=mysql
-    - php: 7.1
-      env: L5_VER=6 TEST_DB_ENGINE=pgsql
-    - php: 7.1
-      env: L5_VER=7 TEST_DB_ENGINE=sqlite
-    - php: 7.1
-      env: L5_VER=7 TEST_DB_ENGINE=mysql
-    - php: 7.1
-      env: L5_VER=7 TEST_DB_ENGINE=pgsql
-    - php: 7.1
-      env: L5_VER=8 TEST_DB_ENGINE=sqlite
-    - php: 7.1
-      env: L5_VER=8 TEST_DB_ENGINE=mysql
-    - php: 7.1
-      env: L5_VER=8 TEST_DB_ENGINE=pgsql
-    - php: 7.2
-      env: L5_VER=4 TEST_DB_ENGINE=sqlite
-    - php: 7.2
-      env: L5_VER=4 TEST_DB_ENGINE=mysql
-    - php: 7.2
-      env: L5_VER=4 TEST_DB_ENGINE=pgsql
-    - php: 7.2
-      env: L5_VER=5 TEST_DB_ENGINE=sqlite
-    - php: 7.2
-      env: L5_VER=5 TEST_DB_ENGINE=mysql
-    - php: 7.2
-      env: L5_VER=5 TEST_DB_ENGINE=pgsql
-    - php: 7.2
-      env: L5_VER=6 TEST_DB_ENGINE=sqlite
-    - php: 7.2
-      env: L5_VER=6 TEST_DB_ENGINE=mysql
-    - php: 7.2
-      env: L5_VER=6 TEST_DB_ENGINE=pgsql
-    - php: 7.2
-      env: L5_VER=7 TEST_DB_ENGINE=sqlite
-    - php: 7.2
-      env: L5_VER=7 TEST_DB_ENGINE=mysql
-    - php: 7.2
-      env: L5_VER=7 TEST_DB_ENGINE=pgsql
-    - php: 7.2
-      env: L5_VER=8 TEST_DB_ENGINE=sqlite
-    - php: 7.2
-      env: L5_VER=8 TEST_DB_ENGINE=mysql
-    - php: 7.2
-      env: L5_VER=8 TEST_DB_ENGINE=pgsql
-    - php: 7.3
-      env: L5_VER=4 TEST_DB_ENGINE=sqlite
-    - php: 7.3
-      env: L5_VER=4 TEST_DB_ENGINE=mysql
-    - php: 7.3
-      env: L5_VER=4 TEST_DB_ENGINE=pgsql
-    - php: 7.3
-      env: L5_VER=5 TEST_DB_ENGINE=sqlite
-    - php: 7.3
-      env: L5_VER=5 TEST_DB_ENGINE=mysql
-    - php: 7.3
-      env: L5_VER=5 TEST_DB_ENGINE=pgsql
-    - php: 7.3
-      env: L5_VER=6 TEST_DB_ENGINE=sqlite
-    - php: 7.3
-      env: L5_VER=6 TEST_DB_ENGINE=mysql
-    - php: 7.3
-      env: L5_VER=6 TEST_DB_ENGINE=pgsql
-    - php: 7.3
-      env: L5_VER=7 TEST_DB_ENGINE=sqlite
-    - php: 7.3
-      env: L5_VER=7 TEST_DB_ENGINE=mysql
-    - php: 7.3
-      env: L5_VER=7 TEST_DB_ENGINE=pgsql
-    - php: 7.3
-      env: L5_VER=8 TEST_DB_ENGINE=sqlite
-    - php: 7.3
-      env: L5_VER=8 TEST_DB_ENGINE=mysql
-    - php: 7.3
-      env: L5_VER=8 TEST_DB_ENGINE=pgsql
+  exclude:
+    - php: '7.1'
+      env: 'LARAVEL=6.0 TEST_DB_ENGINE=sqlite'
+    - php: '7.1'
+      env: 'LARAVEL=6.5 TEST_DB_ENGINE=pgsql'
+    - php: '7.1'
+      env: 'LARAVEL=6.5 TEST_DB_ENGINE=mysql'
+    - php: '7.1'
+      env: 'LARAVEL=6.5 TEST_DB_ENGINE=sqlite'
+
 script:
   - vendor/bin/phpunit --testdox
+
 before_install:
-- composer require "illuminate/support:5.${L5_VER}.*" --no-update -v
-- composer require "illuminate/console:5.${L5_VER}.*" --no-update -v
-- composer require "orchestra/testbench:3.${L5_VER}.*" --no-update -v
-- sh -c "[ ! -z $TEST_DB_ENGINE ] && [ 'mysql' = $TEST_DB_ENGINE ] && mysql -e 'DROP DATABASE IF EXISTS order_test;CREATE DATABASE order_test;'" || true
-- sh -c "[ ! -z $TEST_DB_ENGINE ] && [ 'pgsql' = $TEST_DB_ENGINE ] && psql -c 'create database order_test;' -U postgres" || true
+  - MINOR=`echo $LARAVEL | sed 's/[5|6]\.\([0-9]\+\)/\1/'`
+  - '[[ $LARAVEL =~ ^6\.[0-9]$ ]] && MAJOR=6 || MAJOR=5'
+  - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
+  - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
+
 install: composer install --no-interaction
+
 services:
   - mysql
   - postgresql
+
 notifications:
   email: false
   slack:

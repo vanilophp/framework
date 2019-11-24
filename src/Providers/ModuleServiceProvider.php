@@ -11,6 +11,7 @@
 
 namespace Vanilo\Order\Providers;
 
+use Illuminate\Support\Str;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Contracts\OrderNumberGenerator;
@@ -50,7 +51,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         $this->app->bind(OrderNumberGenerator::class, function ($app) use ($generatorClass, $nsRoot) {
             if (!class_exists($generatorClass)) {
                 $generatorClass = sprintf('%s\\Generators\\%sGenerator',
-                    $nsRoot, studly_case($generatorClass)
+                    $nsRoot, Str::studly($generatorClass)
                 );
             }
 
