@@ -17,13 +17,13 @@
     ],
     "require": {
         "php": "^7.1.3",
-        "konekt/concord": "~1.1",
-        "vanilo/contracts": "~1.0"
+        "konekt/concord": "~1.4",
+        "vanilo/contracts": "~1.1@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "6.2 - 7.5",
-        "orchestra/testbench": "^3.4.2",
-        "vanilo/support": "~1.0"
+        "phpunit/phpunit": "6.2 - 7.5|~8.0",
+        "orchestra/testbench": "~3.5|~4.0",
+        "vanilo/support": "~1.1@dev"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Checkout\\": "src/" }
@@ -31,11 +31,6 @@
     "autoload-dev": {
         "psr-4": {
             "Vanilo\\Checkout\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
         }
     }
 }

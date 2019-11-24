@@ -11,6 +11,7 @@
 
 namespace Vanilo\Checkout\Tests\Example;
 
+use Illuminate\Support\Arr;
 use Vanilo\Contracts\Address as AddressContract;
 
 class Billpayer implements \Vanilo\Contracts\Billpayer
@@ -22,7 +23,7 @@ class Billpayer implements \Vanilo\Contracts\Billpayer
 
     public function __construct(array $data = null)
     {
-        $this->data = $data ? array_except($data, 'address') : [];
+        $this->data = $data ? Arr::except($data, 'address') : [];
 
         $this->address = new Address($data['address'] ?? []);
     }

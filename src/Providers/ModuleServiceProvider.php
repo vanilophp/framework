@@ -11,6 +11,7 @@
 
 namespace Vanilo\Checkout\Providers;
 
+use Illuminate\Support\Str;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\CheckoutManager;
@@ -37,7 +38,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
             if (false === strpos($driverClass, '\\')) {
                 $driverClass = sprintf(
                     '\\Vanilo\\Checkout\\Drivers\\%sStore',
-                    studly_case($driverClass)
+                    Str::studly($driverClass)
                 );
             }
 
