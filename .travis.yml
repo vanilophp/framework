@@ -40,6 +40,8 @@ before_install:
   - '[[ $LARAVEL =~ ^6\.[0-9]$ ]] && MAJOR=6 || MAJOR=5'
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
   - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
+  - sh -c "[ ! -z $TEST_DB_ENGINE ] && [ 'mysql' = $TEST_DB_ENGINE ] && mysql -e 'DROP DATABASE IF EXISTS order_test;CREATE DATABASE order_test;'" || true
+  - sh -c "[ ! -z $TEST_DB_ENGINE ] && [ 'pgsql' = $TEST_DB_ENGINE ] && psql -c 'create database order_test;' -U postgres" || true
 
 install: composer install --no-interaction
 
