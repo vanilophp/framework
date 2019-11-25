@@ -3,3 +3,4 @@ vendor/
 composer.lock
 build
 tests/temp
+/.phpunit.result.cache
