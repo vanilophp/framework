@@ -2,8 +2,8 @@
 
 ## 1.x Series
 
-### Unreleased
-##### 2019-11-XX
+### 1.1.0
+##### 2019-11-25
 
 - Added Laravel 6 Support
 
