@@ -25,7 +25,7 @@
                 @can('create taxons')
                     <div class="card-footer">
                         <a href="{{ route('vanilo.taxon.create', $taxonomy) }}"
-                           class="btn btn-outline-success btn-sm">{{ __('Add :category', ['category' => str_singular($taxonomy->name)]) }}</a>
+                           class="btn btn-outline-success btn-sm">{{ __('Add :category', ['category' => \Illuminate\Support\Str::singular($taxonomy->name)]) }}</a>
                     </div>
                 @endcan
             </div>

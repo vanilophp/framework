@@ -11,6 +11,7 @@
 
 namespace Vanilo\Framework\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Category\Contracts\Taxonomy;
@@ -47,7 +48,7 @@ class TaxonController extends BaseController
                 ['taxonomy_id' => $taxonomy->id]));
             flash()->success(__(':name :taxonomy has been created', [
                 'name'     => $taxon->name,
-                'taxonomy' => str_singular($taxonomy->name)
+                'taxonomy' => Str::singular($taxonomy->name)
             ]));
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));

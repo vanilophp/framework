@@ -11,7 +11,7 @@
         <div class="card card-accent-secondary">
 
             <div class="card-header">
-                {{ __(':category Data', ['category' => str_singular($taxonomy->name)]) }}
+                {{ __(':category Data', ['category' => \Illuminate\Support\Str::singular($taxonomy->name)]) }}
             </div>
 
             <div class="card-block">

@@ -21,7 +21,7 @@
         <div class="card-actionbar card-actionbar-show-on-hover">
             @can('create taxons')
                 <a href="{{ route('vanilo.taxon.create', $taxonomy) }}?parent={{$taxon->id}}"
-                   class="btn btn-outline-success btn-xs float-right">{{ __('Add Child :category', ['category' => str_singular($taxonomy->name)]) }}</a>
+                   class="btn btn-outline-success btn-xs float-right">{{ __('Add Child :category', ['category' => \Illuminate\Support\Str::singular($taxonomy->name)]) }}</a>
             @endcan
             @can('delete taxons')
                 {{ Form::open([
