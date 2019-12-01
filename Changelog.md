@@ -2,6 +2,11 @@
 
 ## 1.x Series
 
+### 1.1.1
+##### 2019-12-01
+
+- Fixed a bug with Category editing in Admin under Laravel 6
+
 ### 1.1.0
 ##### 2019-11-25
 
