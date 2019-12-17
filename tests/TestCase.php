@@ -9,7 +9,7 @@
  *
  */
 
-namespace Vanilo\Properties\Tests;
+namespace Vanilo\Payment\Tests;
 
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
