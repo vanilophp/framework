@@ -1,0 +1,32 @@
+{
+    "name": "vanilo/payment",
+    "description": "Vanilo Payment Module",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["payments", "cards", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "support": {
+        "source": "https://github.com/vanilophp/payment"
+    },
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "konekt/concord": "~1.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.2 - 7.5|~8.0",
+        "orchestra/testbench": "~3.5|~4.0"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Payment\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vanilo\\Payment\\Tests\\": "tests/"
+        }
+    }
+}
