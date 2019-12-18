@@ -2,6 +2,12 @@
 
 ## 1.x Series
 
+### Unreleased
+##### 2019-12-XX
+
+- Payment module has been added
+- Dropped PHP 7.1 support
+
 ### 1.1.1
 ##### 2019-12-01
 
