@@ -5,9 +5,9 @@ cache:
   - "$HOME/.composer/cache"
 
 php:
-  - '7.1'
   - '7.2'
   - '7.3'
+  - '7.4'
 
 env:
   - LARAVEL=5.5 TEST_DB_ENGINE=pgsql
@@ -17,20 +17,9 @@ env:
   - LARAVEL=5.7 TEST_DB_ENGINE=sqlite
   - LARAVEL=5.8 TEST_DB_ENGINE=sqlite
   - LARAVEL=6.0 TEST_DB_ENGINE=sqlite
-  - LARAVEL=6.5 TEST_DB_ENGINE=pgsql
-  - LARAVEL=6.5 TEST_DB_ENGINE=mysql
-  - LARAVEL=6.5 TEST_DB_ENGINE=sqlite
-
-matrix:
-  exclude:
-    - php: '7.1'
-      env: 'LARAVEL=6.0 TEST_DB_ENGINE=sqlite'
-    - php: '7.1'
-      env: 'LARAVEL=6.5 TEST_DB_ENGINE=pgsql'
-    - php: '7.1'
-      env: 'LARAVEL=6.5 TEST_DB_ENGINE=mysql'
-    - php: '7.1'
-      env: 'LARAVEL=6.5 TEST_DB_ENGINE=sqlite'
+  - LARAVEL=6.8 TEST_DB_ENGINE=pgsql
+  - LARAVEL=6.8 TEST_DB_ENGINE=mysql
+  - LARAVEL=6.8 TEST_DB_ENGINE=sqlite
 
 script:
   - vendor/bin/phpunit --testdox
