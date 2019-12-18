@@ -5,9 +5,9 @@ cache:
   - "$HOME/.composer/cache"
 
 php:
-  - '7.1'
   - '7.2'
   - '7.3'
+  - '7.4'
 
 env:
   - LARAVEL=5.5
@@ -15,14 +15,7 @@ env:
   - LARAVEL=5.7
   - LARAVEL=5.8
   - LARAVEL=6.0
-  - LARAVEL=6.5
-
-matrix:
-  exclude:
-    - php: '7.1'
-      env: 'LARAVEL=6.0'
-    - php: '7.1'
-      env: 'LARAVEL=6.5'
+  - LARAVEL=6.8
 
 script:
   - vendor/bin/phpunit -c phpunit.xml
