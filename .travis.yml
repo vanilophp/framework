@@ -15,7 +15,7 @@ env:
   - LARAVEL=5.7
   - LARAVEL=5.8
   - LARAVEL=6.0
-  - LARAVEL=6.7
+  - LARAVEL=6.8
 
 script:
   - vendor/bin/phpunit -c phpunit.xml

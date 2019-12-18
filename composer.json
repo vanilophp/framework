@@ -39,6 +39,9 @@
             "aliases": {
                 "Cart": "Vanilo\\Cart\\Facades\\Cart"
             }
+        },
+        "branch-alias": {
+            "dev-master": "1.2.x-dev"
         }
     }
 }
