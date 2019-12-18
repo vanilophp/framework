@@ -9,7 +9,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bitInteger('payment_method_id')->unsigned();
+            $table->bigInteger('payment_method_id')->unsigned();
             $table->string('payable_type');
             $table->bigInteger('payable_id')->unsigned();
             $table->string('hash')->nullable();
