@@ -114,7 +114,7 @@ class CartManager implements CartManagerContract
      */
     public function exists()
     {
-        return (bool) $this->getCartId();
+        return (bool) $this->getCartId() && $this->model();
     }
 
     /**
