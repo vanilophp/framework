@@ -16,6 +16,7 @@
 ##### 2019-11-25
 
 - Added Laravel 6 Support
+- Dropped Laravel 5.4 Support
 
 ### 1.0.0
 ##### 2019-11-11
