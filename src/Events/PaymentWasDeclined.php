@@ -13,5 +13,4 @@ namespace Vanilo\Payment\Events;
 
 class PaymentWasDeclined
 {
-
 }
