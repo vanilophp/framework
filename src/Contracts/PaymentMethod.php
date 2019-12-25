@@ -13,4 +13,10 @@ namespace Vanilo\Payment\Contracts;
 
 interface PaymentMethod
 {
+    /**
+     * Time in seconds after an initiated payment request is being considered as timed out
+     *
+     * @return int
+     */
+    public function getTimeout(): int;
 }

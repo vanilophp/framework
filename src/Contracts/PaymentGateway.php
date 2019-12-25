@@ -15,10 +15,7 @@ use Vanilo\Contracts\Payable;
 
 interface PaymentGateway
 {
-    /** Returns the unique slug of the gateway type */
-    public function getId(): string;
-
-    public function getName(): string;
+    public static function getName(): string;
 
     public function createPaymentRequest(Payable $payable): PaymentRequest;
 
