@@ -6,6 +6,8 @@
 ##### 2019-12-XX
 
 - Payable interface has been added
+- Shippable inteface has been added
+- BC: Address interface has been extended and refactored to use return types
 - Dropped PHP 7.1 support
 
 ### 1.1.0
