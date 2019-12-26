@@ -13,46 +13,32 @@ namespace Vanilo\Contracts;
 
 interface Address
 {
-    /**
-     * The name on the address
-     *
-     * @return string
-     */
-    public function getName();
+    public function getName(): string;
 
     /**
      * The country's ISO 3166-1 alpha-2 code
-     *
-     * @return string
      */
-    public function getCountryCode();
+    public function getCountryCode(): string;
 
     /**
      * Returns the province (state, county, region, etc) code in national notation
-     *
-     * @return string|null
      */
-    public function getProvinceCode();
+    public function getProvinceCode(): ?string;
 
-    /**
-     * Returns the postal code of the address
-     * 
-     * @return string|null
-     */
-    public function getPostalCode();
+    public function getPostalCode(): ?string;
 
-    /**
-     * Returns the name of the city
-     * 
-     * @return string
-     */
-    public function getCity();
+    public function getCity(): string;
 
     /**
      * The address part (Street, number, building, etc)
-     *
-     * @return string
      */
-    public function getAddress();
+    public function getAddress(): string;
 
+    public function isOrganization(): bool;
+
+    public function getOrganizationName(): ?string;
+
+    public function getEmail(): ?string;
+
+    public function getPhone(): ?string;
 }
