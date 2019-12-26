@@ -21,7 +21,7 @@ interface Payable
 
     public function getCurrency(): string;
 
-    public function getBillingAddress(): Address;
+    public function getBillpayer(): Billpayer;
 
     public function needsShipping(): bool;
 
