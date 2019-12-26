@@ -35,9 +35,12 @@ final class PaymentGateways
             );
         }
 
-
-
         self::$registry[$id] = $class;
+    }
+
+    public static function reset(): void
+    {
+        self::$registry = [];
     }
 
     public static function getClass(string $id): ?string
