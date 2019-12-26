@@ -12,6 +12,7 @@
 namespace Vanilo\Payment;
 
 use Vanilo\Payment\Contracts\PaymentGateway;
+use Vanilo\Payment\Exceptions\InexistentPaymentGatewayException;
 
 final class PaymentGateways
 {
@@ -36,6 +37,19 @@ final class PaymentGateways
         }
 
         self::$registry[$id] = $class;
+    }
+
+    public static function make(string $id): PaymentGateway
+    {
+        $gwClass = self::getClass($id);
+
+        if (null === $gwClass) {
+            throw new InexistentPaymentGatewayException(
+                "No payment gateway is registered with the id `$id`."
+            );
+        }
+
+        return app()->make($gwClass);
     }
 
     public static function reset(): void
