@@ -13,11 +13,17 @@ namespace Vanilo\Contracts;
 
 interface Payable
 {
+    public function getId(): string;
+
+    public function getPayableType(): string;
+
     public function getAmount();
 
     public function getCurrency(): string;
 
-    public function getType(): string;
+    public function getBillingAddress(): Address;
 
-    public function getId(): int;
+    public function needsShipping(): bool;
+
+    public function getShippable(): ?Shippable;
 }
