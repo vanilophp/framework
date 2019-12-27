@@ -18,16 +18,14 @@ interface Buyable
     /**
      * Returns the id of the _thing_
      *
-     * @return int
+     * @return mixed
      */
     public function getId();
 
     /**
      * Returns the name of the _thing_
-     *
-     * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Returns the price of the item; float is temporary!!
@@ -41,28 +39,22 @@ interface Buyable
 
     /**
      * Returns whether the item has an image
-     *
-     * @return bool
      */
-    public function hasImage();
+    public function hasImage(): bool;
 
     /**
      * Returns the URL of the item's thumbnail image, or null if there's no image
-     *
-     * @return string|null
      */
-    public function getThumbnailUrl();
+    public function getThumbnailUrl(): ?string;
 
     /**
      * Returns the URL of the item's (main) image, or null if there's no image
-     *
-     * @return string|null
      */
-    public function getImageUrl();
+    public function getImageUrl(): ?string;
 
-    public function addSale(Carbon $date, $units = 1);
+    public function addSale(Carbon $date, $units = 1): void;
 
-    public function removeSale($units = 1);
+    public function removeSale($units = 1): void;
 
     /**
      * Return the name to use for saving to the db as type name.

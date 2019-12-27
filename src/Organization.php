@@ -15,16 +15,11 @@ interface Organization extends Contactable
 {
     /**
      * Returns the Company name
-     *
-     * @return string|null
      */
-    public function getCompanyName();
+    public function getCompanyName(): ?string;
 
     /**
      * Customer's tax number (VAT id, tax id, etc)
-     *
-     * @return string|null
      */
-    public function getTaxNumber();
-
+    public function getTaxNumber(): ?string;
 }

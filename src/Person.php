@@ -15,23 +15,16 @@ interface Person extends Contactable
 {
     /**
      * Returns the first name of the person
-     *
-     * @return string|null
      */
-    public function getFirstName();
+    public function getFirstName(): ?string;
 
     /**
      * Returns the last name of the person
-     *
-     * @return string|null
      */
-    public function getLastName();
+    public function getLastName(): ?string;
 
     /**
      * Returns the full name of the person (in appropriate name order)
-     *
-     * @return string
      */
-    public function getFullName();
-
+    public function getFullName(): string;
 }

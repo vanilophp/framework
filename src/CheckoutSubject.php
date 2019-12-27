@@ -18,11 +18,6 @@ use Illuminate\Support\Collection;
  */
 interface CheckoutSubject
 {
-    /**
-     * Returns a collection of CheckoutSubjectItems
-     *
-     * @return Collection
-     */
     public function getItems(): Collection;
 
     /**

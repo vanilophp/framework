@@ -13,17 +13,7 @@ namespace Vanilo\Contracts;
 
 interface Contactable
 {
-    /**
-     * The contact's email address
-     *
-     * @return string|null
-     */
-    public function getEmail();
+    public function getEmail(): ?string;
 
-    /**
-     * The contact's phone number
-     *
-     * @return string|null
-     */
-    public function getPhone();
+    public function getPhone(): ?string;
 }
