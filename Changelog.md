@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.x Series
+## 2.x Series
 
 ### Unreleased
 ##### 2019-12-XX
@@ -9,6 +9,8 @@
 - Shippable interface has been added
 - BC: Address interface has been extended and refactored to use return types
 - Dropped PHP 7.1 support
+
+## 1.x Series
 
 ### 1.1.0
 ##### 2019-11-25
