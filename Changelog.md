@@ -3,7 +3,7 @@
 ## 2.x Series
 
 ### Unreleased
-##### 2019-12-XX
+##### 2020-01-XX
 
 - Payable interface has been added
 - Shippable interface has been added
