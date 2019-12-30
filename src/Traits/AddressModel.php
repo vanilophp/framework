@@ -19,7 +19,7 @@ trait AddressModel
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -27,7 +27,7 @@ trait AddressModel
     /**
      * @inheritDoc
      */
-    public function getCountryCode()
+    public function getCountryCode(): string
     {
         return $this->country_id;
     }
@@ -35,7 +35,7 @@ trait AddressModel
     /**
      * @inheritDoc
      */
-    public function getProvinceCode()
+    public function getProvinceCode(): ?string
     {
         return $this->province ? $this->province->code : null;
     }
@@ -43,7 +43,7 @@ trait AddressModel
     /**
      * @inheritDoc
      */
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
         return $this->postalcode;
     }
@@ -51,7 +51,7 @@ trait AddressModel
     /**
      * @inheritDoc
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -59,7 +59,7 @@ trait AddressModel
     /**
      * @inheritDoc
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }

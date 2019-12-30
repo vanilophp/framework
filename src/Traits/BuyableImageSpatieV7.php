@@ -21,7 +21,7 @@ trait BuyableImageSpatieV7
      *
      * @return bool
      */
-    public function hasImage()
+    public function hasImage(): bool
     {
         return $this->getMedia()->isNotEmpty();
     }
@@ -31,7 +31,7 @@ trait BuyableImageSpatieV7
      *
      * @return string|null
      */
-    public function getThumbnailUrl()
+    public function getThumbnailUrl(): ?string
     {
         return $this->getFirstMediaUrl('default', 'thumbnail');
     }
@@ -41,7 +41,7 @@ trait BuyableImageSpatieV7
      *
      * @return string|null
      */
-    public function getImageUrl()
+    public function getImageUrl(): ?string
     {
         return $this->getFirstMediaUrl();
     }

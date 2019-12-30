@@ -21,7 +21,7 @@ trait BuyableNoImage
      *
      * @return bool
      */
-    public function hasImage()
+    public function hasImage(): bool
     {
         return false;
     }
@@ -31,7 +31,7 @@ trait BuyableNoImage
      *
      * @return string|null
      */
-    public function getThumbnailUrl()
+    public function getThumbnailUrl(): ?string
     {
         return null;
     }
@@ -41,7 +41,7 @@ trait BuyableNoImage
      *
      * @return string|null
      */
-    public function getImageUrl()
+    public function getImageUrl(): ?string
     {
         return null;
     }

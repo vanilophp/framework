@@ -23,7 +23,7 @@ trait BuyableModel
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -33,14 +33,14 @@ trait BuyableModel
         return $this->price;
     }
 
-    public function addSale(Carbon $date, $units = 1)
+    public function addSale(Carbon $date, $units = 1): void
     {
         $this->last_sale_at = $date;
         $this->units_sold += $units;
         $this->save();
     }
 
-    public function removeSale($units = 1)
+    public function removeSale($units = 1): void
     {
         $this->units_sold -= $units;
         $this->save();
