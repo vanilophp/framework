@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "konekt/concord": "~1.4",
+        "konekt/concord": "~1.5@dev",
         "cviebrock/eloquent-sluggable": "4.3 - 6"
     },
     "require-dev": {
