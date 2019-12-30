@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "konekt/concord": "~1.4"
+        "konekt/concord": "~1.5@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "6.2 - 7.5|~8.0",
