@@ -84,6 +84,12 @@ To have a cleaner code, there are two methods to check if cart is empty:
 
 Their result is based on the `itemCount()` method.
 
+### Get Items
+
+`Cart::getItems()` returns all products in the cart.
+
+It returns an empty collection if the cart is empty.
+
 ### Adding An Item
 
 You can add product to the cart with the `Cart::addItem()` method.
