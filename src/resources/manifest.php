@@ -2,5 +2,5 @@
 
 return [
     'name'    => 'Vanilo Properties Module',
-    'version' => '1.2-dev'
+    'version' => '2.0-dev'
 ];
