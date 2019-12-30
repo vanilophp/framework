@@ -1,11 +1,13 @@
 # Changelog
 
-## 1.x Series
+## 2.x Series
 
 ### Unreleased
-##### 2019-12-XX
+##### 2020-01-XX
 
 - Dropped PHP 7.1 support
+
+## 1.x Series
 
 ### 1.1.0
 ##### 2019-11-25
