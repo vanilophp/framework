@@ -23,14 +23,12 @@ interface CheckoutSubjectItem
     /**
      * Returns the quantity of the line
      *
-     * @return integer
+     * @return integer|float
      */
     public function getQuantity();
 
     /**
      * Returns the (adjusted) line total
-     *
-     * @return float
      */
-    public function total();
+    public function total(): Decimal;
 }

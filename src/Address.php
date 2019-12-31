@@ -33,12 +33,4 @@ interface Address
      * The address part (Street, number, building, etc)
      */
     public function getAddress(): string;
-
-    public function isOrganization(): bool;
-
-    public function getOrganizationName(): ?string;
-
-    public function getEmail(): ?string;
-
-    public function getPhone(): ?string;
 }

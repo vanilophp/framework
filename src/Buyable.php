@@ -28,14 +28,11 @@ interface Buyable
     public function getName(): string;
 
     /**
-     * Returns the price of the item; float is temporary!!
-     *
-     * @todo Make the decision with Vanilo 0.2 about how to handle prices:
-     *       Decimal/Money/PreciseMoney/json with various currencies/...
-     *
-     * @return float
+     * Returns the price of the item
      */
-    public function getPrice();
+    public function getPrice(): Decimal;
+
+    public function getCurrency(): string;
 
     /**
      * Returns whether the item has an image

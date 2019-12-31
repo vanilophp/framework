@@ -22,8 +22,6 @@ interface CheckoutSubject
 
     /**
      * Returns the final total of the CheckoutSubject (typically a cart)
-     *
-     * @return float
      */
-    public function total();
+    public function total(): Decimal;
 }
