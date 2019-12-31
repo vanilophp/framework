@@ -30,7 +30,7 @@ class ProductState extends Enum implements ProductStateContract
     /**
      * @inheritdoc
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return in_array($this->value, static::$activeStates);
     }
@@ -38,7 +38,7 @@ class ProductState extends Enum implements ProductStateContract
     /**
      * @inheritdoc
      */
-    public static function getActiveStates()
+    public static function getActiveStates(): array
     {
         return static::$activeStates;
     }

@@ -46,7 +46,7 @@ class Product extends Model implements ProductContract
     /**
      * @inheritdoc
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->state->isActive();
     }
@@ -64,7 +64,7 @@ class Product extends Model implements ProductContract
         return $this->stock > 0;
     }
 
-    public function title()
+    public function title(): string
     {
         return isset($this->ext_title) ? $this->ext_title : $this->name;
     }
