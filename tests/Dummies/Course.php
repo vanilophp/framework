@@ -27,7 +27,7 @@ class Course extends Model implements Buyable
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->title;
     }
@@ -42,12 +42,12 @@ class Course extends Model implements Buyable
         return static::class;
     }
 
-    public function addSale(Carbon $date, $units = 1)
+    public function addSale(Carbon $date, $units = 1): void
     {
         //
     }
 
-    public function removeSale($units = 1)
+    public function removeSale($units = 1): void
     {
         //
     }
