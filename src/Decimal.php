@@ -21,7 +21,7 @@ class Decimal implements DecimalContract
 
     public function __construct($value, int $precision = DecimalContract::DEFAULT_PRECISION)
     {
-        $value = self::ensureCompatibleValue($value);
+        $value         = self::ensureCompatibleValue($value);
         $this->decimal = ($value instanceof PhpDecimal) ? $value : new PhpDecimal($value, $precision);
     }
 

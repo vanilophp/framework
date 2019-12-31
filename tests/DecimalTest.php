@@ -252,7 +252,6 @@ class DecimalTest extends TestCase
         $this->assertEquals('0.0000000000000000555', sprintf('%.19f', 0.1 + 0.2 - 0.3));
         // Prove that decimals don't:
         $this->assertEquals('0.0000000000000000000', Decimal::sum(['0.1', '0.2', '-0.3'])->toFixed(19));
-
     }
 
     /** @test */
