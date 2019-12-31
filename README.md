@@ -46,6 +46,12 @@ The `CartManager` was introduced in order to take care of:
   visitor/hit)
 - Provide a straightforward API
 
+### Get Products in Cart
+
+`Cart::getItems()` returns all products in the cart.
+
+It returns an empty collection if the cart is empty.
+
 ### Checking Whether A Cart Exists
 
 As written above, the cart manager only creates a cart entry (db) if it's needed. Thus you can check
