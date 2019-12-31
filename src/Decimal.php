@@ -198,12 +198,12 @@ interface Decimal
      *
      * This method is equivalent to adding each value individually.
      */
-    public static function sum(\Traversable $values, int $precision = 28): Decimal;
+    public static function sum(iterable $values, int $precision = 28): Decimal;
 
     /**
      * Return the decimal average of the given values
      *
      * This method is equivalent to adding each value individually, then dividing by the number of values.
      */
-    public static function avg(\Traversable $values, int $precision = 28): Decimal;
+    public static function avg(iterable $values, int $precision = 28): Decimal;
 }
