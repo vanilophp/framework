@@ -48,9 +48,9 @@ class CreateOrderTest extends TestCase
 
         if ('mysql' == DB::connection()->getPDO()->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
             DB::connection()->statement('SET sql_mode = \'STRICT_TRANS_TABLES\'');
-            $this->expectExceptionMessageRegExp("/'number' doesn't have a default/i");
+            $this->expectExceptionMessageMatches("/'number' doesn't have a default/i");
         } else {
-            $this->expectExceptionMessageRegExp('/NOT NULL/i');
+            $this->expectExceptionMessageMatches('/NOT NULL/i');
         }
 
 
