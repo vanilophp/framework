@@ -18,11 +18,12 @@
     "require": {
         "php": "^7.2",
         "konekt/concord": "~1.4",
-        "vanilo/contracts": "~1.1"
+        "vanilo/contracts": "~1.2@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "6.2 - 7.5|~8.0",
-        "orchestra/testbench": "~3.5|~4.0",
+        "phpunit/phpunit": "6.2 - 7.5|~8.0|~9.0",
+        "orchestra/testbench": "~3.5|~4.0|~5.0",
+        "konekt/enum": "~2.1",
         "vanilo/support": "~1.2@dev"
     },
     "autoload": {
@@ -31,11 +32,6 @@
     "autoload-dev": {
         "psr-4": {
             "Vanilo\\Checkout\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.2.x-dev"
         }
     }
 }
