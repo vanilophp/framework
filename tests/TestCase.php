@@ -18,22 +18,14 @@ use Vanilo\Properties\Providers\ModuleServiceProvider as PropertiesModule;
 
 abstract class TestCase extends Orchestra
 {
+    use PhpUnit6To9Compatible;
+
     public function setUp(): void
     {
         parent::setUp();
 
         $this->setUpDatabase($this->app);
         $this->withFactories(__DIR__ . '/factories');
-    }
-
-    /* @todo Remove once PHPUnit < 9.0 won't be supported by the package */
-    public function expectExceptionMessageMatches(string $regularExpression): void
-    {
-        if (is_callable('parent::expectExceptionMessageMatches')) {
-            parent::expectExceptionMessageMatches($regularExpression);
-        } else {
-            $this->expectExceptionMessageRegExp($regularExpression);
-        }
     }
 
     /**
