@@ -18,8 +18,8 @@
         "konekt/concord": "~1.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "6.2 - 7.5|~8.0",
-        "orchestra/testbench": "~3.5|~4.0"
+        "phpunit/phpunit": "6.2 - 7.5|~8.0|~9.0",
+        "orchestra/testbench": "~3.5|~4.0|~5.0"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Channel\\": "src/" }
@@ -27,11 +27,6 @@
     "autoload-dev": {
         "psr-4": {
             "Vanilo\\Channel\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.2.x-dev"
         }
     }
 }
