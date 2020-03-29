@@ -17,24 +17,13 @@ use Vanilo\Contracts\BillPayer;
 
 interface Order
 {
-    /**
-     * Returns the number of the order
-     *
-     * @return string
-     */
-    public function getNumber();
+    public function getNumber(): ?string;
 
     public function getStatus(): OrderStatus;
 
-    /**
-     * @return BillPayer|null
-     */
-    public function getBillpayer();
+    public function getBillpayer(): ?BillPayer;
 
-    /**
-     * @return Address|null
-     */
-    public function getShippingAddress();
+    public function getShippingAddress(): ?Address;
 
     public function getItems(): Traversable;
 

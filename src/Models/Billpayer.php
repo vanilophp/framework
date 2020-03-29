@@ -26,7 +26,7 @@ class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContr
 {
     protected $guarded = ['id', 'address_id'];
 
-    public function isEuRegistered()
+    public function isEuRegistered(): bool
     {
         return $this->is_eu_registered;
     }
@@ -41,17 +41,17 @@ class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContr
         return $this->address;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
-    public function getName()
+    public function getName(): string
     {
         if ($this->isOrganization()) {
             return $this->getCompanyName();
@@ -60,37 +60,37 @@ class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContr
         }
     }
 
-    public function isOrganization()
+    public function isOrganization(): bool
     {
         return $this->is_organization;
     }
 
-    public function isIndividual()
+    public function isIndividual(): bool
     {
         return !$this->is_organization;
     }
 
-    public function getCompanyName()
+    public function getCompanyName(): ?string
     {
         return $this->company_name;
     }
 
-    public function getTaxNumber()
+    public function getTaxNumber(): ?string
     {
         return $this->tax_nr;
     }
 
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstname;
     }
 
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastname;
     }
 
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
     }

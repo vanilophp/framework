@@ -21,5 +21,5 @@ interface OrderFactory
      *
      * @return Order
      */
-    public function createFromDataArray(array $data, array $items) : Order;
+    public function createFromDataArray(array $data, array $items): Order;
 }

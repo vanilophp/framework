@@ -16,6 +16,8 @@ use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Konekt\User\Models\UserProxy;
 use Traversable;
+use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Billpayer;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus;
 
@@ -42,7 +44,7 @@ class Order extends Model implements OrderContract
     /**
      * @inheritdoc
      */
-    public function getNumber()
+    public function getNumber(): ?string
     {
         return $this->number;
     }
@@ -60,7 +62,7 @@ class Order extends Model implements OrderContract
     /**
      * @inheritdoc
      */
-    public function getBillpayer()
+    public function getBillpayer(): ?BillPayer
     {
         return $this->billpayer;
     }
@@ -68,7 +70,7 @@ class Order extends Model implements OrderContract
     /**
      * @inheritdoc
      */
-    public function getShippingAddress()
+    public function getShippingAddress(): ?Address
     {
         return $this->shippingAddress;
     }

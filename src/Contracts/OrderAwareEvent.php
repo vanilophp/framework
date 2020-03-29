@@ -13,8 +13,5 @@ namespace Vanilo\Order\Contracts;
 
 interface OrderAwareEvent
 {
-    /**
-     * @return Order
-     */
-    public function getOrder();
+    public function getOrder(): Order;
 }

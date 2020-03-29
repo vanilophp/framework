@@ -20,5 +20,5 @@ interface OrderNumberGenerator
      *
      * @return string
      */
-    public function generateNumber(Order $order = null);
+    public function generateNumber(Order $order = null): string;
 }
