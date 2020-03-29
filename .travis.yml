@@ -23,11 +23,12 @@ env:
 # `implode(): Passing glue string after array is deprecated. Swap the parameters`
 # due to improper order of `implode()` arguments in eloquent-sluggable dependency
 # Laravel 5.6 & 5.7 are EOL anyway
-exclude:
-  - php: 7.4
-    env: LARAVEL=5.6
-  - php: 7.4
-    env: LARAVEL=5.7
+jobs:
+  exclude:
+    - php: 7.4
+      env: LARAVEL=5.6
+    - php: 7.4
+      env: LARAVEL=5.7
 
 script:
   - vendor/bin/phpunit
