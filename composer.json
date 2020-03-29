@@ -19,15 +19,15 @@
         "laravel/framework": "~5.5|~6.0|~7.0",
         "konekt/appshell": "~1.5",
         "spatie/laravel-medialibrary": "^7.3",
-        "vanilo/contracts": "~1.2@dev",
-        "vanilo/support": "~1.2@dev",
-        "vanilo/category": "~1.2@dev",
-        "vanilo/product": "~1.2@dev",
-        "vanilo/cart": "~1.2@dev",
-        "vanilo/checkout": "~1.2@dev",
-        "vanilo/order": "~1.2@dev",
-        "vanilo/properties": "~1.2@dev",
-        "vanilo/channel": "~1.2@dev"
+        "vanilo/contracts": "~1.2",
+        "vanilo/support": "~1.2",
+        "vanilo/category": "~1.2",
+        "vanilo/product": "~1.2",
+        "vanilo/cart": "~1.2",
+        "vanilo/checkout": "~1.2",
+        "vanilo/order": "~1.2",
+        "vanilo/properties": "~1.2",
+        "vanilo/channel": "~1.2"
     },
     "autoload": {
         "psr-4": {
@@ -49,10 +49,5 @@
     },
     "scripts": {
         "test": "phpunit"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.2.x-dev"
-        }
     }
 }
