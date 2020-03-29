@@ -19,7 +19,7 @@ class TaxonomyTest extends TestCase
     /** @test */
     public function taxonomies_must_have_a_name()
     {
-        $this->expectExceptionMessageRegExp('/NOT NULL constraint failed: taxonomies\.name/');
+        $this->expectExceptionMessageMatches('/NOT NULL constraint failed: taxonomies\.name/');
 
         Taxonomy::create();
     }
@@ -42,7 +42,7 @@ class TaxonomyTest extends TestCase
     /** @test */
     public function slug_must_be_unique()
     {
-        $this->expectExceptionMessageRegExp('/UNIQUE constraint failed: taxonomies\.slug/');
+        $this->expectExceptionMessageMatches('/UNIQUE constraint failed: taxonomies\.slug/');
 
         Taxonomy::create(['name' => 'Category']);
         Taxonomy::create(['name' => 'Category', 'slug' => 'category']);

@@ -5,6 +5,8 @@
 ### Unreleased
 ##### 2019-12-XX
 
+- Added Laravel 7 support
+- Added PHP 7.4 support
 - Dropped PHP 7.1 support
 
 ### 1.1.0
