@@ -49,7 +49,7 @@ class PropertyValueTest extends TestCase
         ]);
 
         $this->assertEquals(3007, $value3007->getValue());
-        $this->assertInternalType('int', $value3007->getValue());
+        $this->assertIsInt($value3007->getValue());
     }
 
     /** @test */
@@ -76,13 +76,13 @@ class PropertyValueTest extends TestCase
         ]);
 
         $this->assertEquals(true, $valueTrue->getValue());
-        $this->assertInternalType('boolean', $valueTrue->getValue());
+        $this->assertIsBool($valueTrue->getValue());
 
         $this->assertEquals(false, $valueFalse->getValue());
-        $this->assertInternalType('boolean', $valueFalse->getValue());
+        $this->assertIsBool($valueFalse->getValue());
 
         $this->assertEquals(false, $valueZero->getValue());
-        $this->assertInternalType('boolean', $valueZero->getValue());
+        $this->assertIsBool($valueZero->getValue());
     }
 
     /** @test */
@@ -97,7 +97,7 @@ class PropertyValueTest extends TestCase
         ]);
 
         $this->assertEquals(11.27, $value11point27->getValue());
-        $this->assertInternalType('double', $value11point27->getValue());
+        $this->assertIsFloat($value11point27->getValue());
     }
 
     /** @test */
