@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "konekt/concord": "~1.5@dev",
+        "konekt/concord": "~1.5",
         "vanilo/contracts": "~2.0@dev"
     },
     "require-dev": {
