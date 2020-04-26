@@ -13,7 +13,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('gateway');
-            $table->boolean('is_enabled');
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
     }
