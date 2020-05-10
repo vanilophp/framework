@@ -12,6 +12,8 @@
 namespace Vanilo\Support\Traits;
 
 use Carbon\Carbon;
+use Vanilo\Contracts\Decimal as DecimalContract;
+use Vanilo\Support\Decimal;
 
 /**
  * Trait for Eloquent Models with default implementation of the Buyable interface
@@ -28,9 +30,9 @@ trait BuyableModel
         return $this->name;
     }
 
-    public function getPrice()
+    public function getPrice(): DecimalContract
     {
-        return $this->price;
+        return new Decimal((string)$this->price);
     }
 
     public function addSale(Carbon $date, $units = 1): void

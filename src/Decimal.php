@@ -211,6 +211,11 @@ class Decimal implements DecimalContract
         return self::create(PhpDecimal::avg(self::ensureCompatibleValues($values), $precision));
     }
 
+    public function __toString()
+    {
+        return $this->toString();
+    }
+
     private static function ensureCompatibleValue($value)
     {
         if ($value instanceof self) {
