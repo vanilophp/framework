@@ -20,6 +20,7 @@ use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
+use Vanilo\Contracts\Decimal;
 
 class CartManager implements CartManagerContract
 {
@@ -104,9 +105,9 @@ class CartManager implements CartManagerContract
     /**
      * @inheritDoc
      */
-    public function total()
+    public function total(): Decimal
     {
-        return $this->exists() ? $this->model()->total() : 0;
+        return $this->exists() ? $this->model()->total() : new \Vanilo\Support\Decimal('0');
     }
 
     /**

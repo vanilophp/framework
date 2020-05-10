@@ -5,11 +5,14 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- BC: interfaces comply with vanilo/contracts v2
+  - Cart total returns `Decimal` instead of float
+- Dropped Laravel 5 support
+
 ## 1.x Series
 
 ### 1.2.0
 ##### 2020-03-29
-
 
 - Added Laravel 7 Support
 - Added PHP 7.4 support

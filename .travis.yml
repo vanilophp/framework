@@ -10,14 +10,10 @@ php:
   - '7.4'
 
 env:
-  - LARAVEL=5.5
-  - LARAVEL=5.6
-  - LARAVEL=5.7
-  - LARAVEL=5.8
   - LARAVEL=6.0
   - LARAVEL=6.18
   - LARAVEL=7.0
-  - LARAVEL=7.3
+  - LARAVEL=7.10
 
 script:
   - vendor/bin/phpunit -c phpunit.xml

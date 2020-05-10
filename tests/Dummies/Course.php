@@ -14,6 +14,8 @@ namespace Vanilo\Cart\Tests\Dummies;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Contracts\Decimal as DecimalContract;
+use Vanilo\Support\Decimal;
 use Vanilo\Support\Traits\BuyableNoImage;
 
 class Course extends Model implements Buyable
@@ -32,9 +34,9 @@ class Course extends Model implements Buyable
         return $this->title;
     }
 
-    public function getPrice()
+    public function getPrice(): DecimalContract
     {
-        return $this->price;
+        return new Decimal($this->price);
     }
 
     public function morphTypeName(): string
@@ -50,5 +52,10 @@ class Course extends Model implements Buyable
     public function removeSale($units = 1): void
     {
         //
+    }
+
+    public function getCurrency(): string
+    {
+        return 'USD';
     }
 }
