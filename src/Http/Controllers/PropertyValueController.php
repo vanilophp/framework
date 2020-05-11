@@ -7,6 +7,7 @@ use Vanilo\Framework\Contracts\Requests\CreatePropertyValue;
 use Vanilo\Framework\Contracts\Requests\CreatePropertyValueForm;
 use Vanilo\Framework\Contracts\Requests\SyncModelPropertyValues;
 use Vanilo\Framework\Contracts\Requests\UpdatePropertyValue;
+use Vanilo\Framework\Traits\CreateMediaTrait;
 use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyProxy;
@@ -14,6 +15,8 @@ use Vanilo\Properties\Models\PropertyValueProxy;
 
 class PropertyValueController extends BaseController
 {
+    use CreateMediaTrait;
+
     public function create(CreatePropertyValueForm $request, Property $property)
     {
         $propertyValue = app(PropertyValue::class);
@@ -44,6 +47,9 @@ class PropertyValueController extends BaseController
                 'title'    => $propertyValue->title,
                 'property' => $property->name
             ]));
+
+            $this->createMedia($propertyValue);
+
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 

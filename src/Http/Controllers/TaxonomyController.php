@@ -17,9 +17,12 @@ use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Framework\Contracts\Requests\CreateTaxonomy;
 use Vanilo\Framework\Contracts\Requests\SyncModelTaxons;
 use Vanilo\Framework\Contracts\Requests\UpdateTaxonomy;
+use Vanilo\Framework\Traits\CreateMediaTrait;
 
 class TaxonomyController extends BaseController
 {
+    use CreateMediaTrait;
+
     public function index()
     {
         return view('vanilo::taxonomy.index', [
@@ -39,6 +42,7 @@ class TaxonomyController extends BaseController
         try {
             $taxonomy = TaxonomyProxy::create($request->except('images'));
             flash()->success(__(':name has been created', ['name' => $taxonomy->name]));
+            $this->createMedia($taxonomy);
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 

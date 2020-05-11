@@ -19,9 +19,12 @@ use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Framework\Contracts\Requests\CreateTaxonForm;
 use Vanilo\Framework\Contracts\Requests\CreateTaxon;
 use Vanilo\Framework\Contracts\Requests\UpdateTaxon;
+use Vanilo\Framework\Traits\CreateMediaTrait;
 
 class TaxonController extends BaseController
 {
+    use CreateMediaTrait;
+
     public function create(CreateTaxonForm $request, Taxonomy $taxonomy)
     {
         $taxon = app(Taxon::class);
@@ -50,6 +53,7 @@ class TaxonController extends BaseController
                 'name'     => $taxon->name,
                 'taxonomy' => Str::singular($taxonomy->name)
             ]));
+            $this->createMedia($taxon);
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
