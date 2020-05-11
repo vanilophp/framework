@@ -35,7 +35,7 @@ class PropertyValueController extends BaseController
         try {
             $propertyValue = PropertyValueProxy::create(
                 array_merge(
-                    $request->all(),
+                    $request->except('images'),
                     ['property_id' => $property->id]
                 )
             );
@@ -65,7 +65,7 @@ class PropertyValueController extends BaseController
     public function update(Property $property, PropertyValue $property_value, UpdatePropertyValue $request)
     {
         try {
-            $property_value->update($request->all());
+            $property_value->update($request->except('images'));
 
             flash()->success(__(':title has been updated', ['title' => $property_value->title]));
         } catch (\Exception $e) {

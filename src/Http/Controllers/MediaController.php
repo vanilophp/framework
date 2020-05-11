@@ -32,14 +32,8 @@ class MediaController extends BaseController
             return redirect()->back();
         }
 
-        // E.g. 'product'
-        $modelName = Str::singular(shorten(get_class($model)));
-
-        return redirect(route(
-            sprintf('vanilo.%s.edit', $modelName),
-            [$modelName => $model]
-            )
-        );
+        // redirect to the previous page
+        return redirect()->intended(url()->previous());
     }
 
     public function store(CreateMedia $request)

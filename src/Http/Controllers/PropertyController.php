@@ -38,7 +38,7 @@ class PropertyController extends BaseController
     public function store(CreateProperty $request)
     {
         try {
-            $property = PropertyProxy::create($request->all());
+            $property = PropertyProxy::create($request->except('images'));
             flash()->success(__(':name has been created', ['name' => $property->name]));
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
@@ -65,7 +65,7 @@ class PropertyController extends BaseController
     public function update(Property $property, UpdateProperty $request)
     {
         try {
-            $property->update($request->all());
+            $property->update($request->except('images'));
 
             flash()->success(__(':name has been updated', ['name' => $property->name]));
         } catch (\Exception $e) {

@@ -44,7 +44,7 @@ class TaxonController extends BaseController
     public function store(Taxonomy $taxonomy, CreateTaxon $request)
     {
         try {
-            $taxon = TaxonProxy::create(array_merge($request->all(),
+            $taxon = TaxonProxy::create(array_merge($request->except('images'),
                 ['taxonomy_id' => $taxonomy->id]));
             flash()->success(__(':name :taxonomy has been created', [
                 'name'     => $taxon->name,
@@ -71,7 +71,7 @@ class TaxonController extends BaseController
     public function update(Taxonomy $taxonomy, Taxon $taxon, UpdateTaxon $request)
     {
         try {
-            $taxon->update($request->all());
+            $taxon->update($request->except('images'));
 
             flash()->success(__(':name has been updated', ['name' => $taxon->name]));
         } catch (\Exception $e) {
