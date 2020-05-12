@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.x Series
+
+### Unreleased
+##### 2020-XX-YY
+
+- Dropped Laravel 5 support
+- Using AppShell 2.0
+
 ## 1.x Series
 
 ### 1.2.0

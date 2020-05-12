@@ -16,18 +16,18 @@
     },
     "require": {
         "php": "^7.2",
-        "laravel/framework": "~5.5|~6.0|~7.0",
-        "konekt/appshell": "~1.5",
+        "laravel/framework": "~6.0|~7.0",
+        "konekt/appshell": "2.0.x-dev",
         "spatie/laravel-medialibrary": "^7.3",
-        "vanilo/contracts": "~1.2",
-        "vanilo/support": "~1.2",
-        "vanilo/category": "~1.2",
-        "vanilo/product": "~1.2",
-        "vanilo/cart": "~1.2",
-        "vanilo/checkout": "~1.2",
-        "vanilo/order": "~1.2",
-        "vanilo/properties": "~1.2",
-        "vanilo/channel": "~1.2"
+        "vanilo/contracts": "2.0.x-dev",
+        "vanilo/support": "2.0.x-dev",
+        "vanilo/category": "2.0.x-dev",
+        "vanilo/product": "2.0.x-dev",
+        "vanilo/cart": "2.0.x-dev",
+        "vanilo/checkout": "2.0.x-dev",
+        "vanilo/order": "2.0.x-dev",
+        "vanilo/properties": "2.0.x-dev",
+        "vanilo/channel": "2.0.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -38,9 +38,8 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "~3.5|~4.0|~5.0",
-        "phpunit/phpunit" : "6.2 - 7.5|~8.0|~9.0",
-        "mockery/mockery": "^1.1"
+        "orchestra/testbench": "~4.0|~5.0",
+        "phpunit/phpunit" : "~8.0|~9.0"
     },
     "autoload-dev": {
         "psr-4": {
@@ -49,5 +48,10 @@
     },
     "scripts": {
         "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
     }
 }
