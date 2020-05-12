@@ -11,7 +11,6 @@
 
 namespace Vanilo\Framework\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Spatie\MediaLibrary\Models\Media;
 use Vanilo\Framework\Contracts\Requests\CreateMedia;
