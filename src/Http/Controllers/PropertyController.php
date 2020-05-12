@@ -14,12 +14,15 @@ namespace Vanilo\Framework\Http\Controllers;
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Framework\Contracts\Requests\CreateProperty;
 use Vanilo\Framework\Contracts\Requests\UpdateProperty;
+use Vanilo\Framework\Traits\CreateMediaTrait;
 use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Models\PropertyProxy;
 use Vanilo\Properties\PropertyTypes;
 
 class PropertyController extends BaseController
 {
+    use CreateMediaTrait;
+
     public function index()
     {
         return view('vanilo::property.index', [
@@ -38,8 +41,9 @@ class PropertyController extends BaseController
     public function store(CreateProperty $request)
     {
         try {
-            $property = PropertyProxy::create($request->all());
+            $property = PropertyProxy::create($request->except('images'));
             flash()->success(__(':name has been created', ['name' => $property->name]));
+            $this->createMedia($property);
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
@@ -65,7 +69,7 @@ class PropertyController extends BaseController
     public function update(Property $property, UpdateProperty $request)
     {
         try {
-            $property->update($request->all());
+            $property->update($request->except('images'));
 
             flash()->success(__(':name has been updated', ['name' => $property->name]));
         } catch (\Exception $e) {

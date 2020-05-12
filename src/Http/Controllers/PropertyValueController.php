@@ -7,6 +7,7 @@ use Vanilo\Framework\Contracts\Requests\CreatePropertyValue;
 use Vanilo\Framework\Contracts\Requests\CreatePropertyValueForm;
 use Vanilo\Framework\Contracts\Requests\SyncModelPropertyValues;
 use Vanilo\Framework\Contracts\Requests\UpdatePropertyValue;
+use Vanilo\Framework\Traits\CreateMediaTrait;
 use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyProxy;
@@ -14,6 +15,8 @@ use Vanilo\Properties\Models\PropertyValueProxy;
 
 class PropertyValueController extends BaseController
 {
+    use CreateMediaTrait;
+
     public function create(CreatePropertyValueForm $request, Property $property)
     {
         $propertyValue = app(PropertyValue::class);
@@ -35,7 +38,7 @@ class PropertyValueController extends BaseController
         try {
             $propertyValue = PropertyValueProxy::create(
                 array_merge(
-                    $request->all(),
+                    $request->except('images'),
                     ['property_id' => $property->id]
                 )
             );
@@ -44,6 +47,8 @@ class PropertyValueController extends BaseController
                 'title'    => $propertyValue->title,
                 'property' => $property->name
             ]));
+
+            $this->createMedia($propertyValue);
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
@@ -65,7 +70,7 @@ class PropertyValueController extends BaseController
     public function update(Property $property, PropertyValue $property_value, UpdatePropertyValue $request)
     {
         try {
-            $property_value->update($request->all());
+            $property_value->update($request->except('images'));
 
             flash()->success(__(':title has been updated', ['title' => $property_value->title]));
         } catch (\Exception $e) {
