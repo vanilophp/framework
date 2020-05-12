@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Vanilo\Framework\Traits;
-
 
 trait CreateMediaTrait
 {

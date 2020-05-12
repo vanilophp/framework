@@ -49,7 +49,6 @@ class PropertyValueController extends BaseController
             ]));
 
             $this->createMedia($propertyValue);
-
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
