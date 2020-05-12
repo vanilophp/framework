@@ -19,9 +19,12 @@ use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Framework\Contracts\Requests\CreateTaxonForm;
 use Vanilo\Framework\Contracts\Requests\CreateTaxon;
 use Vanilo\Framework\Contracts\Requests\UpdateTaxon;
+use Vanilo\Framework\Traits\CreateMediaTrait;
 
 class TaxonController extends BaseController
 {
+    use CreateMediaTrait;
+
     public function create(CreateTaxonForm $request, Taxonomy $taxonomy)
     {
         $taxon = app(Taxon::class);
@@ -44,12 +47,13 @@ class TaxonController extends BaseController
     public function store(Taxonomy $taxonomy, CreateTaxon $request)
     {
         try {
-            $taxon = TaxonProxy::create(array_merge($request->all(),
+            $taxon = TaxonProxy::create(array_merge($request->except('images'),
                 ['taxonomy_id' => $taxonomy->id]));
             flash()->success(__(':name :taxonomy has been created', [
                 'name'     => $taxon->name,
                 'taxonomy' => Str::singular($taxonomy->name)
             ]));
+            $this->createMedia($taxon);
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
@@ -71,7 +75,7 @@ class TaxonController extends BaseController
     public function update(Taxonomy $taxonomy, Taxon $taxon, UpdateTaxon $request)
     {
         try {
-            $taxon->update($request->all());
+            $taxon->update($request->except('images'));
 
             flash()->success(__(':name has been updated', ['name' => $taxon->name]));
         } catch (\Exception $e) {
