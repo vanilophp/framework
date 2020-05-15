@@ -41,12 +41,12 @@ class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContr
         return $this->address;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function getPhone(): string
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
