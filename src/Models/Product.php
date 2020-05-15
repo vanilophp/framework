@@ -25,6 +25,7 @@ use Vanilo\Product\Models\Product as BaseProduct;
 class Product extends BaseProduct implements Buyable, HasMedia
 {
     use BuyableModel, BuyableImageSpatieV7, HasMediaTrait, HasTaxons, HasPropertyValues;
+
     protected const DEFAULT_THUMBNAIL_WIDTH  = 250;
     protected const DEFAULT_THUMBNAIL_HEIGHT = 250;
     protected const DEFAULT_THUMBNAIL_FIT    = Manipulations::FIT_CROP;

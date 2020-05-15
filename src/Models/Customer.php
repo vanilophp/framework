@@ -16,10 +16,16 @@ use Vanilo\Contracts\Customer as CustomerContract;
 
 class Customer extends BaseCustomer implements CustomerContract
 {
+    public function getName(): string
+    {
+        // Added for interface compatibility
+        return parent::getName();
+    }
+
     /**
      * @inheritDoc
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstname;
     }
@@ -27,7 +33,7 @@ class Customer extends BaseCustomer implements CustomerContract
     /**
      * @inheritDoc
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastname;
     }
@@ -35,7 +41,7 @@ class Customer extends BaseCustomer implements CustomerContract
     /**
      * @inheritDoc
      */
-    public function getCompanyName()
+    public function getCompanyName(): ?string
     {
         return $this->company_name;
     }
@@ -43,7 +49,7 @@ class Customer extends BaseCustomer implements CustomerContract
     /**
      * @inheritDoc
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -51,7 +57,7 @@ class Customer extends BaseCustomer implements CustomerContract
     /**
      * @inheritDoc
      */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
@@ -59,22 +65,22 @@ class Customer extends BaseCustomer implements CustomerContract
     /**
      * @inheritDoc
      */
-    public function getTaxNumber()
+    public function getTaxNumber(): ?string
     {
         return $this->tax_nr;
     }
 
-    public function isOrganization()
+    public function isOrganization(): bool
     {
         return $this->type->isOrganization();
     }
 
-    public function isIndividual()
+    public function isIndividual(): bool
     {
         return $this->type->isIndividual();
     }
 
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName(); // This is temporary. My ass.
     }
