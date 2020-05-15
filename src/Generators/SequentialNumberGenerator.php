@@ -40,7 +40,7 @@ class SequentialNumberGenerator implements OrderNumberGenerator
     /**
      * @inheritDoc
      */
-    public function generateNumber(Order $order = null)
+    public function generateNumber(Order $order = null): string
     {
         $lastOrder = OrderProxy::orderBy('id', 'desc')->limit(1)->first();
 
