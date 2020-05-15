@@ -3,16 +3,26 @@
 ## 2.x Series
 
 ### Unreleased
-##### 2020-01-XX
+##### 2020-XX-YY
 
-- Dropped PHP 7.1 support
+- Dropped Laravel 5 support
 
 ## 1.x Series
+
+### 1.2.0
+##### 2020-03-29
+
+- Added Laravel 7 support
+- Added PHP 7.4 support
+- Dropped PHP 7.1 support
+- Combination of PHP 7.4 & Laravel 5.6|5.7 is not recommended
+  due to improper order of `implode()` arguments in eloquent-sluggable dependency
 
 ### 1.1.0
 ##### 2019-11-25
 
 - Added Laravel 6 Support
+- Dropped Laravel 5.4 Support (might work, but no longer being tested)
 
 ### 1.0.0
 ##### 2019-11-11

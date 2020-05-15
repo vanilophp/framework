@@ -46,7 +46,7 @@ class PropertyTest extends TestCase
         $this->assertEquals('creepiness', $property->slug);
 
         $cfg = $property->configuration;
-        $this->assertInternalType('array', $cfg);
+        $this->assertIsArray($cfg);
         $this->assertEquals('zdish', $cfg['bam']);
         $this->assertEquals('tsish', $cfg['bumm']);
     }
@@ -65,7 +65,7 @@ class PropertyTest extends TestCase
     /** @test */
     public function slug_must_be_unique()
     {
-        $this->expectExceptionMessageRegExp('/UNIQUE constraint failed/');
+        $this->expectExceptionMessageMatches('/UNIQUE constraint failed/');
 
         $p1 = Property::create([
             'name' => 'Color',
