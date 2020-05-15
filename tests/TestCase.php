@@ -41,6 +41,16 @@ abstract class TestCase extends Orchestra
         $this->withFactories(__DIR__ . '/factories');
     }
 
+    /* @todo Remove once PHPUnit < 9.0 won't be supported by the package */
+    public function expectExceptionMessageMatches(string $regularExpression): void
+    {
+        if (is_callable('parent::expectExceptionMessageMatches')) {
+            parent::expectExceptionMessageMatches($regularExpression);
+        } else {
+            $this->expectExceptionMessageMatches($regularExpression);
+        }
+    }
+
     /**
      * @param \Illuminate\Foundation\Application $app
      *
