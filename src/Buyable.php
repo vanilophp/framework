@@ -30,9 +30,7 @@ interface Buyable
     /**
      * Returns the price of the item
      */
-    public function getPrice(): Decimal;
-
-    public function getCurrency(): string;
+    public function getPrice(): float;
 
     /**
      * Returns whether the item has an image

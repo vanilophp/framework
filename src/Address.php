@@ -13,6 +13,9 @@ namespace Vanilo\Contracts;
 
 interface Address
 {
+    /**
+     * Returns the name of the person and/or organization belonging to the address
+     */
     public function getName(): string;
 
     /**
@@ -25,12 +28,18 @@ interface Address
      */
     public function getProvinceCode(): ?string;
 
+    /**
+     * The postal code, or zip code if applicable
+     */
     public function getPostalCode(): ?string;
 
-    public function getCity(): string;
+    /**
+     * The city (town, village) or other locality if applicable
+     */
+    public function getCity(): ?string;
 
     /**
-     * The address part (Street, number, building, etc)
+     * The address part (Street, number, building, PO box etc)
      */
     public function getAddress(): string;
 }

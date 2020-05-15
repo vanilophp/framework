@@ -15,20 +15,16 @@ interface CheckoutSubjectItem
 {
     /**
      * Returns the buyable (product) of the item
-     *
-     * @return Buyable
      */
     public function getBuyable(): Buyable;
 
     /**
      * Returns the quantity of the line
-     *
-     * @return integer|float
      */
-    public function getQuantity();
+    public function getQuantity(): int;
 
     /**
      * Returns the (adjusted) line total
      */
-    public function total(): Decimal;
+    public function total(): float;
 }

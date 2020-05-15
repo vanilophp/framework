@@ -17,7 +17,7 @@ interface Payable
 
     public function getPayableType(): string;
 
-    public function getAmount(): Decimal;
+    public function getAmount(): float;
 
     public function getCurrency(): string;
 
