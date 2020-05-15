@@ -51,7 +51,7 @@ class NonexistentCartTest extends TestCase
         $this->assertNull(Cart::getUser());
         $this->assertEquals(0, Cart::itemCount());
         $this->assertEmpty(Cart::getItems());
-        $this->assertEquals(0, Cart::total()->toFloat());
+        $this->assertEquals(0, Cart::total());
         $this->assertFalse(Cart::exists());
         $this->assertTrue(Cart::doesNotExist());
     }

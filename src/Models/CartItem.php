@@ -15,8 +15,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
-use Vanilo\Contracts\Decimal as DecimalContract;
-use Vanilo\Support\Decimal;
 
 /**
  * @property Buyable $product
@@ -42,7 +40,7 @@ class CartItem extends Model implements CartItemContract
     /**
      * @inheritDoc
      */
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
@@ -50,9 +48,9 @@ class CartItem extends Model implements CartItemContract
     /**
      * @inheritDoc
      */
-    public function total(): DecimalContract
+    public function total(): float
     {
-        return (new Decimal($this->price))->mul($this->quantity);
+        return $this->price * $this->quantity;
     }
 
     /**

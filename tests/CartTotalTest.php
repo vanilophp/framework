@@ -42,7 +42,7 @@ class CartTotalTest extends TestCase
      */
     public function a_non_existent_cart_has_a_zero_total()
     {
-        $this->assertEquals(0, Cart::total()->toFloat());
+        $this->assertEquals(0, Cart::total());
     }
 
     /**
@@ -54,20 +54,13 @@ class CartTotalTest extends TestCase
         $item2 = Cart::addItem($this->blackCat);
 
         $manualCheckSum = $this->blackCat->getPrice()
-                            ->add(
-                                $this->whiteCat->getPrice()->mul(2)
-                            )
+            +
+            2 * $this->whiteCat->getPrice()
         ;
 
-        $this->assertTrue(
-            $item1->total()->add(
-                $item2->total()
-            )->equals(
-                Cart::total()
-            )
-        );
+        $this->assertEquals($item1->total() + $item2->total(), Cart::total());
 
-        $this->assertTrue($manualCheckSum->equals(Cart::total()));
+        $this->assertEquals($manualCheckSum, Cart::total());
     }
 
     /**

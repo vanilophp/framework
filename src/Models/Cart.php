@@ -18,8 +18,6 @@ use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\Cart as CartContract;
-use Vanilo\Contracts\Decimal as DecimalContract;
-use Vanilo\Support\Decimal;
 
 class Cart extends Model implements CartContract
 {
@@ -117,9 +115,9 @@ class Cart extends Model implements CartContract
     /**
      * @inheritDoc
      */
-    public function total(): DecimalContract
+    public function total(): float
     {
-        return new Decimal($this->items->sum('total'));
+        return $this->items->sum('total');
     }
 
     /**

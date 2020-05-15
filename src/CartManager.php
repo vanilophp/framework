@@ -105,9 +105,9 @@ class CartManager implements CartManagerContract
     /**
      * @inheritDoc
      */
-    public function total(): Decimal
+    public function total(): float
     {
-        return $this->exists() ? $this->model()->total() : new \Vanilo\Support\Decimal('0');
+        return $this->exists() ? $this->model()->total() : 0;
     }
 
     /**

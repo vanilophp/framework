@@ -21,9 +21,4 @@ class Product extends Model implements Buyable
     use BuyableModel, BuyableNoImage;
 
     protected $guarded = ['id'];
-
-    public function getCurrency(): string
-    {
-        return 'USD';
-    }
 }
