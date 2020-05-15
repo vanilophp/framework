@@ -19,7 +19,7 @@ class TaxonTest extends TestCase
     /** @test */
     public function taxons_must_belong_to_a_taxonomy()
     {
-        $this->expectExceptionMessageRegExp('/NOT NULL constraint failed: taxons\.taxonomy_id/');
+        $this->expectExceptionMessageMatches('/NOT NULL constraint failed: taxons\.taxonomy_id/');
 
         Taxon::create();
     }
@@ -42,7 +42,7 @@ class TaxonTest extends TestCase
     {
         $taxonomy = Taxonomy::create(['name' => 'Category']);
 
-        $this->expectExceptionMessageRegExp('/NOT NULL constraint failed: taxons\.name/');
+        $this->expectExceptionMessageMatches('/NOT NULL constraint failed: taxons\.name/');
 
         Taxon::create(['taxonomy_id' => $taxonomy->id]);
     }
@@ -111,7 +111,7 @@ class TaxonTest extends TestCase
     /** @test */
     public function slugs_must_be_unique_within_the_same_level_of_a_taxonomy()
     {
-        $this->expectExceptionMessageRegExp('/UNIQUE constraint failed/');
+        $this->expectExceptionMessageMatches('/UNIQUE constraint failed/');
 
         $taxonomy = Taxonomy::create(['name' => 'Category']);
         $root     = Taxon::create([

@@ -24,6 +24,16 @@ abstract class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
     }
 
+    /* @todo Remove once PHPUnit < 9.0 won't be supported by the package */
+    public function expectExceptionMessageMatches(string $regularExpression): void
+    {
+        if (is_callable('parent::expectExceptionMessageMatches')) {
+            parent::expectExceptionMessageMatches($regularExpression);
+        } else {
+            $this->expectExceptionMessageRegExp($regularExpression);
+        }
+    }
+
     /**
      * @param \Illuminate\Foundation\Application $app
      *
