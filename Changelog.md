@@ -2,14 +2,19 @@
 
 ## 2.x Series
 
+### Unreleased
+##### 2020-XX-YY
+
+- Dropped Laravel 5 Support
+
+## 1.x Series
+
 ### 1.2.0
 ##### 2020-03-29
 
 - Added Laravel 7 Support
 - Added PHP 7.4 support
 - Dropped PHP 7.1 support
-
-## 1.x Series
 
 ### 1.1.0
 ##### 2019-11-25
