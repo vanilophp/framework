@@ -40,7 +40,7 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -48,7 +48,7 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
@@ -56,7 +56,7 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
-    public function hasImage()
+    public function hasImage(): bool
     {
         return false;
     }
@@ -64,7 +64,7 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
-    public function getThumbnailUrl()
+    public function getThumbnailUrl(): ?string
     {
         return null;
     }
@@ -72,7 +72,7 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
-    public function getImageUrl()
+    public function getImageUrl(): ?string
     {
         return null;
     }
@@ -85,12 +85,12 @@ class Product implements Buyable
         return 'product';
     }
 
-    public function addSale(Carbon $date, $units = 1)
+    public function addSale(Carbon $date, $units = 1): void
     {
         // not implemented here
     }
 
-    public function removeSale($units = 1)
+    public function removeSale($units = 1): void
     {
         // not implemented here
     }

@@ -62,7 +62,7 @@ class Cart implements CheckoutSubject
     /**
      * @inheritDoc
      */
-    public function total()
+    public function total(): float
     {
         return $this->items->sum->total();
     }

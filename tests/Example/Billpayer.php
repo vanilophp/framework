@@ -42,9 +42,9 @@ class Billpayer implements \Vanilo\Contracts\Billpayer
         }
     }
 
-    public function isEuRegistered()
+    public function isEuRegistered(): bool
     {
-        return $this->data['is_eu_registered'] ?? null;
+        return $this->data['is_eu_registered'] ?? false;
     }
 
     public function getBillingAddress(): AddressContract
@@ -52,52 +52,52 @@ class Billpayer implements \Vanilo\Contracts\Billpayer
         return $this->address;
     }
 
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->data['email'] ?? null;
     }
 
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->data['phone'] ?? null;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->isOrganization() ? $this->getCompanyName() : $this->getFullName();
     }
 
-    public function isOrganization()
+    public function isOrganization(): bool
     {
         return $this->data['is_organization'] ?? false;
     }
 
-    public function isIndividual()
+    public function isIndividual(): bool
     {
         return $this->data['is_individual'] ?? false;
     }
 
-    public function getCompanyName()
+    public function getCompanyName(): ?string
     {
         return $this->data['company_name'] ?? null;
     }
 
-    public function getTaxNumber()
+    public function getTaxNumber(): ?string
     {
         return $this->data['tax_nr'] ?? null;
     }
 
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->data['first_name'] ?? null;
     }
 
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->data['last_name'] ?? null;
     }
 
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
     }

@@ -44,7 +44,7 @@ class CartItem implements CheckoutSubjectItem
     /**
      * @inheritDoc
      */
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->qty;
     }
@@ -52,7 +52,7 @@ class CartItem implements CheckoutSubjectItem
     /**
      * @inheritDoc
      */
-    public function total()
+    public function total(): float
     {
         return $this->product->getPrice() * $this->qty;
     }

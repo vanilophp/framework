@@ -10,24 +10,18 @@ php:
   - '7.4'
 
 env:
-  - LARAVEL=5.5
-  - LARAVEL=5.6
-  - LARAVEL=5.7
-  - LARAVEL=5.8
   - LARAVEL=6.0
   - LARAVEL=6.18
   - LARAVEL=7.0
-  - LARAVEL=7.3
+  - LARAVEL=7.10
 
 script:
   - vendor/bin/phpunit -c phpunit.xml
 
 before_install:
-  - MINOR=`echo $LARAVEL | sed 's/[5|6|7]\.\([0-9]\+\)/\1/'`
-  - '[[ $LARAVEL =~ ^6\.[0-9]+$ ]] && MAJOR=6 || MAJOR=5'
-  - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || true'
-  - '[ 6 -eq $MAJOR ] && ORCH=4 || ORCH=3'
-  - '[ 7 -eq $MAJOR ] && ORCH=5 || true'
+  - MINOR=`echo $LARAVEL | sed 's/[6|7]\.\([0-9]\+\)/\1/'`
+  - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || MAJOR=6'
+  - '[ 7 -eq $MAJOR ] && ORCH=5 || ORCH=4'
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
   - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
 
