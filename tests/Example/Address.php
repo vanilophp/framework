@@ -30,33 +30,33 @@ class Address implements AddressContract
         $this->data[$name] = $value;
     }
 
-    public function getName()
+    public function getName(): string
     {
-        return $this->data['name'] ?? null;
+        return $this->data['name'] ?? '';
     }
 
-    public function getCountryCode()
+    public function getCountryCode(): string
     {
-        return $this->data['country_code'] ?? null;
+        return $this->data['country_code'] ?? '';
     }
 
-    public function getProvinceCode()
+    public function getProvinceCode(): ?string
     {
         return $this->data['province_code'] ?? null;
     }
 
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
         return $this->data['postal_code'] ?? null;
     }
 
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->data['city'] ?? null;
     }
 
-    public function getAddress()
+    public function getAddress(): string
     {
-        return $this->data['address'] ?? null;
+        return $this->data['address'] ?? '';
     }
 }
