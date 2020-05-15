@@ -43,7 +43,7 @@ class ChannelTest extends TestCase
 
         $cfg = $channel->configuration;
         // @todo convert to `assertIsArray` once dropping Laravel 5.5 -> PHPUnit < 7.5 support
-        $this->assertInternalType('array', $cfg);
+        $this->assertIsArray($cfg);
         $this->assertEquals('zdish', $cfg['bam']);
         $this->assertEquals('tsish', $cfg['bumm']);
     }
@@ -51,7 +51,7 @@ class ChannelTest extends TestCase
     /** @test */
     public function slug_must_be_unique()
     {
-        $this->expectExceptionMessageRegExp('/UNIQUE constraint failed/');
+        $this->expectExceptionMessageMatches('/UNIQUE constraint failed/');
 
         $c1 = Channel::create([
             'name' => 'Webshop 1',
