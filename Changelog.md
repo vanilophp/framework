@@ -3,10 +3,8 @@
 ## 2.x Series
 
 ### Unreleased
-##### 2020-01-XX
+##### 2020-XX-YY
 
-- Decimal interface has been added
-- All prices are decimal
 - Payable interface has been added
 - Shippable interface has been added
 - BC: Address interface has been extended and refactored to use return types
