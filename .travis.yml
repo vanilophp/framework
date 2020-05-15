@@ -15,15 +15,30 @@ env:
   - LARAVEL=5.7
   - LARAVEL=5.8
   - LARAVEL=6.0
-  - LARAVEL=6.8
+  - LARAVEL=6.18
+  - LARAVEL=7.0
+  - LARAVEL=7.3
+
+# PHP 7.4 + Laravel 5.6|5.7 combo excluded because they fail with deprecation warning:
+# `implode(): Passing glue string after array is deprecated. Swap the parameters`
+# due to improper order of `implode()` arguments in eloquent-sluggable dependency
+# Laravel 5.6 & 5.7 are EOL anyway
+jobs:
+  exclude:
+    - php: 7.4
+      env: LARAVEL=5.6
+    - php: 7.4
+      env: LARAVEL=5.7
 
 script:
   - vendor/bin/phpunit
 
 before_install:
-  - MINOR=`echo $LARAVEL | sed 's/[5|6]\.\([0-9]\+\)/\1/'`
-  - '[[ $LARAVEL =~ ^6\.[0-9]$ ]] && MAJOR=6 || MAJOR=5'
+  - MINOR=`echo $LARAVEL | sed 's/[5|6|7]\.\([0-9]\+\)/\1/'`
+  - '[[ $LARAVEL =~ ^6\.[0-9]+$ ]] && MAJOR=6 || MAJOR=5'
+  - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || true'
   - '[ 6 -eq $MAJOR ] && ORCH=4 || ORCH=3'
+  - '[ 7 -eq $MAJOR ] && ORCH=5 || true'
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
   - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
 
