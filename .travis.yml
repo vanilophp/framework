@@ -21,7 +21,7 @@ script:
 before_install:
   - MINOR=`echo $LARAVEL | sed 's/[6|7]\.\([0-9]\+\)/\1/'`
   - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || MAJOR=6'
-  - '[ 6 -eq $MAJOR ] && ORCH=5 || ORCH=4'
+  - '[ 7 -eq $MAJOR ] && ORCH=5 || ORCH=4'
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
   - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
 
