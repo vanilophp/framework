@@ -19,7 +19,6 @@ script:
   - vendor/bin/phpunit
 
 before_install:
-  - sudo apt-get install libmpdec-dev && pecl install decimal
   - MINOR=`echo $LARAVEL | sed 's/[6|7]\.\([0-9]\+\)/\1/'`
   - '[[ $LARAVEL =~ ^7\.[0-9]$ ]] && MAJOR=7 || MAJOR=6'
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
