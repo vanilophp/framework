@@ -20,11 +20,6 @@ class HeyBuyMe implements Buyable
 
     public $price = 0;
 
-    public function getCurrency(): string
-    {
-        return 'USD';
-    }
-
     public function hasImage(): bool
     {
         return false;

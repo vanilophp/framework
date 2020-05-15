@@ -15,8 +15,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "illuminate/support": "~6.0|~7.0",
-        "php-decimal/php-decimal": "~1.1",
+        "illuminate/support": "~6.0|~7.0"
         "vanilo/contracts": "^2.0@dev"
     },
     "require-dev": {
