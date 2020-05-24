@@ -17,7 +17,7 @@ env:
   - LARAVEL=6.0
   - LARAVEL=6.18
   - LARAVEL=7.0
-  - LARAVEL=7.3
+  - LARAVEL=7.12
 
 # PHP 7.4 + Laravel 5.6|5.7 combo excluded because they fail with deprecation warning:
 # `implode(): Passing glue string after array is deprecated. Swap the parameters`
