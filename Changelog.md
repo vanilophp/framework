@@ -10,6 +10,12 @@
 
 ## 1.x Series
 
+### 1.2.1
+##### 2020-05-24
+
+- Changed minimum AppShell version to 1.7
+- Fixes the "taxons" vs "taxa" permission problem caused by Doctrine Inflector 1.4+
+
 ### 1.2.0
 ##### 2020-03-29
 
