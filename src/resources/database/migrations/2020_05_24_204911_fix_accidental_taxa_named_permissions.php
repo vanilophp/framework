@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-
 use Konekt\Acl\Models\PermissionProxy;
 
 /**
