@@ -13,6 +13,7 @@ namespace Vanilo\Framework\Providers;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Address\Contracts\Address as AddressContract;
+use Konekt\AppShell\Acl\ResourcePermissions;
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
@@ -76,6 +77,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     {
         parent::register();
 
+        ResourcePermissions::overrideResourcePlural('taxon', 'taxons');
         $this->app->bind(CheckoutDataFactoryContract::class, CheckoutDataFactory::class);
     }
 

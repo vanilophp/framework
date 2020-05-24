@@ -17,7 +17,7 @@
     "require": {
         "php": "^7.2",
         "laravel/framework": "~5.5|~6.0|~7.0",
-        "konekt/appshell": "~1.5",
+        "konekt/appshell": "~1.7",
         "spatie/laravel-medialibrary": "^7.3",
         "vanilo/contracts": "~1.2",
         "vanilo/support": "~1.2",
