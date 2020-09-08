@@ -19,11 +19,10 @@ class PaymentMethodTest extends TestCase
     public function it_can_be_created()
     {
         $method = PaymentMethod::create([
-            'name' => 'Credit Card',
+            'name'    => 'Credit Card',
             'gateway' => 'plastic'
         ]);
 
         $this->assertInstanceOf(PaymentMethod::class, $method);
     }
-
 }
