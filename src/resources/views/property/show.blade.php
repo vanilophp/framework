@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ $property->name }} {{ __('property') }}
@@ -10,13 +10,13 @@
         <div class="card-header">
             <h5>{{ __(':name Values', ['name' => $property->name]) }}</h5>
         </div>
-        <div class="card-block">
+        <div class="card-body">
             @include('vanilo::property-value._index', ['propertyValues' => $property->values()])
         </div>
     </div>
 
     <div class="card">
-        <div class="card-block">
+        <div class="card-body">
             @can('edit properties')
                 <a href="{{ route('vanilo.property.edit', $property) }}" class="btn btn-outline-primary">{{ __('Edit Property') }}</a>
             @endcan

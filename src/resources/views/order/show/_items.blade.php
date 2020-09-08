@@ -3,7 +3,7 @@
         {{ __('Ordered Items') }}
     </div>
 
-    <div class="card-block">
+    <div class="card-body">
         <table class="table table-striped">
             <thead>
             <tr>

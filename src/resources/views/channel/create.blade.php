@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Create Channel') }}
@@ -13,7 +13,7 @@
             {{ __('Channel Details') }}
         </div>
 
-        <div class="card-block">
+        <div class="card-body">
             @include('vanilo::channel._form')
         </div>
 

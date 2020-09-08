@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Orders') }}
@@ -16,7 +16,7 @@
 
         </div>
 
-        <div class="card-block">
+        <div class="card-body">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>

@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Editing') }} {{ $taxonomy->name }}
@@ -16,7 +16,7 @@
             {{ __('Category Tree Data') }}
         </div>
 
-        <div class="card-block">
+        <div class="card-body">
             @include('vanilo::taxonomy._form')
         </div>
 

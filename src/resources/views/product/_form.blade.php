@@ -1,7 +1,9 @@
 <div class="form-group">
     <div class="input-group">
-        <span class="input-group-addon">
-            <i class="zmdi zmdi-layers"></i>
+        <span class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="zmdi zmdi-layers"></i>
+            </span>
         </span>
         {{ Form::text('name', null, [
                 'class' => 'form-control form-control-lg' . ($errors->has('name') ? ' is-invalid' : ''),
@@ -19,8 +21,10 @@
 <div class="form-row">
     <div class="form-group col-12 col-md-6 col-xl-4">
         <div class="input-group">
-            <span class="input-group-addon">
-                <i class="zmdi zmdi-code-setting"></i>
+            <span class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="zmdi zmdi-code-setting"></i>
+                </span>
             </span>
             {{ Form::text('sku', null, [
                     'class' => 'form-control' . ($errors->has('sku') ? ' is-invalid' : ''),
@@ -38,8 +42,10 @@
 <div class="form-row">
     <div class="form-group col-12 col-md-6 col-xl-4">
         <div class="input-group">
-            <span class="input-group-addon">
-                <i class="zmdi zmdi-code-setting"></i>
+            <span class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="zmdi zmdi-code-setting"></i>
+                </span>
             </span>
             {{ Form::number('stock', null, [
                     'class' => 'form-control' . ($errors->has('stock') ? ' is-invalid' : ''),
@@ -62,8 +68,10 @@
                     'placeholder' => __('Price')
                 ])
             }}
-            <span class="input-group-addon">
-                {{ config('vanilo.framework.currency.code') }}
+            <span class="input-group-append">
+                <span class="input-group-text">
+                    {{ config('vanilo.framework.currency.code') }}
+                </span>
             </span>
         </div>
         @if ($errors->has('price'))

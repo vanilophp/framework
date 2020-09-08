@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Create new product') }}
@@ -13,7 +13,7 @@
                 <div class="card-header">
                     {{ __('Product Details') }}
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     @include('vanilo::product._form')
                 </div>
                 <div class="card-footer">

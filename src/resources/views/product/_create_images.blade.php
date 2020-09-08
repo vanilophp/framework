@@ -1,6 +1,6 @@
     <div class="card card-accent-success">
         <div class="card-header">{{ __('Images') }}</div>
-        <div class="card-block">
+        <div class="card-body">
             @can('create media')
                 <div class="card">
                     <div class="card-body p-0 d-flex align-items-center">

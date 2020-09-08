@@ -2,7 +2,7 @@
         <div class="card-header">{{ __('Images') }}
             <span class="badge badge-pill badge-info">{{ $product->getMedia()->count() }}</span>
         </div>
-        <div class="card-block">
+        <div class="card-body">
             @if($errors->has('images'))
                 <div class="alert alert-danger">{{ $errors->first('images') }}</div>
             @endif

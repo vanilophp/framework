@@ -9,7 +9,7 @@
                 $billpayer = $order->billpayer;
                 $billingAddress = $billpayer->getBillingAddress();
             ?>
-            <div class="card-block">
+            <div class="card-body">
                 <h6>{{ $billpayer->getName() }}</h6>
                 @if( $billpayer->isOrganization())
                     {{ $billpayer->getTaxNumber() }}
@@ -30,7 +30,7 @@
             </div>
 
             <?php $shippingAddress = $order->getShippingAddress(); ?>
-            <div class="card-block">
+            <div class="card-body">
                 <h6>{{ $shippingAddress->getName() }}</h6>
                 <p>
                     {{ $shippingAddress->getAddress() }}<br>

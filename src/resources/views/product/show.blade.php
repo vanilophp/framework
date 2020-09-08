@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Viewing') }} {{ $product->name }}
@@ -69,7 +69,7 @@
     </div>
 
     <div class="card">
-        <div class="card-block">
+        <div class="card-body">
             @can('edit products')
             <a href="{{ route('vanilo.product.edit', $product) }}" class="btn btn-outline-primary">{{ __('Edit product') }}</a>
             @endcan

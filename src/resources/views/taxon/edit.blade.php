@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Editing') }} {{ $taxon->name }}
@@ -14,7 +14,7 @@
                 {{ __(':category Data', ['category' => \Illuminate\Support\Str::singular($taxonomy->name)]) }}
             </div>
 
-            <div class="card-block">
+            <div class="card-body">
                 @include('vanilo::taxon._form')
             </div>
 

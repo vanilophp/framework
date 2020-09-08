@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-block">
+    <div class="card-body">
         @can('edit orders')
             <div class="dropdown float-left">
                 <a class="btn btn-outline-info dropdown-toggle" href="#" data-toggle="dropdown"

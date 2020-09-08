@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ $channel->name }} {{ __('channel') }}
@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="card">
-        <div class="card-block">
+        <div class="card-body">
             @can('edit channels')
                 <a href="{{ route('vanilo.channel.edit', $channel) }}" class="btn btn-outline-primary">{{ __('Edit Channel') }}</a>
             @endcan

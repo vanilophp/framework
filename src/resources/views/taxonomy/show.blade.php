@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Viewing') }} {{ $taxonomy->name }}
@@ -12,13 +12,13 @@
             transition: opacity 0.2s ease-in-out;
         }
 
-        .card-block:hover > .card-actionbar-show-on-hover {
+        .card-body:hover > .card-actionbar-show-on-hover {
             opacity: 1;
         }
     </style>
 
     <div class="card">
-        <div class="card-block">
+        <div class="card-body">
             <div class="card">
                 @include('vanilo::taxon._tree', ['taxons' => $taxonomy->rootLevelTaxons()])
 
@@ -33,7 +33,7 @@
     </div>
 
     <div class="card">
-        <div class="card-block">
+        <div class="card-body">
             @can('edit taxonomies')
                 <a href="{{ route('vanilo.taxonomy.edit', $taxonomy) }}" class="btn btn-outline-primary">{{ __('Edit Category Tree') }}</a>
             @endcan

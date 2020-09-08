@@ -1,5 +1,5 @@
 @foreach($taxons as $taxon)
-    <div class="card-block">
+    <div class="card-body">
 
         @if ($taxon->children->isNotEmpty())
             <a href="#taxon-{{$taxon->id}}" aria-expanded="false"
@@ -41,7 +41,7 @@
 
     @if ($taxon->children->isNotEmpty())
         <div class="collapse multi-collapse" id="taxon-{{$taxon->id}}" data-toggle="collapse">
-            <div class="card-block">
+            <div class="card-body">
                 <div class="card">
                     @include('vanilo::taxon._tree', ['taxons' => $taxon->children])
                 </div>

@@ -1,7 +1,9 @@
 <div class="form-group">
     <div class="input-group">
-        <span class="input-group-addon">
-            <i class="zmdi zmdi-folder"></i>
+        <span class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="zmdi zmdi-folder"></i>
+            </span>
         </span>
         {{ Form::text('name', null, [
                 'class' => 'form-control form-control-lg' . ($errors->has('name') ? ' is-invalid' : ''),

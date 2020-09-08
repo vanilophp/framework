@@ -1,7 +1,9 @@
 <div class="form-group">
     <div class="input-group">
-        <span class="input-group-addon">
-            <i class="zmdi zmdi-portable-wifi"></i>
+        <span class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="zmdi zmdi-portable-wifi"></i>
+            </span>
         </span>
         {{ Form::text('name', null, [
                 'class' => 'form-control form-control-lg' . ($errors->has('name') ? ' is-invalid' : ''),
@@ -10,8 +12,7 @@
         }}
     </div>
     @if ($errors->has('name'))
-        <input hidden class="form-control is-invalid" />
-        <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+        <div class="invalid-tooltip">{{ $errors->first('name') }}</div>
     @endif
 </div>
 

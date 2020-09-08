@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 <?php $taxonTypeName =  \Illuminate\Support\Str::singular($taxonomy->name) ?>
 
@@ -14,7 +14,7 @@
                 {{ __(':category Details', ['category' => $taxonTypeName]) }}
             </div>
 
-            <div class="card-block">
+            <div class="card-body">
                 @include('vanilo::taxon._form')
             </div>
 

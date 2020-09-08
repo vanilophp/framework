@@ -1,4 +1,4 @@
-@extends('appshell::layouts.default')
+@extends('appshell::layouts.private')
 
 @section('title')
     {{ __('Add :property value', ['property' => $property->name]) }}
@@ -12,7 +12,7 @@
                 {{ __('Value Details') }}
             </div>
 
-            <div class="card-block">
+            <div class="card-body">
                 @include('vanilo::property-value._form')
             </div>
 

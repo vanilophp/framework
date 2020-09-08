@@ -1,6 +1,6 @@
 
 <div class="card">
-    <div class="card-block">
+    <div class="card-body">
 
         <h6 class="card-title">
             {{ __('Images') }}
