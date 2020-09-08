@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-4 mb-3">
             @component('appshell::widgets.card_with_icon', [
                     'icon' => $product->is_active ? 'layers' : 'layers-off',
                     'type' => $product->is_active ? 'success' : 'warning'
@@ -26,7 +26,7 @@
             @endcomponent
         </div>
 
-        <div class="col-sm-6 col-md-5">
+        <div class="col-sm-6 col-md-5 mb-3">
             @component('appshell::widgets.card_with_icon', [
                     'icon' => 'time-restore',
                     'type' => 'info'
@@ -43,7 +43,7 @@
             @endcomponent
         </div>
 
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-3 mb-3">
             @component('appshell::widgets.card_with_icon', ['icon' => 'mall'])
                 {{ $product->units_sold ?: '0' }}
                 {{ __('units sold') }}
@@ -58,17 +58,17 @@
             @endcomponent
         </div>
 
-        <div class="col-sm-6 col-md-9">
+        <div class="col-sm-6 col-md-9 mb-3">
             @include('vanilo::product._show_categories')
             @include('vanilo::product._show_properties')
         </div>
 
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-3 mb-3">
             @include('vanilo::product._show_images')
         </div>
     </div>
 
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-body">
             @can('edit products')
             <a href="{{ route('vanilo.product.edit', $product) }}" class="btn btn-outline-primary">{{ __('Edit product') }}</a>

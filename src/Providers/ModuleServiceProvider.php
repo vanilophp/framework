@@ -107,13 +107,23 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     {
         if ($menu = Menu::get('appshell')) {
             $shop = $menu->addItem('shop', __('Shop'));
-            $shop->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])->data('icon', 'layers');
-            $shop->addSubItem('product_properties', __('Product Properties'), ['route' => 'vanilo.property.index'])->data('icon', 'format-list-bulleted');
-            $shop->addSubItem('categories', __('Categorization'), ['route' => 'vanilo.taxonomy.index'])->data('icon', 'folder');
-            $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])->data('icon', 'mall');
+            $shop->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])
+                ->data('icon', 'layers')
+                ->activateOnUrls(route('vanilo.product.index', [], false) . '*');
+            $shop->addSubItem('product_properties', __('Product Properties'), ['route' => 'vanilo.property.index'])
+                ->data('icon', 'format-list-bulleted')
+                ->activateOnUrls(route('vanilo.property.index', [], false) . '*');
+            $shop->addSubItem('categories', __('Categorization'), ['route' => 'vanilo.taxonomy.index'])
+                ->data('icon', 'folder')
+                ->activateOnUrls(route('vanilo.taxonomy.index', [], false) . '*');
+            $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])
+                ->data('icon', 'mall')
+                ->activateOnUrls(route('vanilo.order.index', [], false) . '*');
 
             $settings = $menu->getItem('settings_group');
-            $settings->addSubItem('channels', __('Channels'), ['route' => 'vanilo.channel.index'])->data('icon', 'portable-wifi');
+            $settings->addSubItem('channels', __('Channels'), ['route' => 'vanilo.channel.index'])
+                ->data('icon', 'portable-wifi')
+                ->activateOnUrls(route('vanilo.channel.index', [], false) . '*');;
         }
     }
 }

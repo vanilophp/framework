@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-6">
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-header">
                 {{ __('Bill To') }}
             </div>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="col-sm-6">
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-header">
                 {{ __('Ship To') }}
             </div>

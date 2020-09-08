@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-3">
     <div class="card-body">
         <h6 class="card-title">{{ __('Categorization') }}</h6>
 

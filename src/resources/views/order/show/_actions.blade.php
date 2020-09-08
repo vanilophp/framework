@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-3">
     <div class="card-body">
         @can('edit orders')
             <div class="dropdown float-left">
