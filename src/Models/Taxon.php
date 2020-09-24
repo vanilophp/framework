@@ -24,12 +24,12 @@ class Taxon extends Model implements TaxonContract
 {
     use Sluggable, SluggableScopeHelpers;
 
-    /** @var Collection */
-    private $_parents;
-
     protected $table = 'taxons';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    /** @var Collection */
+    private $_parents;
 
     public function getParentsAttribute(): Collection
     {
@@ -53,7 +53,7 @@ class Taxon extends Model implements TaxonContract
 
     public function isRootLevel(): bool
     {
-        return (bool) ($this->parent_id == null);
+        return (bool) (null == $this->parent_id);
     }
 
     public function lastNeighbour(bool $excludeSelf = false)

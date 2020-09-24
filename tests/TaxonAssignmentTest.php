@@ -143,12 +143,14 @@ class TaxonAssignmentTest extends TestCase
     {
         parent::setUpDatabase($app);
 
-        $app['db']->connection()->getSchemaBuilder()->create('products',
+        $app['db']->connection()->getSchemaBuilder()->create(
+            'products',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
                 $table->timestamps();
-            });
+            }
+        );
 
         $this->taxonomy = Taxonomy::create(['name' => 'Category']);
     }
