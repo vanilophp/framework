@@ -5,8 +5,10 @@
 ### Unreleased
 ##### 2020-01-XX
 
+- Added Laravel 8 Support
 - Dropped Laravel 5 Support
-- Concord 1.5+ is required
+- Dropped PHP 7.2 support
+- Concord 1.6+ is required
 
 ## 1.x Series
 
