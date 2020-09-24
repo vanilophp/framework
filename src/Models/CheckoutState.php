@@ -16,7 +16,7 @@ use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 
 class CheckoutState extends Enum implements CheckoutStateContract
 {
-    const __default = self::VIRGIN;
+    const __DEFAULT = self::VIRGIN;
 
     const VIRGIN    = null;        // There was no interaction with the checkout process yet
     const STARTED   = 'started';   // The checkout process has been started

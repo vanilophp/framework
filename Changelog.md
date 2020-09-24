@@ -5,7 +5,11 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- Added Laravel 8 Support
+- Upgrade to Enum v3
 - Dropped Laravel 5 Support
+- Dropped PHP 7.2 support
+- Concord 1.6+ is required
 
 ## 1.x Series
 
