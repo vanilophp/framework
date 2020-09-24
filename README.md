@@ -1,5 +1,6 @@
 # Vanilo Contracts
 
+[![Travis](https://img.shields.io/travis/vanilophp/contracts.svg?style=flat-square)](https://travis-ci.org/vanilophp/contracts)
 [![Packagist Stable Version](https://img.shields.io/packagist/v/vanilo/contracts.svg?style=flat-square&label=stable)](https://packagist.org/packages/vanilo/contracts)
 [![StyleCI](https://styleci.io/repos/109375913/shield?branch=master)](https://styleci.io/repos/109375913)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/contracts.svg?style=flat-square)](https://packagist.org/packages/vanilo/contracts)
