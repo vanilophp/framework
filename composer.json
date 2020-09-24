@@ -17,8 +17,16 @@
         "php": "^7.3",
         "illuminate/support": "~6.0|~7.0|~8.0"
     },
+    "require-dev": {
+        "phpunit/phpunit" : "~8.0|~9.0"
+    },
     "autoload": {
         "psr-4": { "Vanilo\\Contracts\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Konekt\\Contracts\\Tests\\": "tests/"
+        }
     },
     "extra": {
         "branch-alias": {
