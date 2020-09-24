@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the AddItems Test class.
+ * Contains the CartItemsAdd Test class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -15,7 +15,7 @@ use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
-class AddItemsTest extends TestCase
+class CartItemsAddTest extends TestCase
 {
     /** @var  Product */
     protected $product1;
