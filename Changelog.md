@@ -8,7 +8,9 @@
 - Payable interface has been added
 - Shippable interface has been added
 - BC: Address interface has been extended and refactored to use return types
-- Dropped PHP 7.1 support
+- Added Laravel 8 Support
+- Dropped Laravel 5 Support
+- Dropped PHP 7.1 and PHP 7.2 support
 
 ## 1.x Series
 
