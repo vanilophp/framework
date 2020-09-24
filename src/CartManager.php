@@ -20,7 +20,6 @@ use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
-use Vanilo\Contracts\Decimal;
 
 class CartManager implements CartManagerContract
 {
