@@ -16,7 +16,7 @@ use Vanilo\Cart\Contracts\CartState as CartStateContract;
 
 class CartState extends Enum implements CartStateContract
 {
-    const __default  = self::ACTIVE;
+    const __DEFAULT  = self::ACTIVE;
     const ACTIVE     = 'active';
     const CHECKOUT   = 'checkout';
     const COMPLETED  = 'completed';
