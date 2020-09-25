@@ -13,6 +13,10 @@ return [
             'high_variance'   => false,
             'start_base_date' => '2000-01-01',
             'uppercase'       => false
-        ]
+        ],
+        'nano_id' => [
+            'size' => 12,
+            'alphabet' => '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        ],
     ]
 ];
