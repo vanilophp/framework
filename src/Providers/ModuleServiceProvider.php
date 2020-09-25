@@ -50,8 +50,10 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
 
         $this->app->bind(OrderNumberGenerator::class, function ($app) use ($generatorClass, $nsRoot) {
             if (!class_exists($generatorClass)) {
-                $generatorClass = sprintf('%s\\Generators\\%sGenerator',
-                    $nsRoot, Str::studly($generatorClass)
+                $generatorClass = sprintf(
+                    '%s\\Generators\\%sGenerator',
+                    $nsRoot,
+                    Str::studly($generatorClass)
                 );
             }
 

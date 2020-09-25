@@ -57,10 +57,12 @@ class OrderFactory implements OrderFactoryContract
             $this->createBillpayer($order, $data);
             $this->createShippingAddress($order, $data);
 
-            $this->createItems($order,
+            $this->createItems(
+                $order,
                 array_map(function ($item) {
                     // Default quantity is 1 if unspecified
                     $item['quantity'] = $item['quantity'] ?? 1;
+
                     return $item;
                 }, $items)
             );

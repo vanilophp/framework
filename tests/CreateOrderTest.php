@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests;
 
 use Illuminate\Support\Facades\DB;
@@ -52,7 +51,6 @@ class CreateOrderTest extends TestCase
         } else {
             $this->expectExceptionMessageMatches('/NOT NULL/i');
         }
-
 
         Order::create([
             'status' => OrderStatus::defaultValue()

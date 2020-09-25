@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests;
 
 use Carbon\Carbon;
@@ -26,7 +25,6 @@ class TimeHashTest extends TestCase
 
         $this->generator = new TimeHashGenerator();
     }
-
 
     /**
      * @test
@@ -71,7 +69,7 @@ class TimeHashTest extends TestCase
             for ($i = 0; $i < 10; $i++) {
                 $numbers[] = $this->generator->generateNumber();
             }
-            usleep(20000);//0.02s
+            usleep(20000); //0.02s
         }
 
         $this->assertEquals(count($numbers), count(array_unique($numbers)));

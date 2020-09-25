@@ -13,7 +13,6 @@ namespace Vanilo\Order\Tests;
 
 use Illuminate\Support\Facades\Event;
 use Konekt\Address\Models\Country;
-use Vanilo\Address\Models\Address;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Events\OrderWasCreated;
@@ -143,7 +142,8 @@ class OrderFactoryTest extends TestCase
      */
     public function item_quantity_is_1_by_default_if_none_gets_passed()
     {
-        $order = $this->factory->createFromDataArray([],
+        $order = $this->factory->createFromDataArray(
+            [],
             [
                 [
                     'product_type' => 'product',
@@ -169,7 +169,8 @@ class OrderFactoryTest extends TestCase
      */
     public function item_quantity_does_not_get_altered_if_a_value_was_passed()
     {
-        $order = $this->factory->createFromDataArray([],
+        $order = $this->factory->createFromDataArray(
+            [],
             [
                 [
                     'product'  => $this->mazdaRX8,
@@ -284,7 +285,7 @@ class OrderFactoryTest extends TestCase
         ]);
 
         $order = $this->factory->createFromDataArray(
-        [
+            [
             'billpayer' => [
                 'address' => [
                     'name'       => 'Johnny Bravo',
@@ -294,11 +295,12 @@ class OrderFactoryTest extends TestCase
                 ]
             ]
         ],
-        [
+            [
             [
                 'product'  => $this->volvoV90
             ],
-        ]);
+        ]
+        );
 
         $this->assertNotEmpty($order->billpayer_id);
     }

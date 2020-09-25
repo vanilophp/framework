@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests;
 
 use Vanilo\Order\Factories\OrderFactory;
@@ -75,7 +74,7 @@ class SequentialNumberGeneratorTest extends TestCase
 
         for ($i = 1; $i < 11; $i++) {
             $order = $factory->createFromDataArray([], [$this->item]);
-            $this->assertEquals((string)$i, $order->getNumber());
+            $this->assertEquals((string) $i, $order->getNumber());
         }
     }
 
@@ -147,7 +146,7 @@ class SequentialNumberGeneratorTest extends TestCase
 
         for ($i = 1000; $i < 1025; $i++) {
             $order = $factory->createFromDataArray([], [$this->item]);
-            $this->assertEquals((string)$i, $order->getNumber());
+            $this->assertEquals((string) $i, $order->getNumber());
         }
     }
 

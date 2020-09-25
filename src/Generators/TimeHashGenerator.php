@@ -55,7 +55,7 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     public function setHighVariance($value)
     {
-        $this->highVariance = (bool)$value;
+        $this->highVariance = (bool) $value;
     }
 
     /**
@@ -101,12 +101,13 @@ class TimeHashGenerator implements OrderNumberGenerator
     {
         $date = Carbon::now();
 
-        $number =  sprintf('%s-%s-%s%s%s',
+        $number =  sprintf(
+            '%s-%s-%s%s%s',
             $this->getYearAndDayHash($date),
             str_pad(base_convert($date->secondsSinceMidnight(), 10, 36), 4, '0', STR_PAD_LEFT),
             str_pad(base_convert($this->getRapidMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT),
             base_convert(mt_rand(0, 35), 10, 36), //always one char
-            ((string)$this->getSlowMicroNumber())[0]
+            ((string) $this->getSlowMicroNumber())[0]
         );
 
         if ($this->highVariance) {
@@ -128,7 +129,6 @@ class TimeHashGenerator implements OrderNumberGenerator
         return str_pad(base_convert($date->diffInDays($this->startBaseDate), 10, 36), 3, '0', STR_PAD_LEFT);
     }
 
-
     /**
      * Returns the rapidly changing part of microtime, and makes sure it is >= 36 & < 1296
      *
@@ -136,7 +136,7 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     protected function getRapidMicroNumber()
     {
-        $n = (int)(fmod(((float)microtime())*1000, 1) * 1000) + 36;
+        $n = (int) (fmod(((float) microtime())*1000, 1) * 1000) + 36;
 
         return $n;
     }
@@ -148,7 +148,7 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     protected function getSlowMicroNumber()
     {
-        $n = (int)(fmod((float)microtime(), 1) * 1000);
+        $n = (int) (fmod((float) microtime(), 1) * 1000);
 
         return $n;
     }

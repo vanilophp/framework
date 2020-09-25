@@ -90,7 +90,6 @@ class Order extends Model implements OrderContract
         return $this->belongsTo(AddressProxy::modelClass());
     }
 
-
     public function items()
     {
         return $this->hasMany(OrderItemProxy::modelClass());
@@ -109,7 +108,8 @@ class Order extends Model implements OrderContract
     {
         $this->setRawAttributes(
             array_merge(
-                $this->attributes, [
+                $this->attributes,
+                [
                     'status' => OrderStatusProxy::defaultValue()
                 ]
             ),

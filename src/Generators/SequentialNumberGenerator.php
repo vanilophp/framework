@@ -47,7 +47,9 @@ class SequentialNumberGenerator implements OrderNumberGenerator
         $last = $lastOrder ? $lastOrder->id : 0;
         $next = $this->startSequenceFrom + $last;
 
-        return sprintf('%s%s', $this->prefix,
+        return sprintf(
+            '%s%s',
+            $this->prefix,
             str_pad($next, $this->padLength, $this->padString, STR_PAD_LEFT)
         );
     }

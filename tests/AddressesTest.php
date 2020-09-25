@@ -49,14 +49,15 @@ class AddressesTest extends TestCase
 
         $billpayer
             ->address()
-            ->associate(Address::create([
+            ->associate(Address::create(
+                [
                 'name'       => 'Karen Blixen',
                 'country_id' => 'DK',
                 'postalcode' => '2960',
                 'city'       => 'Rungsted',
                 'address'    => 'Strandvej 111'
             ]
-        ));
+            ));
         $order->billpayer()->associate($billpayer);
         $billpayer->save();
 
@@ -85,7 +86,8 @@ class AddressesTest extends TestCase
 
         $billpayer
             ->address()
-            ->associate(Address::create([
+            ->associate(Address::create(
+                [
                     'name'       => 'Karen Blixen',
                     'country_id' => 'DK',
                     'postalcode' => '2960',

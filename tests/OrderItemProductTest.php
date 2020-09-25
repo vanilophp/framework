@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Order\Tests;
 
 use Vanilo\Contracts\Buyable;
@@ -31,7 +30,6 @@ class OrderItemProductTest extends TestCase
             'price' => 17.95
         ]);
     }
-
 
     /**
      * @test
