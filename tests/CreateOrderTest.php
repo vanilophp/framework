@@ -33,7 +33,7 @@ class CreateOrderTest extends TestCase
     {
         $order = Order::create([
             'number' => 'PO123456',
-            'status' => OrderStatus::__default
+            'status' => OrderStatus::defaultValue()
         ]);
 
         $this->assertInstanceOf(OrderContract::class, $order);
@@ -55,7 +55,7 @@ class CreateOrderTest extends TestCase
 
 
         Order::create([
-            'status' => OrderStatus::__default
+            'status' => OrderStatus::defaultValue()
         ]);
     }
 

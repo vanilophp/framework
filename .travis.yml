@@ -5,7 +5,6 @@ cache:
   - "$HOME/.composer/cache"
 
 php:
-  - '7.2'
   - '7.3'
   - '7.4'
 
@@ -15,17 +14,24 @@ env:
   - LARAVEL=6.18 TEST_DB_ENGINE=mysql
   - LARAVEL=6.18 TEST_DB_ENGINE=sqlite
   - LARAVEL=7.0 TEST_DB_ENGINE=sqlite
-  - LARAVEL=7.10 TEST_DB_ENGINE=pgsql
-  - LARAVEL=7.10 TEST_DB_ENGINE=mysql
-  - LARAVEL=7.10 TEST_DB_ENGINE=sqlite
+  - LARAVEL=7.28 TEST_DB_ENGINE=pgsql
+  - LARAVEL=7.28 TEST_DB_ENGINE=mysql
+  - LARAVEL=7.28 TEST_DB_ENGINE=sqlite
+  - LARAVEL=8.0 TEST_DB_ENGINE=sqlite
+  - LARAVEL=8.6 TEST_DB_ENGINE=sqlite
+  - LARAVEL=8.6 TEST_DB_ENGINE=pgsql
+  - LARAVEL=8.6 TEST_DB_ENGINE=mysql
 
 script:
   - vendor/bin/phpunit --testdox
 
 before_install:
-  - MINOR=`echo $LARAVEL | sed 's/[6|7]\.\([0-9]\+\)/\1/'`
+  - MINOR=`echo $LARAVEL | sed 's/[6|7|8]\.\([0-9]\+\)/\1/'`
   - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || MAJOR=6'
-  - '[ 7 -eq $MAJOR ] && ORCH=5 || ORCH=4'
+  - '[[ $LARAVEL =~ ^8\.[0-9]+$ ]] && MAJOR=8 || true'
+  - echo "Testing against Laravel ${MAJOR}.${MINOR}"
+  - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
+  - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
   - sh -c "[ ! -z $TEST_DB_ENGINE ] && [ 'mysql' = $TEST_DB_ENGINE ] && mysql -e 'DROP DATABASE IF EXISTS order_test;CREATE DATABASE order_test;'" || true
   - sh -c "[ ! -z $TEST_DB_ENGINE ] && [ 'pgsql' = $TEST_DB_ENGINE ] && psql -c 'create database order_test;' -U postgres" || true
 

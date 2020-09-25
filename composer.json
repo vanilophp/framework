@@ -16,18 +16,20 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "konekt/concord": "~1.5",
-        "konekt/user": "~1.3",
-        "konekt/address": "~1.1",
+        "php": "^7.3",
+        "konekt/concord": "~1.6",
+        "konekt/enum": "~3.0",
+        "konekt/user": "~2.0@dev",
+        "konekt/address": "~2.0@dev",
         "konekt/laravel-migration-compatibility": "~1.1",
         "vanilo/contracts": "~2.0@dev",
         "vanilo/support": "~2.0@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~8.0|~9.0",
-        "orchestra/testbench": "~4.0|~5.0",
-        "orchestra/database": "~4.0|~5.0"
+        "orchestra/testbench": "~4.0|~5.0|~6.0",
+        "orchestra/database": "~4.0|~5.0|~6.0",
+        "laravel/legacy-factories": "^1.0"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Order\\": "src/" }

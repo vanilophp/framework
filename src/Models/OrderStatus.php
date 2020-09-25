@@ -16,7 +16,7 @@ use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
 
 class OrderStatus extends Enum implements OrderStatusContract
 {
-    const __default = self::PENDING;
+    const __DEFAULT = self::PENDING;
 
     /**
      * Pending orders are brand new orders that have not been processed yet.
