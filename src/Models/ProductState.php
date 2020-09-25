@@ -17,7 +17,7 @@ use Vanilo\Product\Contracts\ProductState as ProductStateContract;
 
 class ProductState extends Enum implements ProductStateContract
 {
-    const __default = self::DRAFT;
+    const __DEFAULT = self::DRAFT;
 
     const DRAFT       = 'draft';
     const INACTIVE    = 'inactive';

@@ -5,7 +5,10 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- BC: Upgrade to Enum v3
+- Added Laravel 8 support
 - Dropped Laravel 5 support
+- Dropped PHP 7.2 support
 
 ## 1.x Series
 
