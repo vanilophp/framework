@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Product\Tests;
 
 use Vanilo\Product\Models\Product;
@@ -71,13 +70,14 @@ class BaseProductAttributesTest extends TestCase
         $this->assertTrue($product->isOnStock());
         $this->assertEquals('maxi-baxi-2000', $product->slug);
         $this->assertEquals('Maxi Baxi 2000 is the THING you always have dreamt of', $product->excerpt);
-        $this->assertEquals('Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
-            $product->description);
+        $this->assertEquals(
+            'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
+            $product->description
+        );
         $this->assertEquals('active', $product->state->value());
         $this->assertEquals('maxi, baxi, dreams', $product->meta_keywords);
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
     }
-
 
     /**
      * @test

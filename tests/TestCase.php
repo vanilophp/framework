@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Product\Tests;
 
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;

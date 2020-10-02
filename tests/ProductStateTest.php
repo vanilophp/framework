@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Product\Tests;
 
 use Konekt\Enum\Enum;

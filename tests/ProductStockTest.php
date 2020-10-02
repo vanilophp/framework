@@ -3,7 +3,6 @@
 namespace Vanilo\Product\Tests;
 
 use Vanilo\Product\Models\Product;
-use Vanilo\Product\Models\ProductProxy;
 
 class ProductStockTest extends TestCase
 {

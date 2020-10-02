@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Vanilo\Product\Contracts;
 
 interface ProductState
