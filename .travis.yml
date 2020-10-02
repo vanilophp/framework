@@ -5,7 +5,6 @@ cache:
     - $HOME/.composer/cache
 
 php:
-  - '7.2'
   - '7.3'
   - '7.4'
 
@@ -13,15 +12,18 @@ env:
   - LARAVEL=6.0
   - LARAVEL=6.18
   - LARAVEL=7.0
-  - LARAVEL=7.10
+  - LARAVEL=7.28
+  - LARAVEL=8.0
+  - LARAVEL=8.8
 
 script:
   - vendor/bin/phpunit
 
 before_install:
-  - MINOR=`echo $LARAVEL | sed 's/[6|7]\.\([0-9]\+\)/\1/'`
+  - MINOR=`echo $LARAVEL | sed 's/[6|7|8]\.\([0-9]\+\)/\1/'`
   - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || MAJOR=6'
-  - '[ 7 -eq $MAJOR ] && ORCH=5 || ORCH=4'
+  - '[[ $LARAVEL =~ ^8\.[0-9]+$ ]] && MAJOR=8 || true'
+  - echo "Testing against Laravel ${MAJOR}.${MINOR}"
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
   - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
 
