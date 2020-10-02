@@ -11,7 +11,7 @@
 
 namespace Vanilo\Framework\Tests;
 
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Framework\Models\Product;
 
 class ProductImageTest extends TestCase

@@ -16,9 +16,9 @@
     },
     "require": {
         "php": "^7.3",
-        "laravel/framework": "~6.0|~7.0|~8.0",
+        "laravel/framework": "^6.18|^7.0|^8.0",
         "konekt/appshell": "2.0.x-dev",
-        "spatie/laravel-medialibrary": "^7.3 | ^8.0",
+        "spatie/laravel-medialibrary": "^8.0",
         "vanilo/contracts": "2.0.x-dev",
         "vanilo/support": "2.0.x-dev",
         "vanilo/category": "2.0.x-dev",
@@ -39,7 +39,8 @@
     },
     "require-dev": {
         "orchestra/testbench": "~4.0|~5.0|~6.0",
-        "phpunit/phpunit" : "~8.0|~9.0"
+        "phpunit/phpunit" : "~8.0|~9.0",
+        "laravel/legacy-factories": "^1.0.4"
     },
     "autoload-dev": {
         "psr-4": {

@@ -12,9 +12,9 @@
 namespace Vanilo\Framework\Models;
 
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Traits\HasTaxons;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Properties\Traits\HasPropertyValues;
@@ -24,7 +24,7 @@ use Vanilo\Product\Models\Product as BaseProduct;
 
 class Product extends BaseProduct implements Buyable, HasMedia
 {
-    use BuyableModel, BuyableImageSpatieV7, HasMediaTrait, HasTaxons, HasPropertyValues;
+    use BuyableModel, BuyableImageSpatieV7, InteractsWithMedia, HasTaxons, HasPropertyValues;
 
     protected const DEFAULT_THUMBNAIL_WIDTH  = 250;
     protected const DEFAULT_THUMBNAIL_HEIGHT = 250;
@@ -32,7 +32,7 @@ class Product extends BaseProduct implements Buyable, HasMedia
 
     protected $dates = ['created_at', 'updated_at', 'last_sale_at'];
 
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         foreach (config('vanilo.framework.image.variants', []) as $name => $settings) {
             $conversion = $this->addMediaConversion($name)
