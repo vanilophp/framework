@@ -3,7 +3,6 @@ preset: psr2
 enabled:
   - align_phpdoc
   - align_double_arrow
-  - align_equals
   - blank_line_before_return
   - cast_spaces
   - concat_with_spaces
@@ -19,8 +18,6 @@ enabled:
   - no_extra_consecutive_blank_lines
   - no_leading_namespace_whitespace
   - no_null_property_initialization
-  - no_unneeded_final_method
-  - no_unreachable_default_argument_value
   - no_unused_imports
   - no_useless_else
   - no_useless_return
@@ -28,12 +25,6 @@ enabled:
   - no_whitespace_in_blank_line
   - object_operator_without_whitespace
   - ordered_class_elements
-  - php_unit_construct
-  - php_unit_dedicate_assert
-  - php_unit_dedicate_assert_internal_type
-  - php_unit_expectation
-  - php_unit_no_expectation_annotation
-  - php_unit_set_up_tear_down_visibility
   - phpdoc_link_to_see
   - phpdoc_no_package
   - phpdoc_order
