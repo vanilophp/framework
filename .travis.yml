@@ -27,7 +27,7 @@ before_install:
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
   - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
 
-install: composer install --no-interaction
+install: export COMPOSER_MEMORY_LIMIT=-1 && composer install --no-interaction
 
 notifications:
   email: false
