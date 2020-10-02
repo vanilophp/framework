@@ -15,7 +15,7 @@
         "issues": "https://github.com/vanilophp/framework/issues"
     },
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "laravel/framework": "^6.18|^7.0|^8.0",
         "konekt/appshell": "2.0.x-dev",
         "spatie/laravel-medialibrary": "^8.0",

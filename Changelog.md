@@ -5,9 +5,11 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- BC: Upgrade to Spatie MediaLibrary v8
 - Added Laravel 8 support
 - Dropped Laravel 5 support
-- Dropped PHP 7.2 support
+- Dropped support for PHP 7.2 and PHP 7.3 (due to MediaLibrary)
+- Minimum Laravel requirement is v6.18 (due to MediaLibrary)
 - Using AppShell 2.0
 
 ## 1.x Series
