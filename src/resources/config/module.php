@@ -2,7 +2,7 @@
 
 return [
     'number' => [
-        'generator'         => 'time_hash', //possible values: time_hash, sequential_number
+        'generator'         => 'time_hash', //possible values: time_hash, sequential_number, nano_id
         'sequential_number' => [
             'start_sequence_from' => 1,
             'prefix'              => '',
