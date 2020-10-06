@@ -32,7 +32,9 @@ class UpgradeMediaTableToV8 extends Migration
 
         // Generate UUID for all records in the table
         DB::table('media')->cursor()->each(function ($media) {
-            DB::table('media')->where('id', $media->id)->update(['uuid' => Str::uuid()]);
+            DB::table('media')->where('id', $media->id)->update([
+                'uuid' => Str::uuid(),
+                'conversions_disk' => $media->disk                                                                ]);
         });
     }
 
