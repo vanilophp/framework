@@ -28,7 +28,7 @@ class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContr
 
     public function isEuRegistered(): bool
     {
-        return $this->is_eu_registered;
+        return (bool) $this->is_eu_registered;
     }
 
     public function address()
@@ -62,12 +62,12 @@ class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContr
 
     public function isOrganization(): bool
     {
-        return $this->is_organization;
+        return (bool) $this->is_organization;
     }
 
     public function isIndividual(): bool
     {
-        return !$this->is_organization;
+        return !$this->isOrganization();
     }
 
     public function getCompanyName(): ?string
