@@ -15,7 +15,7 @@ return [
             'uppercase'       => false
         ],
         'nano_id' => [
-            'size' => 12,
+            'size'     => 12,
             'alphabet' => '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         ],
     ]
