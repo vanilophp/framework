@@ -20,14 +20,14 @@
         "konekt/appshell": "2.0.x-dev",
         "spatie/laravel-medialibrary": "^8.0",
         "vanilo/contracts": "^2.0",
-        "vanilo/support": "2.0.x-dev",
-        "vanilo/category": "2.0.x-dev",
-        "vanilo/product": "2.0.x-dev",
-        "vanilo/cart": "2.0.x-dev",
-        "vanilo/checkout": "2.0.x-dev",
-        "vanilo/order": "2.0.x-dev",
+        "vanilo/support": "^2.0",
+        "vanilo/category": "^2.0",
+        "vanilo/product": "^2.0",
+        "vanilo/cart": "^2.0",
+        "vanilo/checkout": "^2.0",
+        "vanilo/order": "^2.0",
         "vanilo/properties": "2.0.x-dev",
-        "vanilo/channel": "2.0.x-dev"
+        "vanilo/channel": "^2.0"
     },
     "autoload": {
         "psr-4": {
