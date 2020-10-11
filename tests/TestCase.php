@@ -11,6 +11,8 @@
 
 namespace Vanilo\Framework\Tests;
 
+use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Database\Schema\Blueprint;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
 use Konekt\Gears\Providers\GearsServiceProvider;
@@ -41,7 +43,15 @@ abstract class TestCase extends Orchestra
             ConcordServiceProvider::class,
             MediaLibraryServiceProvider::class,
             GearsServiceProvider::class,
-            LaravelMigrationCompatibilityProvider::class
+            LaravelMigrationCompatibilityProvider::class,
+            BreadcrumbsServiceProvider::class
+        ];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Breadcrumbs' => Breadcrumbs::class
         ];
     }
 
