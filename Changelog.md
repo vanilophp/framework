@@ -2,8 +2,8 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.0.0
+##### 2020-10-11
 
 - BC: Upgrade to Enum v3
 - Added Laravel 8 support
