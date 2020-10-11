@@ -5,8 +5,9 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- BC: Address interface changed according to Contracts v2 
+- BC: Upgrade to Enum v3
 - Added Laravel 8 Support
-- Upgrade to Enum v3
 - Dropped Laravel 5 Support
 - Dropped PHP 7.2 support
 - Concord 1.6+ is required
