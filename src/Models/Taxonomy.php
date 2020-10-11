@@ -24,7 +24,7 @@ class Taxonomy extends Model implements TaxonomyContract
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public static function findOneByName(string $name)
+    public static function findOneByName(string $name): ?TaxonomyContract
     {
         return static::where('name', $name)->first();
     }

@@ -5,6 +5,7 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- BC: Return types have been added to some methods in Taxon and Taxonomy interfaces
 - Added Laravel 8 Support
 - Dropped Laravel 5 Support
 - Dropped PHP 7.2 Support

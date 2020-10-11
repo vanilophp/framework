@@ -27,7 +27,7 @@ interface Taxon
      *
      * @return Taxon|null
      */
-    public function lastNeighbour(bool $excludeSelf = false);
+    public function lastNeighbour(bool $excludeSelf = false): ?Taxon;
 
     /**
      * Returns the lowest priority taxon from the same level
@@ -36,5 +36,5 @@ interface Taxon
      *
      * @return Taxon|null
      */
-    public function firstNeighbour(bool $excludeSelf = false);
+    public function firstNeighbour(bool $excludeSelf = false): ?Taxon;
 }

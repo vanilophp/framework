@@ -56,7 +56,7 @@ class Taxon extends Model implements TaxonContract
         return (bool) (null == $this->parent_id);
     }
 
-    public function lastNeighbour(bool $excludeSelf = false)
+    public function lastNeighbour(bool $excludeSelf = false): ?TaxonContract
     {
         if ($excludeSelf) {
             return $this->neighbours()->except($this)->sortReverse()->first();
@@ -68,7 +68,7 @@ class Taxon extends Model implements TaxonContract
     /**
      * @inheritdoc
      */
-    public function firstNeighbour(bool $excludeSelf = false)
+    public function firstNeighbour(bool $excludeSelf = false): ?TaxonContract
     {
         if ($excludeSelf) {
             return $this->neighbours()->except($this)->sort()->first();

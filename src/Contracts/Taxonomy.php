@@ -21,7 +21,7 @@ interface Taxonomy
      *
      * @return Taxonomy|null
      */
-    public static function findOneByName(string $name);
+    public static function findOneByName(string $name): ?Taxonomy;
 
     /**
      * Returns the root level taxons for the taxonomy
