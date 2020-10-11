@@ -18,8 +18,8 @@
     "require": {
         "php": "^7.3",
         "konekt/concord": "~1.6",
-        "vanilo/contracts": "~2.0@dev",
-        "vanilo/support": "~2.0@dev"
+        "vanilo/contracts": "^2.0",
+        "vanilo/support": "^2.0"
     },
     "require-dev": {
         "ext-sqlite3": "*",

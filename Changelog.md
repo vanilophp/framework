@@ -6,7 +6,7 @@
 ##### 2020-XX-YY
 
 - BC: interfaces comply with vanilo/contracts v2
-- Upgrade to Enum v3
+- BC: Upgrade to Enum v3
 - Added Laravel 8 support
 - Dropped Laravel 5 support
 - Dropped PHP 7.2 support
