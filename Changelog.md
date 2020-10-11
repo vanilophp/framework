@@ -2,8 +2,8 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.0.0
+##### 2020-10-11
 
 - BC: interfaces comply with vanilo/contracts v2
 - BC: Upgrade to Enum v3
