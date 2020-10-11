@@ -5,6 +5,7 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- BC: Changed traits to v2 interfaces
 - Added Laravel 8 support
 - Dropped Laravel 5 support
 - Dropped PHP 7.2 support
