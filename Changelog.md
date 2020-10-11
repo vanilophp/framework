@@ -2,10 +2,12 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.0.0
+##### 2020-10-11
 
+- BC: Updated interfaces to v2
 - BC: Upgrade to Enum v3
+- Added nanoid order number generator
 - Added Laravel 8 Support
 - Dropped PHP 7.2 support
 - Dropped Laravel 5 Support
