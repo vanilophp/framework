@@ -2,8 +2,8 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.0.0
+##### 2020-10-12
 
 - BC: Address interface changed according to Contracts v2 
 - BC: Upgrade to Enum v3
