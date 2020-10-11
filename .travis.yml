@@ -18,9 +18,9 @@ env:
   - LARAVEL=7.28 TEST_DB_ENGINE=mysql
   - LARAVEL=7.28 TEST_DB_ENGINE=sqlite
   - LARAVEL=8.0 TEST_DB_ENGINE=sqlite
-  - LARAVEL=8.6 TEST_DB_ENGINE=sqlite
-  - LARAVEL=8.6 TEST_DB_ENGINE=pgsql
-  - LARAVEL=8.6 TEST_DB_ENGINE=mysql
+  - LARAVEL=8.9 TEST_DB_ENGINE=sqlite
+  - LARAVEL=8.9 TEST_DB_ENGINE=pgsql
+  - LARAVEL=8.9 TEST_DB_ENGINE=mysql
 
 script:
   - vendor/bin/phpunit --testdox
