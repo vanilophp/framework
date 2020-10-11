@@ -13,4 +13,7 @@ namespace Vanilo\Channel\Contracts;
 
 interface Channel
 {
+    public function getName(): string;
+
+    public function getSlug(): ?string;
 }

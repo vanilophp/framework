@@ -23,4 +23,16 @@ class Channel extends Model implements ChannelContract
     protected $casts = [
         'configuration' => 'array'
     ];
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+
 }
