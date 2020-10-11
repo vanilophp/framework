@@ -2,5 +2,5 @@
 
 return [
     'name'    => 'Vanilo Channel Module',
-    'version' => '2.0-dev'
+    'version' => '2.0.0'
 ];

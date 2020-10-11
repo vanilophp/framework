@@ -2,9 +2,10 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-01-XX
+### 2.0.0
+##### 2020-10-12
 
+- BC: Added getter methods to Channel interface
 - Added Laravel 8 Support
 - Dropped Laravel 5 Support
 - Dropped PHP 7.2 support
