@@ -156,7 +156,8 @@ class RequestStore implements CheckoutStore
     private function getShipToName()
     {
         if ($this->billpayer->isOrganization()) {
-            return sprintf('%s (%s)',
+            return sprintf(
+                '%s (%s)',
                 $this->billpayer->getCompanyName(),
                 $this->billpayer->getFullName()
             );
