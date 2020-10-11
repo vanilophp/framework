@@ -18,13 +18,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Traits\HasTaxons;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Properties\Traits\HasPropertyValues;
-use Vanilo\Support\Traits\BuyableImageSpatieV7;
+use Vanilo\Support\Traits\BuyableImageSpatieV8;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Product\Models\Product as BaseProduct;
 
 class Product extends BaseProduct implements Buyable, HasMedia
 {
-    use BuyableModel, BuyableImageSpatieV7, InteractsWithMedia, HasTaxons, HasPropertyValues;
+    use BuyableModel, BuyableImageSpatieV8, InteractsWithMedia, HasTaxons, HasPropertyValues;
 
     protected const DEFAULT_THUMBNAIL_WIDTH  = 250;
     protected const DEFAULT_THUMBNAIL_HEIGHT = 250;
