@@ -2,9 +2,11 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.0.0
+##### 2020-10-13
 
+- BC: Added `getCastedValue()` method to the PropertyValue interface
+- BC: Renamed `getValue()` -> `getCastedValue()` in the PropertyValue module
 - Added Laravel 8 support
 - Dropped Laravel 5 support
 - Dropped PHP 7.2 support
