@@ -48,8 +48,8 @@ class PropertyValueTest extends TestCase
             'title'       => '3007'
         ]);
 
-        $this->assertEquals(3007, $value3007->getValue());
-        $this->assertIsInt($value3007->getValue());
+        $this->assertEquals(3007, $value3007->getCastedValue());
+        $this->assertIsInt($value3007->getCastedValue());
     }
 
     /** @test */
@@ -75,14 +75,14 @@ class PropertyValueTest extends TestCase
             'title'       => 'No'
         ]);
 
-        $this->assertEquals(true, $valueTrue->getValue());
-        $this->assertIsBool($valueTrue->getValue());
+        $this->assertEquals(true, $valueTrue->getCastedValue());
+        $this->assertIsBool($valueTrue->getCastedValue());
 
-        $this->assertEquals(false, $valueFalse->getValue());
-        $this->assertIsBool($valueFalse->getValue());
+        $this->assertEquals(false, $valueFalse->getCastedValue());
+        $this->assertIsBool($valueFalse->getCastedValue());
 
-        $this->assertEquals(false, $valueZero->getValue());
-        $this->assertIsBool($valueZero->getValue());
+        $this->assertEquals(false, $valueZero->getCastedValue());
+        $this->assertIsBool($valueZero->getCastedValue());
     }
 
     /** @test */
@@ -96,8 +96,8 @@ class PropertyValueTest extends TestCase
             'title'       => '11.27'
         ]);
 
-        $this->assertEquals(11.27, $value11point27->getValue());
-        $this->assertIsFloat($value11point27->getValue());
+        $this->assertEquals(11.27, $value11point27->getCastedValue());
+        $this->assertIsFloat($value11point27->getCastedValue());
     }
 
     /** @test */

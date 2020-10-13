@@ -39,8 +39,8 @@ class ModelPropertyValuesTest extends TestCase
 
         $this->assertCount(2, $product->propertyValues);
         $this->assertEquals('haha', $product->propertyValues->first()->value);
-        $this->assertIsInt($product->propertyValues->last()->getValue());
-        $this->assertEquals(16, $product->propertyValues->last()->getValue());
+        $this->assertIsInt($product->propertyValues->last()->getCastedValue());
+        $this->assertEquals(16, $product->propertyValues->last()->getCastedValue());
     }
 
     protected function setUpDatabase($app)

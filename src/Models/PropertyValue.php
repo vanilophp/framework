@@ -20,7 +20,7 @@ use Vanilo\Properties\Contracts\PropertyValue as PropertyValueContract;
 
 /**
  * @property \Vanilo\Properties\Contracts\Property $property
- * @property string                                $value      The value as stored in the db @see getValue()
+ * @property string                                $value      The value as stored in the db @see getCastedValue()
  * @property string                                $title
  * @property integer                               $priority
  * @property array|null                            $settings
@@ -63,7 +63,7 @@ class PropertyValue extends Model implements PropertyValueContract
     /**
      * Returns the transformed value according to the underlying type
      */
-    public function getValue()
+    public function getCastedValue()
     {
         return $this->property->getType()->transformValue($this->value, $this->settings);
     }

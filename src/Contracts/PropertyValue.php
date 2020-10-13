@@ -13,4 +13,8 @@ namespace Vanilo\Properties\Contracts;
 
 interface PropertyValue
 {
+    /**
+     * Returns the transformed value according to the underlying type
+     */
+    public function getCastedValue();
 }
