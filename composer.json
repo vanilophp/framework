@@ -26,7 +26,7 @@
         "vanilo/cart": "^2.0",
         "vanilo/checkout": "^2.0",
         "vanilo/order": "^2.0",
-        "vanilo/properties": "2.0.x-dev",
+        "vanilo/properties": "^2.0",
         "vanilo/channel": "^2.0"
     },
     "autoload": {
