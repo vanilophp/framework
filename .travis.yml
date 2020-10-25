@@ -8,7 +8,6 @@ php:
   - '7.4'
 
 env:
-  - LARAVEL=6.0
   - LARAVEL=6.18
   - LARAVEL=7.0
   - LARAVEL=7.28
