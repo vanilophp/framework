@@ -57,7 +57,7 @@ abstract class TestCase extends Orchestra
     {
         return [
             'Breadcrumbs' => Breadcrumbs::class,
-            'Menu' => Menu::class,
+            'Menu'        => Menu::class,
         ];
     }
 

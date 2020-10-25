@@ -148,7 +148,7 @@ class ProductFinder
     public function havingPropertyValuesByName(string $property, array $values): self
     {
         return $this->havingPropertyValues(
-                PropertyValueProxy::query()
+            PropertyValueProxy::query()
                     ->select('property_values.*')
                     ->join('properties', 'properties.id', '=', 'property_values.property_id')
                     ->where('properties.slug', '=', $property)

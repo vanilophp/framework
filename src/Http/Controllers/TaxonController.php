@@ -47,8 +47,10 @@ class TaxonController extends BaseController
     public function store(Taxonomy $taxonomy, CreateTaxon $request)
     {
         try {
-            $taxon = TaxonProxy::create(array_merge($request->except('images'),
-                ['taxonomy_id' => $taxonomy->id]));
+            $taxon = TaxonProxy::create(array_merge(
+                $request->except('images'),
+                ['taxonomy_id' => $taxonomy->id]
+            ));
             flash()->success(__(':name :taxonomy has been created', [
                 'name'     => $taxon->name,
                 'taxonomy' => Str::singular($taxonomy->name)

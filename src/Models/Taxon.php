@@ -21,7 +21,11 @@ class Taxon extends BaseTaxon
     public function products(): MorphToMany
     {
         return $this->morphedByMany(
-            ProductProxy::modelClass(), 'model', 'model_taxons', 'taxon_id', 'model_id'
+            ProductProxy::modelClass(),
+            'model',
+            'model_taxons',
+            'taxon_id',
+            'model_id'
         );
     }
 
