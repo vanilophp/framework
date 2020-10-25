@@ -12,7 +12,7 @@
 namespace Vanilo\Framework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Framework\Contracts\Requests\CreateMedia;
 
 class MediaController extends BaseController
