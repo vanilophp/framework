@@ -16,20 +16,6 @@ class UpgradeMediaTableToV8 extends Migration
             $table->string('conversions_disk')->nullable();
         });
 
-        Media::create([
-            'model_type'        => 'Product',
-            'model_id'          => 1,
-            'collection_name'   => 'ja',
-            'name'              => 'ja',
-            'file_name'         => 'ja',
-            'mime_type'         => 'image/jpeg',
-            'disk'              => 'local',
-            'size'              => 1,
-            'manipulations'     => '{}',
-            'custom_properties' => '{}',
-            'responsive_images' => '{}',
-        ]);
-
         // Generate UUID for all records in the table
         DB::table('media')->cursor()->each(function ($media) {
             DB::table('media')->where('id', $media->id)->update([
