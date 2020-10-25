@@ -1,6 +1,6 @@
 @foreach($propertyValues as $propertyValue)
     <div class="btn-group btn-group-sm mb-1" role="group">
-        @can('edit propertyvalues')
+        @can('edit property values')
             <a href="{{ route('vanilo.property_value.edit', [$property, $propertyValue]) }}"
                class="btn btn-secondary">{{ $propertyValue->title }}</a>
         @else
@@ -10,7 +10,7 @@
                 aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i>
         </button>
         <div class="dropdown-menu">
-            @can('delete propertyvalues')
+            @can('delete property values')
                 {{ Form::open([
                             'url' => route('vanilo.property_value.destroy', [$property, $propertyValue]),
                             'style' => 'display: inline',
@@ -28,7 +28,7 @@
         </div>
     </div>
 @endforeach
-@can('create propertyvalues')
+@can('create property values')
     <a href="{{ route('vanilo.property_value.create', $property) }}"
        class="btn btn-success btn-sm mb-1"
        title="{{ __('Add :property value', ['property' => $property->name]) }}"><i

@@ -11,12 +11,15 @@
 
 namespace Vanilo\Framework\Tests;
 
+use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Database\Schema\Blueprint;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
 use Konekt\Gears\Providers\GearsServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
+use Konekt\Menu\Facades\Menu;
+use Konekt\Menu\MenuServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;
 use Konekt\Concord\ConcordServiceProvider;
@@ -44,14 +47,17 @@ abstract class TestCase extends Orchestra
             MediaLibraryServiceProvider::class,
             GearsServiceProvider::class,
             LaravelMigrationCompatibilityProvider::class,
-            BreadcrumbsServiceProvider::class
+            BreadcrumbsServiceProvider::class,
+            MenuServiceProvider::class,
+            SluggableServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'Breadcrumbs' => Breadcrumbs::class
+            'Breadcrumbs' => Breadcrumbs::class,
+            'Menu' => Menu::class,
         ];
     }
 

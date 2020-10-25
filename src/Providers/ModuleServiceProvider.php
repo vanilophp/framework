@@ -13,7 +13,7 @@ namespace Vanilo\Framework\Providers;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Address\Contracts\Address as AddressContract;
-use Konekt\AppShell\Acl\ResourcePermissions;
+use Konekt\AppShell\Acl\ResourcePermissionMapper;
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
@@ -77,7 +77,6 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     {
         parent::register();
 
-        ResourcePermissions::overrideResourcePlural('taxon', 'taxons');
         $this->app->bind(CheckoutDataFactoryContract::class, CheckoutDataFactory::class);
     }
 
@@ -85,7 +84,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     {
         parent::boot();
 
-        // Use the frameworks's extended model classes
+        $this->app->get(ResourcePermissionMapper::class)->overrideResourcePlural('taxon', 'taxons');
+
+        // Use the framework's extended model classes
         $this->concord->registerModel(ProductContract::class, Product::class);
         $this->concord->registerModel(AddressContract::class, Address::class);
         $this->concord->registerModel(CustomerContract::class, Customer::class);
@@ -109,21 +110,26 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             $shop = $menu->addItem('shop', __('Shop'));
             $shop->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])
                 ->data('icon', 'layers')
-                ->activateOnUrls(route('vanilo.product.index', [], false) . '*');
+                ->activateOnUrls(route('vanilo.product.index', [], false) . '*')
+                ->allowIfUserCan('list products');
             $shop->addSubItem('product_properties', __('Product Properties'), ['route' => 'vanilo.property.index'])
                 ->data('icon', 'format-list-bulleted')
-                ->activateOnUrls(route('vanilo.property.index', [], false) . '*');
+                ->activateOnUrls(route('vanilo.property.index', [], false) . '*')
+                ->allowIfUserCan('list properties');
             $shop->addSubItem('categories', __('Categorization'), ['route' => 'vanilo.taxonomy.index'])
                 ->data('icon', 'folder')
-                ->activateOnUrls(route('vanilo.taxonomy.index', [], false) . '*');
+                ->activateOnUrls(route('vanilo.taxonomy.index', [], false) . '*')
+                ->allowIfUserCan('list taxonomies');
             $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])
                 ->data('icon', 'mall')
-                ->activateOnUrls(route('vanilo.order.index', [], false) . '*');
+                ->activateOnUrls(route('vanilo.order.index', [], false) . '*')
+                ->allowIfUserCan('list orders');
 
             $settings = $menu->getItem('settings_group');
             $settings->addSubItem('channels', __('Channels'), ['route' => 'vanilo.channel.index'])
                 ->data('icon', 'portable-wifi')
-                ->activateOnUrls(route('vanilo.channel.index', [], false) . '*');;
+                ->activateOnUrls(route('vanilo.channel.index', [], false) . '*')
+                ->allowIfUserCan('list channels');
         }
     }
 }
