@@ -62,6 +62,5 @@ class UserCustomModelTest extends TestCase
             $table->rememberToken();
             $table->timestamps();
         });
-
     }
 }

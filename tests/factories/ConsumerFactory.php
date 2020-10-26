@@ -5,13 +5,15 @@ use Illuminate\Support\Str;
 use Vanilo\Cart\Tests\Dummies\Consumer;
 
 $factory->define(
-    Consumer::class, function (Faker $faker) {
-    static $password;
+    Consumer::class,
+    function (Faker $faker) {
+        static $password;
 
-    return [
+        return [
         'name'           => $faker->name,
         'email'          => $faker->unique()->safeEmail,
         'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => Str::random(10),
     ];
-});
+    }
+);
