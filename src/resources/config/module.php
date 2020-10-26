@@ -2,6 +2,9 @@
 
 return [
     'event_listeners'   => true,
+    'user'              => [
+        'model'         => null, // Leave null to use config('auth.providers.users.model'): default of v0.1 - v2.0
+    ],
     'session_key'       => 'vanilo_cart', // The session key where the cart id gets saved
     'auto_destroy'      => false, // Whether to immediately delete carts with 0 items
     'auto_assign_user'  => true, // Whether to automatically set the user_id on new carts (based on Auth::user())

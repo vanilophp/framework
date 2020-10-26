@@ -282,10 +282,28 @@ If you want to modify the possible states of the cart, follow the instructions f
 
 The cart can be assigned to user automatically and/or manually.
 
-> The cart's user model is not bound to any specific class (like `App\User`), but to Laravel's
-> [authentication system](https://laravel.com/docs/5.6/authentication).
->
-> See the `auth.providers.users.model` config value for more details.
+#### The User Model
+
+The cart's user model is not bound to any specific class (like `App\User`).
+
+By default, it uses the model defined in `auth.providers.users.model` configuration entry.
+In fresh Laravel installations, and in most of the cases this will give the `App\User` class.
+
+However, these values are just sensible defaults, and Laravel's
+[authentication system](https://laravel.com/docs/8.x/authentication) does not force you to have this
+setup.
+
+You can specify the user model manually by setting the user model class name under the
+`vanilo.cart.user.model` configuration key.
+
+```php
+// config/vanilo.php
+return [
+    'user' => [
+        'model' => App\Some\Other\User::class,
+    ]
+];
+```
 
 #### Manual Association
 

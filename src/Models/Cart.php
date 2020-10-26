@@ -127,7 +127,9 @@ class Cart extends Model implements CartContract
      */
     public function user()
     {
-        return $this->belongsTo(config('auth.providers.users.model'));
+        $userModel = config('vanilo.cart.user.model') ?: config('auth.providers.users.model');
+
+        return $this->belongsTo($userModel);
     }
 
     /**

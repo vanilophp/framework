@@ -2,6 +2,11 @@
 
 ## 2.x Series
 
+### Unreleased
+##### 2020-10-XX
+
+- Added configuration option to explicitly define the cart's user model class
+
 ### 2.0.0
 ##### 2020-10-11
 
