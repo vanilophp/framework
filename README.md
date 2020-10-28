@@ -2,7 +2,7 @@
 
 ## The Truly Laravel E-commerce Framework
 
-[![Travis](https://img.shields.io/travis/vanilophp/framework.svg?style=flat-square)](https://travis-ci.org/vanilophp/framework)
+[![Travis](https://img.shields.io/travis/com/vanilophp/framework?style=flat-square)](https://travis-ci.com/vanilophp/framework)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
 [![StyleCI](https://styleci.io/repos/101036876/shield?branch=master)](https://styleci.io/repos/101036876)
