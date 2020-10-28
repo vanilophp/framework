@@ -2,6 +2,11 @@
 
 ## 2.x Series
 
+### 2.1.1
+##### 2020-10-28
+
+- Fixed invalid method call in `Order::open()` scope (introduced with 2.1.0)
+
 ### 2.1.0
 ##### 2020-10-28
 
