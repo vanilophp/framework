@@ -2,7 +2,7 @@
 
 This is the order module for [Vanilo](https://vanilo.io).
 
-[![Travis](https://img.shields.io/travis/vanilophp/order.svg?style=flat-square)](https://travis-ci.org/vanilophp/order)
+[![Travis](https://img.shields.io/travis/com/vanilophp/order?style=flat-square)](https://travis-ci.com/vanilophp/order)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/order.svg?style=flat-square)](https://packagist.org/packages/vanilo/order)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/order.svg?style=flat-square)](https://packagist.org/packages/vanilo/order)
 [![StyleCI](https://styleci.io/repos/112107112/shield?branch=master)](https://styleci.io/repos/112107112)
