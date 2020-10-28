@@ -25,7 +25,7 @@
         "vanilo/product": "^2.0",
         "vanilo/cart": "^2.0",
         "vanilo/checkout": "^2.0",
-        "vanilo/order": "^2.1",
+        "vanilo/order": "^2.1.1",
         "vanilo/properties": "^2.0",
         "vanilo/channel": "^2.0"
     },
