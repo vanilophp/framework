@@ -38,15 +38,6 @@ class OrderStatus extends Enum implements OrderStatusContract
 
     protected static $openStatuses = [self::PENDING];
 
-    protected static function boot()
-    {
-        static::$labels = [
-            self::PENDING     => __('Pending'),
-            self::COMPLETED   => __('Completed'),
-            self::CANCELLED   => __('Cancelled')
-        ];
-    }
-
     public function isOpen(): bool
     {
         return in_array($this->value, static::$openStatuses);
@@ -55,5 +46,14 @@ class OrderStatus extends Enum implements OrderStatusContract
     public static function getOpenStatuses(): array
     {
         return static::$openStatuses;
+    }
+
+    protected static function boot()
+    {
+        static::$labels = [
+            self::PENDING     => __('Pending'),
+            self::COMPLETED   => __('Completed'),
+            self::CANCELLED   => __('Cancelled')
+        ];
     }
 }
