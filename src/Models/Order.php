@@ -103,7 +103,7 @@ class Order extends Model implements OrderContract
 
     public function scopeOpen(Builder $query)
     {
-        return $query->whereIn('status', OrderStatus::getOpenStatuses());
+        return $query->whereIn('status', OrderStatusProxy::getOpenStatuses());
     }
 
     /**
