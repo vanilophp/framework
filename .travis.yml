@@ -18,6 +18,7 @@ script:
   - vendor/bin/phpunit
 
 before_install:
+  - composer self-update --2
   - MINOR=`echo $LARAVEL | sed 's/[6|7|8]\.\([0-9]\+\)/\1/'`
   - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || MAJOR=6'
   - '[[ $LARAVEL =~ ^8\.[0-9]+$ ]] && MAJOR=8 || true'
