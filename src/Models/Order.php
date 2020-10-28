@@ -11,6 +11,7 @@
 
 namespace Vanilo\Order\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
@@ -98,6 +99,11 @@ class Order extends Model implements OrderContract
     public function total()
     {
         return $this->items->sum('total');
+    }
+
+    public function scopeOpen(Builder $query)
+    {
+        return $query->whereIn('status', OrderStatus::getOpenStatuses());
     }
 
     /**

@@ -2,6 +2,12 @@
 
 ## 2.x Series
 
+### Unreleased
+##### 2020-10-XX
+
+- Added `isOpen` and `getOpenStatuses` methods to OrderStatus
+- Added the `open()` scope to orders for retrieving open orders
+
 ### 2.0.0
 ##### 2020-10-11
 
