@@ -10,7 +10,8 @@
 - Dropped Laravel 5 support
 - Dropped support for PHP 7.2 and PHP 7.3 (due to MediaLibrary)
 - Minimum Laravel requirement is v6.18 (due to MediaLibrary)
-- Using AppShell 2.0
+- Upgrade to AppShell 2.0
+- Admin and admin icons are themeable (AppShell 2.0 feature)
 
 ## 1.x Series
 

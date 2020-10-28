@@ -14,7 +14,7 @@
             <div class="card-actionbar">
                 @can('create products')
                     <a href="{{ route('vanilo.product.create') }}" class="btn btn-sm btn-outline-success float-right">
-                        <i class="zmdi zmdi-plus"></i>
+                        {!! icon('+') !!}
                         {{ __('New Product') }}
                     </a>
                 @endcan

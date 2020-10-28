@@ -4,10 +4,10 @@
         <a href="#taxon-{{$taxon->id}}" aria-expanded="false"
            aria-controls="taxon-{{$taxon->id}}" data-toggle="collapse"
            class="collapse-toggler-heading">
-            &nbsp;<i class="zmdi zmdi-chevron-right"></i>
+            &nbsp;{!! icon('>') !!}
         </a>
     @else
-        &nbsp;<i class="zmdi zmdi-chevron-right text-secondary"></i>
+        &nbsp;{!! icon('>', 'secondary') !!}
     @endif
 
     <input type="checkbox" id="taxon-checkbox-{{$taxon->id}}"

@@ -51,6 +51,7 @@ use Vanilo\Product\Models\ProductProxy;
 class ModuleServiceProvider extends BaseBoxServiceProvider
 {
     use HasBreadcrumbs;
+    use RegistersVaniloIcons;
 
     protected $requests = [
         CreateProduct::class,
@@ -100,6 +101,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         // Use the framework's extended order factory
         $this->app->bind(OrderFactoryContract::class, OrderFactory::class);
 
+        $this->registerIconExtensions();
+        $this->registerEnumIcons();
         $this->loadBreadcrumbs();
         $this->addMenuItems();
     }
@@ -109,25 +112,25 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         if ($menu = Menu::get('appshell')) {
             $shop = $menu->addItem('shop', __('Shop'));
             $shop->addSubItem('products', __('Products'), ['route' => 'vanilo.product.index'])
-                ->data('icon', 'layers')
+                ->data('icon', 'product')
                 ->activateOnUrls(route('vanilo.product.index', [], false) . '*')
                 ->allowIfUserCan('list products');
             $shop->addSubItem('product_properties', __('Product Properties'), ['route' => 'vanilo.property.index'])
-                ->data('icon', 'format-list-bulleted')
+                ->data('icon', 'properties')
                 ->activateOnUrls(route('vanilo.property.index', [], false) . '*')
                 ->allowIfUserCan('list properties');
             $shop->addSubItem('categories', __('Categorization'), ['route' => 'vanilo.taxonomy.index'])
-                ->data('icon', 'folder')
+                ->data('icon', 'taxonomies')
                 ->activateOnUrls(route('vanilo.taxonomy.index', [], false) . '*')
                 ->allowIfUserCan('list taxonomies');
             $shop->addSubItem('orders', __('Orders'), ['route' => 'vanilo.order.index'])
-                ->data('icon', 'mall')
+                ->data('icon', 'bag')
                 ->activateOnUrls(route('vanilo.order.index', [], false) . '*')
                 ->allowIfUserCan('list orders');
 
             $settings = $menu->getItem('settings_group');
             $settings->addSubItem('channels', __('Channels'), ['route' => 'vanilo.channel.index'])
-                ->data('icon', 'portable-wifi')
+                ->data('icon', 'channel')
                 ->activateOnUrls(route('vanilo.channel.index', [], false) . '*')
                 ->allowIfUserCan('list channels');
         }

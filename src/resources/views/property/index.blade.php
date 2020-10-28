@@ -14,7 +14,7 @@
             <div class="card-actionbar">
                 @can('create properties')
                     <a href="{{ route('vanilo.property.create') }}" class="btn btn-sm btn-outline-success float-right">
-                        <i class="zmdi zmdi-plus"></i>
+                        {!! icon('+') !!}
                         {{ __('New Property') }}
                     </a>
                 @endcan

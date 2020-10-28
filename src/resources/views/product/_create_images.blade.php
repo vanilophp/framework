@@ -6,7 +6,7 @@
                     <div class="card-body p-0 d-flex align-items-center">
                         <div class="p-3 bg-secondary">
                             <div class="align-content-center text-center">
-                                <i class="zmdi font-2xl zmdi-collection-image"></i>
+                                {!! icon('image') !!}
                             </div>
                         </div>
                         <div class="p-2">

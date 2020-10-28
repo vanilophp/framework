@@ -14,7 +14,7 @@
             <div class="card-actionbar">
                 @can('create taxonomies')
                     <a href="{{ route('vanilo.taxonomy.create') }}" class="btn btn-sm btn-outline-success float-right">
-                        <i class="zmdi zmdi-plus"></i>
+                        {!! icon('+') !!}
                         {{ __('New Category Tree') }}
                     </a>
                 @endcan

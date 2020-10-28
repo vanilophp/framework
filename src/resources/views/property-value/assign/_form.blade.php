@@ -31,7 +31,7 @@
                             </select>
                         </td>
                         <td class="align-middle">
-                            <i class="zmdi zmdi-close text-danger" style="cursor: pointer" @click="removePropertyValue(id)"></i>
+                            {!! icon('delete', 'danger', ['style' => 'cursor: pointer', '@click' => 'removePropertyValue(id)']) !!}
                         </td>
                     </tr>
                     </tbody>

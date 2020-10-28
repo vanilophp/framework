@@ -17,7 +17,7 @@
                             </div>
                             <div class="text-muted text-uppercase font-weight-bold small">
                                 <a href="{{ $media->getUrl() }}" title="{{ $media->getUrl() }}"
-                                   target="_blank"><i class="zmdi zmdi-link"></i></a>
+                                   target="_blank">{!! icon('link') !!}</a>
                             </div>
                         </div>
                         <div class="w-25 p-2 b-l-1">
@@ -25,7 +25,7 @@
                                 @can('delete media')
                                     {!! Form::open(['route' => ['vanilo.media.destroy', $media], 'method' => 'DELETE', 'class' => "float-right"]) !!}
                                     <button class="btn btn-sm btn-outline-danger" title="{{ __('Delete image') }}">
-                                        <i class="zmdi zmdi-close"></i>
+                                        {!! icon('delete') !!}
                                     </button>
                                     {!! Form::close() !!}
                                 @endcan
@@ -49,7 +49,7 @@
                         <div class="w-25 p-2 bg-success">
                             <div class="align-content-center text-center">
                                 <button class="btn btn-sm btn-success" title="{{ __('Upload image(s)') }}">
-                                    <i class="zmdi font-2xl zmdi-check"></i>
+                                    {!! icon('check') !!}
                                 </button>
                             </div>
                         </div>

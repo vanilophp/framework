@@ -2,7 +2,7 @@
     <div class="input-group">
         <span class="input-group-prepend">
             <span class="input-group-text">
-                <i class="zmdi zmdi-folder"></i>
+                {!! icon('property') !!}
             </span>
         </span>
         {{ Form::text('name', null, [

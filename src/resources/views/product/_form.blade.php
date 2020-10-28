@@ -2,7 +2,7 @@
     <div class="input-group">
         <span class="input-group-prepend">
             <span class="input-group-text">
-                <i class="zmdi zmdi-layers"></i>
+                {!! icon('product') !!}
             </span>
         </span>
         {{ Form::text('name', null, [
@@ -23,7 +23,7 @@
         <div class="input-group">
             <span class="input-group-prepend">
                 <span class="input-group-text">
-                    <i class="zmdi zmdi-code-setting"></i>
+                    {!! icon('sku') !!}
                 </span>
             </span>
             {{ Form::text('sku', null, [
@@ -44,7 +44,7 @@
         <div class="input-group">
             <span class="input-group-prepend">
                 <span class="input-group-text">
-                    <i class="zmdi zmdi-code-setting"></i>
+                    {!! icon('stock') !!}
                 </span>
             </span>
             {{ Form::number('stock', null, [
@@ -126,7 +126,7 @@
            @if ($seoHasErrors)
                aria-expanded="true"
            @endif
-        ><i class="zmdi zmdi-chevron-right"></i> {{ __('SEO') }}</a></h5>
+        >{!! icon('>') !!} {{ __('SEO') }}</a></h5>
 
     <div id="product-form-seo" class="collapse{{ $seoHasErrors ? ' show' : '' }}">
         <div class="callout">
@@ -143,7 +143,7 @@
            @if ($extraHasErrors)
            aria-expanded="true"
                 @endif
-        ><i class="zmdi zmdi-chevron-right"></i> {{ __('Extra Settings') }}</a></h5>
+        >{!! icon('>') !!} {{ __('Extra Settings') }}</a></h5>
 
     <div id="product-form-extra" class="collapse{{ $extraHasErrors ? ' show' : '' }}">
         <div class="callout">

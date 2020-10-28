@@ -2,7 +2,7 @@
     <div class="input-group">
         <span class="input-group-prepend">
             <span class="input-group-text">
-                <i class="zmdi zmdi-format-indent-increase"></i>
+                {!! icon('taxon') !!}
             </span>
         </span>
         {{ Form::text('name', null,
@@ -69,7 +69,7 @@
            @if ($seoHasErrors)
            aria-expanded="true"
                 @endif
-        ><i class="zmdi zmdi-chevron-right"></i> {{ __('SEO') }}</a></h5>
+        >{!! icon('>') !!} {{ __('SEO') }}</a></h5>
 
     <div id="taxon-form-seo" class="collapse{{ $seoHasErrors ? ' show' : '' }}">
         <div class="callout">

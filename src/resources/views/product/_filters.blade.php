@@ -5,7 +5,7 @@
                 @if ($hasActiveFilters ?? false)
                 aria-expanded="true"
                 @endif
-            ><i class="zmdi zmdi-chevron-right"></i> {{ __('Filters') }}</a>
+            >{!! icon('>') !!} {{ __('Filters') }}</a>
         </h5>
         <form action="{{ route('vanilo.product.index') }}" id="product-filters" class="collapse{{ ($hasActiveFilters ?? false) ? ' show' : '' }}">
 

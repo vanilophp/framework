@@ -1,7 +1,7 @@
 <div class="card-deck mb-3">
 
     @component('appshell::widgets.card_with_icon', [
-            'icon' => 'account-circle',
+            'icon' => 'customer',
             'type' => 'info'
     ])
         {{ $order->billpayer->getName() }}
@@ -18,7 +18,7 @@
     @endcomponent
 
     @component('appshell::widgets.card_with_icon', [
-            'icon' => $order->status->is_completed ? 'check-circle' : 'dot-circle-alt',
+            'icon' => enum_icon($order->status),
             'type' => $order->status->is_completed ? 'success' : 'warning'
     ])
         {{ $order->status->label() }}
@@ -32,7 +32,7 @@
         @endslot
     @endcomponent
 
-    @component('appshell::widgets.card_with_icon', ['icon' => 'mall'])
+    @component('appshell::widgets.card_with_icon', ['icon' => 'bag'])
         {{ format_price($order->total()) }}
         @slot('subtitle')
             {{ __(':no lines on order', ['no' => $order->items->count()]) }}

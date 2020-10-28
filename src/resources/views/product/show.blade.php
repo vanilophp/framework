@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-4 mb-3">
             @component('appshell::widgets.card_with_icon', [
-                    'icon' => $product->is_active ? 'layers' : 'layers-off',
+                    'icon' => $product->is_active ? 'product' : 'product-off',
                     'type' => $product->is_active ? 'success' : 'warning'
             ])
                 {{ $product->name }}
@@ -28,7 +28,7 @@
 
         <div class="col-sm-6 col-md-5 mb-3">
             @component('appshell::widgets.card_with_icon', [
-                    'icon' => 'time-restore',
+                    'icon' => 'time',
                     'type' => 'info'
             ])
                 {{ $product->state }}
@@ -44,7 +44,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3 mb-3">
-            @component('appshell::widgets.card_with_icon', ['icon' => 'mall'])
+            @component('appshell::widgets.card_with_icon', ['icon' => 'bag'])
                 {{ $product->units_sold ?: '0' }}
                 {{ __('units sold') }}
                 @slot('subtitle')

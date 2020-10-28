@@ -14,7 +14,7 @@
             <div class="card-actionbar">
                 @can('create channels')
                     <a href="{{ route('vanilo.channel.create') }}" class="btn btn-sm btn-outline-success float-right">
-                        <i class="zmdi zmdi-plus"></i>
+                        {!! icon('+') !!}
                         {{ __('Create Channel') }}
                     </a>
                 @endcan

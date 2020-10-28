@@ -7,7 +7,7 @@
             <button class="btn btn-secondary" type="button">{{ $propertyValue->title }}</button>
         @endcan
         <button type="button" class="btn btn-secondary" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i>
+                aria-haspopup="true" aria-expanded="false">{!! icon('more-items') !!}
         </button>
         <div class="dropdown-menu">
             @can('delete property values')
@@ -19,7 +19,7 @@
                         ])
                 }}
                 <button class="dropdown-item" type="submit">
-                    <i class="zmdi zmdi-close text-danger"></i>
+                    {!! icon('delete', 'danger') !!}
                     {{ __('Delete ":title"', ['title' => $propertyValue->title]) }}
                 </button>
                 {{ Form::close() }}
@@ -31,6 +31,5 @@
 @can('create property values')
     <a href="{{ route('vanilo.property_value.create', $property) }}"
        class="btn btn-success btn-sm mb-1"
-       title="{{ __('Add :property value', ['property' => $property->name]) }}"><i
-                class="zmdi zmdi-plus"></i></a>
+       title="{{ __('Add :property value', ['property' => $property->name]) }}">{!! icon('+') !!}</a>
 @endcan

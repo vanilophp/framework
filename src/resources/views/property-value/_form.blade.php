@@ -2,7 +2,7 @@
     <div class="input-group">
         <span class="input-group-prepend">
             <span class="input-group-text">
-                <i class="zmdi zmdi-format-indent-increase"></i>
+                {!! icon('property-value') !!}
             </span>
         </span>
         {{ Form::text('title', null,
