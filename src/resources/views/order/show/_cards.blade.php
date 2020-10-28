@@ -1,15 +1,15 @@
 <div class="card-deck mb-3">
 
     @component('appshell::widgets.card_with_icon', [
-            'icon' => 'customer',
-            'type' => 'info'
+        'icon' => 'customer',
+        'type' => 'info'
     ])
         {{ $order->billpayer->getName() }}
         @if ($order->status->is_cancelled)
             <small>
-                    <span class="badge badge-secondary">
-                        {{ __('cancelled') }}
-                    </span>
+                <span class="badge badge-secondary">
+                    {{ __('cancelled') }}
+                </span>
             </small>
         @endif
         @slot('subtitle')
@@ -18,17 +18,17 @@
     @endcomponent
 
     @component('appshell::widgets.card_with_icon', [
-            'icon' => enum_icon($order->status),
-            'type' => $order->status->is_completed ? 'success' : 'warning'
+        'icon' => enum_icon($order->status),
+        'type' => $order->status->is_completed ? 'success' : 'warning'
     ])
         {{ $order->status->label() }}
 
         @slot('subtitle')
             {{ __('Updated') }}
-            {{ $order->updated_at->diffForHumans() }}
+            {{ show_datetime($order->updated_at) }}
             |
             {{ __('Created at') }}
-            {{ $order->created_at->format(__('Y-m-d H:i')) }}
+            {{ show_datetime($order->created_at) }}
         @endslot
     @endcomponent
 

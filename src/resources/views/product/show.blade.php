@@ -35,10 +35,10 @@
 
                 @slot('subtitle')
                     {{ __('Updated') }}
-                    {{ $product->updated_at->diffForHumans() }}
+                    {{ show_datetime($product->updated_at) }}
                     |
                     {{ __('Created at') }}
-                    {{ $product->created_at->format(__('Y-m-d H:i')) }}
+                    {{ show_datetime($product->created_at) }}
                 @endslot
             @endcomponent
         </div>
@@ -50,7 +50,7 @@
                 @slot('subtitle')
                     @if ($product->last_sale_at)
                         {{ __('Last sale at') }}
-                        {{ $product->last_sale_at->format(__('Y-m-d H:i')) }}
+                        {{ show_datetime($product->last_sale_at) }}
                     @else
                         {{ __('No sales were registered') }}
                     @endif

@@ -46,7 +46,7 @@
                             </span>
                         </td>
                         <td>{{ $taxonomy->slug }}</td>
-                        <td><span title="{{ $taxonomy->created_at }}">{{ $taxonomy->created_at->diffForHumans() }}</span></td>
+                        <td><span title="{{ $taxonomy->created_at }}">{{ show_datetime($taxonomy->created_at) }}</span></td>
                         <td>
                             @can('edit taxonomies')
                                 <a href="{{ route('vanilo.taxonomy.edit', $taxonomy) }}"

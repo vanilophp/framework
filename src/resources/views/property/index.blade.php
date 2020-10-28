@@ -48,7 +48,7 @@
                         </td>
                         <td>{{ $property->slug }}</td>
                         <td>{{ $property->getType()->getName() }}</td>
-                        <td><span title="{{ $property->created_at }}">{{ $property->created_at->diffForHumans() }}</span></td>
+                        <td><span title="{{ $property->created_at }}">{{ show_datetime($property->created_at) }}</span></td>
                         <td>
                             @can('edit properties')
                                 <a href="{{ route('vanilo.property.edit', $property) }}"

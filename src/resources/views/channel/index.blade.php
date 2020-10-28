@@ -46,7 +46,7 @@
                             </span>
                         </td>
                         <td>{{ $channel->slug }}</td>
-                        <td><span title="{{ $channel->created_at }}">{{ $channel->created_at->diffForHumans() }}</span></td>
+                        <td><span title="{{ $channel->created_at }}">{{ show_datetime($channel->created_at) }}</span></td>
                         <td>
                             @can('edit channels')
                                 <a href="{{ route('vanilo.channel.edit', $channel) }}"

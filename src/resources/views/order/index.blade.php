@@ -45,7 +45,7 @@
                         </td>
                         <td>
                             <span class="mb-3" title="{{ $order->created_at }}">
-                                {{ $order->created_at->diffForHumans() }}
+                                {{ show_datetime($order->created_at) }}
                             </span>
                             <div class="text-muted" title="{{ __('Order Total') }}">
                                 {{ format_price($order->total()) }}
