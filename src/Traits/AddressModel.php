@@ -21,7 +21,7 @@ trait AddressModel
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->name ?: '';
     }
 
     /**
@@ -29,7 +29,7 @@ trait AddressModel
      */
     public function getCountryCode(): string
     {
-        return $this->country_id;
+        return $this->country_id ?: '';
     }
 
     /**
@@ -53,7 +53,7 @@ trait AddressModel
      */
     public function getCity(): string
     {
-        return $this->city;
+        return $this->city ?: '';
     }
 
     /**
@@ -61,6 +61,6 @@ trait AddressModel
      */
     public function getAddress(): string
     {
-        return $this->address;
+        return $this->address ?: '';
     }
 }
