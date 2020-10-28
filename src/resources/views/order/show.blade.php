@@ -6,9 +6,14 @@
 
 @section('content')
 
-    @include('vanilo::order.show._cards')
+    <div class="card-deck mb-3">
+        @include('vanilo::order.show._cards')
+    </div>
 
-    @include('vanilo::order.show._addresses')
+    <div class="card-deck mb-3">
+        @include('vanilo::order.show._addresses')
+        @include('vanilo::order.show._details')
+    </div>
 
     @include('vanilo::order.show._items')
 
