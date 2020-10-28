@@ -11,6 +11,7 @@
 
 namespace Vanilo\Framework\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Framework\Contracts\Requests\UpdateOrder;
 use Vanilo\Order\Contracts\Order;
@@ -18,10 +19,16 @@ use Vanilo\Order\Models\OrderProxy;
 
 class OrderController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = OrderProxy::orderBy('created_at', 'desc');
+
+        if ('1' != $request->get('inactives')) {
+            $query->open();
+        }
+
         return view('vanilo::order.index', [
-            'orders' => OrderProxy::orderBy('created_at', 'desc')->paginate(100)
+            'orders' => $query->paginate(100)
         ]);
     }
 
