@@ -2,8 +2,8 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.0.0
+##### 2020-10-31
 
 - BC: Upgrade to Spatie MediaLibrary v8
 - Added Laravel 8 support
