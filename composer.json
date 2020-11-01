@@ -18,7 +18,7 @@
         "php": "^7.4",
         "laravel/framework": "^6.18|^7.0|^8.0",
         "konekt/appshell": "^2.0",
-        "spatie/laravel-medialibrary": "^9.0",
+        "spatie/laravel-medialibrary": "^8.0|^9.0",
         "vanilo/contracts": "^2.0",
         "vanilo/support": "^2.0.1",
         "vanilo/category": "^2.0",
@@ -39,7 +39,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "~4.0|~5.0|~6.0",
-        "phpunit/phpunit" : "~8.0|~9.0",
+        "phpunit/phpunit": "~8.0|~9.0",
         "laravel/legacy-factories": "^1.0.4"
     },
     "autoload-dev": {

@@ -15,7 +15,7 @@ class UpgradeMediaTableToV9 extends Migration
 
         DB::table('media')->cursor()->each(function ($media) {
             DB::table('media')->where('id', $media->id)->update([
-                'generated_conversions' => json_encode([])                                                       
+                'generated_conversions' => json_encode([])
             ]);
         });
 
