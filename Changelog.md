@@ -7,7 +7,7 @@
 
 - Payable interface has been added
 - Shippable interface has been added
-- BC: Address interface has been extended and refactored to use return types
+- BC: interfaces have been changed to use return types. See [the complete list of changes](https://github.com/vanilophp/contracts/compare/1.2.0..2.0.0).
 - Added Laravel 8 Support
 - Dropped Laravel 5 Support
 - Dropped PHP 7.1 and PHP 7.2 support

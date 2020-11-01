@@ -1,6 +1,6 @@
 # Vanilo Contracts
 
-[![Travis](https://img.shields.io/travis/vanilophp/contracts.svg?style=flat-square)](https://travis-ci.org/vanilophp/contracts)
+[![Travis](https://img.shields.io/travis/com/vanilophp/contracts.svg?style=flat-square)](https://travis-ci.com/vanilophp/contracts)
 [![Packagist Stable Version](https://img.shields.io/packagist/v/vanilo/contracts.svg?style=flat-square&label=stable)](https://packagist.org/packages/vanilo/contracts)
 [![StyleCI](https://styleci.io/repos/109375913/shield?branch=master)](https://styleci.io/repos/109375913)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/contracts.svg?style=flat-square)](https://packagist.org/packages/vanilo/contracts)
@@ -15,5 +15,5 @@ It also aims to support separately using modules, so that you can choose
 for example to use the [checkout](https://github.com/vanilophp/checkout)
 component without the [cart](https://github.com/vanilophp/cart).
 
-Thus I can't imagine a scenario using this package alone. It comes as a
+Thus, I can't imagine a scenario using this package alone. It comes as a
 requirement of almost all Vanilo components.
