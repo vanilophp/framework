@@ -10,11 +10,11 @@ php:
 
 env:
   - LARAVEL=6.0
-  - LARAVEL=6.18
+  - LARAVEL=6.20
   - LARAVEL=7.0
-  - LARAVEL=7.28
+  - LARAVEL=7.29
   - LARAVEL=8.0
-  - LARAVEL=8.9
+  - LARAVEL=8.15
 
 script:
   - vendor/bin/phpunit

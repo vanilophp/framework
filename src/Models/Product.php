@@ -66,7 +66,7 @@ class Product extends Model implements ProductContract
 
     public function title(): string
     {
-        return isset($this->ext_title) ? $this->ext_title : $this->name;
+        return $this->ext_title ?? $this->name;
     }
 
     /**
