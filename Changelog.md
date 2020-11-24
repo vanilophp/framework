@@ -2,6 +2,11 @@
 
 ## 2.x Series
 
+### 2.0.1
+##### 2020-11-24
+
+- Fixed incorrect sluggable dependency in composer.json
+
 ### 2.0.0
 ##### 2020-10-11
 
