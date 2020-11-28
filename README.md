@@ -1,6 +1,6 @@
 # Vanilo Category Module
 
-[![Travis](https://img.shields.io/travis/vanilophp/category.svg?style=flat-square)](https://travis-ci.org/vanilophp/category)
+[![Travis](https://img.shields.io/travis/com/vanilophp/category.svg?style=flat-square)](https://travis-ci.com/vanilophp/category)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/category.svg?style=flat-square)](https://packagist.org/packages/vanilo/category)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/category.svg?style=flat-square)](https://packagist.org/packages/vanilo/category)
 [![StyleCI](https://styleci.io/repos/145992208/shield?branch=master)](https://styleci.io/repos/145992208)
@@ -8,7 +8,7 @@
 
 Category module for the [Vanilo E-commerce framework](https://vanilo.io)
 
-[Documentation](https://vanilo.io/docs/master/categorization)
+[Documentation](https://vanilo.io/docs/2.x/categorization)
 
 ## Overview
 
