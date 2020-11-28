@@ -29,6 +29,11 @@ class Taxonomy extends Model implements TaxonomyContract
         return static::where('name', $name)->first();
     }
 
+    public static function findOneBySlug(string $slug): ?TaxonomyContract
+    {
+        return static::where('slug', $slug)->first();
+    }
+
     public function rootLevelTaxons(): Collection
     {
         return TaxonProxy::byTaxonomy($this)

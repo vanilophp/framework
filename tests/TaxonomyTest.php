@@ -99,4 +99,15 @@ class TaxonomyTest extends TestCase
         $this->assertEquals('Brands', Taxonomy::findOneByName('Brands')->name);
         $this->assertNull(Taxonomy::findOneByName('I dont exist'));
     }
+
+    /** @test */
+    public function taxonomy_can_be_retrieved_by_slug_with_the_dedicated_static_method()
+    {
+        Taxonomy::create(['name' => 'Mordor', 'slug' => 'mordor']);
+        Taxonomy::create(['name' => 'Middle Earth', 'slug' => 'middle-earth']);
+
+        $this->assertEquals('Mordor', Taxonomy::findOneBySlug('mordor')->name);
+        $this->assertEquals('Middle Earth', Taxonomy::findOneBySlug('middle-earth')->name);
+        $this->assertNull(Taxonomy::findOneByName('no-such-slug'));
+    }
 }

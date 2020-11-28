@@ -119,12 +119,24 @@ echo $category2->slug;
 
 ## Finding Taxonomies
 
+### By Name
+
 There's a dedicated finder method to retrieve a single taxonomy by name:
 
 ```php
 Taxonomy::create(['name' => 'Brands']);
 
 $brands = Taxonomy::findOneByName('Brands');
+```
+
+### By Slug
+
+There's a dedicated static method to retrieve a single taxonomy by slug:
+
+```php
+Taxonomy::create(['name' => 'Gift Ideas', 'slug' => 'gift-ideas']);
+
+$giftIdeas = Taxonomy::findOneBySlug('gift-ideas');
 ```
 
 ## Creating Taxons
