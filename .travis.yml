@@ -7,7 +7,7 @@ cache:
 php:
   - '7.3'
   - '7.4'
-  - '8.0nightly'
+  - 'nightly'
 
 env:
   - LARAVEL=6.0
