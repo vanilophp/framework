@@ -16,7 +16,6 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
@@ -41,7 +40,7 @@ class Taxon extends Model implements TaxonContract
         $taxonomyTableName = (new $taxonomyClass())->getTable();
         $taxonTableName = (new static())->getTable();
         $query = static::query()
-                       ->where(function(Builder $query) use ($taxonomyTableName) {
+                       ->where(function($query) use ($taxonomyTableName) {
                            $query->select('slug')
                                ->from($taxonomyTableName)
                                ->whereColumn('taxonomy_id', "$taxonomyTableName.id");
@@ -49,10 +48,10 @@ class Taxon extends Model implements TaxonContract
                        ->where('slug', $slug);
 
         if (null !== $parentSlug) {
-            $query->where('parent_id', function(Builder $query) use ($taxonomyTableName, $taxonomySlug, $taxonTableName, $parentSlug) {
+            $query->where('parent_id', function($query) use ($taxonomyTableName, $taxonomySlug, $taxonTableName, $parentSlug) {
                 $query->select('id')
                     ->from($taxonTableName)
-                    ->where(function(Builder $query) use ($taxonomyTableName) {
+                    ->where(function($query) use ($taxonomyTableName) {
                         $query->select('slug')
                               ->from($taxonomyTableName)
                               ->whereColumn('taxonomy_id', "$taxonomyTableName.id");
