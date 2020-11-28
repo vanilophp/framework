@@ -416,6 +416,40 @@ echo $tablets->lastNeighbour(true)->name;
 
 ### Retrieving Taxons (Scopes)
 
+#### Easy Retrieval By Slug(s)
+
+> Added in v2.1
+
+There is a static convenience method called `Taxon::findOneByParentsAndSlug()` to locate a taxon
+based on its and its parents' slug. These methods can be handy in Controller contexts where
+you get a series of slugs as route parameters.
+
+Retrieve a taxon by slug within a given taxonomy:
+
+```php
+$brands = Taxonomy::create(['name' => 'Brands']);
+Taxon::create(['name' => 'Klarna', 'taxonomy_id' => $brands->id]);
+
+$klarna = Taxon::findOneByParentsAndSlug('brands', 'klarna');
+echo $klarna->name;
+// Klarna
+```
+
+Due to their tree-like nature, taxon slugs aren't unique. If you need to locate a specific Taxon
+with a given parent, use the third (`parentSlug`) parameter of the method:
+
+```php
+$locations = Taxonomy::create(['name' => 'Locations']);
+$tennessee = Taxon::create(['name' => 'Tennessee', 'taxonomy_id' => $locations->id]);
+$egypt = Taxon::create(['name' => 'Egypt', 'taxonomy_id' => $locations->id]);
+
+Taxon::create(['name' => 'Memphis', 'parent_id' => $tennessee->id, 'taxonomy_id' => $locations->id]);
+Taxon::create(['name' => 'Memphis', 'parent_id' => $egypt->id, 'taxonomy_id' => $locations->id]);
+
+$memphisEgypt = Taxon::findOneByParentsAndSlug('locations', 'memphis', 'egypt');
+$memphisTennessee = Taxon::findOneByParentsAndSlug('locations', 'memphis', 'tennessee');
+```
+
 The default Taxon model that ships with this package defines a several [Query Scopes](https://laravel.com/docs/5.7/eloquent#local-scopes).
 
 Due to the nature of Eloquent query scopes, these are chainable so it is possible to combine them arbitrarily.

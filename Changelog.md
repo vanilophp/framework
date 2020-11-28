@@ -2,6 +2,13 @@
 
 ## 2.x Series
 
+### Unreleased
+##### 2020-XX-YY
+
+- Added `Taxon::findOneByParentsAndSlug` method
+- Added `Taxonomy::findOneBySlug` method
+- Added PHP 8 support
+
 ### 2.0.0
 ##### 2020-10-11
 
