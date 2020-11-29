@@ -38,11 +38,6 @@ class Product extends Model implements ProductContract
         ];
     }
 
-    public function getRouteKeyName()
-    {
-        return $this->getSlugKeyName();
-    }
-
     /**
      * @inheritdoc
      */

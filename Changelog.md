@@ -6,6 +6,8 @@
 ##### 2020-XX-YY
 
 - Added PHP 8 support
+- Reverted the Product model's route key to the default (id) instead of `slug`.
+  Resolving by slug must be done by the host application.
 
 ### 2.0.1
 ##### 2020-11-24
