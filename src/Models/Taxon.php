@@ -60,7 +60,6 @@ class Taxon extends Model implements TaxonContract
             });
         }
 
-        //return dd($query->toSql());
         return $query->first();
     }
 
