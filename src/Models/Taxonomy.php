@@ -13,6 +13,7 @@ namespace Vanilo\Category\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 
@@ -29,9 +30,19 @@ class Taxonomy extends Model implements TaxonomyContract
         return static::where('name', $name)->first();
     }
 
-    public static function findOneBySlug(string $slug): ?TaxonomyContract
+    public static function findOneBySlug(string $slug, array $columns = ['*']): ?TaxonomyContract
     {
-        return static::where('slug', $slug)->first();
+        return static::findBySlug($slug, $columns);
+    }
+
+    public function taxa(): HasMany
+    {
+        return $this->hasMany(TaxonProxy::modelClass(), 'taxonomy_id', 'id');
+    }
+
+    public function taxons(): HasMany
+    {
+        return $this->taxa();
     }
 
     public function rootLevelTaxons(): Collection

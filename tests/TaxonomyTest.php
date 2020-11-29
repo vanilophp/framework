@@ -110,4 +110,23 @@ class TaxonomyTest extends TestCase
         $this->assertEquals('Middle Earth', Taxonomy::findOneBySlug('middle-earth')->name);
         $this->assertNull(Taxonomy::findOneByName('no-such-slug'));
     }
+
+    /** @test */
+    public function taxonomy_has_a_taxa_relationship_to_the_child_taxons()
+    {
+        $promo = Taxonomy::create(['name' => 'Promotion']);
+        $categ = Taxonomy::create(['name' => 'Category']);
+
+        Taxon::create(['name' => 'Black Friday', 'taxonomy_id' => $promo->id]);
+        Taxon::create(['name' => 'Cyber Monday', 'taxonomy_id' => $promo->id]);
+
+        Taxon::create(['name' => 'Books', 'taxonomy_id' => $categ->id]);
+        Taxon::create(['name' => 'Magazines', 'taxonomy_id' => $categ->id]);
+        Taxon::create(['name' => 'Eyeglasses', 'taxonomy_id' => $categ->id]);
+
+        $this->assertCount(2, $promo->taxa);
+        $this->assertCount(2, $promo->taxons);
+        $this->assertCount(3, $categ->taxons);
+        $this->assertCount(3, $categ->taxa);
+    }
 }
