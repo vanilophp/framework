@@ -88,10 +88,11 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->app->get(ResourcePermissionMapper::class)->overrideResourcePlural('taxon', 'taxons');
 
         // Use the framework's extended model classes
-        $this->concord->registerModel(ProductContract::class, Product::class);
-        $this->concord->registerModel(AddressContract::class, Address::class);
-        $this->concord->registerModel(CustomerContract::class, Customer::class);
-        $this->concord->registerModel(TaxonContract::class, Taxon::class);
+        $registerRouteModels = config('concord.register_route_models', true);
+        $this->concord->registerModel(ProductContract::class, Product::class, $registerRouteModels);
+        $this->concord->registerModel(AddressContract::class, Address::class, $registerRouteModels);
+        $this->concord->registerModel(CustomerContract::class, Customer::class, $registerRouteModels);
+        $this->concord->registerModel(TaxonContract::class, Taxon::class, $registerRouteModels);
 
         // This is ugly, but it does the job for v0.1
         Relation::morphMap([

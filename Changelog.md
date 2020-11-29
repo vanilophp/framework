@@ -6,6 +6,7 @@
 ##### 2020-XX-YY
 
 - Added PHP 8 support
+- Fixed model registration to takes into account Concord's `register_route_models` setting
 
 ### 2.0.0
 ##### 2020-10-31
