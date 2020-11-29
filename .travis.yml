@@ -15,6 +15,15 @@ env:
   - LARAVEL=8.0
   - LARAVEL=8.16
 
+matrix:
+  exclude:
+    - php: 'nightly'
+      env: 'LARAVEL=6.0'
+    - php: 'nightly'
+      env: 'LARAVEL=7.0'
+    - php: 'nightly'
+      env: 'LARAVEL=8.0'
+
 script:
   - vendor/bin/phpunit
 
