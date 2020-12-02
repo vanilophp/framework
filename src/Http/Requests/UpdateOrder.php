@@ -14,6 +14,7 @@ namespace Vanilo\Framework\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Vanilo\Framework\Contracts\Requests\UpdateOrder as UpdateOrderContract;
+use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Models\OrderStatusProxy;
 
 class UpdateOrder extends FormRequest implements UpdateOrderContract
@@ -23,6 +24,16 @@ class UpdateOrder extends FormRequest implements UpdateOrderContract
         return [
             'status' => ['required', Rule::in(OrderStatusProxy::values())]
         ];
+    }
+
+    public function wantsToChangeOrderStatus(Order $order): bool
+    {
+        return $this->getStatus() !== $order->getStatus()->value();
+    }
+
+    public function getStatus(): string
+    {
+        return $this->get('status');
     }
 
     public function authorize()
