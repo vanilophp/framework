@@ -24,7 +24,7 @@ class MediaController extends BaseController
             $model = $medium->model;
             $medium->delete();
 
-            flash()->warning(__('Media :name has been deleted', ['name' => $name, 'model' => $model]));
+            flash()->warning(__('Media :name and media :model has been deleted', ['name' => $name, 'model' => $model]));
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 
