@@ -24,7 +24,7 @@ use Vanilo\Payment\PaymentGateways;
  * @property string $name
  * @property null|string $description
  * @property string $gateway
- * @property array configuration
+ * @property array $configuration
  * @property bool $is_enabled
  * @property integer $transaction_count
  * @property Carbon $created_at
@@ -40,13 +40,15 @@ class PaymentMethod extends Model implements PaymentMethodContract
         'configuration' => 'json'
     ];
 
-    public function __construct(array $attributes = [])
+    public static function boot()
     {
-        parent::__construct($attributes);
+        parent::boot();
 
-        if (null === $this->configuration) {
-            $this->configuration = [];
-        }
+        static::saving(function ($model) {
+            if (null === $model->configuration) {
+                $model->configuration = [];
+            }
+        });
     }
 
     public function getTimeout(): int

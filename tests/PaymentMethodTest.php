@@ -56,6 +56,20 @@ class PaymentMethodTest extends TestCase
     }
 
     /** @test */
+    public function configuration_can_be_set_as_array()
+    {
+        $method = PaymentMethod::create([
+            'name'    => 'Credit Card',
+            'gateway' => 'plastic',
+            'configuration' => ["asd" => "qwe"],
+        ]);
+
+        $method = $method->fresh();
+        $this->assertIsArray($method->getConfiguration());
+        $this->assertEquals('qwe', $method->configuration['asd']);
+    }
+
+    /** @test */
     public function methods_can_be_enabled()
     {
         $method = PaymentMethod::create([
