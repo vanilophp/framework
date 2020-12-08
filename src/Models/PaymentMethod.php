@@ -34,10 +34,10 @@ use Vanilo\Payment\PaymentGateways;
  */
 class PaymentMethod extends Model implements PaymentMethodContract
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'transaction_count', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
-        'configuration' => 'array'
+        'configuration' => 'json'
     ];
 
     public function __construct(array $attributes = [])
