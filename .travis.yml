@@ -31,9 +31,9 @@ script:
 
 before_install:
   - MINOR=`echo $LARAVEL | sed 's/[6|7|8]\.\([0-9]\+\)/\1/'`
-    - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || MAJOR=6'
-    - '[[ $LARAVEL =~ ^8\.[0-9]+$ ]] && MAJOR=8 || true'
-    - echo "Testing against Laravel ${MAJOR}.${MINOR}"
+  - '[[ $LARAVEL =~ ^7\.[0-9]+$ ]] && MAJOR=7 || MAJOR=6'
+  - '[[ $LARAVEL =~ ^8\.[0-9]+$ ]] && MAJOR=8 || true'
+  - echo "Testing against Laravel ${MAJOR}.${MINOR}"
   - composer require "illuminate/support:${MAJOR}.${MINOR}.*" --no-update -v
   - composer require "illuminate/console:${MAJOR}.${MINOR}.*" --no-update -v
 
