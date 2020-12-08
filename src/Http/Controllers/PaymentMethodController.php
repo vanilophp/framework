@@ -42,7 +42,9 @@ class PaymentMethodController extends BaseController
     {
         try {
             $guardedAttributes = app(PaymentMethodProxy::modelClass())->getGuarded();
-            $paymentMethod = PaymentMethodProxy::create($request->except($guardedAttributes));
+            $attributes = $request->except($guardedAttributes);
+            $attributes['configuration'] = json_decode($attributes['configuration']);
+            $paymentMethod = PaymentMethodProxy::create($attributes);
             flash()->success(__(':name has been created', ['name' => $paymentMethod->name]));
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
@@ -70,7 +72,9 @@ class PaymentMethodController extends BaseController
     {
         try {
             $guardedAttributes = $paymentMethod->getGuarded();
-            $paymentMethod->update($request->except($guardedAttributes));
+            $attributes = $request->except($guardedAttributes);
+            $attributes['configuration'] = json_decode($attributes['configuration']);
+            $paymentMethod->update($attributes);
 
             flash()->success(__(':name has been updated', ['name' => $paymentMethod->getName()]));
         } catch (\Exception $e) {
