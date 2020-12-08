@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the CreatePaymentMethod class.
+ * Contains the UpdatePaymentMethod class.
  *
  * @copyright   Copyright (c) 2020 Attila Fulop
  * @author      Attila Fulop
@@ -16,10 +16,10 @@ namespace Vanilo\Framework\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Vanilo\Framework\Contracts\Requests\CreatePaymentMethod as CreatePaymentMethodContract;
+use Vanilo\Framework\Contracts\Requests\UpdatePaymentMethod as UpdatePaymentMethodContract;
 use Vanilo\Payment\PaymentGateways;
 
-class CreatePaymentMethod extends FormRequest implements CreatePaymentMethodContract
+class UpdatePaymentMethod extends FormRequest implements UpdatePaymentMethodContract
 {
     public function rules()
     {

@@ -48,3 +48,20 @@
     </div>
 </div>
 
+<hr>
+
+<div class="form-group row">
+    <label class="col-form-label col-form-label-sm col-md-2">{{ __('Configuration') }}</label>
+    <div class="col-md-10">
+        {{ Form::textarea('configuration', null, [
+            'class' => 'form-control form-control-sm' . ($errors->has('configuration') ? ' is-invalid' : ''),
+            'placeholder' => __('Enter JSON config'),
+            'rows' => 6
+            ])
+        }}
+        @if ($errors->has('configuration'))
+            <div class="invalid-feedback">{{ $errors->first('configuration') }}</div>
+        @endif
+    </div>
+</div>
+

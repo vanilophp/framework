@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header">
             <h5>{{ $paymentMethod->getName() }}</h5>
         </div>

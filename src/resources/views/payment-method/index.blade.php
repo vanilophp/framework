@@ -47,7 +47,7 @@
                             </span>
                         </td>
                         <td>{{ $paymentMethod->getGateway()->getName() }}</td>
-                        <td>{{ $paymentMethod->transaction_count }}</td>
+                        <td>{{ (int) $paymentMethod->transaction_count }}</td>
                         <td>
                             @if($paymentMethod->isEnabled())
                                 {!! icon('active') !!}

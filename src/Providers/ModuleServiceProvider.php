@@ -29,6 +29,7 @@ use Vanilo\Framework\Http\Requests\CreateTaxonForm;
 use Vanilo\Framework\Http\Requests\SyncModelPropertyValues;
 use Vanilo\Framework\Http\Requests\SyncModelTaxons;
 use Vanilo\Framework\Http\Requests\UpdateChannel;
+use Vanilo\Framework\Http\Requests\UpdatePaymentMethod;
 use Vanilo\Framework\Http\Requests\UpdateProperty;
 use Vanilo\Framework\Http\Requests\UpdatePropertyValue;
 use Vanilo\Framework\Http\Requests\UpdateTaxon;
@@ -74,6 +75,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         CreateChannel::class,
         UpdateChannel::class,
         CreatePaymentMethod::class,
+        UpdatePaymentMethod::class
     ];
 
     public function register()
