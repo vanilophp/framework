@@ -5,15 +5,17 @@ cache:
     - $HOME/.composer/cache
 
 php:
-  - '7.2'
   - '7.3'
   - '7.4'
+  - '8.0'
 
 env:
   - LARAVEL=6.0
-  - LARAVEL=6.18
+  - LARAVEL=6.20
   - LARAVEL=7.0
-  - LARAVEL=7.27
+  - LARAVEL=7.30
+  - LARAVEL=8.0
+  - LARAVEL=8.17
 
 script:
   - vendor/bin/phpunit
