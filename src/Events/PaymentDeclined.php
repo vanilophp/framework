@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the PaymentHasTimedOut class.
+ * Contains the PaymentDeclined class.
  *
  * @copyright   Copyright (c) 2019 Attila Fulop
  * @author      Attila Fulop
@@ -11,6 +11,6 @@
 
 namespace Vanilo\Payment\Events;
 
-class PaymentHasTimedOut
+class PaymentDeclined extends BasePaymentEvent
 {
 }
