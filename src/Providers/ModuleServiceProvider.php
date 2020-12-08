@@ -12,11 +12,19 @@
 namespace Vanilo\Payment\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Payment\Gateways\NullGateway;
 use Vanilo\Payment\Models\PaymentMethod;
+use Vanilo\Payment\PaymentGateways;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
         PaymentMethod::class
     ];
+
+    public function boot()
+    {
+        parent::boot();
+        PaymentGateways::register('null', NullGateway::class);
+    }
 }

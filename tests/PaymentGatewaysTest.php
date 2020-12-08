@@ -19,9 +19,10 @@ class PaymentGatewaysTest extends TestCase
     /** @test */
     public function new_gateways_can_be_registered()
     {
+        $originalCount = count(PaymentGateways::choices());
         PaymentGateways::register('plastic', PlasticPayments::class);
 
-        $this->assertCount(1, PaymentGateways::choices());
+        $this->assertCount($originalCount + 1, PaymentGateways::choices());
     }
 
     /** @test */
