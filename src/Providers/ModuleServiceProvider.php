@@ -12,8 +12,11 @@
 namespace Vanilo\Payment\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Payment\Models\PaymentMethod;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
-    protected $models = [];
+    protected $models = [
+        PaymentMethod::class
+    ];
 }
