@@ -2,6 +2,11 @@
 
 ## 2.x Series
 
+### Unreleased
+##### 2020-XX-YY
+
+- Added PHP 8 support
+
 ### 2.1.0
 ##### 2020-10-27
 

@@ -2,7 +2,7 @@
 
 This is the cart module for [Vanilo](https://vanilo.io).
 
-[![Travis](https://img.shields.io/travis/vanilophp/cart.svg?style=flat-square)](https://travis-ci.org/vanilophp/cart)
+[![Travis](https://img.shields.io/travis/com/vanilophp/cart.svg?style=flat-square)](https://travis-ci.com/vanilophp/cart)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
 [![StyleCI](https://styleci.io/repos/108638279/shield?branch=master)](https://styleci.io/repos/108638279)
@@ -16,21 +16,6 @@ This is the cart module for [Vanilo](https://vanilo.io).
 2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
 3. Add `Vanilo\Cart\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
 4. `php artisan migrate`
-
-
-### Register Alias (Facade)
-
-The Cart facade is automatically registered with Laravel 5.5+
-
-For Laravel 5.4 you need to manually register it in config/app.php:
-
-```php
-'aliases' => [
-    // ...
-    'Cart' => Vanilo\Cart\Facades\Cart::class
-],
-```
-
 
 ## Using The Cart
 
