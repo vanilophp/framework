@@ -20,6 +20,7 @@ use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Framework\Http\Requests\CreateChannel;
 use Vanilo\Framework\Http\Requests\CreateMedia;
+use Vanilo\Framework\Http\Requests\CreatePaymentMethod;
 use Vanilo\Framework\Http\Requests\CreateProperty;
 use Vanilo\Framework\Http\Requests\CreatePropertyValue;
 use Vanilo\Framework\Http\Requests\CreatePropertyValueForm;
@@ -71,7 +72,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         UpdatePropertyValue::class,
         SyncModelPropertyValues::class,
         CreateChannel::class,
-        UpdateChannel::class
+        UpdateChannel::class,
+        CreatePaymentMethod::class,
     ];
 
     public function register()
@@ -134,6 +136,10 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
                 ->data('icon', 'channel')
                 ->activateOnUrls(route('vanilo.channel.index', [], false) . '*')
                 ->allowIfUserCan('list channels');
+            $settings->addSubItem('payment-methods', __('Payment Methods'), ['route' => 'vanilo.payment-method.index'])
+                     ->data('icon', 'payment-method')
+                     ->activateOnUrls(route('vanilo.payment-method.index', [], false) . '*')
+                     ->allowIfUserCan('list payment methods');
         }
     }
 }

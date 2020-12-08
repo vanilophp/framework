@@ -8,7 +8,8 @@ return [
         Vanilo\Channel\Providers\ModuleServiceProvider::class    => [],
         Vanilo\Cart\Providers\ModuleServiceProvider::class       => [],
         Vanilo\Checkout\Providers\ModuleServiceProvider::class   => [],
-        Vanilo\Order\Providers\ModuleServiceProvider::class      => []
+        Vanilo\Order\Providers\ModuleServiceProvider::class      => [],
+        Vanilo\Payment\Providers\ModuleServiceProvider::class    => [],
     ],
     'event_listeners' => true,
     'views'           => [
