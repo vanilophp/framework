@@ -23,7 +23,7 @@ class NullGateway implements PaymentGateway
 {
     public static function getName(): string
     {
-        return __('Null Payment Gateway');
+        return __('Offline');
     }
 
     public function createPaymentRequest(Payable $payable): PaymentRequest

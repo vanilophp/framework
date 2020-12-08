@@ -1,6 +1,6 @@
 # Vanilo Payment Module
 
-[![Travis](https://img.shields.io/travis/vanilophp/payment.svg?style=flat-square)](https://travis-ci.org/vanilophp/payment)
+[![Travis](https://img.shields.io/travis/com/vanilophp/payment.svg?style=flat-square)](https://travis-ci.com/vanilophp/payment)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/payment.svg?style=flat-square)](https://packagist.org/packages/vanilo/payment)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/payment.svg?style=flat-square)](https://packagist.org/packages/vanilo/payment)
 [![StyleCI](https://styleci.io/repos/228569768/shield?branch=master)](https://styleci.io/repos/228569768)
