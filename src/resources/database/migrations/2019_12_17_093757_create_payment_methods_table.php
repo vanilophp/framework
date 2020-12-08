@@ -15,6 +15,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('gateway');
             $table->json('configuration');
             $table->boolean('is_enabled')->default(true);
+            $table->bigInteger('transaction_count')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

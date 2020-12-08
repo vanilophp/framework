@@ -26,6 +26,7 @@ use Vanilo\Payment\PaymentGateways;
  * @property string $gateway
  * @property array configuration
  * @property bool $is_enabled
+ * @property integer $transaction_count
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property null|Carbon $deleted_at
