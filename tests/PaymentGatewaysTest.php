@@ -25,6 +25,14 @@ class PaymentGatewaysTest extends TestCase
     }
 
     /** @test */
+    public function registered_gateway_instances_can_be_returned()
+    {
+        PaymentGateways::register('plastic', PlasticPayments::class);
+
+        $this->assertInstanceOf(PlasticPayments::class, PaymentGateways::make('plastic'));
+    }
+
+    /** @test */
     public function attempting_to_retrieve_an_unregistered_gateway_returns_null()
     {
         $this->assertNull(PaymentGateways::getClass('randomness'));

@@ -1,26 +1,29 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Contains the PlasticPayments class.
+ * Contains the NullGateway class.
  *
- * @copyright   Copyright (c) 2019 Attila Fulop
+ * @copyright   Copyright (c) 2020 Attila Fulop
  * @author      Attila Fulop
  * @license     MIT
- * @since       2019-12-26
+ * @since       2020-12-08
  *
  */
 
-namespace Vanilo\Payment\Tests\Examples;
+namespace Vanilo\Payment\Gateways;
 
 use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentRequest;
 use Vanilo\Payment\Requests\NullRequest;
 
-class PlasticPayments implements PaymentGateway
+class NullGateway implements PaymentGateway
 {
     public static function getName(): string
     {
-        return 'Plastic Payments';
+        return __('Null Payment Gateway');
     }
 
     public function createPaymentRequest(Payable $payable): PaymentRequest
@@ -30,6 +33,6 @@ class PlasticPayments implements PaymentGateway
 
     public function isOffline(): bool
     {
-        return false;
+        return true;
     }
 }

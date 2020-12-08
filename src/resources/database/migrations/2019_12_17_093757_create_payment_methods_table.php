@@ -13,9 +13,10 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('gateway');
-            $table->json('configuration')->nullable();
+            $table->json('configuration');
             $table->boolean('is_enabled')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
