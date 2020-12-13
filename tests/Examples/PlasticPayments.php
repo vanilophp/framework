@@ -11,6 +11,7 @@
 
 namespace Vanilo\Payment\Tests\Examples;
 
+use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentRequest;
@@ -23,8 +24,11 @@ class PlasticPayments implements PaymentGateway
         return 'Plastic Payments';
     }
 
-    public function createPaymentRequest(Payable $payable): PaymentRequest
-    {
+    public function createPaymentRequest(
+        Payable $payable,
+        Address $shippingAddress = null,
+        array $options = []
+    ): PaymentRequest {
         return new NullRequest($payable);
     }
 
@@ -32,4 +36,6 @@ class PlasticPayments implements PaymentGateway
     {
         return false;
     }
+
+
 }
