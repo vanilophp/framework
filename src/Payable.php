@@ -13,7 +13,7 @@ namespace Vanilo\Contracts;
 
 interface Payable
 {
-    public function getId(): string;
+    public function getPayableId(): string;
 
     public function getPayableType(): string;
 

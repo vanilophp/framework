@@ -6,6 +6,7 @@
 ###### 2020-XX-YY
 
 - Added PHP 8 support
+- Renamed `Payable::getId` to `Payable::getPayableId`
 
 ### 2.0.0
 ##### 2020-10-11

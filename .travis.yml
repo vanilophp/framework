@@ -7,23 +7,23 @@ cache:
 php:
   - '7.3'
   - '7.4'
-  - 'nightly'
+  - '8.0'
 
 env:
   - LARAVEL=6.0
   - LARAVEL=6.20
   - LARAVEL=7.0
-  - LARAVEL=7.29
+  - LARAVEL=7.30
   - LARAVEL=8.0
-  - LARAVEL=8.16
+  - LARAVEL=8.18
 
 matrix:
   exclude:
-    - php: 'nightly'
+    - php: '8.0'
       env: 'LARAVEL=6.0'
-    - php: 'nightly'
+    - php: '8.0'
       env: 'LARAVEL=7.0'
-    - php: 'nightly'
+    - php: '8.0'
       env: 'LARAVEL=8.0'
 
 script:
