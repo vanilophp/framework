@@ -7,6 +7,7 @@
 
 - Added PHP 8 support
 - Renamed `Payable::getId` to `Payable::getPayableId`
+- Changed `Payable::getBillpayer` to be nullable
 
 ### 2.0.0
 ##### 2020-10-11
