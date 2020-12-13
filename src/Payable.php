@@ -22,8 +22,4 @@ interface Payable
     public function getCurrency(): string;
 
     public function getBillpayer(): ?Billpayer;
-
-    public function needsShipping(): bool;
-
-    public function getShippable(): ?Shippable;
 }
