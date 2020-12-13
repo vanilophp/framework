@@ -44,9 +44,11 @@ use Vanilo\Framework\Http\Requests\UpdateProduct;
 use Vanilo\Framework\Http\Requests\UpdateTaxonomy;
 use Menu;
 use Vanilo\Framework\Models\Customer;
+use Vanilo\Framework\Models\Order;
 use Vanilo\Framework\Models\PaymentMethod;
 use Vanilo\Framework\Models\Product;
 use Vanilo\Framework\Models\Taxon;
+use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Product\Contracts\Product as ProductContract;
@@ -100,6 +102,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(CustomerContract::class, Customer::class, $registerRouteModels);
         $this->concord->registerModel(TaxonContract::class, Taxon::class, $registerRouteModels);
         $this->concord->registerModel(PaymentMethodContract::class, PaymentMethod::class, $registerRouteModels);
+        $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
 
         // This is ugly, but it does the job for v0.1
         Relation::morphMap([
