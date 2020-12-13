@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Gateways;
 
+use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentRequest;
@@ -26,7 +27,11 @@ class NullGateway implements PaymentGateway
         return __('Offline');
     }
 
-    public function createPaymentRequest(Payable $payable): PaymentRequest
+    public function createPaymentRequest(
+        Payable $payable,
+        Address $shippingAddress = null,
+        array $options = []
+    ): PaymentRequest
     {
         return new NullRequest($payable);
     }

@@ -31,4 +31,9 @@ class NullRequest implements PaymentRequest
     {
         return '';
     }
+
+    public function willRedirect(): bool
+    {
+        return false;
+    }
 }
