@@ -11,13 +11,18 @@
 
 namespace Vanilo\Payment\Contracts;
 
+use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Payable;
 
 interface PaymentGateway
 {
     public static function getName(): string;
 
-    public function createPaymentRequest(Payable $payable): PaymentRequest;
+    public function createPaymentRequest(
+        Payable $payable,
+        Address $shippingAddress = null,
+        array $options = []
+    ): PaymentRequest;
 
     public function isOffline(): bool;
 }

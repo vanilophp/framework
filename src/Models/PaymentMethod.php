@@ -12,6 +12,7 @@
 namespace Vanilo\Payment\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Vanilo\Payment\Contracts\PaymentGateway;
@@ -82,5 +83,15 @@ class PaymentMethod extends Model implements PaymentMethodContract
     public function getName(): string
     {
         return (string) $this->name;
+    }
+
+    public function scopeActives(Builder $query)
+    {
+        return $query->where('is_enabled', true);
+    }
+
+    public function scopeInActives(Builder $query)
+    {
+        return $query->where('is_enabled', false);
     }
 }
