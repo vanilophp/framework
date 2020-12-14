@@ -7,7 +7,7 @@
                 <div class="alert alert-danger">{{ $errors->first('images') }}</div>
             @endif
             @foreach($product->getMedia() as $media)
-                <div class="card">
+                <div class="card mb-2">
                     <div class="card-body p-0 d-flex align-items-center">
                         <img class="mr-3 w-25" src="{{ $media->getUrl('thumbnail') }}"
                              alt="{{ $media->name }}" title="{{ $media->name }}">
@@ -55,7 +55,7 @@
 
             @can('create media')
                 {!! Form::open(['route' => 'vanilo.media.store', 'enctype'=>'multipart/form-data', 'class' => 'card']) !!}
-                    <div class="card-body p-0 d-flex align-items-center mt-2">
+                    <div class="card-body p-0 d-flex align-items-center">
                         <div class="w-75 p-2">
                             {{ Form::hidden('for', 'product') }}
                             {{ Form::hidden('forId', $product->id) }}
