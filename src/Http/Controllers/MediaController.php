@@ -17,11 +17,13 @@ use Vanilo\Framework\Contracts\Requests\CreateMedia;
 
 class MediaController extends BaseController
 {
+    private const DEFAULT_COLLECTION_NAME = 'default';
+
     public function update(Media $medium)
     {
         // Unset primary on other images assigned to the model
         $model = $medium->model;
-        foreach ($model->media()->get()->fresh() as $mediaItem) {
+        foreach ($model->getMedia(self::DEFAULT_COLLECTION_NAME) as $mediaItem) {
             if ($medium->id !== $mediaItem->id) {
                 $mediaItem->setCustomProperty('isPrimary', false);
                 $mediaItem->save();
@@ -59,7 +61,7 @@ class MediaController extends BaseController
         $model = $request->getFor();
 
         $model->addMultipleMediaFromRequest(['images'])->each(function ($fileAdder) {
-            $fileAdder->toMediaCollection();
+            $fileAdder->toMediaCollection(self::DEFAULT_COLLECTION_NAME);
         });
 
         return back()->with('success', __('Images have been added successfully'));
