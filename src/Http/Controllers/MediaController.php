@@ -17,6 +17,25 @@ use Vanilo\Framework\Contracts\Requests\CreateMedia;
 
 class MediaController extends BaseController
 {
+    public function update(Media $medium)
+    {
+        // Unset primary on other images assigned to the model
+        $model = $medium->model;
+        foreach ($model->media()->get()->fresh() as $mediaItem) {
+            if ($medium->id !== $mediaItem->id) {
+                $mediaItem->setCustomProperty('isPrimary', false);
+                $mediaItem->save();
+            }
+        }
+
+        $medium->setCustomProperty('isPrimary', true);
+        $medium->save();
+
+        flash()->success(__('Primary image has been updated'));
+
+        return back();
+    }
+
     public function destroy(Media $medium)
     {
         try {

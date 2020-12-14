@@ -46,4 +46,11 @@ class Product extends BaseProduct implements Buyable, HasMedia
             }
         }
     }
+
+    public function getThumbnailUrl(): ?string
+    {
+        $media = $this->getFirstMedia('default', ['isPrimary' => true]);
+
+        return $media ? $media->getUrl('thumbnail') : $this->getFirstMediaUrl('default', 'thumbnail');
+    }
 }

@@ -7,6 +7,7 @@
 
 - Added PHP 8 support
 - Added Spatie Media Library v9 Support
+- Added Primary Image feature (products)
 - Fixed model registration to takes into account Concord's `register_route_models` setting
 - Switched CI from Travis to Github Actions
 

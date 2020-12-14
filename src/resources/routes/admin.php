@@ -15,7 +15,7 @@ Route::resource('taxonomy', 'TaxonomyController');
 Route::resource('product', 'ProductController');
 Route::resource('property', 'PropertyController');
 Route::resource('order', 'OrderController');
-Route::resource('media', 'MediaController')->only(['destroy', 'store']);
+Route::resource('media', 'MediaController')->only(['update', 'destroy', 'store']);
 Route::resource('payment-method', 'PaymentMethodController')
      ->parameters(['payment-method' => 'paymentMethod']);
 

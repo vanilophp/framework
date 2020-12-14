@@ -20,7 +20,7 @@
                                    target="_blank">{!! icon('link') !!}</a>
                             </div>
                         </div>
-                        <div class="w-25 p-2 b-l-1">
+                        <div class="w-25 pr-2 pl-0 b-l-1">
                             <div class="align-content-center text-center">
                                 @can('delete media')
                                     {!! Form::open(['route' => ['vanilo.media.destroy', $media], 'method' => 'DELETE', 'class' => "float-right"]) !!}
@@ -29,6 +29,22 @@
                                     </button>
                                     {!! Form::close() !!}
                                 @endcan
+
+                                    @can('edit media')
+                                        @unless($media->getCustomProperty('isPrimary'))
+                                            {!! Form::open(['route' => ['vanilo.media.update', $media], 'method' => 'PUT', 'class' => "float-right"]) !!}
+                                            <button class="btn btn-sm btn-outline-info mr-1" title="{{ __('Set as Primary Image') }}">
+                                                {!! icon('image') !!}
+                                            </button>
+                                            {!! Form::close() !!}
+                                        @else
+                                            <div class="float-right">
+                                                <button class="btn btn-sm btn-info mr-1" title="{{ __('Primary Image') }}" disabled>
+                                                    {!! icon('image') !!}
+                                                </button>
+                                            </div>
+                                        @endunless
+                                    @endcan
                             </div>
                         </div>
 
@@ -39,7 +55,7 @@
 
             @can('create media')
                 {!! Form::open(['route' => 'vanilo.media.store', 'enctype'=>'multipart/form-data', 'class' => 'card']) !!}
-                    <div class="card-body p-0 d-flex align-items-center">
+                    <div class="card-body p-0 d-flex align-items-center mt-2">
                         <div class="w-75 p-2">
                             {{ Form::hidden('for', 'product') }}
                             {{ Form::hidden('forId', $product->id) }}
