@@ -10,6 +10,7 @@
 - Added Primary Image feature (products)
 - Refactored image handling
 - Added images to taxonomies and taxons
+- Added option to define separate image conversions per entity type (product, taxonomy, taxon)
 - Added the `HasImages` interface - extracted it from Buyable
 - Added `Order` model that implements the `Payable`
 - Added Payment method CRUD
