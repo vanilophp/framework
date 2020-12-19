@@ -11,6 +11,7 @@
 
 namespace Vanilo\Support\Tests\Dummies;
 
+use Illuminate\Support\Collection;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\BuyableModel;
 
@@ -30,8 +31,23 @@ class HeyBuyMe implements Buyable
         return null;
     }
 
-    public function getImageUrl(): ?string
+    public function getImageUrl(string $variant = ''): ?string
     {
         return null;
+    }
+
+    public function imageCount(): int
+    {
+        return 0;
+    }
+
+    public function getThumbnailUrls(): Collection
+    {
+        return collect();
+    }
+
+    public function getImageUrls(string $variant = ''): Collection
+    {
+        return collect();
     }
 }

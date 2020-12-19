@@ -11,38 +11,37 @@
 
 namespace Vanilo\Support\Traits;
 
-/**
- * Buyable image interface compatibility for Buyable models without images
- */
+use Illuminate\Support\Collection;
+
 trait BuyableNoImage
 {
-    /**
-     * Returns whether the item has an image
-     *
-     * @return bool
-     */
     public function hasImage(): bool
     {
         return false;
     }
 
-    /**
-     * Returns the URL of the item's thumbnail image, or null if there's no image
-     *
-     * @return string|null
-     */
+    public function imageCount(): int
+    {
+        return 0;
+    }
+
     public function getThumbnailUrl(): ?string
     {
         return null;
     }
 
-    /**
-     * Returns the URL of the item's (main) image, or null if there's no image
-     *
-     * @return string|null
-     */
-    public function getImageUrl(): ?string
+    public function getThumbnailUrls(): Collection
+    {
+        return collect([]);
+    }
+
+    public function getImageUrl(string $variant = ''): ?string
     {
         return null;
+    }
+
+    public function getImageUrls(string $variant = ''): Collection
+    {
+        return collect([]);
     }
 }
