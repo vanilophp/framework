@@ -13,39 +13,13 @@ namespace Vanilo\Contracts;
 
 use Carbon\Carbon;
 
-interface Buyable
+interface Buyable extends HasImages
 {
-    /**
-     * Returns the id of the _thing_
-     *
-     * @return mixed
-     */
     public function getId();
 
-    /**
-     * Returns the name of the _thing_
-     */
     public function getName(): string;
 
-    /**
-     * Returns the price of the item
-     */
     public function getPrice(): float;
-
-    /**
-     * Returns whether the item has an image
-     */
-    public function hasImage(): bool;
-
-    /**
-     * Returns the URL of the item's thumbnail image, or null if there's no image
-     */
-    public function getThumbnailUrl(): ?string;
-
-    /**
-     * Returns the URL of the item's (main) image, or null if there's no image
-     */
-    public function getImageUrl(): ?string;
 
     public function addSale(Carbon $date, $units = 1): void;
 
