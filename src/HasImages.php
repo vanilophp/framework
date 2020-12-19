@@ -26,7 +26,7 @@ interface HasImages
 
     public function getThumbnailUrls(): Collection;
 
-    public function getImageUrl(string $variant = 'default'): ?string;
+    public function getImageUrl(string $variant = ''): ?string;
 
-    public function getImageUrls(string $variant = 'default'): Collection;
+    public function getImageUrls(string $variant = ''): Collection;
 }
