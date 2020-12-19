@@ -58,12 +58,12 @@
             @endcomponent
         </div>
 
-        <div class="col-sm-6 col-md-9 mb-3">
+        <div class="col-12 col-md-6 col-lg-8 col-xl-9 mb-3">
             @include('vanilo::product._show_categories')
             @include('vanilo::product._show_properties')
         </div>
 
-        <div class="col-sm-6 col-md-3 mb-3">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
             @include('vanilo::media._index', ['model' => $product])
         </div>
     </div>

@@ -17,7 +17,10 @@
         }
     </style>
 
-    <div class="card">
+<div class="row">
+
+    <div class="col-12 col-md-6 col-lg-8 col-xl-9">
+    <div class="card mb-4">
         <div class="card-body">
             <div class="card">
                 @include('vanilo::taxon._tree', ['taxons' => $taxonomy->rootLevelTaxons()])
@@ -31,6 +34,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="card">
         <div class="card-body">
@@ -53,5 +57,12 @@
             @endcan
         </div>
     </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        @include('vanilo::media._index', ['model' => $taxonomy])
+    </div>
+
+</div>
 
 @stop

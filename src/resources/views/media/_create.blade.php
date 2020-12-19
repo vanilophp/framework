@@ -15,8 +15,14 @@
                     </div>
                 </div>
             @endcan
-            @if ($errors->has('images'))
-                <div class="sinvalid-feedback">{{ $errors->first('images') }}</div>
+            @if ($errors->has('images.*'))
+                <div class="alert alert-danger mt-2">
+                    @foreach($errors->get('images.*') as $fileErrors)
+                        @foreach($fileErrors as $error)
+                            {{ $error }}<br>
+                        @endforeach
+                    @endforeach
+                </div>
             @endif
         </div>
     </div>

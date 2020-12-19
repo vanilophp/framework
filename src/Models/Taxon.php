@@ -14,13 +14,17 @@ namespace Vanilo\Framework\Models;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Models\Taxon as BaseTaxon;
+use Vanilo\Contracts\HasImages;
+use Vanilo\Framework\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
+use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 
-class Taxon extends BaseTaxon implements HasMedia
+class Taxon extends BaseTaxon implements HasMedia, HasImages
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, HasImagesFromMediaLibrary, LoadsMediaConversionsFromConfig;
 
     public function products(): MorphToMany
     {
@@ -57,5 +61,10 @@ class Taxon extends BaseTaxon implements HasMedia
     public function removeProduct(Product $product)
     {
         return $this->products()->detach($product);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->loadConversionsFromVaniloConfig();
     }
 }

@@ -18,9 +18,6 @@ use Vanilo\Framework\Contracts\Requests\CreateProduct as CreateProductContract;
 
 class CreateProduct extends FormRequest implements CreateProductContract
 {
-    /**
-     * @inheritDoc
-     */
     public function rules()
     {
         return [
@@ -34,11 +31,15 @@ class CreateProduct extends FormRequest implements CreateProductContract
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'stock' => $this->stock ?? 0,
+        ]);
     }
 }

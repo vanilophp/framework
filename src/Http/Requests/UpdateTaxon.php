@@ -16,9 +16,6 @@ use Vanilo\Framework\Contracts\Requests\UpdateTaxon as UpdateTaxonContract;
 
 class UpdateTaxon extends FormRequest implements UpdateTaxonContract
 {
-    /**
-     * @inheritDoc
-     */
     public function rules()
     {
         return [
@@ -28,9 +25,6 @@ class UpdateTaxon extends FormRequest implements UpdateTaxonContract
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function authorize()
     {
         return true;

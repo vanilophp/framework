@@ -17,11 +17,11 @@ use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Framework\Contracts\Requests\CreateTaxonomy;
 use Vanilo\Framework\Contracts\Requests\SyncModelTaxons;
 use Vanilo\Framework\Contracts\Requests\UpdateTaxonomy;
-use Vanilo\Framework\Traits\CreateMediaTrait;
+use Vanilo\Framework\Traits\CreatesMediaFromRequestImages;
 
 class TaxonomyController extends BaseController
 {
-    use CreateMediaTrait;
+    use CreatesMediaFromRequestImages;
 
     public function index()
     {
@@ -42,7 +42,7 @@ class TaxonomyController extends BaseController
         try {
             $taxonomy = TaxonomyProxy::create($request->except('images'));
             flash()->success(__(':name has been created', ['name' => $taxonomy->name]));
-            $this->createMedia($taxonomy);
+            $this->createMedia($taxonomy, $request);
         } catch (\Exception $e) {
             flash()->error(__('Error: :msg', ['msg' => $e->getMessage()]));
 

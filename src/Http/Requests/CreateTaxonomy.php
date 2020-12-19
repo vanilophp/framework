@@ -16,20 +16,16 @@ use Vanilo\Framework\Contracts\Requests\CreateTaxonomy as CreateTaxonomyContract
 
 class CreateTaxonomy extends FormRequest implements CreateTaxonomyContract
 {
-    /**
-     * @inheritDoc
-     */
     public function rules()
     {
         return [
             'name' => 'required|min:2|max:191',
-            'slug' => 'nullable|max:191'
+            'slug' => 'nullable|max:191',
+            'images'   => 'nullable',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function authorize()
     {
         return true;

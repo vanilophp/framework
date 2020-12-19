@@ -15,14 +15,10 @@ declare(strict_types=1);
 namespace Vanilo\Framework\Traits;
 
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 trait LoadsMediaConversionsFromConfig
 {
-    use InteractsWithMedia;
-
-    public function registerMediaConversions(Media $media = null): void
+    public function loadConversionsFromVaniloConfig(): void
     {
         $shortname = shorten(static::class);
 

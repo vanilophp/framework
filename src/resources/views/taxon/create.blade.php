@@ -7,8 +7,8 @@
 @stop
 
 @section('content')
-{!! Form::model($taxon, ['url' => route('vanilo.taxon.store', $taxonomy), 'autocomplete' => 'off', 'class' => 'row']) !!}
-    <div class="col-12 col-lg-8 col-xl-9">
+{!! Form::model($taxon, ['url' => route('vanilo.taxon.store', $taxonomy), 'autocomplete' => 'off', 'enctype'=>'multipart/form-data', 'class' => 'row']) !!}
+    <div class="col-12 col-lg-8 col-xl-9 mb-4">
         <div class="card card-accent-success">
             <div class="card-header">
                 {{ __(':category Details', ['category' => $taxonTypeName]) }}
@@ -24,5 +24,10 @@
             </div>
         </div>
     </div>
+
+    <div class="col-12 col-lg-4 col-xl-3">
+        @include('vanilo::media._create')
+    </div>
+
 {!! Form::close() !!}
 @stop

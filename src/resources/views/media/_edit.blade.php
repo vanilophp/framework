@@ -71,6 +71,17 @@
                             </div>
                         </div>
                     </div>
+
+                    @if ($errors->has('images.*'))
+                        <div class="alert alert-danger m-2">
+                            @foreach($errors->get('images.*') as $fileErrors)
+                                @foreach($fileErrors as $error)
+                                    {{ $error }}<br>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    @endif
+
                 {!! Form::close() !!}
             @endcan
         </div>

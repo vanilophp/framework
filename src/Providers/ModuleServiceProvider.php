@@ -18,6 +18,7 @@ use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
+use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Framework\Http\Requests\CreateChannel;
 use Vanilo\Framework\Http\Requests\CreateMedia;
 use Vanilo\Framework\Http\Requests\CreatePaymentMethod;
@@ -48,6 +49,7 @@ use Vanilo\Framework\Models\Order;
 use Vanilo\Framework\Models\PaymentMethod;
 use Vanilo\Framework\Models\Product;
 use Vanilo\Framework\Models\Taxon;
+use Vanilo\Framework\Models\Taxonomy;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
@@ -101,6 +103,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(AddressContract::class, Address::class, $registerRouteModels);
         $this->concord->registerModel(CustomerContract::class, Customer::class, $registerRouteModels);
         $this->concord->registerModel(TaxonContract::class, Taxon::class, $registerRouteModels);
+        $this->concord->registerModel(TaxonomyContract::class, Taxonomy::class, $registerRouteModels);
         $this->concord->registerModel(PaymentMethodContract::class, PaymentMethod::class, $registerRouteModels);
         $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
 

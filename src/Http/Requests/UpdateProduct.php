@@ -18,9 +18,6 @@ use Vanilo\Framework\Contracts\Requests\UpdateProduct as UpdateProductContract;
 
 class UpdateProduct extends FormRequest implements UpdateProductContract
 {
-    /**
-     * @inheritDoc
-     */
     public function rules()
     {
         return [
@@ -37,11 +34,15 @@ class UpdateProduct extends FormRequest implements UpdateProductContract
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'stock' => $this->stock ?? 0,
+        ]);
     }
 }
