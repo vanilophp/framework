@@ -19,6 +19,8 @@ use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
+use Vanilo\Category\Models\TaxonomyProxy;
+use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Framework\Http\Requests\CreateChannel;
 use Vanilo\Framework\Http\Requests\CreateMedia;
 use Vanilo\Framework\Http\Requests\CreatePaymentMethod;
@@ -52,6 +54,7 @@ use Vanilo\Framework\Models\Taxon;
 use Vanilo\Framework\Models\Taxonomy;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
+use Vanilo\Order\Models\OrderProxy;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
@@ -107,9 +110,11 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(PaymentMethodContract::class, PaymentMethod::class, $registerRouteModels);
         $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
 
-        // This is ugly, but it does the job for v0.1
         Relation::morphMap([
-            app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass()
+            app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass(),
+            'taxonomy' => TaxonomyProxy::modelClass(),
+            'taxon' => TaxonProxy::modelClass(),
+            'order' => OrderProxy::modelClass(),
         ]);
 
         // Use the framework's extended order factory
