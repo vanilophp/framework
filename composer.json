@@ -32,7 +32,8 @@
         }
     },
     "suggest": {
-        "spatie/laravel-medialibrary": "Allows associating images (or other files) with Eloquent models"
+        "spatie/laravel-medialibrary": "Allows associating images (or other files) with Eloquent models (^7.0|^8.0|^9.0)",
+        "konekt/concord": "Library to write Modular Applications (^1.5)"
     },
     "extra": {
         "branch-alias": {
