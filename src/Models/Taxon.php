@@ -12,12 +12,16 @@
 namespace Vanilo\Framework\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
 use Vanilo\Category\Models\Taxon as BaseTaxon;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 
-class Taxon extends BaseTaxon
+class Taxon extends BaseTaxon implements HasMedia
 {
+    use InteractsWithMedia;
+
     public function products(): MorphToMany
     {
         return $this->morphedByMany(

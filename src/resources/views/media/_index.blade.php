@@ -1,25 +1,25 @@
-
+<?php $media = $model->getMedia($collection ?? 'default') ?>
 <div class="card">
     <div class="card-body">
 
         <h6 class="card-title">
             {{ __('Images') }}
-            <span class="badge badge-pill badge-dark">{{ $product->getMedia()->count() }}</span>
+            <span class="badge badge-pill badge-dark">{{ $media->count() }}</span>
         </h6>
 
-        @if($product->hasImage())
+        @if($media->isNotEmpty())
             <div id="product-images" class="carousel slide" data-ride="carousel" data-interval="false">
 
             <ol class="carousel-indicators">
-                @foreach($product->getMedia() as $media)
+                @foreach($media as $medium)
                 <li data-target="#product-images" data-slide-to="{{ $loop->index }}"{{ $loop->first ? ' class="active"' : ''}}></li>
                 @endforeach
             </ol>
 
             <div class="carousel-inner">
-                @foreach($product->getMedia() as $media)
+                @foreach($media as $medium)
                     <div class="carousel-item{{ $loop->first ? ' active' : ''}}">
-                        <img class="d-block w-100" src="{{ $media->getUrl('thumbnail') }}" alt="{{ $media->name }}">
+                        <img class="d-block w-100" src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->name }}">
                     </div>
                 @endforeach
             </div>

@@ -1,29 +1,30 @@
+<?php $media = $model->getMedia($collection ?? 'default') ?>
     <div class="card card-accent-secondary">
         <div class="card-header">{{ __('Images') }}
-            <span class="badge badge-pill badge-info">{{ $product->getMedia()->count() }}</span>
+            <span class="badge badge-pill badge-info">{{ $media->isNotEmpty() }}</span>
         </div>
         <div class="card-body">
             @if($errors->has('images'))
                 <div class="alert alert-danger">{{ $errors->first('images') }}</div>
             @endif
-            @foreach($product->getMedia() as $media)
+            @foreach($media as $medium)
                 <div class="card mb-2">
                     <div class="card-body p-0 d-flex align-items-center">
-                        <img class="mr-3 w-25" src="{{ $media->getUrl('thumbnail') }}"
-                             alt="{{ $media->name }}" title="{{ $media->name }}">
+                        <img class="mr-3 w-25" src="{{ $medium->getUrl('thumbnail') }}"
+                             alt="{{ $medium->name }}" title="{{ $medium->name }}">
                         <div class="w-50">
                             <div class="text-sm-left text-info font-weight-bold">
-                                <span title="{{ $media->getPath() }}">{{ $media->human_readable_size }}</span>
+                                <span title="{{ $medium->getPath() }}">{{ $medium->human_readable_size }}</span>
                             </div>
                             <div class="text-muted text-uppercase font-weight-bold small">
-                                <a href="{{ $media->getUrl() }}" title="{{ $media->getUrl() }}"
+                                <a href="{{ $medium->getUrl() }}" title="{{ $medium->getUrl() }}"
                                    target="_blank">{!! icon('link') !!}</a>
                             </div>
                         </div>
                         <div class="w-25 pr-2 pl-0 b-l-1">
                             <div class="align-content-center text-center">
                                 @can('delete media')
-                                    {!! Form::open(['route' => ['vanilo.media.destroy', $media], 'method' => 'DELETE', 'class' => "float-right"]) !!}
+                                    {!! Form::open(['route' => ['vanilo.media.destroy', $medium], 'method' => 'DELETE', 'class' => "float-right"]) !!}
                                     <button class="btn btn-sm btn-outline-danger" title="{{ __('Delete image') }}">
                                         {!! icon('delete') !!}
                                     </button>
@@ -31,8 +32,8 @@
                                 @endcan
 
                                     @can('edit media')
-                                        @unless($media->getCustomProperty('isPrimary'))
-                                            {!! Form::open(['route' => ['vanilo.media.update', $media], 'method' => 'PUT', 'class' => "float-right"]) !!}
+                                        @unless($medium->getCustomProperty('isPrimary'))
+                                            {!! Form::open(['route' => ['vanilo.media.update', $medium], 'method' => 'PUT', 'class' => "float-right"]) !!}
                                             <button class="btn btn-sm btn-outline-info mr-1" title="{{ __('Set as Primary Image') }}">
                                                 {!! icon('image') !!}
                                             </button>
@@ -57,8 +58,8 @@
                 {!! Form::open(['route' => 'vanilo.media.store', 'enctype'=>'multipart/form-data', 'class' => 'card']) !!}
                     <div class="card-body p-0 d-flex align-items-center">
                         <div class="w-75 p-2">
-                            {{ Form::hidden('for', 'product') }}
-                            {{ Form::hidden('forId', $product->id) }}
+                            {{ Form::hidden('for', shorten(get_class($model))) }}
+                            {{ Form::hidden('forId', $model->id) }}
 
                             {{ Form::file('images[]', ['multiple', 'class' => 'form-control-file']) }}
                         </div>

@@ -64,7 +64,7 @@
         </div>
 
         <div class="col-sm-6 col-md-3 mb-3">
-            @include('vanilo::product._show_images')
+            @include('vanilo::media._index', ['model' => $product])
         </div>
     </div>
 
