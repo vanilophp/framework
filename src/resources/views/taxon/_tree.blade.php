@@ -8,7 +8,7 @@
                 &nbsp;{!! icon('>') !!}
             </a>
         @else
-            &nbsp;{!! icon('>', 'secondary') !!}
+            &nbsp;{!! icon('>', 'light') !!}
         @endif
 
         @can('edit taxons')
@@ -18,22 +18,25 @@
         @endcan
             &nbsp;<span class="badge badge-pill badge-light text-muted">{{ $taxon->products()->count() }}</span>
 
-        <div class="card-actionbar card-actionbar-show-on-hover">
+        <div class="d-inline card-actionbar-show-on-hover">
             @can('create taxons')
                 <a href="{{ route('vanilo.taxon.create', $taxonomy) }}?parent={{$taxon->id}}"
-                   class="btn btn-outline-success btn-xs float-right">{{ __('Add Child :category', ['category' => \Illuminate\Support\Str::singular($taxonomy->name)]) }}</a>
+                   class="btn btn-outline-success btn-xs"
+                   title="{{ __('Add Child :category', ['category' => \Illuminate\Support\Str::singular($taxonomy->name)]) }}">
+                    {!! icon('+') !!}
+                </a>
             @endcan
             @can('delete taxons')
                 {{ Form::open([
                             'url' => route('vanilo.taxon.destroy', [$taxonomy, $taxon]),
-                            'class' => 'form float-right',
+                            'class' => 'form',
                             'style' => 'display: inline-flex',
                             'data-confirmation-text' => __('Delete :name?', ['name' => $taxon->name]),
                             'method' => 'DELETE'
                         ])
                 }}
                 <button type="submit"
-                        class="btn btn-outline-danger btn-xs">{{ __('Delete') }}</button>
+                        class="btn btn-outline-danger btn-xs" title="{{ __('Delete') }}">{!! icon('delete') !!}</button>
                 {{ Form::close() }}
             @endcan
         </div>
