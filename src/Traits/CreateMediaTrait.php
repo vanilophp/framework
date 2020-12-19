@@ -2,6 +2,9 @@
 
 namespace Vanilo\Framework\Traits;
 
+/**
+ * @deprecated But won't be removed in v2. Use the built in MediaController instead.
+ */
 trait CreateMediaTrait
 {
     public function createMedia($model)

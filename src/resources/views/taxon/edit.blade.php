@@ -5,9 +5,9 @@
 @stop
 
 @section('content')
-{!! Form::model($taxon, ['url'  => route('vanilo.taxon.update', [$taxonomy, $taxon]), 'method' => 'PUT', 'class' => 'row']) !!}
-
+<div class="row">
     <div class="col-12 col-lg-8 col-xl-9">
+        {!! Form::model($taxon, ['url'  => route('vanilo.taxon.update', [$taxonomy, $taxon]), 'method' => 'PUT']) !!}
         <div class="card card-accent-secondary">
 
             <div class="card-header">
@@ -24,11 +24,11 @@
             </div>
 
         </div>
+        {!! Form::close() !!}
     </div>
 
     <div class="col-12 col-lg-4 col-xl-3">
         @include('vanilo::media._edit', ['model' => $taxon])
     </div>
-
-{!! Form::close() !!}
+</div>
 @stop
