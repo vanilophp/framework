@@ -127,7 +127,7 @@ class ProductController extends BaseController
             return redirect()->back()->withInput();
         }
 
-        return redirect(route('vanilo.product.index'));
+        return redirect(route('vanilo.product.show', $product));
     }
 
     /**

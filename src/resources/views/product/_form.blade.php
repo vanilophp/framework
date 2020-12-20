@@ -90,15 +90,14 @@
 
         @foreach($states as $key => $value)
             <label class="radio-inline" for="state_{{ $key }}">
-                {{ Form::radio('state', $key, $product->state == $value, ['id' => "state_$key"]) }}
+                {{ Form::radio('state', $key, $product->state->value() === $key, ['id' => "state_$key"]) }}
                 {{ $value }}
                 &nbsp;
             </label>
         @endforeach
 
         @if ($errors->has('state'))
-            <input hidden class="form-control is-invalid">
-            <div class="invalid-feedback">{{ $errors->first('state') }}</div>
+            <div class="alert alert-danger">{{ $errors->first('state') }}</div>
         @endif
     </div>
 </div>
