@@ -11,6 +11,7 @@
 
 namespace Vanilo\Payment\Contracts;
 
+use Illuminate\Http\Request;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Payable;
 
@@ -23,6 +24,8 @@ interface PaymentGateway
         Address $shippingAddress = null,
         array $options = []
     ): PaymentRequest;
+
+    public function processPaymentResponse(Request $request, array $options = []): PaymentResponse;
 
     public function isOffline(): bool;
 }

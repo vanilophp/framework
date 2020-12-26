@@ -14,11 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Gateways;
 
+use Illuminate\Http\Request;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentRequest;
+use Vanilo\Payment\Contracts\PaymentResponse;
 use Vanilo\Payment\Requests\NullRequest;
+use Vanilo\Payment\Responses\NullResponse;
 
 class NullGateway implements PaymentGateway
 {
@@ -34,6 +37,11 @@ class NullGateway implements PaymentGateway
     ): PaymentRequest
     {
         return new NullRequest($payable);
+    }
+
+    public function processPaymentResponse(Request $request, array $options = []): PaymentResponse
+    {
+        return new NullResponse();
     }
 
     public function isOffline(): bool
