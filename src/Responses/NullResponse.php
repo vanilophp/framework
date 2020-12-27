@@ -32,4 +32,9 @@ class NullResponse implements PaymentResponse
     {
         return null;
     }
+
+    public function getPayableId(): string
+    {
+        return '';
+    }
 }

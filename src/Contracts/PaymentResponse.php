@@ -21,4 +21,6 @@ interface PaymentResponse
     public function getMessage(): ?string;
 
     public function getTransactionId(): ?string;
+
+    public function getPayableId(): string;
 }
