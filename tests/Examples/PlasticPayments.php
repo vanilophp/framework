@@ -44,6 +44,4 @@ class PlasticPayments implements PaymentGateway
     {
         return false;
     }
-
-
 }
