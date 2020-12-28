@@ -13,9 +13,10 @@ class CreatePaymentsTable extends Migration
             $table->string('payable_type');
             $table->bigInteger('payable_id')->unsigned();
             $table->string('hash')->nullable();
-            $table->json('configuration')->nullable();
+            $table->json('data')->nullable();
             $table->char('currency', 3);
             $table->decimal('amount', 15, 4);
+            $table->decimal('amount_paid', 15, 4);
             $table->string('status', 35);
             $table->timestamps();
 
