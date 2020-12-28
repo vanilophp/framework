@@ -13,9 +13,17 @@ namespace Vanilo\Payment\Contracts;
 
 use Vanilo\Contracts\Payable;
 
-interface Payment extends Payable
+interface Payment
 {
+    public function getAmount(): float;
+
+    public function getCurrency(): string;
+
+    public function getAmountPaid(): float;
+
     public function getStatus(): PaymentStatus;
 
     public function getMethod(): PaymentMethod;
+
+    public function getPayable(): Payable;
 }

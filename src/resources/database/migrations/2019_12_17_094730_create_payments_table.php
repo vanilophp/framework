@@ -16,7 +16,7 @@ class CreatePaymentsTable extends Migration
             $table->json('data')->nullable();
             $table->char('currency', 3);
             $table->decimal('amount', 15, 4);
-            $table->decimal('amount_paid', 15, 4);
+            $table->decimal('amount_paid', 15, 4)->default(0);
             $table->string('status', 35);
             $table->timestamps();
 

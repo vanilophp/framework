@@ -11,6 +11,7 @@
 
 namespace Vanilo\Payment\Tests;
 
+use Artisan;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Payment\Providers\ModuleServiceProvider as PaymentModule;
@@ -58,7 +59,8 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
-        \Artisan::call('migrate', ['--force' => true]);
+        $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        Artisan::call('migrate', ['--force' => true]);
     }
 
     /**

@@ -18,6 +18,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "konekt/concord": "~1.5",
+        "konekt/enum": "^3.0",
         "vanilo/contracts": "^2.0"
     },
     "require-dev": {
