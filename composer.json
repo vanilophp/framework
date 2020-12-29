@@ -27,7 +27,7 @@
         "vanilo/product": "^2.1.x-dev",
         "vanilo/cart": "^2.1.x-dev",
         "vanilo/checkout": "^2.1.x-dev",
-        "vanilo/order": "^2.1.1",
+        "vanilo/order": "^2.2.x-dev",
         "vanilo/properties": "^2.1.x-dev",
         "vanilo/channel": "^2.1.x-dev",
         "vanilo/payment": "^2.1.x-dev"
