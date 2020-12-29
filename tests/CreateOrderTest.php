@@ -11,6 +11,7 @@
 
 namespace Vanilo\Order\Tests;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Konekt\Address\Models\Address;
 use Konekt\Address\Models\AddressType;
@@ -54,6 +55,20 @@ class CreateOrderTest extends TestCase
 
         Order::create([
             'status' => OrderStatus::defaultValue()
+        ]);
+    }
+
+    /** @test */
+    public function order_number_is_unique()
+    {
+        $this->expectException(QueryException::class);
+        $this->expectExceptionMessageMatches('/UNIQUE/i');
+
+        Order::create([
+            'number' => 'DUPLICATE'
+        ]);
+        Order::create([
+            'number' => 'DUPLICATE'
         ]);
     }
 

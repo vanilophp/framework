@@ -11,10 +11,13 @@
 
 namespace Vanilo\Order\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Konekt\User\Contracts\User;
 use Konekt\User\Models\UserProxy;
 use Traversable;
 use Vanilo\Contracts\Address;
@@ -22,6 +25,24 @@ use Vanilo\Contracts\Billpayer;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus;
 
+/**
+ * @property int $id
+ * @property string $number
+ * @property string $notes
+ * @property OrderStatus $status
+ * @property null|int $billpayer_id
+ * @property null|Billpayer $billpayer
+ * @property null|int $user_id
+ * @property null|User $user
+ * @property null|Address $shippingAddress
+ * @property null|int $shipping_address_id
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property null|Carbon $deleted_at
+ * @property OrderItem[]|Collection $items
+ * @method static Order create(array $attributes = [])
+ * @method static Builder open()
+ */
 class Order extends Model implements OrderContract
 {
     use CastsEnums;
@@ -31,6 +52,11 @@ class Order extends Model implements OrderContract
     protected $enums = [
         'status' => 'OrderStatusProxy@enumClass'
     ];
+
+    public static function findByNumber(string $orderNumber): ?OrderContract
+    {
+        return static::where('number', $orderNumber)->first();
+    }
 
     public function __construct(array $attributes = [])
     {

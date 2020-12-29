@@ -6,6 +6,8 @@
 ##### 2020-XX-YY
 
 - Added PHP 8 support
+- Added `Order::findByNumber()` method
+- Added unique index to `orders.number` field
 
 ### 2.1.1
 ##### 2020-10-28
