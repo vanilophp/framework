@@ -15,7 +15,7 @@ env:
   - LARAVEL=7.0
   - LARAVEL=7.30
   - LARAVEL=8.0
-  - LARAVEL=8.17
+  - LARAVEL=8.20
 
 matrix:
   exclude:
