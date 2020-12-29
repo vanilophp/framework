@@ -53,11 +53,6 @@ class Order extends Model implements OrderContract
         'status' => 'OrderStatusProxy@enumClass'
     ];
 
-    public static function findByNumber(string $orderNumber): ?OrderContract
-    {
-        return static::where('number', $orderNumber)->first();
-    }
-
     public function __construct(array $attributes = [])
     {
         // Set default status in case there was none given
@@ -68,9 +63,11 @@ class Order extends Model implements OrderContract
         parent::__construct($attributes);
     }
 
-    /**
-     * @inheritdoc
-     */
+    public static function findByNumber(string $orderNumber): ?OrderContract
+    {
+        return static::where('number', $orderNumber)->first();
+    }
+
     public function getNumber(): ?string
     {
         return $this->number;
@@ -86,17 +83,11 @@ class Order extends Model implements OrderContract
         return $this->belongsTo(UserProxy::modelClass());
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getBillpayer(): ?BillPayer
     {
         return $this->billpayer;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getShippingAddress(): ?Address
     {
         return $this->shippingAddress;
@@ -132,10 +123,6 @@ class Order extends Model implements OrderContract
         return $query->whereIn('status', OrderStatusProxy::getOpenStatuses());
     }
 
-    /**
-     * Sets the default order status in raw attributes
-     *
-     */
     protected function setDefaultOrderStatus()
     {
         $this->setRawAttributes(
