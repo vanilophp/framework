@@ -26,11 +26,11 @@ env:
 matrix:
   exclude:
     - php: '8.0'
-      env: 'LARAVEL=6.0'
+      env: 'LARAVEL=6.0 TEST_DB_ENGINE=sqlite'
     - php: '8.0'
-      env: 'LARAVEL=7.0'
+      env: 'LARAVEL=7.0 TEST_DB_ENGINE=sqlite'
     - php: '8.0'
-      env: 'LARAVEL=8.0'
+      env: 'LARAVEL=8.0 TEST_DB_ENGINE=sqlite'
 
 script:
   - vendor/bin/phpunit --testdox
