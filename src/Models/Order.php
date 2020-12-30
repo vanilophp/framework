@@ -29,6 +29,11 @@ class Order extends BaseOrder implements Payable
         return 'order';
     }
 
+    public function getTitle(): string
+    {
+        return $this->getNumber();
+    }
+
     public function getAmount(): float
     {
         return $this->total();
