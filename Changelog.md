@@ -8,6 +8,8 @@
 - Added PHP 8 support
 - Added `HasImagesFromMediaLibrary` trait for supporting the new `HasImages` interface
 - Deprecated the `BuyableImageSpatieV8` and `BuyableImageSpatieV7` traits
+- Added generic NanoId generator utility class
+- Changed CI from Travis to Github
 
 ### 2.0.1
 ##### 2020-10-28
