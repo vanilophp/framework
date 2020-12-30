@@ -32,6 +32,11 @@ class Order extends Model implements Payable
         return self::class;
     }
 
+    public function getTitle(): string
+    {
+        return sprintf('Order #%d | %f %s', $this->id, $this->total, $this->getCurrency());
+    }
+
     public function getAmount(): float
     {
         return $this->total;
