@@ -80,10 +80,6 @@ class TimeHashTest extends TestCase
      */
     public function number_length_is_18_if_high_variance_is_enabled()
     {
-        if (7 === PHP_MAJOR_VERSION && 3 === PHP_MINOR_VERSION) {
-            $this->markTestSkipped('Fails with PHP 7.3 in travis; Disabling until migrated to Github');
-        }
-
         $this->generator->setHighVariance(true);
 
         for ($i = 0; $i < 100; $i++) {
