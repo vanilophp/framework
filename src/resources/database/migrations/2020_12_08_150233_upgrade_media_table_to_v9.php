@@ -9,7 +9,7 @@ class UpgradeMediaTableToV9 extends Migration
     public function up()
     {
         Schema::table('media', function (Blueprint $table) {
-            $table->json('generated_conversions')->default('{}');
+            $table->json('generated_conversions');
             $table->unique('uuid', 'ix_unique_uuid');
         });
     }
