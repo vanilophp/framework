@@ -9,6 +9,7 @@
 - Added the `HasImages` interface
 - Changed the `Buyable` interface: image related methods extracted and moved to `HasImages` which it extends
 - Renamed `Payable::getId` to `Payable::getPayableId`
+- Added `getTitle()` method to Payable
 - Changed `Payable::getBillpayer` to be nullable
 - Removed `Payable::needsShipping` and `Payable::getShippable` method signatures
 

@@ -22,4 +22,7 @@ interface Payable
     public function getCurrency(): string;
 
     public function getBillpayer(): ?Billpayer;
+
+    /** The human readable representation, eg.: "Order no. ABC-123" */
+    public function getTitle(): string;
 }
