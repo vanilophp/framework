@@ -11,8 +11,6 @@
 
 namespace Vanilo\Support\Traits;
 
-use Illuminate\Support\Collection;
-
 /**
  * @deprecated use HasImagesFromMediaLibrary instead
  */

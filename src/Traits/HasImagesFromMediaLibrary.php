@@ -52,7 +52,7 @@ trait HasImagesFromMediaLibrary
 
     public function getImageUrls(string $variant = ''): Collection
     {
-        return $this->getMedia($this->mediaCollectionName)->map(function($medium) use ($variant) {
+        return $this->getMedia($this->mediaCollectionName)->map(function ($medium) use ($variant) {
             return $medium->getUrl($variant);
         });
     }
