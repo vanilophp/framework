@@ -9,7 +9,12 @@ class UpgradeMediaTableToV9 extends Migration
     public function up()
     {
         Schema::table('media', function (Blueprint $table) {
-            $table->json('generated_conversions');
+            if ($this->isSqlite()) {
+                $table->json('generated_conversions')->default('{}');
+            } else {
+                $table->json('generated_conversions');
+            }
+
             $table->unique('uuid', 'ix_unique_uuid');
         });
     }
@@ -20,5 +25,14 @@ class UpgradeMediaTableToV9 extends Migration
             $table->dropColumn('generated_conversions');
             $table->dropUnique('ix_unique_uuid');
         });
+    }
+
+    private function isSqlite(): bool
+    {
+        return 'sqlite' === Schema::connection($this->getConnection())
+            ->getConnection()
+            ->getPdo()
+            ->getAttribute(PDO::ATTR_DRIVER_NAME)
+        ;
     }
 }

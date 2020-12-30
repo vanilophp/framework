@@ -17,6 +17,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "ext-json": "*",
+        "ext-pdo": "*",
         "laravel/framework": "^6.18|^7.0|^8.0",
         "konekt/appshell": "^2.0",
         "konekt/concord": "^1.10",
