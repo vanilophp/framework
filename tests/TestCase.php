@@ -68,14 +68,22 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
+        $engine = env('TEST_DB_ENGINE', 'sqlite');
         $app['path.lang'] = __DIR__ . '/lang';
-
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
+        $app['config']->set('database.default', $engine);
+        $app['config']->set('database.connections.' . $engine, [
+            'driver'   => $engine,
+            'database' => 'sqlite' == $engine ? ':memory:' : 'vanilo_test',
             'prefix'   => '',
+            'host'     => env('TEST_DB_HOST', '127.0.0.1'),
+            'username' => env('TEST_DB_USERNAME', 'pgsql' === $engine ? 'postgres' : 'root'),
+            'password' => env('TEST_DB_PASSWORD', ''),
+            'port'     => env('TEST_DB_PORT'),
         ]);
+
+        if ('pgsql' === $engine) {
+            $app['config']->set("database.connections.{$engine}.charset", 'utf8');
+        }
     }
 
     /**
@@ -85,12 +93,8 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
-        $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email');
-        });
-
-        \Artisan::call('migrate', ['--force' => true]);
+        $this->loadLaravelMigrations();
+        $this->artisan('migrate', ['--force' => true]);
     }
 
     /**
