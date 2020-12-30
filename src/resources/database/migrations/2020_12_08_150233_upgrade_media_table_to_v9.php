@@ -12,7 +12,7 @@ class UpgradeMediaTableToV9 extends Migration
             if ($this->isSqlite()) {
                 $table->json('generated_conversions')->default('{}');
             } else {
-                $table->json('generated_conversions');
+                $table->json('generated_conversions')->nullable();
             }
 
             $table->unique('uuid', 'ix_unique_uuid');
