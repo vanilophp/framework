@@ -22,5 +22,7 @@ interface PaymentResponse
 
     public function getTransactionId(): ?string;
 
-    public function getPayableId(): string;
+    public function getAmountPaid(): ?float;
+
+    public function getPaymentId(): string;
 }

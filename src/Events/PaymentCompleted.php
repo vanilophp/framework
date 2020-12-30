@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the PaymentDeclined class.
+ * Contains the PaymentCompleted class.
  *
  * @copyright   Copyright (c) 2019 Attila Fulop
  * @author      Attila Fulop
@@ -11,6 +11,6 @@
 
 namespace Vanilo\Payment\Events;
 
-class PaymentDeclined extends BasePaymentEvent
+class PaymentCompleted extends BasePaymentEvent
 {
 }

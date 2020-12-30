@@ -13,7 +13,7 @@ namespace Vanilo\Payment\Tests\Examples;
 
 use Illuminate\Http\Request;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\Payable;
+use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentRequest;
 use Vanilo\Payment\Contracts\PaymentResponse;
@@ -28,11 +28,11 @@ class PlasticPayments implements PaymentGateway
     }
 
     public function createPaymentRequest(
-        Payable $payable,
+        Payment $payment,
         Address $shippingAddress = null,
         array $options = []
     ): PaymentRequest {
-        return new NullRequest($payable);
+        return new NullRequest($payment);
     }
 
     public function processPaymentResponse(Request $request, array $options = []): PaymentResponse

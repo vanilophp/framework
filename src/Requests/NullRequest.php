@@ -15,16 +15,17 @@ declare(strict_types=1);
 namespace Vanilo\Payment\Requests;
 
 use Vanilo\Contracts\Payable;
+use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentRequest;
 
 class NullRequest implements PaymentRequest
 {
-    /** @var Payable */
-    private $payable;
+    /** @var Payment */
+    private $payment;
 
-    public function __construct(Payable $payable)
+    public function __construct(Payment $payment)
     {
-        $this->payable = $payable;
+        $this->payment = $payment;
     }
 
     public function getHtmlSnippet(array $options = []): ?string

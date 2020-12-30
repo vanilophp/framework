@@ -13,14 +13,13 @@ namespace Vanilo\Payment\Contracts;
 
 use Illuminate\Http\Request;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\Payable;
 
 interface PaymentGateway
 {
     public static function getName(): string;
 
     public function createPaymentRequest(
-        Payable $payable,
+        Payment $payment,
         Address $shippingAddress = null,
         array $options = []
     ): PaymentRequest;
