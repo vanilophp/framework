@@ -13,8 +13,9 @@ namespace Vanilo\Order\Generators;
 
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderNumberGenerator;
+use Vanilo\Support\Generators\NanoIdGenerator as BaseNanoIdGenerator;
 
-final class NanoIdGenerator implements OrderNumberGenerator
+final class NanoIdGenerator extends BaseNanoIdGenerator implements OrderNumberGenerator
 {
     private const ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -24,37 +25,19 @@ final class NanoIdGenerator implements OrderNumberGenerator
 
     public function __construct(int $size = null, string $alphabet = null)
     {
-        $this->alphabet = $alphabet ?? $this->config('alphabet', self::ALPHABET);
-        $this->size = $size ?? $this->config('size', $this->size);
+        parent::__construct(
+            $size ?? $this->config('size', $this->size),
+            $alphabet ?? $this->config('alphabet', self::ALPHABET)
+        );
     }
 
     public function generateNumber(Order $order = null): string
     {
-        $len = strlen($this->alphabet);
-        $mask = (2 << log($len - 1) / M_LN2) - 1;
-        $step = (int) ceil(1.6 * $mask * $this->size / $len);
-        $id = '';
-        while (true) {
-            $bytes = $this->random($step);
-            for ($i = 1; $i <= $step; $i++) {
-                $byte = $bytes[$i] & $mask;
-                if (isset($this->alphabet[$byte])) {
-                    $id .= $this->alphabet[$byte];
-                    if (strlen($id) === $this->size) {
-                        return $id;
-                    }
-                }
-            }
-        }
+        return parent::generate();
     }
 
     private function config(string $key, $default = null)
     {
         return config('vanilo.order.number.nano_id.' . $key, $default);
-    }
-
-    private function random($size)
-    {
-        return unpack('C*', \random_bytes($size));
     }
 }

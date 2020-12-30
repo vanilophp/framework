@@ -1,0 +1,70 @@
+name: tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        php: ['7.3', '7.4', '8.0']
+        laravel: ['6.0', '6.20', '7.0', '7.30', '8.0', '8.20']
+        exclude:
+          - php: '8.0'
+            laravel: '6.0'
+          - php: '8.0'
+            laravel: '7.0'
+          - php: '8.0'
+            laravel: '8.0'
+    name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Installing PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, json, sqlite3
+          tools: composer:v2
+      - name: Lock Laravel Version
+        run: composer require "illuminate/support:${{ matrix.laravel }}.*" --no-update -v && composer require "illuminate/console:${{ matrix.laravel }}.*" --no-update -v
+      - name: Composer Install
+        run: composer install --prefer-dist --no-progress --no-interaction
+      - name: Create SQLite Database
+        run: mkdir -p database && touch database/database.sqlite
+      - name: Run Tests [sqlite]
+        run: php vendor/bin/phpunit --testdox
+        env:
+          TEST_DB_ENGINE: sqlite
+      - name: Run Tests [postgres]
+        run: php vendor/bin/phpunit --testdox
+        env:
+          TEST_DB_ENGINE: pgsql
+          TEST_DB_PORT: ${{ job.services.postgres.ports[5432] }}
+          TEST_DB_PASSWORD: postgres
+      - name: Run Tests [mysql]
+        run: php vendor/bin/phpunit --testdox
+        env:
+          TEST_DB_ENGINE: mysql
+          TEST_DB_PORT: ${{ job.services.mysql.ports[3306] }}
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: user_test
+        ports:
+          - 3306
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: user_test
+        ports:
+          - 5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5

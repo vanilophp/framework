@@ -8,6 +8,9 @@
 - Added PHP 8 support
 - Added `Order::findByNumber()` method
 - Added unique index to `orders.number` field
+- Changed the internal implementation of the nanoid order number generator to utilize the generic
+  nanoid generator from the support module
+- Changed CI from Travis to Github
 
 ### 2.1.1
 ##### 2020-10-28
