@@ -68,8 +68,9 @@ class TimeHashTest extends TestCase
         for ($k = 0; $k < 10; $k++) {
             for ($i = 0; $i < 10; $i++) {
                 $numbers[] = $this->generator->generateNumber();
+                usleep(10000); //0.01s
             }
-            usleep(30000); //0.03s
+            usleep(10000); //0.01s
         }
 
         $this->assertEquals(count($numbers), count(array_unique($numbers)));
