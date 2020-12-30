@@ -14,8 +14,16 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Events;
 
+use Vanilo\Payment\Contracts\Payment;
+
 class PaymentPartiallyReceived extends BasePaymentEvent
 {
     /** @var float */
     public $amountPaid;
+
+    public function __construct(Payment $payment, float $amountPaid)
+    {
+        parent::__construct($payment);
+        $this->amountPaid = $amountPaid;
+    }
 }

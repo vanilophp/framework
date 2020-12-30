@@ -14,9 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Events;
 
+use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentEvent;
 
 class BasePaymentEvent implements PaymentEvent
 {
     use HasPayment;
+
+    public function __construct(Payment $payment)
+    {
+        $this->payment = $payment;
+    }
 }

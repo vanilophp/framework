@@ -17,6 +17,7 @@ namespace Vanilo\Payment\Factories;
 use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentMethod;
+use Vanilo\Payment\Events\PaymentCreated;
 use Vanilo\Payment\Models\PaymentProxy;
 
 class PaymentFactory
@@ -26,7 +27,7 @@ class PaymentFactory
         PaymentMethod $paymentMethod,
         array $extraData = []
     ): Payment {
-        return PaymentProxy::create([
+        $payment = PaymentProxy::create([
             'amount' => $payable->getAmount(),
             'currency' => $payable->getCurrency(),
             'payable_type' => $payable->getPayableType(),
@@ -34,5 +35,9 @@ class PaymentFactory
             'payment_method_id' => $paymentMethod->id,
             'data' => $extraData
         ]);
+
+        event(new PaymentCreated($payment));
+
+        return $payment;
     }
 }
