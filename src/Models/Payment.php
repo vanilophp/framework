@@ -23,6 +23,7 @@ use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\Payment as PaymentContract;
 use Vanilo\Payment\Contracts\PaymentMethod;
 use Vanilo\Payment\Contracts\PaymentStatus;
+use Vanilo\Support\Generators\NanoIdGenerator;
 
 /**
  * @property int $id
@@ -59,12 +60,31 @@ class Payment extends Model implements PaymentContract
 
     public function __construct(array $attributes = [])
     {
-        // Set default status in case there was none given
         if (!isset($attributes['status'])) {
             $this->setDefaultPaymentStatus();
         }
 
+        if (!isset($attributes['hash'])) {
+            $this->generateHash();
+        }
+
         parent::__construct($attributes);
+    }
+
+    /* An alias of findByHash to comply with the Payment interface */
+    public static function findByPaymentId(string $paymentId): ?Payment
+    {
+        return static::findByHash($paymentId);
+    }
+
+    public static function findByHash(string $hash): ?Payment
+    {
+        return static::where('hash', $hash)->first();
+    }
+
+    public function getPaymentId(): string
+    {
+        return $this->hash;
     }
 
     public function getAmount(): float
@@ -114,6 +134,19 @@ class Payment extends Model implements PaymentContract
                 $this->attributes,
                 [
                     'status' => PaymentStatusProxy::defaultValue()
+                ]
+            ),
+            true
+        );
+    }
+
+    private function generateHash()
+    {
+        $this->setRawAttributes(
+            array_merge(
+                $this->attributes,
+                [
+                    'hash' => (new NanoIdGenerator())->generate()
                 ]
             ),
             true

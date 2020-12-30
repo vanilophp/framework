@@ -15,6 +15,8 @@ use Vanilo\Contracts\Payable;
 
 interface Payment
 {
+    public function getPaymentId(): string;
+
     public function getAmount(): float;
 
     public function getCurrency(): string;
