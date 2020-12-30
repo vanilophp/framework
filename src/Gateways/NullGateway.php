@@ -34,8 +34,7 @@ class NullGateway implements PaymentGateway
         Payment $payment,
         Address $shippingAddress = null,
         array $options = []
-    ): PaymentRequest
-    {
+    ): PaymentRequest {
         return new NullRequest($payment);
     }
 

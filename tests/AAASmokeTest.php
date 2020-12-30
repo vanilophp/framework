@@ -13,11 +13,9 @@ namespace Vanilo\Payment\Tests;
 
 class AAASmokeTest extends TestCase
 {
-    const MIN_PHP_VERSION = '7.2.0';
+    private const MIN_PHP_VERSION = '7.3.0';
 
-    /**
-     * @test
-     */
+    /** @test */
     public function smoke()
     {
         $this->assertTrue(true);
