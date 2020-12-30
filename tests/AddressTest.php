@@ -28,17 +28,6 @@ class AddressTest extends TestCase
     /** @var Province */
     private $newYork;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->artisan('db:seed', ['--class' => Countries::class]);
-        $this->artisan('db:seed', ['--class' => StatesOfUsa::class]);
-
-        $this->usa     = Country::find('US');
-        $this->newYork = Province::findByCountryAndCode($this->usa, 'NY');
-    }
-
     /** @test */
     public function address_model_implements_the_vanilo_address_contract()
     {
@@ -88,5 +77,24 @@ class AddressTest extends TestCase
         $address = $this->app->make(\Konekt\Address\Contracts\Address::class);
 
         $this->assertInstanceOf(Address::class, $address);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed', ['--class' => Countries::class]);
+        $this->artisan('db:seed', ['--class' => StatesOfUsa::class]);
+
+        $this->usa     = Country::find('US');
+        $this->newYork = Province::findByCountryAndCode($this->usa, 'NY');
+    }
+
+    protected function tearDown(): void
+    {
+        Province::query()->delete();
+        Country::query()->delete();
+
+        parent::tearDown();
     }
 }

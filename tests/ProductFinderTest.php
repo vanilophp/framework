@@ -429,4 +429,10 @@ class ProductFinderTest extends TestCase
         $this->assertInstanceOf(LengthAwarePaginator::class, $results);
         $this->assertCount(8, $results->items());
     }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Product::query()->delete();
+    }
 }
