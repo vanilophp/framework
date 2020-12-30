@@ -21,7 +21,7 @@ class Order extends BaseOrder implements Payable
 {
     public function getPayableId(): string
     {
-        return $this->getNumber();
+        return (string) $this->id;
     }
 
     public function getPayableType(): string
