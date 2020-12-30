@@ -265,6 +265,32 @@ class PaymentTest extends TestCase
         $this->assertNull(Payment::findByPaymentId('I do not exist'));
     }
 
+    /** @test */
+    public function extra_data_is_an_array()
+    {
+        $payment = new Payment();
+
+        $this->assertEmpty($payment->getExtraData());
+        $this->assertIsArray($payment->getExtraData());
+    }
+
+    /** @test */
+    public function extra_data_can_be_set_as_array()
+    {
+        $payment = Payment::create([
+            'amount' => 27,
+            'currency' => 'EUR',
+            'payable_type' => Order::class,
+            'payable_id' => 1,
+            'payment_method_id' => $this->method->id,
+            'data' => ['meh' => 'moh']
+        ]);
+
+        $payment = $payment->fresh();
+        $this->assertIsArray($payment->getExtraData());
+        $this->assertEquals('moh', $payment->data['meh']);
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

@@ -28,4 +28,6 @@ interface Payment
     public function getMethod(): PaymentMethod;
 
     public function getPayable(): Payable;
+
+    public function getExtraData(): array;
 }

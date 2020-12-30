@@ -54,6 +54,10 @@ class Payment extends Model implements PaymentContract
         'status' => 'PaymentStatusProxy@enumClass',
     ];
 
+    protected $casts = [
+        'data' => 'json'
+    ];
+
     protected $attributes = [
         'amount_paid' => 0,
     ];
@@ -69,6 +73,17 @@ class Payment extends Model implements PaymentContract
         }
 
         parent::__construct($attributes);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            if (null === $model->data) {
+                $model->data = [];
+            }
+        });
     }
 
     /* An alias of findByHash to comply with the Payment interface */
@@ -115,6 +130,11 @@ class Payment extends Model implements PaymentContract
     public function getPayable(): Payable
     {
         return $this->payable;
+    }
+
+    public function getExtraData(): array
+    {
+        return $this->data ?? [];
     }
 
     public function method(): BelongsTo
