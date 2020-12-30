@@ -92,6 +92,7 @@ class AddressTest extends TestCase
 
     protected function tearDown(): void
     {
+        Address::query()->delete();
         Province::query()->delete();
         Country::query()->delete();
 
