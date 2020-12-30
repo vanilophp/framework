@@ -16,6 +16,7 @@ namespace Vanilo\Framework\Models;
 
 use Vanilo\Contracts\Payable;
 use Vanilo\Order\Models\Order as BaseOrder;
+use Vanilo\Payment\Models\PaymentProxy;
 
 class Order extends BaseOrder implements Payable
 {
@@ -42,5 +43,10 @@ class Order extends BaseOrder implements Payable
     public function getCurrency(): string
     {
         return config('vanilo.framework.currency.code');
+    }
+
+    public function payments()
+    {
+        return $this->morphMany(PaymentProxy::modelClass(), 'payable');
     }
 }

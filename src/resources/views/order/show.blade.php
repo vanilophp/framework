@@ -15,7 +15,16 @@
         @include('vanilo::order.show._details')
     </div>
 
-    @include('vanilo::order.show._items')
+    <div class="row">
+
+        <div class="col-12 col-md-8">
+            @include('vanilo::order.show._items')
+        </div>
+
+        <div class="col-12 col-md-4">
+            @include('vanilo::order.show._payments')
+        </div>
+    </div>
 
     @include('vanilo::order.show._actions')
 
