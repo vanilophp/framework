@@ -12,6 +12,8 @@ jobs:
         laravel: ['6.20', '7.0', '7.30', '8.0', '8.20']
         exclude:
           - php: '8.0'
+            laravel: '6.20'
+          - php: '8.0'
             laravel: '7.0'
           - php: '8.0'
             laravel: '8.0'
