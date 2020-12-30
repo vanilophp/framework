@@ -9,14 +9,12 @@ jobs:
     strategy:
       matrix:
         php: ['7.3', '7.4', '8.0']
-        laravel: ['6.20', '7.0', '7.30', '8.0', '8.20']
+        laravel: ['6.0', '6.20', '7.0', '7.30', '8.0', '8.20']
         exclude:
           - php: '8.0'
-            laravel: '6.20'
+            laravel: '6.0'
           - php: '8.0'
             laravel: '7.0'
-          - php: '8.0'
-            laravel: '7.30'
           - php: '8.0'
             laravel: '8.0'
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
