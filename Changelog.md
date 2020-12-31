@@ -2,14 +2,16 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.1.0
+##### 2020-12-31
 
 - Added PHP 8 support
 - Added `Taxon::findOneByParentsAndSlug` method
 - Added `Taxonomy::findOneBySlug` method
 - Added `taxa` (and `taxons` alias) relationship to `Taxonomy` model
 - Changed CI from Travis to Github
+
+**Known Issue**: - The `Taxon::findOneByParentsAndSlug()` method is not working with Laravel 6 (only with Laravel 7 & 8)
 
 ### 2.0.0
 ##### 2020-10-11
