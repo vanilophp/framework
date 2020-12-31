@@ -19,8 +19,8 @@
         "php": "^7.3|^8.0",
         "konekt/concord": "~1.5",
         "konekt/enum": "^3.0",
-        "vanilo/contracts": "2.1.x-dev",
-        "vanilo/support": "2.1.x-dev"
+        "vanilo/contracts": "^2.1",
+        "vanilo/support": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "8 - 9",
