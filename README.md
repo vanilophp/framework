@@ -12,10 +12,10 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 
 ## Current Version
 
-#### 2.0
+#### 2.1
 
-The latest Vanilo version is **2.0.0** and was released on Oct 31, 2020.
-It supports Laravel 6.x - 8.x versions
+The latest Vanilo version is **2.1** and was released on Dec 31, 2020. (Yeah, just before the party 🥳)
+It supports Laravel 6.x - 8.x versions and PHP 7.4 - 8.0 (Individual modules support PHP 7.3)
 
 Refer to the [Roadmap](https://vanilo.io/docs/master/roadmap) for upcoming versions.
 

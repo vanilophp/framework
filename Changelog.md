@@ -2,12 +2,13 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.1.0
+##### 2020-12-31
 
 - Added PHP 8 support
 - Added Spatie Media Library v9 Support
 - Added Primary Image feature (products)
+- Upgrade to AppShell 2.1
 - Refactored image handling
 - Added images to taxonomies and taxons
 - Added option to define separate image conversions per entity type (product, taxonomy, taxon)
