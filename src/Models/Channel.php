@@ -33,6 +33,4 @@ class Channel extends Model implements ChannelContract
     {
         return $this->slug;
     }
-
-
 }
