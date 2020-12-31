@@ -1,6 +1,6 @@
 # Vanilo Channel Module
 
-[![Travis](https://img.shields.io/travis/vanilophp/channel.svg?style=flat-square)](https://travis-ci.org/vanilophp/channel)
+[![Tests](https://img.shields.io/github/workflow/status/vanilophp/channel/tests/master?style=flat-square)](https://github.com/vanilophp/channel/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/channel.svg?style=flat-square)](https://packagist.org/packages/vanilo/channel)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/channel.svg?style=flat-square)](https://packagist.org/packages/vanilo/channel)
 [![StyleCI](https://styleci.io/repos/199554876/shield?branch=master)](https://styleci.io/repos/199554876)
