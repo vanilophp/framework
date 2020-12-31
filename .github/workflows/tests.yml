@@ -1,0 +1,35 @@
+name: tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        php: ['7.3', '7.4', '8.0']
+        laravel: ['6.0', '6.20', '7.0', '7.30', '8.0', '8.20']
+        exclude:
+          - php: '8.0'
+            laravel: '6.0'
+          - php: '8.0'
+            laravel: '7.0'
+          - php: '8.0'
+            laravel: '8.0'
+    name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Installing PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, json, sqlite3
+          tools: composer:v2
+      - name: Lock Laravel Version
+        run: composer require "illuminate/support:${{ matrix.laravel }}.*" --no-update -v && composer require "illuminate/console:${{ matrix.laravel }}.*" --no-update -v
+      - name: Composer Install
+        run: composer install --prefer-dist --no-progress --no-interaction
+      - name: Run Tests
+        run: php vendor/bin/phpunit --testdox

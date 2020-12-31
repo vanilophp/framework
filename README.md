@@ -1,6 +1,6 @@
 # Vanilo Properties Module
 
-[![Travis](https://img.shields.io/travis/vanilophp/properties.svg?style=flat-square)](https://travis-ci.org/vanilophp/properties)
+[![Tests](https://img.shields.io/github/workflow/status/vanilophp/properties/tests/master?style=flat-square)](https://github.com/vanilophp/properties/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/properties.svg?style=flat-square)](https://packagist.org/packages/vanilo/properties)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/properties.svg?style=flat-square)](https://packagist.org/packages/vanilo/properties)
 [![StyleCI](https://styleci.io/repos/160932929/shield?branch=master)](https://styleci.io/repos/160932929)
