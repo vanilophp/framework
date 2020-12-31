@@ -112,9 +112,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
         Relation::morphMap([
             app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass(),
-            'taxonomy' => TaxonomyProxy::modelClass(),
-            'taxon' => TaxonProxy::modelClass(),
-            'order' => OrderProxy::modelClass(),
+            'taxonomy'                                   => TaxonomyProxy::modelClass(),
+            'taxon'                                      => TaxonProxy::modelClass(),
+            'order'                                      => OrderProxy::modelClass(),
         ]);
 
         // Use the framework's extended order factory

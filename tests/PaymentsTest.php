@@ -24,7 +24,7 @@ class PaymentsTest extends TestCase
     public function an_order_can_have_multiple_payments()
     {
         $paymentMethod = PaymentMethod::create([
-            'name' => 'Wire Transfer',
+            'name'    => 'Wire Transfer',
             'gateway' => 'null',
         ]);
 

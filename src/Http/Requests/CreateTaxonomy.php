@@ -19,8 +19,8 @@ class CreateTaxonomy extends FormRequest implements CreateTaxonomyContract
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:191',
-            'slug' => 'nullable|max:191',
+            'name'     => 'required|min:2|max:191',
+            'slug'     => 'nullable|max:191',
             'images'   => 'nullable',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif',
         ];

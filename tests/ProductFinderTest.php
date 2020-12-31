@@ -23,6 +23,12 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductFinderTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Product::query()->delete();
+    }
+
     /** @test */
     public function it_excludes_inactive_products_by_default()
     {
@@ -428,11 +434,5 @@ class ProductFinderTest extends TestCase
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $results);
         $this->assertCount(8, $results->items());
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        Product::query()->delete();
     }
 }

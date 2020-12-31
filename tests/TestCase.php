@@ -14,7 +14,6 @@ namespace Vanilo\Framework\Tests;
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
-use Illuminate\Database\Schema\Blueprint;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
 use Konekt\Gears\Providers\GearsServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
