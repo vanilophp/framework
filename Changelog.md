@@ -2,16 +2,18 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.1.1
+##### 2020-12-31
 
 - Added PHP 8 support
 - Changed CI from Travis to Github
+- Only works with Vanilo 2.1+ modules
 
 ### 2.1.0
 ##### 2020-10-27
 
 - Added configuration option to explicitly define the cart's user model class
+- Works with Vanilo 2.0 modules
 
 ### 2.0.0
 ##### 2020-10-11
