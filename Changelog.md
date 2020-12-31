@@ -2,8 +2,10 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2020-XX-YY
+### 2.2.0
+##### 2020-12-31
+
+> 2.2.0 is actually **part of Vanilo 2.1 series**, but because of semver... 🤷
 
 - Added PHP 8 support
 - Added `Order::findByNumber()` method
@@ -11,6 +13,7 @@
 - Changed the internal implementation of the nanoid order number generator to utilize the generic
   nanoid generator from the support module
 - Changed CI from Travis to Github
+- Only works with Vanilo 2.1+ modules
 
 ### 2.1.1
 ##### 2020-10-28
