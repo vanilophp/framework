@@ -5,10 +5,11 @@
 ### Unreleased
 ##### 2020-XX-YY
 
+- Added PHP 8 support
 - Added `Taxon::findOneByParentsAndSlug` method
 - Added `Taxonomy::findOneBySlug` method
-- Added PHP 8 support
 - Added `taxa` (and `taxons` alias) relationship to `Taxonomy` model
+- Changed CI from Travis to Github
 
 ### 2.0.0
 ##### 2020-10-11
