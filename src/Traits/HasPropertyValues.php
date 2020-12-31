@@ -19,8 +19,12 @@ trait HasPropertyValues
 {
     public function propertyValues(): MorphToMany
     {
-        return $this->morphToMany(PropertyValueProxy::modelClass(), 'model',
-            'model_property_values', 'model_id', 'property_value_id'
+        return $this->morphToMany(
+            PropertyValueProxy::modelClass(),
+            'model',
+            'model_property_values',
+            'model_id',
+            'property_value_id'
         );
     }
 
