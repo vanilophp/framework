@@ -12,6 +12,7 @@
 - Added `getTitle()` method to Payable
 - Changed `Payable::getBillpayer` to be nullable
 - Removed `Payable::needsShipping` and `Payable::getShippable` method signatures
+- Changed CI from Travis to Github
 
 ### 2.0.0
 ##### 2020-10-11
