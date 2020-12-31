@@ -12,6 +12,7 @@
 namespace Vanilo\Checkout\Tests\Example;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Vanilo\Contracts\Buyable;
 
 class Product implements Buyable
@@ -72,7 +73,7 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
-    public function getImageUrl(): ?string
+    public function getImageUrl(string $variant = ''): ?string
     {
         return null;
     }
@@ -93,5 +94,20 @@ class Product implements Buyable
     public function removeSale($units = 1): void
     {
         // not implemented here
+    }
+
+    public function imageCount(): int
+    {
+        return 0;
+    }
+
+    public function getThumbnailUrls(): Collection
+    {
+        return collect([]);
+    }
+
+    public function getImageUrls(string $variant = ''): Collection
+    {
+        return collect([]);
     }
 }
