@@ -29,7 +29,7 @@
         "vanilo/cart": "^2.1",
         "vanilo/checkout": "^2.1",
         "vanilo/order": "^2.2",
-        "vanilo/properties": "^2.1",
+        "vanilo/properties": "^2.1.1",
         "vanilo/channel": "^2.1",
         "vanilo/payment": "^2.1"
     },
