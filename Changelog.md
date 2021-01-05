@@ -2,6 +2,12 @@
 
 ## 2.x Series
 
+### 2.1.1
+##### 2021-01-05
+
+- Bumped min Properties module to v2.1.1 to fix type mismatch at `Property::findOneByName()` when
+  using overridden Property model.
+
 ### 2.1.0
 ##### 2020-12-31
 
