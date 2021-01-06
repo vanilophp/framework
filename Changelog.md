@@ -2,6 +2,11 @@
 
 ## 2.x Series
 
+### 2.1.1
+##### 2021-01-06
+
+- Fixed composer version constraint
+
 ### 2.1.0
 ##### 2020-12-31
 
