@@ -12,6 +12,7 @@
             @yield('title')
 
             <div class="card-actionbar">
+
                 @can('create products')
                     <a href="{{ route('vanilo.product.create') }}" class="btn btn-sm btn-outline-success float-right">
                         {!! icon('+') !!}
@@ -19,6 +20,8 @@
                     </a>
                 @endcan
             </div>
+
+            @include('vanilo::product._search')
 
         </div>
 

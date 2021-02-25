@@ -6,7 +6,6 @@
  * @author      Attila Fulop
  * @license     MIT
  * @since       2018-09-22
- *
  */
 
 namespace Vanilo\Framework\Http\Controllers;
@@ -26,14 +25,14 @@ class TaxonomyController extends BaseController
     public function index()
     {
         return view('vanilo::taxonomy.index', [
-            'taxonomies' => TaxonomyProxy::all()
+            'taxonomies' => TaxonomyProxy::all(),
         ]);
     }
 
     public function create()
     {
         return view('vanilo::taxonomy.create', [
-            'taxonomy' => app(Taxonomy::class)
+            'taxonomy' => app(Taxonomy::class),
         ]);
     }
 
@@ -107,6 +106,6 @@ class TaxonomyController extends BaseController
 
         $model->taxons()->byTaxonomy($taxonomy)->sync($taxonIds);
 
-        return redirect(route(sprintf('vanilo.%s.show', shorten(get_class($model))), $model));
+        return redirect(route(sprintf('vanilo.%s.show', shorten(\get_class($model))), $model));
     }
 }

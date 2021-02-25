@@ -6,36 +6,42 @@
  * @author      Attila Fulop
  * @license     MIT
  * @since       2017-10-19
- *
  */
 
 namespace Vanilo\Framework\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Category\Models\TaxonomyProxy;
+use Vanilo\Framework\Contracts\Requests\CreateProduct;
+use Vanilo\Framework\Contracts\Requests\UpdateProduct;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
-use Vanilo\Framework\Contracts\Requests\CreateProduct;
-use Vanilo\Framework\Contracts\Requests\UpdateProduct;
 use Vanilo\Properties\Models\PropertyProxy;
 
 class ProductController extends BaseController
 {
     /**
-     * Displays the product index
+     * Displays the product index.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('query')) {
+            $products = ProductProxy::search($request->get('query'))->paginate(100);
+        } else {
+            $products = ProductProxy::paginate(100);
+        }
+
         return view('vanilo::product.index', [
-            'products' => ProductProxy::paginate(100)
+            'products' => $products,
         ]);
     }
 
     /**
-     * Displays the create new product view
+     * Displays the create new product view.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -43,7 +49,7 @@ class ProductController extends BaseController
     {
         return view('vanilo::product.create', [
             'product' => app(Product::class),
-            'states'  => ProductStateProxy::choices()
+            'states'  => ProductStateProxy::choices(),
         ]);
     }
 
@@ -79,7 +85,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Show the product
+     * Show the product.
      *
      * @param Product $product
      *
@@ -90,7 +96,7 @@ class ProductController extends BaseController
         return view('vanilo::product.show', [
             'product'    => $product,
             'taxonomies' => TaxonomyProxy::all(),
-            'properties' => PropertyProxy::all()
+            'properties' => PropertyProxy::all(),
         ]);
     }
 
@@ -103,12 +109,12 @@ class ProductController extends BaseController
     {
         return view('vanilo::product.edit', [
             'product'    => $product,
-            'states'     => ProductStateProxy::choices()
+            'states'     => ProductStateProxy::choices(),
         ]);
     }
 
     /**
-     * Saves updates to an existing product
+     * Saves updates to an existing product.
      *
      * @param Product       $product
      * @param UpdateProduct $request
@@ -131,7 +137,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * Delete a product
+     * Delete a product.
      *
      * @param Product $product
      *

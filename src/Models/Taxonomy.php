@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @author      Attila Fulop
  * @license     MIT
  * @since       2020-12-19
- *
  */
 
 namespace Vanilo\Framework\Models;
