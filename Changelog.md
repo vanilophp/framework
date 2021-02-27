@@ -2,6 +2,11 @@
 
 ## 2.x Series
 
+### 2.1.1
+##### 2021-02-27
+
+- Fixed a possible string return type instead of float in Payment module
+
 ### 2.1.0
 ##### 2020-12-31
 
