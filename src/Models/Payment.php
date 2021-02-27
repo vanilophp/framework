@@ -104,7 +104,7 @@ class Payment extends Model implements PaymentContract
 
     public function getAmount(): float
     {
-        return $this->amount;
+        return (float) $this->amount;
     }
 
     public function getCurrency(): string
@@ -114,7 +114,7 @@ class Payment extends Model implements PaymentContract
 
     public function getAmountPaid(): float
     {
-        return $this->amount_paid;
+        return (float) $this->amount_paid;
     }
 
     public function getStatus(): PaymentStatus
