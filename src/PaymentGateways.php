@@ -27,10 +27,10 @@ final class PaymentGateways
             return;
         }
 
-        if (!class_implements($class, PaymentGateway::class)) {
+        if (!in_array(PaymentGateway::class, class_implements($class))) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'The class you are trying to register (%s) as property type, ' .
+                    'The class you are trying to register (%s) as payment gateway, ' .
                     'must implement the %s interface.',
                     $class,
                     PaymentGateway::class
