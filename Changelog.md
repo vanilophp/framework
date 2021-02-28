@@ -2,6 +2,12 @@
 
 ## 2.x Series
 
+### Unreleased
+##### 2021-XX-YY
+
+- Added `status_message` field to payments table
+- Dropped PHP 7.3 support (added attribute field types)
+
 ### 2.1.1
 ##### 2021-02-27
 

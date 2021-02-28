@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * Contains the PaymentGateways class.
  *
@@ -18,8 +19,7 @@ use Vanilo\Payment\Exceptions\InexistentPaymentGatewayException;
 
 final class PaymentGateways
 {
-    /** @var array */
-    private static $registry = [];
+    private static array $registry = [];
 
     public static function register(string $id, string $class)
     {

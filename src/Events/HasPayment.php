@@ -18,8 +18,7 @@ use Vanilo\Payment\Contracts\Payment;
 
 trait HasPayment
 {
-    /** @var Payment */
-    protected $payment;
+    protected Payment $payment;
 
     public function getPayment(): Payment
     {

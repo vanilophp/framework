@@ -18,8 +18,7 @@ use Vanilo\Payment\Contracts\Payment;
 
 class PaymentPartiallyReceived extends BasePaymentEvent
 {
-    /** @var float */
-    public $amountPaid;
+    public float $amountPaid;
 
     public function __construct(Payment $payment, float $amountPaid)
     {

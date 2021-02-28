@@ -19,8 +19,7 @@ use Vanilo\Payment\Contracts\PaymentRequest;
 
 class NullRequest implements PaymentRequest
 {
-    /** @var Payment */
-    private $payment;
+    private Payment $payment;
 
     public function __construct(Payment $payment)
     {

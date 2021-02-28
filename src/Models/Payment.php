@@ -33,6 +33,7 @@ use Vanilo\Support\Generators\NanoIdGenerator;
  * @property Payable $payable
  * @property PaymentMethod $method
  * @property PaymentStatus $status
+ * @property string $status_message
  * @property null|string $hash
  * @property array $data
  * @property float $amount
