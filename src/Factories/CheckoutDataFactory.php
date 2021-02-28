@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CheckoutDataFactory class.
  *
@@ -24,7 +26,7 @@ class CheckoutDataFactory implements CheckoutDataFactoryContract
     {
         $billpayer = app(BillpayerContract::class);
 
-        $address       = app(AddressContract::class);
+        $address = app(AddressContract::class);
         $address->type = AddressType::BILLING;
 
         $billpayer->address()->associate($address);
@@ -34,7 +36,7 @@ class CheckoutDataFactory implements CheckoutDataFactoryContract
 
     public function createShippingAddress(): Address
     {
-        $address       = app(AddressContract::class);
+        $address = app(AddressContract::class);
         $address->type = AddressType::SHIPPING;
 
         return $address;

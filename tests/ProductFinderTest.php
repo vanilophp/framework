@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ProductFinderTest.php class.
  *
@@ -11,15 +13,15 @@
 
 namespace Vanilo\Framework\Tests;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Builder;
+use Vanilo\Framework\Models\Product;
 use Vanilo\Framework\Models\Taxon;
 use Vanilo\Framework\Search\ProductFinder;
-use Vanilo\Framework\Models\Product;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductFinderTest extends TestCase
 {
@@ -275,8 +277,8 @@ class ProductFinderTest extends TestCase
         factory(Product::class, 10)->create();
 
         $red = factory(PropertyValue::class)->create([
-            'value'       => 'red',
-            'title'       => 'Red'
+            'value' => 'red',
+            'title' => 'Red'
         ]);
 
         factory(Product::class, 9)->create()->each(function (Product $product) use ($red) {
@@ -300,14 +302,14 @@ class ProductFinderTest extends TestCase
         ]);
 
         $twentyseven = factory(PropertyValue::class)->create([
-            'value'       => '27',
-            'title'       => '27"',
+            'value' => '27',
+            'title' => '27"',
             'property_id' => $property
         ]);
 
         $twentynine = factory(PropertyValue::class)->create([
-            'value'       => '29',
-            'title'       => '29"',
+            'value' => '29',
+            'title' => '29"',
             'property_id' => $property
         ]);
 
@@ -417,7 +419,7 @@ class ProductFinderTest extends TestCase
     {
         factory(Product::class, 15)->create();
 
-        $finder  = new ProductFinder();
+        $finder = new ProductFinder();
         $results = $finder->simplePaginate(8);
 
         $this->assertInstanceOf(Paginator::class, $results);
@@ -429,7 +431,7 @@ class ProductFinderTest extends TestCase
     {
         factory(Product::class, 15)->create();
 
-        $finder  = new ProductFinder();
+        $finder = new ProductFinder();
         $results = $finder->paginate(8);
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $results);

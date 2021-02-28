@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the AAASmokeTest class.
  *
@@ -13,7 +15,7 @@ namespace Vanilo\Framework\Tests;
 
 class AAASmokeTest extends TestCase
 {
-    const MIN_PHP_VERSION = '7.1.3';
+    public const MIN_PHP_VERSION = '7.1.3';
 
     /**
      * @test

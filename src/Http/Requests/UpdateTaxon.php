@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the UpdateTaxon class.
  *
@@ -19,9 +21,9 @@ class UpdateTaxon extends FormRequest implements UpdateTaxonContract
     public function rules()
     {
         return [
-            'name'      => 'required|min:2|max:255',
+            'name' => 'required|min:2|max:255',
             'parent_id' => 'nullable|exists:taxons,id',
-            'priority'  => 'nullable|integer'
+            'priority' => 'nullable|integer'
         ];
     }
 

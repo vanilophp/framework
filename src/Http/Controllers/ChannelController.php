@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ChannelController class.
  *
@@ -30,11 +32,11 @@ class ChannelController extends BaseController
 
     public function create()
     {
-        $channel                = app(Channel::class);
+        $channel = app(Channel::class);
         $channel->configuration = ['country_id' => Settings::get('appshell.default.country')];
 
         return view('vanilo::channel.create', [
-            'channel'   => $channel,
+            'channel' => $channel,
             'countries' => $this->getCountries(),
         ]);
     }
@@ -61,7 +63,7 @@ class ChannelController extends BaseController
     public function edit(Channel $channel)
     {
         return view('vanilo::channel.edit', [
-            'channel'   => $channel,
+            'channel' => $channel,
             'countries' => $this->getCountries(),
         ]);
     }

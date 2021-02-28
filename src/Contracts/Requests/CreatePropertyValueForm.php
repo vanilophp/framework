@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Framework\Contracts\Requests;
 
 use Konekt\Concord\Contracts\BaseRequest;

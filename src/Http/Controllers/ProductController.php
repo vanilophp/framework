@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Product controller class.
  *
@@ -13,11 +15,11 @@ namespace Vanilo\Framework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Category\Models\TaxonomyProxy;
+use Vanilo\Framework\Contracts\Requests\CreateProduct;
+use Vanilo\Framework\Contracts\Requests\UpdateProduct;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
-use Vanilo\Framework\Contracts\Requests\CreateProduct;
-use Vanilo\Framework\Contracts\Requests\UpdateProduct;
 use Vanilo\Properties\Models\PropertyProxy;
 
 class ProductController extends BaseController
@@ -43,7 +45,7 @@ class ProductController extends BaseController
     {
         return view('vanilo::product.create', [
             'product' => app(Product::class),
-            'states'  => ProductStateProxy::choices()
+            'states' => ProductStateProxy::choices()
         ]);
     }
 
@@ -88,7 +90,7 @@ class ProductController extends BaseController
     public function show(Product $product)
     {
         return view('vanilo::product.show', [
-            'product'    => $product,
+            'product' => $product,
             'taxonomies' => TaxonomyProxy::all(),
             'properties' => PropertyProxy::all()
         ]);
@@ -102,8 +104,8 @@ class ProductController extends BaseController
     public function edit(Product $product)
     {
         return view('vanilo::product.edit', [
-            'product'    => $product,
-            'states'     => ProductStateProxy::choices()
+            'product' => $product,
+            'states' => ProductStateProxy::choices()
         ]);
     }
 

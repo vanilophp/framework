@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TaxonController class.
  *
@@ -16,8 +18,8 @@ use Konekt\AppShell\Http\Controllers\BaseController;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Category\Contracts\Taxonomy;
 use Vanilo\Category\Models\TaxonProxy;
-use Vanilo\Framework\Contracts\Requests\CreateTaxonForm;
 use Vanilo\Framework\Contracts\Requests\CreateTaxon;
+use Vanilo\Framework\Contracts\Requests\CreateTaxonForm;
 use Vanilo\Framework\Contracts\Requests\UpdateTaxon;
 use Vanilo\Framework\Traits\CreatesMediaFromRequestImages;
 
@@ -38,9 +40,9 @@ class TaxonController extends BaseController
         $taxon->priority = $request->getNextPriority($taxon);
 
         return view('vanilo::taxon.create', [
-            'taxons'   => TaxonProxy::byTaxonomy($taxonomy)->get()->pluck('name', 'id'),
+            'taxons' => TaxonProxy::byTaxonomy($taxonomy)->get()->pluck('name', 'id'),
             'taxonomy' => $taxonomy,
-            'taxon'    => $taxon
+            'taxon' => $taxon
         ]);
     }
 
@@ -52,7 +54,7 @@ class TaxonController extends BaseController
                 ['taxonomy_id' => $taxonomy->id]
             ));
             flash()->success(__(':name :taxonomy has been created', [
-                'name'     => $taxon->name,
+                'name' => $taxon->name,
                 'taxonomy' => Str::singular($taxonomy->name)
             ]));
             $this->createMedia($taxon, $request);
@@ -68,9 +70,9 @@ class TaxonController extends BaseController
     public function edit(Taxonomy $taxonomy, Taxon $taxon)
     {
         return view('vanilo::taxon.edit', [
-            'taxons'   => TaxonProxy::byTaxonomy($taxonomy)->except($taxon)->get()->pluck('name', 'id'),
+            'taxons' => TaxonProxy::byTaxonomy($taxonomy)->except($taxon)->get()->pluck('name', 'id'),
             'taxonomy' => $taxonomy,
-            'taxon'    => $taxon
+            'taxon' => $taxon
         ]);
     }
 

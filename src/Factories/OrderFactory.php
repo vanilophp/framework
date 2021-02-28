@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the OrderFactory class.
  *
@@ -20,7 +22,7 @@ class OrderFactory extends BaseOrderFactory
     public function createFromCheckout(Checkout $checkout)
     {
         $orderData = [
-            'billpayer'       => $checkout->getBillpayer()->toArray(),
+            'billpayer' => $checkout->getBillpayer()->toArray(),
             'shippingAddress' => $checkout->getShippingAddress()->toArray()
         ];
 
@@ -33,7 +35,7 @@ class OrderFactory extends BaseOrderFactory
     {
         return $cart->getItems()->map(function ($item) {
             return [
-                'product'  => $item->getBuyable(),
+                'product' => $item->getBuyable(),
                 'quantity' => $item->getQuantity()
             ];
         })->all();

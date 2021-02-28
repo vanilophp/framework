@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 Breadcrumbs::register('vanilo.product.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push(__('Products'), route('vanilo.product.index'));

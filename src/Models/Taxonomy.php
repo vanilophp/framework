@@ -24,7 +24,9 @@ use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 
 class Taxonomy extends BaseTaxonomy implements HasMedia, HasImages
 {
-    use InteractsWithMedia, HasImagesFromMediaLibrary, LoadsMediaConversionsFromConfig;
+    use InteractsWithMedia;
+    use HasImagesFromMediaLibrary;
+    use LoadsMediaConversionsFromConfig;
 
     public function registerMediaConversions(Media $media = null): void
     {

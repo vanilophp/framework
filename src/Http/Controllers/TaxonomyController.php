@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TaxonomyController class.
  *
@@ -96,7 +98,7 @@ class TaxonomyController extends BaseController
     public function sync(Taxonomy $taxonomy, SyncModelTaxons $request)
     {
         $taxonIds = $request->getTaxonIds();
-        $model    = $request->getFor();
+        $model = $request->getFor();
 
         foreach (TaxonomyProxy::where('id', '<>', $taxonomy->id)->get() as $foreignTaxonomy) {
             $taxonIds = array_merge(

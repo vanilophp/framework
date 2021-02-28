@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Str;
 
 class UpgradeMediaTableToV8 extends Migration
@@ -18,7 +20,7 @@ class UpgradeMediaTableToV8 extends Migration
         // Generate UUID for all records in the table
         DB::table('media')->cursor()->each(function ($media) {
             DB::table('media')->where('id', $media->id)->update([
-                'uuid'             => Str::uuid(),
+                'uuid' => Str::uuid(),
                 'conversions_disk' => $media->disk                                                                ]);
         });
     }

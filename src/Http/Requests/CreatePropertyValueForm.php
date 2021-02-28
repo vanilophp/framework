@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Framework\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Vanilo\Framework\Contracts\Requests\CreatePropertyValueForm as CreatePropertyValueFormContract;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyValueProxy;
-use Vanilo\Framework\Contracts\Requests\CreatePropertyValueForm as CreatePropertyValueFormContract;
 
 class CreatePropertyValueForm extends FormRequest implements CreatePropertyValueFormContract
 {

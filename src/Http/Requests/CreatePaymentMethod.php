@@ -24,11 +24,11 @@ class CreatePaymentMethod extends FormRequest implements CreatePaymentMethodCont
     public function rules()
     {
         return [
-            'name'          => 'required|min:2|max:255',
-            'gateway'       => ['required', Rule::in(PaymentGateways::ids())],
+            'name' => 'required|min:2|max:255',
+            'gateway' => ['required', Rule::in(PaymentGateways::ids())],
             'configuration' => 'sometimes|json',
-            'is_enabled'    => 'sometimes|boolean',
-            'description'   => 'sometimes|nullable|string',
+            'is_enabled' => 'sometimes|boolean',
+            'description' => 'sometimes|nullable|string',
         ];
     }
 

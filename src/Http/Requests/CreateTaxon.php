@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CreateTaxon class.
  *
@@ -19,11 +21,11 @@ class CreateTaxon extends FormRequest implements CreateTaxonContract
     public function rules()
     {
         return [
-            'name'      => 'required|min:2|max:255',
+            'name' => 'required|min:2|max:255',
             'parent_id' => 'nullable|exists:taxons,id',
-            'priority'  => 'nullable|integer',
-            'images'    => 'nullable',
-            'images.*'  => 'image|mimes:jpeg,png,jpg,gif',
+            'priority' => 'nullable|integer',
+            'images' => 'nullable',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
         ];
     }
 

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Defines the faker factory for the Address model.
  *
@@ -13,10 +15,10 @@ use Vanilo\Framework\Models\Address;
 
 $factory->define(Address::class, function (Faker $faker) {
     return [
-        'name'       => $faker->name,
-        'address'    => $faker->address,
+        'name' => $faker->name,
+        'address' => $faker->address,
         'postalcode' => $faker->postcode,
         'country_id' => $faker->countryCode,
-        'city'       => $faker->city
+        'city' => $faker->city
     ];
 });

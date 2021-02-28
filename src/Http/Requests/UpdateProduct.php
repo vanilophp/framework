@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the UpdateProduct request class.
  *
@@ -13,8 +15,8 @@ namespace Vanilo\Framework\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Framework\Contracts\Requests\UpdateProduct as UpdateProductContract;
+use Vanilo\Product\Models\ProductStateProxy;
 
 class UpdateProduct extends FormRequest implements UpdateProductContract
 {
@@ -22,14 +24,14 @@ class UpdateProduct extends FormRequest implements UpdateProductContract
     {
         return [
             'name' => 'required|min:2|max:255',
-            'sku'  => [
+            'sku' => [
                 'required',
                 Rule::unique('products')->ignore($this->route('product')->id),
                 ],
-            'state'    => ['required', Rule::in(ProductStateProxy::values())],
-            'price'    => 'nullable|numeric',
-            'stock'    => 'nullable|numeric',
-            'images'   => 'nullable',
+            'state' => ['required', Rule::in(ProductStateProxy::values())],
+            'price' => 'nullable|numeric',
+            'stock' => 'nullable|numeric',
+            'images' => 'nullable',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif'
         ];
     }

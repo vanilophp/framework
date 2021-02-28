@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ProductImageTest class.
  *
@@ -24,7 +26,7 @@ class ProductImageTest extends TestCase
         /** @var Product $product */
         $product = Product::create([
             'name' => 'Nokia 7 Plus',
-            'sku'  => 'TA-1062'
+            'sku' => 'TA-1062'
         ]);
 
         $product->addMedia(self::TEST_IMAGE)

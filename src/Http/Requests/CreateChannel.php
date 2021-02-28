@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CreateChannel class.
  *
@@ -22,8 +24,8 @@ class CreateChannel extends FormRequest implements CreateChannelContract
     public function rules()
     {
         return [
-            'name'          => 'required|min:1|max:255',
-            'slug'          => 'nullable|max:255',
+            'name' => 'required|min:1|max:255',
+            'slug' => 'nullable|max:255',
             'configuration' => 'nullable|array',
         ];
     }

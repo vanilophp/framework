@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Framework\Http\Controllers;
 
 use Konekt\AppShell\Http\Controllers\BaseController;
@@ -26,10 +28,10 @@ class PropertyValueController extends BaseController
         $propertyValue->priority = $request->getNextPriority($propertyValue);
 
         return view('vanilo::property-value.create', [
-            'property'       => $property,
-            'properties'     => PropertyProxy::get()->pluck('name', 'id'),
+            'property' => $property,
+            'properties' => PropertyProxy::get()->pluck('name', 'id'),
             'hideProperties' => true,
-            'propertyValue'  => $propertyValue
+            'propertyValue' => $propertyValue
         ]);
     }
 
@@ -44,7 +46,7 @@ class PropertyValueController extends BaseController
             );
 
             flash()->success(__(':title :property has been created', [
-                'title'    => $propertyValue->title,
+                'title' => $propertyValue->title,
                 'property' => $property->name
             ]));
 
@@ -61,8 +63,8 @@ class PropertyValueController extends BaseController
     public function edit(Property $property, PropertyValue $property_value)
     {
         return view('vanilo::property-value.edit', [
-            'property'      => $property,
-            'properties'    => PropertyProxy::get()->pluck('name', 'id'),
+            'property' => $property,
+            'properties' => PropertyProxy::get()->pluck('name', 'id'),
             'propertyValue' => $property_value
         ]);
     }

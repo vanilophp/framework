@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Defines the faker factory for the Product model.
  *
@@ -14,11 +16,11 @@ use Vanilo\Product\Models\ProductState;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        'name'        => $faker->words(mt_rand(1, 3), true),
-        'sku'         => $faker->unique()->ean8,
-        'price'       => $faker->numberBetween(10, 2000),
-        'stock'       => $faker->numberBetween(10, 2000),
-        'state'       => ProductState::ACTIVE,
+        'name' => $faker->words(mt_rand(1, 3), true),
+        'sku' => $faker->unique()->ean8,
+        'price' => $faker->numberBetween(10, 2000),
+        'stock' => $faker->numberBetween(10, 2000),
+        'state' => ProductState::ACTIVE,
         'description' => $faker->optional(0.9)->paragraph
     ];
 });

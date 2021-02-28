@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ModuleServiceProvider class.
  *
@@ -17,35 +19,35 @@ use Konekt\AppShell\Acl\ResourcePermissionMapper;
 use Konekt\AppShell\Breadcrumbs\HasBreadcrumbs;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
+use Menu;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Category\Models\TaxonProxy;
+use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
+use Vanilo\Framework\Factories\CheckoutDataFactory;
+use Vanilo\Framework\Factories\OrderFactory;
 use Vanilo\Framework\Http\Requests\CreateChannel;
 use Vanilo\Framework\Http\Requests\CreateMedia;
 use Vanilo\Framework\Http\Requests\CreatePaymentMethod;
+use Vanilo\Framework\Http\Requests\CreateProduct;
 use Vanilo\Framework\Http\Requests\CreateProperty;
 use Vanilo\Framework\Http\Requests\CreatePropertyValue;
 use Vanilo\Framework\Http\Requests\CreatePropertyValueForm;
 use Vanilo\Framework\Http\Requests\CreateTaxon;
 use Vanilo\Framework\Http\Requests\CreateTaxonForm;
+use Vanilo\Framework\Http\Requests\CreateTaxonomy;
 use Vanilo\Framework\Http\Requests\SyncModelPropertyValues;
 use Vanilo\Framework\Http\Requests\SyncModelTaxons;
 use Vanilo\Framework\Http\Requests\UpdateChannel;
+use Vanilo\Framework\Http\Requests\UpdateOrder;
 use Vanilo\Framework\Http\Requests\UpdatePaymentMethod;
+use Vanilo\Framework\Http\Requests\UpdateProduct;
 use Vanilo\Framework\Http\Requests\UpdateProperty;
 use Vanilo\Framework\Http\Requests\UpdatePropertyValue;
 use Vanilo\Framework\Http\Requests\UpdateTaxon;
-use Vanilo\Framework\Models\Address;
-use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
-use Vanilo\Framework\Factories\CheckoutDataFactory;
-use Vanilo\Framework\Factories\OrderFactory;
-use Vanilo\Framework\Http\Requests\CreateProduct;
-use Vanilo\Framework\Http\Requests\CreateTaxonomy;
-use Vanilo\Framework\Http\Requests\UpdateOrder;
-use Vanilo\Framework\Http\Requests\UpdateProduct;
 use Vanilo\Framework\Http\Requests\UpdateTaxonomy;
-use Menu;
+use Vanilo\Framework\Models\Address;
 use Vanilo\Framework\Models\Customer;
 use Vanilo\Framework\Models\Order;
 use Vanilo\Framework\Models\PaymentMethod;
@@ -112,9 +114,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
         Relation::morphMap([
             app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass(),
-            'taxonomy'                                   => TaxonomyProxy::modelClass(),
-            'taxon'                                      => TaxonProxy::modelClass(),
-            'order'                                      => OrderProxy::modelClass(),
+            'taxonomy' => TaxonomyProxy::modelClass(),
+            'taxon' => TaxonProxy::modelClass(),
+            'order' => OrderProxy::modelClass(),
         ]);
 
         // Use the framework's extended order factory

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ProductFinder class.
  *
@@ -11,6 +13,8 @@
 
 namespace Vanilo\Framework\Search;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon;
@@ -18,8 +22,6 @@ use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyValueProxy;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductFinder
 {

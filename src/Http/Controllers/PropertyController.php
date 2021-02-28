@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PropertyController class.
  *
@@ -34,7 +36,7 @@ class PropertyController extends BaseController
     {
         return view('vanilo::property.create', [
             'property' => app(Property::class),
-            'types'    => PropertyTypes::choices()
+            'types' => PropertyTypes::choices()
         ]);
     }
 
@@ -62,7 +64,7 @@ class PropertyController extends BaseController
     {
         return view('vanilo::property.edit', [
             'property' => $property,
-            'types'    => PropertyTypes::choices()
+            'types' => PropertyTypes::choices()
         ]);
     }
 

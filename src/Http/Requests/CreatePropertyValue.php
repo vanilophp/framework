@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CreatePropertyValue class.
  *
@@ -22,10 +24,10 @@ class CreatePropertyValue extends FormRequest implements CreatePropertyValueCont
     public function rules()
     {
         return [
-            'title'       => 'required|min:1|max:255',
-            'value'       => 'nullable|min:1|max:255',
+            'title' => 'required|min:1|max:255',
+            'value' => 'nullable|min:1|max:255',
             'property_id' => 'nullable|exists:properties,id',
-            'priority'    => 'nullable|integer'
+            'priority' => 'nullable|integer'
         ];
     }
 

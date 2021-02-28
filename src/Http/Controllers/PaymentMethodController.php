@@ -34,7 +34,7 @@ class PaymentMethodController extends BaseController
     {
         return view('vanilo::payment-method.create', [
             'paymentMethod' => app(PaymentMethod::class),
-            'gateways'      => PaymentGateways::choices(),
+            'gateways' => PaymentGateways::choices(),
         ]);
     }
 
@@ -64,7 +64,7 @@ class PaymentMethodController extends BaseController
     {
         return view('vanilo::payment-method.edit', [
             'paymentMethod' => $paymentMethod,
-            'gateways'      => PaymentGateways::choices(),
+            'gateways' => PaymentGateways::choices(),
         ]);
     }
 

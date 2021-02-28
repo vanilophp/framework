@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TestCase class.
  *
@@ -15,14 +17,14 @@ use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
+use Konekt\Concord\ConcordServiceProvider;
 use Konekt\Gears\Providers\GearsServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Konekt\Menu\Facades\Menu;
 use Konekt\Menu\MenuServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;
-use Konekt\Concord\ConcordServiceProvider;
-use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {
@@ -56,7 +58,7 @@ abstract class TestCase extends Orchestra
     {
         return [
             'Breadcrumbs' => Breadcrumbs::class,
-            'Menu'        => Menu::class,
+            'Menu' => Menu::class,
         ];
     }
 
@@ -71,13 +73,13 @@ abstract class TestCase extends Orchestra
         $app['path.lang'] = __DIR__ . '/lang';
         $app['config']->set('database.default', $engine);
         $app['config']->set('database.connections.' . $engine, [
-            'driver'   => $engine,
+            'driver' => $engine,
             'database' => 'sqlite' == $engine ? ':memory:' : 'vanilo_test',
-            'prefix'   => '',
-            'host'     => env('TEST_DB_HOST', '127.0.0.1'),
+            'prefix' => '',
+            'host' => env('TEST_DB_HOST', '127.0.0.1'),
             'username' => env('TEST_DB_USERNAME', 'pgsql' === $engine ? 'postgres' : 'root'),
             'password' => env('TEST_DB_PASSWORD', ''),
-            'port'     => env('TEST_DB_PORT'),
+            'port' => env('TEST_DB_PORT'),
         ]);
 
         if ('pgsql' === $engine) {

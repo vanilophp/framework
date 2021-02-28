@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the AddressTest class.
  *
@@ -35,7 +37,7 @@ class AddressTest extends TestCase
         $this->artisan('db:seed', ['--class' => Countries::class]);
         $this->artisan('db:seed', ['--class' => StatesOfUsa::class]);
 
-        $this->usa     = Country::find('US');
+        $this->usa = Country::find('US');
         $this->newYork = Province::findByCountryAndCode($this->usa, 'NY');
     }
 
@@ -52,12 +54,12 @@ class AddressTest extends TestCase
     public function address_model_implements_the_vanilo_address_contract()
     {
         $address = factory(Address::class)->make([
-            'name'        => 'Robert De Niro',
+            'name' => 'Robert De Niro',
             'province_id' => $this->newYork->id,
-            'country_id'  => $this->usa->id,
-            'postalcode'  => 'NY 10013',
-            'address'     => '123 Greenwich St',
-            'city'        => 'New York'
+            'country_id' => $this->usa->id,
+            'postalcode' => 'NY 10013',
+            'address' => '123 Greenwich St',
+            'city' => 'New York'
         ]);
 
         $this->assertInstanceOf(Address::class, $address);

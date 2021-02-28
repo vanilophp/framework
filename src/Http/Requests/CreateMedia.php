@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CreateMedia class.
  *
@@ -27,7 +29,7 @@ class CreateMedia extends FormRequest implements CreateMediaContract
     public function rules()
     {
         return array_merge($this->getForRules(), [
-            'images'   => 'required',
+            'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif'
         ]);
     }

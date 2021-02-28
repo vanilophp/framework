@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Taxon class.
  *
@@ -12,8 +14,8 @@
 namespace Vanilo\Framework\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Models\Taxon as BaseTaxon;
 use Vanilo\Contracts\HasImages;
@@ -24,7 +26,9 @@ use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 
 class Taxon extends BaseTaxon implements HasMedia, HasImages
 {
-    use InteractsWithMedia, HasImagesFromMediaLibrary, LoadsMediaConversionsFromConfig;
+    use InteractsWithMedia;
+    use HasImagesFromMediaLibrary;
+    use LoadsMediaConversionsFromConfig;
 
     public function products(): MorphToMany
     {
