@@ -24,6 +24,16 @@ class PaymentFactoryTest extends TestCase
     /** @var PaymentMethod */
     private $paymentMethod;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->paymentMethod = PaymentMethod::create([
+            'name' => 'Credit Card',
+            'gateway' => 'plastic',
+        ]);
+    }
+
     /** @test */
     public function it_can_create_a_payment_from_a_payable_and_from_a_payment_method()
     {
@@ -65,15 +75,5 @@ class PaymentFactoryTest extends TestCase
         $payment = PaymentFactory::createFromPayable($order, $this->paymentMethod, ['boo' => 'baa']);
         $this->assertInstanceOf(Payment::class, $payment);
         $this->assertEquals('baa', $payment->getExtraData()['boo']);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->paymentMethod = PaymentMethod::create([
-            'name'    => 'Credit Card',
-            'gateway' => 'plastic',
-        ]);
     }
 }

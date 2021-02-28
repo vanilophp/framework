@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Requests;
 
-use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentRequest;
 

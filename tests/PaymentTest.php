@@ -27,6 +27,16 @@ class PaymentTest extends TestCase
 {
     private $method;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->method = $method = PaymentMethod::create([
+            'name' => 'Credit Card',
+            'gateway' => 'plastic'
+        ]);
+    }
+
     /** @test */
     public function it_can_be_created()
     {
@@ -289,15 +299,5 @@ class PaymentTest extends TestCase
         $payment = $payment->fresh();
         $this->assertIsArray($payment->getExtraData());
         $this->assertEquals('moh', $payment->data['meh']);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->method = $method = PaymentMethod::create([
-            'name'    => 'Credit Card',
-            'gateway' => 'plastic'
-        ]);
     }
 }

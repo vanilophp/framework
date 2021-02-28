@@ -26,23 +26,23 @@ use Vanilo\Payment\Contracts\PaymentStatus as PaymentStatusContract;
  */
 class PaymentStatus extends Enum implements PaymentStatusContract
 {
-    public const __DEFAULT      = self::PENDING;
-    public const PENDING        = 'pending';
-    public const PAID           = 'paid';
+    public const __DEFAULT = self::PENDING;
+    public const PENDING = 'pending';
+    public const PAID = 'paid';
     public const PARTIALLY_PAID = 'partially_paid';
-    public const DECLINED       = 'declined';
-    public const TIMEOUT        = 'timeout';
+    public const DECLINED = 'declined';
+    public const TIMEOUT = 'timeout';
 
     protected static $labels = [];
 
     protected static function boot()
     {
         static::$labels = [
-            self::PENDING        => __('Pending'),
-            self::PAID           => __('Paid'),
+            self::PENDING => __('Pending'),
+            self::PAID => __('Paid'),
             self::PARTIALLY_PAID => __('Partially Paid'),
-            self::DECLINED       => __('Declined'),
-            self::TIMEOUT        => __('Timed out'),
+            self::DECLINED => __('Declined'),
+            self::TIMEOUT => __('Timed out'),
         ];
     }
 }

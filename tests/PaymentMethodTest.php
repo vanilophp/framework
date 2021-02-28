@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PaymentMethodTest class.
  *
@@ -22,7 +24,7 @@ class PaymentMethodTest extends TestCase
     public function it_can_be_created()
     {
         $method = PaymentMethod::create([
-            'name'    => 'Credit Card',
+            'name' => 'Credit Card',
             'gateway' => 'plastic'
         ]);
 
@@ -35,7 +37,7 @@ class PaymentMethodTest extends TestCase
     public function it_has_a_default_timeout()
     {
         $method = PaymentMethod::create([
-            'name'    => 'Credit Card',
+            'name' => 'Credit Card',
             'gateway' => 'plastic'
         ]);
 
@@ -47,7 +49,7 @@ class PaymentMethodTest extends TestCase
     public function default_configuration_is_an_empty_array()
     {
         $method = PaymentMethod::create([
-            'name'    => 'Credit Card',
+            'name' => 'Credit Card',
             'gateway' => 'plastic'
         ]);
 
@@ -59,7 +61,7 @@ class PaymentMethodTest extends TestCase
     public function configuration_can_be_set_as_array()
     {
         $method = PaymentMethod::create([
-            'name'    => 'Credit Card',
+            'name' => 'Credit Card',
             'gateway' => 'plastic',
             'configuration' => ["asd" => "qwe"],
         ]);
@@ -87,7 +89,7 @@ class PaymentMethodTest extends TestCase
     {
         PaymentGateways::register('plastic', PlasticPayments::class);
         $method = PaymentMethod::create([
-            'name'    => 'Credit Card',
+            'name' => 'Credit Card',
             'gateway' => 'plastic'
         ]);
 
