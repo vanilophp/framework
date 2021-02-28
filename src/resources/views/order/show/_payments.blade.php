@@ -16,8 +16,11 @@
                             {{ show_datetime($payment->updated_at) }}
                         </div>
                     </td>
+                    <td>
+                        <div class="font-weight-bolder">{{ $payment->getStatus()->label() }}</div>
+                        <span class="font-italic">{{ $payment->status_message }}</span>
+                    </td>
                     <td>{{ format_price($payment->amount) }}</td>
-                    <td>{{ $payment->getStatus()->label() }}</td>
                 </tr>
             @endforeach
             </tbody>
