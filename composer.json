@@ -31,7 +31,7 @@
         "vanilo/order": "^2.2",
         "vanilo/properties": "^2.1.1",
         "vanilo/channel": "^2.1",
-        "vanilo/payment": "^2.1"
+        "vanilo/payment": "^2.2.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -56,7 +56,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1.x-dev"
+            "dev-master": "2.2.x-dev"
         }
     }
 }
