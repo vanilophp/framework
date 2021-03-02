@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @author      Attila Fulop
  * @license     MIT
  * @since       2020-12-28
- *
  */
 
 namespace Vanilo\Payment\Models;
@@ -19,6 +18,7 @@ use Vanilo\Payment\Contracts\PaymentStatus as PaymentStatusContract;
 
 /**
  * @method static PaymentStatus PENDING()
+ * @method static PaymentStatus AUTHORIZED()
  * @method static PaymentStatus PAID()
  * @method static PaymentStatus PARTIALLY_PAID()
  * @method static PaymentStatus DECLINED()
@@ -28,6 +28,7 @@ class PaymentStatus extends Enum implements PaymentStatusContract
 {
     public const __DEFAULT = self::PENDING;
     public const PENDING = 'pending';
+    public const AUTHORIZED = 'authorized';
     public const PAID = 'paid';
     public const PARTIALLY_PAID = 'partially_paid';
     public const DECLINED = 'declined';
@@ -38,11 +39,12 @@ class PaymentStatus extends Enum implements PaymentStatusContract
     protected static function boot()
     {
         static::$labels = [
-            self::PENDING => __('Pending'),
-            self::PAID => __('Paid'),
+            self::PENDING        => __('Pending'),
+            self::AUTHORIZED     => __('Authorized'),
+            self::PAID           => __('Paid'),
             self::PARTIALLY_PAID => __('Partially Paid'),
-            self::DECLINED => __('Declined'),
-            self::TIMEOUT => __('Timed out'),
+            self::DECLINED       => __('Declined'),
+            self::TIMEOUT        => __('Timed out'),
         ];
     }
 }
