@@ -6,6 +6,7 @@
 ##### 2021-XX-YY
 
 - Added `status_message` field to payments table
+- Added `authorized` value to payment status enum
 - Dropped PHP 7.3 support (added attribute field types)
 
 ### 2.1.1
