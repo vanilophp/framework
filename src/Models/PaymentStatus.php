@@ -39,12 +39,12 @@ class PaymentStatus extends Enum implements PaymentStatusContract
     protected static function boot()
     {
         static::$labels = [
-            self::PENDING        => __('Pending'),
-            self::AUTHORIZED     => __('Authorized'),
-            self::PAID           => __('Paid'),
+            self::PENDING => __('Pending'),
+            self::AUTHORIZED => __('Authorized'),
+            self::PAID => __('Paid'),
             self::PARTIALLY_PAID => __('Partially Paid'),
-            self::DECLINED       => __('Declined'),
-            self::TIMEOUT        => __('Timed out'),
+            self::DECLINED => __('Declined'),
+            self::TIMEOUT => __('Timed out'),
         ];
     }
 }
