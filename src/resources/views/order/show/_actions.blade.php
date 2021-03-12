@@ -39,6 +39,10 @@
             </script>
         @endcan
 
+        @can('view orders')
+            <a href="#" class="btn btn-outline-secondary ml-2">{{ __('Print') }}</a>
+        @endcan
+
         @can('delete orders')
             {!! Form::open(['route' => ['vanilo.order.destroy', $order], 'method' => 'DELETE', 'class' => "float-right"]) !!}
             <button class="btn btn-outline-danger">

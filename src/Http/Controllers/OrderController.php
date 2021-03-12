@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * Contains the OrderController class.
  *
@@ -38,9 +39,11 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function show(Order $order)
+    public function show(Order $order, Request $request)
     {
-        return view('vanilo::order.show', ['order' => $order]);
+        $view = $request->has('print') ? 'print' : 'show';
+
+        return view("vanilo::order.$view", ['order' => $order]);
     }
 
     public function update(Order $order, UpdateOrder $request)
