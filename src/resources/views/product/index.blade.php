@@ -99,7 +99,7 @@
             @if($products->hasPages())
                 <hr>
                 <nav>
-                    {{ $products->links() }}
+                    {{ $products->withQueryString()->links() }}
                 </nav>
             @endif
 

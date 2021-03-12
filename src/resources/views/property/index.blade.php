@@ -71,6 +71,13 @@
 
             </table>
 
+            @if($properties->hasPages())
+                <hr>
+                <nav>
+                    {{ $properties->withQueryString()->links() }}
+                </nav>
+            @endif
+
         </div>
     </div>
 

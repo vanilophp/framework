@@ -5,8 +5,12 @@
 ## Unreleased
 ##### 2021-XX-YY
 
-- Changed internal CS ruleset from PSR-2 to PSR-12
+- Upgrade to AppShell v2.2 (minimum requirement)
+- Added order print page
+- Added show/hide closed orders button to order list
 - Added `status_message` field to payment list on order view
+- Fixed missing query strings in admin paginators
+- Changed internal CS ruleset from PSR-2 to PSR-12
 
 ### 2.1.1
 ##### 2021-01-05

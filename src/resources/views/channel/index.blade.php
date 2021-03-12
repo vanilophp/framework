@@ -69,6 +69,13 @@
 
             </table>
 
+            @if($channels->hasPages())
+                <hr>
+                <nav>
+                    {{ $channels->withQueryString()->links() }}
+                </nav>
+            @endif
+
         </div>
     </div>
 
