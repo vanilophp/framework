@@ -30,12 +30,14 @@ class OrderController extends BaseController
     {
         $query = OrderProxy::orderBy('created_at', 'desc');
 
-        if ('1' != $request->get('inactives')) {
+        $inactives = $request->has('inactives');
+        if (!$inactives) {
             $query->open();
         }
 
         return view('vanilo::order.index', [
-            'orders' => $query->paginate(100)
+            'orders' => $query->paginate(100),
+            'inactives' => $inactives,
         ]);
     }
 

@@ -12,6 +12,15 @@
             @yield('title')
 
             <div class="card-actionbar">
+                @if($inactives)
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ route('vanilo.order.index') }}">
+                        {{ __('Hide closed orders') }}
+                    </a>
+                @else
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ route('vanilo.order.index') }}?inactives=1">
+                        {{ __('Show closed orders') }}
+                    </a>
+                @endif
             </div>
 
         </div>
