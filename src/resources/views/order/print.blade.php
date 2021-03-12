@@ -8,23 +8,21 @@
 
     <h1>@yield('title')</h1>
 
-    <div class="card-deck mb-3">
-        @include('vanilo::order.show._cards')
+
+    @include('vanilo::order.print._header')
+
+    <h3>{{ __('Customer Notes') }}</h3>
+
+    <div class="font-italic">
+        @isset($order->notes)
+            {!! nl2br($order->notes) !!}
+        @else
+            {{ __('No special notes have been added by the customer') }}
+        @endif
     </div>
 
-    <div class="card-deck mb-3">
-        @include('vanilo::order.show._addresses')
-        @include('vanilo::order.show._details')
-    </div>
+    @include('vanilo::order.print._items')
 
-    <div class="row">
+    @include('vanilo::order.print._payment')
 
-        <div class="col-12 col-md-8">
-            @include('vanilo::order.show._items')
-        </div>
-
-        <div class="col-12 col-md-4">
-            @include('vanilo::order.show._payments')
-        </div>
-    </div>
 @stop

@@ -4,7 +4,7 @@
     </div>
 
     <div class="card-body">
-        <h6>{{ __('Notes') }}</h6>
+        <h6>{{ __('Customer Notes') }}</h6>
         <div class="font-italic">
             {!! nl2br($order->notes) !!}
         </div>

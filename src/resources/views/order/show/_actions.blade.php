@@ -40,7 +40,8 @@
         @endcan
 
         @can('view orders')
-            <a href="#" class="btn btn-outline-secondary ml-2">{{ __('Print') }}</a>
+                <a href="{{ route('vanilo.order.show', $order) }}?print=1"
+                   class="btn btn-outline-secondary ml-2">{{ __('Print') }}</a>
         @endcan
 
         @can('delete orders')

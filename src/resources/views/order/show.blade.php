@@ -22,7 +22,7 @@
         </div>
 
         <div class="col-12 col-md-4">
-            @include('vanilo::order.show._payments')
+            @include('vanilo::order.show._payment')
         </div>
     </div>
 

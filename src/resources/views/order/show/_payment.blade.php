@@ -1,6 +1,6 @@
 <div class="card mb-3">
     <div class="card-header">
-        {{ __('Payments') }}
+        {{ __('Payment') }}
     </div>
 
     <div class="card-body">
