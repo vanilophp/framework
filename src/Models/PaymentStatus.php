@@ -19,20 +19,26 @@ use Vanilo\Payment\Contracts\PaymentStatus as PaymentStatusContract;
 /**
  * @method static PaymentStatus PENDING()
  * @method static PaymentStatus AUTHORIZED()
+ * @method static PaymentStatus ON_HOLD()
  * @method static PaymentStatus PAID()
  * @method static PaymentStatus PARTIALLY_PAID()
  * @method static PaymentStatus DECLINED()
  * @method static PaymentStatus TIMEOUT()
+ * @method static PaymentStatus CANCELLED()
+ * @method static PaymentStatus REFUNDED()
  */
 class PaymentStatus extends Enum implements PaymentStatusContract
 {
     public const __DEFAULT = self::PENDING;
     public const PENDING = 'pending';
     public const AUTHORIZED = 'authorized';
+    public const ON_HOLD = 'on_hold';
     public const PAID = 'paid';
     public const PARTIALLY_PAID = 'partially_paid';
     public const DECLINED = 'declined';
     public const TIMEOUT = 'timeout';
+    public const CANCELLED = 'cancelled';
+    public const REFUNDED = 'refunded';
 
     protected static $labels = [];
 
@@ -41,9 +47,12 @@ class PaymentStatus extends Enum implements PaymentStatusContract
         static::$labels = [
             self::PENDING => __('Pending'),
             self::AUTHORIZED => __('Authorized'),
+            self::ON_HOLD => __('On hold'),
             self::PAID => __('Paid'),
             self::PARTIALLY_PAID => __('Partially Paid'),
             self::DECLINED => __('Declined'),
+            self::CANCELLED => __('Cancelled'),
+            self::REFUNDED => __('Refunded'),
             self::TIMEOUT => __('Timed out'),
         ];
     }
