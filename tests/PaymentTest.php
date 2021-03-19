@@ -127,9 +127,8 @@ class PaymentTest extends TestCase
         ]);
 
         $payment = Payment::create([
-            'amount' => 35,
+            'amount' => $order->total,
             'currency' => 'EUR',
-            'status' => PaymentStatus::PARTIALLY_PAID(),
             'payable_type' => Order::class,
             'payable_id' => $order->id,
             'payment_method_id' => $this->method->id,
