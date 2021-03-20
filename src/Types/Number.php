@@ -22,7 +22,7 @@ class Number implements PropertyType
         return __('Number');
     }
 
-    public function transformValue($value, ?array $settings)
+    public function transformValue(string $value, ?array $settings)
     {
         return (float) $value;
     }

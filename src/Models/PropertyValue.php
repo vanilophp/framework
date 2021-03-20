@@ -68,7 +68,7 @@ class PropertyValue extends Model implements PropertyValueContract
      */
     public function getCastedValue()
     {
-        return $this->property->getType()->transformValue($this->value, $this->settings);
+        return $this->property->getType()->transformValue((string) $this->value, $this->settings);
     }
 
     public function scopeWithUniqueSlugConstraints(Builder $query, Model $model, $attribute, $config, $slug)
