@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PropertyValueTest class.
  *
@@ -23,14 +25,14 @@ class PropertyValueTest extends TestCase
 
         $value1 = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => 1,
-            'title'       => '1'
+            'value' => 1,
+            'title' => '1'
         ]);
 
         $value2 = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => 2,
-            'title'       => '2'
+            'value' => 2,
+            'title' => '2'
         ]);
 
         $this->assertEquals('1', $value1->value);
@@ -44,8 +46,8 @@ class PropertyValueTest extends TestCase
 
         $value3007 = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => 3007,
-            'title'       => '3007'
+            'value' => 3007,
+            'title' => '3007'
         ]);
 
         $this->assertEquals(3007, $value3007->getCastedValue());
@@ -59,20 +61,20 @@ class PropertyValueTest extends TestCase
 
         $valueTrue = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => true,
-            'title'       => 'Yes'
+            'value' => true,
+            'title' => 'Yes'
         ]);
 
         $valueFalse = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => 'false',
-            'title'       => 'No'
+            'value' => 'false',
+            'title' => 'No'
         ]);
 
         $valueZero = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => '0',
-            'title'       => 'No'
+            'value' => '0',
+            'title' => 'No'
         ]);
 
         $this->assertEquals(true, $valueTrue->getCastedValue());
@@ -92,8 +94,8 @@ class PropertyValueTest extends TestCase
 
         $value11point27 = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => 11.27,
-            'title'       => '11.27'
+            'value' => 11.27,
+            'title' => '11.27'
         ]);
 
         $this->assertEquals(11.27, $value11point27->getCastedValue());
@@ -107,9 +109,9 @@ class PropertyValueTest extends TestCase
 
         $valueX = PropertyValue::create([
             'property_id' => $property->id,
-            'value'       => 'x',
-            'title'       => 'X',
-            'settings'    => ['x' => 123, 'y' => 456]
+            'value' => 'x',
+            'title' => 'X',
+            'settings' => ['x' => 123, 'y' => 456]
         ]);
 
         $this->assertEquals(['x' => 123, 'y' => 456], $valueX->settings);

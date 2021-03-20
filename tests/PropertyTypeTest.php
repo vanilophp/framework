@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PropertyTypeTest class.
  *
@@ -11,9 +13,9 @@
 
 namespace Vanilo\Properties\Tests;
 
-use Vanilo\Properties\PropertyTypes;
 use Vanilo\Properties\Exceptions\UnknownPropertyTypeException;
 use Vanilo\Properties\Models\Property;
+use Vanilo\Properties\PropertyTypes;
 use Vanilo\Properties\Tests\Examples\MaterialPropertyType;
 use Vanilo\Properties\Types\Boolean;
 use Vanilo\Properties\Types\Integer;

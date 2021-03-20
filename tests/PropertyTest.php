@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PropertyTest class.
  *
@@ -19,9 +21,9 @@ class PropertyTest extends TestCase
     public function all_mutable_fields_can_be_mass_assigned()
     {
         $property = Property::create([
-            'name'          => 'Funkiness',
-            'type'          => 'text',
-            'slug'          => 'funkiness',
+            'name' => 'Funkiness',
+            'type' => 'text',
+            'slug' => 'funkiness',
             'configuration' => ['x' => 'y', 'a' => 'b']
         ]);
 
@@ -36,9 +38,9 @@ class PropertyTest extends TestCase
     {
         $property = new Property();
 
-        $property->name          = 'Creepiness';
-        $property->type          = 'number';
-        $property->slug          = 'creepiness';
+        $property->name = 'Creepiness';
+        $property->type = 'number';
+        $property->slug = 'creepiness';
         $property->configuration = ['bam' => 'zdish', 'bumm' => 'tsish'];
 
         $this->assertEquals('Creepiness', $property->name);

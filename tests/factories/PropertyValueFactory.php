@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Faker\Generator as Faker;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;

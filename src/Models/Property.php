@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Property class.
  *
@@ -16,10 +18,10 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
-use Vanilo\Properties\PropertyTypes;
 use Vanilo\Properties\Contracts\Property as PropertyContract;
 use Vanilo\Properties\Contracts\PropertyType;
 use Vanilo\Properties\Exceptions\UnknownPropertyTypeException;
+use Vanilo\Properties\PropertyTypes;
 
 /**
  * @property string     $name
@@ -30,7 +32,8 @@ use Vanilo\Properties\Exceptions\UnknownPropertyTypeException;
  */
 class Property extends Model implements PropertyContract
 {
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable;
+    use SluggableScopeHelpers;
 
     protected $table = 'properties';
 

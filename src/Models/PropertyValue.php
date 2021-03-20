@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PropertyValue class.
  *
@@ -28,7 +30,8 @@ use Vanilo\Properties\Contracts\PropertyValue as PropertyValueContract;
  */
 class PropertyValue extends Model implements PropertyValueContract
 {
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable;
+    use SluggableScopeHelpers;
 
     protected $table = 'property_values';
 

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PropertyTypes class.
  *
@@ -20,10 +22,10 @@ use Vanilo\Properties\Types\Text;
 final class PropertyTypes
 {
     private const BUILT_IN_TYPES = [
-        'text'    => Text::class,
+        'text' => Text::class,
         'boolean' => Boolean::class,
         'integer' => Integer::class,
-        'number'  => Number::class
+        'number' => Number::class
     ];
 
     private static $registry = self::BUILT_IN_TYPES;

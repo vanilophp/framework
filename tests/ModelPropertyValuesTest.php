@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ModelPropertyValuesTest class.
  *
@@ -31,7 +33,7 @@ class ModelPropertyValuesTest extends TestCase
 
         $sixteen = factory(PropertyValue::class)->create([
             'property_id' => factory(Property::class)->create(['type' => 'integer'])->id,
-            'value'       => 16
+            'value' => 16
         ]);
 
         $product->propertyValues()->save($haha);
