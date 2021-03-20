@@ -9,6 +9,7 @@
 - Added `authorized`, `on_hold`, `cancelled` and `refunded` values to payment status enum
 - Added support trait intended to be used for processor plugins for substituting payment URL parameters
 - Dropped PHP 7.3 support (added attribute field types)
+- Changed internal CS ruleset from PSR-2 to PSR-12 (incl. declare strict types)
 
 ### 2.1.1
 ##### 2021-02-27

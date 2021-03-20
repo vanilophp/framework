@@ -15,7 +15,7 @@ namespace Vanilo\Payment\Tests;
 
 class AAASmokeTest extends TestCase
 {
-    private const MIN_PHP_VERSION = '7.3.0';
+    private const MIN_PHP_VERSION = '7.4.0';
 
     /** @test */
     public function smoke()
