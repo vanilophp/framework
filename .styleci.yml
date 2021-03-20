@@ -5,7 +5,6 @@ enabled:
   - alpha_ordered_imports
   - cast_spaces
   - clean_namespace
-  - declare_strict_types
   - fully_qualified_strict_types
   - implode_call
   - no_extra_block_blank_lines

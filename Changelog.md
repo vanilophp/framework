@@ -6,6 +6,7 @@
 ##### 2021-XX-YY
 
 - Changed internal CS ruleset from PSR-2 to PSR-12
+- Dropped PHP 7.3 support
 
 ### 2.1.0
 ##### 2020-12-31
