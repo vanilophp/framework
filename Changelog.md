@@ -7,6 +7,7 @@
 
 - Changed internal CS ruleset from PSR-2 to PSR-12
 - Dropped PHP 7.3 support
+- Fixed broken interface check on type registration
 
 ### 2.1.1
 ##### 2021-01-05
