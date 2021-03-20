@@ -52,7 +52,7 @@ class SequentialNumberGenerator implements OrderNumberGenerator
         return sprintf(
             '%s%s',
             $this->prefix,
-            str_pad($next, $this->padLength, $this->padString, STR_PAD_LEFT)
+            str_pad((string) $next, $this->padLength, $this->padString, STR_PAD_LEFT)
         );
     }
 

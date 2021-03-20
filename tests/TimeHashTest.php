@@ -63,11 +63,11 @@ class TimeHashTest extends TestCase
     /**
      * @test
      */
-    public function it_is_unique_when_called_in_a_rapid_consecutive_ten_times_ten_times_with_small_delays()
+    public function it_is_unique_when_called_in_a_rapid_consecutive_eight_times_ten_times_with_small_delays()
     {
         $numbers = [];
         // This is the most edgy test case, increase number of iterations and it'll be more prone to fail
-        for ($k = 0; $k < 10; $k++) {
+        for ($k = 0; $k < 8; $k++) {
             for ($i = 0; $i < 10; $i++) {
                 $numbers[] = $this->generator->generateNumber();
                 usleep(10000); //0.01s
