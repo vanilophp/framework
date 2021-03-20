@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the base TestCase class.
  *
@@ -11,9 +13,9 @@
 namespace Vanilo\Category\Tests;
 
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
-use Vanilo\Category\Providers\ModuleServiceProvider as CategoryModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vanilo\Category\Providers\ModuleServiceProvider as CategoryModule;
 
 abstract class TestCase extends Orchestra
 {
@@ -58,9 +60,9 @@ abstract class TestCase extends Orchestra
 
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
 

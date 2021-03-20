@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ModuleTest class.
  *
@@ -11,8 +13,8 @@
 
 namespace Vanilo\Category\Tests;
 
-use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
+use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Models\Taxon;
 use Vanilo\Category\Models\Taxonomy;
 use Vanilo\Category\Providers\ModuleServiceProvider;

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TaxonAssignmentTest class.
  *
@@ -62,7 +64,7 @@ class TaxonAssignmentTest extends TestCase
     /** @test */
     public function multiple_taxons_can_be_assigned_to_a_model()
     {
-        $jams       = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Jams']);
+        $jams = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Jams']);
         $strawberry = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Strawberry Products']);
 
         /** @var Product $product */
@@ -118,7 +120,7 @@ class TaxonAssignmentTest extends TestCase
         Relation::morphMap(['product' => Product::class]);
         concord()->registerModel(TaxonContract::class, TaxonExt::class);
 
-        $taxon   = TaxonExt::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Asian Food'])->fresh();
+        $taxon = TaxonExt::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Asian Food'])->fresh();
         $product = Product::create(['name' => 'Pho Quai']);
 
         $product->taxons()->save($taxon);

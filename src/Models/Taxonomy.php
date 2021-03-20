@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Taxonomy class.
  *
@@ -19,7 +21,8 @@ use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 
 class Taxonomy extends Model implements TaxonomyContract
 {
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable;
+    use SluggableScopeHelpers;
 
     protected $table = 'taxonomies';
 

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TaxonTest class.
  *
@@ -62,8 +64,8 @@ class TaxonTest extends TestCase
     {
         $taxon = Taxon::create([
             'taxonomy_id' => Taxonomy::create(['name' => 'Wine Regions']),
-            'name'        => 'Carcavelos DOC',
-            'slug'        => 'carcavelos'
+            'name' => 'Carcavelos DOC',
+            'slug' => 'carcavelos'
         ]);
 
         $this->assertEquals('carcavelos', $taxon->slug);
@@ -77,12 +79,12 @@ class TaxonTest extends TestCase
 
         $taxon1 = Taxon::create([
             'taxonomy_id' => $taxonomy1->id,
-            'name'        => 'Domestic'
+            'name' => 'Domestic'
         ]);
 
         $taxon2 = Taxon::create([
             'taxonomy_id' => $taxonomy2->id,
-            'name'        => 'Domestic'
+            'name' => 'Domestic'
         ]);
 
         $this->assertEquals('domestic', $taxon1->slug);
@@ -95,13 +97,13 @@ class TaxonTest extends TestCase
         $taxonomy = Taxonomy::create(['name' => 'Category']);
 
         $taxon1 = Taxon::create([
-            'name'        => 'Docking Stations',
+            'name' => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $taxon2 = Taxon::create([
-            'parent_id'   => $taxon1->id,
-            'name'        => 'Docking Stations',
+            'parent_id' => $taxon1->id,
+            'name' => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -114,20 +116,20 @@ class TaxonTest extends TestCase
         $this->expectExceptionMessageMatches('/UNIQUE constraint failed/');
 
         $taxonomy = Taxonomy::create(['name' => 'Category']);
-        $root     = Taxon::create([
-            'name'        => 'Accessories',
+        $root = Taxon::create([
+            'name' => 'Accessories',
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $taxon1 = Taxon::create([
-            'parent_id'   => $root->id,
-            'name'        => 'Docking Stations',
+            'parent_id' => $root->id,
+            'name' => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $taxon2 = Taxon::create([
-            'parent_id'   => $root->id,
-            'name'        => 'Docking Stations',
+            'parent_id' => $root->id,
+            'name' => 'Docking Stations',
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -163,8 +165,8 @@ class TaxonTest extends TestCase
         $taxon = Taxon::create(['name' => 'Parent', 'taxonomy_id' => $taxonomy->id]);
 
         $child = Taxon::create([
-            'name'        => 'Child',
-            'parent_id'   => $taxon->id,
+            'name' => 'Child',
+            'parent_id' => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -179,20 +181,20 @@ class TaxonTest extends TestCase
         $taxon = Taxon::create(['name' => 'Parent', 'taxonomy_id' => $taxonomy->id]);
 
         Taxon::create([
-            'name'        => 'Child 1',
-            'parent_id'   => $taxon->id,
+            'name' => 'Child 1',
+            'parent_id' => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         Taxon::create([
-            'name'        => 'Child 2',
-            'parent_id'   => $taxon->id,
+            'name' => 'Child 2',
+            'parent_id' => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         Taxon::create([
-            'name'        => 'Child 3',
-            'parent_id'   => $taxon->id,
+            'name' => 'Child 3',
+            'parent_id' => $taxon->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -208,32 +210,32 @@ class TaxonTest extends TestCase
         $root2 = Taxon::create(['name' => 'Root 2', 'taxonomy_id' => $taxonomy->id]);
 
         $root1Child1 = Taxon::create([
-            'name'        => 'Root 1 Child 1',
-            'parent_id'   => $root1->id,
+            'name' => 'Root 1 Child 1',
+            'parent_id' => $root1->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $root1Child2 = Taxon::create([
-            'name'        => 'Root 1 Child 2',
-            'parent_id'   => $root1->id,
+            'name' => 'Root 1 Child 2',
+            'parent_id' => $root1->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $root1Child2Child1 = Taxon::create([
-            'name'        => 'Root 1 Child 2 Child 1',
-            'parent_id'   => $root1Child2->id,
+            'name' => 'Root 1 Child 2 Child 1',
+            'parent_id' => $root1Child2->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $root1Child2Child1Child1 = Taxon::create([
-            'name'        => 'Root 1 Child 2 Child 1 Child 1',
-            'parent_id'   => $root1Child2Child1->id,
+            'name' => 'Root 1 Child 2 Child 1 Child 1',
+            'parent_id' => $root1Child2Child1->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
-        $root2Child1 =Taxon::create([
-            'name'        => 'Root 2 Child 1',
-            'parent_id'   => $root2->id,
+        $root2Child1 = Taxon::create([
+            'name' => 'Root 2 Child 1',
+            'parent_id' => $root2->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -258,20 +260,20 @@ class TaxonTest extends TestCase
         $root = Taxon::create(['name' => 'root', 'taxonomy_id' => $taxonomy->id]);
 
         $child1 = Taxon::create([
-            'name'        => 'child_1',
-            'parent_id'   => $root->id,
+            'name' => 'child_1',
+            'parent_id' => $root->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $child2 = Taxon::create([
-            'name'        => 'child_2',
-            'parent_id'   => $child1->id,
+            'name' => 'child_2',
+            'parent_id' => $child1->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $child3 = Taxon::create([
-            'name'        => 'child_3',
-            'parent_id'   => $child2->id,
+            'name' => 'child_3',
+            'parent_id' => $child2->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -298,14 +300,14 @@ class TaxonTest extends TestCase
         $root = Taxon::create(['name' => 'root', 'taxonomy_id' => $taxonomy->id]);
 
         $child1 = Taxon::create([
-            'name'        => 'child_1',
-            'parent_id'   => $root->id,
+            'name' => 'child_1',
+            'parent_id' => $root->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $child2 = Taxon::create([
-            'name'        => 'child_2',
-            'parent_id'   => $child1->id,
+            'name' => 'child_2',
+            'parent_id' => $child1->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -330,14 +332,14 @@ class TaxonTest extends TestCase
         $root = Taxon::create(['name' => 'root', 'taxonomy_id' => $taxonomy->id]);
 
         $child1 = Taxon::create([
-            'name'        => 'child_1',
-            'parent_id'   => $root->id,
+            'name' => 'child_1',
+            'parent_id' => $root->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         $child2 = Taxon::create([
-            'name'        => 'child_2',
-            'parent_id'   => $child1->id,
+            'name' => 'child_2',
+            'parent_id' => $child1->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
@@ -359,8 +361,8 @@ class TaxonTest extends TestCase
         $root = Taxon::create(['name' => 'Parent', 'taxonomy_id' => $taxonomy->id]);
 
         $child = Taxon::create([
-            'name'        => 'Child',
-            'parent_id'   => $root->id,
+            'name' => 'Child',
+            'parent_id' => $root->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 

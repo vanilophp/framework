@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Category\Tests\Dummies;
 
 use Vanilo\Category\Models\Taxon as BaseTaxon;

@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TaxonScopesTest class.
  *
@@ -97,20 +99,20 @@ class TaxonScopesTest extends TestCase
         Taxon::create(['name' => 'Top 2', 'taxonomy_id' => $taxonomy->id]);
 
         Taxon::create([
-            'name'        => 'Child 1',
-            'parent_id'   => $root->id,
+            'name' => 'Child 1',
+            'parent_id' => $root->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         Taxon::create([
-            'name'        => 'Child 2',
-            'parent_id'   => $root->id,
+            'name' => 'Child 2',
+            'parent_id' => $root->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 
         Taxon::create([
-            'name'        => 'Child 3',
-            'parent_id'   => $root->id,
+            'name' => 'Child 3',
+            'parent_id' => $root->id,
             'taxonomy_id' => $taxonomy->id
         ]);
 

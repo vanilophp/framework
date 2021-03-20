@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TaxonNeighboursTest class.
  *
@@ -21,7 +23,7 @@ class TaxonNeighboursTest extends TestCase
     {
         $brands = Taxonomy::create(['name' => 'Brands']);
 
-        $sports  = Taxon::create(['name' => 'Sports', 'taxonomy_id' => $brands->id]);
+        $sports = Taxon::create(['name' => 'Sports', 'taxonomy_id' => $brands->id]);
         $fashion = Taxon::create(['name' => 'Fashion', 'taxonomy_id' => $brands->id]);
 
         Taxon::create(['name' => 'Nike', 'taxonomy_id' => $brands->id, 'parent_id' => $sports->id]);
@@ -48,7 +50,7 @@ class TaxonNeighboursTest extends TestCase
     {
         $brands = Taxonomy::create(['name' => 'Brands']);
 
-        $sports  = Taxon::create(['name' => 'Sports', 'taxonomy_id' => $brands->id]);
+        $sports = Taxon::create(['name' => 'Sports', 'taxonomy_id' => $brands->id]);
         $fashion = Taxon::create(['name' => 'Fashion', 'taxonomy_id' => $brands->id]);
 
         Taxon::create(['name' => 'Nike', 'taxonomy_id' => $brands->id, 'parent_id' => $sports->id]);
@@ -69,7 +71,7 @@ class TaxonNeighboursTest extends TestCase
     {
         $brands = Taxonomy::create(['name' => 'Brands']);
 
-        $sports  = Taxon::create(['name' => 'Sports', 'taxonomy_id' => $brands->id]);
+        $sports = Taxon::create(['name' => 'Sports', 'taxonomy_id' => $brands->id]);
         $fashion = Taxon::create(['name' => 'Fashion', 'taxonomy_id' => $brands->id]);
 
         Taxon::create(['name' => 'Nike', 'priority' => 1, 'taxonomy_id' => $brands->id, 'parent_id' => $sports->id]);
