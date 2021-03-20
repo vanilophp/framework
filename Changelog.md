@@ -2,8 +2,13 @@
 
 ## 2.x Series
 
+### Unreleased
+##### 2021-XX-YY
+
+- Changed internal CS ruleset from PSR-2 to PSR-12
+
 ### 2.1.0
-###### 2020-12-31
+##### 2020-12-31
 
 - Added PHP 8 support
 - Added the `HasImages` interface
