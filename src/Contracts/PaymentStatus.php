@@ -13,6 +13,17 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Contracts;
 
+/**
+ * @method static PaymentStatus PENDING()
+ * @method static PaymentStatus AUTHORIZED()
+ * @method static PaymentStatus ON_HOLD()
+ * @method static PaymentStatus PAID()
+ * @method static PaymentStatus PARTIALLY_PAID()
+ * @method static PaymentStatus DECLINED()
+ * @method static PaymentStatus TIMEOUT()
+ * @method static PaymentStatus CANCELLED()
+ * @method static PaymentStatus REFUNDED()
+ */
 interface PaymentStatus
 {
 }
