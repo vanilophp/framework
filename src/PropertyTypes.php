@@ -36,7 +36,7 @@ final class PropertyTypes
             return;
         }
 
-        if (!class_implements($class, PropertyType::class)) {
+        if (!in_array(PropertyType::class, class_implements($class))) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'The class you are trying to register (%s) as property type, ' .
