@@ -69,11 +69,11 @@ class NanoIdGeneratorTest extends TestCase
     public function the_alphabet_can_be_specified_within_the_constructor()
     {
         $alphabetsAndSizes = [
-            'abcdefghijklmnopqrstwxyz'                                         => 12,
-            'abcdefghjklmnopqrstwxyzABCDEFGHJKLMNOPQRSTWXYZ123456789'          => 21,
-            '0123456789'                                                       => 8,
+            'abcdefghijklmnopqrstwxyz' => 12,
+            'abcdefghjklmnopqrstwxyzABCDEFGHJKLMNOPQRSTWXYZ123456789' => 21,
+            '0123456789' => 8,
             '_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' => 21,
-            '[]{}|:<>!@#$%^&*()-_=+~'                                          => 10
+            '[]{}|:<>!@#$%^&*()-_=+~' => 10
         ];
 
         foreach ($alphabetsAndSizes as $alphabet => $size) {
