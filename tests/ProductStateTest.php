@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ProductStateTest class.
  *
@@ -25,7 +27,7 @@ class ProductStateTest extends TestCase
     {
         $product = Product::create([
             'name' => 'The Big Enums Book',
-            'sku'  => 'BOOK-001'
+            'sku' => 'BOOK-001'
         ]);
 
         $this->assertInstanceOf(Enum::class, $product->state);
@@ -39,7 +41,7 @@ class ProductStateTest extends TestCase
     {
         $product = Product::create([
             'name' => 'The Medium Enums Book',
-            'sku'  => 'BOOK-002'
+            'sku' => 'BOOK-002'
         ]);
 
         $this->assertEquals(ProductStateProxy::defaultValue(), $product->state->value());
@@ -51,8 +53,8 @@ class ProductStateTest extends TestCase
     public function the_state_can_be_set_via_enum_object()
     {
         $product = Product::create([
-            'name'  => 'The Small Enums Book',
-            'sku'   => 'BOOK-003',
+            'name' => 'The Small Enums Book',
+            'sku' => 'BOOK-003',
             'state' => ProductState::ACTIVE()
         ]);
 
@@ -65,8 +67,8 @@ class ProductStateTest extends TestCase
     public function the_state_can_be_set_via_scalar()
     {
         $product = Product::create([
-            'name'  => 'The Small Enums Book',
-            'sku'   => 'BOOK-003',
+            'name' => 'The Small Enums Book',
+            'sku' => 'BOOK-003',
             'state' => 'active'
         ]);
 
@@ -80,7 +82,7 @@ class ProductStateTest extends TestCase
     {
         $product = Product::create([
             'name' => 'The Tiny Enums Book',
-            'sku'  => 'BOOK-004'
+            'sku' => 'BOOK-004'
         ]);
 
         $defaultState = new ProductState();
@@ -105,8 +107,8 @@ class ProductStateTest extends TestCase
     public function active_status_can_be_returned_by_the_is_active_property_as_well()
     {
         $product = Product::create([
-            'name'  => 'The Micro Enum Book',
-            'sku'   => 'BOOK-005',
+            'name' => 'The Micro Enum Book',
+            'sku' => 'BOOK-005',
             'state' => ProductState::ACTIVE
         ]);
 

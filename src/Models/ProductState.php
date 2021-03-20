@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ProductState enum class.
  *
@@ -16,13 +18,13 @@ use Vanilo\Product\Contracts\ProductState as ProductStateContract;
 
 class ProductState extends Enum implements ProductStateContract
 {
-    const __DEFAULT = self::DRAFT;
+    public const __DEFAULT = self::DRAFT;
 
-    const DRAFT       = 'draft';
-    const INACTIVE    = 'inactive';
-    const ACTIVE      = 'active';
-    const UNAVAILABLE = 'unavailable';
-    const RETIRED     = 'retired';
+    public const DRAFT = 'draft';
+    public const INACTIVE = 'inactive';
+    public const ACTIVE = 'active';
+    public const UNAVAILABLE = 'unavailable';
+    public const RETIRED = 'retired';
 
     protected static $activeStates = [self::ACTIVE];
 

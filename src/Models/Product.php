@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Product class.
  *
@@ -19,7 +21,9 @@ use Vanilo\Product\Contracts\Product as ProductContract;
 
 class Product extends Model implements ProductContract
 {
-    use CastsEnums, Sluggable, SluggableScopeHelpers;
+    use CastsEnums;
+    use Sluggable;
+    use SluggableScopeHelpers;
 
     protected $table = 'products';
 

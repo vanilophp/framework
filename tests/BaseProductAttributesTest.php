@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the BaseProductAttributesTest class.
  *
@@ -23,7 +25,7 @@ class BaseProductAttributesTest extends TestCase
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
-            'sku'  => 'DLL-74237'
+            'sku' => 'DLL-74237'
         ]);
 
         $this->assertNotNull($product->id);
@@ -38,7 +40,7 @@ class BaseProductAttributesTest extends TestCase
     {
         $product = ProductProxy::create([
             'name' => 'Dell Latitude E7440 Laptop',
-            'sku'  => 'DLL-74234'
+            'sku' => 'DLL-74234'
         ]);
 
         $this->assertNotNull($product->id);
@@ -52,14 +54,14 @@ class BaseProductAttributesTest extends TestCase
     public function all_fields_can_be_properly_set()
     {
         $product = Product::create([
-            'name'             => 'Maxi Baxi 2000',
-            'sku'              => 'MXB-2000',
-            'stock'            => 123.4567,
-            'slug'             => 'maxi-baxi-2000',
-            'excerpt'          => 'Maxi Baxi 2000 is the THING you always have dreamt of',
-            'description'      => 'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
-            'state'            => 'active',
-            'meta_keywords'    => 'maxi, baxi, dreams',
+            'name' => 'Maxi Baxi 2000',
+            'sku' => 'MXB-2000',
+            'stock' => 123.4567,
+            'slug' => 'maxi-baxi-2000',
+            'excerpt' => 'Maxi Baxi 2000 is the THING you always have dreamt of',
+            'description' => 'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
+            'state' => 'active',
+            'meta_keywords' => 'maxi, baxi, dreams',
             'meta_description' => 'The THING you always have dreamt of'
         ]);
 
@@ -86,7 +88,7 @@ class BaseProductAttributesTest extends TestCase
     {
         $product = Product::create([
             'name' => 'Hello What?',
-            'sku'  => 'NEEDED-1'
+            'sku' => 'NEEDED-1'
         ]);
 
         $this->assertEquals('Hello What?', $product->title());
@@ -98,8 +100,8 @@ class BaseProductAttributesTest extends TestCase
     public function the_title_method_returns_the_title_if_the_field_is_set()
     {
         $product = Product::create([
-            'name'      => 'Hello Why?',
-            'sku'       => 'NEEDED-2',
+            'name' => 'Hello Why?',
+            'sku' => 'NEEDED-2',
             'ext_title' => 'Buy the book Hello Why? with discount'
         ]);
 
@@ -112,14 +114,14 @@ class BaseProductAttributesTest extends TestCase
     public function the_title_can_be_returned_via_property_returns_as_well()
     {
         $productWithTitle = Product::create([
-            'name'      => 'Hello When?',
-            'sku'       => 'NEEDED-3',
+            'name' => 'Hello When?',
+            'sku' => 'NEEDED-3',
             'ext_title' => 'Buy Kitty Kats'
         ]);
 
         $productWithoutTitle = Product::create([
             'name' => 'Hello Where?',
-            'sku'  => 'NEEDED-4'
+            'sku' => 'NEEDED-4'
         ]);
 
         $this->assertEquals('Buy Kitty Kats', $productWithTitle->title);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Product\Tests;
 
 use Vanilo\Product\Models\Product;
@@ -12,8 +14,8 @@ class ProductStockTest extends TestCase
     public function field_value_can_be_specified()
     {
         $product = Product::create([
-            'name'  => 'Dell Latitude E7240 Laptop',
-            'sku'   => 'DLL-74237',
+            'name' => 'Dell Latitude E7240 Laptop',
+            'sku' => 'DLL-74237',
             'stock' => 123.45
         ]);
 
@@ -26,8 +28,8 @@ class ProductStockTest extends TestCase
     public function field_value_returns_a_numeric_value()
     {
         $createdProduct = Product::create([
-            'name'  => 'Dell Latitude E7240 Laptop',
-            'sku'   => 'DLL-74237',
+            'name' => 'Dell Latitude E7240 Laptop',
+            'sku' => 'DLL-74237',
             'stock' => 123.45
         ]);
 
@@ -43,7 +45,7 @@ class ProductStockTest extends TestCase
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
-            'sku'  => 'DLL-74237'
+            'sku' => 'DLL-74237'
         ]);
 
         $this->assertEquals(0, $product->stock);
@@ -55,8 +57,8 @@ class ProductStockTest extends TestCase
     public function isOnStock_returns_true_if_the_stock_is_greater_than_zero()
     {
         $product = Product::create([
-            'name'  => 'Dell Latitude E7240 Laptop',
-            'sku'   => 'DLL-74237',
+            'name' => 'Dell Latitude E7240 Laptop',
+            'sku' => 'DLL-74237',
             'stock' => 123.45
         ]);
 
@@ -69,8 +71,8 @@ class ProductStockTest extends TestCase
     public function isOnStock_returns_false_if_the_stock_is_equal_to_zero()
     {
         $product = Product::create([
-            'name'  => 'Dell Latitude E7240 Laptop',
-            'sku'   => 'DLL-74237',
+            'name' => 'Dell Latitude E7240 Laptop',
+            'sku' => 'DLL-74237',
             'stock' => 0
         ]);
 
@@ -83,8 +85,8 @@ class ProductStockTest extends TestCase
     public function isOnStock_returns_false_if_the_stock_is_less_than_zero()
     {
         $product = Product::create([
-            'name'  => 'Dell Latitude E7240 Laptop',
-            'sku'   => 'DLL-74237',
+            'name' => 'Dell Latitude E7240 Laptop',
+            'sku' => 'DLL-74237',
             'stock' => -123.45
         ]);
 
