@@ -106,16 +106,16 @@ class TimeHashGenerator implements OrderNumberGenerator
         $number = sprintf(
             '%s-%s-%s%s%s',
             $this->getYearAndDayHash($date),
-            str_pad(base_convert($date->secondsSinceMidnight(), 10, 36), 4, '0', STR_PAD_LEFT),
-            str_pad(base_convert($this->getRapidMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT),
-            base_convert(mt_rand(0, 35), 10, 36), //always one char
+            str_pad(base_convert((string) $date->secondsSinceMidnight(), 10, 36), 4, '0', STR_PAD_LEFT),
+            str_pad(base_convert((string) $this->getRapidMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT),
+            base_convert((string) mt_rand(0, 35), 10, 36), //always one char
             ((string) $this->getSlowMicroNumber())[0]
         );
 
         if ($this->highVariance) {
             $number .= '-'
-                . str_pad(base_convert($this->getSlowMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT)
-                . str_pad(base_convert(mt_rand(0, 1295), 10, 36), 2, '0', STR_PAD_LEFT);
+                . str_pad(base_convert((string) $this->getSlowMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT)
+                . str_pad(base_convert((string) mt_rand(0, 1295), 10, 36), 2, '0', STR_PAD_LEFT);
         }
 
         return $this->uppercase ? strtoupper($number) : $number;
@@ -128,7 +128,7 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     protected function getYearAndDayHash(Carbon $date)
     {
-        return str_pad(base_convert($date->diffInDays($this->startBaseDate), 10, 36), 3, '0', STR_PAD_LEFT);
+        return str_pad(base_convert((string) $date->diffInDays($this->startBaseDate), 10, 36), 3, '0', STR_PAD_LEFT);
     }
 
     /**
