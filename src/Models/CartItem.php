@@ -44,7 +44,7 @@ class CartItem extends Model implements CartItemContract
      */
     public function getQuantity(): int
     {
-        return $this->quantity;
+        return (int) $this->quantity;
     }
 
     /**
