@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the SequentialNumberGeneratorTest class.
  *
@@ -24,9 +26,9 @@ class SequentialNumberGeneratorTest extends TestCase
 
         $this->item = [
             'product_type' => 'product',
-            'product_id'   => 1,
-            'price'        => 129,
-            'quantity'     => 1
+            'product_id' => 1,
+            'price' => 129,
+            'quantity' => 1
         ];
     }
 
@@ -59,7 +61,7 @@ class SequentialNumberGeneratorTest extends TestCase
     {
         $factory = new OrderFactory(new SequentialNumberGenerator());
 
-        $firstOrder  = $factory->createFromDataArray([], [$this->item]);
+        $firstOrder = $factory->createFromDataArray([], [$this->item]);
         $secondOrder = $factory->createFromDataArray([], [$this->item]);
 
         $this->assertEquals('2', $secondOrder->getNumber());
@@ -166,7 +168,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $numbers = [];
 
         for ($i = 0; $i < $generateX; $i++) {
-            $order     = $factory->createFromDataArray([], [$this->item]);
+            $order = $factory->createFromDataArray([], [$this->item]);
             $numbers[] = $order->getNumber();
         }
 

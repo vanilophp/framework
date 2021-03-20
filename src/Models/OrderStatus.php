@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the OrderStatus enum class.
  *
@@ -16,22 +18,22 @@ use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
 
 class OrderStatus extends Enum implements OrderStatusContract
 {
-    const __DEFAULT = self::PENDING;
+    public const __DEFAULT = self::PENDING;
 
     /**
      * Pending orders are brand new orders that have not been processed yet.
      */
-    const PENDING = 'pending';
+    public const PENDING = 'pending';
 
     /**
      * Orders fulfilled completely.
      */
-    const COMPLETED = 'completed';
+    public const COMPLETED = 'completed';
 
     /**
      * Order that has been cancelled.
      */
-    const CANCELLED = 'cancelled';
+    public const CANCELLED = 'cancelled';
 
     // $labels static property needs to be defined
     public static $labels = [];
@@ -51,9 +53,9 @@ class OrderStatus extends Enum implements OrderStatusContract
     protected static function boot()
     {
         static::$labels = [
-            self::PENDING     => __('Pending'),
-            self::COMPLETED   => __('Completed'),
-            self::CANCELLED   => __('Cancelled')
+            self::PENDING => __('Pending'),
+            self::COMPLETED => __('Completed'),
+            self::CANCELLED => __('Cancelled')
         ];
     }
 }

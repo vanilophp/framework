@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CreateOrderTest class.
  *
@@ -117,25 +119,25 @@ class CreateOrderTest extends TestCase
     public function all_fields_can_be_properly_set()
     {
         Country::create([
-            'id'           => 'DE',
-            'name'         => 'Germany',
-            'phonecode'    => 49,
+            'id' => 'DE',
+            'name' => 'Germany',
+            'phonecode' => 49,
             'is_eu_member' => 1
         ]);
 
         factory(User::class, 271)->create();
         factory(Address::class, 8)->create(['type' => AddressType::SHIPPING]);
-        $user            = User::orderBy('id', 'desc')->first();
+        $user = User::orderBy('id', 'desc')->first();
         $shippingAddress = Address::orderBy('id', 'desc')->first();
-        $billpayer       = factory(Billpayer::class)->create();
+        $billpayer = factory(Billpayer::class)->create();
 
         $order = Order::create([
-            'number'              => 'UEOIP',
-            'status'              => OrderStatus::COMPLETED(),
-            'user_id'             => $user->id,
-            'billpayer_id'        => $billpayer->id,
+            'number' => 'UEOIP',
+            'status' => OrderStatus::COMPLETED(),
+            'user_id' => $user->id,
+            'billpayer_id' => $billpayer->id,
             'shipping_address_id' => $shippingAddress->id,
-            'notes'               => 'Never fight an inanimate object'
+            'notes' => 'Never fight an inanimate object'
         ]);
 
         $this->assertEquals('UEOIP', $order->number);

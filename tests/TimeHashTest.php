@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TimeHashTest class.
  *
@@ -107,7 +109,7 @@ class TimeHashTest extends TestCase
      */
     public function can_be_configured_to_return_numbers_in_uppercase()
     {
-        $number =  $this->generator->generateNumber();
+        $number = $this->generator->generateNumber();
         $this->assertEquals($number, strtolower($number));
         $this->assertNotEquals($number, strtoupper($number));
 

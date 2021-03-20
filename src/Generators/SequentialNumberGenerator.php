@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the SequentialNumberGenerator class.
  *
@@ -32,9 +34,9 @@ class SequentialNumberGenerator implements OrderNumberGenerator
     public function __construct()
     {
         $this->startSequenceFrom = $this->config('start_sequence_from', 1);
-        $this->prefix            = $this->config('prefix', '');
-        $this->padLength         = $this->config('pad_length', 1);
-        $this->padString         = $this->config('pad_string', '0');
+        $this->prefix = $this->config('prefix', '');
+        $this->padLength = $this->config('pad_length', 1);
+        $this->padString = $this->config('pad_string', '0');
     }
 
     /**

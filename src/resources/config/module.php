@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'number' => [
-        'generator'         => 'time_hash', //possible values: time_hash, sequential_number, nano_id
+        'generator' => 'time_hash', //possible values: time_hash, sequential_number, nano_id
         'sequential_number' => [
             'start_sequence_from' => 1,
-            'prefix'              => '',
-            'pad_length'          => 1,
-            'pad_string'          => '0'
+            'prefix' => '',
+            'pad_length' => 1,
+            'pad_string' => '0'
         ],
         'time_hash' => [
-            'high_variance'   => false,
+            'high_variance' => false,
             'start_base_date' => '2000-01-01',
-            'uppercase'       => false
+            'uppercase' => false
         ],
         'nano_id' => [
-            'size'     => 12,
+            'size' => 12,
             'alphabet' => '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         ],
     ]

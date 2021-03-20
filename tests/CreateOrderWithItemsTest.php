@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CreateOrderWithItemsTest class.
  *
@@ -26,10 +28,10 @@ class CreateOrderWithItemsTest extends TestCase
 
         $order->items()->create([
             'product_type' => 'product',
-            'product_id'   => 1,
-            'name'         => 'Tesla charger',
-            'quantity'     => 1,
-            'price'        => 179.99
+            'product_id' => 1,
+            'name' => 'Tesla charger',
+            'quantity' => 1,
+            'price' => 179.99
         ]);
 
         $this->assertCount(1, $order->items);
@@ -67,17 +69,17 @@ class CreateOrderWithItemsTest extends TestCase
         $order->items()->createMany([
             [
                 'product_type' => 'product',
-                'product_id'   => 1,
-                'name'         => 'Tesla charger',
-                'quantity'     => 1,
-                'price'        => 179.99
+                'product_id' => 1,
+                'name' => 'Tesla charger',
+                'quantity' => 1,
+                'price' => 179.99
             ],
             [
                 'product_type' => 'product',
-                'product_id'   => 2,
-                'name'         => 'Prius charger',
-                'quantity'     => 1,
-                'price'        => 199.99
+                'product_id' => 2,
+                'name' => 'Prius charger',
+                'quantity' => 1,
+                'price' => 199.99
             ]
         ]);
 

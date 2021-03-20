@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the OrderFactoryTest class.
  *
@@ -36,14 +38,14 @@ class OrderFactoryTest extends TestCase
         parent::setUp();
 
         $this->mazdaRX8 = Product::create([
-            'name'  => 'Mazda RX-8',
-            'sku'   => 'SE3P',
+            'name' => 'Mazda RX-8',
+            'sku' => 'SE3P',
             'price' => 10899
         ]);
 
         $this->volvoV90 = Product::create([
-            'name'  => 'Volvo V90',
-            'sku'   => 'B4204T20',
+            'name' => 'Volvo V90',
+            'sku' => 'B4204T20',
             'price' => 59600
         ]);
 
@@ -62,10 +64,10 @@ class OrderFactoryTest extends TestCase
             [
                 [
                     'product_type' => 'product',
-                    'product_id'   => $this->mazdaRX8->getId(),
-                    'name'         => $this->mazdaRX8->getName(),
-                    'quantity'     => 1,
-                    'price'        => $this->mazdaRX8->getPrice()
+                    'product_id' => $this->mazdaRX8->getId(),
+                    'name' => $this->mazdaRX8->getName(),
+                    'quantity' => 1,
+                    'price' => $this->mazdaRX8->getPrice()
                 ]
             ]
         );
@@ -81,7 +83,7 @@ class OrderFactoryTest extends TestCase
 
         // Testing the item
         $this->assertCount(1, $order->items);
-        $item  = $order->items->first();
+        $item = $order->items->first();
         $this->assertEquals($this->mazdaRX8->getName(), $item->name);
         $this->assertEquals($this->mazdaRX8->getPrice(), $item->price);
         $this->assertEquals(1, $item->quantity);
@@ -105,10 +107,10 @@ class OrderFactoryTest extends TestCase
         $order = $this->factory->createFromDataArray([], [
             [
                 'product_type' => 'product',
-                'product_id'   => $this->mazdaRX8->getId(),
-                'name'         => $this->mazdaRX8->getName(),
-                'quantity'     => 1,
-                'price'        => $this->mazdaRX8->getPrice()
+                'product_id' => $this->mazdaRX8->getId(),
+                'name' => $this->mazdaRX8->getName(),
+                'quantity' => 1,
+                'price' => $this->mazdaRX8->getPrice()
             ]
         ]);
 
@@ -125,10 +127,10 @@ class OrderFactoryTest extends TestCase
         $order = $this->factory->createFromDataArray([], [
             [
                 'product_type' => 'product',
-                'product_id'   => $this->mazdaRX8->getId(),
-                'name'         => $this->mazdaRX8->getName(),
-                'quantity'     => 1,
-                'price'        => $this->mazdaRX8->getPrice()
+                'product_id' => $this->mazdaRX8->getId(),
+                'name' => $this->mazdaRX8->getName(),
+                'quantity' => 1,
+                'price' => $this->mazdaRX8->getPrice()
             ]
         ]);
 
@@ -147,9 +149,9 @@ class OrderFactoryTest extends TestCase
             [
                 [
                     'product_type' => 'product',
-                    'product_id'   => $this->mazdaRX8->getId(),
-                    'name'         => $this->mazdaRX8->getName(),
-                    'price'        => $this->mazdaRX8->getPrice()
+                    'product_id' => $this->mazdaRX8->getId(),
+                    'name' => $this->mazdaRX8->getName(),
+                    'price' => $this->mazdaRX8->getPrice()
                 ]
             ]
         );
@@ -173,7 +175,7 @@ class OrderFactoryTest extends TestCase
             [],
             [
                 [
-                    'product'  => $this->mazdaRX8,
+                    'product' => $this->mazdaRX8,
                     'quantity' => 3
                 ]
             ]
@@ -196,7 +198,7 @@ class OrderFactoryTest extends TestCase
     {
         $order = $this->factory->createFromDataArray([], [
             [
-                'product'  => $this->mazdaRX8
+                'product' => $this->mazdaRX8
             ]
         ]);
 
@@ -226,14 +228,13 @@ class OrderFactoryTest extends TestCase
         $order = $this->factory->createFromDataArray([], [
             [
                 'product_type' => 'product',
-                'product_id'   => $this->mazdaRX8->getId(),
-                'name'         => $this->mazdaRX8->getName(),
-                'price'        => $this->mazdaRX8->getPrice()
+                'product_id' => $this->mazdaRX8->getId(),
+                'name' => $this->mazdaRX8->getName(),
+                'price' => $this->mazdaRX8->getPrice()
             ],
             [
-                'product'  => $this->volvoV90
+                'product' => $this->volvoV90
             ],
-
         ]);
 
         $this->assertCount(2, $order->getItems());
@@ -278,9 +279,9 @@ class OrderFactoryTest extends TestCase
     public function separate_billing_address_entry_gets_created_for_the_order()
     {
         Country::create([
-            'id'           => 'DE',
-            'name'         => 'Germany',
-            'phonecode'    => 49,
+            'id' => 'DE',
+            'name' => 'Germany',
+            'phonecode' => 49,
             'is_eu_member' => 1
         ]);
 
@@ -288,16 +289,16 @@ class OrderFactoryTest extends TestCase
             [
             'billpayer' => [
                 'address' => [
-                    'name'       => 'Johnny Bravo',
+                    'name' => 'Johnny Bravo',
                     'country_id' => 'DE',
-                    'city'       => 'Aron City',
-                    'address'    => '12 Sandy Baker Street'
+                    'city' => 'Aron City',
+                    'address' => '12 Sandy Baker Street'
                 ]
             ]
         ],
             [
             [
-                'product'  => $this->volvoV90
+                'product' => $this->volvoV90
             ],
         ]
         );

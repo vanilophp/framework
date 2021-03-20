@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the OrderItemProductTest class.
  *
@@ -25,8 +27,8 @@ class OrderItemProductTest extends TestCase
         parent::setUp();
 
         $this->theMoonRing = Product::create([
-            'name'  => 'The Moon Ring',
-            'sku'   => 'B01KR3SAIS',
+            'name' => 'The Moon Ring',
+            'sku' => 'B01KR3SAIS',
             'price' => 17.95
         ]);
     }
@@ -42,13 +44,13 @@ class OrderItemProductTest extends TestCase
 
         $order->items()->create([
             'product_type' => 'product',
-            'product_id'   => $this->theMoonRing->getId(),
-            'quantity'     => 1,
-            'name'         => $this->theMoonRing->getName(),
-            'price'        => $this->theMoonRing->getPrice()
+            'product_id' => $this->theMoonRing->getId(),
+            'quantity' => 1,
+            'name' => $this->theMoonRing->getName(),
+            'price' => $this->theMoonRing->getPrice()
         ]);
 
-        $item    = $order->items->first();
+        $item = $order->items->first();
         $product = $item->product;
         $this->assertInstanceOf(Buyable::class, $product);
         $this->assertInstanceOf(Product::class, $product);
@@ -58,7 +60,7 @@ class OrderItemProductTest extends TestCase
         $order = $order->fresh();
 
         // And repeat the test
-        $item    = $order->items->first();
+        $item = $order->items->first();
         $product = $item->product;
         $this->assertInstanceOf(Buyable::class, $product);
         $this->assertInstanceOf(Product::class, $product);

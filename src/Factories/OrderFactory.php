@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the OrderFactory class.
  *
@@ -50,7 +52,7 @@ class OrderFactory implements OrderFactoryContract
             $order = app(Order::class);
 
             $order->fill(Arr::except($data, ['billpayer', 'shippingAddress']));
-            $order->number  = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
+            $order->number = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
             $order->user_id = $data['user_id'] ?? auth()->id();
             $order->save();
 
@@ -106,7 +108,7 @@ class OrderFactory implements OrderFactoryContract
 
     protected function createItems(Order $order, array $items)
     {
-        $that        = $this;
+        $that = $this;
         $hasBuyables = collect($items)->contains(function ($item) use ($that) {
             return $that->itemContainsABuyable($item);
         });
@@ -131,11 +133,11 @@ class OrderFactory implements OrderFactoryContract
         if ($this->itemContainsABuyable($item)) {
             /** @var Buyable $product */
             $product = $item['product'];
-            $item    = array_merge($item, [
+            $item = array_merge($item, [
                 'product_type' => $product->morphTypeName(),
-                'product_id'   => $product->getId(),
-                'price'        => $product->getPrice(),
-                'name'         => $product->getName()
+                'product_id' => $product->getId(),
+                'price' => $product->getPrice(),
+                'name' => $product->getName()
             ]);
             unset($item['product']);
         }
@@ -158,12 +160,12 @@ class OrderFactory implements OrderFactoryContract
     private function addressToAttributes(Address $address)
     {
         return [
-            'name'       => $address->getName(),
+            'name' => $address->getName(),
             'postalcode' => $address->getPostalCode(),
             'country_id' => $address->getCountryCode(),
             /** @todo Convert Province code to province_id */
-            'city'       => $address->getCity(),
-            'address'    => $address->getAddress(),
+            'city' => $address->getCity(),
+            'address' => $address->getAddress(),
         ];
     }
 
@@ -180,7 +182,7 @@ class OrderFactory implements OrderFactoryContract
             );
         }
 
-        $type            = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
+        $type = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
         $address['type'] = $type;
         $address['name'] = empty(Arr::get($address, 'name')) ? '-' : $address['name'];
 

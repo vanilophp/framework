@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the TimeHashGenerator class.
  *
@@ -37,8 +39,8 @@ class TimeHashGenerator implements OrderNumberGenerator
 
     public function __construct()
     {
-        $this->highVariance  = $this->config('high_variance', false);
-        $this->uppercase     = $this->config('uppercase', false);
+        $this->highVariance = $this->config('high_variance', false);
+        $this->uppercase = $this->config('uppercase', false);
         $this->startBaseDate = Carbon::parse($this->config('start_base_date', $this->startBaseDate));
     }
 
@@ -101,7 +103,7 @@ class TimeHashGenerator implements OrderNumberGenerator
     {
         $date = Carbon::now();
 
-        $number =  sprintf(
+        $number = sprintf(
             '%s-%s-%s%s%s',
             $this->getYearAndDayHash($date),
             str_pad(base_convert($date->secondsSinceMidnight(), 10, 36), 4, '0', STR_PAD_LEFT),

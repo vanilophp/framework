@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the AddressesTest class.
  *
@@ -13,9 +15,9 @@ namespace Vanilo\Order\Tests;
 
 use Konekt\Address\Models\Country;
 use Vanilo\Contracts\Address as AddressContract;
-use Vanilo\Order\Tests\Dummies\Address;
 use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\Order;
+use Vanilo\Order\Tests\Dummies\Address;
 
 class AddressesTest extends TestCase
 {
@@ -24,16 +26,16 @@ class AddressesTest extends TestCase
         parent::setUp();
 
         Country::create([
-            'id'           => 'DK',
-            'name'         => 'Denmark',
-            'phonecode'    => 45,
+            'id' => 'DK',
+            'name' => 'Denmark',
+            'phonecode' => 45,
             'is_eu_member' => 1
         ]);
 
         Country::create([
-            'id'           => 'DE',
-            'name'         => 'Germany',
-            'phonecode'    => 49,
+            'id' => 'DE',
+            'name' => 'Germany',
+            'phonecode' => 49,
             'is_eu_member' => 1
         ]);
     }
@@ -51,22 +53,22 @@ class AddressesTest extends TestCase
             ->address()
             ->associate(Address::create(
                 [
-                'name'       => 'Karen Blixen',
+                'name' => 'Karen Blixen',
                 'country_id' => 'DK',
                 'postalcode' => '2960',
-                'city'       => 'Rungsted',
-                'address'    => 'Strandvej 111'
+                'city' => 'Rungsted',
+                'address' => 'Strandvej 111'
             ]
             ));
         $order->billpayer()->associate($billpayer);
         $billpayer->save();
 
         $order->shippingAddress()->associate(Address::create([
-            'name'       => 'Karen Blixen',
+            'name' => 'Karen Blixen',
             'country_id' => 'DK',
             'postalcode' => '2960',
-            'city'       => 'Rungsted',
-            'address'    => 'Strandvej 111'
+            'city' => 'Rungsted',
+            'address' => 'Strandvej 111'
         ]));
 
         $order->save();
@@ -88,11 +90,11 @@ class AddressesTest extends TestCase
             ->address()
             ->associate(Address::create(
                 [
-                    'name'       => 'Karen Blixen',
+                    'name' => 'Karen Blixen',
                     'country_id' => 'DK',
                     'postalcode' => '2960',
-                    'city'       => 'Rungsted',
-                    'address'    => 'Strandvej 111'
+                    'city' => 'Rungsted',
+                    'address' => 'Strandvej 111'
                 ]
             ));
         $billpayer->save();
@@ -127,11 +129,11 @@ class AddressesTest extends TestCase
         ]);
 
         $order->shippingAddress()->associate(Address::create([
-            'name'       => 'Katarina Witt',
+            'name' => 'Katarina Witt',
             'country_id' => 'DE',
             'postalcode' => '13591',
-            'city'       => 'Staaken',
-            'address'    => 'Torweg 91'
+            'city' => 'Staaken',
+            'address' => 'Torweg 91'
         ]));
 
         $order->save();
