@@ -21,11 +21,10 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
 {
     public function setUp(): void
     {
+        parent::setUp();
         if ('6' === $this->app->version()[0]) {
             $this->markTestSkipped('This method is incompatible with Laravel 6');
         }
-
-        parent::setUp();
     }
 
     /** @test */
