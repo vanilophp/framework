@@ -20,7 +20,7 @@ use Vanilo\Payment\Contracts\Payment;
 
 trait ReplacesPaymentUrlParameters
 {
-    private function replaceUrlParameters(string $url,Payment $payment): string
+    private function replaceUrlParameters(string $url, Payment $payment): string
     {
         $substitutions = [
             'paymentId' => $payment->getPaymentId(),

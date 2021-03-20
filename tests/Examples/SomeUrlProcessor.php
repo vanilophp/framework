@@ -15,14 +15,13 @@ declare(strict_types=1);
 namespace Vanilo\Payment\Tests\Examples;
 
 use Vanilo\Payment\Contracts\Payment;
-use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\Support\ReplacesPaymentUrlParameters;
 
 class SomeUrlProcessor
 {
     use ReplacesPaymentUrlParameters;
 
-    public function processUrl(string $url,Payment $payment): string
+    public function processUrl(string $url, Payment $payment): string
     {
         return $this->replaceUrlParameters($url, $payment);
     }
