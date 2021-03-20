@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ChannelTest class.
  *
@@ -19,8 +21,8 @@ class ChannelTest extends TestCase
     public function all_mutable_fields_can_be_mass_assigned()
     {
         $channel = Channel::create([
-            'name'          => 'Sweden Online',
-            'slug'          => 'seol',
+            'name' => 'Sweden Online',
+            'slug' => 'seol',
             'configuration' => ['country' => 'se', 'currency' => 'SEK']
         ]);
 
@@ -34,8 +36,8 @@ class ChannelTest extends TestCase
     {
         $channel = new Channel();
 
-        $channel->name          = 'Mobile App';
-        $channel->slug          = 'app';
+        $channel->name = 'Mobile App';
+        $channel->slug = 'app';
         $channel->configuration = ['bam' => 'zdish', 'bumm' => 'tsish'];
 
         $this->assertEquals('Mobile App', $channel->name);
