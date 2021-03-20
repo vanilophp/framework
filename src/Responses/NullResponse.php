@@ -14,7 +14,10 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Responses;
 
+use Konekt\Enum\Enum;
 use Vanilo\Payment\Contracts\PaymentResponse;
+use Vanilo\Payment\Contracts\PaymentStatus;
+use Vanilo\Payment\Models\PaymentStatusProxy;
 
 class NullResponse implements PaymentResponse
 {
@@ -41,5 +44,15 @@ class NullResponse implements PaymentResponse
     public function getPaymentId(): string
     {
         return '';
+    }
+
+    public function getStatus(): PaymentStatus
+    {
+        return PaymentStatusProxy::create(); // Returns the default value of the enum
+    }
+
+    public function getNativeStatus(): Enum
+    {
+        return NullStatus::create();
     }
 }

@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Contracts;
 
+use Konekt\Enum\Enum;
+
 interface PaymentResponse
 {
     public function wasSuccessful(): bool;
@@ -25,4 +27,8 @@ interface PaymentResponse
     public function getAmountPaid(): ?float;
 
     public function getPaymentId(): string;
+
+    public function getStatus(): PaymentStatus;
+
+    public function getNativeStatus(): Enum;
 }
