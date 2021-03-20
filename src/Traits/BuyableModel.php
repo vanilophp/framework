@@ -32,7 +32,7 @@ trait BuyableModel
 
     public function getPrice(): float
     {
-        return $this->price;
+        return (float) $this->price;
     }
 
     public function addSale(Carbon $date, $units = 1): void
