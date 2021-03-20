@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the RequestStore class.
  *
@@ -27,7 +29,9 @@ use Vanilo\Contracts\Billpayer;
  */
 class RequestStore implements CheckoutStore
 {
-    use HasCheckoutState, HasCart, EmulatesFillAttributes;
+    use HasCheckoutState;
+    use HasCart;
+    use EmulatesFillAttributes;
 
     protected $state;
 
@@ -45,8 +49,8 @@ class RequestStore implements CheckoutStore
 
     public function __construct($config, CheckoutDataFactory $dataFactory)
     {
-        $this->dataFactory     = $dataFactory;
-        $this->billpayer       = $dataFactory->createBillpayer();
+        $this->dataFactory = $dataFactory;
+        $this->billpayer = $dataFactory->createBillpayer();
         $this->shippingAddress = $dataFactory->createShippingAddress();
     }
 
@@ -58,7 +62,7 @@ class RequestStore implements CheckoutStore
         $this->updateBillpayer($data['billpayer'] ??  []);
 
         if (Arr::get($data, 'ship_to_billing_address')) {
-            $shippingAddress         = $data['billpayer']['address'];
+            $shippingAddress = $data['billpayer']['address'];
             $shippingAddress['name'] = $this->getShipToName();
         } else {
             $shippingAddress = $data['shippingAddress'] ?? [];

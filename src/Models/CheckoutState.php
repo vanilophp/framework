@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CheckoutState enum class.
  *
@@ -16,12 +18,12 @@ use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 
 class CheckoutState extends Enum implements CheckoutStateContract
 {
-    const __DEFAULT = self::VIRGIN;
+    public const __DEFAULT = self::VIRGIN;
 
-    const VIRGIN    = null;        // There was no interaction with the checkout process yet
-    const STARTED   = 'started';   // The checkout process has been started
-    const READY     = 'ready';     // Checkout data is valid and ready to submit
-    const COMPLETED = 'completed'; // Checkout has been completed
+    public const VIRGIN = null;        // There was no interaction with the checkout process yet
+    public const STARTED = 'started';   // The checkout process has been started
+    public const READY = 'ready';     // Checkout data is valid and ready to submit
+    public const COMPLETED = 'completed'; // Checkout has been completed
 
     protected static $submittableStates = [self::READY];
 

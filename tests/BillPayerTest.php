@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the BillPayerTest class.
  *
@@ -27,18 +29,18 @@ class BillPayerTest extends TestCase
         parent::setUp();
 
         $this->billpayerAttributes = [
-            'email'            => 'random.joe@trimail.co',
-            'phone'            => '1234',
-            'is_organization'  => true,
+            'email' => 'random.joe@trimail.co',
+            'phone' => '1234',
+            'is_organization' => true,
             'is_eu_registered' => false,
-            'company_name'     => 'Trimail Inc.',
-            'tax_nr'           => '5678',
-            'address'          => [
-                'country_code'  => 'US',
+            'company_name' => 'Trimail Inc.',
+            'tax_nr' => '5678',
+            'address' => [
+                'country_code' => 'US',
                 'province_code' => 'NY',
-                'postal_code'   => '55555',
-                'city'          => 'New York',
-                'address'       => 'Clinton Ave. 17'
+                'postal_code' => '55555',
+                'city' => 'New York',
+                'address' => 'Clinton Ave. 17'
             ]
         ];
 

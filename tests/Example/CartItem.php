@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartItem test class.
  *
@@ -25,7 +27,7 @@ class CartItem implements CheckoutSubjectItem
     public function __construct(Buyable $product, $qty)
     {
         $this->product = $product;
-        $this->qty     = $qty;
+        $this->qty = $qty;
     }
 
     public function increaseQuantityWith($increment)

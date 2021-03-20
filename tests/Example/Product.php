@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Product test class.
  *
@@ -25,8 +27,8 @@ class Product implements Buyable
 
     public function __construct($id, $name, $price)
     {
-        $this->id    = $id;
-        $this->name  = $name;
+        $this->id = $id;
+        $this->name = $name;
         $this->price = $price;
     }
 

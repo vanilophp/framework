@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartTest class.
  *
@@ -28,7 +30,7 @@ class CartTest extends TestCase
     {
         parent::setUp();
 
-        $this->productEarly2018  = new Product(1, 'Laracon EU 2018 Ticket Early Bird', 399);
+        $this->productEarly2018 = new Product(1, 'Laracon EU 2018 Ticket Early Bird', 399);
         $this->productNormal2018 = new Product(2, 'Laracon EU 2018 Ticket', 599);
     }
 
