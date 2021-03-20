@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the PreserveForUserTest class.
  *
@@ -12,11 +14,11 @@
 namespace Vanilo\Cart\Tests;
 
 use Illuminate\Support\Facades\Auth;
+use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Models\Cart as CartModel;
 use Vanilo\Cart\Models\CartState;
 use Vanilo\Cart\Tests\Dummies\Product;
 use Vanilo\Cart\Tests\Dummies\User;
-use Vanilo\Cart\Facades\Cart;
 
 class PreserveForUserTest extends TestCase
 {
@@ -33,13 +35,13 @@ class PreserveForUserTest extends TestCase
         config(['vanilo.cart.preserve_for_user' => true]);
 
         $this->user = User::create([
-            'email'    => 'dude.who@uses-devices.info',
-            'name'     => 'Dude Who',
+            'email' => 'dude.who@uses-devices.info',
+            'name' => 'Dude Who',
             'password' => bcrypt('123456 always works')
         ])->fresh();
 
         $this->product = Product::create([
-            'name'  => 'myPad Ultra',
+            'name' => 'myPad Ultra',
             'price' => '279'
         ])->fresh();
     }

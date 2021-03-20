@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ClearCart Test class.
  *
@@ -28,12 +30,12 @@ class ClearCartTest extends TestCase
         parent::setUp();
 
         $this->product5 = Product::create([
-            'name'  => 'Spicy Ketchup',
+            'name' => 'Spicy Ketchup',
             'price' => 1.29
         ]);
 
         $this->product6 = Product::create([
-            'name'  => 'Curry Sauce',
+            'name' => 'Curry Sauce',
             'price' => 1.09
         ]);
     }

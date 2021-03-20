@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Product class.
  *
@@ -18,7 +20,8 @@ use Vanilo\Support\Traits\BuyableNoImage;
 
 class Product extends Model implements Buyable
 {
-    use BuyableModel, BuyableNoImage;
+    use BuyableModel;
+    use BuyableNoImage;
 
     protected $guarded = ['id'];
 }

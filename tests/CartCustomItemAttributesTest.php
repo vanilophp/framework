@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartCustomItemAttributes Test class.
  *
@@ -31,11 +33,11 @@ class CartCustomItemAttributesTest extends TestCase
         ]);
 
         $product = SizedProduct::create([
-            'name'   => 'Kids Backpack in Strawberry Design',
-            'price'  => 14.99,
-            'width'  => 25,
+            'name' => 'Kids Backpack in Strawberry Design',
+            'price' => 14.99,
+            'width' => 25,
             'height' => 29,
-            'depth'  => 15
+            'depth' => 15
         ]);
 
         $item = Cart::addItem($product);
@@ -51,14 +53,14 @@ class CartCustomItemAttributesTest extends TestCase
     public function custom_cart_item_attributes_can_be_passed_and_are_stored_when_adding_a_product_to_cart()
     {
         $product = Product::create([
-            'name'   => 'Kids Backpack Dinosaur',
-            'price'  => 12.99
+            'name' => 'Kids Backpack Dinosaur',
+            'price' => 12.99
         ]);
 
         $item = Cart::addItem($product, 1, ['attributes' => [
-            'width'  => 22,
+            'width' => 22,
             'height' => 27,
-            'depth'  => 9
+            'depth' => 9
         ]]);
 
         $this->assertEquals(22, $item->width);
@@ -76,8 +78,8 @@ class CartCustomItemAttributesTest extends TestCase
         config(['vanilo.cart.extra_product_attributes' => [1]]);
 
         $product = Product::create([
-            'name'   => 'Kids Backpack Dinosaur',
-            'price'  => 12.99
+            'name' => 'Kids Backpack Dinosaur',
+            'price' => 12.99
         ]);
 
         Cart::addItem($product);
@@ -93,8 +95,8 @@ class CartCustomItemAttributesTest extends TestCase
         config(['vanilo.cart.extra_product_attributes' => 'width']);
 
         $product = Product::create([
-            'name'   => 'Kids Backpack Dinosaur',
-            'price'  => 12.99
+            'name' => 'Kids Backpack Dinosaur',
+            'price' => 12.99
         ]);
 
         Cart::addItem($product);
@@ -112,11 +114,11 @@ class CartCustomItemAttributesTest extends TestCase
         ]);
 
         $product = SizedProduct::create([
-            'name'   => 'Kids Backpack in Strawberry Design',
-            'price'  => 14.99,
-            'width'  => 25,
+            'name' => 'Kids Backpack in Strawberry Design',
+            'price' => 14.99,
+            'width' => 25,
             'height' => 29,
-            'depth'  => 15
+            'depth' => 15
         ]);
 
         $item = Cart::addItem($product, 1, ['attributes' => ['width' => 27, 'depth' => 14]]);

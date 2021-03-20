@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartItemTotalTest class.
  *
@@ -27,12 +29,12 @@ class CartItemTotalTest extends TestCase
         parent::setUp();
 
         $this->greenBook = Product::create([
-            'name'  => 'Green Book',
+            'name' => 'Green Book',
             'price' => 12.50
         ]);
 
         $this->blueBook = Product::create([
-            'name'  => 'Blue Book',
+            'name' => 'Blue Book',
             'price' => 17.50 // blue is more expensive because of Monty Python
         ]);
     }

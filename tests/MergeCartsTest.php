@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the MergeCartsTest class.
  *
@@ -30,7 +32,7 @@ class MergeCartsTest extends TestCase
     {
         config(['vanilo.cart.merge_duplicates' => true]);
 
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $product1 = factory(Product::class)->create();
         $product2 = factory(Product::class)->create();
         $product3 = factory(Product::class)->create();
@@ -71,7 +73,7 @@ class MergeCartsTest extends TestCase
     {
         config(['vanilo.cart.merge_duplicates' => false]);
 
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $product1 = factory(Product::class)->create();
         $product2 = factory(Product::class)->create();
         $product3 = factory(Product::class)->create();

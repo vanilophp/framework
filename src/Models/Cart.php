@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Cart class.
  *
@@ -15,15 +17,15 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Contracts\Buyable;
-use Vanilo\Cart\Contracts\Cart as CartContract;
 
 class Cart extends Model implements CartContract
 {
     use CastsEnums;
 
-    const EXTRA_PRODUCT_MERGE_ATTRIBUTES_CONFIG_KEY = 'vanilo.cart.extra_product_attributes';
+    public const EXTRA_PRODUCT_MERGE_ATTRIBUTES_CONFIG_KEY = 'vanilo.cart.extra_product_attributes';
 
     protected $guarded = ['id'];
 
@@ -174,9 +176,9 @@ class Cart extends Model implements CartContract
     {
         return [
             'product_type' => $product->morphTypeName(),
-            'product_id'   => $product->getId(),
-            'quantity'     => $qty,
-            'price'        => $product->getPrice()
+            'product_id' => $product->getId(),
+            'quantity' => $qty,
+            'price' => $product->getPrice()
         ];
     }
 
@@ -192,7 +194,7 @@ class Cart extends Model implements CartContract
     protected function getExtraProductMergeAttributes(Buyable $product)
     {
         $result = [];
-        $cfg    = config(self::EXTRA_PRODUCT_MERGE_ATTRIBUTES_CONFIG_KEY, []);
+        $cfg = config(self::EXTRA_PRODUCT_MERGE_ATTRIBUTES_CONFIG_KEY, []);
 
         if (!is_array($cfg)) {
             throw new InvalidCartConfigurationException(

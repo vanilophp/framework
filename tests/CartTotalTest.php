@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartTotalTest class.
  *
@@ -27,12 +29,12 @@ class CartTotalTest extends TestCase
         parent::setUp();
 
         $this->blackCat = Product::create([
-            'name'  => 'Black Cat',
+            'name' => 'Black Cat',
             'price' => 85
         ]);
 
         $this->whiteCat = Product::create([
-            'name'  => 'White Cat',
+            'name' => 'White Cat',
             'price' => 80
         ]);
     }

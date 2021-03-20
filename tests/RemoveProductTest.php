@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the RemoveProduct Test class.
  *
@@ -27,11 +29,11 @@ class RemoveProductTest extends TestCase
         parent::setUp();
 
         $this->product3 = Product::create([
-            'name'  => 'Saint George Pizza',
+            'name' => 'Saint George Pizza',
             'price' => 9.79]);
 
         $this->product4 = Product::create([
-            'name'  => 'Pizza With Goose Liver',
+            'name' => 'Pizza With Goose Liver',
             'price' => 8.89
         ]);
     }

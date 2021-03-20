@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CreateCartTest class.
  *
@@ -23,7 +25,7 @@ class CreateCartTest extends TestCase
     {
         $this->assertTrue(Cart::doesNotExist());
         $product = Product::create([
-            'name'  => 'Tusnad Mineral Water 0.5',
+            'name' => 'Tusnad Mineral Water 0.5',
             'price' => 1.25
         ]);
 
@@ -38,7 +40,7 @@ class CreateCartTest extends TestCase
     public function item_count_returns_the_number_of_items_in_the_cart()
     {
         $product = Product::create([
-            'name'  => 'S8 Mineral Water 0.5',
+            'name' => 'S8 Mineral Water 0.5',
             'price' => 1.35
         ]);
 
@@ -57,7 +59,7 @@ class CreateCartTest extends TestCase
     public function number_of_items_to_add_can_be_specified()
     {
         $product = Product::create([
-            'name'  => 'V8 Mineral Water 2L',
+            'name' => 'V8 Mineral Water 2L',
             'price' => 1.95
         ]);
 

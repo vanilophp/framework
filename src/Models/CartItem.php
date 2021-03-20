@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartItem class.
  *
@@ -13,8 +15,8 @@ namespace Vanilo\Cart\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
+use Vanilo\Contracts\Buyable;
 
 /**
  * @property Buyable $product

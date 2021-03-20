@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the UserTest class.
  *
@@ -26,8 +28,8 @@ class UserTest extends TestCase
         parent::setUp();
 
         $this->user = User::create([
-            'email'    => 'ever@green.me',
-            'name'     => 'Molly Green',
+            'email' => 'ever@green.me',
+            'name' => 'Molly Green',
             'password' => bcrypt('brute force')
         ])->fresh();
     }
@@ -122,7 +124,7 @@ class UserTest extends TestCase
         $this->assertTrue(Cart::doesNotExist());
 
         Cart::addItem(Product::create([
-            'name'  => 'Rolls Royce',
+            'name' => 'Rolls Royce',
             'price' => '100000'
         ]));
 
@@ -138,7 +140,7 @@ class UserTest extends TestCase
         $this->be($this->user);
 
         Cart::addItem(Product::create([
-            'name'  => 'Rolls Royce',
+            'name' => 'Rolls Royce',
             'price' => '100000'
         ]));
 
@@ -155,7 +157,7 @@ class UserTest extends TestCase
         $this->assertGuest();
 
         Cart::addItem(Product::create([
-            'name'  => 'Rolls Royce',
+            'name' => 'Rolls Royce',
             'price' => '100000'
         ]));
 

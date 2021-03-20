@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the DestroyCart Test class.
  *
@@ -28,12 +30,12 @@ class DestroyCartTest extends TestCase
         parent::setUp();
 
         $this->product7 = Product::create([
-            'name'  => 'Yellow Laptop',
+            'name' => 'Yellow Laptop',
             'price' => 899
         ]);
 
         $this->product8 = Product::create([
-            'name'  => 'Orange Laptop',
+            'name' => 'Orange Laptop',
             'price' => 949
         ]);
     }

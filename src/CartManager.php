@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartManager class.
  *
@@ -14,16 +16,16 @@ namespace Vanilo\Cart;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Vanilo\Cart\Contracts\Cart as CartContract;
-use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
-use Vanilo\Contracts\Buyable;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
+use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
+use Vanilo\Contracts\Buyable;
 
 class CartManager implements CartManagerContract
 {
-    const CONFIG_SESSION_KEY = 'vanilo.cart.session_key';
+    public const CONFIG_SESSION_KEY = 'vanilo.cart.session_key';
 
     /** @var string The key in session that holds the cart id */
     protected $sessionKey;

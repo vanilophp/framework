@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Laravel54TestCompatibility trait.
  *
@@ -16,7 +18,8 @@ use Illuminate\Foundation\Testing\Concerns\InteractsWithSession;
 
 trait Laravel54TestCompatibility
 {
-    use InteractsWithSession, InteractsWithAuthentication;
+    use InteractsWithSession;
+    use InteractsWithAuthentication;
 
     public function assertAuthenticatedAs($user, $guard = null)
     {

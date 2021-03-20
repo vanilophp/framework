@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartItemsAdd Test class.
  *
@@ -28,11 +30,11 @@ class CartItemsAddTest extends TestCase
         parent::setUp();
 
         $this->product1 = Product::create([
-            'name'  => 'Random Product',
+            'name' => 'Random Product',
             'price' => 178
         ]);
         $this->product2 = Product::create([
-            'name'  => 'Another Product',
+            'name' => 'Another Product',
             'price' => 87
         ]);
     }

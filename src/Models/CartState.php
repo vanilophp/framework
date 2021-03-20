@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartState enum class.
  *
@@ -16,11 +18,11 @@ use Vanilo\Cart\Contracts\CartState as CartStateContract;
 
 class CartState extends Enum implements CartStateContract
 {
-    const __DEFAULT  = self::ACTIVE;
-    const ACTIVE     = 'active';
-    const CHECKOUT   = 'checkout';
-    const COMPLETED  = 'completed';
-    const ABANDONDED = 'abandoned';
+    public const __DEFAULT = self::ACTIVE;
+    public const ACTIVE = 'active';
+    public const CHECKOUT = 'checkout';
+    public const COMPLETED = 'completed';
+    public const ABANDONDED = 'abandoned';
 
     protected static $labels = [];
 
@@ -45,9 +47,9 @@ class CartState extends Enum implements CartStateContract
     protected static function boot()
     {
         static::$labels = [
-            self::ACTIVE     => __('Active'),
-            self::CHECKOUT   => __('Checkout'),
-            self::COMPLETED  => __('Completed'),
+            self::ACTIVE => __('Active'),
+            self::CHECKOUT => __('Checkout'),
+            self::COMPLETED => __('Completed'),
             self::ABANDONDED => __('Abandoned')
         ];
     }

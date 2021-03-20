@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CartItemProduct Test class.
  *
@@ -28,7 +30,7 @@ class CartItemProductTest extends TestCase
         parent::setUp();
 
         $this->alaskaSnow = Product::create([
-            'name'  => 'Alaska Snow 34oz',
+            'name' => 'Alaska Snow 34oz',
             'price' => 9
         ]);
 
