@@ -17,7 +17,9 @@ namespace Vanilo\Payment\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Collection;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Payable;
 use Vanilo\Payment\Contracts\Payment as PaymentContract;
@@ -33,6 +35,7 @@ use Vanilo\Support\Generators\NanoIdGenerator;
  * @property Payable $payable
  * @property PaymentMethod $method
  * @property PaymentStatus $status
+ * @property Collection $history
  * @property string $status_message
  * @property null|string $hash
  * @property array $data
@@ -136,6 +139,11 @@ class Payment extends Model implements PaymentContract
     public function getExtraData(): array
     {
         return $this->data ?? [];
+    }
+
+    public function history(): HasMany
+    {
+        return $this->hasMany(PaymentHistoryProxy::modelClass(), 'payment_id', 'id');
     }
 
     public function method(): BelongsTo

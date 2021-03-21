@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Contains the PropertyTypeTest class.
+ * Contains the GatewaysTest class.
  *
  * @copyright   Copyright (c) 2019 Attila Fulop
  * @author      Attila Fulop
@@ -16,7 +16,7 @@ namespace Vanilo\Payment\Tests;
 use Vanilo\Payment\PaymentGateways;
 use Vanilo\Payment\Tests\Examples\PlasticPayments;
 
-class PaymentGatewaysTest extends TestCase
+class GatewaysTest extends TestCase
 {
     /** @test */
     public function new_gateways_can_be_registered()

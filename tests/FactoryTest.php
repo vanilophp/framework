@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the PaymentFactoryTest class.
+ * Contains the FactoryTest class.
  *
  * @copyright   Copyright (c) 2020 Attila Fulop
  * @author      Attila Fulop
@@ -19,7 +19,7 @@ use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\Tests\Examples\Order;
 
-class PaymentFactoryTest extends TestCase
+class FactoryTest extends TestCase
 {
     /** @var PaymentMethod */
     private $paymentMethod;
