@@ -6,7 +6,7 @@
 ##### 2021-XX-YY
 
 - Added `status_message` field to payments table
-- Added `authorized`, `on_hold`, `cancelled` and `refunded` values to payment status enum
+- Added `authorized`, `on_hold`, `cancelled`, `refunded` and `partially_refunded` values to payment status enum
 - Added `getStatus` and `getNativeStatus` methods to the `PaymentResponse` interface
 - Added support trait intended to be used for processor plugins for substituting payment URL parameters
 - Dropped PHP 7.3 support (added attribute field types)

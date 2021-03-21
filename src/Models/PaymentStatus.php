@@ -26,6 +26,7 @@ use Vanilo\Payment\Contracts\PaymentStatus as PaymentStatusContract;
  * @method static PaymentStatus TIMEOUT()
  * @method static PaymentStatus CANCELLED()
  * @method static PaymentStatus REFUNDED()
+ * @method static PaymentStatus PARTIALLY_REFUNDED()
  */
 class PaymentStatus extends Enum implements PaymentStatusContract
 {
@@ -39,6 +40,7 @@ class PaymentStatus extends Enum implements PaymentStatusContract
     public const TIMEOUT = 'timeout';
     public const CANCELLED = 'cancelled';
     public const REFUNDED = 'refunded';
+    public const PARTIALLY_REFUNDED = 'partially_refunded';
 
     protected static $labels = [];
 
@@ -53,6 +55,7 @@ class PaymentStatus extends Enum implements PaymentStatusContract
             self::DECLINED => __('Declined'),
             self::CANCELLED => __('Cancelled'),
             self::REFUNDED => __('Refunded'),
+            self::PARTIALLY_REFUNDED => __('Partially Refunded'),
             self::TIMEOUT => __('Timed out'),
         ];
     }
