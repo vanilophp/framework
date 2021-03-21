@@ -140,6 +140,17 @@ class HistoryTest extends TestCase
     }
 
     /** @test */
+    public function old_status_can_be_explicitly_specified_at_write_from_response_method()
+    {
+        $payment = $this->createPayment();
+        $paymentResponse = new SomePaymentResponse('', true, 'x', 3.99, $payment->getPaymentId(), SomeNativeStatus::CAPTURED(), PaymentStatus::AUTHORIZED());
+        $entry = PaymentHistory::writePaymentResponseToHistory($payment, $paymentResponse, PaymentStatus::DECLINED());
+
+        $this->assertEquals(PaymentStatus::AUTHORIZED, $entry->new_status->value());
+        $this->assertEquals(PaymentStatus::DECLINED, $entry->old_status->value());
+    }
+
+    /** @test */
     public function payment_can_return_its_history_entries()
     {
         $payment1 = $this->createPayment(19, 'EUR');

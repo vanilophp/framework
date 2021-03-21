@@ -21,18 +21,19 @@ use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentHistory as PaymentHistoryContract;
 use Vanilo\Payment\Contracts\PaymentResponse;
+use Vanilo\Payment\Contracts\PaymentStatus;
 
 /**
- * @property int payment_id
- * @property Payment $payment
- * @property \Vanilo\Payment\Contracts\PaymentStatus old_status
- * @property \Vanilo\Payment\Contracts\PaymentStatus new_status
- * @property ?string $message
- * @property ?string $native_status
- * @property ?float $transaction_amount
- * @property ?string $transaction_number
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property int           payment_id
+ * @property Payment       $payment
+ * @property PaymentStatus old_status
+ * @property PaymentStatus new_status
+ * @property ?string       $message
+ * @property ?string       $native_status
+ * @property ?float        $transaction_amount
+ * @property ?string       $transaction_number
+ * @property Carbon        $created_at
+ * @property Carbon        $updated_at
  * @method static PaymentHistory create(array $attributes)
  */
 class PaymentHistory extends Model implements PaymentHistoryContract
@@ -48,11 +49,15 @@ class PaymentHistory extends Model implements PaymentHistoryContract
         'new_status' => 'PaymentStatusProxy@enumClass',
     ];
 
-    public static function writePaymentResponseToHistory(Payment $payment, PaymentResponse $response): PaymentHistoryContract
+    public static function writePaymentResponseToHistory(
+        Payment $payment,
+        PaymentResponse $response,
+        PaymentStatus $oldStatus = null
+    ): PaymentHistoryContract
     {
         return PaymentHistoryProxy::create([
            'payment_id' => $payment->id,
-           'old_status' => $payment->getStatus()->value(),
+           'old_status' => $oldStatus ?: $payment->getStatus()->value(),
            'new_status' => $response->getStatus()->value(),
            'message' => $response->getMessage(),
            'transaction_amount' => $response->getAmountPaid(),

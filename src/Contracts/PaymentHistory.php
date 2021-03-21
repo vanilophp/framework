@@ -16,5 +16,9 @@ namespace Vanilo\Payment\Contracts;
 
 interface PaymentHistory
 {
-    public static function writePaymentResponseToHistory(Payment $payment, PaymentResponse $response): PaymentHistory;
+    public static function writePaymentResponseToHistory(
+        Payment $payment,
+        PaymentResponse $response,
+        PaymentStatus $oldStatus = null
+    ): PaymentHistory;
 }
