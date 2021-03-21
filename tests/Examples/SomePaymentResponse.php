@@ -42,8 +42,7 @@ class SomePaymentResponse implements PaymentResponse
         string $paymentId,
         SomeNativeStatus $nativeStatus,
         PaymentStatus $status
-    )
-    {
+    ) {
         $this->message = $message;
         $this->nativeStatus = $nativeStatus;
         $this->wasSuccessful = $wasSuccessful;

@@ -19,7 +19,6 @@ use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentHistory;
 use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\Models\PaymentStatus;
-use Vanilo\Payment\Responses\NullResponse;
 use Vanilo\Payment\Tests\Examples\Order;
 use Vanilo\Payment\Tests\Examples\SomeNativeStatus;
 use Vanilo\Payment\Tests\Examples\SomePaymentResponse;
@@ -189,5 +188,4 @@ class HistoryTest extends TestCase
             'payment_method_id' => $this->method->id,
         ]);
     }
-
 }
