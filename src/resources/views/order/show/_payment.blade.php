@@ -20,7 +20,11 @@
                         </div>
                     </td>
                     <td>
-                        <div class="font-weight-bolder">{{ $payment->getStatus()->label() }}</div>
+                        <div>
+                            <span class="badge badge-pill badge-primary">
+                                {{ $payment->getStatus()->label() }}
+                            </span>
+                        </div>
                         <span class="font-italic">{{ $payment->status_message }}</span>
                     </td>
                     <td>{{ format_price($payment->amount) }}</td>
