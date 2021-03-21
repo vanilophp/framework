@@ -6,11 +6,14 @@
     <div class="card-body">
         <table class="table table-striped">
             <tbody>
-            @foreach($order->payments as $payment)
+            @forelse($order->payments as $payment)
                 <tr>
                     <td>
                         <span class="font-lg mb-3 font-weight-bold" title="{{ $payment->hash }}">
-                            {{ $payment->getMethod()->getName() }}
+                            <a href="#" title="{{ __('Click to open payment history...') }}"
+                               data-toggle="modal" data-target="#payment-history">
+                                {{ $payment->getMethod()->getName() }}
+                            </a>
                         </span>
                         <div class="text-muted">
                             {{ show_datetime($payment->updated_at) }}
@@ -22,8 +25,14 @@
                     </td>
                     <td>{{ format_price($payment->amount) }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td>{{ __('There are not payments assigned to this order') }}</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
     </div>
 </div>
+
+@includeWhen($order->payments->isNotEmpty(), 'vanilo::order.show._payment_history')

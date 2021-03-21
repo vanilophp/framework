@@ -9,11 +9,11 @@ declare(strict_types=1);
  *
  * @return string
  */
-function format_price($price)
+function format_price($price, string $currency = null)
 {
     return sprintf(
         config('vanilo.framework.currency.format'),
         $price,
-        config('vanilo.framework.currency.sign')
+        $currency ?? config('vanilo.framework.currency.sign')
     );
 }

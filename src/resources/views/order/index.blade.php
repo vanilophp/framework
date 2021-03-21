@@ -32,6 +32,7 @@
                     <th>{{ __('Number') }}</th>
                     <th>{{ __('Ordered') }}</th>
                     <th>{{ __('Ship To') }}</th>
+                    <th>{{ __('Payment Method') }}</th>
                     <th>{{ __('Status') }}</th>
                     <th style="width: 10%">&nbsp;</th>
                 </tr>
@@ -70,6 +71,13 @@
                             @else
                                 -
                             @endif
+                        </td>
+                        <td>
+                            <div class="mt-2">
+                                <span class="badge badge-pill badge-dark">
+                                    {{ $order->payments->last() ? $order->payments->last()->method->name : __('n/a')  }}
+                                </span>
+                            </div>
                         </td>
                         <td>
                             <div class="mt-2">

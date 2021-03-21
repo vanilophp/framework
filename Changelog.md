@@ -6,9 +6,11 @@
 ##### 2021-XX-YY
 
 - Upgrade to AppShell v2.2 (minimum requirement)
-- Added order print page
-- Added show/hide closed orders button to order list
-- Added `status_message` field to payment list on order view
+- Added order print page in admin
+- Added payment history to order view page in admin
+- Added payment method to order list in admin
+- Added show/hide closed orders button to order list in admin
+- Added `status_message` field to payment list on order view in admin
 - Fixed missing query strings in admin paginators
 - Changed internal CS ruleset from PSR-2 to PSR-12
 - Changed all classes to declare strict types enabled
