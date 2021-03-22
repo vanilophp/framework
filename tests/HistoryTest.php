@@ -116,6 +116,19 @@ class HistoryTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_begun_with_the_dedicated_method()
+    {
+        $payment = $this->createPayment(55.17);
+        $entry = PaymentHistory::begin($payment);
+        $this->assertEquals($payment->id, $entry->payment_id);
+        $this->assertEquals($payment->status->value(), $entry->new_status->value());
+        $this->assertEquals('Payment created', $entry->message);
+        $this->assertNull($entry->native_status);
+        $this->assertEquals(0, $entry->transaction_amount);
+        $this->assertNull($entry->transaction_number);
+    }
+
+    /** @test */
     public function it_can_be_written_from_a_payment_response()
     {
         $payment = $this->createPayment(63.99);
@@ -128,7 +141,7 @@ class HistoryTest extends TestCase
             SomeNativeStatus::CAPTURED(),
             PaymentStatus::PAID()
         );
-        $entry = PaymentHistory::writePaymentResponseToHistory($payment, $paymentResponse);
+        $entry = PaymentHistory::addPaymentResponse($payment, $paymentResponse);
 
         $this->assertEquals($payment->id, $entry->payment_id);
         $this->assertEquals($payment->status->value(), $entry->old_status->value());
@@ -144,7 +157,7 @@ class HistoryTest extends TestCase
     {
         $payment = $this->createPayment();
         $paymentResponse = new SomePaymentResponse('', true, 'x', 3.99, $payment->getPaymentId(), SomeNativeStatus::CAPTURED(), PaymentStatus::AUTHORIZED());
-        $entry = PaymentHistory::writePaymentResponseToHistory($payment, $paymentResponse, PaymentStatus::DECLINED());
+        $entry = PaymentHistory::addPaymentResponse($payment, $paymentResponse, PaymentStatus::DECLINED());
 
         $this->assertEquals(PaymentStatus::AUTHORIZED, $entry->new_status->value());
         $this->assertEquals(PaymentStatus::DECLINED, $entry->old_status->value());

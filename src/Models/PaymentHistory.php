@@ -49,7 +49,7 @@ class PaymentHistory extends Model implements PaymentHistoryContract
         'new_status' => 'PaymentStatusProxy@enumClass',
     ];
 
-    public static function writePaymentResponseToHistory(
+    public static function addPaymentResponse(
         Payment $payment,
         PaymentResponse $response,
         PaymentStatus $oldStatus = null
@@ -62,6 +62,15 @@ class PaymentHistory extends Model implements PaymentHistoryContract
            'transaction_amount' => $response->getAmountPaid(),
            'native_status' => $response->getNativeStatus()->value(),
            'transaction_number' => $response->getTransactionId(),
+        ]);
+    }
+
+    public static function begin(Payment $payment): PaymentHistory
+    {
+        return PaymentHistory::create([
+            'payment_id' => $payment->id,
+            'new_status' => $payment->getStatus(),
+            'message' => __('Payment created')
         ]);
     }
 
