@@ -38,7 +38,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="text-muted">
+                                <div class="text-muted" title="{{ __('Transaction amount') }}">
                                     {{ sprintf('%.2f %s', $entry->transaction_amount, $payment->getCurrency()) }}
                                 </div>
                             </td>
