@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="payment-history-title">
                     {{ __('Payment History') }}
-                    <span class="badge badge-pill badge-muted" title="{{ __('Payment hash') }}">
+                    <span class="badge badge-pill badge-light" title="{{ __('Payment hash') }}">
                         {{ $payment->hash }}
                     </span>
                 </h5>
