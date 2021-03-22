@@ -7,8 +7,8 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="payment-history-title">
                     {{ __('Payment History') }}
-                    <span class="badge badge-pill badge-muted" title="{{ __('Payment id') }}">
-                        {{ $payment->id }}
+                    <span class="badge badge-pill badge-muted" title="{{ __('Payment hash') }}">
+                        {{ $payment->hash }}
                     </span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
