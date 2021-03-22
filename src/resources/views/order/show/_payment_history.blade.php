@@ -1,12 +1,16 @@
 <div id="payment-history" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="payment-history-title" aria-hidden="true">
 
-
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="payment-history-title">{{ __('Payment History') }}</h5>
+                <h5 class="modal-title" id="payment-history-title">
+                    {{ __('Payment History') }}
+                    <span class="badge badge-pill badge-muted" title="{{ __('Payment id') }}">
+                        {{ $payment->id }}
+                    </span>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -26,10 +30,10 @@
                     @foreach($payment->history as $entry)
                         <tr>
                             <td>
-                                <span class="font-lg mb-3 font-weight-bold" title="{{ $payment->hash }}">
+                                <span class="font-lg mb-3 font-weight-bold" title="{{ $entry->created_at }}">
                                     {{ show_datetime($entry->created_at) }}
                                 </span>
-                                <div class="text-muted">
+                                <div class="text-muted" title="{{ __('Transaction id') }}">
                                     {!! $entry->transaction_number ?: '&nbsp;' !!}
                                 </div>
                             </td>
@@ -39,7 +43,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="badge badge-pill badge-primary">{{ $entry->new_status }}</span>
+                                <span class="badge badge-pill badge-primary">{{ $entry->new_status->label() }}</span>
                             </td>
                             <td><span class="font-italic">{{ $entry->message }}</span></td>
                             <td>
