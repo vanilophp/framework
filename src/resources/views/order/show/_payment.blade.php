@@ -31,7 +31,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td>{{ __('There are not payments assigned to this order') }}</td>
+                    <td>{{ __('There are no payments assigned to this order') }}</td>
                 </tr>
             @endforelse
             </tbody>
