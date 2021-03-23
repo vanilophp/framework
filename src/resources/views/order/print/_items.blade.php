@@ -16,7 +16,7 @@
     @foreach($order->getItems() as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->product->sku }}</td>
+            <td>{{ $item->product ? $item->product->sku : '' }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->quantity }}</td>
             <td>{{ format_price($item->price) }}</td>
