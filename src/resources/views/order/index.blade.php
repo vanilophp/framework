@@ -75,7 +75,7 @@
                         <td>
                             <div class="mt-2">
                                 <span class="badge badge-pill badge-dark">
-                                    {{ $order->payments->last() ? $order->payments->last()->method->name : __('n/a')  }}
+                                    {{ $order->currentPayment ? $order->currentPayment->method->name : __('n/a')  }}
                                 </span>
                             </div>
                         </td>

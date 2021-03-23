@@ -28,7 +28,7 @@ class OrderController extends BaseController
 {
     public function index(Request $request)
     {
-        $query = OrderProxy::orderBy('created_at', 'desc');
+        $query = OrderProxy::with('currentPayment')->orderBy('created_at', 'desc');
 
         $inactives = $request->has('inactives');
         if (!$inactives) {
