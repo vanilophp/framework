@@ -28,13 +28,12 @@ class OrderController extends BaseController
 {
     public function index(Request $request)
     {
-        $query = OrderProxy::with('currentPayment')->orderBy('created_at', 'desc');
+        $query = OrderProxy::withCurrentPayment()->orderBy('created_at', 'desc');
 
         $inactives = $request->has('inactives');
         if (!$inactives) {
             $query->open();
         }
-
         return view('vanilo::order.index', [
             'orders' => $query->paginate(100),
             'inactives' => $inactives,

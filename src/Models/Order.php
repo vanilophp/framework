@@ -14,14 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Framework\Models;
 
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Vanilo\Contracts\Payable;
 use Vanilo\Order\Models\Order as BaseOrder;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Models\PaymentProxy;
 
 /**
- * @property null|Payment $currentPayment
+ * @property null|Payment $currentPayment is only available if order was fetched with withCurrentPayment() scope
  */
 class Order extends BaseOrder implements Payable
 {
@@ -50,11 +51,33 @@ class Order extends BaseOrder implements Payable
         return config('vanilo.framework.currency.code');
     }
 
-    public function currentPayment(): MorphOne
+    public function getCurrentPayment(): ?Payment
     {
-        return $this
-            ->morphOne(PaymentProxy::modelClass(), 'payable')
-            ->orderByDesc('id');
+        /** If it has been fetched already, use it */
+        if (null !== $this->currentPayment) {
+            return $this->currentPayment;
+        }
+
+        return PaymentProxy::where('payable_id', $this->getPayableId())
+            ->where('payable_type', $this->getPayableType())
+            ->orderByDesc('id')
+            ->take(1)
+            ->first();
+    }
+
+    public function currentPayment(): BelongsTo
+    {
+        return $this->belongsTo(PaymentProxy::modelClass());
+    }
+
+    public function scopeWithCurrentPayment(Builder $query)
+    {
+        $query->addSelect(['current_payment_id' => PaymentProxy::select('id')
+            ->whereColumn('payable_id', 'orders.id')
+            ->where('payable_type', $this->getPayableType())
+            ->orderByDesc('id')
+            ->take(1)
+        ])->with('currentPayment');
     }
 
     public function payments()
