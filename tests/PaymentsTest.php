@@ -52,7 +52,7 @@ class PaymentsTest extends TestCase
     {
         /** @var Order $order */
         $order = Order::create([
-            'number' => '5732952',
+            'number' => '5732953',
         ]);
 
         PaymentFactory::createFromPayable($order, $this->paymentMethod, ['x' => 'a']);
