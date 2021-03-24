@@ -101,7 +101,6 @@ class PaymentsTest extends TestCase
         PaymentFactory::createFromPayable($order, $this->paymentMethod, ['mark' => '001']);
         PaymentFactory::createFromPayable($order, $this->paymentMethod, ['mark' => '002']);
 
-
         DB::enableQueryLog();
         $currentPayment = $order->getCurrentPayment();
         $this->assertInstanceOf(Payment::class, $currentPayment);
