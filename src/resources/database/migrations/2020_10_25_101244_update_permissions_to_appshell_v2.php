@@ -28,10 +28,9 @@ class UpdatePermissionsToAppshellV2 extends Migration
     public function down()
     {
         foreach ($this->permissionsToMigrate as $old => $new) {
-            if(Permission::whereName($new)->exists()) {
-                Permission::findByName($new)->update(['name' => $old]);
-            } else {
-                Permission::findOrCreate($old);
+            $permission = Permission::findByName($new);
+            if (null !== $permission) {
+                $permission->update(['name' => $old]);
             }
         }
     }
