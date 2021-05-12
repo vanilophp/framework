@@ -92,7 +92,6 @@ final class DefaultEventMappingRules implements PaymentEventMap
 
         $cursorCopy = $this->cursor;
         foreach ($cursorCopy as $event => $secondaryConditions) {
-
             $allowedOldStatuses = $secondaryConditions['andOldStatusIs'] ?? null;
             if (null !== $allowedOldStatuses) {
                 if (!in_array($status->value(), $allowedOldStatuses) && !in_array('*', $allowedOldStatuses)) {

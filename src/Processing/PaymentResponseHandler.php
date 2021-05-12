@@ -49,7 +49,7 @@ final class PaymentResponseHandler
     {
         PaymentHistoryProxy::addPaymentResponse($this->payment, $this->response, $this->oldStatus);
     }
-    
+
     public function updatePayment(): void
     {
         $this->payment->status = $this->newStatus;
@@ -70,7 +70,7 @@ final class PaymentResponseHandler
             ->thenFireEvents();
 
         collect($events)
-            ->filter(fn(string $eventClass) => is_a($eventClass, PaymentEvent::class, true))
-            ->each(fn($event) => Event::dispatch(new $event($this->payment)));
+            ->filter(fn (string $eventClass) => is_a($eventClass, PaymentEvent::class, true))
+            ->each(fn ($event) => Event::dispatch(new $event($this->payment)));
     }
 }

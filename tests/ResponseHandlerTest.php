@@ -171,7 +171,6 @@ class ResponseHandlerTest extends TestCase
             'status' => $status,
             'payment_method_id' => $this->method->id,
         ]);
-
     }
 
     private function createResponse(PaymentStatus $status, ?float $amountPaid = 27, $message = 'Transaction OK'): SomePaymentResponse
