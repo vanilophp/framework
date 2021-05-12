@@ -26,4 +26,9 @@ namespace Vanilo\Payment\Contracts;
  */
 interface PaymentStatus
 {
+    /** @return string */
+    public function value();
+
+    /** @return string */
+    public function label();
 }

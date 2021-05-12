@@ -26,7 +26,7 @@ class SomePaymentResponse implements PaymentResponse
 
     private string $transactionId;
 
-    private float $amountPaid;
+    private ?float $amountPaid;
 
     private string $paymentId;
 
@@ -38,7 +38,7 @@ class SomePaymentResponse implements PaymentResponse
         string $message,
         bool $wasSuccessful,
         string $transactionId,
-        float $amountPaid,
+        ?float $amountPaid,
         string $paymentId,
         SomeNativeStatus $nativeStatus,
         PaymentStatus $status
