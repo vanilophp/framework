@@ -25,13 +25,13 @@ use Vanilo\Payment\Tests\Examples\Order;
 
 class PaymentTest extends TestCase
 {
-    private $method;
+    private PaymentMethod $method;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->method = $method = PaymentMethod::create([
+        $this->method = PaymentMethod::create([
             'name' => 'Credit Card',
             'gateway' => 'plastic'
         ]);

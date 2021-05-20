@@ -36,8 +36,9 @@ use Vanilo\Support\Generators\NanoIdGenerator;
  * @property PaymentMethod $method
  * @property PaymentStatus $status
  * @property Collection $history
- * @property ?string $status_message
+ * @property null|string $status_message
  * @property null|string $hash
+ * @property null|string $remote_id
  * @property array $data
  * @property float $amount
  * @property string $currency
@@ -99,6 +100,17 @@ class Payment extends Model implements PaymentContract
     public static function findByHash(string $hash): ?Payment
     {
         return static::where('hash', $hash)->first();
+    }
+
+    public static function findByRemoteId(string $remoteId, int $paymentMethodId = null): ?Payment
+    {
+        if (null === $paymentMethodId) {
+            return static::where('remote_id', $remoteId)->first();
+        }
+
+        return static::where('remote_id', $remoteId)
+            ->where('payment_method_id', $paymentMethodId)
+            ->first();
     }
 
     public function getPaymentId(): string

@@ -6,6 +6,7 @@
 ##### 2021-XX-YY
 
 - Added `status_message` field to payments table
+- Added `remote_id` field to payments table
 - Added payment history handling
 - Added `authorized`, `on_hold`, `cancelled`, `refunded` and `partially_refunded` values to payment status enum
 - Added `getStatus` and `getNativeStatus` methods to the `PaymentResponse` interface
