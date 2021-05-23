@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Konekt\Enum\Enum;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentHistory as PaymentHistoryContract;
 use Vanilo\Payment\Contracts\PaymentResponse;
@@ -62,6 +63,22 @@ class PaymentHistory extends Model implements PaymentHistoryContract
            'transaction_amount' => $response->getAmountPaid(),
            'native_status' => $response->getNativeStatus()->value(),
            'transaction_number' => $response->getTransactionId(),
+        ]);
+    }
+
+    public static function addEvent(
+        Payment $payment,
+        string $message,
+        ?string $transactionNumber = null,
+        Enum $nativeStatus = null
+    ): PaymentHistoryContract {
+        return PaymentHistoryProxy::create([
+            'payment_id' => $payment->id,
+            'old_status' => $payment->getStatus()->value(),
+            'new_status' => $payment->getStatus()->value(),
+            'message' => $message,
+            'native_status' => $nativeStatus ? $nativeStatus->value() : null,
+            'transaction_number' => $transactionNumber,
         ]);
     }
 

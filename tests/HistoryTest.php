@@ -153,6 +153,36 @@ class HistoryTest extends TestCase
     }
 
     /** @test */
+    public function the_add_event_static_factory_method_can_be_used_to_log_non_status_changing_events()
+    {
+        $payment = $this->createPayment(55.00);
+        $entry = PaymentHistory::addEvent($payment, 'Yo! This is a message.');
+
+        $this->assertEquals($payment->id, $entry->payment_id);
+        $this->assertEquals($payment->status->value(), $entry->old_status->value());
+        $this->assertEquals($payment->status->value(), $entry->new_status->value());
+        $this->assertEquals('Yo! This is a message.', $entry->message);
+        $this->assertNull($entry->native_status);
+        $this->assertNull($entry->transaction_amount);
+        $this->assertNull($entry->transaction_number);
+    }
+
+    /** @test */
+    public function the_transaction_number_and_the_native_status_can_be_explicitly_logged_with_the_add_event_static_factory_method()
+    {
+        $payment = $this->createPayment(107);
+        $entry = PaymentHistory::addEvent($payment, 'Log entry with extras', 'trid19192234194', SomeNativeStatus::CAPTURED());
+
+        $this->assertEquals($payment->id, $entry->payment_id);
+        $this->assertEquals($payment->status->value(), $entry->old_status->value());
+        $this->assertEquals($payment->status->value(), $entry->new_status->value());
+        $this->assertEquals('Log entry with extras', $entry->message);
+        $this->assertEquals(SomeNativeStatus::CAPTURED, $entry->native_status);
+        $this->assertNull($entry->transaction_amount);
+        $this->assertEquals('trid19192234194', $entry->transaction_number);
+    }
+
+    /** @test */
     public function old_status_can_be_explicitly_specified_at_write_from_response_method()
     {
         $payment = $this->createPayment();
