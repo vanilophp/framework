@@ -20,7 +20,6 @@ class UpdatePropertyValue extends FormRequest implements UpdatePropertyValueCont
 {
     /**
      * @inheritDoc
-     * @refactored 07-07-2021 sd@groundwow.com
      */
     public function rules()
     {
