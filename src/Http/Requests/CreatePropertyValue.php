@@ -20,7 +20,6 @@ class CreatePropertyValue extends FormRequest implements CreatePropertyValueCont
 {
     /**
      * @inheritDoc
-     * @refactored sd@groundwow.com 07-07-2021
      */
     public function rules()
     {
