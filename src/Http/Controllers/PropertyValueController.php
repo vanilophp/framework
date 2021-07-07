@@ -35,12 +35,15 @@ class PropertyValueController extends BaseController
         ]);
     }
 
+    /**
+     * @refactored 07-07-2021 sd@groundwow.com
+     */
     public function store(Property $property, CreatePropertyValue $request)
     {
         try {
             $propertyValue = PropertyValueProxy::create(
                 array_merge(
-                    $request->except('images'),
+                    $request->validated(),
                     ['property_id' => $property->id]
                 )
             );
