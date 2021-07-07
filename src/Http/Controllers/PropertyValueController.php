@@ -75,7 +75,7 @@ class PropertyValueController extends BaseController
     public function update(Property $property, PropertyValue $property_value, UpdatePropertyValue $request)
     {
         try {
-            $property_value->update($request->except('images'));
+            $property_value->update($request->validated());
 
             flash()->success(__(':title has been updated', ['title' => $property_value->title]));
         } catch (\Exception $e) {
