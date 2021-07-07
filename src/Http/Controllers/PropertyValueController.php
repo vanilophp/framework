@@ -68,7 +68,7 @@ class PropertyValueController extends BaseController
             'propertyValue' => $property_value
         ]);
     }
-  
+
     public function update(Property $property, PropertyValue $property_value, UpdatePropertyValue $request)
     {
         try {
