@@ -20,13 +20,14 @@ class UpdatePropertyValue extends FormRequest implements UpdatePropertyValueCont
 {
     /**
      * @inheritDoc
+     * @refactored 07-07-2021 sd@groundwow.com
      */
     public function rules()
     {
         return [
             'title' => 'required|min:1|max:255',
             'value' => 'nullable|min:1|max:255',
-            'property_id' => 'nullable|exists:properties,id',
+            'property_id' => 'required|exists:properties,id',
             'priority' => 'nullable|integer'
         ];
     }
