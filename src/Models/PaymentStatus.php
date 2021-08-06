@@ -34,7 +34,7 @@ class PaymentStatus extends Enum implements PaymentStatusContract
     public const PENDING = 'pending';
     public const AUTHORIZED = 'authorized';
     public const ON_HOLD = 'on_hold';
-    public const PAID = 'paid';
+    public const PAID = 'paid'; // aka. captured
     public const PARTIALLY_PAID = 'partially_paid';
     public const DECLINED = 'declined';
     public const TIMEOUT = 'timeout';
