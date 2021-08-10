@@ -25,10 +25,10 @@ use Vanilo\Payment\Contracts\PaymentResponse;
 use Vanilo\Payment\Contracts\PaymentStatus;
 
 /**
- * @property int           payment_id
+ * @property int           $payment_id
  * @property Payment       $payment
- * @property PaymentStatus old_status
- * @property PaymentStatus new_status
+ * @property PaymentStatus $old_status
+ * @property PaymentStatus $new_status
  * @property ?string       $message
  * @property ?string       $native_status
  * @property ?float        $transaction_amount
@@ -70,7 +70,7 @@ class PaymentHistory extends Model implements PaymentHistoryContract
         Payment $payment,
         string $message,
         ?string $transactionNumber = null,
-        Enum $nativeStatus = null
+        ?Enum $nativeStatus = null
     ): PaymentHistoryContract {
         return PaymentHistoryProxy::create([
             'payment_id' => $payment->id,
