@@ -26,7 +26,6 @@ class CreatePropertyValue extends FormRequest implements CreatePropertyValueCont
         return [
             'title' => 'required|min:1|max:255',
             'value' => 'nullable|min:1|max:255',
-            'property_id' => 'nullable|exists:properties,id',
             'priority' => 'nullable|integer'
         ];
     }

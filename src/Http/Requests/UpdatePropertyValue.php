@@ -26,7 +26,7 @@ class UpdatePropertyValue extends FormRequest implements UpdatePropertyValueCont
         return [
             'title' => 'required|min:1|max:255',
             'value' => 'nullable|min:1|max:255',
-            'property_id' => 'nullable|exists:properties,id',
+            'property_id' => 'required|exists:properties,id',
             'priority' => 'nullable|integer'
         ];
     }
