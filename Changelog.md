@@ -14,6 +14,7 @@
 - Fixed missing query strings in admin paginators
 - Changed internal CS ruleset from PSR-2 to PSR-12
 - Changed all classes to declare strict types enabled
+- Improved property value form handling on admin
 
 ### 2.1.1
 ##### 2021-01-05
