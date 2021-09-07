@@ -10,10 +10,20 @@ This is the order module for [Vanilo](https://vanilo.io).
 
 ## Installation
 
-```bash
-composer require vanilo/order
-php artisan migrate
-```
+1. Add it to your project: `composer require vanilo/order`
+2. Create the file `config/concord.php` with the following content:
+    ```php
+    <?php
+    
+    return [
+        'modules' => [
+            \Konekt\Address\Providers\ModuleServiceProvider::class,
+            \Konekt\User\Providers\ModuleServiceProvider::class,
+            \Vanilo\Order\Providers\ModuleServiceProvider::class,
+        ]
+    ];
+    ```
+3. Run `php artisan migrate`
 
 ## Models, Enums
 
