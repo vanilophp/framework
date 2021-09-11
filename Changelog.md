@@ -2,8 +2,8 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2021-XX-YY
+### 2.2.0
+##### 2021-09-11
 
 - Changed internal CS ruleset from PSR-2 to PSR-12
 - Dropped PHP 7.3 support
