@@ -2,13 +2,14 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2021-XX-YY
+### 2.2.1
+##### 2021-09-11
 
 - Alignment to rest of Vanilo 2.2 modules
 - Changed internal CS ruleset from PSR-2 to PSR-12
+- Added strict type checking, fixed errors it brought to surface
+- Improved the Documentation
 - Dropped PHP 7.3 support
-
 
 ### 2.2.0
 ##### 2020-12-31
