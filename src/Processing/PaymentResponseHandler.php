@@ -55,7 +55,7 @@ final class PaymentResponseHandler
         $this->payment->status = $this->newStatus;
         $amountPaid = $this->response->getAmountPaid();
         if (null !== $amountPaid) {
-            $this->payment->amount_paid = $this->response->getAmountPaid();
+            $this->payment->amount_paid += $this->response->getAmountPaid();
         }
         $this->payment->status_message = $this->response->getMessage();
         $this->payment->save();

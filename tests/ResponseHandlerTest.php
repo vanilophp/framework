@@ -85,6 +85,34 @@ class ResponseHandlerTest extends TestCase
     }
 
     /** @test */
+    public function it_subtracts_the_transaction_from_the_payments_paid_amount_if_the_responses_amount_is_negative()
+    {
+        $payment = $this->createPayment(PaymentStatus::PENDING());
+        $handler = new PaymentResponseHandler($payment, $this->createResponse(PaymentStatus::PAID(), 27));
+
+        $handler->updatePayment();
+        $this->assertEquals(27, $payment->amount_paid);
+
+        $handler = new PaymentResponseHandler($payment, $this->createResponse(PaymentStatus::REFUNDED(), -17));
+        $handler->updatePayment();
+        $this->assertEquals(10, $payment->amount_paid);
+    }
+
+    /** @test */
+    public function two_consecutive_partial_payments_sum_up_the_payments_paid_amount()
+    {
+        $payment = $this->createPayment(PaymentStatus::PENDING());
+        $handler = new PaymentResponseHandler($payment, $this->createResponse(PaymentStatus::PARTIALLY_PAID(), 15));
+
+        $handler->updatePayment();
+        $this->assertEquals(15, $payment->amount_paid);
+
+        $handler = new PaymentResponseHandler($payment, $this->createResponse(PaymentStatus::PARTIALLY_PAID(), 12));
+        $handler->updatePayment();
+        $this->assertEquals(27, $payment->amount_paid);
+    }
+
+    /** @test */
     public function it_updates_the_status_message()
     {
         $payment = $this->createPayment(PaymentStatus::PENDING());

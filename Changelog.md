@@ -11,7 +11,8 @@
 - Added `authorized`, `on_hold`, `cancelled`, `refunded` and `partially_refunded` values to payment status enum
 - Added `getStatus` and `getNativeStatus` methods to the `PaymentResponse` interface
 - Added `PaymentResponseHandler` to simplify processing of payment responses in applications
-- Added support trait intended to be used for processor plugins for substituting payment URL parameters
+- Added support trait intended to be used by gateway plugins for substituting payment URL parameters
+- Added expectation: Gateways should return `getAmountPaid()` as negative at refund/rollback types of transactions
 - Dropped PHP 7.3 support (added attribute field types)
 - Changed internal CS ruleset from PSR-2 to PSR-12 (incl. declare strict types)
 
