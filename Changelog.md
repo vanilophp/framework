@@ -2,8 +2,8 @@
 
 ## 2.x Series
 
-### Unreleased
-##### 2021-XX-YY
+### 2.2.0
+##### 2021-09-11
 
 - Added `status_message` field to payments table
 - Added `remote_id` field to payments table
