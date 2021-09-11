@@ -2,8 +2,8 @@
 
 ## 2.x Series
 
-## Unreleased
-##### 2021-XX-YY
+## 2.2.0
+##### 2021-09-11
 
 - Upgrade to AppShell v2.2 (minimum requirement)
 - Added order print page in admin
@@ -12,9 +12,10 @@
 - Added show/hide closed orders button to order list in admin
 - Added `status_message` field to payment list on order view in admin
 - Fixed missing query strings in admin paginators
+- Improved permission migrations to add flexibility to projects that manage permissions differently
+- Improved property value form handling on admin
 - Changed internal CS ruleset from PSR-2 to PSR-12
 - Changed all classes to declare strict types enabled
-- Improved property value form handling on admin
 
 ### 2.1.1
 ##### 2021-01-05
