@@ -31,8 +31,7 @@
         "vanilo/order": "^2.2",
         "vanilo/properties": "^2.2",
         "vanilo/channel": "^2.2",
-        "vanilo/payment": "^2.2",
-        "vanilo/shipping": "^2.2"
+        "vanilo/payment": "^2.2"
     },
     "autoload": {
         "psr-4": {
