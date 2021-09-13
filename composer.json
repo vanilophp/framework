@@ -32,8 +32,8 @@
         "vanilo/payment": "^2.2"
     },
     "replace": {
-        "vanilo/contracts": "self.version",
-        "vanilo/support": "self.version"
+        "vanilo/contracts": "^2.2 | ^3.0",
+        "vanilo/support": "^2.2 | ^3.0"
     },
     "autoload": {
         "psr-4": {
