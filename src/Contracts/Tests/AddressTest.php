@@ -39,7 +39,7 @@ class AddressTest extends TestCase
     /** @test */
     public function name_field_is_a_string()
     {
-        $address = new DummyAddress(1);
+        $address = new DummyAddress("1");
         $this->assertIsString($address->getName());
         $this->assertEquals('1', $address->getName());
     }
@@ -86,7 +86,7 @@ class AddressTest extends TestCase
     /** @test */
     public function province_code_field_is_a_string()
     {
-        $address = new DummyAddress(null, null, null, 2000);
+        $address = new DummyAddress(null, null, null, "2000");
         $this->assertIsString($address->getProvinceCode());
         $this->assertEquals('2000', $address->getProvinceCode());
     }
@@ -101,7 +101,7 @@ class AddressTest extends TestCase
     /** @test */
     public function postal_code_field_is_a_string()
     {
-        $address = new DummyAddress(null, null, null, null, 10407);
+        $address = new DummyAddress(null, null, null, null, "10407");
         $this->assertIsString($address->getPostalCode());
         $this->assertEquals('10407', $address->getPostalCode());
     }
