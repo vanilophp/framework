@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Contains the AddressTest class.
  *
@@ -12,9 +14,9 @@
 
 namespace Vanilo\Contracts\Tests;
 
-use Vanilo\Contracts\Tests\Dummies\Address as DummyAddress;
 use PHPUnit\Framework\TestCase;
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Tests\Dummies\Address as DummyAddress;
 
 class AddressTest extends TestCase
 {
