@@ -35,10 +35,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Vanilo\\Framework\\": "src"
+            "Vanilo\\": "src"
         },
         "files": [
-            "src/Support/helpers.php"
+            "src/Framework/Support/helpers.php"
         ]
     },
     "require-dev": {
