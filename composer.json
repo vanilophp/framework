@@ -46,11 +46,6 @@
         "phpunit/phpunit" : "~9.0",
         "laravel/legacy-factories": "^1.0.4"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Vanilo\\Framework\\Tests\\": "tests"
-        }
-    },
     "scripts": {
         "test": "phpunit"
     },
