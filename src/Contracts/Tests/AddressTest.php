@@ -10,9 +10,9 @@
  *
  */
 
-namespace Konekt\Contracts\Tests;
+namespace Vanilo\Contracts\Tests;
 
-use Konekt\Contracts\Tests\Dummies\Address as DummyAddress;
+use Vanilo\Contracts\Tests\Dummies\Address as DummyAddress;
 use PHPUnit\Framework\TestCase;
 use Vanilo\Contracts\Address;
 

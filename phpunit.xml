@@ -10,7 +10,10 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Vanilo Framework Test Suite">
+        <testsuite name="Contract Tests">
+            <directory>src/Contracts/Tests</directory>
+        </testsuite>
+        <testsuite name="Framework Tests">
             <directory>src/Framework/Tests</directory>
         </testsuite>
     </testsuites>

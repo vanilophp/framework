@@ -10,7 +10,7 @@
  *
  */
 
-namespace Konekt\Contracts\Tests\Dummies;
+namespace Vanilo\Contracts\Tests\Dummies;
 
 class Address implements \Vanilo\Contracts\Address
 {
