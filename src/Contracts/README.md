@@ -2,7 +2,6 @@
 
 [![Tests](https://img.shields.io/github/workflow/status/vanilophp/contracts/tests/master?style=flat-square)](https://github.com/vanilophp/contracts/actions?query=workflow%3Atests)
 [![Packagist Stable Version](https://img.shields.io/packagist/v/vanilo/contracts.svg?style=flat-square&label=stable)](https://packagist.org/packages/vanilo/contracts)
-[![StyleCI](https://styleci.io/repos/109375913/shield?branch=master)](https://styleci.io/repos/109375913)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/contracts.svg?style=flat-square)](https://packagist.org/packages/vanilo/contracts)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
