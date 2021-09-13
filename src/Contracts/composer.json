@@ -1,0 +1,36 @@
+{
+    "name": "vanilo/contracts",
+    "description": "Common set of Vanilo Contracts (Interfaces)",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["ecommerce", "laravel", "vanilo", "artkonekt"],
+    "support": {
+        "source": "https://github.com/vanilophp/contracts"
+    },
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "~6.0|~7.0|~8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "~8.0|~9.0"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Contracts\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Konekt\\Contracts\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2.x-dev"
+        }
+    }
+}
