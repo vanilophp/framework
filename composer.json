@@ -15,10 +15,10 @@
         "issues": "https://github.com/vanilophp/framework/issues"
     },
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "ext-json": "*",
         "ext-pdo": "*",
-        "laravel/framework": "^6.18|^7.0|^8.0",
+        "laravel/framework": "^8.22.1",
         "konekt/appshell": "^2.2",
         "konekt/concord": "^1.10",
         "spatie/laravel-medialibrary": "^8.0|^9.0",
@@ -42,8 +42,8 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "~4.0|~5.0|~6.0",
-        "phpunit/phpunit" : "~8.0|~9.0",
+        "orchestra/testbench": "~6.0",
+        "phpunit/phpunit" : "~9.0",
         "laravel/legacy-factories": "^1.0.4"
     },
     "autoload-dev": {

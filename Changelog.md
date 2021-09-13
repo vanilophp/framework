@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.x Series
+
+## Unreleased
+##### 2021-12-XX
+
+- Dropped PHP 7.4 Support
+- Dropped Laravel 6-7 Support
+- Minimum Laravel version is 8.22.1. [See GHSA-3p32-j457-pg5x](https://github.com/advisories/GHSA-3p32-j457-pg5x)
+
 ## 2.x Series
 
 ## 2.2.0
