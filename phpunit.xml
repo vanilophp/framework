@@ -22,6 +22,9 @@
         <testsuite name="Category Tests">
             <directory>src/Category/Tests</directory>
         </testsuite>
+        <testsuite name="Cart Tests">
+            <directory>src/Cart/Tests</directory>
+        </testsuite>
         <testsuite name="Framework Tests">
             <directory>src/Framework/Tests</directory>
         </testsuite>
