@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vanilo\\Support\\": "src/"
+            "Vanilo\\Support\\": ""
         }
     },
     "suggest": {
