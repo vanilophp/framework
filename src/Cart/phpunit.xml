@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    phpunit -c phpunit.xml
+-->
+<phpunit colors="true"
+         convertNoticesToExceptions="true"
+         bootstrap="./vendor/autoload.php"
+         testdox="true"
+>
+    <testsuites>
+        <testsuite name="Vanilo Cart Module Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
