@@ -46,14 +46,14 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: order_test
+          MYSQL_DATABASE: vanilo_test
         ports:
           - 3306
       postgres:
         image: postgres
         env:
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: order_test
+          POSTGRES_DB: vanilo_test
         ports:
           - 5432
         options: >-

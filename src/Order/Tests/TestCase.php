@@ -84,7 +84,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('database.default', $engine);
         $app['config']->set('database.connections.' . $engine, [
             'driver' => $engine,
-            'database' => 'sqlite' == $engine ? ':memory:' : 'order_test',
+            'database' => 'sqlite' == $engine ? ':memory:' : 'vanilo_test',
             'prefix' => '',
             'host' => env('TEST_DB_HOST', '127.0.0.1'),
             'username' => env('TEST_DB_USERNAME', 'pgsql' === $engine ? 'postgres' : 'root'),
