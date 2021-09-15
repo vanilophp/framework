@@ -16,6 +16,9 @@
         <testsuite name="Support Tests">
             <directory>src/Support/Tests</directory>
         </testsuite>
+        <testsuite name="Product Tests">
+            <directory>src/Product/Tests</directory>
+        </testsuite>
         <testsuite name="Framework Tests">
             <directory>src/Framework/Tests</directory>
         </testsuite>
