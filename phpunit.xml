@@ -19,11 +19,26 @@
         <testsuite name="Product Tests">
             <directory>src/Product/Tests</directory>
         </testsuite>
+        <testsuite name="Properties Tests">
+            <directory>src/Properties/Tests</directory>
+        </testsuite>
         <testsuite name="Category Tests">
             <directory>src/Category/Tests</directory>
         </testsuite>
+        <testsuite name="Channel Tests">
+            <directory>src/Channel/Tests</directory>
+        </testsuite>
         <testsuite name="Cart Tests">
             <directory>src/Cart/Tests</directory>
+        </testsuite>
+        <testsuite name="Checkout Tests">
+            <directory>src/Checkout/Tests</directory>
+        </testsuite>
+        <testsuite name="Order Tests">
+            <directory>src/Order/Tests</directory>
+        </testsuite>
+        <testsuite name="Payment Tests">
+            <directory>src/Payment/Tests</directory>
         </testsuite>
         <testsuite name="Framework Tests">
             <directory>src/Framework/Tests</directory>

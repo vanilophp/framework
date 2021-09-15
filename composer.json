@@ -21,19 +21,19 @@
         "laravel/framework": "^8.22.1",
         "konekt/appshell": "^2.2",
         "konekt/concord": "^1.10",
-        "spatie/laravel-medialibrary": "^8.0|^9.0",
-        "vanilo/checkout": "^2.2",
-        "vanilo/order": "^2.2",
-        "vanilo/properties": "^2.2",
-        "vanilo/channel": "^2.2",
-        "vanilo/payment": "^2.2"
+        "spatie/laravel-medialibrary": "^8.0|^9.0"
     },
     "replace": {
         "vanilo/contracts": "^2.2 | ^3.0",
         "vanilo/support": "^2.2 | ^3.0",
         "vanilo/product": "^2.2 | ^3.0",
+        "vanilo/properties": "^2.2 | ^3.0",
         "vanilo/category": "^2.2 | ^3.0",
-        "vanilo/cart": "^2.2 | ^3.0"
+        "vanilo/channel": "^2.2 | ^3.0",
+        "vanilo/cart": "^2.2 | ^3.0",
+        "vanilo/checkout": "^2.2 | ^3.0",
+        "vanilo/order": "^2.2 | ^3.0",
+        "vanilo/payment": "^2.2 | ^3.0"
     },
     "autoload": {
         "psr-4": {
