@@ -5,7 +5,6 @@ This is the cart module for [Vanilo](https://vanilo.io).
 [![Tests](https://img.shields.io/github/workflow/status/vanilophp/cart/tests/master?style=flat-square)](https://github.com/vanilophp/cart/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
-[![StyleCI](https://styleci.io/repos/108638279/shield?branch=master)](https://styleci.io/repos/108638279)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
 ## Installation
