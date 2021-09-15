@@ -16,27 +16,22 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "konekt/concord": "^1.6",
         "konekt/enum": "^3.0",
         "vanilo/contracts": "^2.2",
         "vanilo/support": "^2.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "8 - 9",
-        "orchestra/testbench": "~4.0|~5.0|~6.0"
+        "phpunit/phpunit": "^9.0",
+        "orchestra/testbench": "^6.0"
     },
     "autoload": {
-        "psr-4": { "Vanilo\\Payment\\": "src/" }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Vanilo\\Payment\\Tests\\": "tests/"
-        }
+        "psr-4": { "Vanilo\\Payment\\": "" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2.x-dev"
+            "dev-master": "3.x-dev"
         }
     }
 }

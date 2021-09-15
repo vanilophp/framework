@@ -6,7 +6,7 @@
          bootstrap="./vendor/autoload.php">
     <testsuites>
         <testsuite name="Vanilo Payment Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+            <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>
