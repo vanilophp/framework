@@ -1,0 +1,32 @@
+preset: psr12
+risky: true
+enabled:
+  - align_phpdoc
+  - alpha_ordered_imports
+  - cast_spaces
+  - clean_namespace
+  - declare_strict_types
+  - fully_qualified_strict_types
+  - implode_call
+  - no_extra_block_blank_lines
+  - no_extra_consecutive_blank_lines
+  - no_spaces_inside_offset
+  - no_spaces_outside_offset
+  - no_whitespace_before_comma_in_array
+  - no_unneeded_curly_braces
+  - no_unneeded_control_parentheses
+  - no_unneeded_final_method
+  - no_unused_imports
+  - no_unused_lambda_imports
+  - no_useless_sprintf
+  - normalize_index_brace
+  - object_operator_without_whitespace
+  - ordered_class_elements
+  - print_to_echo
+  - property_separation
+  - short_array_syntax
+  - short_list_syntax
+  - standardize_not_equals
+  - unalign_equals
+  - unalign_double_arrow
+  - yoda_style
