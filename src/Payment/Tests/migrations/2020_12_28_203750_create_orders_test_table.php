@@ -10,15 +10,17 @@ class CreateOrdersTestTable extends Migration
 {
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id');
-            $table->decimal('total', 15, 2);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('orders')) {
+            Schema::create('orders', function (Blueprint $table) {
+                $table->increments('id');
+                $table->decimal('total', 15, 2);
+                $table->timestamps();
+            });
+        }
     }
 
     public function down()
     {
-        Schema::drop('orders');
+        Schema::dropIfExists('orders');
     }
 }
