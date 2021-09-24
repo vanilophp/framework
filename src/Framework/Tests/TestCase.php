@@ -16,6 +16,7 @@ namespace Vanilo\Framework\Tests;
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\Gears\Providers\GearsServiceProvider;
@@ -28,6 +29,8 @@ use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;
 
 abstract class TestCase extends Orchestra
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -69,7 +72,7 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
-        $engine = env('TEST_DB_ENGINE', 'sqlite');
+        $engine = env('TEST_DB_ENGINE', 'pgsql');
         $app['path.lang'] = __DIR__ . '/lang';
         $app['config']->set('database.default', $engine);
         $app['config']->set('database.connections.' . $engine, [
@@ -78,8 +81,8 @@ abstract class TestCase extends Orchestra
             'prefix' => '',
             'host' => env('TEST_DB_HOST', '127.0.0.1'),
             'username' => env('TEST_DB_USERNAME', 'pgsql' === $engine ? 'postgres' : 'root'),
-            'password' => env('TEST_DB_PASSWORD', ''),
-            'port' => env('TEST_DB_PORT'),
+            'password' => env('TEST_DB_PASSWORD', 'root'),
+            'port' => env('TEST_DB_PORT', 5432),
         ]);
 
         if ('pgsql' === $engine) {

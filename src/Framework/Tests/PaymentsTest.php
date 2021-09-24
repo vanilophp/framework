@@ -27,6 +27,7 @@ class PaymentsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        Order::query()->delete();
 
         $this->paymentMethod = PaymentMethod::create([
             'name' => 'Wire Transfer',

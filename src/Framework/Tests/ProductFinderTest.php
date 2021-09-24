@@ -29,6 +29,7 @@ class ProductFinderTest extends TestCase
     {
         parent::setUp();
         Product::query()->delete();
+        Property::query()->delete();
     }
 
     /** @test */
