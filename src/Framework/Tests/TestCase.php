@@ -72,7 +72,7 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
-        $engine = env('TEST_DB_ENGINE', 'pgsql');
+        $engine = env('TEST_DB_ENGINE', 'sqlite');
         $app['path.lang'] = __DIR__ . '/lang';
         $app['config']->set('database.default', $engine);
         $app['config']->set('database.connections.' . $engine, [
@@ -81,8 +81,8 @@ abstract class TestCase extends Orchestra
             'prefix' => '',
             'host' => env('TEST_DB_HOST', '127.0.0.1'),
             'username' => env('TEST_DB_USERNAME', 'pgsql' === $engine ? 'postgres' : 'root'),
-            'password' => env('TEST_DB_PASSWORD', 'root'),
-            'port' => env('TEST_DB_PORT', 5432),
+            'password' => env('TEST_DB_PASSWORD', ''),
+            'port' => env('TEST_DB_PORT'),
         ]);
 
         if ('pgsql' === $engine) {
