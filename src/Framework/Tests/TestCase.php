@@ -97,8 +97,12 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
-        $this->loadLaravelMigrations();
         $this->artisan('migrate', ['--force' => true]);
+    }
+
+    protected function defineDatabaseMigrations()
+    {
+        $this->loadLaravelMigrations();
     }
 
     /**
