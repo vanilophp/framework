@@ -20,7 +20,6 @@ use Konekt\Address\Seeds\Countries;
 use Konekt\Address\Seeds\StatesOfUsa;
 use Vanilo\Contracts\Address as AddressContract;
 use Vanilo\Framework\Models\Address;
-use Vanilo\Framework\Models\Customer;
 
 class AddressTest extends TestCase
 {
@@ -78,19 +77,6 @@ class AddressTest extends TestCase
         $address = factory(Address::class)->make();
 
         $this->assertTrue(AddressType::create()->equals($address->type));
-    }
-
-    /** @ test @todo check, it used to be achieved via AppShell */
-    public function it_has_the_customers_relationship()
-    {
-        $customer = factory(Customer::class)->make();
-        $customer->save();
-
-        $address = factory(Address::class)->make();
-        $address->save();
-
-        $address->customers()->attach($customer);
-        $this->assertCount(1, $address->customers);
     }
 
     /** @test */
