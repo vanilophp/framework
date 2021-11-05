@@ -16,9 +16,9 @@ namespace Vanilo\Framework\Tests;
 
 use Illuminate\Support\Facades\DB;
 use Vanilo\Framework\Models\Order;
-use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\Factories\PaymentFactory;
 use Vanilo\Payment\Models\Payment;
+use Vanilo\Payment\Models\PaymentMethod;
 
 class PaymentsTest extends TestCase
 {

@@ -34,7 +34,6 @@ use Vanilo\Framework\Models\Taxonomy;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Models\OrderProxy;
-use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
 
