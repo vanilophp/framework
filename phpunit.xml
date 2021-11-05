@@ -34,9 +34,9 @@
         <testsuite name="Checkout Tests">
             <directory>src/Checkout/Tests</directory>
         </testsuite>
-<!--        <testsuite name="Order Tests">-->
-<!--            <directory>src/Order/Tests</directory>-->
-<!--        </testsuite>-->
+        <testsuite name="Order Tests">
+            <directory>src/Order/Tests</directory>
+        </testsuite>
         <testsuite name="Payment Tests">
             <directory>src/Payment/Tests</directory>
         </testsuite>

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Vanilo\Order\Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Address\Providers\ModuleServiceProvider as KonektAddressModule;
 use Konekt\Concord\ConcordServiceProvider;
@@ -25,6 +26,8 @@ use Vanilo\Order\Tests\Dummies\Product;
 
 abstract class TestCase extends Orchestra
 {
+    use RefreshDatabase;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -32,8 +35,6 @@ abstract class TestCase extends Orchestra
         Relation::morphMap([
             shorten(Product::class) => Product::class
         ]);
-
-        $this->setUpDatabase($this->app);
 
         $this->app->concord->registerModel(
             AddressContract::class,
@@ -97,22 +98,12 @@ abstract class TestCase extends Orchestra
         }
     }
 
-    /**
-     * Set up the database.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
-    protected function setUpDatabase($app)
+    protected function defineDatabaseMigrations()
     {
-        $this->artisan('migrate:reset');
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
-        $this->artisan('migrate', ['--force' => true]);
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function resolveApplicationConfiguration($app)
     {
         parent::resolveApplicationConfiguration($app);
