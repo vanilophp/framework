@@ -44,6 +44,12 @@ abstract class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
     }
 
+    protected function tearDown(): void
+    {
+        $this->artisan('migrate:reset');
+        parent::tearDown();
+    }
+
     /* @todo Remove once PHPUnit < 9.0 won't be supported by the package */
     public function expectExceptionMessageMatches(string $regularExpression): void
     {
@@ -103,12 +109,6 @@ abstract class TestCase extends Orchestra
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         Artisan::call('migrate', ['--force' => true]);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->artisan('migrate:reset');
-        parent::tearDown();
     }
 
     protected function resolveApplicationConfiguration($app)

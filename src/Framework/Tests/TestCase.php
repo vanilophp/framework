@@ -16,7 +16,6 @@ namespace Vanilo\Framework\Tests;
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\Gears\Providers\GearsServiceProvider;
@@ -35,6 +34,12 @@ abstract class TestCase extends Orchestra
 
         $this->withFactories(realpath(__DIR__ . '/factories'));
         $this->setUpDatabase($this->app);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->artisan('migrate:reset');
+        parent::tearDown();
     }
 
     /**
@@ -97,12 +102,6 @@ abstract class TestCase extends Orchestra
     {
         $this->loadLaravelMigrations();
         $this->artisan('migrate', ['--force' => true]);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->artisan('migrate:reset');
-        parent::tearDown();
     }
 
     /**
