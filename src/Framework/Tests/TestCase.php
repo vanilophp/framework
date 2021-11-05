@@ -14,13 +14,10 @@ declare(strict_types=1);
 namespace Vanilo\Framework\Tests;
 
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
-use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Konekt\Concord\ConcordServiceProvider;
-use Konekt\Gears\Providers\GearsServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Konekt\Menu\Facades\Menu;
-use Konekt\Menu\MenuServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;

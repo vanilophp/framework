@@ -71,6 +71,5 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
         // Use the framework's extended order factory
         $this->app->bind(OrderFactoryContract::class, OrderFactory::class);
-
     }
 }
