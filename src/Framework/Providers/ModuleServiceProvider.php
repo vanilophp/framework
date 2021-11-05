@@ -28,7 +28,6 @@ use Vanilo\Framework\Factories\OrderFactory;
 use Vanilo\Framework\Models\Address;
 use Vanilo\Framework\Models\Customer;
 use Vanilo\Framework\Models\Order;
-use Vanilo\Framework\Models\PaymentMethod;
 use Vanilo\Framework\Models\Product;
 use Vanilo\Framework\Models\Taxon;
 use Vanilo\Framework\Models\Taxonomy;
@@ -59,7 +58,6 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(CustomerContract::class, Customer::class, $registerRouteModels);
         $this->concord->registerModel(TaxonContract::class, Taxon::class, $registerRouteModels);
         $this->concord->registerModel(TaxonomyContract::class, Taxonomy::class, $registerRouteModels);
-        $this->concord->registerModel(PaymentMethodContract::class, PaymentMethod::class, $registerRouteModels);
         $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
 
         Relation::morphMap([

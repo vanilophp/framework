@@ -16,7 +16,7 @@ namespace Vanilo\Framework\Tests;
 
 use Illuminate\Support\Facades\DB;
 use Vanilo\Framework\Models\Order;
-use Vanilo\Framework\Models\PaymentMethod;
+use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\Factories\PaymentFactory;
 use Vanilo\Payment\Models\Payment;
 
