@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Framework\Models;
 
-use Konekt\AppShell\Models\Address as BaseAddress;
+use Konekt\Address\Models\Address as BaseAddress;
 use Vanilo\Contracts\Address as AddressContract;
 use Vanilo\Support\Traits\AddressModel;
 

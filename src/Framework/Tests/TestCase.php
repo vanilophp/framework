@@ -16,7 +16,6 @@ namespace Vanilo\Framework\Tests;
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
-use Konekt\AppShell\Providers\ModuleServiceProvider as AppShellModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\Gears\Providers\GearsServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
@@ -52,10 +51,7 @@ abstract class TestCase extends Orchestra
         return [
             ConcordServiceProvider::class,
             MediaLibraryServiceProvider::class,
-            GearsServiceProvider::class,
             LaravelMigrationCompatibilityProvider::class,
-            BreadcrumbsServiceProvider::class,
-            MenuServiceProvider::class,
             SluggableServiceProvider::class,
         ];
     }
@@ -111,7 +107,6 @@ abstract class TestCase extends Orchestra
     {
         parent::resolveApplicationConfiguration($app);
         $app['config']->set('concord.modules', [
-            AppShellModule::class,
             VaniloModule::class
         ]);
     }

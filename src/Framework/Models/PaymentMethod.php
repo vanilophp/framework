@@ -19,7 +19,8 @@ use Vanilo\Payment\Models\PaymentMethod as BasePaymentMethod;
 
 class PaymentMethod extends BasePaymentMethod
 {
-    use FormAccessible;
+    // @todo check, this is only needed for admin
+    //use FormAccessible;
 
     public function formConfigurationAttribute($value)
     {

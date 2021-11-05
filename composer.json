@@ -19,9 +19,12 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "laravel/framework": "^8.22.1",
-        "konekt/appshell": "^2.2",
         "konekt/concord": "^1.10",
-        "spatie/laravel-medialibrary": "^8.0|^9.0"
+        "spatie/laravel-medialibrary": "^8.0|^9.0",
+        "cviebrock/eloquent-sluggable": "^8.0",
+        "konekt/laravel-migration-compatibility": "^1.4",
+        "konekt/address": "^2.1",
+        "konekt/customer": "^2.1"
     },
     "replace": {
         "vanilo/contracts": "^2.2 | ^3.0",

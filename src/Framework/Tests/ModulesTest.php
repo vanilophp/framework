@@ -24,7 +24,7 @@ class ModulesTest extends TestCase
                 return $module->getId();
             });
 
-        $this->assertTrue($modules->has('konekt.app_shell'), 'AppShell module is missing');
+        $this->assertFalse($modules->has('konekt.app_shell'), 'AppShell module is still present');
         $this->assertTrue($modules->has('vanilo.cart'), 'Cart module is missing');
         $this->assertTrue($modules->has('vanilo.category'), 'Category module is missing');
         $this->assertTrue($modules->has('vanilo.checkout'), 'Checkout module is missing');

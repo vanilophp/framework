@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 return [
     'modules' => [
+        Konekt\User\Providers\ModuleServiceProvider::class => [],
+        Konekt\Address\Providers\ModuleServiceProvider::class => [],
+        Konekt\Customer\Providers\ModuleServiceProvider::class => [],
         Vanilo\Category\Providers\ModuleServiceProvider::class => [],
         Vanilo\Product\Providers\ModuleServiceProvider::class => [],
         Vanilo\Properties\Providers\ModuleServiceProvider::class => [],
@@ -14,16 +17,6 @@ return [
         Vanilo\Payment\Providers\ModuleServiceProvider::class => [],
     ],
     'event_listeners' => true,
-    'views' => [
-        'namespace' => 'vanilo'
-    ],
-    'routes' => [
-        'prefix' => 'admin',
-        'as' => 'vanilo.',
-        'middleware' => ['web', 'auth', 'acl'],
-        'files' => ['admin']
-    ],
-    'breadcrumbs' => true,
     'image' => [
         'variants' => [
             'thumbnail' => [

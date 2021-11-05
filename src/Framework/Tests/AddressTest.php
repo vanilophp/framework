@@ -80,7 +80,7 @@ class AddressTest extends TestCase
         $this->assertTrue(AddressType::create()->equals($address->type));
     }
 
-    /** @test */
+    /** @ test @todo check, it used to be achieved via AppShell */
     public function it_has_the_customers_relationship()
     {
         $customer = factory(Customer::class)->make();
