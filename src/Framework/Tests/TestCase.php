@@ -29,8 +29,6 @@ use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;
 
 abstract class TestCase extends Orchestra
 {
-    use RefreshDatabase;
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -97,12 +95,14 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
+        $this->loadLaravelMigrations();
         $this->artisan('migrate', ['--force' => true]);
     }
 
-    protected function defineDatabaseMigrations()
+    protected function tearDown(): void
     {
-        $this->loadLaravelMigrations();
+        $this->artisan('migrate:reset');
+        parent::tearDown();
     }
 
     /**

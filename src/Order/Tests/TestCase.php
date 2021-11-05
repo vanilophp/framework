@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * Contains the base TestCase class.
  *
@@ -14,7 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Order\Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Address\Providers\ModuleServiceProvider as KonektAddressModule;
 use Konekt\Concord\ConcordServiceProvider;
@@ -26,8 +27,6 @@ use Vanilo\Order\Tests\Dummies\Product;
 
 abstract class TestCase extends Orchestra
 {
-    use RefreshDatabase;
-
     public function setUp(): void
     {
         parent::setUp();
@@ -42,6 +41,7 @@ abstract class TestCase extends Orchestra
         );
 
         $this->withFactories(__DIR__ . '/factories');
+        $this->setUpDatabase($this->app);
     }
 
     /* @todo Remove once PHPUnit < 9.0 won't be supported by the package */
@@ -98,10 +98,17 @@ abstract class TestCase extends Orchestra
         }
     }
 
-    protected function defineDatabaseMigrations()
+    protected function setUpDatabase($app)
     {
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        Artisan::call('migrate', ['--force' => true]);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->artisan('migrate:reset');
+        parent::tearDown();
     }
 
     protected function resolveApplicationConfiguration($app)
