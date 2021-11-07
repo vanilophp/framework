@@ -22,7 +22,7 @@ function remote()
     git remote add $1 $REPO || true
 }
 
-#git pull origin $CURRENT_BRANCH
+git pull origin $CURRENT_BRANCH
 
 remote cart
 remote category
