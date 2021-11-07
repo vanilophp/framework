@@ -5,7 +5,7 @@
 <phpunit colors="true"
          bootstrap="./vendor/autoload.php">
     <testsuites>
-        <testsuite name="Vanilo Channel Test Suite">
+        <testsuite name="Vanilo Channel Module Test Suite">
             <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>
