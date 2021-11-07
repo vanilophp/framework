@@ -5,7 +5,6 @@ This is the checkout module for [Vanilo](https://vanilo.io).
 [![Tests](https://img.shields.io/github/workflow/status/vanilophp/checkout/tests/master?style=flat-square)](https://github.com/vanilophp/checkout/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/checkout.svg?style=flat-square)](https://packagist.org/packages/vanilo/checkout)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/checkout.svg?style=flat-square)](https://packagist.org/packages/vanilo/checkout)
-[![StyleCI](https://styleci.io/repos/109258256/shield?branch=master)](https://styleci.io/repos/109258256)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
 ## Installation

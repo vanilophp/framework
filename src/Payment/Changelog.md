@@ -1,4 +1,15 @@
-# Changelog
+# Vanilo Payment Module Changelog
+
+## Unreleased - v3
+##### 2021-12-XX
+
+- Dropped PHP 7.4 Support
+- Dropped Laravel 6-7 Support
+- Removed Admin from "Framework" - it is available as an optional separate package see [vanilo/admin](https://github.com/vanilophp/admin) 
+- Minimum Laravel version is 8.22.1. [See GHSA-3p32-j457-pg5x](https://github.com/advisories/GHSA-3p32-j457-pg5x)
+
+
+---
 
 ## 2.x Series
 
