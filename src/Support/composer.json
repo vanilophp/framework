@@ -2,6 +2,8 @@
     "name": "vanilo/support",
     "description": "Common Vanilo functions, traits, helpers",
     "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "license": "MIT",
     "keywords": ["ecommerce", "laravel", "vanilo", "artkonekt"],
     "support": {

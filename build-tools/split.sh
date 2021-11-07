@@ -8,9 +8,9 @@ CURRENT_BRANCH="master"
 function split()
 {
     if [ -n "$3" ]; then # Optional starting commit
-        SHA1=$(splitsh-lite -scratch --prefix=$1 --commit $3)
+        SHA1=$(splitsh-lite --prefix=$1 --commit $3)
     else
-        SHA1=$(splitsh-lite -scratch --prefix=$1)
+        SHA1=$(splitsh-lite --prefix=$1)
     fi
 
     git push $2 "$SHA1:refs/heads/$CURRENT_BRANCH" -f
