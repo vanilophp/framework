@@ -44,7 +44,7 @@
         },
         "files": [
             "src/Foundation/Support/helpers.php",
-            "src/Foundation/Support/vanilo2_compatibility.php"
+            "src/Foundation/Support/v2_compatibility.php"
         ]
     },
     "require-dev": {

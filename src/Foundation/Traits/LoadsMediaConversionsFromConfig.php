@@ -22,9 +22,9 @@ trait LoadsMediaConversionsFromConfig
     {
         $shortname = shorten(static::class);
 
-        $variants = config("vanilo.framework.image.$shortname.variants");
+        $variants = config("vanilo.foundation.image.$shortname.variants");
         if (!is_array($variants)) {
-            $variants = config('vanilo.framework.image.variants', []);
+            $variants = config('vanilo.foundation.image.variants', []);
         }
 
         foreach ($variants as $name => $settings) {

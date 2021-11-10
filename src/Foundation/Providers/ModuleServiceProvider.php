@@ -50,7 +50,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
     {
         parent::boot();
 
-        // Use the framework's extended model classes
+        // Use the foundation's extended model classes
         $registerRouteModels = config('concord.register_route_models', true);
         $this->concord->registerModel(ProductContract::class, Product::class, $registerRouteModels);
         $this->concord->registerModel(AddressContract::class, Address::class, $registerRouteModels);
@@ -66,7 +66,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'order' => OrderProxy::modelClass(),
         ]);
 
-        // Use the framework's extended order factory
+        // Use the foundation's extended order factory
         $this->app->bind(OrderFactoryContract::class, OrderFactory::class);
     }
 }

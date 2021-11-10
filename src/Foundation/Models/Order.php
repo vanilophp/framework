@@ -48,7 +48,7 @@ class Order extends BaseOrder implements Payable
 
     public function getCurrency(): string
     {
-        return config('vanilo.framework.currency.code');
+        return config('vanilo.foundation.currency.code');
     }
 
     public function getCurrentPayment(): ?Payment

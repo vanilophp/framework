@@ -12,8 +12,8 @@ declare(strict_types=1);
 function format_price($price, string $currency = null)
 {
     return sprintf(
-        config('vanilo.framework.currency.format'),
+        config('vanilo.foundation.currency.format'),
         $price,
-        $currency ?? config('vanilo.framework.currency.sign')
+        $currency ?? config('vanilo.foundation.currency.sign')
     );
 }
