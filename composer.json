@@ -43,7 +43,8 @@
             "Vanilo\\": "src"
         },
         "files": [
-            "src/Framework/Support/helpers.php"
+            "src/Foundation/Support/helpers.php",
+            "src/Foundation/Support/vanilo2_compatibility.php"
         ]
     },
     "require-dev": {
