@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Models;
+namespace Vanilo\Foundation\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\MediaLibrary\HasMedia;
@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Models\Taxon as BaseTaxon;
 use Vanilo\Contracts\HasImages;
-use Vanilo\Framework\Traits\LoadsMediaConversionsFromConfig;
+use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;

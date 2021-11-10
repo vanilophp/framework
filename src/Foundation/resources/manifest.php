@@ -3,6 +3,6 @@
 declare(strict_types=1);
 
 return [
-    'name' => 'Vanilo Framework',
+    'name' => 'Vanilo Foundation',
     'version' => '3.x-dev'
 ];

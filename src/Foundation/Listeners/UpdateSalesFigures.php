@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Listeners;
+namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Contracts\OrderAwareEvent;

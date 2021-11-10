@@ -12,10 +12,10 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Providers;
+namespace Vanilo\Foundation\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Vanilo\Framework\Listeners\UpdateSalesFigures;
+use Vanilo\Foundation\Listeners\UpdateSalesFigures;
 use Vanilo\Order\Events\OrderWasCreated;
 
 class EventServiceProvider extends ServiceProvider

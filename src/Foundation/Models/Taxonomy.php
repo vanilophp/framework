@@ -12,14 +12,14 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Models;
+namespace Vanilo\Foundation\Models;
 
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Models\Taxonomy as BaseTaxonomy;
 use Vanilo\Contracts\HasImages;
-use Vanilo\Framework\Traits\LoadsMediaConversionsFromConfig;
+use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 
 class Taxonomy extends BaseTaxonomy implements HasMedia, HasImages

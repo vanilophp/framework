@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Tests;
+namespace Vanilo\Foundation\Tests;
 
 use Konekt\Address\Models\AddressType;
 use Konekt\Address\Models\Country;
@@ -20,7 +20,7 @@ use Konekt\Address\Models\Province;
 use Konekt\Address\Seeds\Countries;
 use Konekt\Address\Seeds\StatesOfUsa;
 use Vanilo\Contracts\Address as AddressContract;
-use Vanilo\Framework\Models\Address;
+use Vanilo\Foundation\Models\Address;
 
 class AddressTest extends TestCase
 {

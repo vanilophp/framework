@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Tests;
+namespace Vanilo\Foundation\Tests;
 
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
@@ -21,7 +21,7 @@ use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Konekt\Menu\Facades\Menu;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
-use Vanilo\Framework\Providers\ModuleServiceProvider as VaniloModule;
+use Vanilo\Foundation\Providers\ModuleServiceProvider as VaniloModule;
 
 abstract class TestCase extends Orchestra
 {

@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Models;
+namespace Vanilo\Foundation\Models;
 
 use Konekt\Customer\Models\Customer as BaseCustomer;
 use Vanilo\Contracts\Customer as CustomerContract;

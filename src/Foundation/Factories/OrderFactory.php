@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Factories;
+namespace Vanilo\Foundation\Factories;
 
 use Vanilo\Checkout\Contracts\Checkout;
 use Vanilo\Contracts\CheckoutSubject;

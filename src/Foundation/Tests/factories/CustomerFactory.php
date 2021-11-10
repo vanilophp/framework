@@ -13,7 +13,7 @@ declare(strict_types=1);
  */
 use Faker\Generator as Faker;
 use Konekt\Customer\Models\CustomerType;
-use Vanilo\Framework\Models\Customer;
+use Vanilo\Foundation\Models\Customer;
 
 $factory->define(Customer::class, function (Faker $faker) {
     return [

@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Providers;
+namespace Vanilo\Foundation\Providers;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Address\Contracts\Address as AddressContract;
@@ -23,14 +23,14 @@ use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Category\Models\TaxonProxy;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
-use Vanilo\Framework\Factories\CheckoutDataFactory;
-use Vanilo\Framework\Factories\OrderFactory;
-use Vanilo\Framework\Models\Address;
-use Vanilo\Framework\Models\Customer;
-use Vanilo\Framework\Models\Order;
-use Vanilo\Framework\Models\Product;
-use Vanilo\Framework\Models\Taxon;
-use Vanilo\Framework\Models\Taxonomy;
+use Vanilo\Foundation\Factories\CheckoutDataFactory;
+use Vanilo\Foundation\Factories\OrderFactory;
+use Vanilo\Foundation\Models\Address;
+use Vanilo\Foundation\Models\Customer;
+use Vanilo\Foundation\Models\Order;
+use Vanilo\Foundation\Models\Product;
+use Vanilo\Foundation\Models\Taxon;
+use Vanilo\Foundation\Models\Taxonomy;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Models\OrderProxy;

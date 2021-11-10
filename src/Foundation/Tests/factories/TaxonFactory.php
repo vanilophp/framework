@@ -13,7 +13,7 @@ declare(strict_types=1);
  */
 use Faker\Generator as Faker;
 use Vanilo\Category\Models\Taxonomy;
-use Vanilo\Framework\Models\Taxon;
+use Vanilo\Foundation\Models\Taxon;
 
 $factory->define(Taxon::class, function (Faker $faker) {
     return [

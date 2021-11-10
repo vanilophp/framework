@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 use Faker\Generator as Faker;
-use Vanilo\Framework\Models\Address;
+use Vanilo\Foundation\Models\Address;
 
 $factory->define(Address::class, function (Faker $faker) {
     return [

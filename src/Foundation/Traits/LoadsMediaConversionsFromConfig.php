@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Traits;
+namespace Vanilo\Foundation\Traits;
 
 use Spatie\Image\Manipulations;
 

@@ -12,14 +12,14 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Tests;
+namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
-use Vanilo\Framework\Models\Product;
-use Vanilo\Framework\Models\Taxon;
-use Vanilo\Framework\Search\ProductFinder;
+use Vanilo\Foundation\Models\Product;
+use Vanilo\Foundation\Models\Taxon;
+use Vanilo\Foundation\Search\ProductFinder;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;

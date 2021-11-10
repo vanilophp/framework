@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 use Faker\Generator as Faker;
-use Vanilo\Framework\Models\Product;
+use Vanilo\Foundation\Models\Product;
 use Vanilo\Product\Models\ProductState;
 
 $factory->define(Product::class, function (Faker $faker) {

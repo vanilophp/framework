@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Factories;
+namespace Vanilo\Foundation\Factories;
 
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Address\Models\AddressType;

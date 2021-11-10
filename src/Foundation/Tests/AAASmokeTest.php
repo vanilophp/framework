@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Tests;
+namespace Vanilo\Foundation\Tests;
 
 class AAASmokeTest extends TestCase
 {

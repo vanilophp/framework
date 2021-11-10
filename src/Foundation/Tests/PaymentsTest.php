@@ -12,10 +12,10 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Tests;
+namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Support\Facades\DB;
-use Vanilo\Framework\Models\Order;
+use Vanilo\Foundation\Models\Order;
 use Vanilo\Payment\Factories\PaymentFactory;
 use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentMethod;

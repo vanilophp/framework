@@ -12,10 +12,10 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Tests;
+namespace Vanilo\Foundation\Tests;
 
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Vanilo\Framework\Models\Product;
+use Vanilo\Foundation\Models\Product;
 
 class ProductImageTest extends TestCase
 {

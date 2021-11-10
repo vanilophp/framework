@@ -12,14 +12,14 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Models;
+namespace Vanilo\Foundation\Models;
 
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Traits\HasTaxons;
 use Vanilo\Contracts\Buyable;
-use Vanilo\Framework\Traits\LoadsMediaConversionsFromConfig;
+use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Product\Models\Product as BaseProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
 use Vanilo\Support\Traits\BuyableModel;

@@ -12,13 +12,13 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Framework\Tests;
+namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Support\Facades\DB;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Models\Taxonomy;
-use Vanilo\Framework\Models\Product;
-use Vanilo\Framework\Models\Taxon;
+use Vanilo\Foundation\Models\Product;
+use Vanilo\Foundation\Models\Taxon;
 
 class CategoryTest extends TestCase
 {
