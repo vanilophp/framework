@@ -5,6 +5,17 @@
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/channel.svg?style=flat-square)](https://packagist.org/packages/vanilo/channel)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-Channel module for the [Vanilo E-commerce framework](https://vanilo.io)
+This is the standalone Channel module from the [Vanilo E-commerce framework](https://vanilo.io)
 
-[Documentation](https://vanilo.io/docs/master/channels)
+## Installation
+
+(As Standalone Component)
+
+1. `composer require vanilo/channel`
+2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
+3. Add `Vanilo\Channel\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
+4. `php artisan migrate`
+
+## Usage
+
+See the [Vanilo Channels Documentation](https://vanilo.io/docs/master/channels) for more details.

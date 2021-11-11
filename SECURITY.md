@@ -6,6 +6,7 @@ Vanilo versions currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
+| 3.x     | ✔                  |
 | 2.x     | ✔                  |
 | 1.x     | :x:                |
 | 0.x     | :x:                |

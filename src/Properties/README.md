@@ -5,12 +5,17 @@
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/properties.svg?style=flat-square)](https://packagist.org/packages/vanilo/properties)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-Properties (attributes) module for the [Vanilo E-commerce framework](https://vanilo.io)
+This is the standalone Properties module from the [Vanilo E-commerce framework](https://vanilo.io)
 
-> Most E-commerce systems name this technique as "product attributes".
-> Laravel's Eloquent also named fields of models (entities) as "attributes".
-> In order to prevent confusion Vanilo calls these "EAV" style attributes as "properties".
-> Spree Commerce for example also has this naming: [Product Properties](https://guides.spreecommerce.org/developer/products.html#product-properties)
+## Installation
 
+(As Standalone Component)
 
-[Documentation](https://vanilo.io/docs/master/properties)
+1. `composer require vanilo/properties`
+2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
+3. Add `Vanilo\Properties\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
+4. `php artisan migrate`
+
+## Usage
+
+See the [Vanilo Properties Documentation](https://vanilo.io/docs/master/properties) for more details.

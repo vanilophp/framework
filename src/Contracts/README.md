@@ -8,11 +8,15 @@
 > Vanilo is an E-commerce Framework for Laravel.
 > Check out [vanilo.io](https://vanilo.io).
 
-This repo defines interfaces shared across various Vanilo modules.
+This is a subtree-split of the `Contracts` folder from Vanilo Framework and
+constitutes a standalone package that defines shared interfaces across various
+Vanilo Modules.
 
-It also aims to support separately using modules, so that you can choose
-for example to use the [checkout](https://github.com/vanilophp/checkout)
-component without the [cart](https://github.com/vanilophp/cart).
+It aims to support using individual modules without the Framework.
+So that you can choose for example to use the
+[checkout](https://github.com/vanilophp/checkout) component without the
+[cart](https://github.com/vanilophp/cart) component.
 
-Thus, I can't imagine a scenario using this package alone. It comes as a
-requirement of almost all Vanilo components.
+## Usage
+
+See the [Vanilo Documentation](https://vanilo.io/docs/master/what-is-vanilo) for more details.

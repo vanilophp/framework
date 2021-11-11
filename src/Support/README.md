@@ -5,4 +5,12 @@
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/support.svg?style=flat-square)](https://packagist.org/packages/vanilo/support)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-Common Vanilo functions, traits, helpers.
+This is a subtree-split of the `Support` folder from Vanilo Framework and
+constitutes a standalone package that contains some common non-essential functions, traits, helpers.
+
+It can be optionally utilized by applications when using standalone Vanilo Module(s) without the entire Framework.
+
+## Usage
+
+See the [Vanilo Documentation](https://vanilo.io/docs/master/what-is-vanilo) for more details.
+
