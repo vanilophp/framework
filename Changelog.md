@@ -7,6 +7,8 @@
 
 - Dropped PHP 7.4 Support
 - Dropped Laravel 6-7 Support
+- Added Laravel 9 Support
+- Added PHP 8.1 Support
 - Removed Admin from "Framework" - it is available as an optional separate package see [vanilo/admin](https://github.com/vanilophp/admin)
 - Minimum Laravel version is 8.22.1. [See GHSA-3p32-j457-pg5x](https://github.com/advisories/GHSA-3p32-j457-pg5x)
 - BC: Renamed Framework Module and Namespace to "Foundation"
