@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Tests;
 
+use Illuminate\Support\Facades\Event;
 use Vanilo\Payment\Events\PaymentCompleted;
 use Vanilo\Payment\Events\PaymentCreated;
 use Vanilo\Payment\Events\PaymentDeclined;
@@ -155,8 +156,9 @@ class ResponseHandlerTest extends TestCase
         $response = $this->createResponse(PaymentStatus::DECLINED());
         $handler = new PaymentResponseHandler($payment, $response);
 
-        $this->expectsEvents([PaymentDeclined::class]);
+        Event::fake();
         $handler->fireEvents();
+        Event::assertDispatched(PaymentDeclined::class);
     }
 
     /** @test */
@@ -166,15 +168,13 @@ class ResponseHandlerTest extends TestCase
         $response = $this->createResponse(PaymentStatus::ON_HOLD());
         $handler = new PaymentResponseHandler($payment, $response);
 
-        $this->doesntExpectEvents([
-            PaymentCompleted::class,
-            PaymentCreated::class,
-            PaymentDeclined::class,
-            PaymentPartiallyReceived::class,
-            PaymentTimedOut::class,
-        ]);
-
+        Event::fake();
         $handler->fireEvents();
+        Event::assertNotDispatched(PaymentCompleted::class);
+        Event::assertNotDispatched(PaymentCreated::class);
+        Event::assertNotDispatched(PaymentDeclined::class);
+        Event::assertNotDispatched(PaymentPartiallyReceived::class);
+        Event::assertNotDispatched(PaymentTimedOut::class);
     }
 
     /** @test */
@@ -184,9 +184,10 @@ class ResponseHandlerTest extends TestCase
         $response = $this->createResponse(PaymentStatus::DECLINED());
         $handler = new PaymentResponseHandler($payment, $response);
 
-        $this->doesntExpectEvents([PaymentDeclined::class]);
-
+        Event::fake();
         $handler->fireEvents();
+        Event::assertNotDispatched(PaymentDeclined::class);
+
     }
 
     private function createPayment(PaymentStatus $status): Payment
