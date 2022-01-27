@@ -187,7 +187,6 @@ class ResponseHandlerTest extends TestCase
         Event::fake();
         $handler->fireEvents();
         Event::assertNotDispatched(PaymentDeclined::class);
-
     }
 
     private function createPayment(PaymentStatus $status): Payment
