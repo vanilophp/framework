@@ -3,6 +3,8 @@
     "description": "Vanilo Category Module",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "keywords": ["category", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
         "source": "https://github.com/vanilophp/category"

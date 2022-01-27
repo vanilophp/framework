@@ -3,6 +3,8 @@
     "description": "Vanilo Channel Module",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "keywords": ["channel", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
         "source": "https://github.com/vanilophp/channel"

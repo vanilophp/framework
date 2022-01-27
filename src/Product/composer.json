@@ -3,6 +3,8 @@
     "description": "Vanilo Product Module",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "keywords": ["product", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
         "source": "https://github.com/vanilophp/product"

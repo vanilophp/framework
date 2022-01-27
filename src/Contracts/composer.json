@@ -3,6 +3,8 @@
     "description": "Common set of Vanilo Contracts (Interfaces)",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "keywords": ["ecommerce", "laravel", "vanilo", "artkonekt"],
     "support": {
         "source": "https://github.com/vanilophp/contracts"
