@@ -15,9 +15,9 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 #### 3.x-dev
 
 You are browsing the unreleased, development version (v3).
-Vanilo v3 supports Laravel 8.22+ and PHP 8.0 and PHP 8.1.
+Vanilo v3 supports Laravel 9.0+ and PHP 8.0 and PHP 8.1.
 
-Vanilo v3 is scheduled to be released in December 2021.
+Vanilo v3 is scheduled to be released in February 2022.
 
 #### 2.x
 
