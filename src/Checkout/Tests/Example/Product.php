@@ -36,7 +36,7 @@ class Product implements Buyable
     /**
      * @inheritDoc
      */
-    public function getId()
+    public function getId(): int|string
     {
         return $this->id;
     }

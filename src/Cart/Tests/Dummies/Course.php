@@ -25,7 +25,7 @@ class Course extends Model implements Buyable
 
     protected $guarded = ['id'];
 
-    public function getId()
+    public function getId(): int|string
     {
         return $this->id;
     }
