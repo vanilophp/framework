@@ -33,6 +33,7 @@ remote order
 remote payment
 remote product
 remote properties
+remote shipment
 remote support
 
 #split 'src/Adjustments' adjustments
@@ -45,5 +46,5 @@ split 'src/Order' order
 split 'src/Payment' payment
 split 'src/Product' product
 split 'src/Properties' properties
-#split 'src/Shipping' shipping
+split 'src/Shipment' shipment
 split 'src/Support' support 8683e47dd2dbd15ac2ceac4dcfae405c4b271aff

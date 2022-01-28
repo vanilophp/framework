@@ -21,7 +21,7 @@ use Carbon\Carbon;
  */
 trait BuyableModel
 {
-    public function getId()
+    public function getId(): int|string
     {
         return $this->id;
     }
@@ -36,14 +36,14 @@ trait BuyableModel
         return (float) $this->price;
     }
 
-    public function addSale(Carbon $date, $units = 1): void
+    public function addSale(Carbon $date, int|float $units = 1): void
     {
         $this->last_sale_at = $date;
         $this->units_sold += $units;
         $this->save();
     }
 
-    public function removeSale($units = 1): void
+    public function removeSale(int|float $units = 1): void
     {
         $this->units_sold -= $units;
         $this->save();
