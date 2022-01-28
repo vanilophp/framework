@@ -18,15 +18,15 @@ use Carbon\Carbon;
 
 interface Buyable extends HasImages
 {
-    public function getId();
+    public function getId(): string|int;
 
     public function getName(): string;
 
     public function getPrice(): float;
 
-    public function addSale(Carbon $date, $units = 1): void;
+    public function addSale(Carbon $date, int|float $units = 1): void;
 
-    public function removeSale($units = 1): void;
+    public function removeSale(int|float $units = 1): void;
 
     /**
      * Return the name to use for saving to the db as type name.

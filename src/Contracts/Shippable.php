@@ -18,7 +18,9 @@ interface Shippable
 {
     public function getShippingAddress(): ?Address;
 
-    public function getWeight(): float;
+    public function weight(): float;
 
-    public function getWeightUnit(): string;
+    public function weightUnit(): string;
+
+    public function dimension(): ?Dimension;
 }

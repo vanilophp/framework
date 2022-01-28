@@ -13,6 +13,7 @@
 - Changed minimum Laravel version to 9.0
 - BC: Renamed Framework Module and Namespace to "Foundation"
 - BC: renamed `vanilo.framework.*` config values to `vanilo.foundation.*`
+- Added Shipment Module
 
 ## 2.x Series
 

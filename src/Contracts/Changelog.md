@@ -9,7 +9,15 @@
 - Dropped Laravel 6-8 Support
 - Removed Admin from "Framework" - it is available as an optional separate package see [vanilo/admin](https://github.com/vanilophp/admin) 
 - Minimum Laravel version is 8.22.1. [See GHSA-3p32-j457-pg5x](https://github.com/advisories/GHSA-3p32-j457-pg5x)
-
+- Changed interface method defs:
+  - Buyable::getId() from no return type to string|int
+  - Buyable::addSale() $units parameter from no type to int|float
+  - Buyable::removeSale() $units parameter from no type to int|float
+- Added the Dimension interface
+- Changed the Shippable interface
+  - Method getWeight() has been renamed to weight()
+  - Method getWeightUnit has been renamed to weightUnit()
+  - Added the dimension() method
 
 ---
 
