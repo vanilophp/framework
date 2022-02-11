@@ -19,7 +19,6 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @property-read int $id
