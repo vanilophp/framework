@@ -27,6 +27,9 @@
         <testsuite name="Category Tests">
             <directory>src/Category/Tests</directory>
         </testsuite>
+        <testsuite name="Links Tests">
+            <directory>src/Links/Tests</directory>
+        </testsuite>
         <testsuite name="Channel Tests">
             <directory>src/Channel/Tests</directory>
         </testsuite>
