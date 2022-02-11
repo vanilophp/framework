@@ -14,12 +14,20 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests;
 
+use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Links\Providers\ModuleServiceProvider as LinksModule;
 
 class TestCase extends Orchestra
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpDatabase($this->app);
+    }
+
     protected function getEnvironmentSetUp($app)
     {
         $app['path.lang'] = __DIR__ . '/lang';
@@ -36,6 +44,7 @@ class TestCase extends Orchestra
     {
         return [
             ConcordServiceProvider::class,
+            SluggableServiceProvider::class
         ];
     }
 
