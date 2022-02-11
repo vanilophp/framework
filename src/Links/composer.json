@@ -18,6 +18,7 @@
     "require": {
         "php": "^8.0",
         "illuminate/support": "^9.0",
+        "konekt/concord": "1.10.2",
         "vanilo/contracts": "^3.0"
     },
     "require-dev": {
