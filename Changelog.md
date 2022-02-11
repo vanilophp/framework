@@ -3,7 +3,7 @@
 ## 3.x Series
 
 ## Unreleased
-##### 2021-12-XX
+##### 2022-02-XX
 
 - Dropped PHP 7.4 Support
 - Dropped Laravel 6-8 Support
@@ -12,7 +12,7 @@
 - Removed Admin from "Framework" - it is available as an optional separate package see [vanilo/admin](https://github.com/vanilophp/admin)
 - Changed minimum Laravel version to 9.0
 - BC: Renamed Framework Module and Namespace to "Foundation"
-- BC: renamed `vanilo.framework.*` config values to `vanilo.foundation.*`
+- BC: Renamed `vanilo.framework.*` config values to `vanilo.foundation.*`
 - Added Shipment Module
 
 ## 2.x Series
