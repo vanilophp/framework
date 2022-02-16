@@ -48,7 +48,5 @@ class LinkedProductsTest extends TestCase
         links('upsell')->of($product1);
         links('variant')->basedOn('shoe-size')->of($product1);
         variants('shoe-size')->of($product1);
-
-
     }
 }

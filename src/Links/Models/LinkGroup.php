@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
