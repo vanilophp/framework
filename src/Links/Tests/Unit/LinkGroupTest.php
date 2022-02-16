@@ -42,7 +42,7 @@ class LinkGroupTest extends TestCase
         ]);
 
         $this->assertEquals($upsell->id, $group->link_type_id);
-        $this->assertInstanceOf(LinkType::class, $group->linkType);
-        $this->assertEquals($upsell->id, $group->linkType->id);
+        $this->assertInstanceOf(LinkType::class, $group->type);
+        $this->assertEquals($upsell->id, $group->type->id);
     }
 }

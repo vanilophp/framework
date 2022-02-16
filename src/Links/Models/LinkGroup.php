@@ -16,6 +16,7 @@ namespace Vanilo\Links\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Vanilo\Links\Contracts\LinkGroup as LinkGroupContract;
 
@@ -27,14 +28,19 @@ use Vanilo\Links\Contracts\LinkGroup as LinkGroupContract;
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  *
- * @property-read LinkType $linkType
+ * @property-read LinkType $type
  */
 class LinkGroup extends Model implements LinkGroupContract
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function linkType(): BelongsTo
+    public function type(): BelongsTo
     {
-        return $this->belongsTo(LinkTypeProxy::modelClass());
+        return $this->belongsTo(LinkTypeProxy::modelClass(), 'link_type_id');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(LinkGroupItemProxy::modelClass(), 'link_group_id', 'id');
     }
 }

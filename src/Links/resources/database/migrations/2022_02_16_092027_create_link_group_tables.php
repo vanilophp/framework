@@ -29,16 +29,17 @@ class CreateLinkGroupTables extends Migration
 
         Schema::create('link_group_items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('link_group id')->unsigned();
-            $table->bigInteger('model_id')->unsigned();
-            $table->string('model_type');
+            $table->bigInteger('link_group_id')->unsigned();
+            $table->bigInteger('linkable_id')->unsigned();
+            $table->string('linkable_type');
+            $table->timestamps();
 
-            $table->foreign('link_group id')
+            $table->foreign('link_group_id')
                 ->references('id')
                 ->on('link_groups')
                 ->onDelete('cascade');
 
-            $table->unique(['link_group_id', 'model_id', 'model_type']);
+            $table->unique(['link_group_id', 'linkable_id', 'linkable_type']);
         });
     }
 
