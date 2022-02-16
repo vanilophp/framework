@@ -15,7 +15,13 @@ declare(strict_types=1);
 namespace Vanilo\Links\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Links\Models\LinkGroup;
+use Vanilo\Links\Models\LinkType;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
+    protected $models = [
+        LinkType::class,
+        LinkGroup::class,
+    ];
 }

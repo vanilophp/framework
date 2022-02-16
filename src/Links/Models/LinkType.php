@@ -19,21 +19,22 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Vanilo\Links\Contracts\LinkType as LinkTypeContract;
 
 /**
- * @property-read int $id
- * @property-read string $name
- * @property-read string $slug
- * @property-read bool $is_active
- * @property-read Carbon $created_at
- * @property-read Carbon|null $updated_at
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property bool $is_active
+ * @property Carbon $created_at
+ * @property Carbon|null $updated_at
  *
  * @method static LinkType create(array $attributes)
  * @method static Builder bySlug(string $slug)
  * @method static Builder active(string $slug)
  * @method static Builder inactive(string $slug)
  */
-class LinkType extends Model
+class LinkType extends Model implements LinkTypeContract
 {
     use Sluggable;
     use SluggableScopeHelpers;

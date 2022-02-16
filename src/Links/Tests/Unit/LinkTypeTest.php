@@ -12,10 +12,11 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Links\Tests;
+namespace Vanilo\Links\Tests\Unit;
 
 use Illuminate\Support\Str;
 use Vanilo\Links\Models\LinkType;
+use Vanilo\Links\Tests\TestCase;
 
 class LinkTypeTest extends TestCase
 {
