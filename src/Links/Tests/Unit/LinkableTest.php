@@ -27,13 +27,21 @@ class LinkableTest extends TestCase
     use TestsDatabasePerformance;
 
     private LinkType $variantType;
+
     private LinkGroup $group1;
+
     private LinkGroup $group2;
+
     private TestLinkableProduct $red;
+
     private TestLinkableProduct $yellow;
+
     private TestLinkableProduct $green;
+
     private TestLinkableProduct $blue;
+
     private TestLinkableProduct $white;
+
     private TestLinkableProduct $purple;
 
     public function setUp(): void
@@ -150,19 +158,19 @@ class LinkableTest extends TestCase
         $this->assertCount(2, $redsLinks);
         $this->assertEquals(
             [$this->yellow->id, $this->green->id],
-            $redsLinks->map(fn($linkable) => $linkable->id)->all()
+            $redsLinks->map(fn ($linkable) => $linkable->id)->all()
         );
 
         $this->assertCount(2, $yellowsLinks);
         $this->assertEquals(
             [$this->red->id, $this->green->id],
-            $yellowsLinks->map(fn($linkable) => $linkable->id)->all()
+            $yellowsLinks->map(fn ($linkable) => $linkable->id)->all()
         );
 
         $this->assertCount(2, $greensLinks);
         $this->assertEquals(
             [$this->red->id, $this->yellow->id],
-            $greensLinks->map(fn($linkable) => $linkable->id)->all()
+            $greensLinks->map(fn ($linkable) => $linkable->id)->all()
         );
     }
 
@@ -193,19 +201,19 @@ class LinkableTest extends TestCase
         $this->assertCount(2, $yellowsLinks);
         $this->assertEquals(
             [$this->blue->id, $this->white->id],
-            $yellowsLinks->map(fn($linkable) => $linkable->id)->all()
+            $yellowsLinks->map(fn ($linkable) => $linkable->id)->all()
         );
 
         $this->assertCount(2, $bluesLinks);
         $this->assertEquals(
             [$this->yellow->id, $this->white->id],
-            $bluesLinks->map(fn($linkable) => $linkable->id)->all()
+            $bluesLinks->map(fn ($linkable) => $linkable->id)->all()
         );
 
         $this->assertCount(2, $whitesLinks);
         $this->assertEquals(
             [$this->yellow->id, $this->blue->id],
-            $whitesLinks->map(fn($linkable) => $linkable->id)->all()
+            $whitesLinks->map(fn ($linkable) => $linkable->id)->all()
         );
     }
 

@@ -16,7 +16,6 @@ namespace Vanilo\Links\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Query\Builder;
 use Vanilo\Links\Contracts\LinkType;
 use Vanilo\Links\Models\LinkGroupItemProxy;
 use Vanilo\Links\Models\LinkTypeProxy;
@@ -40,7 +39,8 @@ trait Linkable
         // @todo Optimize this to a single query
         $result = Collection::make();
         foreach ($this->linkGroups()->filter(fn ($group) => $group->type->id === $type->id) as $group) {
-            $result->push(...$group
+            $result->push(
+                ...$group
                 ->items
                 ->map
                 ->linkable
@@ -53,7 +53,7 @@ trait Linkable
 
     public function linkGroups(): Collection
     {
-        return $this->includedInLinkGroupItems->transform(fn($item) => $item->group);
+        return $this->includedInLinkGroupItems->transform(fn ($item) => $item->group);
     }
 
     public function includedInLinkGroupItems(): MorphMany

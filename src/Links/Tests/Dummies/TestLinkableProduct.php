@@ -25,5 +25,6 @@ class TestLinkableProduct extends Model
     use Linkable;
 
     protected $guarded = ['id'];
+
     protected $table = 'test_products';
 }
