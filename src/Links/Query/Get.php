@@ -41,6 +41,11 @@ final class Get
         $this->type = $this->normalizeLinkTypeModel($type);
     }
 
+    public static function __callStatic($name, $arguments)
+    {
+        return self::the($name);
+    }
+
     public static function usePropertiesModel(string $class): void
     {
         self::$propertiesModelClass = $class;
@@ -49,11 +54,6 @@ final class Get
     public static function the(LinkType|string $type): self
     {
         return new self($type);
-    }
-
-    public static function __callStatic($name, $arguments)
-    {
-        return self::the($name);
     }
 
     public function links(): self
