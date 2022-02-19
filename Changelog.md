@@ -13,6 +13,7 @@
 - Changed minimum Laravel version to 9.0
 - BC: Renamed Framework Module and Namespace to "Foundation"
 - BC: Renamed `vanilo.framework.*` config values to `vanilo.foundation.*`
+- BC: Added the static `findBySlug(string $slug): ?Property;` method to the Property interface
 - Added Shipment Module
 
 ## 2.x Series

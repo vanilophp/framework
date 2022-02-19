@@ -100,4 +100,29 @@ class PropertyTest extends TestCase
 
         $this->assertNotEquals($p1->slug, $p2->slug);
     }
+
+    /** @test */
+    public function it_can_be_retrieved_by_slug_using_the_static_finder_method()
+    {
+        Property::create([
+            'name' => 'RAM Size',
+            'slug' => 'ram',
+            'type' => 'text',
+        ]);
+
+        Property::create([
+            'name' => 'Screen Size',
+            'slug' => 'screen',
+            'type' => 'text',
+        ]);
+
+        $ram = Property::findBySlug('ram');
+        $screen = Property::findBySlug('screen');
+
+        $this->assertInstanceOf(Property::class, $ram);
+        $this->assertEquals('RAM Size', $ram->name);
+
+        $this->assertInstanceOf(Property::class, $screen);
+        $this->assertEquals('Screen Size', $screen->name);
+    }
 }

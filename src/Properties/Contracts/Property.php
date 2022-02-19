@@ -21,4 +21,6 @@ interface Property
     public function getType(): PropertyType;
 
     public function values(): Collection;
+
+    public static function findBySlug(string $slug): ?Property;
 }

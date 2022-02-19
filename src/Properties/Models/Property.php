@@ -34,7 +34,9 @@ use Vanilo\Properties\PropertyTypes;
 class Property extends Model implements PropertyContract
 {
     use Sluggable;
-    use SluggableScopeHelpers;
+    use SluggableScopeHelpers {
+        findBySlug as protected sluggableFindBySlug;
+    }
 
     protected $table = 'properties';
 
@@ -55,6 +57,11 @@ class Property extends Model implements PropertyContract
         }
 
         return new $class();
+    }
+
+    public static function findBySlug(string $slug): ?PropertyContract
+    {
+        return static::sluggableFindBySlug($slug);
     }
 
     public static function findOneByName(string $name): ?PropertyContract

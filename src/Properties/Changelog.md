@@ -9,7 +9,7 @@
 - Dropped Laravel 6-8 Support
 - Removed Admin from "Framework" - it is available as an optional separate package see [vanilo/admin](https://github.com/vanilophp/admin) 
 - Minimum Laravel version is 8.22.1. [See GHSA-3p32-j457-pg5x](https://github.com/advisories/GHSA-3p32-j457-pg5x)
-
+- BC: Added the static `findBySlug(string $slug): ?Property;` method to the Property interface
 
 ---
 
