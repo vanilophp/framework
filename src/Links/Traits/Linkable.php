@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Vanilo\Links\Contracts\LinkType;
 use Vanilo\Links\Models\LinkGroupItemProxy;
-use Vanilo\Links\Models\LinkTypeProxy;
 
 /**
  * @property-read Collection $includedInLinkGroupItems

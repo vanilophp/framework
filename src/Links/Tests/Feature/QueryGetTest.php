@@ -20,17 +20,22 @@ use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Get;
 use Vanilo\Links\Tests\Dummies\TestLinkableProduct;
-use Vanilo\Links\Tests\Dummies\TestProduct;
 use Vanilo\Links\Tests\TestCase;
 
 class QueryGetTest extends TestCase
 {
     private TestLinkableProduct $galaxyS22;
+
     private TestLinkableProduct $galaxyS22Plus;
+
     private TestLinkableProduct $galaxyS22Ultra;
+
     private LinkType $series;
+
     private LinkType $variant;
+
     private LinkGroup $groupSeries;
+
     private LinkGroup $groupVariant;
 
     public function setUp(): void
@@ -170,7 +175,6 @@ class QueryGetTest extends TestCase
         links('upsell')->of($product1);
         links('variant')->basedOn('shoe-size')->of($product1);
         variants('shoe-size')->of($product1);
-
     }
 
     private function createTestData(): void

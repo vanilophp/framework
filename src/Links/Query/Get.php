@@ -76,7 +76,7 @@ final class Get
             $groups = $groups->filter(fn ($group) => $group->property_id == $this->property);
         }
 
-        if ($this->wants === 'groups') {
+        if ('groups' === $this->wants) {
             return $groups;
         }
 
