@@ -19,6 +19,7 @@ use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Get;
+use Vanilo\Links\Tests\Dummies\Property;
 use Vanilo\Links\Tests\Dummies\TestLinkableProduct;
 use Vanilo\Links\Tests\TestCase;
 
@@ -141,11 +142,42 @@ class QueryGetTest extends TestCase
 
         $variants22 = Get::the('variant')->links()->basedOn(22)->of($this->galaxyS22);
         $this->assertCount(1, $variants22);
-        $this->assertContains($this->galaxyS22Plus->id, $allVariants->map->id);
+        $this->assertContains($this->galaxyS22Plus->id, $variants22->map->id);
 
         $variants33 = Get::the('variant')->links()->basedOn(33)->of($this->galaxyS22);
         $this->assertCount(1, $variants33);
-        $this->assertContains($this->galaxyS22Ultra->id, $allVariants->map->id);
+        $this->assertContains($this->galaxyS22Ultra->id, $variants33->map->id);
+    }
+
+    /** @test */
+    public function the_property_filter_can_be_passed_by_slug()
+    {
+        Get::usePropertiesModel(Property::class);
+
+        $seriesProperty = Property::create(['name' => 'Series', 'slug' => 'series', 'type' => 'string'])->fresh();
+        $screenProperty = Property::create(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'])->fresh();
+        $groupSeries = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $seriesProperty->id])->fresh();
+        $groupScreen = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $screenProperty->id])->fresh();
+
+        // Variant "Series" Group
+        $attrsSeries = ['link_group_id' => $groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrsSeries, ['linkable_id' => $this->galaxyS22->id]));
+        LinkGroupItem::create(array_merge($attrsSeries, ['linkable_id' => $this->galaxyS22Plus->id]));
+        LinkGroupItem::create(array_merge($attrsSeries, ['linkable_id' => $this->galaxyS22Ultra->id]));
+
+        // Variant "Screen" Group
+        $attrsScreen = ['link_group_id' => $groupScreen->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrsScreen, ['linkable_id' => $this->galaxyS22->id]));
+        LinkGroupItem::create(array_merge($attrsScreen, ['linkable_id' => $this->galaxyS22Plus->id]));
+
+        $variantsBySeries = Get::the('variant')->links()->basedOn('series')->of($this->galaxyS22);
+        $this->assertCount(2, $variantsBySeries);
+        $this->assertContains($this->galaxyS22Plus->id, $variantsBySeries->map->id);
+        $this->assertContains($this->galaxyS22Ultra->id, $variantsBySeries->map->id);
+
+        $variantsByScreen = Get::the('variant')->links()->basedOn('screen')->of($this->galaxyS22);
+        $this->assertCount(1, $variantsByScreen);
+        $this->assertContains($this->galaxyS22Plus->id, $variantsByScreen->map->id);
     }
 
     /** @test */
@@ -175,6 +207,12 @@ class QueryGetTest extends TestCase
         links('upsell')->of($product1);
         links('variant')->basedOn('shoe-size')->of($product1);
         variants('shoe-size')->of($product1);
+    }
+
+    protected function setUpDatabase($app)
+    {
+        $this->loadMigrationsFrom(dirname(__DIR__) . '/migrations_of_property_module');
+        parent::setUpDatabase($app);
     }
 
     private function createTestData(): void

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Query;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Vanilo\Links\Contracts\LinkType;
@@ -24,6 +25,11 @@ final class Get
 {
     use NormalizesLinkType;
 
+    // Since the properties are an optional dependency, we use it very cautiously
+    private const PROPERTY_PROXY_CLASS = '\\Vanilo\\Properties\\Models\\PropertyProxy';
+
+    private static ?string $propertiesModelClass = null;
+
     private LinkType $type;
 
     private null|int|string $property = null;
@@ -33,6 +39,11 @@ final class Get
     private function __construct(LinkType|string $type)
     {
         $this->type = $this->normalizeLinkTypeModel($type);
+    }
+
+    public static function usePropertiesModel(string $class): void
+    {
+        self::$propertiesModelClass = $class;
     }
 
     public static function the(LinkType|string $type): self
@@ -69,11 +80,8 @@ final class Get
             ->transform(fn ($item) => $item->group)
             ->filter(fn ($group) => $group->type->id === $this->type->id);
 
-        if (null !== $this->property) {
-            // @todo if property is string, resolve the model
-            // Import PropertyProxy but before using, check if the class exists,
-            // if not, give an error, telling the developer to install the properties package
-            $groups = $groups->filter(fn ($group) => $group->property_id == $this->property);
+        if ($this->hasPropertyFilter()) {
+            $groups = $groups->filter(fn ($group) => $group->property_id == $this->propertyId());
         }
 
         if ('groups' === $this->wants) {
@@ -92,5 +100,39 @@ final class Get
         });
 
         return $links;
+    }
+
+    private function propertyId(): ?int
+    {
+        return match (true) {
+            is_null($this->property) => null,
+            is_int($this->property) => $this->property,
+            is_string($this->property) => $this->fetchProperty()?->id,
+            default => null,
+        };
+    }
+
+    private function hasPropertyFilter(): bool
+    {
+        return null !== $this->property;
+    }
+
+    /**
+     * @throws Exception
+     * It only works if the Properties module is installed and loaded by Concord
+     */
+    private function fetchProperty(): ?object
+    {
+        if (null !== self::$propertiesModelClass) {
+            $propertiesClass = self::$propertiesModelClass;
+        } else { // Obtain from Concord
+            $proxyClass = self::PROPERTY_PROXY_CLASS;
+            if (!class_exists($proxyClass)) {
+                throw new Exception('The properties module is missing. Use `composer req vanilo/properties` to install it.');
+            }
+            $propertiesClass = $proxyClass::modelClass();
+        }
+
+        return $propertiesClass::findBySlug($this->property);
     }
 }

@@ -19,4 +19,9 @@ use Illuminate\Database\Eloquent\Model;
 class Property extends Model
 {
     protected $guarded = ['id'];
+
+    public static function findBySlug(string $slug)
+    {
+        return self::query()->where('slug', $slug)->first();
+    }
 }
