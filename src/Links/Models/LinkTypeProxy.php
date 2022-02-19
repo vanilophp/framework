@@ -15,7 +15,11 @@ declare(strict_types=1);
 namespace Vanilo\Links\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
+use Vanilo\Links\Contracts\LinkType as LinkTypeContract;
 
+/**
+ * @method static LinkTypeContract|null findBySlug(string $slug)
+ */
 class LinkTypeProxy extends ModelProxy
 {
 }

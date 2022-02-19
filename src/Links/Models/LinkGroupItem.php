@@ -29,6 +29,8 @@ use Vanilo\Links\Contracts\LinkGroupItem as LinkGroupItemContract;
  * @property Carbon|null $updated_at
  *
  * @property-read LinkGroup $group
+ *
+ * @method static LinkGroupItem create(array $attributes)
  */
 class LinkGroupItem extends Model implements LinkGroupItemContract
 {

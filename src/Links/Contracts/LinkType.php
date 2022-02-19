@@ -16,4 +16,5 @@ namespace Vanilo\Links\Contracts;
 
 interface LinkType
 {
+    public static function findBySlug(string $slug): ?LinkType;
 }

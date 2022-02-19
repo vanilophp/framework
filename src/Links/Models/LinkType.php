@@ -45,7 +45,7 @@ class LinkType extends Model implements LinkTypeContract
         'is_active' => 'boolean',
     ];
 
-    public static function findBySlug(string $slug): ?LinkType
+    public static function findBySlug(string $slug): ?LinkTypeContract
     {
         return static::bySlug($slug)->first();
     }

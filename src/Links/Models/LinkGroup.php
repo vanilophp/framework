@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -29,6 +30,9 @@ use Vanilo\Links\Contracts\LinkGroup as LinkGroupContract;
  * @property Carbon|null $updated_at
  *
  * @property-read LinkType $type
+ * @property-read Collection $items
+ *
+ * @method static LinkGroup create(array $attributes)
  */
 class LinkGroup extends Model implements LinkGroupContract
 {
