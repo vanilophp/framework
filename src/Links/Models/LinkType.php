@@ -37,7 +37,9 @@ use Vanilo\Links\Contracts\LinkType as LinkTypeContract;
 class LinkType extends Model implements LinkTypeContract
 {
     use Sluggable;
-    use SluggableScopeHelpers;
+    use SluggableScopeHelpers {
+        findBySlug as protected sluggableFindBySlug;
+    }
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -47,12 +49,12 @@ class LinkType extends Model implements LinkTypeContract
 
     public static function findBySlug(string $slug): ?LinkTypeContract
     {
-        return static::bySlug($slug)->first();
+        return static::sluggableFindBySlug($slug);
     }
 
     public function scopeBySlug(Builder $builder, string $slug): Builder
     {
-        return $builder->where('slug', $slug);
+        return $this->scopeWhereSlug($builder, $slug);
     }
 
     public function scopeActive(Builder $builder): Builder

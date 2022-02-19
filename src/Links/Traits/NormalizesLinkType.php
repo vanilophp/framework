@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Traits;
 
+use InvalidArgumentException;
 use Vanilo\Links\Contracts\LinkType;
 use Vanilo\Links\Models\LinkTypeProxy;
 
@@ -27,6 +28,10 @@ trait NormalizesLinkType
 
         if (!isset($this->linkTypeCache[$slug])) {
             $this->linkTypeCache[$slug] = is_string($type) ? LinkTypeProxy::findBySlug($type) : $type;
+        }
+
+        if (null === $this->linkTypeCache[$slug]) {
+            throw new InvalidArgumentException("There is no link type with `$slug` slug");
         }
 
         return $this->linkTypeCache[$slug];

@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Links\Tests\Feature;
 
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
@@ -195,18 +196,84 @@ class QueryGetTest extends TestCase
         $this->assertInstanceOf(LinkGroup::class, $seriesGroups->first());
     }
 
-    /** @ test */
+    /** @test */
     public function it_resolves_the_types_via_a_magic_method_call()
     {
-        // @todo implement this
-        // via magic __call:
-        Get::variant()->links()->of($product1);
-        Get::upsell()->links()->of($product1);
+        $attrs1 = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrs1, ['linkable_id' => $this->galaxyS22->id]));
+        LinkGroupItem::create(array_merge($attrs1, ['linkable_id' => $this->galaxyS22Plus->id]));
 
-        // in blade templates;
-        links('upsell')->of($product1);
-        links('variant')->basedOn('shoe-size')->of($product1);
-        variants('shoe-size')->of($product1);
+        $seriesLinks = Get::series()->links()->of($this->galaxyS22);
+        $this->assertCount(1, $seriesLinks);
+        $this->assertInstanceOf(TestLinkableProduct::class, $seriesLinks->first());
+        $this->assertContains($this->galaxyS22Plus->id, $seriesLinks->map->id);
+    }
+
+    /** @test */
+    public function it_throws_an_invalid_argument_exception_if_attempting_to_fetch_an_inexistent_link_type()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Get::the('inexistent-link-type-slug');
+    }
+
+    /** @test */
+    public function the_links_helper_function_returns_a_get_query()
+    {
+        $this->assertInstanceOf(Get::class, links('series'));
+    }
+
+    /** @test */
+    public function the_links_helper_function_accepts_type_as_first_argument()
+    {
+        $attrs1 = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrs1, ['linkable_id' => $this->galaxyS22->id]));
+        LinkGroupItem::create(array_merge($attrs1, ['linkable_id' => $this->galaxyS22Plus->id]));
+
+        $seriesLinks = links('series')->of($this->galaxyS22);
+        $this->assertCount(1, $seriesLinks);
+        $this->assertInstanceOf(TestLinkableProduct::class, $seriesLinks->first());
+        $this->assertContains($this->galaxyS22Plus->id, $seriesLinks->map->id);
+    }
+
+    /** @test */
+    public function the_links_helper_function_accepts_an_optional_property_as_second_argument()
+    {
+        Get::usePropertiesModel(Property::class);
+
+        $screenProperty = Property::create(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'])->fresh();
+        $groupScreen = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $screenProperty->id])->fresh();
+
+        $attrs = ['link_group_id' => $groupScreen->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->galaxyS22->id]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->galaxyS22Plus->id]));
+
+        $variantsByScreen = links('variant', 'screen')->of($this->galaxyS22);
+        $this->assertCount(1, $variantsByScreen);
+        $this->assertContains($this->galaxyS22Plus->id, $variantsByScreen->map->id);
+    }
+
+    /** @test */
+    public function the_link_groups_helper_returns_link_groups_in_which_the_model_is_included()
+    {
+        LinkGroupItem::create([
+            'link_group_id' => $this->groupSeries->id,
+            'linkable_type' => TestLinkableProduct::class,
+            'linkable_id' => $this->galaxyS22->id,
+        ]);
+        LinkGroupItem::create([
+            'link_group_id' => $this->groupVariant->id,
+            'linkable_type' => TestLinkableProduct::class,
+            'linkable_id' => $this->galaxyS22->id,
+        ]);
+
+        $seriesGroups = link_groups('series')->of($this->galaxyS22);
+        $this->assertCount(1, $seriesGroups);
+        $this->assertInstanceOf(LinkGroup::class, $seriesGroups->first());
+
+        $variantGroups = link_groups('variant')->of($this->galaxyS22);
+        $this->assertCount(1, $variantGroups);
+        $this->assertInstanceOf(LinkGroup::class, $variantGroups->first());
     }
 
     protected function setUpDatabase($app)

@@ -51,6 +51,11 @@ final class Get
         return new self($type);
     }
 
+    public static function __callStatic($name, $arguments)
+    {
+        return self::the($name);
+    }
+
     public function links(): self
     {
         $this->wants = 'links';

@@ -28,7 +28,10 @@
     "autoload": {
         "psr-4": {
             "Vanilo\\Links\\": ""
-        }
+        },
+        "files": [
+            "Support/helpers.php"
+        ]
     },
     "suggest": {
         "vanilo/properties": "Allows setting the differing property between linked models (^3.0)"

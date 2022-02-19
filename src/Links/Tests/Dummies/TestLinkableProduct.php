@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
 use Vanilo\Links\Traits\Linkable;
 
 /**
+ * @property int $id
+ *
  * @method static TestLinkableProduct create(array $attributes)
  */
 class TestLinkableProduct extends Model
