@@ -25,7 +25,7 @@ use Vanilo\Links\Models\LinkTypeProxy;
  */
 trait Linkable
 {
-    private array $linkTypeCache = [];
+    use NormalizesLinkType;
 
     /**
      * Returns the models (other linkables) that are linked to this model with
@@ -59,16 +59,5 @@ trait Linkable
     public function includedInLinkGroupItems(): MorphMany
     {
         return $this->morphMany(LinkGroupItemProxy::modelClass(), 'linkable');
-    }
-
-    private function normalizeLinkTypeModel(LinkType|string $type): LinkType
-    {
-        $slug = is_string($type) ? $type : $type->slug;
-
-        if (!isset($this->linkTypeCache[$slug])) {
-            $this->linkTypeCache[$slug] = is_string($type) ? LinkTypeProxy::findBySlug($type) : $type;
-        }
-
-        return $this->linkTypeCache[$slug];
     }
 }

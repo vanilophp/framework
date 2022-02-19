@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 /**
- * Contains the LinkedProductsTest class.
+ * Contains the QueryEstablishTest class.
  *
  * @copyright   Copyright (c) 2022 Attila Fulop
  * @author      Attila Fulop
  * @license     MIT
- * @since       2022-02-11
+ * @since       2022-02-19
  *
  */
 
@@ -17,7 +17,7 @@ namespace Vanilo\Links\Tests\Feature;
 use Vanilo\Links\Tests\Dummies\TestProduct;
 use Vanilo\Links\Tests\TestCase;
 
-class LinkedProductsTest extends TestCase
+class QueryEstablishTest extends TestCase
 {
     /** @ test */
     public function two_products_can_be_linked_together()
@@ -36,17 +36,5 @@ class LinkedProductsTest extends TestCase
         Eliminate::the('upsell')->link()->between($product1)->and($product2);
         Eliminate::the('upsell')->group()->constitutedBy($product1)->and($product2);
         Eliminate::model($product1)->fromThe('upsell')->group()->of($product2);
-
-        Get::the('upsell')->links()->of($product1);
-        Get::the('variant')->links()->basedOn('shoe-size')->of($product1);
-
-        // via magic __call:
-        Get::variant()->links()->of($product1);
-        Get::upsell()->links()->of($product1);
-
-        // in blade templates;
-        links('upsell')->of($product1);
-        links('variant')->basedOn('shoe-size')->of($product1);
-        variants('shoe-size')->of($product1);
     }
 }

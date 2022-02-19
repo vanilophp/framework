@@ -38,6 +38,10 @@ class LinkGroup extends Model implements LinkGroupContract
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'property_id' => 'integer',
+    ];
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(LinkTypeProxy::modelClass(), 'link_type_id');
