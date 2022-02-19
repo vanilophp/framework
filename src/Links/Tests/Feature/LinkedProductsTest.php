@@ -19,7 +19,7 @@ use Vanilo\Links\Tests\TestCase;
 
 class LinkedProductsTest extends TestCase
 {
-    /** @test */
+    /** @ test */
     public function two_products_can_be_linked_together()
     {
         $product1 = TestProduct::create(['name' => 'iPhone Black']);
