@@ -31,8 +31,8 @@ use Vanilo\Links\Contracts\LinkType as LinkTypeContract;
  *
  * @method static LinkType create(array $attributes)
  * @method static Builder bySlug(string $slug)
- * @method static Builder active(string $slug)
- * @method static Builder inactive(string $slug)
+ * @method static Builder active()
+ * @method static Builder inactive()
  */
 class LinkType extends Model implements LinkTypeContract
 {
@@ -50,6 +50,20 @@ class LinkType extends Model implements LinkTypeContract
     public static function findBySlug(string $slug): ?LinkTypeContract
     {
         return static::sluggableFindBySlug($slug);
+    }
+
+    public static function choices(bool|array $withInactives = false): array
+    {
+        if (false === $withInactives || empty($withInactives)) {
+            $query = static::active();
+        } elseif (true === $withInactives) {
+            $query = static::query();
+        } else {
+            $field = (is_int($withInactives[0] ?? null)) ? 'id' : 'slug';
+            $query = static::active()->orWhereIn($field, $withInactives);
+        }
+
+        return $query->get(['id', 'name'])->pluck('name', 'id')->all();
     }
 
     public function scopeBySlug(Builder $builder, string $slug): Builder

@@ -24,9 +24,7 @@ class LinkTypeTest extends TestCase
     public function it_can_be_created()
     {
         $name = Str::random();
-        $type = LinkType::create([
-            'name' => $name
-        ]);
+        $type = LinkType::create(['name' => $name]);
 
         $this->assertInstanceOf(LinkType::class, $type);
         $this->assertEquals($name, $type->name);
@@ -99,5 +97,72 @@ class LinkTypeTest extends TestCase
         $this->assertInstanceOf(LinkType::class, $cole);
         $this->assertEquals('Cole', $cole->name);
         $this->assertEquals('cole', $cole->slug);
+    }
+
+    /** @test */
+    public function the_choices_method_returns_the_list_of_active_entries()
+    {
+        LinkType::create(['name' => 'Variant']);
+        LinkType::create(['name' => 'Similar']);
+        LinkType::create(['name' => 'X-Sell']);
+
+        $this->assertEquals([
+            1 => 'Variant',
+            2 => 'Similar',
+            3 => 'X-Sell',
+        ], LinkType::choices());
+    }
+
+    /** @test */
+    public function the_choices_method_returns_inactive_entries_as_well_if_requested_explicitly()
+    {
+        LinkType::create(['name' => 'Variant']);
+        LinkType::create(['name' => 'Similar']);
+        LinkType::create(['name' => 'X-Sell']);
+        LinkType::create(['name' => 'Black Friday 2013', 'is_active' => false]);
+
+        $this->assertEquals([
+            1 => 'Variant',
+            2 => 'Similar',
+            3 => 'X-Sell',
+            4 => 'Black Friday 2013',
+        ], LinkType::choices(true));
+    }
+
+    /** @test */
+    public function the_choices_method_returns_specific_inactive_entries_as_well_if_an_array_of_integer_ids_is_passed()
+    {
+        LinkType::create(['name' => 'Variant']);
+        LinkType::create(['name' => 'Similar']);
+        LinkType::create(['name' => 'X-Sell']);
+        LinkType::create(['name' => 'Black Friday 2012', 'is_active' => false]);
+        LinkType::create(['name' => 'Black Friday 2013', 'is_active' => false]);
+        LinkType::create(['name' => 'Black Friday 2014', 'is_active' => false]);
+        LinkType::create(['name' => 'Black Friday 2015', 'is_active' => false]);
+
+        $this->assertEquals([
+            1 => 'Variant',
+            2 => 'Similar',
+            3 => 'X-Sell',
+            5 => 'Black Friday 2013',
+            7 => 'Black Friday 2015',
+        ], LinkType::choices([5, 7]));
+    }
+
+    /** @test */
+    public function the_choices_method_returns_specific_inactive_entries_as_well_if_an_array_of_strings_slugs_is_passed()
+    {
+        LinkType::create(['name' => 'Matching Style']);
+        LinkType::create(['name' => 'Upsell']);
+        LinkType::create(['name' => '2013', 'is_active' => false]);
+        LinkType::create(['name' => '2015', 'is_active' => false]);
+        LinkType::create(['name' => 'X-Sell', 'is_active' => false]);
+
+        $this->assertEquals([
+            1 => 'Matching Style',
+            2 => 'Upsell',
+            4 => '2015',
+            5 => 'X-Sell',
+        ], LinkType::choices(['2015', 'x-sell']));
     }
 }
