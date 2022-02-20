@@ -52,18 +52,20 @@ class LinkType extends Model implements LinkTypeContract
         return static::sluggableFindBySlug($slug);
     }
 
-    public static function choices(bool|array $withInactives = false): array
+    public static function choices(bool|array $withInactives = false, bool $slugAsKey = false): array
     {
         if (false === $withInactives || empty($withInactives)) {
             $query = static::active();
         } elseif (true === $withInactives) {
             $query = static::query();
         } else {
-            $field = (is_int($withInactives[0] ?? null)) ? 'id' : 'slug';
-            $query = static::active()->orWhereIn($field, $withInactives);
+            $lookupField = (is_int($withInactives[0] ?? null)) ? 'id' : 'slug';
+            $query = static::active()->orWhereIn($lookupField, $withInactives);
         }
 
-        return $query->get(['id', 'name'])->pluck('name', 'id')->all();
+        $keyField = $slugAsKey ? 'slug' : 'id';
+
+        return $query->get([$keyField, 'name'])->pluck('name', $keyField)->all();
     }
 
     public function scopeBySlug(Builder $builder, string $slug): Builder

@@ -165,4 +165,20 @@ class LinkTypeTest extends TestCase
             5 => 'X-Sell',
         ], LinkType::choices(['2015', 'x-sell']));
     }
+
+    /** @test */
+    public function the_choices_method_can_return_slugs_as_keys()
+    {
+        LinkType::create(['name' => 'Designer']);
+        LinkType::create(['name' => 'Cross Sell']);
+        LinkType::create(['name' => 'Color Variant']);
+        LinkType::create(['name' => '2019']);
+
+        $this->assertEquals([
+            'designer' => 'Designer',
+            'cross-sell' => 'Cross Sell',
+            'color-variant' => 'Color Variant',
+            '2019' => '2019',
+        ], LinkType::choices(false, true));
+    }
 }
