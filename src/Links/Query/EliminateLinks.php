@@ -26,7 +26,8 @@ final class EliminateLinks
 
     public function __construct(
         private LinkType $type
-    ) {}
+    ) {
+    }
 
     public function and(Model ...$models): void
     {
