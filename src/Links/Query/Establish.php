@@ -69,9 +69,9 @@ final class Establish
         return $this;
     }
 
-    public function and(Model $model): void
+    public function and(Model ...$models): void
     {
-        $groups = $this->linkGroupsOfModel($model);
+        $groups = $this->linkGroupsOfModel($models[0]);
         $destinationGroup = $groups->first();
         if (null === $destinationGroup) {
             $destinationGroup = $this->createNewLinkGroup();
@@ -82,11 +82,13 @@ final class Establish
             ]);
         }
 
-        LinkGroupItemProxy::create([
-            'link_group_id' => $destinationGroup->id,
-            'linkable_id' => $model->id,
-            'linkable_type' => $model::class,
-        ]);
+        foreach ($models as $model) {
+            LinkGroupItemProxy::create([
+                'link_group_id' => $destinationGroup->id,
+                'linkable_id' => $model->id,
+                'linkable_type' => $model::class,
+            ]);
+        }
     }
 
     private function createNewLinkGroup(): LinkGroup

@@ -17,6 +17,7 @@ namespace Vanilo\Links\Tests\Feature;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Establish;
 use Vanilo\Links\Query\Get;
+use Vanilo\Links\Tests\Dummies\Property;
 use Vanilo\Links\Tests\Dummies\TestLinkableProduct;
 use Vanilo\Links\Tests\Dummies\TestProduct;
 use Vanilo\Links\Tests\TestCase;
@@ -60,14 +61,51 @@ class QueryEstablishTest extends TestCase
         $blue = TestProduct::create(['name' => 'T-Shirt Blue'])->fresh();
         LinkType::create(['name' => 'Variant']);
 
-        Establish::an('variant')->link()->basedOn(1)->between($green)->and($blue);
+        Establish::a('variant')->link()->basedOn(1)->between($green)->and($blue);
 
         $variants = Get::the('variant')->links()->basedOn(1)->of($green);
         $this->assertCount(1, $variants);
         $this->assertEquals($blue->id, $variants->first()->id);
     }
 
+    /** @test */
+    public function models_can_be_linked_by_property_slug()
+    {
+        Establish::usePropertiesModel(Property::class);
+        Get::usePropertiesModel(Property::class);
+
+        Property::create(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'])->fresh();
+        $laptop13 = TestProduct::create(['name' => 'Laptop 13"'])->fresh();
+        $laptop15 = TestProduct::create(['name' => 'Laptop 15"'])->fresh();
+        LinkType::create(['name' => 'Variant']);
+
+        Establish::a('variant')->link()->basedOn('screen')->between($laptop13)->and($laptop15);
+
+        $variants = Get::the('variant')->links()->basedOn('screen')->of($laptop13);
+        $this->assertCount(1, $variants);
+        $this->assertEquals($laptop15->id, $variants->first()->id);
+    }
+
+    /** @test */
+    public function multiple_products_can_be_linked_together()
+    {
+        $iphone12 = TestLinkableProduct::create(['name' => 'iPhone 12'])->fresh();
+        $iphone13 = TestLinkableProduct::create(['name' => 'iPhone 13'])->fresh();
+        $iphone14 = TestLinkableProduct::create(['name' => 'iPhone 14'])->fresh();
+        LinkType::create(['name' => 'Series']);
+
+        Establish::a('series')->link()->between($iphone12)->and($iphone13, $iphone14);
+
+        $this->assertCount(2, $iphone12->links('series'));
+        $this->assertEquals($iphone13->id, $iphone12->links('series')->first()->id);
+        $this->assertEquals($iphone14->id, $iphone12->links('series')->last()->id);
+    }
+
+    protected function setUpDatabase($app)
+    {
+        $this->loadMigrationsFrom(dirname(__DIR__) . '/migrations_of_property_module');
+        parent::setUpDatabase($app);
+    }
+
     // @todo test and implement ->group() alternative
-    // @todo test property resolution by slug ::usePropertyModel...
-    // @todo implement and(...$product) to take multiple models
 }
