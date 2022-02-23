@@ -269,4 +269,22 @@ class LinkableTest extends TestCase
         $this->group1 = LinkGroup::create(['link_type_id' => $this->variantType->id])->fresh();
         $this->group2 = LinkGroup::create(['link_type_id' => $this->variantType->id])->fresh();
     }
+
+    /** @test */
+    public function links_can_be_queried_consecutively_without_an_error()
+    {
+        $attrs = ['link_group_id' => $this->group1->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->red->id]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->yellow->id]));
+
+        // Call it twice to see if it doesn't throw an exception
+        $this->red->links($this->variantType); // << double call is intentional!
+        $redsLinks = $this->red->links($this->variantType);
+
+        $this->assertCount(1, $redsLinks);
+        $this->assertEquals(
+            [$this->yellow->id],
+            $redsLinks->map(fn ($linkable) => $linkable->id)->all()
+        );
+    }
 }

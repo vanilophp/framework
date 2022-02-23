@@ -52,7 +52,7 @@ trait Linkable
 
     public function linkGroups(): Collection
     {
-        return $this->includedInLinkGroupItems->transform(fn ($item) => $item->group);
+        return $this->includedInLinkGroupItems()->get()->transform(fn ($item) => $item->group);
     }
 
     public function includedInLinkGroupItems(): MorphMany
