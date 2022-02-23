@@ -255,21 +255,6 @@ class LinkableTest extends TestCase
 //        $this->assertDbQueryCountWasExactly(6);
     }
 
-    private function createTestData(): void
-    {
-        $this->red = TestLinkableProduct::create(['name' => 'Red Phone']);
-        $this->yellow = TestLinkableProduct::create(['name' => 'Yellow Phone']);
-        $this->green = TestLinkableProduct::create(['name' => 'Green Phone']);
-        $this->blue = TestLinkableProduct::create(['name' => 'Blue Phone']);
-        $this->white = TestLinkableProduct::create(['name' => 'White Phone']);
-        $this->purple = TestLinkableProduct::create(['name' => 'Purple Phone']);
-
-        $this->variantType = LinkType::create(['name' => 'Variant']);
-
-        $this->group1 = LinkGroup::create(['link_type_id' => $this->variantType->id])->fresh();
-        $this->group2 = LinkGroup::create(['link_type_id' => $this->variantType->id])->fresh();
-    }
-
     /** @test */
     public function links_can_be_queried_consecutively_without_an_error()
     {
@@ -286,5 +271,20 @@ class LinkableTest extends TestCase
             [$this->yellow->id],
             $redsLinks->map(fn ($linkable) => $linkable->id)->all()
         );
+    }
+
+    private function createTestData(): void
+    {
+        $this->red = TestLinkableProduct::create(['name' => 'Red Phone']);
+        $this->yellow = TestLinkableProduct::create(['name' => 'Yellow Phone']);
+        $this->green = TestLinkableProduct::create(['name' => 'Green Phone']);
+        $this->blue = TestLinkableProduct::create(['name' => 'Blue Phone']);
+        $this->white = TestLinkableProduct::create(['name' => 'White Phone']);
+        $this->purple = TestLinkableProduct::create(['name' => 'Purple Phone']);
+
+        $this->variantType = LinkType::create(['name' => 'Variant']);
+
+        $this->group1 = LinkGroup::create(['link_type_id' => $this->variantType->id])->fresh();
+        $this->group2 = LinkGroup::create(['link_type_id' => $this->variantType->id])->fresh();
     }
 }

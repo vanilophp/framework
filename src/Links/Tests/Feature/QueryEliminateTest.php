@@ -21,9 +21,9 @@ class QueryEliminateTest extends TestCase
     // @todo implement it
     /**
      *
-    Eliminate::the('upsell')->link()->between($product1)->and($product2);
-    Eliminate::the('upsell')->group()->constitutedBy($product1)->and($product2);
-    Eliminate::model($product1)->fromThe('upsell')->group()->of($product2);
+     * Eliminate::the('upsell')->link()->between($product1)->and($product2);
+     * Eliminate::the('upsell')->group()->constitutedBy($product1)->and($product2);
+     * Eliminate::model($product1)->fromThe('upsell')->group()->of($product2);
      *
      */
 }

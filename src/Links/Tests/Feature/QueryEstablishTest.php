@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Feature;
 
-use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Establish;
 use Vanilo\Links\Query\Get;
