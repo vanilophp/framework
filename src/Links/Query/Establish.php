@@ -19,24 +19,14 @@ use Vanilo\Links\Contracts\LinkGroup;
 use Vanilo\Links\Contracts\LinkType;
 use Vanilo\Links\Models\LinkGroupItemProxy;
 use Vanilo\Links\Models\LinkGroupProxy;
-use Vanilo\Links\Traits\NormalizesLinkType;
 
 final class Establish
 {
-    use NormalizesLinkType;
-    use HasPropertyFilter;
+    use HasPrivateLinkTypeBasedConstructor;
     use FindsDesiredLinkGroups;
-
-    private LinkType $type;
+    use HasBaseModel;
 
     private string $wants = 'link';
-
-    private Model $baseModel;
-
-    private function __construct(LinkType|string $type)
-    {
-        $this->type = $this->normalizeLinkTypeModel($type);
-    }
 
     public static function a(LinkType|string $type): self
     {
@@ -62,16 +52,9 @@ final class Establish
         return $this;
     }
 
-    public function between(Model $model): self
-    {
-        $this->baseModel = $model;
-
-        return $this;
-    }
-
     public function and(Model ...$models): void
     {
-        $groups = $this->linkGroupsOfModel($models[0]);
+        $groups = $this->linkGroupsOfModel($this->baseModel);
         $destinationGroup = $groups->first();
         if (null === $destinationGroup) {
             $destinationGroup = $this->createNewLinkGroup();

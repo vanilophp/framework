@@ -17,22 +17,12 @@ namespace Vanilo\Links\Query;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Vanilo\Links\Contracts\LinkType;
-use Vanilo\Links\Traits\NormalizesLinkType;
 
 final class Get
 {
-    use NormalizesLinkType;
-    use HasPropertyFilter;
+    use HasPrivateLinkTypeBasedConstructor;
     use FindsDesiredLinkGroups;
-
-    private LinkType $type;
-
-    private string $wants = 'links';
-
-    private function __construct(LinkType|string $type)
-    {
-        $this->type = $this->normalizeLinkTypeModel($type);
-    }
+    use WantsLinksOrGroups;
 
     public static function __callStatic($name, $arguments)
     {
@@ -42,20 +32,6 @@ final class Get
     public static function the(LinkType|string $type): self
     {
         return new self($type);
-    }
-
-    public function links(): self
-    {
-        $this->wants = 'links';
-
-        return $this;
-    }
-
-    public function groups(): self
-    {
-        $this->wants = 'groups';
-
-        return $this;
     }
 
     public function of(Model $model): Collection
