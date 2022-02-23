@@ -14,11 +14,21 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Query;
 
+use Illuminate\Database\Eloquent\Model;
 use Vanilo\Links\Contracts\LinkType;
+use Vanilo\Links\Models\LinkGroupProxy;
 
 class EliminateLinkGroup
 {
-    public function __construct(private LinkType $type)
+    use FindsDesiredLinkGroups;
+
+    public function __construct(
+        private LinkType $type
+    ) {
+    }
+
+    public function of(Model $model): void
     {
+        LinkGroupProxy::destroy($this->linkGroupsOfModel($model)->map->id);
     }
 }
