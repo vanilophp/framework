@@ -122,7 +122,7 @@ class Product extends Model implements ProductContract
             return null;
         }
 
-        return new class($this->width, $this->height, $this->length) implements Dimension {
+        return new class ($this->width, $this->height, $this->length) implements Dimension {
             public function __construct(private float $width, private float $height, private float $length)
             {
             }
