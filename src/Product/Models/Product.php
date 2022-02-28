@@ -17,8 +17,10 @@ namespace Vanilo\Product\Models;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Vanilo\Contracts\Dimension;
 use Vanilo\Product\Contracts\Product as ProductContract;
 
 /**
@@ -31,6 +33,10 @@ use Vanilo\Product\Contracts\Product as ProductContract;
  * @property string|null $excerpt
  * @property string|null $description
  * @property ProductState $state
+ * @property float|null $weight
+ * @property float|null $width
+ * @property float|null $height
+ * @property float|null $length
  * @property string|null $ext_title
  * @property string|null $meta_keywords
  * @property string|null $meta_description
@@ -53,6 +59,10 @@ class Product extends Model implements ProductContract
     protected $casts = [
         'price' => 'float',
         'original_price' => 'float',
+        'weight' => 'float',
+        'height' => 'float',
+        'width' => 'float',
+        'length' => 'float',
     ];
 
     protected $enums = [
@@ -88,26 +98,49 @@ class Product extends Model implements ProductContract
         return $this->ext_title ?? $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitleAttribute()
+    public function getTitleAttribute(): string
     {
         return $this->title();
     }
 
-    /**
-     * Scope for returning the products with active state
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeActives($query)
+    public function scopeActives(Builder $query): Builder
     {
         return $query->whereIn(
             'state',
             ProductStateProxy::getActiveStates()
         );
+    }
+
+    public function hasDimensions(): bool
+    {
+        return null !== $this->width && null !== $this->height && null !== $this->length;
+    }
+
+    public function dimension(): ?Dimension
+    {
+        if (!$this->hasDimensions()) {
+            return null;
+        }
+
+        return new class($this->width, $this->height, $this->length) implements Dimension {
+            public function __construct(private float $width, private float $height, private float $length)
+            {
+            }
+
+            public function width(): float
+            {
+                return $this->width;
+            }
+
+            public function height(): float
+            {
+                return $this->height;
+            }
+
+            public function length(): float
+            {
+                return $this->length;
+            }
+        };
     }
 }

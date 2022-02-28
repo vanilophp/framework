@@ -16,6 +16,7 @@
 - BC: Added the static `findBySlug(string $slug): ?Property;` method to the Property interface
 - Added Shipment Module
 - Added `original_price` field to products
+- Added product dimension (`width`, `height`, `depth`) and `weight` fields
 
 ## 2.x Series
 

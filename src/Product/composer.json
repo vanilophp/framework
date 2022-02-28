@@ -19,6 +19,7 @@
         "php": "^8.0",
         "konekt/concord": "^1.10.2",
         "konekt/enum": "^3.0",
+        "vanilo/contracts": "^3.0",
         "cviebrock/eloquent-sluggable": "^9.0"
     },
     "require-dev": {
