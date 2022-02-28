@@ -16,10 +16,15 @@ namespace Vanilo\Shipment\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Shipment\Models\Shipment;
+use Vanilo\Shipment\Models\ShipmentStatus;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-        Shipment::class
+        Shipment::class,
+    ];
+
+    protected $enums = [
+        ShipmentStatus::class,
     ];
 }

@@ -18,7 +18,7 @@ class CreateShipmentsTable extends Migration
             $table->decimal('weight', 15, 4)->nullable();
             $table->decimal('height', 15, 4)->nullable();
             $table->decimal('width', 15, 4)->nullable();
-            $table->decimal('depth', 15, 4)->nullable();
+            $table->decimal('length', 15, 4)->nullable();
             $table->text('comment')->nullable();
             $table->json('configuration')->nullable();
             $table->timestamps();

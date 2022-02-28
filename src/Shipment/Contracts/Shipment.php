@@ -14,6 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Contracts;
 
+use Vanilo\Contracts\Address;
+
 interface Shipment
 {
+    public function getAddress(): Address;
 }

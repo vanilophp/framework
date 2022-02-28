@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Tests;
 
+use Konekt\Address\Contracts\Address;
 use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -26,6 +27,7 @@ abstract class TestCase extends Orchestra
         parent::setUp();
 
         $this->setUpDatabase($this->app);
+        concord()->registerModel(Address::class, \Vanilo\Shipment\Tests\Dummies\Address::class);
     }
 
     /**
