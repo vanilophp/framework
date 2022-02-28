@@ -21,9 +21,15 @@ class AddDimensionsToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('weight');
+        });
+        Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('height');
+        });
+        Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('width');
-            $table->dropColumn('depth');
+        });
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('length');
         });
     }
 }
