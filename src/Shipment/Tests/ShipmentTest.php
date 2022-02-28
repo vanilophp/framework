@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Shipment\Tests;
 
 use Konekt\Enum\Enum;
+use Vanilo\Shipment\Models\Carrier;
 use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Models\ShipmentStatus;
 use Vanilo\Shipment\Tests\Dummies\Address;
@@ -36,7 +37,7 @@ class ShipmentTest extends TestCase
         $address = $this->createAddress();
         $shipment = Shipment::create(['address_id' => $address->id]);
 
-        $this->assertInstanceOf(\Vanilo\Contracts\Address::class, $shipment->getAddress());
+        $this->assertInstanceOf(\Vanilo\Contracts\Address::class, $shipment->deliveryAddress());
     }
 
     /** @test */
@@ -136,6 +137,20 @@ class ShipmentTest extends TestCase
         $shipment = $shipment->fresh();
 
         $this->assertEquals('some value', $shipment->configuration['some_key']);
+    }
+
+    /** @test */
+    public function it_can_have_a_carrier()
+    {
+        $carrier = Carrier::create(['name' => 'SEUR']);
+        $shipment = Shipment::create([
+            'address_id' => $this->createAddress()->id,
+            'carrier_id' => $carrier->id,
+        ]);
+
+        $this->assertInstanceOf(Carrier::class, $shipment->getCarrier());
+        $this->assertEquals('SEUR', $shipment->carrier->name);
+        $this->assertEquals('SEUR', $shipment->getCarrier()->name());
     }
 
     private function createAddress(): Address

@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Shipment\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Shipment\Models\Carrier;
 use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Models\ShipmentStatus;
 
@@ -22,6 +23,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
         Shipment::class,
+        Carrier::class,
     ];
 
     protected $enums = [

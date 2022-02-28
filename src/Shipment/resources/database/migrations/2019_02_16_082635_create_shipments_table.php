@@ -10,9 +10,9 @@ class CreateShipmentsTable extends Migration
     public function up()
     {
         Schema::create('shipments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('tracking_number')->nullable();
-            $table->integer('address_id')->unsigned();
+            $table->intOrBigIntBasedOnRelated('address_id', Schema::connection(null), 'addresses.id')->unsigned();
             $table->boolean('is_trackable')->default(true);
             $table->string('status')->default('new');
             $table->decimal('weight', 15, 4)->nullable();

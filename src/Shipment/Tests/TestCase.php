@@ -17,6 +17,7 @@ namespace Vanilo\Shipment\Tests;
 use Konekt\Address\Contracts\Address;
 use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
 use Konekt\Concord\ConcordServiceProvider;
+use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Shipment\Providers\ModuleServiceProvider as ShipmentModule;
 
@@ -38,6 +39,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
+            LaravelMigrationCompatibilityProvider::class,
             ConcordServiceProvider::class
         ];
     }

@@ -19,6 +19,7 @@
         "php": "^8.0",
         "konekt/concord": "^1.10.2",
         "konekt/address": "^2.1",
+        "konekt/laravel-migration-compatibility": "^1.4.2",
         "vanilo/contracts": "^3.0"
     },
     "require-dev": {

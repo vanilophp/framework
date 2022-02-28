@@ -18,5 +18,9 @@ use Vanilo\Contracts\Address;
 
 interface Shipment
 {
-    public function getAddress(): Address;
+    public function deliveryAddress(): Address;
+
+    public function status(): ShipmentStatus;
+
+    public function getCarrier(): ?Carrier;
 }
