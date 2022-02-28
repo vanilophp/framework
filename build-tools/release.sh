@@ -68,6 +68,6 @@ do
         git checkout "$RELEASE_BRANCH";
 
         git tag $VERSION
-        #git push origin --tags
+        git push origin --tags
     )
 done
