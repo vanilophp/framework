@@ -131,4 +131,13 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('Hello Where?', $productWithoutTitle->title);
         $this->assertEquals($productWithoutTitle->title(), $productWithoutTitle->title);
     }
+
+    /** @test */
+    public function the_id_field_is_an_integer()
+    {
+        $product = Product::create(['sku' => 'AAA', 'name' => 'Hey Hello']);
+
+        $this->assertIsInt($product->id);
+        $this->assertIsInt($product->fresh()->id);
+    }
 }

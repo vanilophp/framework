@@ -5,6 +5,7 @@
 
 - Added Laravel 9 support
 - Added PHP 8.1 support
+- Added `original_price` field to products
 - Dropped PHP 7.4 Support
 - Dropped Laravel 6-8 Support
 - Removed Admin from "Framework" - it is available as an optional separate package see [vanilo/admin](https://github.com/vanilophp/admin) 

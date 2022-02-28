@@ -14,12 +14,32 @@ declare(strict_types=1);
 
 namespace Vanilo\Product\Models;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Product\Contracts\Product as ProductContract;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string|null $slug
+ * @property string $sku
+ * @property float|null $price
+ * @property float|null $original_price
+ * @property string|null $excerpt
+ * @property string|null $description
+ * @property ProductState $state
+ * @property string|null $ext_title
+ * @property string|null $meta_keywords
+ * @property string|null $meta_description
+ * @property null|Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @method static Product create(array $attributes)
+ */
 class Product extends Model implements ProductContract
 {
     use CastsEnums;
@@ -29,6 +49,11 @@ class Product extends Model implements ProductContract
     protected $table = 'products';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'price' => 'float',
+        'original_price' => 'float',
+    ];
 
     protected $enums = [
         'state' => 'ProductStateProxy@enumClass'
@@ -43,18 +68,12 @@ class Product extends Model implements ProductContract
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isActive(): bool
     {
         return $this->state->isActive();
     }
 
-    /**
-     * @return bool
-     */
-    public function getIsActiveAttribute()
+    public function getIsActiveAttribute(): bool
     {
         return $this->isActive();
     }
