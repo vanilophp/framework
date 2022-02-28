@@ -1,7 +1,7 @@
 # Vanilo Shipment Module Changelog
 
-## Unreleased
-##### 2022-02-XX
+## 3.0.0
+##### 2022-02-28
 
 - The very first release of Shipment module (replaces the never-released "Shipping" module)
-- Shipment and Shipment status classes
+- Shipment, Shipment Status and Carrier support

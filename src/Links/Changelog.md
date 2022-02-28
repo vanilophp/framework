@@ -1,6 +1,6 @@
 # Vanilo Links Module Changelog
 
-## Unreleased
-##### 2022-02-XX
+## 3.0.0
+##### 2022-02-28
 
 - The very first release of Links module

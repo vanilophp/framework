@@ -1,7 +1,7 @@
 # Vanilo Payment Module Changelog
 
-## Unreleased - v3
-##### 2022-02-XX
+## 3.0.0
+##### 2022-02-28
 
 - Added Laravel 9 support
 - Added PHP 8.1 support

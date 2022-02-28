@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2022-02-XX
+## 3.0.0
+##### 2022-02-28
 
 - Dropped PHP 7.4 Support
 - Dropped Laravel 6-8 Support
