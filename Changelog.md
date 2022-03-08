@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2022-03-XX
+
+- Added `actives()` and `inactives()` scopes to the Carrier model
+
 ## 3.0.0
 ##### 2022-02-28
 

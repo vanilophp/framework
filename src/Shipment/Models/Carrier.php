@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
 
@@ -22,6 +23,10 @@ use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
  * @property string            $name
  * @property bool              $is_active
  * @property array             $configuration
+ *
+ * @method Builder actives()
+ * @method Builder inactives()
+ *
  * @method static Carrier create(array $attributes)
  */
 class Carrier extends Model implements CarrierContract
@@ -42,6 +47,16 @@ class Carrier extends Model implements CarrierContract
                 $model->configuration = [];
             }
         });
+    }
+
+    public function scopeActives(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeInactives(Builder $query): Builder
+    {
+        return $query->where('is_active', false);
     }
 
     public function name(): string

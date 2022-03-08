@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Tests;
 
+use Illuminate\Support\Str;
 use Vanilo\Shipment\Models\Carrier;
 
 class CarrierTest extends TestCase
@@ -41,6 +42,23 @@ class CarrierTest extends TestCase
         $dpd = Carrier::create(['name' => 'Budbee', 'is_active' => false])->fresh();
 
         $this->assertFalse($dpd->is_active);
+    }
+
+    /** @test */
+    public function active_and_inactive_entries_can_be_scoped()
+    {
+        for ($i = 0; $i < 3; $i++) {
+            Carrier::create(['name' => Str::uuid(), 'is_active' => false]);
+        }
+
+        for ($i = 0; $i < 7; $i++) {
+            Carrier::create(['name' => Str::uuid(), 'is_active' => true]);
+        }
+
+        $this->assertCount(10, Carrier::all());
+        $this->assertCount(7, Carrier::actives()->get());
+        $this->assertCount(3, Carrier::inactives()->get());
+
     }
 
     /** @test */
