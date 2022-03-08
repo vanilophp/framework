@@ -58,7 +58,6 @@ class CarrierTest extends TestCase
         $this->assertCount(10, Carrier::all());
         $this->assertCount(7, Carrier::actives()->get());
         $this->assertCount(3, Carrier::inactives()->get());
-
     }
 
     /** @test */
