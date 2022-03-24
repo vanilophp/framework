@@ -24,6 +24,7 @@ function remote()
 
 git pull origin $CURRENT_BRANCH
 
+remote adjustments
 remote cart
 remote category
 remote channel
@@ -37,7 +38,7 @@ remote properties
 remote shipment
 remote support
 
-#split 'src/Adjustments' adjustments
+split 'src/Adjustments' adjustments
 split 'src/Cart' cart
 split 'src/Category' category
 split 'src/Channel' channel
