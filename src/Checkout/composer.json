@@ -3,7 +3,7 @@
     "description": "Vanilo Checkout Module",
     "type": "library",
     "license": "MIT",
-    "keywords": ["checkout", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "keywords": ["checkout", "ecommerce", "vanilo", "laravel"],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "support": {

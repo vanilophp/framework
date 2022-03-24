@@ -3,7 +3,7 @@
     "description": "Vanilo Order Module",
     "type": "library",
     "license": "MIT",
-    "keywords": ["order", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "keywords": ["order", "ecommerce", "vanilo", "laravel"],
     "support": {
         "source": "https://github.com/vanilophp/order",
         "issues": "https://github.com/vanilophp/framework/issues"

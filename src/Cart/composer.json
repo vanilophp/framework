@@ -3,7 +3,7 @@
     "description": "Vanilo Cart Module",
     "type": "library",
     "license": "MIT",
-    "keywords": ["cart", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "keywords": ["cart", "ecommerce", "vanilo", "laravel"],
     "support": {
         "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/cart"

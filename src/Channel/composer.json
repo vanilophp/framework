@@ -5,7 +5,7 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "keywords": ["channel", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "keywords": ["channel", "ecommerce", "vanilo", "laravel"],
     "support": {
         "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/channel"

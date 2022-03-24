@@ -5,7 +5,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "license": "MIT",
-    "keywords": ["payments", "cards", "ecommerce", "vanilo", "artkonekt", "laravel"],
+    "keywords": ["payments", "cards", "ecommerce", "vanilo", "laravel"],
     "support": {
         "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/payment"
