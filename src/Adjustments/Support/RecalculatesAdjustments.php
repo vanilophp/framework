@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Vanilo\Adjustments\Support;
 
 use Vanilo\Adjustments\Contracts\Adjustment;
-use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 
 /**
  * Only apply this trait on an adjustable!
