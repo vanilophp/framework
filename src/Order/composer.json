@@ -5,7 +5,8 @@
     "license": "MIT",
     "keywords": ["order", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
-        "source": "https://github.com/artkonekt/order"
+        "source": "https://github.com/vanilophp/order",
+        "issues": "https://github.com/vanilophp/framework/issues"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -17,11 +18,11 @@
     ],
     "require": {
         "php": "^8.0",
-        "konekt/concord": "^1.10.2",
-        "konekt/enum": "^3.0",
-        "konekt/user": "^2.0",
-        "konekt/address": "^2.0",
-        "konekt/laravel-migration-compatibility": "^1.4.2",
+        "konekt/address": "^2.2",
+        "konekt/concord": "^1.11",
+        "konekt/enum": "^3.1.1",
+        "konekt/laravel-migration-compatibility": "^1.5",
+        "konekt/user": "^2.4",
         "vanilo/contracts": "^3.0",
         "vanilo/support": "^3.0"
     },

@@ -1,5 +1,14 @@
 # Vanilo Payment Module Changelog
 
+## 3.x Series
+
+## Unreleased
+##### 2022-03-XX
+
+- Changed minimum Konekt module requirements to:
+    - Concord: 1.11
+    - Enum: 3.1.1
+
 ## 3.0.0
 ##### 2022-02-28
 

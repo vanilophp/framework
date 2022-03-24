@@ -7,6 +7,7 @@
     "prefer-stable": true,
     "keywords": ["shipping", "ecommerce", "vanilo", "laravel"],
     "support": {
+        "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/shipment"
     },
     "authors": [
@@ -17,9 +18,10 @@
     ],
     "require": {
         "php": "^8.0",
-        "konekt/concord": "^1.10.2",
-        "konekt/address": "^2.1",
-        "konekt/laravel-migration-compatibility": "^1.4.2",
+        "konekt/address": "^2.2",
+        "konekt/concord": "^1.11",
+        "konekt/enum": "^3.1.1",
+        "konekt/laravel-migration-compatibility": "^1.5",
         "vanilo/contracts": "^3.0"
     },
     "require-dev": {

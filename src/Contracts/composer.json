@@ -7,6 +7,7 @@
     "prefer-stable": true,
     "keywords": ["ecommerce", "laravel", "vanilo", "artkonekt"],
     "support": {
+        "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/contracts"
     },
     "authors": [

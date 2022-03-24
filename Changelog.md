@@ -6,6 +6,13 @@
 ##### 2022-03-XX
 
 - Added `actives()` and `inactives()` scopes to the Carrier model
+- Changed minimum Konekt module requirements to:
+    - Address: 2.2
+    - Concord: 1.11
+    - Customer: 2.3.1
+    - Enum: 3.1.1
+    - Laravel Migration Compatibility: 1.5
+    - User: 2.4
 
 ## 3.0.0
 ##### 2022-02-28

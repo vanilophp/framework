@@ -5,6 +5,7 @@
     "license": "MIT",
     "keywords": ["cart", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
+        "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/cart"
     },
     "minimum-stability": "dev",
@@ -17,7 +18,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "konekt/concord": "^1.10.2",
+        "konekt/concord": "^1.11",
+        "konekt/enum": "^3.1.1",
         "vanilo/contracts": "^3.0",
         "vanilo/support": "^3.0"
     },
@@ -25,7 +27,6 @@
         "ext-sqlite3": "*",
         "phpunit/phpunit": "^9.0",
         "orchestra/testbench": "^7.0",
-        "konekt/enum": "^3.0",
         "laravel/legacy-factories": "^1.0"
     },
     "autoload": {

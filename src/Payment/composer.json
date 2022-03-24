@@ -7,6 +7,7 @@
     "license": "MIT",
     "keywords": ["payments", "cards", "ecommerce", "vanilo", "artkonekt", "laravel"],
     "support": {
+        "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/payment"
     },
     "authors": [
@@ -17,8 +18,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "konekt/concord": "^1.10.2",
-        "konekt/enum": "^3.0",
+        "konekt/concord": "^1.11",
+        "konekt/enum": "^3.1.1",
         "vanilo/contracts": "^3.0",
         "vanilo/support": "^3.0"
     },

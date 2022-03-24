@@ -1,5 +1,17 @@
 # Vanilo Order Module Changelog
 
+## 3.x Series
+
+## Unreleased
+##### 2022-03-XX
+
+- Changed minimum Konekt module requirements to:
+    - Address: 2.2
+    - Concord: 1.11
+    - Enum: 3.1.1
+    - Laravel Migration Compatibility: 1.5
+    - User: 2.4
+
 ## 3.0.0
 ##### 2022-02-28
 
