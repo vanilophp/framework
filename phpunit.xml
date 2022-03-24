@@ -48,6 +48,9 @@
         <testsuite name="Shipment Tests">
             <directory>src/Shipment/Tests</directory>
         </testsuite>
+        <testsuite name="Adjustments Tests">
+            <directory>src/Adjustments/Tests</directory>
+        </testsuite>
         <testsuite name="Foundation Tests">
             <directory>src/Foundation/Tests</directory>
         </testsuite>

@@ -1,0 +1,35 @@
+{
+    "name": "vanilo/adjustments",
+    "description": "Vanilo Adjustments Module",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["adjustments", "shipping", "promotions", "taxes", "ecommerce", "vanilo", "laravel"],
+    "support": {
+        "issues": "https://github.com/vanilophp/framework/issues",
+        "source": "https://github.com/vanilophp/adjustments"
+    },
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "konekt/concord": "^1.1",
+        "konekt/enum": "^3.1.1",
+        "konekt/enum-eloquent": "^1.8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "orchestra/testbench": "^7.0"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Adjustments\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    }
+}
