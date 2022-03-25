@@ -7,6 +7,7 @@ return [
         Konekt\User\Providers\ModuleServiceProvider::class => [],
         Konekt\Address\Providers\ModuleServiceProvider::class => [],
         Konekt\Customer\Providers\ModuleServiceProvider::class => [],
+        Vanilo\Adjustments\Providers\ModuleServiceProvider::class => [],
         Vanilo\Category\Providers\ModuleServiceProvider::class => [],
         Vanilo\Product\Providers\ModuleServiceProvider::class => [],
         Vanilo\Properties\Providers\ModuleServiceProvider::class => [],

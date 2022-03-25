@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
+use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Models\TaxonomyProxy;
@@ -26,6 +27,7 @@ use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract
 use Vanilo\Foundation\Factories\CheckoutDataFactory;
 use Vanilo\Foundation\Factories\OrderFactory;
 use Vanilo\Foundation\Models\Address;
+use Vanilo\Foundation\Models\Cart;
 use Vanilo\Foundation\Models\Customer;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\Product;
@@ -57,6 +59,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(CustomerContract::class, Customer::class, $registerRouteModels);
         $this->concord->registerModel(TaxonContract::class, Taxon::class, $registerRouteModels);
         $this->concord->registerModel(TaxonomyContract::class, Taxonomy::class, $registerRouteModels);
+        $this->concord->registerModel(CartContract::class, Cart::class, $registerRouteModels);
         $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
 
         Relation::morphMap([

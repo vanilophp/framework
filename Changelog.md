@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2022-03-XX
 
+- Added the Adjustments module
+- Added the extended Adjustable Cart model to `Foundation` (original Cart model still there, intact)
 - Added `actives()` and `inactives()` scopes to the Carrier model
 - Changed minimum Konekt module requirements to:
     - Address: 2.2

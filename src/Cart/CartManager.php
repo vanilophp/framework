@@ -243,6 +243,15 @@ class CartManager implements CartManagerContract
         session()->forget($this->sessionKey);
     }
 
+    public function __call(string $name , array $arguments): mixed
+    {
+        if (null !== $this->model()) {
+            return call_user_func([$this->model(), $name], ...$arguments);
+        }
+
+        return null;
+    }
+
     /**
      * Returns the model id of the cart for the current session
      * or null if it does not exist
