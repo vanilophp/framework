@@ -18,15 +18,11 @@ interface CheckoutState
 {
     /**
      * Returns whether the state represents a state where the checkout can be submitted
-     *
-     * @return bool
      */
-    public function canBeSubmitted();
+    public function canBeSubmitted(): bool;
 
     /**
-     * Returns an array of states that represent an checkout state that is ready to be submitted
-     *
-     * @return array
+     * Returns an array of states that represent a checkout state that is ready to be submitted
      */
-    public static function getSubmittableStates();
+    public static function getSubmittableStates(): array;
 }

@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2022-03-XX
 
+- Added return type definitions to `CheckoutState` interface (`canBeSubmitted(): bool` and `getSubmittableStates(): array`)
+- Added Session checkout driver that persists the checkout status/data in the session
 - Changed minimum Konekt module requirements to:
     - Concord: 1.11
     - Enum: 3.1.1

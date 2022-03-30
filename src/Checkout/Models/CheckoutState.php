@@ -17,6 +17,17 @@ namespace Vanilo\Checkout\Models;
 use Konekt\Enum\Enum;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 
+/**
+ * @method static VIRGIN()
+ * @method static STARTED()
+ * @method static READY()
+ * @method static COMPLETED()
+ *
+ * @method bool isVirgin()
+ * @method bool isStarted()
+ * @method bool isReady()
+ * @method bool isCompleted()
+ */
 class CheckoutState extends Enum implements CheckoutStateContract
 {
     public const __DEFAULT = self::VIRGIN;
@@ -26,12 +37,12 @@ class CheckoutState extends Enum implements CheckoutStateContract
     public const READY = 'ready';     // Checkout data is valid and ready to submit
     public const COMPLETED = 'completed'; // Checkout has been completed
 
-    protected static $submittableStates = [self::READY];
+    protected static array $submittableStates = [self::READY];
 
     /**
      * @inheritdoc
      */
-    public function canBeSubmitted()
+    public function canBeSubmitted(): bool
     {
         return in_array($this->value, static::$submittableStates);
     }
@@ -39,7 +50,7 @@ class CheckoutState extends Enum implements CheckoutStateContract
     /**
      * @inheritdoc
      */
-    public static function getSubmittableStates()
+    public static function getSubmittableStates(): array
     {
         return static::$submittableStates;
     }

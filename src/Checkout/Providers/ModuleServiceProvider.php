@@ -38,7 +38,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
 
         $this->app->bind(CheckoutStore::class, function ($app) {
             $driverClass = $app['config']->get('vanilo.checkout.store.driver');
-            if (false === strpos($driverClass, '\\')) {
+            if (!str_contains($driverClass, '\\')) {
                 $driverClass = sprintf(
                     '\\Vanilo\\Checkout\\Drivers\\%sStore',
                     Str::studly($driverClass)
