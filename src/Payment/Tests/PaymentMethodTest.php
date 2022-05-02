@@ -47,6 +47,17 @@ class PaymentMethodTest extends TestCase
     }
 
     /** @test */
+    public function the_configuration_field_is_an_array()
+    {
+        $method = PaymentMethod::create([
+            'name' => 'Credit Card',
+            'gateway' => 'plastic'
+        ]);
+
+        $this->assertIsArray($method->configuration);
+    }
+
+    /** @test */
     public function default_configuration_is_an_empty_array()
     {
         $method = PaymentMethod::create([
