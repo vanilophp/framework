@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \Illuminate\Support\Collection getItems()
- * @method static \Vanilo\Cart\Contracts\CartItem addItem(Buyable $product, $qty = 1, $params = [])
+ * @method static \Vanilo\Cart\Contracts\CartItem addItem(\Vanilo\Contracts\Buyable $product, $qty = 1, $params = [])
  * @method static removeItem($item)
  * @method static removeProduct(\Vanilo\Contracts\Buyable $product)
  * @method static clear()
