@@ -3,12 +3,11 @@
 ## 3.x Series
 
 ## Unreleased
-##### 2022-03-XX
+##### 2022-06-XX
 
 - Added the Adjustments module
 - Added the extended Adjustable Cart model to `Foundation` (original Cart model still there, intact)
 - Added Shipping methods
-- Added `actives()` and `inactives()` scopes to the Carrier model
 - Changed minimum Konekt module requirements to:
     - Address: 2.2
     - Concord: 1.11
@@ -16,6 +15,12 @@
     - Enum: 3.1.1
     - Laravel Migration Compatibility: 1.5
     - User: 2.4
+
+## 3.0.1
+##### 2022-05-22
+
+- Added `actives()` and `inactives()` scopes to the Carrier model
+- Fixed the missing `Cart` alias registration when using the entire framework
 
 ## 3.0.0
 ##### 2022-02-28

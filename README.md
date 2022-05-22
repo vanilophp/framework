@@ -14,7 +14,7 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 
 #### 3.x
 
-The latest stable release is **3.0.0**, and it was released on Feb 28, 2022.
+The latest stable release is **3.0.1**, and it was released on May 22, 2022.
 Vanilo v3.0 supports Laravel 9.x versions and PHP 8.0 - 8.1
 
 Refer to the [Roadmap](https://vanilo.io/docs/3.x/roadmap) for upcoming versions.

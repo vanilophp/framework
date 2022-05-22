@@ -3,7 +3,7 @@
 ## 3.x Series
 
 ## Unreleased
-##### 2022-03-XX
+##### 2022-06-XX
 
 - Changed minimum Konekt module requirements to:
     - Address: 2.2
@@ -11,6 +11,11 @@
     - Enum: 3.1.1
     - Laravel Migration Compatibility: 1.5
     - User: 2.4
+
+## 3.0.1
+##### 2022-05-22
+
+- Bump module version to mainline (no change)
 
 ## 3.0.0
 ##### 2022-02-28
