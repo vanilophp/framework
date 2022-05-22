@@ -6,6 +6,7 @@
 ##### 2022-03-XX
 
 - Added `actives()` and `inactives()` scopes to the Carrier model
+- Fixed the missing `Cart` alias registration when using the entire framework
 
 ## 3.0.0
 ##### 2022-02-28
