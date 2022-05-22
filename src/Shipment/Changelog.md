@@ -1,7 +1,7 @@
 # Vanilo Shipment Module Changelog
 
-## Unreleased
-##### 2022-03-XX
+## 3.0.1
+##### 2022-05-22
 
 - Added `actives()` and `inactives()` scopes to the Carrier model
 
