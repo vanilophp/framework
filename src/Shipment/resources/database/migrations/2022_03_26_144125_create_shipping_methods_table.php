@@ -11,7 +11,7 @@ return new class () extends Migration {
         Schema::create('shipping_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->bigInteger('carrier_id')->nullable();
+            $table->bigInteger('carrier_id')->unsigned()->nullable();
             $table->json('configuration')->nullable();
             $table->timestamps();
 
