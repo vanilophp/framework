@@ -120,6 +120,5 @@ class PaymentMethodTest extends TestCase
         ]);
 
         $this->assertEquals(PlasticPayments::getName(), $method->getGatewayName());
-
     }
 }
