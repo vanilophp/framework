@@ -8,6 +8,9 @@
 - Added the Adjustments module
 - Added the extended Adjustable Cart model to `Foundation` (original Cart model still there, intact)
 - Added Shipping methods
+- Added the `getGatewayName()` method to the PaymentMethod class.
+  It can retrieve the gateway name without instantiating it,
+  thus gateway configuration errors don't affect it
 - Changed minimum Konekt module requirements to:
     - Address: 2.2
     - Concord: 1.11

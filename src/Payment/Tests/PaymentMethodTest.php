@@ -109,4 +109,17 @@ class PaymentMethodTest extends TestCase
         $this->assertInstanceOf(PlasticPayments::class, $gateway);
         $this->assertEquals(PlasticPayments::getName(), $gateway::getName());
     }
+
+    /** @test */
+    public function it_can_tell_its_gateway_name()
+    {
+        PaymentGateways::register('plastic', PlasticPayments::class);
+        $method = PaymentMethod::create([
+            'name' => 'Credit Card',
+            'gateway' => 'plastic'
+        ]);
+
+        $this->assertEquals(PlasticPayments::getName(), $method->getGatewayName());
+
+    }
 }

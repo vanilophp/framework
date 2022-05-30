@@ -8,6 +8,9 @@
 - Changed minimum Konekt module requirements to:
     - Concord: 1.11
     - Enum: 3.1.1
+- Added the `getGatewayName()` method to the PaymentMethod class.
+  It can retrieve the gateway name without instantiating it,
+  thus gateway configuration errors don't affect it
 
 ## 3.0.1
 ##### 2022-05-22

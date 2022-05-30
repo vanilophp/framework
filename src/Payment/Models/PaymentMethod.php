@@ -97,4 +97,15 @@ class PaymentMethod extends Model implements PaymentMethodContract
     {
         return $query->where('is_enabled', false);
     }
+
+    public function getGatewayName(): string
+    {
+        if (null === $this->gateway) {
+            return NullGateway::getName();
+        }
+
+        $gwClass = PaymentGateways::getClass($this->gateway);
+
+        return $gwClass::getName();
+    }
 }
