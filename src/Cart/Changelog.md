@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2022-06-XX
 
+- Added Enum 4.0 Support
 - Added `__call` to `CartManager` that proxies unhandled calls to the underlying cart model
 - Changed minimum Konekt module requirements to:
     - Concord: 1.11

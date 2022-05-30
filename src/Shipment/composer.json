@@ -20,7 +20,7 @@
         "php": "^8.0",
         "konekt/address": "^2.2",
         "konekt/concord": "^1.11",
-        "konekt/enum": "^3.1.1",
+        "konekt/enum": "^3.1.1 | ^4.0",
         "konekt/laravel-migration-compatibility": "^1.5",
         "vanilo/contracts": "^3.0"
     },

@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2022-06-XX
 
+- Added Enum 4.0 Support
 - Added Shipping methods
 - Changed minimum Konekt module requirements to:
     - Address: 2.2

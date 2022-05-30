@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2022-06-XX
 
+- Added Enum 4.0 Support
 - Added return type definitions to `CheckoutState` interface (`canBeSubmitted(): bool` and `getSubmittableStates(): array`)
 - Added Session checkout driver that persists the checkout status/data in the session
 - Changed minimum Konekt module requirements to:
