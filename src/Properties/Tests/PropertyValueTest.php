@@ -117,4 +117,60 @@ class PropertyValueTest extends TestCase
 
         $this->assertEquals(['x' => 123, 'y' => 456], $valueX->settings);
     }
+
+    /** @test */
+    public function it_can_be_retrieved_by_the_property_slug_and_value()
+    {
+        /** @var Property $color */
+        $color = Property::create(['name' => 'Color', 'type' => 'text']);
+        $color->propertyValues()->createMany([
+            ['title' => 'Gold'],
+            ['title' => 'Red'],
+            ['title' => 'White'],
+        ]);
+
+        $goldColor = PropertyValue::findByPropertyAndValue('color', 'gold');
+        $this->assertInstanceOf(PropertyValue::class, $goldColor);
+        $this->assertEquals($color->id, $goldColor->property->id);
+        $this->assertEquals('gold', $goldColor->value);
+    }
+
+    /** @test */
+    public function it_can_be_retrieved_by_the_property_slug_and_value_when_the_value_is_int()
+    {
+        /** @var Property $doors */
+        $doors = Property::create(['name' => 'doors', 'type' => 'integer']);
+        $doors->propertyValues()->createMany([
+            ['title' => 'Three', 'value' => 3],
+            ['title' => 'Four', 'value' => 4],
+            ['title' => 'Five', 'value' => 5],
+        ]);
+
+        $fourDoor = PropertyValue::findByPropertyAndValue('doors', 4);
+        $this->assertInstanceOf(PropertyValue::class, $fourDoor);
+        $this->assertEquals($doors->id, $fourDoor->property->id);
+        $this->assertEquals(4, $fourDoor->value);
+    }
+
+    /** @test */
+    public function it_can_be_retrieved_by_the_property_slug_and_value_when_the_value_is_boolean()
+    {
+        /** @var Property $sunroof */
+        $sunroof = Property::create(['name' => 'sunroof', 'type' => 'boolean']);
+        $sunroof->propertyValues()->createMany([
+            ['title' => 'Yes', 'value' => true],
+            ['title' => 'No', 'value' => false],
+        ]);
+
+        $withSunroof = PropertyValue::findByPropertyAndValue('sunroof', true);
+        $this->assertInstanceOf(PropertyValue::class, $withSunroof);
+        $this->assertEquals($sunroof->id, $withSunroof->property->id);
+        $this->assertEquals(true, $withSunroof->value);
+    }
+
+    /** @test */
+    public function the_property_and_value_finder_returns_null_when_attempting_to_locate_by_a_nonexistent_property_slug()
+    {
+        $this->assertNull(PropertyValue::findByPropertyAndValue('hey-i-am-so-stupid', 'gold'));
+    }
 }

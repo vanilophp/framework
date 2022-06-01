@@ -28,6 +28,10 @@ use Vanilo\Properties\Contracts\PropertyValue as PropertyValueContract;
  * @property integer                               $priority
  * @property array|null                            $settings
  *
+ * @method static Builder byProperty(int|Property $property)
+ * @method Builder sort()
+ * @method Builder sortReverse()
+ *
  */
 class PropertyValue extends Model implements PropertyValueContract
 {
@@ -41,6 +45,16 @@ class PropertyValue extends Model implements PropertyValueContract
     protected $casts = [
         'settings' => 'array'
     ];
+
+    public static function findByPropertyAndValue(string $propertySlug, mixed $value): ?PropertyValueContract
+    {
+        if (null === $property = PropertyProxy::findBySlug($propertySlug)) {
+            return null;
+        }
+
+        return static::byProperty($property)->whereSlug($value)->first();
+
+    }
 
     public function property(): BelongsTo
     {

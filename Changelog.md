@@ -11,6 +11,7 @@
 - Added the `getGatewayName()` method to the PaymentMethod class.
   It can retrieve the gateway name without instantiating it,
   thus gateway configuration errors don't affect it
+- Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
 - Added Enum 4.0 Support
 - Changed minimum Konekt module requirements to:
     - Address: 2.2

@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2022-06-XX
 
+- Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
 - Changed minimum Concord requirement to 1.11
 
 ## 3.0.1
