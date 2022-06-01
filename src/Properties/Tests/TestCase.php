@@ -21,8 +21,6 @@ use Vanilo\Properties\Providers\ModuleServiceProvider as PropertiesModule;
 
 abstract class TestCase extends Orchestra
 {
-    use PhpUnit6To9Compatible;
-
     public function setUp(): void
     {
         parent::setUp();
