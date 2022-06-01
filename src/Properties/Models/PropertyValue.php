@@ -53,7 +53,6 @@ class PropertyValue extends Model implements PropertyValueContract
         }
 
         return static::byProperty($property)->whereSlug($value)->first();
-
     }
 
     public function property(): BelongsTo
