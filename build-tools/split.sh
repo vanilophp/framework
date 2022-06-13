@@ -31,6 +31,7 @@ remote channel
 remote checkout
 remote contracts
 remote links
+remote master-product
 remote order
 remote payment
 remote product
@@ -45,6 +46,7 @@ split 'src/Channel' channel
 split 'src/Checkout' checkout
 split 'src/Contracts' contracts 8683e47dd2dbd15ac2ceac4dcfae405c4b271aff
 split 'src/Links' links
+split 'src/MasterProduct' master-product
 split 'src/Order' order
 split 'src/Payment' payment
 split 'src/Product' product
