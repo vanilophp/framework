@@ -21,6 +21,7 @@
         "konekt/enum": "^3.1.1 | ^4.0",
         "konekt/enum-eloquent": "^1.8.1",
         "vanilo/contracts": "^3.0",
+        "vanilo/product": "^3.0",
         "vanilo/support": "^3.0"
     },
     "require-dev": {
