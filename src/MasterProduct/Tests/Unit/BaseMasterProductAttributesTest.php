@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\MasterProduct\Tests\Unit;
 
+use Vanilo\Contracts\Buyable;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
 use Vanilo\MasterProduct\Tests\TestCase;
@@ -116,5 +117,38 @@ class BaseMasterProductAttributesTest extends TestCase
 
         $this->assertIsInt($product->id);
         $this->assertIsInt($product->fresh()->id);
+    }
+
+    /** @test */
+    public function the_master_product_does_not_have_an_sku()
+    {
+        $product = MasterProduct::create(['name' => 'Fish Pizza', 'sku' => 'FP-123']);
+
+        $this->assertNull($product->sku);
+    }
+
+    /** @test */
+    public function the_master_product_does_not_have_sales_fields()
+    {
+        $product = MasterProduct::create([
+            'name' => 'Kalamari Pizza',
+            'units_sold' => 12,
+            'last_sale_at' => '2022-06-11 12:00:00',
+        ]);
+
+        $this->assertNull($product->units_sold);
+        $this->assertNull($product->last_sale_at);
+    }
+
+    /** @test */
+    public function the_master_product_is_not_buyable()
+    {
+        $product = MasterProduct::create([
+            'name' => 'Kalamari Pizza',
+        ]);
+
+        $this->assertNotInstanceOf(Buyable::class, $product);
+        $this->assertFalse(method_exists($product, 'addSale'));
+        $this->assertFalse(method_exists($product, 'removeSale'));
     }
 }

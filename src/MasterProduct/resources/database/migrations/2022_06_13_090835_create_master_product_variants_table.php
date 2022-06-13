@@ -13,6 +13,7 @@ return new class () extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('master_product_id');
 
+            $table->string('sku');
             $table->string('name')->nullable();
             $table->text('excerpt')->nullable();
 
