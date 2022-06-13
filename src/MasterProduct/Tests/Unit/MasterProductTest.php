@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the BaseMasterProductAttributesTest class.
+ * Contains the MasterProductTest class.
  *
  * @copyright   Copyright (c) 2022 Attila Fulop
  * @author      Attila Fulop
@@ -19,7 +19,7 @@ use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
 use Vanilo\MasterProduct\Tests\TestCase;
 
-class BaseMasterProductAttributesTest extends TestCase
+class MasterProductTest extends TestCase
 {
     /** @test */
     public function product_can_be_created_with_minimal_data()
