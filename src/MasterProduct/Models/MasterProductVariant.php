@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
-use Vanilo\Product\Models\ProductState;
 
 /**
  *
