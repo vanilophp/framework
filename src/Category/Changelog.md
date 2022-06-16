@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2022-06-XX
 
+- Changed minimum Laravel requirement to 9.2
 - Changed minimum Concord requirement to 1.11
 
 ## 3.0.1

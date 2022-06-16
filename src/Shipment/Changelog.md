@@ -7,6 +7,7 @@
 
 - Added Enum 4.0 Support
 - Added Shipping methods
+- Changed minimum Laravel requirement to 9.2
 - Changed minimum Konekt module requirements to:
     - Address: 2.2
     - Concord: 1.11

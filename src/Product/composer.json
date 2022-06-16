@@ -21,6 +21,7 @@
         "konekt/concord": "^1.11",
         "konekt/enum": "^3.1.1 | ^4.0",
         "konekt/enum-eloquent": "^1.8.1",
+        "laravel/framework": "^9.2",
         "vanilo/contracts": "^3.0",
         "cviebrock/eloquent-sluggable": "^9.0"
     },

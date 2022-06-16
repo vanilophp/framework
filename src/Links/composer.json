@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.0",
         "cviebrock/eloquent-sluggable": "^9.0",
-        "illuminate/support": "^9.0",
+        "illuminate/support": "^9.2",
         "konekt/concord": "^1.11"
     },
     "require-dev": {

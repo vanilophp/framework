@@ -21,6 +21,9 @@
         <testsuite name="Product Tests">
             <directory>src/Product/Tests</directory>
         </testsuite>
+        <testsuite name="Master Product Tests">
+            <directory>src/MasterProduct/Tests</directory>
+        </testsuite>
         <testsuite name="Properties Tests">
             <directory>src/Properties/Tests</directory>
         </testsuite>

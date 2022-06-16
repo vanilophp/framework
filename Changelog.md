@@ -14,6 +14,7 @@
   thus gateway configuration errors don't affect it
 - Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
 - Added Enum 4.0 Support
+- Changed minimum Laravel requirement to 9.2
 - Changed minimum Konekt module requirements to:
     - Address: 2.2
     - Concord: 1.11

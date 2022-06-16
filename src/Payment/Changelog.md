@@ -6,6 +6,7 @@
 ##### 2022-06-XX
 
 - Added Enum 4.0 Support
+- Changed minimum Laravel requirement to 9.2
 - Changed minimum Konekt module requirements to:
     - Concord: 1.11
     - Enum: 3.1.1

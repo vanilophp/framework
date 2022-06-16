@@ -8,6 +8,7 @@
 - Added Enum 4.0 Support
 - Added return type definitions to `CheckoutState` interface (`canBeSubmitted(): bool` and `getSubmittableStates(): array`)
 - Added Session checkout driver that persists the checkout status/data in the session
+- Changed minimum Laravel requirement to 9.2
 - Changed minimum Konekt module requirements to:
     - Concord: 1.11
     - Enum: 3.1.1

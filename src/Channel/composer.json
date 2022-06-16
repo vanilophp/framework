@@ -18,7 +18,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "konekt/concord": "^1.11"
+        "konekt/concord": "^1.11",
+        "laravel/framework": "^9.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
