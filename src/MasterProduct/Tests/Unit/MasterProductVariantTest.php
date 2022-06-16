@@ -17,6 +17,7 @@ namespace Vanilo\MasterProduct\Tests\Unit;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductVariant;
 use Vanilo\MasterProduct\Tests\TestCase;
+use Vanilo\Product\Models\ProductState;
 
 class MasterProductVariantTest extends TestCase
 {
@@ -48,5 +49,80 @@ class MasterProductVariantTest extends TestCase
         ]);
 
         $this->assertNull($variant->slug);
+    }
+
+    /** @test */
+    public function a_variant_does_not_have_a_description()
+    {
+        $master = MasterProduct::create([
+            'name' => 'PUMA Men Super Liga OG Retro',
+        ]);
+        $variant = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'B079M6TMTJ0',
+            'description' => 'Variants do not have a description'
+        ]);
+
+        $this->assertNull($variant->description);
+    }
+
+    /** @test */
+    public function a_variant_does_not_have_a_state()
+    {
+        $master = MasterProduct::create([
+            'name' => 'PUMA Men Super Liga OG Retro',
+        ]);
+        $variant = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'B079M6TMTJ0',
+            'state' => ProductState::ACTIVE,
+        ]);
+
+        $this->assertNull($variant->state);
+    }
+
+    /** @test */
+    public function a_variant_does_not_have_ext_title()
+    {
+        $master = MasterProduct::create([
+            'name' => 'PUMA Men Super Liga OG Retro',
+        ]);
+        $variant = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'B079M6TMTJ0',
+            'ext_title' => 'PUMA Men Super Liga OG Retro Green-White 42.5 Real Leather',
+        ]);
+
+        $this->assertNull($variant->ext_title);
+    }
+
+    /** @test */
+    public function a_variant_does_not_have_meta_keywords()
+    {
+        $master = MasterProduct::create([
+            'name' => 'PUMA Men Super Liga OG Retro',
+        ]);
+        $variant = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'B079M6TMTJ0',
+            'meta_keywords' => 'puma, men, leather',
+        ]);
+
+        $this->assertNull($variant->meta_keywords);
+    }
+
+    /** @test */
+    public function a_variant_does_not_have_meta_description()
+    {
+        $master = MasterProduct::create([
+            'name' => 'PUMA Men Super Liga OG Retro',
+        ]);
+        $variant = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'B079M6TMTJ0',
+            'meta_description' => 'Buy PUMA Men&#39;s Super Liga OG Retro Lace-Up Fashion Sneaker and other Fashion Sneakers.',
+        ]);
+
+        $this->assertNull($variant->meta_description);
     }
 }
