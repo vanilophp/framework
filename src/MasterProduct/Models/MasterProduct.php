@@ -47,7 +47,7 @@ use Vanilo\Product\Models\ProductStateProxy;
  * @property-read bool $is_active
  * @property-read string|null $title
  *
- * @method static MasterProduct create(array $attributes)
+ * @method static MasterProduct create(array $attributes = [])
  */
 class MasterProduct extends Model implements MasterProductContract
 {
