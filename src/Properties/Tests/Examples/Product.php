@@ -17,6 +17,9 @@ namespace Vanilo\Properties\Tests\Examples;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Properties\Traits\HasPropertyValues;
 
+/**
+ * @method static Product create(array $attributes = [])
+ */
 class Product extends Model
 {
     use HasPropertyValues;

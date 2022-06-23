@@ -46,6 +46,51 @@ class ModelPropertyValuesTest extends TestCase
         $this->assertEquals(16, $product->propertyValues->last()->getCastedValue());
     }
 
+    /** @test */
+    public function value_of_a_property_can_be_returned_by_property_slug()
+    {
+        $lamp = Product::create([
+            'name' => 'Bicycle Lamp'
+        ]);
+
+        $color = factory(Property::class)->create(['name' => 'Color']);
+
+        $red = factory(PropertyValue::class)->create([
+            'value' => 'red',
+            'property_id' => $color->id,
+        ]);
+
+        $lamp->addPropertyValue($red);
+
+        $this->assertInstanceOf(PropertyValue::class, $lamp->valueOfProperty('color'));
+        $this->assertEquals('red', $lamp->valueOfProperty('color')->getCastedValue());
+    }
+
+    /** @test */
+    public function value_of_a_property_returns_null_if_the_property_is_not_assigned()
+    {
+        $flex = Product::create([
+            'name' => 'Bosch PWS 750-115 Angle Grinder'
+        ]);
+
+        factory(PropertyValue::class)->create([
+            'value' => 'green',
+            'property_id' => factory(Property::class)->create(['name' => 'Color'])->id,
+        ]);
+
+        $this->assertNull($flex->valueOfProperty('color'));
+    }
+
+    /** @test */
+    public function value_of_a_property_returns_null_if_the_property_does_not_exist()
+    {
+        $drill = Product::create([
+            'name' => 'Milwaukee M18 2-Tool Brushless Combo Kit'
+        ]);
+
+        $this->assertNull($drill->valueOfProperty('color'));
+    }
+
     protected function setUpDatabase($app)
     {
         parent::setUpDatabase($app);

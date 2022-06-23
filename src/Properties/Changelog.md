@@ -6,6 +6,7 @@
 ##### 2022-06-XX
 
 - Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
+- Added the `valueOfProperty()` method to the `HasProperties` trait
 - Changed minimum Laravel requirement to 9.2
 - Changed minimum Concord requirement to 1.11
 

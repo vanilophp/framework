@@ -13,6 +13,7 @@
   It can retrieve the gateway name without instantiating it,
   thus gateway configuration errors don't affect it
 - Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
+- Added the `valueOfProperty()` method to the `HasProperties` trait
 - Added Enum 4.0 Support
 - Changed minimum Laravel requirement to 9.2
 - Changed minimum Konekt module requirements to:

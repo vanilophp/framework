@@ -15,11 +15,24 @@ declare(strict_types=1);
 namespace Vanilo\Properties\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyValueProxy;
 
 trait HasPropertyValues
 {
+    public function valueOfProperty(string|Property $property): ?PropertyValue
+    {
+        $propertySlug = is_string($property) ? $property : $property->slug;
+        foreach ($this->propertyValues as $propertyValue) {
+            if ($propertySlug === $propertyValue->property->slug) {
+                return $propertyValue;
+            }
+        }
+
+        return null;
+    }
+
     public function propertyValues(): MorphToMany
     {
         return $this->morphToMany(
