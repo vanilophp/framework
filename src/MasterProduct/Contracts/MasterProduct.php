@@ -24,4 +24,6 @@ use Vanilo\Product\Contracts\Product;
 interface MasterProduct extends Product
 {
     public function variants(): HasMany;
+
+    public function createVariant(array $attributes): MasterProductVariant;
 }

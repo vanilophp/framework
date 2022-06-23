@@ -25,6 +25,9 @@
         "vanilo/product": "^3.0",
         "vanilo/support": "^3.0"
     },
+    "suggest": {
+        "vanilo/properties": "Allows establishing variants based on properties like color, size, etc"
+    },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
         "orchestra/testbench": "^7.0"

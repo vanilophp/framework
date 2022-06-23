@@ -24,6 +24,8 @@ use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantC
  *
  * @property int $id
  * @property string $name
+ * @property string $sku
+ * @property float $stock
  * @property float|null $price
  * @property float|null $original_price
  * @property string|null $excerpt

@@ -19,6 +19,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Arr;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\MasterProduct\Contracts\MasterProduct as MasterProductContract;
 use Vanilo\Product\Models\ProductState;
@@ -75,6 +76,16 @@ class MasterProduct extends Model implements MasterProductContract
     public function variants(): HasMany
     {
         return $this->hasMany(MasterProductVariantProxy::modelClass(), 'master_product_id', 'id');
+    }
+
+    public function createVariant(array $attributes): MasterProductVariant
+    {
+        return MasterProductVariantProxy::create(
+            array_merge(
+                Arr::except($attributes, ['properties']),
+                ['master_product_id' => $this->id],
+            )
+        );
     }
 
     public function isActive(): bool
