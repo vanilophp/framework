@@ -20,6 +20,7 @@ use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\MasterProduct\Providers\ModuleServiceProvider as MasterProductModule;
 use Vanilo\Product\Providers\ModuleServiceProvider as ProductModule;
+use Vanilo\Properties\Providers\ModuleServiceProvider as PropertiesModule;
 
 abstract class TestCase extends Orchestra
 {
@@ -71,6 +72,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('concord.modules', [
             ProductModule::class,
             MasterProductModule::class,
+            PropertiesModule::class,
         ]);
     }
 }
