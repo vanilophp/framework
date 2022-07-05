@@ -3,6 +3,8 @@
     "description": "Vanilo Master Product Module",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "keywords": ["products", "variants", "ecommerce", "vanilo", "laravel"],
     "support": {
         "issues": "https://github.com/vanilophp/framework/issues",
