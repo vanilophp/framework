@@ -11,7 +11,10 @@ return new class () extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->intOrBigIntBasedOnRelated('channel_id', Schema::connection(null), 'channels.id')->unsigned()->nullable();
+            $table->intOrBigIntBasedOnRelated('channel_id', Schema::connection(null), 'channels.id')
+                ->after('shipping_address_id')
+                ->unsigned()
+                ->nullable();
         });
     }
 
