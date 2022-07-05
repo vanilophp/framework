@@ -14,6 +14,8 @@
   thus gateway configuration errors don't affect it
 - Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
 - Added the `valueOfProperty()` method to the `HasProperties` trait
+- Added the Sluggable behavior to the Channel model
+- Added configuration getter and setter methods to the Channel model
 - Added Enum 4.0 Support
 - Changed minimum Laravel requirement to 9.2
 - Changed minimum Konekt module requirements to:

@@ -68,4 +68,12 @@ class ChannelTest extends TestCase
 
         $this->assertNotEquals($c1->slug, $c2->slug);
     }
+
+    /** @test */
+    public function the_slug_gets_generated_automatically()
+    {
+        $channel = Channel::create(['name' => 'A bottle of water']);
+
+        $this->assertEquals('a-bottle-of-water', $channel->slug);
+    }
 }

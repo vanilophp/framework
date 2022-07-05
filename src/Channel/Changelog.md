@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2022-06-XX
 
+- Added the Sluggable behavior
+- Added configuration getter and setter methods to the Channel model
 - Changed minimum Laravel requirement to 9.2
 - Changed minimum Concord requirement to 1.11
 
