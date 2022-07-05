@@ -8,6 +8,7 @@
 - Added the Master Product module
 - Added the Adjustments module
 - Added the extended Adjustable Cart model to `Foundation` (original Cart model still there, intact)
+- Added `channel_id` to the extended `Order` model in Foundation
 - Added Shipping methods
 - Added the `getGatewayName()` method to the PaymentMethod class.
   It can retrieve the gateway name without instantiating it,
