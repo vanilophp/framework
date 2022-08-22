@@ -19,7 +19,6 @@ use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
 use Vanilo\Properties\Models\PropertyProxy;
 use Vanilo\Properties\Models\PropertyValueProxy;
-use Vanilo\Properties\PropertyTypes;
 
 trait HasPropertyValues
 {
