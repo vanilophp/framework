@@ -17,10 +17,39 @@ namespace Vanilo\Properties\Traits;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
+use Vanilo\Properties\Models\PropertyProxy;
 use Vanilo\Properties\Models\PropertyValueProxy;
+use Vanilo\Properties\PropertyTypes;
 
 trait HasPropertyValues
 {
+    public function assignPropertyValue(string|Property $property, mixed $value): void
+    {
+        if ($value instanceof PropertyValue) {
+            $this->addPropertyValue($value);
+
+            return;
+        }
+
+        $propertyValue = PropertyValueProxy::findByPropertyAndValue($property, $value);
+        if (null === $propertyValue) {
+            $propertyValue = PropertyValueProxy::create([
+                'property_id' => $property instanceof Property ? $property->id : PropertyProxy::findBySlug($property)?->id,
+                'value' => $value,
+                'title' => $value,
+            ]);
+        }
+
+        $this->addPropertyValue($propertyValue);
+    }
+
+    public function assignPropertyValues(iterable $propertyValues): void
+    {
+        foreach ($propertyValues as $property => $value) {
+            $this->assignPropertyValue($property, $value);
+        }
+    }
+
     public function valueOfProperty(string|Property $property): ?PropertyValue
     {
         $propertySlug = is_string($property) ? $property : $property->slug;
@@ -52,7 +81,7 @@ trait HasPropertyValues
     public function addPropertyValues(iterable $propertyValues)
     {
         foreach ($propertyValues as $propertyValue) {
-            if (! $propertyValue instanceof PropertyValue) {
+            if (!$propertyValue instanceof PropertyValue) {
                 throw new \InvalidArgumentException(
                     sprintf(
                         'Every element passed to addPropertyValues must be a PropertyValue object. Given `%s`.',

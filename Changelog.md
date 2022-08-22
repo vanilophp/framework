@@ -14,7 +14,7 @@
   It can retrieve the gateway name without instantiating it,
   thus gateway configuration errors don't affect it
 - Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
-- Added the `valueOfProperty()` method to the `HasProperties` trait
+- Added the `valueOfProperty()`, `assignPropertyValue()` and `assignPropertyValues()` methods to the `HasPropertyValues` trait
 - Added the Sluggable behavior to the Channel model
 - Added configuration getter and setter methods to the Channel model
 - Added Enum 4.0 Support

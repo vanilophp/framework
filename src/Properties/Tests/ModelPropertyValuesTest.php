@@ -91,6 +91,61 @@ class ModelPropertyValuesTest extends TestCase
         $this->assertNull($drill->valueOfProperty('color'));
     }
 
+    /** @test */
+    public function a_value_can_be_assigned_to_a_model_by_property_and_scalar_value_when_the_property_value_exists()
+    {
+        $cake = Product::create(['name' => 'Kiwi Cake']);
+
+        $color = factory(Property::class)->create(['name' => 'Color']);
+        $taste = factory(Property::class)->create(['name' => 'Taste']);
+
+        factory(PropertyValue::class)->create([
+            'value' => 'green',
+            'property_id' => $color->id,
+        ]);
+
+        factory(PropertyValue::class)->create([
+            'value' => 'tart',
+            'property_id' => $taste->id,
+        ]);
+
+        $cake->assignPropertyValue($color, 'green');
+        $cake->assignPropertyValue('taste', 'tart');
+
+        $this->assertInstanceOf(PropertyValue::class, $cake->valueOfProperty('color'));
+        $this->assertEquals('green', $cake->valueOfProperty('color')->getCastedValue());
+        $this->assertEquals('tart', $cake->valueOfProperty('taste')->getCastedValue());
+    }
+
+    /** @test */
+    public function a_non_existent_value_will_be_created_when_assigned_to_a_model_by_scalar_value()
+    {
+        $booklet = Product::create(['name' => 'Booklet']);
+        $color = factory(Property::class)->create(['name' => 'Color']);
+
+        $booklet->assignPropertyValue($color, 'purple');
+
+        $this->assertInstanceOf(PropertyValue::class, $booklet->valueOfProperty('color'));
+        $this->assertEquals('purple', $booklet->valueOfProperty('color')->getCastedValue());
+        $this->assertModelExists($booklet->valueOfProperty('color'));
+    }
+
+    /** @test */
+    public function multiple_values_can_be_assigned_to_a_model_by_scalar_value()
+    {
+        $sword = Product::create(['name' => 'Sword']);
+        factory(Property::class)->create(['name' => 'Length']);
+        factory(Property::class)->create(['name' => 'Shape']);
+
+        $sword->assignPropertyValues([
+            'length' => 'medium',
+            'shape' => 'Hua lu guy',
+        ]);
+
+        $this->assertEquals('medium', $sword->valueOfProperty('length')->getCastedValue());
+        $this->assertEquals('Hua lu guy', $sword->valueOfProperty('shape')->getCastedValue());
+    }
+
     protected function setUpDatabase($app)
     {
         parent::setUpDatabase($app);

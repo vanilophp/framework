@@ -82,4 +82,14 @@ final class PropertyTypes
 
         return $result;
     }
+
+    public static function guessTypeFromValue(mixed $value): string
+    {
+        return match (true) {
+            is_int($value) => 'integer',
+            is_numeric($value) => 'number',
+            is_bool($value) => 'boolean',
+            default => 'text'
+        };
+    }
 }
