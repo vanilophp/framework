@@ -13,7 +13,7 @@ class CreateLinkGroupTables extends Migration
         Schema::create('link_groups', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('link_type_id')->unsigned();
-            $table->bigInteger('property_id')->nullable();
+            $table->integer('property_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('link_type_id')

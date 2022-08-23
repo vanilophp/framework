@@ -58,21 +58,21 @@ class LinkGroupItemTest extends TestCase
     public function one_model_can_only_be_added_once()
     {
         $group = LinkGroup::create([
-            'link_type_id' => LinkType::create(['name' => 'Similar product'])
+            'link_type_id' => LinkType::create(['name' => 'Similar product'])->id
         ]);
         $product = TestProduct::create(['name' => 'Furry Bra']);
 
         LinkGroupItem::create([
             'link_group_id' => $group->id,
-            'linkable_id' => $product,
+            'linkable_id' => $product->id,
             'linkable_type' => $product::class,
         ]);
 
-        $this->expectExceptionMessageMatches('/UNIQUE constraint failed/');
+        $this->expectExceptionMessageMatches('/constraint/');
 
         LinkGroupItem::create([
             'link_group_id' => $group->id,
-            'linkable_id' => $product,
+            'linkable_id' => $product->id,
             'linkable_type' => $product::class,
         ]);
     }
@@ -81,7 +81,7 @@ class LinkGroupItemTest extends TestCase
     public function items_can_be_retrieved_from_the_parent_group_relation()
     {
         $group = LinkGroup::create([
-            'link_type_id' => LinkType::create(['name' => 'Variant'])
+            'link_type_id' => LinkType::create(['name' => 'Variant'])->id
         ]);
         $pink = TestProduct::create(['name' => 'Furry Bra Pink']);
         $purple = TestProduct::create(['name' => 'Furry Bra Purple']);
@@ -98,7 +98,7 @@ class LinkGroupItemTest extends TestCase
     public function the_linkable_object_can_be_accessed_via_the_polymorphic_relationship()
     {
         $group = LinkGroup::create([
-            'link_type_id' => LinkType::create(['name' => 'Designer'])
+            'link_type_id' => LinkType::create(['name' => 'Designer'])->id
         ]);
         $milky = TestProduct::create(['name' => 'Milky White']);
 

@@ -59,11 +59,12 @@ class QueryEstablishTest extends TestCase
     {
         $green = TestProduct::create(['name' => 'T-Shirt Green'])->fresh();
         $blue = TestProduct::create(['name' => 'T-Shirt Blue'])->fresh();
+        $color = Property::create(['name' => 'Color', 'type' => 'text'])->fresh();
         LinkType::create(['name' => 'Variant']);
 
-        Establish::a('variant')->link()->basedOn(1)->between($green)->and($blue);
+        Establish::a('variant')->link()->basedOn($color->id)->between($green)->and($blue);
 
-        $variants = Get::the('variant')->links()->basedOn(1)->of($green);
+        $variants = Get::the('variant')->links()->basedOn($color->id)->of($green);
         $this->assertCount(1, $variants);
         $this->assertEquals($blue->id, $variants->first()->id);
     }

@@ -156,7 +156,7 @@ class LinkableTest extends TestCase
         $greensLinks = $this->green->links($this->variantType);
 
         $this->assertCount(2, $redsLinks);
-        $this->assertEquals(
+        $this->assertEqualsCanonicalizing(
             [$this->yellow->id, $this->green->id],
             $redsLinks->map(fn ($linkable) => $linkable->id)->all()
         );

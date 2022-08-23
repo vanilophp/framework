@@ -123,8 +123,11 @@ class QueryGetTest extends TestCase
     /** @test */
     public function an_optional_property_can_be_specified_to_filter_groups_by()
     {
-        $variantGroup22 = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => 22])->fresh();
-        $variantGroup33 = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => 33])->fresh();
+        $prop22 = Property::create(['name' => '22', 'type' => 'text']);
+        $prop33 = Property::create(['name' => '33', 'type' => 'text']);
+
+        $variantGroup22 = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $prop22->id])->fresh();
+        $variantGroup33 = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $prop33->id])->fresh();
 
         // Variant 22 Group
         $attrs22 = ['link_group_id' => $variantGroup22->id, 'linkable_type' => TestLinkableProduct::class];
@@ -141,11 +144,11 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Ultra->id, $allVariants->map->id);
         $this->assertContains($this->galaxyS22Plus->id, $allVariants->map->id);
 
-        $variants22 = Get::the('variant')->links()->basedOn(22)->of($this->galaxyS22);
+        $variants22 = Get::the('variant')->links()->basedOn($prop22->id)->of($this->galaxyS22);
         $this->assertCount(1, $variants22);
         $this->assertContains($this->galaxyS22Plus->id, $variants22->map->id);
 
-        $variants33 = Get::the('variant')->links()->basedOn(33)->of($this->galaxyS22);
+        $variants33 = Get::the('variant')->links()->basedOn($prop33->id)->of($this->galaxyS22);
         $this->assertCount(1, $variants33);
         $this->assertContains($this->galaxyS22Ultra->id, $variants33->map->id);
     }
