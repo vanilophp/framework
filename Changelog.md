@@ -45,7 +45,8 @@
 - BC: Renamed Framework Module and Namespace to "Foundation"
 - BC: Renamed `vanilo.framework.*` config values to `vanilo.foundation.*`
 - BC: Added the static `findBySlug(string $slug): ?Property;` method to the Property interface
-- Added Shipment Module
+- Added the Shipment Module
+- Added the Links Module
 - Added `original_price` field to products
 - Added product dimension (`width`, `height`, `depth`) and `weight` fields
 
