@@ -43,8 +43,6 @@ use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantC
  */
 class MasterProductVariant extends Model implements MasterProductVariantContract
 {
-    protected $table = 'master_product_variants';
-
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [

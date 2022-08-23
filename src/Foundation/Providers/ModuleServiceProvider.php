@@ -29,10 +29,12 @@ use Vanilo\Foundation\Factories\OrderFactory;
 use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Cart;
 use Vanilo\Foundation\Models\Customer;
+use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Models\Taxonomy;
+use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Models\OrderProxy;
@@ -61,6 +63,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(TaxonomyContract::class, Taxonomy::class, $registerRouteModels);
         $this->concord->registerModel(CartContract::class, Cart::class, $registerRouteModels);
         $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
+        $this->concord->registerModel(MasterProductVariantContract::class, MasterProductVariant::class, $registerRouteModels);
 
         Relation::morphMap([
             app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass(),

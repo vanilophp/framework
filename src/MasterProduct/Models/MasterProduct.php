@@ -56,8 +56,6 @@ class MasterProduct extends Model implements MasterProductContract
     use Sluggable;
     use SluggableScopeHelpers;
 
-    protected $table = 'master_products';
-
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
@@ -80,12 +78,18 @@ class MasterProduct extends Model implements MasterProductContract
 
     public function createVariant(array $attributes): MasterProductVariant
     {
-        return MasterProductVariantProxy::create(
+        $variant = MasterProductVariantProxy::create(
             array_merge(
                 Arr::except($attributes, ['properties']),
                 ['master_product_id' => $this->id],
             )
         );
+
+        if (Arr::exists($attributes, 'properties') && method_exists($variant, 'assignPropertyValues')) {
+            $variant->assignPropertyValues($attributes['properties']);
+        }
+
+        return $variant;
     }
 
     public function isActive(): bool
