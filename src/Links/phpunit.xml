@@ -9,4 +9,17 @@
             <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>
+
+    <php>
+        <!--        FOR POSTGRES:-->
+        <!--        <env name="TEST_DB_USERNAME" value="postgres"/>-->
+        <!--        <env name="TEST_DB_PASSWORD" value="password"/>-->
+        <!--        <env name="TEST_DB_ENGINE" value="pgsql"/>-->
+
+        <!--        FOR MYSQL:-->
+        <!--        <env name="TEST_DB_USERNAME" value="mysql"/>-->
+        <!--        <env name="TEST_DB_PASSWORD" value="password"/>-->
+        <!--        <env name="TEST_DB_ENGINE" value="mysql"/>-->
+    </php>
+
 </phpunit>
