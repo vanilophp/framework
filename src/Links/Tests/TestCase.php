@@ -28,6 +28,12 @@ class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
     }
 
+    protected function tearDown(): void
+    {
+        $this->artisan('migrate:reset');
+        parent::tearDown();
+    }
+
     protected function getEnvironmentSetUp($app)
     {
         $app['path.lang'] = __DIR__ . '/lang';
@@ -69,11 +75,5 @@ class TestCase extends Orchestra
     {
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         \Artisan::call('migrate', ['--force' => true]);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->artisan('migrate:reset');
-        parent::tearDown();
     }
 }
