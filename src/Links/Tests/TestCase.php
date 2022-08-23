@@ -70,4 +70,10 @@ class TestCase extends Orchestra
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         \Artisan::call('migrate', ['--force' => true]);
     }
+
+    protected function tearDown(): void
+    {
+        $this->artisan('migrate:reset');
+        parent::tearDown();
+    }
 }
