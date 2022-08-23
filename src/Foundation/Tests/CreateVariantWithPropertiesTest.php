@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
-use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
+use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
 
