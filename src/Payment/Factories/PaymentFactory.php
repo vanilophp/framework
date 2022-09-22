@@ -28,7 +28,7 @@ class PaymentFactory
         array $extraData = []
     ): Payment {
         $payment = PaymentProxy::create([
-            'amount' => $payable->getAmount(),
+            'amount' => round($payable->getAmount(), 2),
             'currency' => $payable->getCurrency(),
             'payable_type' => $payable->getPayableType(),
             'payable_id' => $payable->getPayableId(),
