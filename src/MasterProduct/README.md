@@ -12,7 +12,7 @@ This is the standalone Master Product module of the [Vanilo E-commerce Framework
 (As Standalone Component)
 
 1. `composer require vanilo/master-product`
-2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
+2. `php artisan vendor:publish --provider="Konekt\Concord\ConcordServiceProvider"`
 3. Add `Vanilo\MasterProduct\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
 4. `php artisan migrate`
 

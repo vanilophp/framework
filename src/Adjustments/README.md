@@ -12,7 +12,7 @@ This is the standalone adjustments module of the [Vanilo E-commerce Framework](h
 (As Standalone Component)
 
 1. `composer require vanilo/adjustments`
-2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
+2. `php artisan vendor:publish --provider="Konekt\Concord\ConcordServiceProvider"`
 3. Add `Vanilo\Adjustments\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
 4. `php artisan migrate`
 
