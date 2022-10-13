@@ -12,7 +12,7 @@ This is the standalone Properties module from the [Vanilo E-commerce framework](
 (As Standalone Component)
 
 1. `composer require vanilo/properties`
-2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
+2. `php artisan vendor:publish --provider="Konekt\Concord\ConcordServiceProvider"`
 3. Add `Vanilo\Properties\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
 4. `php artisan migrate`
 

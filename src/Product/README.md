@@ -12,7 +12,7 @@ This is the standalone Product module from the [Vanilo E-commerce framework](htt
 (As Standalone Component)
 
 1. `composer require vanilo/product`
-2. `php artisan vendor:publish --provider=Konekt\Concord\ConcordServiceProvider`
+2. `php artisan vendor:publish --provider="Konekt\Concord\ConcordServiceProvider"`
 3. Add `Vanilo\Product\Providers\ModuleServiceProvider::class` to modules in `config/concord.php`
 4. `php artisan migrate`
 
