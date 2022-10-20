@@ -43,6 +43,7 @@
 - Removed Admin from "Framework" - it is available as an optional separate package see [vanilo/admin](https://github.com/vanilophp/admin)
 - Changed minimum Laravel version to 9.0
 - BC: Renamed Framework Module and Namespace to "Foundation"
+- BC: Removed the `Vanilo\Foundation\Models\PaymentMethod` class. Use `Vanilo\Payment\Models\PaymentMethod` instead
 - BC: Renamed `vanilo.framework.*` config values to `vanilo.foundation.*`
 - BC: Added the static `findBySlug(string $slug): ?Property;` method to the Property interface
 - Added the Shipment Module
