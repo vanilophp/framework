@@ -8,6 +8,8 @@
         "issues": "https://github.com/vanilophp/framework/issues",
         "source": "https://github.com/vanilophp/adjustments"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Attila Fulop",
@@ -16,7 +18,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "konekt/concord": "^1.1",
+        "konekt/concord": "^1.11",
         "konekt/enum": "^3.1.1 | ^4.0",
         "konekt/enum-eloquent": "^1.8.1",
         "laravel/framework": "^9.2"
