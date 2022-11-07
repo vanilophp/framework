@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2022-06-XX
+## 3.1.0
+##### 2022-11-07
 
 - Added the `PropertyValue::findByPropertyAndValue('color', 'red')` finder method
 - Added the `valueOfProperty()` method to the `HasProperties` trait

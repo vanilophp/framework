@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2022-06-XX
+## 3.1.0
+##### 2022-11-07
 
 - Added the Master Product module
 - Added the Adjustments module
@@ -17,6 +17,7 @@
 - Added the `valueOfProperty()`, `assignPropertyValue()` and `assignPropertyValues()` methods to the `HasPropertyValues` trait
 - Added the Sluggable behavior to the Channel model
 - Added configuration getter and setter methods to the Channel model
+- Added PHP 8.2 Support
 - Added Enum 4.0 Support
 - Changed minimum Laravel requirement to 9.2
 - Changed minimum Konekt module requirements to:

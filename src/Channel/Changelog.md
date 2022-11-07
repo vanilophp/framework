@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2022-06-XX
+## 3.1.0
+##### 2022-11-07
 
 - Added the Sluggable behavior
 - Added configuration getter and setter methods to the Channel model
