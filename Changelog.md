@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2022-XX-YY
 
+- Added forwarding/proxying of method calls and property getters from the Checkout manager to the underlying store
+
 ## 3.1.0
 ##### 2022-11-07
 

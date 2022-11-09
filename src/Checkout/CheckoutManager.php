@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout;
 
+use Illuminate\Support\Traits\ForwardsCalls;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
 use Vanilo\Checkout\Contracts\CheckoutStore;
@@ -23,6 +24,8 @@ use Vanilo\Contracts\CheckoutSubject;
 
 class CheckoutManager implements CheckoutContract
 {
+    use ForwardsCalls;
+
     /** @var  CheckoutStore */
     protected $store;
 
@@ -129,5 +132,15 @@ class CheckoutManager implements CheckoutContract
     public function total()
     {
         return $this->store->total();
+    }
+
+    public function __call(string $method, array $arguments)
+    {
+        return $this->forwardDecoratedCallTo($this->store, $method, $arguments);
+    }
+
+    public function __get(string $name)
+    {
+        return $this->store->{$name};
     }
 }
