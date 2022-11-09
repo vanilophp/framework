@@ -20,6 +20,7 @@ use Vanilo\Checkout\CheckoutManager;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
+use Vanilo\Checkout\Drivers\RequestStore;
 use Vanilo\Checkout\Models\CheckoutState;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -36,19 +37,18 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
 
         $this->app->bind(CheckoutContract::class, CheckoutManager::class);
 
+        $this->app->when(RequestStore::class)->needs('$config')->giveConfig('vanilo.checkout.store');
+
         $this->app->bind(CheckoutStore::class, function ($app) {
             $driverClass = $app['config']->get('vanilo.checkout.store.driver');
             if (!str_contains($driverClass, '\\')) {
                 $driverClass = sprintf(
-                    '\\Vanilo\\Checkout\\Drivers\\%sStore',
+                    'Vanilo\\Checkout\\Drivers\\%sStore',
                     Str::studly($driverClass)
                 );
             }
 
-            return new $driverClass(
-                $app['config']->get('vanilo.checkout.store'),
-                $app->make(CheckoutDataFactory::class)
-            );
+            return $app->make($driverClass);
         });
 
         $this->app->singleton('vanilo.checkout', function ($app) {

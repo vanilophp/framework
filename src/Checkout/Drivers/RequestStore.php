@@ -48,6 +48,11 @@ class RequestStore implements CheckoutStore
     /** @var array */
     protected $customData = [];
 
+    /**
+     * @todo remove the first, $config parameter in v4
+     *       it was never in use, but after 5 years
+     *       people might be using it, thus a BC
+     */
     public function __construct($config, CheckoutDataFactory $dataFactory)
     {
         $this->dataFactory = $dataFactory;
