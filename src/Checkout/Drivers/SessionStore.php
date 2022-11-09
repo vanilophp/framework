@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Contracts\Session\Session;
+use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
@@ -32,10 +33,13 @@ class SessionStore implements CheckoutStore
 
     protected string $prefix;
 
-    public function __construct(Session $session = null, string $prefix = null)
+    protected CheckoutDataFactory $factory;
+
+    public function __construct(CheckoutDataFactory $factory, Session $session = null, string $prefix = null)
     {
         $this->session = $session ?? app('session.store');
         $this->prefix = $prefix ?? static::DEFAULT_PREFIX;
+        $this->factory = $factory;
     }
 
     public function getState(): CheckoutState
@@ -52,22 +56,22 @@ class SessionStore implements CheckoutStore
 
     public function getBillpayer(): Billpayer
     {
-        // TODO: Implement getBillpayer() method.
+        return $this->retrieveData('billpayer') ?? $this->factory->createBillpayer();
     }
 
     public function setBillpayer(Billpayer $billpayer)
     {
-        // TODO: Implement setBillpayer() method.
+        $this->storeData('billpayer', $billpayer);
     }
 
     public function getShippingAddress(): Address
     {
-        // TODO: Implement getShippingAddress() method.
+        return $this->retrieveData('shipping_address') ?? $this->factory->createShippingAddress();
     }
 
     public function setShippingAddress(Address $address)
     {
-        // TODO: Implement setShippingAddress() method.
+        $this->storeData('shipping_address', $address);
     }
 
     public function setCustomAttribute(string $key, $value): void
@@ -97,7 +101,7 @@ class SessionStore implements CheckoutStore
 
     public function total()
     {
-        // TODO: Implement total() method.
+        return $this->cart->total();
     }
 
     protected function storeData(string $key, mixed $value): void
