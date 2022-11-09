@@ -4,5 +4,5 @@ declare(strict_types=1);
 
 return [
     'name' => 'Vanilo Payment Module',
-    'version' => '3.1.0'
+    'version' => '3.2-dev'
 ];
