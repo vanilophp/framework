@@ -27,7 +27,7 @@ class SessionStore implements CheckoutStore
 {
     use HasCart;
 
-    private const DEFAULT_PREFIX = 'vanilo_checkout__';
+    protected const DEFAULT_PREFIX = 'vanilo_checkout__';
 
     protected Session $session;
 
