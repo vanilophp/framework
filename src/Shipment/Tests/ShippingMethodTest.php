@@ -64,4 +64,44 @@ class ShippingMethodTest extends TestCase
         $this->assertEquals(8.99, $method->configuration['price']);
         $this->assertEquals(25, $method->configuration['free_threshold']);
     }
+
+    /** @test */
+    public function it_is_active_by_default()
+    {
+        $method = ShippingMethod::create(['name' => 'Bike Courier'])->fresh();
+
+        $this->assertTrue($method->is_active);
+    }
+
+    /** @test */
+    public function it_can_be_set_to_inactive()
+    {
+        $method = ShippingMethod::create(['name' => 'Dead Messenger', 'is_active' => false])->fresh();
+
+        $this->assertFalse($method->is_active);
+    }
+
+    /** @test */
+    public function active_ones_can_be_listed()
+    {
+        ShippingMethod::create(['name' => 'Messenger 1', 'is_active' => true]);
+        ShippingMethod::create(['name' => 'Messenger 2', 'is_active' => false]);
+        ShippingMethod::create(['name' => 'Messenger 3', 'is_active' => true]);
+        ShippingMethod::create(['name' => 'Messenger 4', 'is_active' => false]);
+        ShippingMethod::create(['name' => 'Messenger 5', 'is_active' => false]);
+
+        $this->assertCount(2, ShippingMethod::actives()->get());
+    }
+
+    /** @test */
+    public function inactive_ones_can_be_listed()
+    {
+        ShippingMethod::create(['name' => 'Messenger 1', 'is_active' => true]);
+        ShippingMethod::create(['name' => 'Messenger 2', 'is_active' => false]);
+        ShippingMethod::create(['name' => 'Messenger 3', 'is_active' => true]);
+        ShippingMethod::create(['name' => 'Messenger 4', 'is_active' => false]);
+        ShippingMethod::create(['name' => 'Messenger 5', 'is_active' => false]);
+
+        $this->assertCount(2, ShippingMethod::actives()->get());
+    }
 }

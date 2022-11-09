@@ -6,6 +6,7 @@
 ##### 2022-XX-YY
 
 - Added forwarding/proxying of method calls and property getters from the Checkout manager to the underlying store
+- Added `is_active` flag to shipping methods
 
 ## 3.1.0
 ##### 2022-11-07

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Shipment\Traits\BelongsToCarrier;
 
@@ -21,7 +22,13 @@ use Vanilo\Shipment\Traits\BelongsToCarrier;
  * @property int $id
  * @property string $name
  * @property int|null $carrier_id
+ * @property boolean $is_active
  * @property array $configuration
+ *
+ * @method static Builder actives()
+ * @method static Builder inactives()
+ *
+ * @method static Carrier create(array $attributes)
  */
 class ShippingMethod extends Model
 {
@@ -31,6 +38,7 @@ class ShippingMethod extends Model
 
     protected $casts = [
         'configuration' => 'json',
+        'is_active' => 'bool',
     ];
 
     public static function boot()
@@ -42,5 +50,15 @@ class ShippingMethod extends Model
                 $model->configuration = [];
             }
         });
+    }
+
+    public function scopeActives(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeInactives(Builder $query): Builder
+    {
+        return $query->where('is_active', false);
     }
 }

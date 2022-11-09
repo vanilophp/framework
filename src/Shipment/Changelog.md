@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2022-XX-YY
 
+- Added `is_active` flag to shipping methods
+
 ## 3.1.0
 ##### 2022-11-07
 
