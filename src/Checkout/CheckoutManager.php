@@ -34,6 +34,16 @@ class CheckoutManager implements CheckoutContract
         $this->store = $store;
     }
 
+    public function __call(string $method, array $arguments)
+    {
+        return $this->forwardDecoratedCallTo($this->store, $method, $arguments);
+    }
+
+    public function __get(string $name)
+    {
+        return $this->store->{$name};
+    }
+
     /**
      * @inheritDoc
      */
@@ -132,15 +142,5 @@ class CheckoutManager implements CheckoutContract
     public function total()
     {
         return $this->store->total();
-    }
-
-    public function __call(string $method, array $arguments)
-    {
-        return $this->forwardDecoratedCallTo($this->store, $method, $arguments);
-    }
-
-    public function __get(string $name)
-    {
-        return $this->store->{$name};
     }
 }

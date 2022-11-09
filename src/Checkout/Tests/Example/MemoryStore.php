@@ -39,6 +39,13 @@ class MemoryStore implements CheckoutStore
         $this->state = \Vanilo\Checkout\Models\CheckoutState::VIRGIN();
     }
 
+    public function __get(string $name)
+    {
+        if ('magicStoreAttribute' === $name) {
+            return 'Hey I am a magic store attribute';
+        }
+    }
+
     public function getCart()
     {
         return $this->cart;
@@ -112,12 +119,5 @@ class MemoryStore implements CheckoutStore
     public function customMethod(): string
     {
         return 'Hey I am a custom method';
-    }
-
-    public function __get(string $name)
-    {
-        if ('magicStoreAttribute' === $name) {
-            return 'Hey I am a magic store attribute';
-        }
     }
 }
