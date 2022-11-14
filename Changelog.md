@@ -8,6 +8,8 @@
 - Added forwarding/proxying of method calls and property getters from the Checkout manager to the underlying store
 - Added `is_active` flag to shipping methods
 - Changed checkout store resolution to happen via the Laravel DI instead of `new SpecificStoreClass()`
+- Changed both built-in checkout stores to save unknown properties as custom attributes on the `update()` method call
+- Fixed missing implementation parts of the checkout session store
 
 ## 3.1.0
 ##### 2022-11-07

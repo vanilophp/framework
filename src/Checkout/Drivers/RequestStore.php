@@ -18,6 +18,7 @@ use Illuminate\Support\Arr;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
+use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Checkout\Traits\HasCheckoutState;
 use Vanilo\Contracts\Address;
@@ -33,6 +34,7 @@ class RequestStore implements CheckoutStore
     use HasCheckoutState;
     use HasCart;
     use EmulatesFillAttributes;
+    use FillsCommonCheckoutAttributes;
 
     protected $state;
 
@@ -65,16 +67,22 @@ class RequestStore implements CheckoutStore
      */
     public function update(array $data)
     {
-        $this->updateBillpayer($data['billpayer'] ??  []);
+        if (isset($data['billpayer'])) {
+            $this->updateBillpayer($data['billpayer'] ??  []);
+        }
 
         if (Arr::get($data, 'ship_to_billing_address')) {
             $shippingAddress = $data['billpayer']['address'];
             $shippingAddress['name'] = $this->getShipToName();
         } else {
-            $shippingAddress = $data['shippingAddress'] ?? [];
+            $shippingAddress = $data['shipping_address'] ?? ($data['shippingAddress'] ?? []);
         }
 
         $this->updateShippingAddress($shippingAddress);
+
+        foreach (Arr::except($data, ['billpayer', 'ship_to_billing_address', 'shipping_address', 'shippingAddress']) as $key => $value) {
+            $this->setCustomAttribute($key, $value);
+        }
     }
 
     /**
@@ -135,44 +143,5 @@ class RequestStore implements CheckoutStore
     public function getCustomAttributes(): array
     {
         return $this->customData;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function updateBillpayer($data)
-    {
-        $this->fill($this->billpayer, Arr::except($data, 'address'));
-        $this->fill($this->billpayer->address, $data['address']);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function updateShippingAddress($data)
-    {
-        $this->fill($this->shippingAddress, $data);
-    }
-
-    private function fill($target, array $attributes)
-    {
-        if (method_exists($target, 'fill')) {
-            $target->fill($attributes);
-        } else {
-            $this->fillAttributes($target, $attributes);
-        }
-    }
-
-    private function getShipToName()
-    {
-        if ($this->billpayer->isOrganization()) {
-            return sprintf(
-                '%s (%s)',
-                $this->billpayer->getCompanyName(),
-                $this->billpayer->getFullName()
-            );
-        }
-
-        return $this->billpayer->getName();
     }
 }

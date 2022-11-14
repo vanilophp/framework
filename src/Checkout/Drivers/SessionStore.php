@@ -15,10 +15,13 @@ declare(strict_types=1);
 namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Arr;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
+use Vanilo\Checkout\Traits\EmulatesFillAttributes;
+use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
@@ -26,8 +29,12 @@ use Vanilo\Contracts\Billpayer;
 class SessionStore implements CheckoutStore
 {
     use HasCart;
+    use EmulatesFillAttributes;
+    use FillsCommonCheckoutAttributes;
 
     protected const DEFAULT_PREFIX = 'vanilo_checkout__';
+
+    protected const CUSTOM_ATTRIBUTES_KEY = '__custom_attributes';
 
     protected Session $session;
 
@@ -76,27 +83,45 @@ class SessionStore implements CheckoutStore
 
     public function setCustomAttribute(string $key, $value): void
     {
-        $this->storeData("custom_attr__{$key}", $value);
+        $customAttributes = $this->getCustomAttributes();
+        $customAttributes[$key] = $value;
+
+        $this->putCustomAttributes($customAttributes);
     }
 
     public function getCustomAttribute(string $key)
     {
-        return $this->retrieveData("custom_attr__{$key}");
+        return $this->getCustomAttributes()[$key] ?? null;
     }
 
     public function putCustomAttributes(array $data): void
     {
-        // TODO: Implement putCustomAttributes() method.
+        $this->storeData(static::CUSTOM_ATTRIBUTES_KEY, $data);
     }
 
     public function getCustomAttributes(): array
     {
-        // TODO: Implement getCustomAttributes() method.
+        return $this->retrieveData(static::CUSTOM_ATTRIBUTES_KEY) ?? [];
     }
 
     public function update(array $data)
     {
-        // TODO: Implement update() method.
+        if (isset($data['billpayer'])) {
+            $this->updateBillpayer($data['billpayer'] ??  []);
+        }
+
+        if (Arr::get($data, 'ship_to_billing_address')) {
+            $shippingAddress = $data['billpayer']['address'];
+            $shippingAddress['name'] = $this->getShipToName();
+        } else {
+            $shippingAddress = $data['shipping_address'] ?? ($data['shippingAddress'] ?? []);
+        }
+
+        $this->updateShippingAddress($shippingAddress);
+
+        foreach (Arr::except($data, ['billpayer', 'ship_to_billing_address', 'shipping_address', 'shippingAddress']) as $key => $value) {
+            $this->setCustomAttribute($key, $value);
+        }
     }
 
     public function total()
