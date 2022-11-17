@@ -32,7 +32,6 @@ class VariantWithPropertiesTest extends TestCase
         );
     }
 
-
     /** @test */
     public function a_variant_can_be_created_with_properties()
     {
