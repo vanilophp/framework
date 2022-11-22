@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Tests;
 
+use Vanilo\Payment\Contracts\PaymentResponse;
+use Vanilo\Payment\Models\PaymentStatus;
 use Vanilo\Payment\PaymentGateways;
 use Vanilo\Payment\Tests\Examples\PlasticPayments;
+use Vanilo\Payment\Tests\Examples\UnorthodoxGateway;
+use Vanilo\Payment\Tests\Examples\UnorthodoxPaymentResponse;
 
 class GatewaysTest extends TestCase
 {
@@ -47,5 +51,20 @@ class GatewaysTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         PaymentGateways::register('whatever', \stdClass::class);
+    }
+
+    /** @test */
+    public function non_illuminate_request_type_request_objects_can_be_accepted_by_process_payment_response_using_type_extension()
+    {
+        PaymentGateways::register('unorthodox', UnorthodoxGateway::class);
+        $gw = PaymentGateways::make('unorthodox');
+
+        $remoteResult = new UnorthodoxPaymentResponse('C9278', 27.99);
+        $result = $gw->processPaymentResponse($remoteResult);
+
+        $this->assertInstanceOf(PaymentResponse::class, $result);
+        $this->assertEquals(PaymentStatus::PAID(), $result->getStatus());
+        $this->assertEquals(27.99, $result->getAmountPaid());
+        $this->assertEquals('C9278', $result->getTransactionId());
     }
 }
