@@ -259,7 +259,9 @@ class CartManager implements CartManagerContract
      */
     public function fresh(): self
     {
-        $this->model()?->fresh();
+        if (null !== $this->cart) {
+            $this->cart = $this->cart->fresh();
+        }
 
         return $this;
     }
