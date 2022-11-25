@@ -253,6 +253,18 @@ class CartManager implements CartManagerContract
     }
 
     /**
+     * Refreshes the underlying cart model from the database
+     *
+     * @return $this
+     */
+    public function fresh(): self
+    {
+        $this->model()?->fresh();
+
+        return $this;
+    }
+
+    /**
      * Returns the model id of the cart for the current session
      * or null if it does not exist
      *
