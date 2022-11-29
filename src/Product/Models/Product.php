@@ -105,10 +105,12 @@ class Product extends Model implements ProductContract
 
     public function scopeActives(Builder $query): Builder
     {
-        return $query->whereIn(
-            'state',
-            ProductStateProxy::getActiveStates()
-        );
+        return $query->whereIn('state', ProductStateProxy::getActiveStates());
+    }
+
+    public function scopeInactives(Builder $query): Builder
+    {
+        return $query->whereIn('state', array_diff(ProductStateProxy::values(), ProductStateProxy::getActiveStates()));
     }
 
     public function hasDimensions(): bool

@@ -17,11 +17,14 @@ namespace Vanilo\MasterProduct\Models;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\MasterProduct\Contracts\MasterProduct as MasterProductContract;
+use Vanilo\MasterProduct\Tests\Factories\MasterProductFactory;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Product\Models\ProductStateProxy;
 
@@ -55,6 +58,7 @@ class MasterProduct extends Model implements MasterProductContract
     use CastsEnums;
     use Sluggable;
     use SluggableScopeHelpers;
+    use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -102,6 +106,16 @@ class MasterProduct extends Model implements MasterProductContract
         return $this->isActive();
     }
 
+    public function scopeActives(Builder $query): Builder
+    {
+        return $query->whereIn('state', ProductStateProxy::getActiveStates());
+    }
+
+    public function scopeInactives(Builder $query): Builder
+    {
+        return $query->whereIn('state', array_diff(ProductStateProxy::values(), ProductStateProxy::getActiveStates()));
+    }
+
     public function title(): string
     {
         return $this->ext_title ?? $this->name;
@@ -119,5 +133,10 @@ class MasterProduct extends Model implements MasterProductContract
                 'source' => 'name'
             ]
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return MasterProductFactory::new();
     }
 }

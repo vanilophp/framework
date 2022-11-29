@@ -151,4 +151,14 @@ class MasterProductTest extends TestCase
         $this->assertFalse(method_exists($product, 'addSale'));
         $this->assertFalse(method_exists($product, 'removeSale'));
     }
+
+    /** @test */
+    public function it_has_an_actives_query_builder_scope()
+    {
+        MasterProduct::factory()->active()->count(4)->create();
+        MasterProduct::factory()->inactive()->count(7)->create();
+
+        $this->assertCount(4, MasterProduct::actives()->get());
+        $this->assertCount(7, MasterProduct::inactives()->get());
+    }
 }

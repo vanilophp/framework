@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2022-XX-YY
 
+- Added the `Product::inactives()`query builder scope
+
 ## 3.1.0
 ##### 2022-11-07
 
