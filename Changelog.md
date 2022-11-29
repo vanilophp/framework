@@ -11,6 +11,7 @@
 - Added the `is_master_product()` helper function (Foundation)
 - Added the `MasterProduct::actives()` and `inactives()` query builder scopes
 - Added the `Product::inactives()`query builder scope
+- Added an extended `MasterProduct` model (Foundation)
 - Changed checkout store resolution to happen via the Laravel DI instead of `new SpecificStoreClass()`
 - Changed both built-in checkout stores to save unknown properties as custom attributes on the `update()` method call
 - Fixed missing implementation parts of the checkout session store
