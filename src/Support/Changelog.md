@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2022-XX-YY
 
+- No-change version bump to match with the rest of the Vanilo Modules
+
 ## 3.1.0
 ##### 2022-11-07
 

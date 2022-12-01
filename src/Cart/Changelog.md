@@ -6,6 +6,7 @@
 ##### 2022-XX-YY
 
 - Added `Cart::fresh()` method to the Cart facade
+- Changed minimum Concord version requirement to v1.12
 
 ## 3.1.0
 ##### 2022-11-07

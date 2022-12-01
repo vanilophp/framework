@@ -14,6 +14,7 @@
 - Added an extended `MasterProduct` model (Foundation)
 - Changed checkout store resolution to happen via the Laravel DI instead of `new SpecificStoreClass()`
 - Changed both built-in checkout stores to save unknown properties as custom attributes on the `update()` method call
+- Changed minimum Concord version requirement to v1.12
 - Fixed missing implementation parts of the checkout session store
 
 ## 3.1.0
