@@ -14,10 +14,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Feature;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Establish;
 use Vanilo\Links\Query\Get;
 use Vanilo\Links\Tests\Dummies\Property;
+use Vanilo\Links\Tests\Dummies\TestLinkableMorphedProduct;
 use Vanilo\Links\Tests\Dummies\TestLinkableProduct;
 use Vanilo\Links\Tests\Dummies\TestProduct;
 use Vanilo\Links\Tests\TestCase;
@@ -100,6 +102,21 @@ class QueryEstablishTest extends TestCase
         $this->assertCount(2, $iphone12->links('series'));
         $this->assertEquals($iphone13->id, $iphone12->links('series')->first()->id);
         $this->assertEquals($iphone14->id, $iphone12->links('series')->last()->id);
+    }
+
+    /** @test */
+    public function morphed_models_can_be_linked_together()
+    {
+        Relation::morphMap(['lmproduct' => TestLinkableMorphedProduct::class]);
+
+        $prod1 = TestLinkableMorphedProduct::create(['name' => 'Product 1'])->fresh();
+        $prod2 = TestLinkableMorphedProduct::create(['name' => 'Product 2'])->fresh();
+        LinkType::create(['name' => 'Variant']);
+
+        Establish::a('variant')->link()->between($prod1)->and($prod2);
+
+        $this->assertCount(1, Get::the('variant')->links()->of($prod1));
+        $this->assertCount(1, Get::the('variant')->links()->of($prod2));
     }
 
     protected function setUpDatabase($app)

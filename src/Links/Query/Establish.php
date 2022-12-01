@@ -25,6 +25,7 @@ final class Establish
     use HasPrivateLinkTypeBasedConstructor;
     use FindsDesiredLinkGroups;
     use HasBaseModel;
+    use CachesMorphTypes;
 
     private string $wants = 'link';
 
@@ -61,7 +62,7 @@ final class Establish
             LinkGroupItemProxy::create([
                 'link_group_id' => $destinationGroup->id,
                 'linkable_id' => $this->baseModel->id,
-                'linkable_type' => $this->baseModel::class,
+                'linkable_type' => $this->morphTypeOf($this->baseModel::class),
             ]);
         }
 
@@ -69,7 +70,7 @@ final class Establish
             LinkGroupItemProxy::create([
                 'link_group_id' => $destinationGroup->id,
                 'linkable_id' => $model->id,
-                'linkable_type' => $model::class,
+                'linkable_type' => $this->morphTypeOf($model::class),
             ]);
         }
     }

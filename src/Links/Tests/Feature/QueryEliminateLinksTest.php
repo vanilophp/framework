@@ -14,10 +14,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Feature;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Eliminate;
 use Vanilo\Links\Query\Establish;
 use Vanilo\Links\Query\Get;
+use Vanilo\Links\Tests\Dummies\TestLinkableMorphedProduct;
 use Vanilo\Links\Tests\Dummies\TestProduct;
 use Vanilo\Links\Tests\TestCase;
 
@@ -83,6 +85,26 @@ class QueryEliminateLinksTest extends TestCase
         $this->assertCount(0, Get::the('variant')->groups()->of($product6));
         $this->assertCount(0, Get::the('variant')->groups()->of($product7));
         $this->assertCount(0, Get::the('variant')->groups()->of($product8));
+    }
+
+    /** @test */
+    public function it_can_remove_links_between_morphed_models()
+    {
+        Relation::morphMap(['lmproduct' => TestLinkableMorphedProduct::class]);
+
+        $service1 = TestLinkableMorphedProduct::create(['name' => 'Service 1'])->fresh();
+        $service2 = TestLinkableMorphedProduct::create(['name' => 'Service 2'])->fresh();
+        LinkType::create(['name' => 'Similar']);
+
+        Establish::a('similar')->link()->between($service1)->and($service2);
+
+        $this->assertCount(1, Get::the('similar')->links()->of($service1));
+        $this->assertCount(1, Get::the('similar')->links()->of($service2));
+
+        Eliminate::the('similar')->link()->between($service1)->and($service2);
+
+        $this->assertCount(0, Get::the('similar')->links()->of($service1));
+        $this->assertCount(0, Get::the('similar')->links()->of($service2));
     }
 
     // @todo implement it

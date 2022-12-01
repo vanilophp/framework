@@ -6,6 +6,7 @@
 ##### 2022-XX-YY
 
 - Changed minimum Concord version requirement to v1.12
+- Fixed establishing and eliminating links between models having morph aliases
 
 ## 3.1.0
 ##### 2022-11-07

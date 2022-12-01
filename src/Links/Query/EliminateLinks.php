@@ -23,6 +23,7 @@ final class EliminateLinks
 {
     use HasBaseModel;
     use FindsDesiredLinkGroups;
+    use CachesMorphTypes;
 
     public function __construct(
         private LinkType $type
@@ -38,7 +39,7 @@ final class EliminateLinks
                 ->items
                 ->filter(fn ($item) => $toRemove->contains(function ($modelToRemove) use ($item) {
                     return $modelToRemove->id == $item->linkable_id &&
-                        $modelToRemove::class === $item->linkable_type;
+                        $this->morphTypeOf($modelToRemove::class) === $item->linkable_type;
                 }));
             LinkGroupItemProxy::destroy($itemsToDelete->map->id);
         }
