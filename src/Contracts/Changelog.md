@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2022-XX-YY
+## 3.2.0
+##### 2022-12-08
 
 - No-change version bump to match with the rest of the Vanilo Modules
 

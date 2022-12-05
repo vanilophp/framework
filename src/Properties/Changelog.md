@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2022-XX-YY
+## 3.2.0
+##### 2022-12-08
 
 - Changed minimum Concord version requirement to v1.12
 

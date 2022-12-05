@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2022-XX-YY
+## 3.2.0
+##### 2022-12-08
 
 - Added forwarding/proxying of method calls and property getters from the Checkout manager to the underlying store
 - Changed checkout store resolution to happen via the Laravel DI instead of `new SpecificStoreClass()`
