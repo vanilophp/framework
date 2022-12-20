@@ -109,49 +109,49 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->price : $value,
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->price : floatval($value),
         );
     }
 
     protected function originalPrice(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->original_price : $value,
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->original_price : floatval($value),
         );
     }
 
     protected function excerpt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->excerpt : $value,
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->excerpt : floatval($value),
         );
     }
 
     protected function height(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->height : $value,
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->height : floatval($value),
         );
     }
 
     protected function width(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->width : $value,
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->width : floatval($value),
         );
     }
 
     protected function length(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->length : $value,
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->length : floatval($value),
         );
     }
 
     protected function weight(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->weight : $value,
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->weight : floatval($value),
         );
     }
 }

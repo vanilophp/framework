@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 202X-YY-ZZ
+
+- Fixed float conversion of master product variant fields (price, original price and dimensions)
+
 ## 3.2.0
 ##### 2022-12-08
 
