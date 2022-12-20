@@ -52,6 +52,7 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
         'height' => 'float',
         'width' => 'float',
         'length' => 'float',
+        'stock' => 'float',
     ];
 
     public function masterProduct(): BelongsTo
@@ -123,7 +124,7 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
     protected function excerpt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->excerpt : floatval($value),
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->excerpt : $value,
         );
     }
 

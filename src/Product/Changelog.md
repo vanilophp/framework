@@ -2,10 +2,15 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 202X-YY-ZZ
+
+- Changed the stock field to cast to be cast to float
+
 ## 3.2.0
 ##### 2022-12-08
 
-- Added the `Product::inactives()`query builder scope
+- Added the `Product::inactives()` query builder scope
 - Changed minimum Concord version requirement to v1.12
 
 ## 3.1.0

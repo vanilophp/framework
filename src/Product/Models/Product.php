@@ -63,6 +63,7 @@ class Product extends Model implements ProductContract
         'height' => 'float',
         'width' => 'float',
         'length' => 'float',
+        'stock' => 'float',
     ];
 
     protected $enums = [
