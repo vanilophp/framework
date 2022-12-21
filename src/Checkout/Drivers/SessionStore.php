@@ -22,7 +22,6 @@ use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\ComputesShipToName;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
-use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
