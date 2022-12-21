@@ -17,6 +17,7 @@ namespace Vanilo\Checkout\Drivers;
 use Illuminate\Support\Arr;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutStore;
+use Vanilo\Checkout\Traits\ComputesShipToName;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCart;
@@ -31,6 +32,7 @@ use Vanilo\Contracts\Billpayer;
  */
 class RequestStore implements CheckoutStore
 {
+    use ComputesShipToName;
     use HasCheckoutState;
     use HasCart;
     use EmulatesFillAttributes;

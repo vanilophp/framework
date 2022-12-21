@@ -34,4 +34,13 @@ trait EmulatesFillAttributes
             }
         }
     }
+
+    private function fill($target, array $attributes)
+    {
+        if (method_exists($target, 'fill')) {
+            $target->fill($attributes);
+        } else {
+            $this->fillAttributes($target, $attributes);
+        }
+    }
 }

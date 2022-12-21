@@ -20,6 +20,7 @@ use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
+use Vanilo\Checkout\Traits\ComputesShipToName;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCart;
@@ -30,7 +31,7 @@ class SessionStore implements CheckoutStore
 {
     use HasCart;
     use EmulatesFillAttributes;
-    use FillsCommonCheckoutAttributes;
+    use ComputesShipToName;
 
     protected const DEFAULT_PREFIX = 'vanilo_checkout__';
 
@@ -127,6 +128,22 @@ class SessionStore implements CheckoutStore
     public function total()
     {
         return $this->cart->total();
+    }
+
+    protected function updateBillpayer($data)
+    {
+        $billpayer = $this->getBillpayer();
+        $this->fill($billpayer, Arr::except($data, 'address'));
+        $this->fill($billpayer->address, $data['address']);
+
+        $this->setBillpayer($billpayer);
+    }
+
+    protected function updateShippingAddress($data)
+    {
+        $shippingAddress = $this->getShippingAddress();
+        $this->fill($shippingAddress, $data);
+        $this->setShippingAddress($shippingAddress);
     }
 
     protected function storeData(string $key, mixed $value): void

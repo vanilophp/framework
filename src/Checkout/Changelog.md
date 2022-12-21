@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 202X-YY-ZZ
+
+- Fixed the session checkout store persistence error
+
 ## 3.2.0
 ##### 2022-12-08
 

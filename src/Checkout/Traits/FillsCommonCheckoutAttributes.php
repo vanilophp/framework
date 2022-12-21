@@ -18,6 +18,8 @@ use Illuminate\Support\Arr;
 
 trait FillsCommonCheckoutAttributes
 {
+    use EmulatesFillAttributes;
+
     /**
      * @inheritdoc
      */
@@ -33,27 +35,5 @@ trait FillsCommonCheckoutAttributes
     protected function updateShippingAddress($data)
     {
         $this->fill($this->shippingAddress, $data);
-    }
-
-    private function fill($target, array $attributes)
-    {
-        if (method_exists($target, 'fill')) {
-            $target->fill($attributes);
-        } else {
-            $this->fillAttributes($target, $attributes);
-        }
-    }
-
-    private function getShipToName()
-    {
-        if ($this->billpayer->isOrganization()) {
-            return sprintf(
-                '%s (%s)',
-                $this->billpayer->getCompanyName(),
-                $this->billpayer->getFullName()
-            );
-        }
-
-        return $this->billpayer->getName();
     }
 }
