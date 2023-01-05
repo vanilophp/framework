@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 202X-YY-ZZ
+## 3.3.0
+##### 2023-01-05
 
 - Fixed the session checkout store persistence error
 - Added final PHP 8.2 support

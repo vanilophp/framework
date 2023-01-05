@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 202X-YY-ZZ
+## 3.3.0
+##### 2023-01-05
 
 - No-change version bump to match with the rest of the Vanilo Modules
 

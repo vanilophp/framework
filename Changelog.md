@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 202X-YY-ZZ
+## 3.3.0
+##### 2023-01-05
 
 - Fixed the session checkout store persistence error
 - Fixed float conversion of master product variant fields (price, original price and dimensions)

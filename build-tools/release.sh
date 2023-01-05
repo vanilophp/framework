@@ -6,7 +6,7 @@
 set -e
 
 echo "Make sure to run split.sh before doing this"
-exit 0
+#exit 0
 # uncomment the line above once it's done
 
 # Make sure the release tag is provided.

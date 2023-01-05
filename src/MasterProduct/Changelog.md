@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 202X-YY-ZZ
+## 3.3.0
+##### 2023-01-05
 
 - Fixed float conversion of master product variant fields (price, original price and dimensions)
 - Changed the variant's stock field to be cast to float
