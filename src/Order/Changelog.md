@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 202X-YY-ZZ
+
+- Added final PHP 8.2 support
+
 ## 3.2.0
 ##### 2022-12-08
 

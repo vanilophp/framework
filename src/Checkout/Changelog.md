@@ -6,6 +6,7 @@
 ##### 202X-YY-ZZ
 
 - Fixed the session checkout store persistence error
+- Added final PHP 8.2 support
 
 ## 3.2.0
 ##### 2022-12-08

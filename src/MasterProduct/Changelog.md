@@ -6,7 +6,8 @@
 ##### 202X-YY-ZZ
 
 - Fixed float conversion of master product variant fields (price, original price and dimensions)
-- Changed the variant's stock field to cast to be cast to float
+- Changed the variant's stock field to be cast to float
+- Added final PHP 8.2 support
 
 ## 3.2.0
 ##### 2022-12-08

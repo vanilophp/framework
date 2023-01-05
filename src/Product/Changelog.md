@@ -5,7 +5,8 @@
 ## Unreleased
 ##### 202X-YY-ZZ
 
-- Changed the stock field to cast to be cast to float
+- Changed the stock field to be cast to float
+- Added final PHP 8.2 support
 
 ## 3.2.0
 ##### 2022-12-08

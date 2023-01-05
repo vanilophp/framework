@@ -5,8 +5,10 @@
 ## Unreleased
 ##### 202X-YY-ZZ
 
+- Fixed the session checkout store persistence error
 - Fixed float conversion of master product variant fields (price, original price and dimensions)
-- Removed the Buyable interface/trait from `Foundation\MasterProduct` - it's conceptually wrong;
+- Changed the product stock field to be cast to float
+- Removed the Buyable interface/trait from `Foundation\MasterProduct` - it was conceptually wrong;
 - Added `Buyable` to `Foundation\MasterProductVariant`
 
 ## 3.2.0
