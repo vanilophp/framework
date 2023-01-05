@@ -1,6 +1,6 @@
 # Vanilo Category Module
 
-[![Tests](https://img.shields.io/github/workflow/status/vanilophp/category/tests/master?style=flat-square)](https://github.com/vanilophp/category/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/category/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/category/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/category.svg?style=flat-square)](https://packagist.org/packages/vanilo/category)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/category.svg?style=flat-square)](https://packagist.org/packages/vanilo/category)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)

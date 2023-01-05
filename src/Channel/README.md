@@ -1,6 +1,6 @@
 # Vanilo Channel Module
 
-[![Tests](https://img.shields.io/github/workflow/status/vanilophp/channel/tests/master?style=flat-square)](https://github.com/vanilophp/channel/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/channel/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/channel/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/channel.svg?style=flat-square)](https://packagist.org/packages/vanilo/channel)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/channel.svg?style=flat-square)](https://packagist.org/packages/vanilo/channel)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)

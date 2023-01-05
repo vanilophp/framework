@@ -1,6 +1,6 @@
 # Vanilo Shipment Module
 
-[![Tests](https://img.shields.io/github/workflow/status/vanilophp/shipment/tests/master?style=flat-square)](https://github.com/vanilophp/shipment/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/shipment/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/shipment/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/shipment.svg?style=flat-square)](https://packagist.org/packages/vanilo/shipment)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/shipment.svg?style=flat-square)](https://packagist.org/packages/vanilo/shipment)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)

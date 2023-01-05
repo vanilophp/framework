@@ -1,6 +1,6 @@
 # Vanilo Master Product Module
 
-[![Tests](https://img.shields.io/github/workflow/status/vanilophp/master-product/tests/master?style=flat-square)](https://github.com/vanilophp/master-product/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/master-product/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/master-product/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/master-product.svg?style=flat-square)](https://packagist.org/packages/vanilo/master-product)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/master-product.svg?style=flat-square)](https://packagist.org/packages/vanilo/master-product)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)

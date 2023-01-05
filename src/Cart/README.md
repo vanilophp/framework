@@ -1,6 +1,6 @@
 # Vanilo Cart Module
 
-[![Tests](https://img.shields.io/github/workflow/status/vanilophp/cart/tests/master?style=flat-square)](https://github.com/vanilophp/cart/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/cart/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/cart/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/cart.svg?style=flat-square)](https://packagist.org/packages/vanilo/cart)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)

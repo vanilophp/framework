@@ -1,6 +1,6 @@
 # Vanilo Links Module
 
-[![Tests](https://img.shields.io/github/workflow/status/vanilophp/links/tests/master?style=flat-square)](https://github.com/vanilophp/links/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/links/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/links/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/links.svg?style=flat-square)](https://packagist.org/packages/vanilo/links)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/links.svg?style=flat-square)](https://packagist.org/packages/vanilo/links)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
