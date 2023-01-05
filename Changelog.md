@@ -6,6 +6,8 @@
 ##### 202X-YY-ZZ
 
 - Fixed float conversion of master product variant fields (price, original price and dimensions)
+- Removed the Buyable interface/trait from `Foundation\MasterProduct` - it's conceptually wrong;
+- Added `Buyable` to `Foundation\MasterProductVariant`
 
 ## 3.2.0
 ##### 2022-12-08

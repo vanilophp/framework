@@ -14,10 +14,26 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Models;
 
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Vanilo\Contracts\Buyable;
+use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\MasterProduct\Models\MasterProductVariant as BaseMasterProductVariant;
 use Vanilo\Properties\Traits\HasPropertyValues;
+use Vanilo\Support\Traits\BuyableModel;
+use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 
-class MasterProductVariant extends BaseMasterProductVariant
+class MasterProductVariant extends BaseMasterProductVariant implements Buyable, HasMedia
 {
+    use BuyableModel;
     use HasPropertyValues;
+    use HasImagesFromMediaLibrary;
+    use InteractsWithMedia;
+    use LoadsMediaConversionsFromConfig;
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->loadConversionsFromVaniloConfig();
+    }
 }
