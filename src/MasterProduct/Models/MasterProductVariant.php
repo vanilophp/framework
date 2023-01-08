@@ -23,6 +23,7 @@ use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantC
 /**
  *
  * @property int $id
+ * @property \Vanilo\MasterProduct\Contracts\MasterProduct $masterProduct
  * @property string $name
  * @property string $sku
  * @property float $stock
