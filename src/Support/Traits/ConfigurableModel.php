@@ -22,16 +22,13 @@ trait ConfigurableModel
 
     public function configuration(): Configuration
     {
-
     }
 
     public function hasConfiguration(): bool
     {
-
     }
 
     public function doesntHaveConfiguration()
     {
-
     }
 }
