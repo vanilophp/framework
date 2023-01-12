@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the missing `ShippingMethod` interface and proxy
 - Added `vanilo/support` composer dependency
 - Added `Configurable` interface to the `Carrier`, `Shipment` and `ShippingMethod` models
 - Changed the `Carrier`, `Shipment` and `ShippingMethod` models to use the `ConfigurableModel` trait

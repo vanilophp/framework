@@ -16,6 +16,7 @@ namespace Vanilo\Shipment\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
 use Vanilo\Shipment\Traits\BelongsToCarrier;
 use Vanilo\Support\Traits\ConfigurableModel;
 
@@ -31,7 +32,7 @@ use Vanilo\Support\Traits\ConfigurableModel;
  *
  * @method static Carrier create(array $attributes)
  */
-class ShippingMethod extends Model
+class ShippingMethod extends Model implements ShippingMethodContract
 {
     use BelongsToCarrier;
     use ConfigurableModel;
