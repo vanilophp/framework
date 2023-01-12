@@ -138,4 +138,12 @@ class CartItemsAddTest extends TestCase
             Cart::addItem($this->product1)
         );
     }
+
+    /** @test */
+    public function cart_items_can_be_assigned_a_configuration_array()
+    {
+        $item = Cart::addItem($this->product1, 1, ['attributes' => ['configuration' => ['custom_message' => 'Hey Hello']]]);
+
+        $this->assertEquals('Hey Hello', $item->configuration['custom_message']);
+    }
 }

@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
  * @property Buyable $product
@@ -25,7 +26,13 @@ use Vanilo\Contracts\Buyable;
  */
 class CartItem extends Model implements CartItemContract
 {
+    use ConfigurableModel;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'configuration' => 'json',
+    ];
 
     public function product()
     {
