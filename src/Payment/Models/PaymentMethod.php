@@ -18,10 +18,12 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Vanilo\Contracts\Configurable;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Payment\Gateways\NullGateway;
 use Vanilo\Payment\PaymentGateways;
+use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
  * @property int $id
@@ -36,24 +38,15 @@ use Vanilo\Payment\PaymentGateways;
  * @property null|Carbon $deleted_at
  * @method PaymentMethod create(array $attributes)
  */
-class PaymentMethod extends Model implements PaymentMethodContract
+class PaymentMethod extends Model implements PaymentMethodContract, Configurable
 {
+    use ConfigurableModel;
+
     protected $guarded = ['id', 'transaction_count', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
         'configuration' => 'json'
     ];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($model) {
-            if (null === $model->configuration) {
-                $model->configuration = [];
-            }
-        });
-    }
 
     public function getTimeout(): int
     {

@@ -20,9 +20,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Configurable;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShipmentStatus;
 use Vanilo\Shipment\Traits\BelongsToCarrier;
+use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
  * @property int               $id
@@ -44,9 +46,10 @@ use Vanilo\Shipment\Traits\BelongsToCarrier;
  *
  * @method static Shipment create(array $attributes)
  */
-class Shipment extends Model implements ShipmentContract
+class Shipment extends Model implements ShipmentContract, Configurable
 {
     use CastsEnums;
+    use ConfigurableModel;
     use BelongsToCarrier;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
@@ -63,17 +66,6 @@ class Shipment extends Model implements ShipmentContract
         'width' => 'float',
         'length' => 'float',
     ];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($model) {
-            if (null === $model->configuration) {
-                $model->configuration = [];
-            }
-        });
-    }
 
     public function status(): ShipmentStatus
     {

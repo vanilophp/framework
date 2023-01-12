@@ -16,7 +16,9 @@ namespace Vanilo\Shipment\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Vanilo\Contracts\Configurable;
 use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
+use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
  * @property int               $id
@@ -29,25 +31,16 @@ use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
  *
  * @method static Carrier create(array $attributes)
  */
-class Carrier extends Model implements CarrierContract
+class Carrier extends Model implements CarrierContract, Configurable
 {
+    use ConfigurableModel;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
         'configuration' => 'json',
         'is_active' => 'bool',
     ];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($model) {
-            if (null === $model->configuration) {
-                $model->configuration = [];
-            }
-        });
-    }
 
     public function scopeActives(Builder $query): Builder
     {

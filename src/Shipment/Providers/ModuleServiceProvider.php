@@ -18,11 +18,13 @@ use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Shipment\Models\Carrier;
 use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Models\ShipmentStatus;
+use Vanilo\Shipment\Models\ShippingMethod;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
         Shipment::class,
+        ShippingMethod::class,
         Carrier::class,
     ];
 

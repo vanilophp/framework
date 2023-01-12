@@ -2,6 +2,12 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added `Configurable` interface to the `PaymentMethod` model
+- Changed the `PaymentMethod` model to use the `ConfigurableModel` trait
+
 ## 3.3.0
 ##### 2023-01-05
 
