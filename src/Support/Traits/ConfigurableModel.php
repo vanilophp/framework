@@ -14,21 +14,31 @@ declare(strict_types=1);
 
 namespace Vanilo\Support\Traits;
 
-use Vanilo\Contracts\Configuration;
-
 trait ConfigurableModel
 {
-    protected string $configurationFieldName = 'configuration';
+    protected static string $configurationFieldName = 'configuration';
 
-    public function configuration(): Configuration
+    public static function bootConfigurableModel()
     {
+        static::saving(function ($model) {
+            if (null === $model->{static::$configurationFieldName}) {
+                $model->{static::$configurationFieldName} = [];
+            }
+        });
+    }
+
+    public function configuration(): ?array
+    {
+        return $this->{static::$configurationFieldName};
     }
 
     public function hasConfiguration(): bool
     {
+        return null !== $this->{static::$configurationFieldName};
     }
 
-    public function doesntHaveConfiguration()
+    public function doesntHaveConfiguration(): bool
     {
+        return !$this->hasConfiguration();
     }
 }

@@ -16,9 +16,9 @@ namespace Vanilo\Contracts;
 
 interface Configurable
 {
-    public function configuration(): Configuration;
+    public function configuration(): ?array;
 
     public function hasConfiguration(): bool;
 
-    public function doesntHaveConfiguration();
+    public function doesntHaveConfiguration(): bool;
 }
