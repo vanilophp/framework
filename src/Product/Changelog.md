@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `Product::findBySku()` method
+
 ## 3.3.0
 ##### 2023-01-05
 

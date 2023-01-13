@@ -140,4 +140,24 @@ class BaseProductAttributesTest extends TestCase
         $this->assertIsInt($product->id);
         $this->assertIsInt($product->fresh()->id);
     }
+
+    /** @test */
+    public function product_can_be_retrieved_by_sku()
+    {
+        ProductProxy::create([
+            'name' => 'Dell XPS 13 Developer Edition',
+            'sku' => 'DLL-XPS13DE'
+        ]);
+
+        $product = Product::findBySku('DLL-XPS13DE');
+        $this->assertInstanceOf(Product::class, $product);
+        $this->assertEquals('Dell XPS 13 Developer Edition', $product->name);
+        $this->assertEquals('DLL-XPS13DE', $product->sku);
+    }
+
+    /** @test */
+    public function find_by_sku_returns_null_if_no_product_was_found_by_the_requested_sku()
+    {
+        $this->assertNull(Product::findBySku('Oh man such SKU could not exist in the Wild. Nor in a lab'));
+    }
 }

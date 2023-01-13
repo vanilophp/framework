@@ -70,6 +70,11 @@ class Product extends Model implements ProductContract
         'state' => 'ProductStateProxy@enumClass'
     ];
 
+    public static function findBySku(string $sku): ?ProductContract
+    {
+        return static::where('sku', $sku)->first();
+    }
+
     public function sluggable(): array
     {
         return [
