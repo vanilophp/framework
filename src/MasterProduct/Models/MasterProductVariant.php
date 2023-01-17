@@ -56,6 +56,11 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
         'stock' => 'float',
     ];
 
+    public static function findBySku(string $sku): ?MasterProductVariantContract
+    {
+        return static::where('sku', $sku)->first();
+    }
+
     public function masterProduct(): BelongsTo
     {
         return $this->belongsTo(MasterProductProxy::modelClass(), 'master_product_id', 'id');

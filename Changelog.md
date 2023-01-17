@@ -11,6 +11,7 @@
 - Removed the Buyable interface/trait from `Foundation\MasterProduct` - it was conceptually wrong;
 - Added `Buyable` to `Foundation\MasterProductVariant`
 - Added the `Product::findBySku()` method to the base product class
+- Added the `MasterProdcutVariant::findBySku()` method
 
 ## 3.2.0
 ##### 2022-12-08
