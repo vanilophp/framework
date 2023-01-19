@@ -24,8 +24,8 @@
         "konekt/laravel-migration-compatibility": "^1.5",
         "konekt/user": "^2.4",
         "laravel/framework": "^9.2",
-        "vanilo/contracts": "^3.0",
-        "vanilo/support": "^3.0"
+        "vanilo/contracts": "^3.4",
+        "vanilo/support": "^3.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
