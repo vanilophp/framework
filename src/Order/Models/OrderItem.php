@@ -14,12 +14,34 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Vanilo\Contracts\Configurable;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
+use Vanilo\Support\Traits\ConfigurableModel;
 
-class OrderItem extends Model implements OrderItemContract
+/**
+ * @property-read int $id
+ * @property int $order_id
+ * @property string $product_type
+ * @property int $product_id
+ * @property string $name
+ * @property int $quantity
+ * @property float $price
+ * @property ?array $configuration
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @method static OrderItem create(array $attributes = [])
+ */
+class OrderItem extends Model implements OrderItemContract, Configurable
 {
+    use ConfigurableModel;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'configuration' => 'json',
+    ];
 
     public function order()
     {

@@ -67,4 +67,25 @@ class OrderItemProductTest extends TestCase
         $this->assertInstanceOf(Product::class, $product);
         $this->assertEquals($this->theMoonRing->getName(), $product->getName());
     }
+
+    /** @test */
+    public function order_items_can_be_configured()
+    {
+        $order = Order::create([
+            'number' => 'WYHP7'
+        ]);
+
+        $order->items()->create([
+            'product_type' => 'product',
+            'product_id' => $this->theMoonRing->getId(),
+            'quantity' => 1,
+            'configuration' => ['hello' => 'dolly buster'],
+            'name' => $this->theMoonRing->getName(),
+            'price' => $this->theMoonRing->getPrice()
+        ]);
+
+        $item = $order->items->first();
+
+        $this->assertEquals('dolly buster', $item->configuration['hello']);
+    }
 }

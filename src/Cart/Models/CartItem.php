@@ -18,13 +18,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Contracts\Configurable;
 use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
  * @property Buyable $product
  * @property float   $total
  */
-class CartItem extends Model implements CartItemContract
+class CartItem extends Model implements CartItemContract, Configurable
 {
     use ConfigurableModel;
 
