@@ -16,6 +16,7 @@ namespace Vanilo\Foundation\Factories;
 
 use Vanilo\Checkout\Contracts\Checkout;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\Configurable;
 use Vanilo\Order\Factories\OrderFactory as BaseOrderFactory;
 
 class OrderFactory extends BaseOrderFactory
@@ -37,7 +38,8 @@ class OrderFactory extends BaseOrderFactory
         return $cart->getItems()->map(function ($item) {
             return [
                 'product' => $item->getBuyable(),
-                'quantity' => $item->getQuantity()
+                'quantity' => $item->getQuantity(),
+                'configuration' => $item->getBuyable() instanceof Configurable ? $item->configuration() : null,
             ];
         })->all();
     }

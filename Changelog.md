@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added processing of `configuration` to the order factory, if the checkout item is a configurable
+
 ## 3.3.0
 ##### 2023-01-05
 
