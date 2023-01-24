@@ -112,7 +112,7 @@ class SessionStore implements CheckoutStore
 
         if (Arr::get($data, 'ship_to_billing_address')) {
             $shippingAddress = $data['billpayer']['address'];
-            $shippingAddress['name'] = $this->getShipToName($this->billpayer);
+            $shippingAddress['name'] = $this->getShipToName($this->getBillpayer());
         } else {
             $shippingAddress = $data['shipping_address'] ?? ($data['shippingAddress'] ?? []);
         }
