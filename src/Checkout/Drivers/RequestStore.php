@@ -75,7 +75,7 @@ class RequestStore implements CheckoutStore
 
         if (Arr::get($data, 'ship_to_billing_address')) {
             $shippingAddress = $data['billpayer']['address'];
-            $shippingAddress['name'] = $this->getShipToName();
+            $shippingAddress['name'] = $this->getShipToName($this->billpayer);
         } else {
             $shippingAddress = $data['shipping_address'] ?? ($data['shippingAddress'] ?? []);
         }
