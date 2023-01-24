@@ -5,7 +5,19 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the `MasterProdcutVariant::findBySku()` method
+- Added the `Product::findBySku()` method
+- Added the `ConfigurableModel` trait
 - Added processing of `configuration` to the order factory, if the checkout item is a configurable
+- Added `Configurable` to the `CartItem` model (incl. implementing the interface)
+- Added `Configurable` to the `OrderItem` model (incl. implementing the interface)
+- Added the `Configurable` and the `Configuration` interfaces
+- Added `Configurable` interface to the `PaymentMethod` model
+- Added the missing `ShippingMethod` interface and proxy
+- Added `Configurable` interface to the `Carrier`, `Shipment` and `ShippingMethod` models
+- Changed the `Carrier`, `Shipment` and `ShippingMethod` models to use the `ConfigurableModel` trait
+- Changed the `PaymentMethod` model to use the `ConfigurableModel` trait
+- Fixed missing required argument from checkout drivers using the `update()` method
 
 ## 3.3.0
 ##### 2023-01-05
