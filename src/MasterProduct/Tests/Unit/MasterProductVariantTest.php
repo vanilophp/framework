@@ -52,7 +52,7 @@ class MasterProductVariantTest extends TestCase
     }
 
     /** @test */
-    public function a_variant_does_not_have_a_description()
+    public function a_variant_has_a_description()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -60,14 +60,14 @@ class MasterProductVariantTest extends TestCase
         $variant = MasterProductVariant::create([
             'master_product_id' => $master->id,
             'sku' => 'B079M6TMTJ0',
-            'description' => 'Variants do not have a description'
+            'description' => 'Variants have a description',
         ]);
 
-        $this->assertNull($variant->description);
+        $this->assertEquals('Variants have a description', $variant->description);
     }
 
     /** @test */
-    public function a_variant_does_not_have_a_state()
+    public function a_variant_also_has_a_state()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -78,7 +78,7 @@ class MasterProductVariantTest extends TestCase
             'state' => ProductState::ACTIVE,
         ]);
 
-        $this->assertNull($variant->state);
+        $this->assertEquals(ProductState::ACTIVE(), $variant->state);
     }
 
     /** @test */

@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `description` and `state` fields to the master product variants table
+
 ## 3.4.0
 ##### 2023-01-25
 
