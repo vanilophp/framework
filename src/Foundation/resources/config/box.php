@@ -18,6 +18,7 @@ return [
         Vanilo\Payment\Providers\ModuleServiceProvider::class => [],
         Vanilo\Links\Providers\ModuleServiceProvider::class => [],
         Vanilo\MasterProduct\Providers\ModuleServiceProvider::class => [],
+        Vanilo\Shipment\Providers\ModuleServiceProvider::class => [],
     ],
     'event_listeners' => true,
     'image' => [

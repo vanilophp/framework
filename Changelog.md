@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed the missing shipment module from foundation module config
+
 ## 3.4.0
 ##### 2023-01-25
 
