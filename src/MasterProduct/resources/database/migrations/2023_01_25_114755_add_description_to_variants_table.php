@@ -19,6 +19,9 @@ return new class () extends Migration {
     {
         Schema::table('master_product_variants', function (Blueprint $table) {
             $table->dropColumn('description');
+        });
+
+        Schema::table('master_product_variants', function (Blueprint $table) {
             $table->dropColumn('state');
         });
     }
