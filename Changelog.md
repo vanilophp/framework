@@ -7,6 +7,11 @@
 
 - Added the `description` and `state` fields to the master product variants table
 
+## 3.4.1
+##### 2023-01-25
+
+- Fixed the missing shipment module from foundation module config
+
 ## 3.4.0
 ##### 2023-01-25
 
