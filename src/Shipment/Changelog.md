@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2023-XX-YY
+## 3.4.0
+##### 2023-01-25
 
 - Added the missing `ShippingMethod` interface and proxy
 - Added `vanilo/support` composer dependency
