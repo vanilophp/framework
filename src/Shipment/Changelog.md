@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed the `Carrier::name()` method to overcome accessor infinite loop
+
 ## 3.4.0
 ##### 2023-01-25
 

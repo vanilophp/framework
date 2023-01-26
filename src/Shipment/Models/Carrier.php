@@ -54,6 +54,6 @@ class Carrier extends Model implements CarrierContract, Configurable
 
     public function name(): string
     {
-        return $this->name;
+        return $this->getRawOriginal('name') ?? '';
     }
 }

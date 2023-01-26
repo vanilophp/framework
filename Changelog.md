@@ -6,6 +6,7 @@
 ##### 2023-XX-YY
 
 - Added the `description` and `state` fields to the master product variants table
+- Fixed the `Carrier::name()` method to overcome accessor infinite loop
 
 ## 3.4.1
 ##### 2023-01-25

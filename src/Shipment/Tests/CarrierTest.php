@@ -29,6 +29,22 @@ class CarrierTest extends TestCase
     }
 
     /** @test */
+    public function the_name_field_is_accessible()
+    {
+        $dhl = Carrier::create(['name' => 'DHL Netherlands']);
+
+        $this->assertEquals('DHL Netherlands', $dhl->name);
+    }
+
+    /** @test */
+    public function the_name_method_returns_a_string_even_if_the_underlying_field_is_null()
+    {
+        $dhl = new Carrier();
+
+        $this->assertEquals('', $dhl->name());
+    }
+
+    /** @test */
     public function is_active_is_true_by_default()
     {
         $budbee = Carrier::create(['name' => 'Budbee'])->fresh();
