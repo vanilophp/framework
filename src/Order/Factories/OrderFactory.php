@@ -183,7 +183,7 @@ class OrderFactory implements OrderFactoryContract
             );
         }
 
-        $type = is_null($type) ? AddressTypeProxy::defaultValue() : $type;
+        $type = is_null($type) ? AddressTypeProxy::defaultValue() : $type->value();
         $address['type'] = $type;
         $address['name'] = empty(Arr::get($address, 'name')) ? '-' : $address['name'];
 

@@ -7,6 +7,7 @@
 
 - Added the `description` and `state` fields to the master product variants table
 - Fixed the `Carrier::name()` method to overcome accessor infinite loop
+- Fixed the address creation with order factory when passing an explicit address type
 
 ## 3.4.1
 ##### 2023-01-25

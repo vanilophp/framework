@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed the address creation with order factory when passing an explicit address type
+
 ## 3.4.0
 ##### 2023-01-25
 
