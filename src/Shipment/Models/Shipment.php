@@ -29,6 +29,7 @@ use Vanilo\Support\Traits\ConfigurableModel;
 /**
  * @property int               $id
  * @property string|null       $tracking_number
+ * @property string|null       $reference_number
  * @property int               $address_id
  * @property int|null          $carrier_id
  * @property bool              $is_trackable

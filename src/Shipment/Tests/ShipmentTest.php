@@ -153,6 +153,28 @@ class ShipmentTest extends TestCase
         $this->assertEquals('SEUR', $shipment->getCarrier()->name());
     }
 
+    /** @test */
+    public function it_can_have_a_reference_number()
+    {
+        $shipment = Shipment::create([
+            'address_id' => $this->createAddress()->id,
+            'reference_number' => 'S799873',
+        ])->fresh();
+
+        $this->assertEquals('S799873', $shipment->reference_number);
+    }
+
+    /** @test */
+    public function it_can_have_a_tracking_number()
+    {
+        $shipment = Shipment::create([
+            'address_id' => $this->createAddress()->id,
+            'tracking_number' => '44832801',
+        ])->fresh();
+
+        $this->assertEquals('44832801', $shipment->tracking_number);
+    }
+
     private function createAddress(): Address
     {
         return Address::create([

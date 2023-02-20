@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the `reference_number` field to the shipments model
 - Fixed the `Carrier::name()` method to overcome accessor infinite loop
 
 ## 3.4.0
