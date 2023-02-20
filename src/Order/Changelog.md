@@ -6,6 +6,7 @@
 ##### 2023-XX-YY
 
 - Fixed the address creation with order factory when passing an explicit address type
+- Changed the random number algo in `TimeHash` generator from `mt_rand` to `random_int` for a decreased collision probability
 
 ## 3.4.0
 ##### 2023-01-25

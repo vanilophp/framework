@@ -8,6 +8,7 @@
 - Added the `description` and `state` fields to the master product variants table
 - Added the Address comparison utility
 - Added the `reference_number` field to the shipments model
+- Changed the random number algo in `TimeHash` generator from `mt_rand` to `random_int` for a decreased collision probability
 - Fixed the `Carrier::name()` method to overcome accessor infinite loop
 - Fixed the address creation with order factory when passing an explicit address type
 
