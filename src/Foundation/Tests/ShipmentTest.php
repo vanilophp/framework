@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Support\Str;
+use Konekt\Address\Models\Country;
 use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\Shipment;
@@ -22,10 +23,20 @@ use Vanilo\Order\Models\OrderStatus;
 
 class ShipmentTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Country::firstOrCreate(
+            ['id' => 'CA'],
+            ['name' => 'Canada', 'phonecode' => 1, 'is_eu_member' => false],
+        );
+    }
+
     /** @test */
     public function a_shipment_can_be_added_to_an_order()
     {
-        $address = factory(Address::class)->create();
+        $address = factory(Address::class)->create(['country_id' => 'CA']);
         $order = Order::create([
             'number' => Str::uuid()->getHex()->toString(),
             'status' => OrderStatus::defaultValue(),
@@ -42,7 +53,7 @@ class ShipmentTest extends TestCase
     /** @test */
     public function multiple_shipments_can_be_added_to_an_order()
     {
-        $address = factory(Address::class)->create();
+        $address = factory(Address::class)->create(['country_id' => 'CA']);
         $order = Order::create([
             'shipping_address_id' => $address->id,
             'number' => Str::uuid()->getHex()->toString(),
@@ -58,9 +69,9 @@ class ShipmentTest extends TestCase
     }
 
     /** @test */
-    public function one_shipment_can_belong_to_multiple_shippables()
+    public function one_shipment_can_belong_to_multiple_orders()
     {
-        $address = factory(Address::class)->create();
+        $address = factory(Address::class)->create(['country_id' => 'CA']);
         $order1 = Order::create(['shipping_address_id' => $address->id, 'number' => Str::uuid()->getHex()->toString()]);
         $order2 = Order::create(['shipping_address_id' => $address->id, 'number' => Str::uuid()->getHex()->toString()]);
         $shipment = Shipment::create(['address_id' => $address->id]);
