@@ -54,7 +54,6 @@ class FulfillmentStatus extends Enum implements FulfillmentStatusContract
      */
     public const ON_HOLD = 'on_hold';
 
-
     /** The item has been picked, processed, and packaged, and is ready for delivery.
      *  It needs a pickup by the delivery personnel
      */
