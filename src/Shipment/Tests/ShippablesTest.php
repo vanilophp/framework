@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Tests;
 
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Tests\Dummies\Address;
 use Vanilo\Shipment\Tests\Dummies\ShippableDummyOrder;
