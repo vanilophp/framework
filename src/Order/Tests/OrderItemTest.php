@@ -94,7 +94,7 @@ class OrderItemTest extends TestCase
     /** @test */
     public function an_order_item_has_a_default_fullfillment_state()
     {
-        $order = Order::create(['number' => Str::uuid()->toString()]);
+        $order = Order::create(['number' => Str::uuid()->getHex()->toString()]);
 
         $order->items()->create([
             'product_type' => 'product',
