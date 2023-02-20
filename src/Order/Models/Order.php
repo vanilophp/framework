@@ -43,7 +43,7 @@ use Vanilo\Order\Contracts\OrderStatus;
  * @property Carbon $updated_at
  * @property null|Carbon $deleted_at
  * @property OrderItem[]|Collection $items
- * @method static Order create(array $attributes = [])
+ * @method static static create(array $attributes = [])
  * @method static Builder open()
  */
 class Order extends Model implements OrderContract

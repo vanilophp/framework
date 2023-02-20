@@ -15,18 +15,24 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Vanilo\Channel\Models\Channel;
 use Vanilo\Channel\Models\ChannelProxy;
 use Vanilo\Contracts\Payable;
 use Vanilo\Order\Models\Order as BaseOrder;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Models\PaymentProxy;
+use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
+use Vanilo\Shipment\Models\ShipmentProxy;
 
 /**
  * @property null|Payment $currentPayment is only available if order was fetched with withCurrentPayment() scope
  * @property null|int $channel_id
  * @property null|Channel $channel
+ * @property-read Collection|Payment[] $payments
+ * @property-read Collection|ShipmentContract[] $shipments
  */
 class Order extends BaseOrder implements Payable
 {
@@ -92,5 +98,24 @@ class Order extends BaseOrder implements Payable
     public function payments()
     {
         return $this->morphMany(PaymentProxy::modelClass(), 'payable');
+    }
+
+    public function shipments(): MorphToMany
+    {
+        return $this->morphToMany(ShipmentProxy::modelClass(), 'shippable');
+    }
+
+    public function addShipment(ShipmentContract $shipment): static
+    {
+        $this->shipments()->save($shipment);
+
+        return $this;
+    }
+
+    public function addShipments(ShipmentContract ...$shipments)
+    {
+        $this->shipments()->saveMany($shipments);
+
+        return $this;
     }
 }

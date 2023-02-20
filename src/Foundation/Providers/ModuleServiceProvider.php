@@ -33,6 +33,7 @@ use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\Product;
+use Vanilo\Foundation\Models\Shipment;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Models\Taxonomy;
 use Vanilo\MasterProduct\Contracts\MasterProduct as MasterProductContract;
@@ -42,6 +43,8 @@ use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Models\OrderProxy;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
+use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
+use Vanilo\Shipment\Models\ShipmentProxy;
 
 class ModuleServiceProvider extends BaseBoxServiceProvider
 {
@@ -65,6 +68,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(TaxonomyContract::class, Taxonomy::class, $registerRouteModels);
         $this->concord->registerModel(CartContract::class, Cart::class, $registerRouteModels);
         $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
+        $this->concord->registerModel(ShipmentContract::class, Shipment::class, $registerRouteModels);
         $this->concord->registerModel(MasterProductContract::class, MasterProduct::class, $registerRouteModels);
         $this->concord->registerModel(MasterProductVariantContract::class, MasterProductVariant::class, $registerRouteModels);
 
@@ -73,6 +77,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'taxonomy' => TaxonomyProxy::modelClass(),
             'taxon' => TaxonProxy::modelClass(),
             'order' => OrderProxy::modelClass(),
+            'shipment' => ShipmentProxy::modelClass(),
         ]);
 
         // Use the foundation's extended order factory
