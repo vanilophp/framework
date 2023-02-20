@@ -8,11 +8,11 @@
 - Added the `description` and `state` fields to the master product variants table
 - Added the Address comparison utility
 - Added the `reference_number` field to the shipments model
-- Added the `shippables` many-to-many, polymorphic relationship.
-  It allows all the following scenarios:
-    a) shipping one order in one shipment
-    b) shipping one order in multiple shipments
-    c) shipping multiple orders in one shipment
+- Added the `shippables` many-to-many, polymorphic relationship.  
+  It allows all the following scenarios:  
+    a) shipping one order in one shipment  
+    b) shipping one order in multiple shipments  
+    c) shipping multiple orders in one shipment  
 - Changed the random number algo in `TimeHash` generator from `mt_rand` to `random_int` for a decreased collision probability
 - Fixed the `Carrier::name()` method to overcome accessor infinite loop
 - Fixed the address creation with order factory when passing an explicit address type
