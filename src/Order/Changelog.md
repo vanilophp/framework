@@ -5,6 +5,8 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the `FulfillmentStatus` enum
+- Added `fulfillment_status` to orders
 - Fixed the address creation with order factory when passing an explicit address type
 - Changed the random number algo in `TimeHash` generator from `mt_rand` to `random_int` for a decreased collision probability
 

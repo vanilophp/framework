@@ -17,6 +17,19 @@ namespace Vanilo\Order\Models;
 use Konekt\Enum\Enum;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
 
+/**
+ * @method static OrderStatus PENDING();
+ * @method static OrderStatus COMPLETED();
+ * @method static OrderStatus CANCELLED();
+ *
+ * @method bool isPending()
+ * @method bool isCompleted()
+ * @method bool isCancelled()
+ *
+ * @property-read bool $is_pending
+ * @property-read bool $is_completed
+ * @property-read bool $is_cancelled
+ */
 class OrderStatus extends Enum implements OrderStatusContract
 {
     public const __DEFAULT = self::PENDING;

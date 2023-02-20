@@ -21,9 +21,11 @@ use Konekt\Address\Models\AddressType;
 use Konekt\Address\Models\Country;
 use Konekt\Enum\Enum;
 use Konekt\User\Models\User;
+use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
 use Vanilo\Order\Models\Billpayer;
+use Vanilo\Order\Models\FulfillmentStatus;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Models\OrderStatus;
 
@@ -75,9 +77,7 @@ class CreateOrderTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function order_status_is_an_enum()
     {
         $order = Order::create([
@@ -89,9 +89,7 @@ class CreateOrderTest extends TestCase
         $this->assertInstanceOf(OrderStatusContract::class, $order->status);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function order_has_default_status_if_none_was_given()
     {
         $order = Order::create([
@@ -101,9 +99,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals(OrderStatus::defaultValue(), $order->status->value());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function order_status_can_be_set()
     {
         $order = Order::create([
@@ -112,6 +108,39 @@ class CreateOrderTest extends TestCase
         ]);
 
         $this->assertEquals(OrderStatus::CANCELLED, $order->status->value());
+    }
+
+    /** @test */
+    public function the_fulfillment_status_is_an_enum()
+    {
+        $order = Order::create([
+            'number' => 'LMN6G1',
+            'fulfillment_status' => FulfillmentStatus::AWAITING_SHIPMENT
+        ]);
+
+        $this->assertInstanceOf(Enum::class, $order->fulfillment_status);
+        $this->assertInstanceOf(FulfillmentStatusContract::class, $order->fulfillment_status);
+    }
+
+    /** @test */
+    public function the_has_a_default_fulfillment_status_if_none_was_given()
+    {
+        $order = Order::create([
+            'number' => 'WK012X44'
+        ]);
+
+        $this->assertEquals(FulfillmentStatus::defaultValue(), $order->fulfillment_status->value());
+    }
+
+    /** @test */
+    public function the_fulfillment_status_can_be_set()
+    {
+        $order = Order::create([
+            'number' => 'PHSFE',
+            'fulfillment_status' => FulfillmentStatus::PARTIALLY_FULFILLED,
+        ]);
+
+        $this->assertEquals(FulfillmentStatus::PARTIALLY_FULFILLED, $order->fulfillment_status->value());
     }
 
     /**
@@ -135,6 +164,7 @@ class CreateOrderTest extends TestCase
         $order = Order::create([
             'number' => 'UEOIP',
             'status' => OrderStatus::COMPLETED(),
+            'fulfillment_status' => FulfillmentStatus::FULFILLED(),
             'user_id' => $user->id,
             'billpayer_id' => $billpayer->id,
             'shipping_address_id' => $shippingAddress->id,
@@ -145,6 +175,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals('UEOIP', $order->getNumber());
 
         $this->assertTrue($order->status->isCompleted());
+        $this->assertTrue($order->fulfillment_status->isFulfilled());
 
         $this->assertEquals($user->id, $order->user_id);
         $this->assertEquals($billpayer->id, $order->billpayer_id);
@@ -159,6 +190,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals('UEOIP', $order->getNumber());
 
         $this->assertTrue($order->status->isCompleted());
+        $this->assertTrue($order->fulfillment_status->isFulfilled());
 
         $this->assertEquals($user->id, $order->user_id);
         $this->assertEquals($billpayer->id, $order->billpayer_id);

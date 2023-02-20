@@ -33,6 +33,7 @@ use Vanilo\Order\Contracts\OrderStatus;
  * @property string $number
  * @property string $notes
  * @property OrderStatus $status
+ * @property FulfillmentStatus $fulfillment_status
  * @property null|int $billpayer_id
  * @property null|Billpayer $billpayer
  * @property null|int $user_id
@@ -53,7 +54,8 @@ class Order extends Model implements OrderContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $enums = [
-        'status' => 'OrderStatusProxy@enumClass'
+        'status' => 'OrderStatusProxy@enumClass',
+        'fulfillment_status' => 'FulfillmentStatusProxy@enumClass',
     ];
 
     public function __construct(array $attributes = [])
@@ -61,6 +63,9 @@ class Order extends Model implements OrderContract
         // Set default status in case there was none given
         if (!isset($attributes['status'])) {
             $this->setDefaultOrderStatus();
+        }
+        if (!isset($attributes['fulfillment_status'])) {
+            $this->setDefaultFulfillmentStatus();
         }
 
         parent::__construct($attributes);
@@ -133,6 +138,19 @@ class Order extends Model implements OrderContract
                 $this->attributes,
                 [
                     'status' => OrderStatusProxy::defaultValue()
+                ]
+            ),
+            true
+        );
+    }
+
+    protected function setDefaultFulfillmentStatus()
+    {
+        $this->setRawAttributes(
+            array_merge(
+                $this->attributes,
+                [
+                    'fulfillment_status' => FulfillmentStatusProxy::defaultValue()
                 ]
             ),
             true

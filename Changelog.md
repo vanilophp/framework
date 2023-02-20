@@ -14,6 +14,8 @@
     b) shipping one order in multiple shipments  
     c) shipping multiple orders in one shipment  
 - Added `Shipment::orders` and `Order::shipments` to the Foundation models
+- Added the `FulfillmentStatus` enum to the Orders module
+- Added `fulfillment_status` to the orders table
 - Changed the random number algo in `TimeHash` generator from `mt_rand` to `random_int` for a decreased collision probability
 - Fixed the `Carrier::name()` method to overcome accessor infinite loop
 - Fixed the address creation with order factory when passing an explicit address type
