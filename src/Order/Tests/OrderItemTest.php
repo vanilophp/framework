@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the OrderItemProductTest class.
+ * Contains the OrderItemTest class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -14,11 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
+use Illuminate\Support\Str;
+use Konekt\Enum\Enum;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
+use Vanilo\Order\Models\FulfillmentStatus;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Tests\Dummies\Product;
 
-class OrderItemProductTest extends TestCase
+class OrderItemTest extends TestCase
 {
     /** @var Product */
     protected $theMoonRing;
@@ -34,9 +38,7 @@ class OrderItemProductTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function product_can_be_added_to_order_item()
     {
         $order = Order::create([
@@ -87,5 +89,25 @@ class OrderItemProductTest extends TestCase
         $item = $order->items->first();
 
         $this->assertEquals('dolly buster', $item->configuration['hello']);
+    }
+
+    /** @test */
+    public function an_order_item_has_a_default_fullfillment_state()
+    {
+        $order = Order::create(['number' => Str::uuid()->toString()]);
+
+        $order->items()->create([
+            'product_type' => 'product',
+            'product_id' => $this->theMoonRing->getId(),
+            'quantity' => 1,
+            'name' => $this->theMoonRing->getName(),
+            'price' => $this->theMoonRing->getPrice()
+        ]);
+
+        $item = $order->items->first();
+
+        $this->assertInstanceOf(Enum::class, $item->fulfillment_status);
+        $this->assertInstanceOf(FulfillmentStatusContract::class, $item->fulfillment_status);
+        $this->assertEquals(FulfillmentStatus::defaultValue(), $item->fulfillment_status->value());
     }
 }

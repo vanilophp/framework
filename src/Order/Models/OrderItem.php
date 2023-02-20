@@ -16,6 +16,7 @@ namespace Vanilo\Order\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Configurable;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 use Vanilo\Support\Traits\ConfigurableModel;
@@ -26,6 +27,7 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property string $product_type
  * @property int $product_id
  * @property string $name
+ * @property FulfillmentStatus $fulfillment_status
  * @property int $quantity
  * @property float $price
  * @property ?array $configuration
@@ -35,9 +37,14 @@ use Vanilo\Support\Traits\ConfigurableModel;
  */
 class OrderItem extends Model implements OrderItemContract, Configurable
 {
+    use CastsEnums;
     use ConfigurableModel;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $enums = [
+        'fulfillment_status' => 'FulfillmentStatusProxy@enumClass',
+    ];
 
     protected $casts = [
         'configuration' => 'json',
