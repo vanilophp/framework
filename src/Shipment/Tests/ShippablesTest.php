@@ -61,7 +61,6 @@ class ShippablesTest extends TestCase
         $order2 = ShippableDummyOrder::create(['address_id' => $address->id]);
         $shipment = Shipment::create(['address_id' => $address->id]);
 
-        /** @var $orders MorphToMany */
         $shipment->orders()->saveMany([$order1, $order2]);
 
         $this->assertCount(2, $shipment->orders);
