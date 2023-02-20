@@ -5,6 +5,11 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the `shippables` many-to-many, polymorphic relationship.
+  It allows all the following scenarios:
+    a) shipping one order in one shipment
+    b) shipping one order in multiple shipments
+    c) shipping multiple orders in one shipment
 - Added the `reference_number` field to the shipments model
 - Fixed the `Carrier::name()` method to overcome accessor infinite loop
 
