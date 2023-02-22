@@ -18,19 +18,26 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Vanilo\Channel\Models\Channel;
+use Konekt\Customer\Models\CustomerProxy;
+use Vanilo\Channel\Contracts\Channel;
 use Vanilo\Channel\Models\ChannelProxy;
 use Vanilo\Contracts\Payable;
 use Vanilo\Order\Models\Order as BaseOrder;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Models\PaymentProxy;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
+use Vanilo\Shipment\Contracts\ShippingMethod;
 use Vanilo\Shipment\Models\ShipmentProxy;
+use Vanilo\Shipment\Models\ShippingMethodProxy;
 
 /**
  * @property null|Payment $currentPayment is only available if order was fetched with withCurrentPayment() scope
  * @property null|int $channel_id
  * @property null|Channel $channel
+ * @property null|int $shipping_method_id
+ * @property null|ShippingMethod $shippingMethod
+ * @property null|int $customer_id
+ * @property null|\Vanilo\Contracts\Customer $customer
  * @property-read Collection|Payment[] $payments
  * @property-read Collection|ShipmentContract[] $shipments
  */
@@ -64,6 +71,16 @@ class Order extends BaseOrder implements Payable
     public function channel(): BelongsTo
     {
         return $this->belongsTo(ChannelProxy::modelClass());
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(CustomerProxy::modelClass());
+    }
+
+    public function shippingMethod(): BelongsTo
+    {
+        return $this->belongsTo(ShippingMethodProxy::modelClass());
     }
 
     public function getCurrentPayment(): ?Payment

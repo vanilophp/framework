@@ -18,6 +18,7 @@
 - Added `fulfillment_status` to the `orders` and `order_items` tables
 - Added `language` field to orders
 - Added `ordered_at` field to orders (defaults to `created_at` unless explicitly specified)
+- Added `shippingMethod` and `customer` fields/relations to the extended (Foundation) Order model
 - Changed the random number algo in `TimeHash` generator from `mt_rand` to `random_int` for a decreased collision probability
 - Fixed the `Carrier::name()` method to overcome accessor infinite loop
 - Fixed the address creation with order factory when passing an explicit address type
