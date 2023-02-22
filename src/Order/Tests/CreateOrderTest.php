@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Konekt\Address\Models\Address;
@@ -123,7 +124,7 @@ class CreateOrderTest extends TestCase
     }
 
     /** @test */
-    public function the_has_a_default_fulfillment_status_if_none_was_given()
+    public function it_has_a_default_fulfillment_status_if_none_was_given()
     {
         $order = Order::create([
             'number' => 'WK012X44'
@@ -141,6 +142,42 @@ class CreateOrderTest extends TestCase
         ]);
 
         $this->assertEquals(FulfillmentStatus::PARTIALLY_FULFILLED, $order->fulfillment_status->value());
+    }
+
+    /** @test */
+    public function the_language_can_be_set()
+    {
+        $order = Order::create([
+            'number' => 'YAHRYHANI',
+            'language' => 'fa',
+        ]);
+
+        $this->assertEquals('fa', $order->language);
+    }
+
+    /** @test */
+    public function the_ordered_at_can_be_set_and_is_a_datetime()
+    {
+        $order = Order::create([
+            'number' => 'USKH2',
+            'ordered_at' => '2022-12-30T09:00:00'
+        ]);
+
+        $this->assertInstanceOf(Carbon::class, $order->ordered_at);
+        $this->assertEquals('2022-12-30T09:00:00', $order->ordered_at->format('Y-m-d\TH:i:s'));
+    }
+
+    /** @test */
+    public function it_sets_the_ordered_at_date_to_be_the_same_as_the_created_at_if_no_explicit_ordered_at_date_is_passed()
+    {
+        $order = Order::create([
+            'number' => 'DDKX$Z'
+        ]);
+
+        $this->assertEquals(
+            $order->created_at->toIso8601ZuluString(),
+            $order->ordered_at->toIso8601ZuluString()
+        );
     }
 
     /**
@@ -165,6 +202,8 @@ class CreateOrderTest extends TestCase
             'number' => 'UEOIP',
             'status' => OrderStatus::COMPLETED(),
             'fulfillment_status' => FulfillmentStatus::FULFILLED(),
+            'language' => 'de',
+            'ordered_at' => '2023-01-15 11:35:27',
             'user_id' => $user->id,
             'billpayer_id' => $billpayer->id,
             'shipping_address_id' => $shippingAddress->id,
@@ -177,6 +216,8 @@ class CreateOrderTest extends TestCase
         $this->assertTrue($order->status->isCompleted());
         $this->assertTrue($order->fulfillment_status->isFulfilled());
 
+        $this->assertEquals('de', $order->language);
+        $this->assertEquals('2023-01-15T11:35:27Z', $order->ordered_at->toIso8601ZuluString());
         $this->assertEquals($user->id, $order->user_id);
         $this->assertEquals($billpayer->id, $order->billpayer_id);
         $this->assertEquals($shippingAddress->id, $order->shipping_address_id);

@@ -34,12 +34,14 @@ use Vanilo\Order\Contracts\OrderStatus;
  * @property string $notes
  * @property OrderStatus $status
  * @property FulfillmentStatus $fulfillment_status
+ * @property null|string $language The two-letter ISO 639-1 code
  * @property null|int $billpayer_id
  * @property null|Billpayer $billpayer
  * @property null|int $user_id
  * @property null|User $user
  * @property null|Address $shippingAddress
  * @property null|int $shipping_address_id
+ * @property null|Carbon $ordered_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property null|Carbon $deleted_at
@@ -58,6 +60,13 @@ class Order extends Model implements OrderContract
         'fulfillment_status' => 'FulfillmentStatusProxy@enumClass',
     ];
 
+    protected $casts = [
+        'ordered_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
     public function __construct(array $attributes = [])
     {
         // Set default status in case there was none given
@@ -69,6 +78,15 @@ class Order extends Model implements OrderContract
         }
 
         parent::__construct($attributes);
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($order) {
+            if (null === $order->ordered_at) {
+                $order->ordered_at = Carbon::now();
+            }
+        });
     }
 
     public static function findByNumber(string $orderNumber): ?OrderContract
