@@ -30,7 +30,7 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @method static Builder actives()
  * @method static Builder inactives()
  *
- * @method static Carrier create(array $attributes)
+ * @method static ShippingMethod create(array $attributes)
  */
 class ShippingMethod extends Model implements ShippingMethodContract
 {
