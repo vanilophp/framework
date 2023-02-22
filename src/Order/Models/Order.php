@@ -80,15 +80,6 @@ class Order extends Model implements OrderContract
         parent::__construct($attributes);
     }
 
-    protected static function booted()
-    {
-        static::creating(function ($order) {
-            if (null === $order->ordered_at) {
-                $order->ordered_at = Carbon::now();
-            }
-        });
-    }
-
     public static function findByNumber(string $orderNumber): ?OrderContract
     {
         return static::where('number', $orderNumber)->first();
@@ -147,6 +138,15 @@ class Order extends Model implements OrderContract
     public function scopeOpen(Builder $query)
     {
         return $query->whereIn('status', OrderStatusProxy::getOpenStatuses());
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($order) {
+            if (null === $order->ordered_at) {
+                $order->ordered_at = Carbon::now();
+            }
+        });
     }
 
     protected function setDefaultOrderStatus()
