@@ -21,10 +21,26 @@ return new class () extends Migration {
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
+            if (!$this->isSqlite()) {
+                $table->dropForeign(['shipping_method_id']);
+            }
+
             $table->dropColumn('shipping_method_id');
         });
         Schema::table('orders', function (Blueprint $table) {
+            if (!$this->isSqlite()) {
+                $table->dropForeign(['customer_id']);
+            }
             $table->dropColumn('customer_id');
         });
+    }
+
+    private function isSqlite(): bool
+    {
+        return 'sqlite' === Schema::connection($this->getConnection())
+                ->getConnection()
+                ->getPdo()
+                ->getAttribute(PDO::ATTR_DRIVER_NAME)
+            ;
     }
 };
