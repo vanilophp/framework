@@ -17,7 +17,6 @@ return new class () extends Migration {
             $table->unsignedBigInteger('shipping_method_id')->nullable()->after('shipping_address_id');
 
             $table->foreign('shipping_method_id')->references('id')->on('shipping_methods');
-
         });
     }
 
