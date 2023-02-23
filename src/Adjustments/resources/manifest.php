@@ -4,5 +4,5 @@ declare(strict_types=1);
 
 return [
     'name' => 'Vanilo Adjustments Module',
-    'version' => '3.5-dev'
+    'version' => '3.5.0'
 ];

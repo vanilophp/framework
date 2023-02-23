@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2023-XX-YY
+## 3.5.0
+##### 2023-02-23
 
 - Added the `shippables` many-to-many, polymorphic relationship.  
   It allows all the following scenarios:  
