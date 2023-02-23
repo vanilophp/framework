@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2023-XX-YY
+## 3.5.1
+##### 2023-02-23
 
 - Fixed non-standard migration name in the order module
 
