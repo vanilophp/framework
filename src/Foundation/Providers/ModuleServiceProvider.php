@@ -38,6 +38,8 @@ use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Models\Taxonomy;
 use Vanilo\MasterProduct\Contracts\MasterProduct as MasterProductContract;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
+use Vanilo\MasterProduct\Models\MasterProductProxy;
+use Vanilo\MasterProduct\Models\MasterProductVariantProxy;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Models\OrderProxy;
@@ -74,6 +76,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
         Relation::morphMap([
             app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass(),
+            'master_product' => MasterProductProxy::modelClass(),
+            'master_product_variant' => MasterProductVariantProxy::modelClass(),
             'taxonomy' => TaxonomyProxy::modelClass(),
             'taxon' => TaxonProxy::modelClass(),
             'order' => OrderProxy::modelClass(),
