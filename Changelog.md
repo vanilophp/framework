@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added master product & variant (Foundation) to the morph map 
+
 ## 3.5.1
 ##### 2023-02-23
 
