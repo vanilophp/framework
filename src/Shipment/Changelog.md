@@ -2,6 +2,12 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added Zone support to shipping methods (optional)
+- Changed minimum Address module requirement to v2.5
+
 ## 3.5.0
 ##### 2023-02-23
 

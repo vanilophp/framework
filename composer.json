@@ -25,7 +25,7 @@
         "spatie/laravel-medialibrary": "^10.0",
         "cviebrock/eloquent-sluggable": "^9.0",
         "konekt/laravel-migration-compatibility": "^1.5",
-        "konekt/address": "^2.2",
+        "konekt/address": "^2.5",
         "konekt/customer": "^2.3.1",
         "konekt/user": "^2.4"
     },

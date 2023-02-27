@@ -5,7 +5,9 @@
 ## Unreleased
 ##### 2023-XX-YY
 
-- Added master product & variant (Foundation) to the morph map 
+- Added master product & variant (Foundation) to the morph map
+- Added Zone support to shipping methods (optional)
+- Changed minimum Address module requirement to v2.5
 
 ## 3.5.1
 ##### 2023-02-23
