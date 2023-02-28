@@ -48,10 +48,10 @@ class DetailedAmountTest extends TestCase
     /** @test */
     public function it_accepts_details_as_an_array_in_the_constructor()
     {
-        $amount = new DetailedAmount(12.99, [['title' => 'asd', 'value' => 12.99]]);
+        $amount = new DetailedAmount(12.99, [['title' => 'asd', 'amount' => 12.99]]);
         $this->assertInstanceOf(DetailedAmount::class, $amount);
         $this->assertEquals(12.99, $amount->getValue());
-        $this->assertEquals(['title' => 'asd', 'value' => 12.99], $amount->getDetails());
+        $this->assertEquals([['title' => 'asd', 'amount' => 12.99]], $amount->getDetails());
     }
 
     /** @test */

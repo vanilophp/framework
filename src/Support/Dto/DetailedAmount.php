@@ -28,6 +28,10 @@ final class DetailedAmount implements DetailedAmountContract
 
     private static Processor $validator;
 
+    /**
+     * @param float $value
+     * @param array{0: array{title: string, amount:float}} $details
+     */
     public function __construct(
         private float $value,
         array $details = [],
@@ -70,7 +74,7 @@ final class DetailedAmount implements DetailedAmountContract
     {
         $this->details[] = [
             'title' => $title,
-            'value' => $value,
+            'amount' => $value,
         ];
 
         if ($recalculate) {
@@ -90,7 +94,7 @@ final class DetailedAmount implements DetailedAmountContract
     {
         $this->value = 0;
         foreach ($this->details as $detail) {
-            $this->value += $detail['value'];
+            $this->value += $detail['amount'];
         }
     }
 }
