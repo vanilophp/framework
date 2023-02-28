@@ -80,4 +80,61 @@ class ShippingMethodZonesTest extends TestCase
         $this->assertCount(1, $methodsForEU);
         $this->assertContains('Avion (2 semaines)', $methodsForEU->pluck('name'));
     }
+
+    /** @test */
+    public function the_for_zones_scope_accepts_an_array_of_zone_ids()
+    {
+        $zone1 = Zone::create(['name' => 'Z1']);
+        $zone2 = Zone::create(['name' => 'Z2']);
+        ShippingMethod::create(['name' => 'SM1', 'zone_id' => $zone1->id]);
+        ShippingMethod::create(['name' => 'SM2']);
+        ShippingMethod::create(['name' => 'SM3', 'zone_id' => $zone2->id]);
+        ShippingMethod::create(['name' => 'SM4', 'zone_id' => $zone1->id]);
+
+        $methods = ShippingMethod::forZones([$zone1->id, $zone2->id])->get();
+        $this->assertCount(3, $methods);
+        $this->assertContains('SM1', $methods->pluck('name'));
+        $this->assertContains('SM3', $methods->pluck('name'));
+        $this->assertContains('SM4', $methods->pluck('name'));
+        $this->assertNotContains('SM2', $methods->pluck('name'));
+    }
+
+    /** @test */
+    public function the_for_zones_scope_accepts_an_array_of_zone_models()
+    {
+        $zone3 = Zone::create(['name' => 'Z3']);
+        $zone4 = Zone::create(['name' => 'Z4']);
+        $zone5 = Zone::create(['name' => 'Z4']);
+        ShippingMethod::create(['name' => 'SM5', 'zone_id' => $zone5->id]);
+        ShippingMethod::create(['name' => 'SM6', 'zone_id' => $zone3->id]);
+        ShippingMethod::create(['name' => 'SM7']);
+        ShippingMethod::create(['name' => 'SM8', 'zone_id' => $zone4->id]);
+        ShippingMethod::create(['name' => 'SM9', 'zone_id' => $zone4->id]);
+        ShippingMethod::create(['name' => 'SM10', 'zone_id' => $zone4->id]);
+
+        $methods = ShippingMethod::forZones([$zone3, $zone4])->get();
+        $this->assertCount(4, $methods);
+        $this->assertContains('SM6', $methods->pluck('name'));
+        $this->assertContains('SM8', $methods->pluck('name'));
+        $this->assertContains('SM9', $methods->pluck('name'));
+        $this->assertContains('SM10', $methods->pluck('name'));
+        $this->assertNotContains('SM5', $methods->pluck('name'));
+        $this->assertNotContains('SM7', $methods->pluck('name'));
+    }
+
+    /** @test */
+    public function the_for_zones_scope_accepts_a_collection_of_zone_models()
+    {
+        $zone7 = Zone::create(['name' => 'Z7']);
+        $zone8 = Zone::create(['name' => 'Z8']);
+        ShippingMethod::create(['name' => 'SM11', 'zone_id' => $zone8->id]);
+        ShippingMethod::create(['name' => 'SM12', 'zone_id' => $zone7->id]);
+        ShippingMethod::create(['name' => 'SM13']);
+
+        $methods = ShippingMethod::forZones(collect([$zone7, $zone8]))->get();
+        $this->assertCount(2, $methods);
+        $this->assertContains('SM11', $methods->pluck('name'));
+        $this->assertContains('SM12', $methods->pluck('name'));
+        $this->assertNotContains('SM13', $methods->pluck('name'));
+    }
 }

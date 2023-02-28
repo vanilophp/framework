@@ -38,7 +38,7 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @method static Builder actives()
  * @method static Builder inactives()
  * @method static Builder forZone(Zone|int $zone)
- * @method static Builder forZones(Zone|int ...$zones)
+ * @method static Builder forZones(array|Collection $zones)
  *
  * @method static ShippingMethod create(array $attributes)
  */
@@ -86,8 +86,14 @@ class ShippingMethod extends Model implements ShippingMethodContract
         return $query->where('zone_id', is_int($zone) ? $zone : $zone->id);
     }
 
-    public function scopeForZones(Builder $query, array $zones): Builder
+    public function scopeForZones(Builder $query, array|Collection $zones): Builder
     {
+        if (is_array($zones)) {
+            $zones = array_map(fn (Zone|int $zone) => is_int($zone) ? $zone : $zone->id, $zones);
+        } else {
+            $zones = $zones->map(fn(Zone $zone) => $zone->id);
+        }
+
         return $query->whereIn('zone_id', $zones);
     }
 }
