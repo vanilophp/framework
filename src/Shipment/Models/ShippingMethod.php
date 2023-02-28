@@ -91,7 +91,7 @@ class ShippingMethod extends Model implements ShippingMethodContract
         if (is_array($zones)) {
             $zones = array_map(fn (Zone|int $zone) => is_int($zone) ? $zone : $zone->id, $zones);
         } else {
-            $zones = $zones->map(fn(Zone $zone) => $zone->id);
+            $zones = $zones->map(fn (Zone $zone) => $zone->id);
         }
 
         return $query->whereIn('zone_id', $zones);
