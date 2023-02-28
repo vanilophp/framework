@@ -2,6 +2,12 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `ShipTo` interface (will supersede shipping addresses)
+
+
 ## 3.5.0
 ##### 2023-02-23
 

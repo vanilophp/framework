@@ -16,6 +16,7 @@ namespace Vanilo\Contracts;
 
 interface Shippable
 {
+    /** @deprecated Superseded by getShipTo(): ShipTo */
     public function getShippingAddress(): ?Address;
 
     public function weight(): float;

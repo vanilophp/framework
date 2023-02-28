@@ -26,6 +26,7 @@ interface Order
 
     public function getBillpayer(): ?BillPayer;
 
+    /** @deprecated Superseded by getShipTo(): ShipTo */
     public function getShippingAddress(): ?Address;
 
     public function getItems(): Traversable;
