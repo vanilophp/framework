@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `processing` order status enum value
+
 ## 3.5.1
 ##### 2023-02-23
 
