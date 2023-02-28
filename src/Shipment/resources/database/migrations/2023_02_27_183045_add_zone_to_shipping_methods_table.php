@@ -19,6 +19,8 @@ return new class () extends Migration {
     {
         Schema::table('shipping_methods', function (Blueprint $table) {
             $table->dropColumn('zone_id');
+        });
+        Schema::table('shipping_methods', function (Blueprint $table) {
             $table->dropColumn('calculator');
         });
     }
