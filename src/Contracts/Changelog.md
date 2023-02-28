@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `DetailedAmount` interface
+
 ## 3.5.0
 ##### 2023-02-23
 

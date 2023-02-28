@@ -7,6 +7,7 @@
 
 - Added master product & variant (Foundation) to the morph map
 - Added the `processing` order status enum value
+- Added the `DetailedAmount` interface (Contracts) and its Dto (Support)
 - Added Zone support to shipping methods (optional)
 - Changed minimum Address module requirement to v2.5
 

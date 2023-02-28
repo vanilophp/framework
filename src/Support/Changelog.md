@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `DetailedAmount` DTO class (provides a default implementation for the same name interface)
+
 ## 3.5.0
 ##### 2023-02-23
 
