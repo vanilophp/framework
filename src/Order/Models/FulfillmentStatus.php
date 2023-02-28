@@ -23,6 +23,7 @@ use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
  * @method static FulfillmentStatus ON_HOLD();
  * @method static FulfillmentStatus AWAITING_SHIPMENT();
  * @method static FulfillmentStatus PARTIALLY_FULFILLED();
+ * @method static FulfillmentStatus READY_FOR_PICKUP();
  * @method static FulfillmentStatus FULFILLED();
  *
  * @method bool isScheduled()
@@ -30,6 +31,7 @@ use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
  * @method bool isOnHold()
  * @method bool isAwaitingShipment()
  * @method bool isPartiallyFulfilled()
+ * @method bool isReadyForPickup()
  * @method bool isFulfilled()
  *
  * @property-read bool $is_scheduled
@@ -37,6 +39,7 @@ use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
  * @property-read bool $is_on_hold
  * @property-read bool $is_awaiting_shipment
  * @property-read bool $is_partially_fulfilled
+ * @property-read bool $is_ready_for_pickup
  * @property-read bool $is_fulfilled
  */
 class FulfillmentStatus extends Enum implements FulfillmentStatusContract
@@ -62,6 +65,9 @@ class FulfillmentStatus extends Enum implements FulfillmentStatusContract
     /** Only some parts of the subject have been handed over to a delivery personnel */
     public const PARTIALLY_FULFILLED = 'partially_fulfilled';
 
+    /** The item has been prepared and can be picked up from the specified location */
+    public const READY_FOR_PICKUP = 'ready_for_pickup';
+
     /** The item has been handed over to a delivery personnel */
     public const FULFILLED = 'fulfilled';
 
@@ -75,6 +81,7 @@ class FulfillmentStatus extends Enum implements FulfillmentStatusContract
             self::UNFULFILLED => __('Unfulfilled'),
             self::AWAITING_SHIPMENT => __('Awaiting shipment'),
             self::PARTIALLY_FULFILLED => __('Partially fulfilled'),
+            self::READY_FOR_PICKUP => __('Ready to be picked up'),
             self::FULFILLED => __('Fulfilled'),
         ];
     }
