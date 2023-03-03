@@ -11,6 +11,7 @@
 - Added the `DetailedAmount` interface (Contracts) and its Dto (Support)
 - Added Zone support to shipping methods (optional)
 - Changed minimum Address module requirement to v2.5
+- Fixed the data loss issue when using the session checkout driver with cookie session driver in Laravel
 
 ## 3.5.1
 ##### 2023-02-23

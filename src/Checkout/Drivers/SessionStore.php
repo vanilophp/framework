@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutState;
@@ -63,7 +64,13 @@ class SessionStore implements CheckoutStore
 
     public function getBillpayer(): Billpayer
     {
-        return $this->retrieveData('billpayer') ?? $this->factory->createBillpayer();
+        $result = $this->factory->createBillpayer();
+        if (is_array($rawData = $this->retrieveData('billpayer'))) {
+            $result->getBillingAddress()->fill($rawData['address']);
+            $result->fill(Arr::except($rawData, 'address'));
+        }
+
+        return $result;
     }
 
     public function setBillpayer(Billpayer $billpayer)
@@ -73,7 +80,11 @@ class SessionStore implements CheckoutStore
 
     public function getShippingAddress(): Address
     {
-        return $this->retrieveData('shipping_address') ?? $this->factory->createShippingAddress();
+        $result = $this->factory->createShippingAddress();
+        if (is_array($rawData = $this->retrieveData('shipping_address'))) {
+            $result->fill($rawData);
+        }
+        return $result;
     }
 
     public function setShippingAddress(Address $address)
@@ -147,7 +158,12 @@ class SessionStore implements CheckoutStore
 
     protected function storeData(string $key, mixed $value): void
     {
-        $this->session->put($this->prefix . $key, $value);
+        $normalizedData = $value;
+        if (!is_scalar($value) && $value instanceof Arrayable) {
+            $normalizedData = $value->toArray();
+        }
+
+        $this->session->put($this->prefix . $key, $normalizedData);
     }
 
     protected function retrieveData(string $key): mixed

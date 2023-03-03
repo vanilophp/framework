@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed the data loss issue when using the session checkout driver with cookie session driver in Laravel
+
 ## 3.5.0
 ##### 2023-02-23
 
