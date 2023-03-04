@@ -40,7 +40,7 @@ trait AddressModel
      */
     public function getProvinceCode(): ?string
     {
-        return $this->province ? $this->province->code : null;
+        return $this->province?->code;
     }
 
     /**
