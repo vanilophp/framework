@@ -11,6 +11,22 @@
 - Added the `DetailedAmount` interface (Contracts) and its Dto (Support)
 - Added Zone support to shipping methods (optional)
 - Changed minimum Address module requirement to v2.5
+- Refactored the internals of the Checkout stores (session and request)
+- Added the following fields as recognized, regular fields of the checkout:
+    - `shipping_method_id`
+    - `payment_method_id`
+    - `ship_to_billing_address`
+    - `notes`
+- Added `ArrayAccess` to the CheckoutManager and to the Checkout Stores
+- Added the following methods to the Checkout implementations (Manager, Stores but not the interfaces):
+    - `getShipToBillingAddress()`
+    - `setShipToBillingAddress()`
+    - `getShippingMethodId()`
+    - `setShippingMethodId()`
+    - `getPaymentMethodId()`
+    - `setPaymentMethodId()`
+    - `getNotes()`
+    - `setNotes()`
 - Fixed the data loss issue when using the session checkout driver with cookie session driver in Laravel
 
 ## 3.5.1

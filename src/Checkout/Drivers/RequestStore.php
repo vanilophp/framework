@@ -14,13 +14,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Drivers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
-use Vanilo\Checkout\Contracts\CheckoutStore;
-use Vanilo\Checkout\Traits\ComputesShipToName;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
-use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Checkout\Traits\HasCheckoutState;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
@@ -30,15 +29,15 @@ use Vanilo\Contracts\Billpayer;
  * This is a simple and lightweight and variant for
  * cases when having volatile checkout data is ✔
  */
-class RequestStore implements CheckoutStore
+class RequestStore extends BaseCheckoutStore
 {
-    use ComputesShipToName;
     use HasCheckoutState;
-    use HasCart;
     use EmulatesFillAttributes;
     use FillsCommonCheckoutAttributes;
 
     protected $state;
+
+    protected array $ownAttributes = ['shipping_method_id', 'payment_method_id', 'ship_to_billing_address'];
 
     /** @var  Billpayer */
     protected $billpayer;
@@ -46,8 +45,11 @@ class RequestStore implements CheckoutStore
     /** @var  Address */
     protected $shippingAddress;
 
-    /** @var  CheckoutDataFactory */
-    protected $dataFactory;
+    protected ?string $shippingMethodId = null;
+
+    protected bool $shipToBillingAddress = false;
+
+    protected Request $request;
 
     /** @var array */
     protected $customData = [];
@@ -57,34 +59,12 @@ class RequestStore implements CheckoutStore
      *       it was never in use, but after 5 years
      *       people might be using it, thus a BC
      */
-    public function __construct($config, CheckoutDataFactory $dataFactory)
+    public function __construct($config, CheckoutDataFactory $dataFactory, Request $request = null)
     {
-        $this->dataFactory = $dataFactory;
+        parent::__construct($dataFactory);
+        $this->request = $request ?? request();
         $this->billpayer = $dataFactory->createBillpayer();
         $this->shippingAddress = $dataFactory->createShippingAddress();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function update(array $data)
-    {
-        if (isset($data['billpayer'])) {
-            $this->updateBillpayer($data['billpayer'] ??  []);
-        }
-
-        if (Arr::get($data, 'ship_to_billing_address')) {
-            $shippingAddress = $data['billpayer']['address'];
-            $shippingAddress['name'] = $this->getShipToName($this->billpayer);
-        } else {
-            $shippingAddress = $data['shipping_address'] ?? ($data['shippingAddress'] ?? []);
-        }
-
-        $this->updateShippingAddress($shippingAddress);
-
-        foreach (Arr::except($data, ['billpayer', 'ship_to_billing_address', 'shipping_address', 'shippingAddress']) as $key => $value) {
-            $this->setCustomAttribute($key, $value);
-        }
     }
 
     /**
@@ -145,5 +125,30 @@ class RequestStore implements CheckoutStore
     public function getCustomAttributes(): array
     {
         return $this->customData;
+    }
+
+    public function clear(): void
+    {
+        $this->request->replace([]);
+    }
+
+    public function offsetExists(mixed $offset)
+    {
+        return $this->request->has($offset);
+    }
+
+    public function offsetUnset(mixed $offset)
+    {
+        $this->request->offsetUnset($offset);
+    }
+
+    protected function readRawDataFromStore(string $key, $default = null): mixed
+    {
+        return $this->request->input($key, $this->request->old($key) ?? $default);
+    }
+
+    protected function writeRawDataToStore(string $key, mixed $data): void
+    {
+        $this->request->offsetSet($key, $data);
     }
 }

@@ -16,6 +16,10 @@ namespace Vanilo\Checkout\Traits;
 
 use Vanilo\Contracts\Billpayer;
 
+/**
+ * @deprecated
+ * @todo remove in v4
+ */
 trait ComputesShipToName
 {
     private function getShipToName(Billpayer $billpayer)

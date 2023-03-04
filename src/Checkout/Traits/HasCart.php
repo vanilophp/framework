@@ -16,6 +16,9 @@ namespace Vanilo\Checkout\Traits;
 
 use Vanilo\Contracts\CheckoutSubject;
 
+/**
+ * @deprecated Will be removed with v4
+ */
 trait HasCart
 {
     /** @var  CheckoutSubject */

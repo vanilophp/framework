@@ -22,7 +22,8 @@ use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 
-class CheckoutManager implements CheckoutContract
+/** @todo Remove `ArrayAccess` and make the Checkout interface to extend ArrayAccess in v4 */
+class CheckoutManager implements CheckoutContract, \ArrayAccess
 {
     use ForwardsCalls;
 
@@ -142,5 +143,25 @@ class CheckoutManager implements CheckoutContract
     public function total()
     {
         return $this->store->total();
+    }
+
+    public function offsetExists(mixed $offset)
+    {
+        return $this->store->offsetExists($offset);
+    }
+
+    public function offsetGet(mixed $offset)
+    {
+        return $this->store->offsetGet($offset);
+    }
+
+    public function offsetSet(mixed $offset, mixed $value)
+    {
+        $this->store->offsetSet($offset, $value);
+    }
+
+    public function offsetUnset(mixed $offset)
+    {
+        $this->store->offsetUnset($offset);
     }
 }

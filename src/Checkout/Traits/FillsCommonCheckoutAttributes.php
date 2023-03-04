@@ -16,6 +16,10 @@ namespace Vanilo\Checkout\Traits;
 
 use Illuminate\Support\Arr;
 
+/**
+ * @deprecated
+ * @todo remove in v4
+ */
 trait FillsCommonCheckoutAttributes
 {
     use EmulatesFillAttributes;
@@ -23,7 +27,7 @@ trait FillsCommonCheckoutAttributes
     /**
      * @inheritdoc
      */
-    protected function updateBillpayer($data)
+    protected function updateBillpayer($data): void
     {
         $this->fill($this->billpayer, Arr::except($data, 'address'));
         $this->fill($this->billpayer->address, $data['address']);
@@ -32,7 +36,7 @@ trait FillsCommonCheckoutAttributes
     /**
      * @inheritdoc
      */
-    protected function updateShippingAddress($data)
+    protected function updateShippingAddress($data): void
     {
         $this->fill($this->shippingAddress, $data);
     }

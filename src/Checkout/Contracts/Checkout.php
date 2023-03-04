@@ -22,7 +22,7 @@ interface Checkout
 {
     /**
      * Returns the cart
-     *
+     * @todo add typehint in v4
      * @return CheckoutSubject|null
      */
     public function getCart();
@@ -64,6 +64,8 @@ interface Checkout
 
     /**
      * Returns the shipping address
+     *
+     * @todo make this nullable in v4
      *
      * @return Address
      */

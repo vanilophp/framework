@@ -16,23 +16,11 @@ namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Support\Arr;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
-use Vanilo\Checkout\Contracts\CheckoutState;
-use Vanilo\Checkout\Contracts\CheckoutStore;
-use Vanilo\Checkout\Models\CheckoutStateProxy;
-use Vanilo\Checkout\Traits\ComputesShipToName;
-use Vanilo\Checkout\Traits\EmulatesFillAttributes;
-use Vanilo\Checkout\Traits\HasCart;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\Billpayer;
 
-class SessionStore implements CheckoutStore
+class SessionStore extends BaseCheckoutStore
 {
-    use HasCart;
-    use EmulatesFillAttributes;
-    use ComputesShipToName;
-
     protected const DEFAULT_PREFIX = 'vanilo_checkout__';
 
     protected const CUSTOM_ATTRIBUTES_KEY = '__custom_attributes';
@@ -41,55 +29,26 @@ class SessionStore implements CheckoutStore
 
     protected string $prefix;
 
-    protected CheckoutDataFactory $factory;
-
     public function __construct(CheckoutDataFactory $factory, Session $session = null, string $prefix = null)
     {
+        parent::__construct($factory);
         $this->session = $session ?? app('session.store');
         $this->prefix = $prefix ?? static::DEFAULT_PREFIX;
-        $this->factory = $factory;
-    }
-
-    public function getState(): CheckoutState
-    {
-        $rawState = $this->retrieveData('state');
-
-        return $rawState instanceof CheckoutState ? $rawState : CheckoutStateProxy::create($rawState);
-    }
-
-    public function setState($state)
-    {
-        $this->storeData('state', $state instanceof CheckoutState ? $state->value() : $state);
-    }
-
-    public function getBillpayer(): Billpayer
-    {
-        $result = $this->factory->createBillpayer();
-        if (is_array($rawData = $this->retrieveData('billpayer'))) {
-            $result->getBillingAddress()->fill($rawData['address']);
-            $result->fill(Arr::except($rawData, 'address'));
-        }
-
-        return $result;
-    }
-
-    public function setBillpayer(Billpayer $billpayer)
-    {
-        $this->storeData('billpayer', $billpayer);
     }
 
     public function getShippingAddress(): Address
     {
         $result = $this->factory->createShippingAddress();
-        if (is_array($rawData = $this->retrieveData('shipping_address'))) {
-            $result->fill($rawData);
+        if (is_array($rawData = $this->readRawDataFromStore('shipping_address'))) {
+            $this->fill($result, $rawData);
         }
+
         return $result;
     }
 
     public function setShippingAddress(Address $address)
     {
-        $this->storeData('shipping_address', $address);
+        $this->writeRawDataToStore('shipping_address', $address);
     }
 
     public function setCustomAttribute(string $key, $value): void
@@ -107,32 +66,12 @@ class SessionStore implements CheckoutStore
 
     public function putCustomAttributes(array $data): void
     {
-        $this->storeData(static::CUSTOM_ATTRIBUTES_KEY, $data);
+        $this->writeRawDataToStore(static::CUSTOM_ATTRIBUTES_KEY, $data);
     }
 
     public function getCustomAttributes(): array
     {
-        return $this->retrieveData(static::CUSTOM_ATTRIBUTES_KEY) ?? [];
-    }
-
-    public function update(array $data)
-    {
-        if (isset($data['billpayer'])) {
-            $this->updateBillpayer($data['billpayer'] ??  []);
-        }
-
-        if (Arr::get($data, 'ship_to_billing_address')) {
-            $shippingAddress = $data['billpayer']['address'];
-            $shippingAddress['name'] = $this->getShipToName($this->getBillpayer());
-        } else {
-            $shippingAddress = $data['shipping_address'] ?? ($data['shippingAddress'] ?? []);
-        }
-
-        $this->updateShippingAddress($shippingAddress);
-
-        foreach (Arr::except($data, ['billpayer', 'ship_to_billing_address', 'shipping_address', 'shippingAddress']) as $key => $value) {
-            $this->setCustomAttribute($key, $value);
-        }
+        return $this->readRawDataFromStore(static::CUSTOM_ATTRIBUTES_KEY) ?? [];
     }
 
     public function total()
@@ -140,34 +79,37 @@ class SessionStore implements CheckoutStore
         return $this->cart->total();
     }
 
-    protected function updateBillpayer($data)
+    public function offsetExists(mixed $offset)
     {
-        $billpayer = $this->getBillpayer();
-        $this->fill($billpayer, Arr::except($data, 'address'));
-        $this->fill($billpayer->address, $data['address']);
-
-        $this->setBillpayer($billpayer);
-    }
-
-    protected function updateShippingAddress($data)
-    {
-        $shippingAddress = $this->getShippingAddress();
-        $this->fill($shippingAddress, $data);
-        $this->setShippingAddress($shippingAddress);
-    }
-
-    protected function storeData(string $key, mixed $value): void
-    {
-        $normalizedData = $value;
-        if (!is_scalar($value) && $value instanceof Arrayable) {
-            $normalizedData = $value->toArray();
+        if ($this->isAnAliasAttribute($offset)) {
+            $offset = $this->getTargetOfAlias($offset);
         }
 
-        $this->session->put($this->prefix . $key, $normalizedData);
+        return in_array($offset, array_merge($this->attributesPlain, $this->attributesViaGetterSetter));
     }
 
-    protected function retrieveData(string $key): mixed
+    public function offsetUnset(mixed $offset)
     {
-        return $this->session->get($this->prefix . $key);
+        $this->session->forget($offset);
+    }
+
+    public function clear(): void
+    {
+        $this->session->forget($this->prefix);
+    }
+
+    protected function readRawDataFromStore(string $key, $default = null): mixed
+    {
+        return $this->session->get($this->prefix . '.' . $key, $default);
+    }
+
+    protected function writeRawDataToStore(string $key, mixed $data): void
+    {
+        $normalizedData = $data;
+        if (!is_scalar($data) && $data instanceof Arrayable) {
+            $normalizedData = $data->toArray();
+        }
+
+        $this->session->put($this->prefix . '.' . $key, $normalizedData);
     }
 }

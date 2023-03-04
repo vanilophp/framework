@@ -29,6 +29,14 @@ use Vanilo\Contracts\CheckoutSubject;
  * @method static setBillpayer(Billpayer $billpayer)
  * @method static getShippingAddress(): Address
  * @method static setShippingAddress(Address $address)
+ * @method static getShipToBillingAddress(bool $default = true): bool
+ * @method static setShipToBillingAddress(bool $value): void
+ * @method static getShippingMethodId(): null|int|string
+ * @method static setShippingMethodId(null|int|string $shippingMethodId): void
+ * @method static getPaymentMethodId(): null|int|string
+ * @method static setPaymentMethodId(null|int|string $paymentMethodId): void
+ * @method static getNotes(): ?string
+ * @method static setNotes(?string $text): void
  * @method static setCustomAttribute(string $key, $value): void
  * @method static getCustomAttribute(string $key)
  * @method static putCustomAttributes(array $data): void
