@@ -14,10 +14,11 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests\Example;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Vanilo\Contracts\Address as AddressContract;
 
-class Billpayer implements \Vanilo\Contracts\Billpayer
+class Billpayer implements \Vanilo\Contracts\Billpayer, Arrayable
 {
     /** @var Address */
     public $address;
@@ -92,16 +93,29 @@ class Billpayer implements \Vanilo\Contracts\Billpayer
 
     public function getFirstName(): ?string
     {
-        return $this->data['first_name'] ?? null;
+        return $this->data['firstname'] ?? null;
     }
 
     public function getLastName(): ?string
     {
-        return $this->data['last_name'] ?? null;
+        return $this->data['lastname'] ?? null;
     }
 
     public function getFullName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    public function fill(array $attributes)
+    {
+        $this->data = array_merge($this->data, $attributes);
+    }
+
+    public function toArray()
+    {
+        return array_merge(
+            $this->data,
+            ['address' => $this->address->toArray()],
+        );
     }
 }

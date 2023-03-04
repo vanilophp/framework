@@ -14,9 +14,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests\Example;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Konekt\Address\Models\Country;
+use Konekt\Address\Models\Province;
 use Vanilo\Contracts\Address as AddressContract;
 
-class Address implements AddressContract
+class Address implements AddressContract, Arrayable
 {
     protected $data;
 
@@ -25,12 +28,21 @@ class Address implements AddressContract
         $this->data = $data ?: [];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function __set($name, $value)
     {
         $this->data[$name] = $value;
+    }
+
+    public function __get($name)
+    {
+        // Emulates the relationship
+        if ('country' === $name && array_key_exists('country_id', $this->data)) {
+            return Country::find($this->data['country_id']);
+        } elseif ('province' === $name && array_key_exists('province_id', $this->data)) {
+            return Province::find($this->data['province_id']);
+        }
+
+        return $this->data[$name] ?? null;
     }
 
     public function getName(): string
@@ -61,5 +73,15 @@ class Address implements AddressContract
     public function getAddress(): string
     {
         return $this->data['address'] ?? '';
+    }
+
+    public function fill(array $attributes)
+    {
+        $this->data = array_merge($this->data, $attributes);
+    }
+
+    public function toArray()
+    {
+        return $this->data;
     }
 }
