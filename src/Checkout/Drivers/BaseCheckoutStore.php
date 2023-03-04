@@ -92,7 +92,6 @@ abstract class BaseCheckoutStore implements CheckoutStore, ArrayAccess
     public function setShipToBillingAddress(bool $value): void
     {
         $this->writeRawDataToStore('ship_to_billing_address', $value);
-
     }
 
     public function setBillpayer(Billpayer $billpayer)
