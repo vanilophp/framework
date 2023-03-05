@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Contracts;
 
+/* @todo  Add callable ...$hooks parameter in v4 */
 interface OrderFactory
 {
     /**

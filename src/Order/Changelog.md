@@ -7,6 +7,7 @@
 
 - Added the `processing` order status enum value
 - Added the `ready_for_pickup` fulfillment status enum value
+- Added optional hooks (callbacks) support to the `OrderFactory::createFromDataArray()` method
 
 ## 3.5.1
 ##### 2023-02-23

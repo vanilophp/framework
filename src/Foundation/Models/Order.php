@@ -19,6 +19,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Konekt\Customer\Models\CustomerProxy;
+use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Support\HasAdjustmentsViaRelation;
+use Vanilo\Adjustments\Support\RecalculatesAdjustments;
 use Vanilo\Channel\Contracts\Channel;
 use Vanilo\Channel\Models\ChannelProxy;
 use Vanilo\Contracts\Payable;
@@ -41,8 +44,11 @@ use Vanilo\Shipment\Models\ShippingMethodProxy;
  * @property-read Collection|Payment[] $payments
  * @property-read Collection|ShipmentContract[] $shipments
  */
-class Order extends BaseOrder implements Payable
+class Order extends BaseOrder implements Payable, Adjustable
 {
+    use HasAdjustmentsViaRelation;
+    use RecalculatesAdjustments;
+
     public function getPayableId(): string
     {
         return (string) $this->id;
@@ -81,6 +87,16 @@ class Order extends BaseOrder implements Payable
     public function shippingMethod(): BelongsTo
     {
         return $this->belongsTo(ShippingMethodProxy::modelClass());
+    }
+
+    public function total(): float
+    {
+        return $this->itemsTotal() + $this->adjustments()->total();
+    }
+
+    public function itemsTotal(): float
+    {
+        return $this->items->sum('total');
     }
 
     public function getCurrentPayment(): ?Payment

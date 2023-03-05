@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Konekt\Address\Contracts\AddressType;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\AddressTypeProxy;
+use ReflectionFunction;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Contracts\Billpayer;
@@ -41,7 +42,7 @@ class OrderFactory implements OrderFactoryContract
     /**
      * @inheritDoc
      */
-    public function createFromDataArray(array $data, array $items): Order
+    public function createFromDataArray(array $data, array $items, callable ...$hooks): Order
     {
         if (empty($items)) {
             throw new CreateOrderException(__('Can not create an order without items'));
@@ -69,6 +70,10 @@ class OrderFactory implements OrderFactoryContract
                     return $item;
                 }, $items)
             );
+
+            foreach ($hooks as $hook) {
+                $this->callHook($hook, $order, $data, $items);
+            }
 
             $order->save();
         } catch (\Exception $e) {
@@ -188,5 +193,19 @@ class OrderFactory implements OrderFactoryContract
         $address['name'] = empty(Arr::get($address, 'name')) ? '-' : $address['name'];
 
         return AddressProxy::create($address);
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    private function callHook(callable $hook, mixed $order, array $data, array $items): void
+    {
+        $ref = new ReflectionFunction($hook);
+        match ($ref->getNumberOfParameters()) {
+            0 => $hook(),
+            1 => $hook($order),
+            2 => $hook($order, $data),
+            default => $hook($order, $data, $items),
+        };
     }
 }

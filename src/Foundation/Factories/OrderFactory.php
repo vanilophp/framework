@@ -14,13 +14,19 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Factories;
 
+use Illuminate\Support\Arr;
+use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Checkout\Contracts\Checkout;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\Configurable;
+use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Factories\OrderFactory as BaseOrderFactory;
 
 class OrderFactory extends BaseOrderFactory
 {
+    protected ?AdjustmentCollection $sourceAdjustments = null;
+
     public function createFromCheckout(Checkout $checkout)
     {
         $orderData = [
@@ -31,7 +37,21 @@ class OrderFactory extends BaseOrderFactory
 
         $items = $this->convertCartItemsToDataArray($checkout->getCart());
 
-        return $this->createFromDataArray($orderData, $items);
+        $this->sourceAdjustments = $checkout->getCart()->adjustments();
+
+        return $this->createFromDataArray($orderData, $items, \Closure::fromCallable([$this, 'copyAdjustmentsHook']));
+    }
+
+    protected function copyAdjustmentsHook(Order $order): void
+    {
+        if ($order instanceof Adjustable) {
+            foreach ($this->sourceAdjustments as $adjustment) {
+                $clone = $adjustment->newInstance(
+                    Arr::except($adjustment->getAttributes(), ['id', 'adjustable_type', 'adjustable_id', 'created_at', 'upated_at'])
+                );
+                $order->adjustments()->add($clone);
+            }
+        }
     }
 
     protected function convertCartItemsToDataArray(CheckoutSubject $cart)
