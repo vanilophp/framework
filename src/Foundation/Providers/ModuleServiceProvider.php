@@ -36,6 +36,7 @@ use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Shipment;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Models\Taxonomy;
+use Vanilo\Foundation\Shipping\FlatFeeCalculator;
 use Vanilo\MasterProduct\Contracts\MasterProduct as MasterProductContract;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
@@ -47,6 +48,7 @@ use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Models\ShipmentProxy;
+use Vanilo\Shipment\ShippingFeeCalculators;
 
 class ModuleServiceProvider extends BaseBoxServiceProvider
 {
@@ -83,6 +85,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'order' => OrderProxy::modelClass(),
             'shipment' => ShipmentProxy::modelClass(),
         ]);
+
+        ShippingFeeCalculators::register(FlatFeeCalculator::ID, FlatFeeCalculator::class);
 
         // Use the foundation's extended order factory
         $this->app->bind(OrderFactoryContract::class, OrderFactory::class);

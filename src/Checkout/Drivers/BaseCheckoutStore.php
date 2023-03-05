@@ -26,9 +26,12 @@ use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\Dimension;
+use Vanilo\Contracts\Shippable;
 
 /** @todo Remove `ArrayAccess` and make the CheckoutStore interface to extend ArrayAccess in v4 */
-abstract class BaseCheckoutStore implements CheckoutStore, ArrayAccess
+/** @todo Remove `Shippable` and make the Checkout interface to extend Shippable in v4 */
+abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAccess
 {
     use EmulatesFillAttributes;
 
@@ -156,6 +159,22 @@ abstract class BaseCheckoutStore implements CheckoutStore, ArrayAccess
     public function setState($state)
     {
         $this->writeRawDataToStore('state', $state instanceof CheckoutState ? $state->value() : $state);
+    }
+
+    public function weight(): float
+    {
+        return floatval($this->getCart()->getItems()->sum('weight'));
+    }
+
+    public function weightUnit(): string
+    {
+        return config('vanilo.checkout.default.weight_unit', 'kg');
+    }
+
+    public function dimension(): ?Dimension
+    {
+        // @todo Calculate the dimensions from the items
+        return null;
     }
 
     public function offsetSet(mixed $offset, mixed $value)

@@ -15,6 +15,8 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Vanilo\Checkout\Events\ShippingMethodSelected;
+use Vanilo\Foundation\Listeners\UpdateCheckoutShippingAdjustments;
 use Vanilo\Foundation\Listeners\UpdateSalesFigures;
 use Vanilo\Order\Events\OrderWasCreated;
 
@@ -22,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         OrderWasCreated::class => [
-            UpdateSalesFigures::class
-        ]
+            UpdateSalesFigures::class,
+        ],
+        ShippingMethodSelected::class => [
+            UpdateCheckoutShippingAdjustments::class,
+        ],
     ];
 }

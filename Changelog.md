@@ -13,12 +13,17 @@
 - Changed minimum Address module requirement to v2.5
 - Refactored the internals of the Checkout stores (session and request)
 - Added the `ShippingMethodSelected` checkout event
+- Added Shipping fee calculator support
+- Added the flat fee shipping fee calculator (Foundation)
+- Added a listener (Foundation) that calculates the shipping fee on checkout shipping method change
 - Added the following fields as recognized, regular fields of the checkout:
     - `shipping_method_id`
     - `payment_method_id`
     - `ship_to_billing_address`
     - `notes`
 - Added `ArrayAccess` to the CheckoutManager and to the Checkout Stores
+- Added `Shippable` to the CheckoutManager and to the Checkout Stores
+- Added the `vanilo.checkout.default.weight_unit` config key which defaults to 'kg'
 - Added the following methods to the Checkout implementations (Manager, Stores but not the interfaces):
     - `getShipToBillingAddress()`
     - `setShipToBillingAddress()`
@@ -28,6 +33,10 @@
     - `setPaymentMethodId()`
     - `getNotes()`
     - `setNotes()`
+- Added `dimensions()` and `hasDimensions()` methods to the `MasterProductVariant` model
+  Added the `Dimension` DTO class in the support module (provides a default implementation for the same name interface)
+- Added the vanilo/support ^3.6 dependency to the Product module
+- Changed the return value of `Product::dimension()` to be a `Dimension` object from the support package instead of an anonymous class object
 - Fixed the data loss issue when using the session checkout driver with cookie session driver in Laravel
 
 ## 3.5.1

@@ -20,7 +20,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 use Konekt\Address\Contracts\Zone;
 use Konekt\Address\Models\ZoneProxy;
+use Vanilo\Shipment\Calculators\NullShippingFeeCalculator;
+use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
+use Vanilo\Shipment\ShippingFeeCalculators;
 use Vanilo\Shipment\Traits\BelongsToCarrier;
 use Vanilo\Support\Traits\ConfigurableModel;
 
@@ -64,6 +67,16 @@ class ShippingMethod extends Model implements ShippingMethodContract
         return self::forZones(array_map(fn (Zone|int $zone) => is_int($zone) ? $zone : $zone->id, $zones))
             ->actives()
             ->get();
+    }
+
+    /** @todo Add this to the ShippingMethod interface in v4 */
+    public function getCalculator(): ShippingFeeCalculator
+    {
+        if (null === $this->calculator) {
+            return new NullShippingFeeCalculator();
+        }
+
+        return ShippingFeeCalculators::make($this->calculator);
     }
 
     public function zone(): BelongsTo

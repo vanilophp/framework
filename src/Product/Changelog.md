@@ -2,6 +2,12 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Changed the return value of `Product::dimension()` to be a `Dimension` object from the support package instead of an anonymous class object
+- Added vanilo/support ^3.6 dependency
+
 ## 3.5.0
 ##### 2023-02-23
 

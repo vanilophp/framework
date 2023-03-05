@@ -13,6 +13,8 @@
   - `ship_to_billing_address`
   - `notes`
 - Added `ArrayAccess` to the CheckoutManager and to the Checkout Stores
+- Added `Shippable` to the CheckoutManager and to the Checkout Stores
+- Added the `vanilo.checkout.default.weight_unit` config key which defaults to 'kg'
 - Added the following methods to the Checkout implementations (Manager, Stores but not the interfaces):
   - `getShipToBillingAddress()`
   - `setShipToBillingAddress()`

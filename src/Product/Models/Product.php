@@ -20,8 +20,9 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
-use Vanilo\Contracts\Dimension;
+use Vanilo\Contracts\Dimension as DimensionContract;
 use Vanilo\Product\Contracts\Product as ProductContract;
+use Vanilo\Support\Dto\Dimension;
 
 /**
  * @property int $id
@@ -124,31 +125,12 @@ class Product extends Model implements ProductContract
         return null !== $this->width && null !== $this->height && null !== $this->length;
     }
 
-    public function dimension(): ?Dimension
+    public function dimension(): ?DimensionContract
     {
         if (!$this->hasDimensions()) {
             return null;
         }
 
-        return new class ($this->width, $this->height, $this->length) implements Dimension {
-            public function __construct(private float $width, private float $height, private float $length)
-            {
-            }
-
-            public function width(): float
-            {
-                return $this->width;
-            }
-
-            public function height(): float
-            {
-                return $this->height;
-            }
-
-            public function length(): float
-            {
-                return $this->length;
-            }
-        };
+        return new Dimension($this->width, $this->height, $this->length);
     }
 }

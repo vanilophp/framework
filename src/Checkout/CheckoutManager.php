@@ -21,9 +21,12 @@ use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\Dimension;
+use Vanilo\Contracts\Shippable;
 
 /** @todo Remove `ArrayAccess` and make the Checkout interface to extend ArrayAccess in v4 */
-class CheckoutManager implements CheckoutContract, \ArrayAccess
+/** @todo Remove `Shippable` and make the Checkout interface to extend Shippable in v4 */
+class CheckoutManager implements CheckoutContract, Shippable, \ArrayAccess
 {
     use ForwardsCalls;
 
@@ -143,6 +146,21 @@ class CheckoutManager implements CheckoutContract, \ArrayAccess
     public function total()
     {
         return $this->store->total();
+    }
+
+    public function weight(): float
+    {
+        return $this->store->weight();
+    }
+
+    public function weightUnit(): string
+    {
+        return $this->store->weightUnit();
+    }
+
+    public function dimension(): ?Dimension
+    {
+        return $this->store->dimension();
     }
 
     public function offsetExists(mixed $offset)

@@ -6,5 +6,8 @@ return [
     'event_listeners' => true,
     'store' => [
         'driver' => 'request'
-    ]
+    ],
+    'default' => [
+        'weight_unit' => 'kg',
+    ],
 ];
