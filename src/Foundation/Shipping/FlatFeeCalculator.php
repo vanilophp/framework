@@ -15,6 +15,8 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Shipping;
 
 use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
+use Vanilo\Contracts\Buyable;
+use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Exceptions\InvalidShippingConfigurationException;
 use Vanilo\Shipment\Models\ShippingFee;
@@ -43,8 +45,8 @@ class FlatFeeCalculator implements ShippingFeeCalculator
     {
         [$cost, $freeThreshold] = $this->toParameters($configuration);
 
-        if (null !== $subject && method_exists($subject, 'itemsTotal')) {
-            if (null !== $freeThreshold && $subject->itemsTotal() >= $freeThreshold) {
+        if (null !== $freeThreshold && null !== $itemsTotal = $this->itemsTotal($subject)) {
+            if ($itemsTotal >= $freeThreshold) {
                 $amount = DetailedAmount::fromArray([
                     ['title' => __('Shipping Fee'), 'amount' => $cost],
                     ['title' => __('Free shipping for orders above :amount', ['amount' => format_price($freeThreshold)]), 'amount' => -$cost],
@@ -67,5 +69,22 @@ class FlatFeeCalculator implements ShippingFeeCalculator
         $freeThreshold = is_null($freeThreshold) ? null : floatval($freeThreshold);
 
         return [$cost, $freeThreshold];
+    }
+
+    private function itemsTotal(?object $subject): ?float
+    {
+        if (null === $subject) {
+            return null;
+        }
+
+        if (method_exists($subject, 'itemsTotal')) {
+            return $subject->itemsTotal();
+        } elseif ($subject instanceof CheckoutSubject) {
+            return $subject->getItems()->sum('total');
+        } elseif ($subject instanceof Buyable) {
+            return $subject->getPrice();
+        }
+
+        return null;
     }
 }
