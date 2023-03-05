@@ -19,6 +19,7 @@ use Vanilo\Contracts\DetailedAmount;
 class ShippingFee
 {
     protected ?object $adjuster;
+
     private DetailedAmount $detailedAmount;
 
     /**
