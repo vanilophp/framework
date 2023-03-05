@@ -48,6 +48,7 @@ class OrderItem extends Model implements OrderItemContract, Configurable
 
     protected $casts = [
         'configuration' => 'json',
+        'quantity' => 'int',
     ];
 
     public function order()

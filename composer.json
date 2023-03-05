@@ -52,7 +52,7 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "6 - 7",
+        "orchestra/testbench": "^7.0",
         "phpunit/phpunit" : "^9.0",
         "laravel/legacy-factories": "^1.0.4"
     },
