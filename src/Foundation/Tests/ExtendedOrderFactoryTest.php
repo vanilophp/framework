@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
-use Phalcon\Forms\Element\Check;
-use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
