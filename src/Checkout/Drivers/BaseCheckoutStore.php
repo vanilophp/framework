@@ -16,10 +16,12 @@ namespace Vanilo\Checkout\Drivers;
 
 use ArrayAccess;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
+use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Contracts\Billpayer;
@@ -123,7 +125,12 @@ abstract class BaseCheckoutStore implements CheckoutStore, ArrayAccess
 
     public function setShippingMethodId(null|int|string $shippingMethodId): void
     {
+        $old = $this->getShippingMethodId();
         $this->writeRawDataToStore('shipping_method_id', $shippingMethodId);
+
+        if ($old !== $shippingMethodId) {
+            Event::dispatch(new ShippingMethodSelected($this, $old));
+        }
     }
 
     public function getPaymentMethodId(): null|int|string

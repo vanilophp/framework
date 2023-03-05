@@ -6,6 +6,7 @@
 ##### 2023-XX-YY
 
 - Refactored the internals of the Checkout stores (session and request)
+- Added the `ShippingMethodSelected` checkout event
 - Added the following fields as recognized, regular fields of the checkout:
   - `shipping_method_id`
   - `payment_method_id`

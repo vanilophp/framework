@@ -12,6 +12,7 @@
 - Added Zone support to shipping methods (optional)
 - Changed minimum Address module requirement to v2.5
 - Refactored the internals of the Checkout stores (session and request)
+- Added the `ShippingMethodSelected` checkout event
 - Added the following fields as recognized, regular fields of the checkout:
     - `shipping_method_id`
     - `payment_method_id`
