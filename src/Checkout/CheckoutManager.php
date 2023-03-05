@@ -148,6 +148,12 @@ class CheckoutManager implements CheckoutContract, Shippable, \ArrayAccess
         return $this->store->total();
     }
 
+    /** @todo add this to the interface in v4 */
+    public function itemsTotal(): float
+    {
+        return $this->getCart()->getItems()->sum('total');
+    }
+
     public function weight(): float
     {
         return $this->store->weight();
