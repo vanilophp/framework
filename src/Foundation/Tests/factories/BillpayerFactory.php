@@ -13,7 +13,6 @@ declare(strict_types=1);
  */
 
 use Faker\Generator as Faker;
-use Vanilo\Foundation\Models\Address;
 use Vanilo\Order\Models\Billpayer;
 
 $factory->define(Billpayer::class, function (Faker $faker) {
@@ -21,6 +20,5 @@ $factory->define(Billpayer::class, function (Faker $faker) {
         'firstname' => $faker->firstName,
         'lastname' => $faker->lastName,
         'company_name' => $faker->company,
-        'address_id' => factory(Address::class)->create(),
     ];
 });
