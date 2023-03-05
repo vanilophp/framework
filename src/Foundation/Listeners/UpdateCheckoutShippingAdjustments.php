@@ -45,5 +45,6 @@ class UpdateCheckoutShippingAdjustments
         if ($adjuster = $calculator->getAdjuster($shippingMethod->configuration())) {
             $cart->adjustments()->create($adjuster);
         }
+        $checkout->setShippingAmount($shippingMethod->estimate($checkout)->amount());
     }
 }

@@ -31,6 +31,10 @@
     - `setShippingMethodId()`
     - `getPaymentMethodId()`
     - `setPaymentMethodId()`
+    - `getShippingAmount()`
+    - `setShippingAmount()`
+    - `getTaxesAmount()`
+    - `setTaxesAmount()`
     - `getNotes()`
     - `setNotes()`
 - Added optional hooks (callbacks) support to the `OrderFactory::createFromDataArray()` method

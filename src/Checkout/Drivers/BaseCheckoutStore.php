@@ -26,6 +26,7 @@ use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
 use Vanilo\Contracts\Shippable;
 
@@ -80,6 +81,16 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
         }
 
         $this->updateShippingAddress($shippingAddress);
+    }
+
+    public function total()
+    {
+        return $this->getCart()?->total();
+    }
+
+    public function itemsTotal()
+    {
+        return $this->getCart()?->getItems()->sum('total');
     }
 
     public function getState(): CheckoutState
@@ -234,7 +245,7 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
 
     protected function updateShipToBillingAddress($data): void
     {
-        $this->setShipToBillingAddress((bool) $data);
+        $this->setShipToBillingAddress((bool)$data);
     }
 
     protected function getAttribute(string $name): mixed
@@ -297,6 +308,18 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
     {
         return array_key_exists($name, $this->attributeAliases);
     }
+
+    /** @todo add this to the interface in v4 */
+    abstract public function getShippingAmount(): DetailedAmount;
+
+    /** @todo add this to the interface in v4 */
+    abstract public function setShippingAmount(float|DetailedAmount $amount): void;
+
+    /** @todo add this to the interface in v4 */
+    abstract public function getTaxesAmount(): DetailedAmount;
+
+    /** @todo add this to the interface in v4 */
+    abstract public function setTaxesAmount(float|DetailedAmount $amount): void;
 
     abstract protected function readRawDataFromStore(string $key, $default = null): mixed;
 

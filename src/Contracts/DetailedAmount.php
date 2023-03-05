@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
-interface DetailedAmount
+use Illuminate\Contracts\Support\Arrayable;
+
+interface DetailedAmount extends Arrayable
 {
     public function getValue(): float;
 

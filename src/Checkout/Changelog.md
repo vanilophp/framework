@@ -22,6 +22,10 @@
   - `setShippingMethodId()`
   - `getPaymentMethodId()`
   - `setPaymentMethodId()`
+  - `getShippingAmount()`
+  - `setShippingAmount()`
+  - `getTaxesAmount()`
+  - `setTaxesAmount()`
   - `getNotes()`
   - `setNotes()`
 - Fixed the data loss issue when using the session checkout driver with cookie session driver in Laravel

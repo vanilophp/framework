@@ -21,6 +21,7 @@ use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
 use Vanilo\Contracts\Shippable;
 
@@ -152,6 +153,30 @@ class CheckoutManager implements CheckoutContract, Shippable, \ArrayAccess
     public function itemsTotal(): float
     {
         return $this->getCart()->getItems()->sum('total');
+    }
+
+    /** @todo add this to the interface in v4 */
+    public function getShippingAmount(): DetailedAmount
+    {
+        return $this->store->getShippingAmount();
+    }
+
+    /** @todo add this to the interface in v4 */
+    public function setShippingAmount(float|DetailedAmount $amount): void
+    {
+        $this->store->setShippingAmount($amount);
+    }
+
+    /** @todo add this to the interface in v4 */
+    public function getTaxesAmount(): DetailedAmount
+    {
+        return $this->store->getTaxesAmount();
+    }
+
+    /** @todo add this to the interface in v4 */
+    public function setTaxesAmount(float|DetailedAmount $amount): void
+    {
+        $this->store->setTaxesAmount($amount);
     }
 
     public function weight(): float

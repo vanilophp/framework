@@ -60,6 +60,11 @@ final class DetailedAmount implements DetailedAmountContract
         return $instance;
     }
 
+    public function toArray()
+    {
+        return $this->getDetails();
+    }
+
     public function getValue(): float
     {
         return $this->value;

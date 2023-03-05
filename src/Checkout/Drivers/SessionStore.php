@@ -18,6 +18,8 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Support\Arrayable;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\DetailedAmount;
+use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
 
 class SessionStore extends BaseCheckoutStore
 {
@@ -51,6 +53,31 @@ class SessionStore extends BaseCheckoutStore
         $this->writeRawDataToStore('shipping_address', $address);
     }
 
+    public function getShippingAmount(): DetailedAmount
+    {
+        $raw = $this->readRawDataFromStore('shipping_fees', []);
+
+        return is_array($raw) ?
+            DetailedAmountDto::fromArray($raw) : new DetailedAmountDto(is_numeric($raw) ? floatval($raw) : 0);
+    }
+
+    public function setShippingAmount(float|DetailedAmount $amount): void
+    {
+        $this->writeRawDataToStore('shipping_fees', $amount);
+    }
+
+    public function getTaxesAmount(): DetailedAmount
+    {
+        $raw = $this->readRawDataFromStore('taxes', []);
+        return is_array($raw) ?
+            DetailedAmountDto::fromArray($raw) : new DetailedAmountDto(is_numeric($raw) ? floatval($raw) : 0);
+    }
+
+    public function setTaxesAmount(float|DetailedAmount $amount): void
+    {
+        $this->writeRawDataToStore('taxes', $amount);
+    }
+
     public function setCustomAttribute(string $key, $value): void
     {
         $customAttributes = $this->getCustomAttributes();
@@ -72,11 +99,6 @@ class SessionStore extends BaseCheckoutStore
     public function getCustomAttributes(): array
     {
         return $this->readRawDataFromStore(static::CUSTOM_ATTRIBUTES_KEY) ?? [];
-    }
-
-    public function total()
-    {
-        return $this->cart->total();
     }
 
     public function offsetExists(mixed $offset)

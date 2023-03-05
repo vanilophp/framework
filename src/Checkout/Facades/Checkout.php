@@ -19,6 +19,7 @@ use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\DetailedAmount;
 
 /**
  * @method static getCart(): ?CheckoutSubject
@@ -35,6 +36,10 @@ use Vanilo\Contracts\CheckoutSubject;
  * @method static setShippingMethodId(null|int|string $shippingMethodId): void
  * @method static getPaymentMethodId(): null|int|string
  * @method static setPaymentMethodId(null|int|string $paymentMethodId): void
+ * @method static getShippingAmount(): DetailedAmount;
+ * @method static setShippingAmount(float|DetailedAmount $amount): void;
+ * @method static getTaxesAmount(): DetailedAmount;
+ * @method static setTaxesAmount(float|DetailedAmount $amount): void;
  * @method static getNotes(): ?string
  * @method static setNotes(?string $text): void
  * @method static setCustomAttribute(string $key, $value): void

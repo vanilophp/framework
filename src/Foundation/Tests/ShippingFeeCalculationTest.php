@@ -18,6 +18,7 @@ use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
+use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
 use Vanilo\Shipment\Models\ShippingMethod;
@@ -84,6 +85,10 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertEquals(3.99, $shippingAdjustment->getAmount());
         $this->assertEquals(20, Cart::itemsTotal());
         $this->assertEquals(20 + 3.99, Cart::total());
+
+        $shippingAmount = Checkout::getShippingAmount();
+        $this->assertInstanceOf(DetailedAmount::class, $shippingAmount);
+        $this->assertEquals(3.99, $shippingAmount->getValue());
     }
 
     /** @test */
@@ -107,6 +112,25 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertEquals(0, $shippingAdjustment->getAmount());
         $this->assertEquals(30, Cart::itemsTotal());
         $this->assertEquals(30, Cart::total());
+    }
+
+    /** @test */
+    public function it_creates_two_lines_of_shipping_details_if_the_free_shipping_threshold_is_exceeded()
+    {
+        $product = factory(Product::class)->create(['price' => 100]);
+        $shippingMethod = ShippingMethod::create([
+            'name' => 'Yo! Gabba Gabba!',
+            'calculator' => FlatFeeCalculator::ID,
+            'configuration' => ['cost' => 7.99, 'free_threshold' => 50],
+        ]);
+
+        Cart::addItem($product);
+        Checkout::setCart(Cart::getFacadeRoot());
+        Checkout::setShippingMethodId($shippingMethod->id);
+
+        $shippingDetails = Checkout::getShippingAmount();
+        $this->assertEquals(0, $shippingDetails->getValue());
+        $this->assertCount(2, $shippingDetails->getDetails());
     }
 
     /** @test */

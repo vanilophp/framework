@@ -22,6 +22,8 @@ use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCheckoutState;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
+use Vanilo\Contracts\DetailedAmount;
+use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
 
 /**
  * Stores & fetches checkout data across http requests.
@@ -48,6 +50,10 @@ class RequestStore extends BaseCheckoutStore
 
     protected bool $shipToBillingAddress = false;
 
+    protected DetailedAmount $shippingFees;
+
+    protected DetailedAmount $taxes;
+
     protected Request $request;
 
     /** @var array */
@@ -64,14 +70,8 @@ class RequestStore extends BaseCheckoutStore
         $this->request = $request ?? request();
         $this->billpayer = $dataFactory->createBillpayer();
         $this->shippingAddress = $dataFactory->createShippingAddress();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function total()
-    {
-        return $this->cart->total();
+        $this->taxes = new DetailedAmountDto(0);
+        $this->shippingFees = new DetailedAmountDto(0);
     }
 
     /**
@@ -104,6 +104,26 @@ class RequestStore extends BaseCheckoutStore
     public function setShippingAddress(Address $address)
     {
         return $this->shippingAddress = $address;
+    }
+
+    public function getShippingAmount(): DetailedAmount
+    {
+        return $this->shippingFees;
+    }
+
+    public function setShippingAmount(float|DetailedAmount $amount): void
+    {
+        $this->shippingFees = $amount instanceof DetailedAmount ? $amount : new DetailedAmountDto($amount);
+    }
+
+    public function getTaxesAmount(): DetailedAmount
+    {
+        return $this->taxes;
+    }
+
+    public function setTaxesAmount(float|DetailedAmount $amount): void
+    {
+        $this->taxes = $amount instanceof DetailedAmount ? $amount : new DetailedAmountDto($amount);
     }
 
     public function setCustomAttribute(string $key, $value): void
