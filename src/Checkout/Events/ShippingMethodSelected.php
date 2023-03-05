@@ -19,6 +19,7 @@ use Vanilo\Checkout\Contracts\Checkout;
 class ShippingMethodSelected extends BaseCheckoutEvent
 {
     protected null|int|string $oldShippingMethodId;
+
     protected null|int|string $newShippingMethodId;
 
     public function __construct(Checkout $checkout, null|int|string $oldShippingMethodId)
