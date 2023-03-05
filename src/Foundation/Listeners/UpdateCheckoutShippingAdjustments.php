@@ -16,7 +16,6 @@ namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
-use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingMethod;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 

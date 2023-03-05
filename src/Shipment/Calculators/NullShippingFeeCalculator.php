@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Calculators;
 
-use Vanilo\Contracts\Shippable;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Models\ShippingFee;
 

@@ -19,6 +19,7 @@ use Vanilo\Contracts\DetailedAmount;
 class ShippingFee
 {
     private DetailedAmount $detailedAmount;
+
     private bool $isEstimate;
 
     public function __construct(float|DetailedAmount $amount, bool $isEstimate = false)
