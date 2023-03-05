@@ -42,10 +42,8 @@ class UpdateCheckoutShippingAdjustments
             return;
         }
 
-        /** @var ShippingFeeCalculator $calculator */
         $calculator = $shippingMethod->getCalculator();
-        $fee = $calculator->calculate($checkout, $shippingMethod->configuration());
-        if ($adjuster = $fee->getAdjuster()) {
+        if ($adjuster = $calculator->getAdjuster($shippingMethod->configuration())) {
             $cart->adjustments()->create($adjuster);
         }
     }

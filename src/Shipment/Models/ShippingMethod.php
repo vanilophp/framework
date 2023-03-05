@@ -79,6 +79,12 @@ class ShippingMethod extends Model implements ShippingMethodContract
         return ShippingFeeCalculators::make($this->calculator);
     }
 
+    /** @todo Add this to the ShippingMethod interface in v4 */
+    public function estimate(?object $subject = null): ShippingFee
+    {
+        return $this->getCalculator()->calculate($subject, $this->configuration());
+    }
+
     public function zone(): BelongsTo
     {
         return $this->belongsTo(ZoneProxy::modelClass(), 'zone_id', 'id');

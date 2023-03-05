@@ -25,8 +25,13 @@ class NullShippingFeeCalculator implements ShippingFeeCalculator
         return __('No shipping fee');
     }
 
-    public function calculate(Shippable $shippable, ?array $configuration = null): ShippingFee
+    public function calculate(object $subject = null, ?array $configuration = null): ShippingFee
     {
         return new ShippingFee(0);
+    }
+
+    public function getAdjuster(?array $configuration = null): ?object
+    {
+        return null;
     }
 }

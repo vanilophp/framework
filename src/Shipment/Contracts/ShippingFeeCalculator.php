@@ -14,12 +14,19 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Contracts;
 
-use Vanilo\Contracts\Shippable;
 use Vanilo\Shipment\Models\ShippingFee;
 
 interface ShippingFeeCalculator
 {
     public static function getName(): string;
 
-    public function calculate(Shippable $shippable, ?array $configuration = null): ShippingFee;
+    /**
+     * We don't set the return type on the language level
+     * since the adjustments module is optional
+     *
+     * @return null|\Vanilo\Adjustments\Contracts\Adjuster
+     */
+    public function getAdjuster(?array $configuration = null): ?object;
+
+    public function calculate(?object $subject = null, ?array $configuration = null): ShippingFee;
 }

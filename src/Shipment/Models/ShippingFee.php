@@ -18,33 +18,22 @@ use Vanilo\Contracts\DetailedAmount;
 
 class ShippingFee
 {
-    protected ?object $adjuster;
-
     private DetailedAmount $detailedAmount;
+    private bool $isEstimate;
 
-    /**
-     * @param float|DetailedAmount|null $amount
-     * @param \Vanilo\Adjustments\Contracts\Adjuster|null $adjuster
-     */
-    public function __construct(float|DetailedAmount $amount, ?object $adjuster = null)
+    public function __construct(float|DetailedAmount $amount, bool $isEstimate = false)
     {
-        $this->adjuster = $adjuster;
+        $this->isEstimate = $isEstimate;
         $this->detailedAmount = $amount instanceof DetailedAmount ? $amount : new \Vanilo\Support\Dto\DetailedAmount($amount);
-    }
-
-    /**
-     * We don't set the return type on the language level
-     * since the adjustments module is optional
-     *
-     * @return null|\Vanilo\Adjustments\Contracts\Adjuster
-     */
-    public function getAdjuster(): ?object
-    {
-        return $this->adjuster;
     }
 
     public function amount(): DetailedAmount
     {
         return $this->detailedAmount;
+    }
+
+    public function isEstimate(): bool
+    {
+        return $this->isEstimate;
     }
 }

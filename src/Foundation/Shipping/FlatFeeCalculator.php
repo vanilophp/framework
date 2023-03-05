@@ -15,10 +15,10 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Shipping;
 
 use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
-use Vanilo\Contracts\Shippable;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Exceptions\InvalidShippingConfigurationException;
 use Vanilo\Shipment\Models\ShippingFee;
+use Vanilo\Support\Dto\DetailedAmount;
 
 class FlatFeeCalculator implements ShippingFeeCalculator
 {
@@ -29,17 +29,43 @@ class FlatFeeCalculator implements ShippingFeeCalculator
         return __('Flat fee');
     }
 
-    public function calculate(Shippable $shippable, ?array $configuration = null): ShippingFee
+    public function getAdjuster(?array $configuration = null): ?object
+    {
+        [$cost, $freeThreshold] = $this->toParameters($configuration);
+
+        $adjuster = new SimpleShippingFee($cost, $freeThreshold);
+        $adjuster->setTitle($configuration['title'] ?? __('Shipping fee'));
+
+        return $adjuster;
+    }
+
+    public function calculate(?object $subject = null, ?array $configuration = null): ShippingFee
+    {
+        [$cost, $freeThreshold] = $this->toParameters($configuration);
+
+        if (null !== $subject && method_exists($subject, 'itemsTotal')) {
+            if (null !== $freeThreshold && $subject->itemsTotal() >= $freeThreshold) {
+                $amount = DetailedAmount::fromArray([
+                    ['title' => __('Shipping Fee'), 'amount' => $cost],
+                    ['title' => __('Free shipping for orders above :amount', ['amount' => format_price($freeThreshold)]), 'amount' => -$cost],
+                ]);
+                return new ShippingFee($amount, false);
+            }
+        }
+
+        return new ShippingFee($cost, true);
+    }
+
+    private function toParameters(?array $configuration): array
     {
         if (!is_array($configuration) || !isset($configuration['cost'])) {
             throw new InvalidShippingConfigurationException('The shipping fee can not be calculated. The `cost` configuration value is missing.');
         }
+
         $cost = floatval($configuration['cost']);
         $freeThreshold = $configuration['free_threshold'] ?? null;
         $freeThreshold = is_null($freeThreshold) ? null : floatval($freeThreshold);
-        $adjuster = new SimpleShippingFee($cost, $freeThreshold);
-        $adjuster->setTitle($configuration['title'] ?? __('Shipping fee'));
 
-        return new ShippingFee(0, $adjuster);
+        return [$cost, $freeThreshold];
     }
 }
