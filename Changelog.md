@@ -36,6 +36,7 @@
 - Added optional hooks (callbacks) support to the `OrderFactory::createFromDataArray()` method
 - Added implementation of the `Adjustable` interface to the Foundation Order model
 - Added the copying of checkout/cart adjustments to the order created by the Foundation OrderFactory
+- Added `int` cast to OrderItem::quantity property
 - Added `dimensions()` and `hasDimensions()` methods to the `MasterProductVariant` model
   Added the `Dimension` DTO class in the support module (provides a default implementation for the same name interface)
 - Added the vanilo/support ^3.6 dependency to the Product module

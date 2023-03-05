@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use Konekt\Address\Models\Country;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
@@ -28,6 +29,16 @@ use Vanilo\Shipment\Models\ShippingMethod;
 
 class ExtendedOrderFactoryTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Country::firstOrCreate(
+            ['id' => 'RU'],
+            ['name' => 'Russia', 'phonecode' => 7, 'is_eu_member' => false],
+        );
+    }
+
     /** @test */
     public function it_copies_the_shipping_adjustment_over_from_the_cart_to_the_order()
     {
@@ -59,7 +70,7 @@ class ExtendedOrderFactoryTest extends TestCase
     private function completeCheckout(int $useShippingMethodId): void
     {
         $data['billpayer'] = factory(Billpayer::class)->make()->toArray();
-        $data['billpayer']['address'] = factory(Address::class)->make()->toArray();
+        $data['billpayer']['address'] = factory(Address::class)->make(['country_id' => 'RU'])->toArray();
         $data['ship_to_billing_address'] = true;
         $data['shipping_method_id'] = $useShippingMethodId;
 
