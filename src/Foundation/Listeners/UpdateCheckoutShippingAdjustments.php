@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Listeners;
 
-use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingMethod;
@@ -28,10 +28,14 @@ class UpdateCheckoutShippingAdjustments
 
         $cart = $checkout->getCart();
 
-        // @todo we're getting a CartManager here
-//        if (!($cart instanceof Adjustable)) {
-//            return;
-//        }
+        // @todo Check if Cart is Adjustable; we're getting a CartManager here
+
+        if (null !== $event->oldShippingMethodId()) {
+            $shippingAdjustments = $cart->adjustments()->byType(AdjustmentTypeProxy::SHIPPING());
+            foreach ($shippingAdjustments as $adjustment) {
+                $shippingAdjustments->remove($adjustment);
+            }
+        }
 
         /** @var ShippingMethod $shippingMethod */
         if (null === $shippingMethod = ShippingMethodProxy::find($event->selectedShippingMethodId())) {

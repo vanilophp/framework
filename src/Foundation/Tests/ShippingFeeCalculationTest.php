@@ -108,4 +108,41 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertEquals(30, Cart::itemsTotal());
         $this->assertEquals(30, Cart::total());
     }
+
+    /** @test */
+    public function it_doesnt_create_multiple_shipping_adjustments_when_changing_the_shipping_method_multiple_times()
+    {
+        $product = factory(Product::class)->create(['price' => 79.99]);
+        $shippingMethod1 = ShippingMethod::create([
+            'name' => 'Paperboy #1',
+            'calculator' => FlatFeeCalculator::ID,
+            'configuration' => ['cost' => 7.99],
+        ]);
+        $shippingMethod2 = ShippingMethod::create([
+            'name' => 'Paperboy #2',
+            'calculator' => FlatFeeCalculator::ID,
+            'configuration' => ['cost' => 12.99],
+        ]);
+
+        Cart::addItem($product);
+        Checkout::setCart(Cart::getFacadeRoot());
+        Checkout::setShippingMethodId($shippingMethod1->id);
+
+        $shippingAdjustments = Cart::adjustments()->byType(AdjustmentType::SHIPPING());
+        $this->assertCount(1, $shippingAdjustments);
+        $shippingAdjustment = $shippingAdjustments->first();
+        $this->assertEquals(7.99, $shippingAdjustment->getAmount());
+
+        Checkout::setShippingMethodId($shippingMethod2->id);
+        $shippingAdjustments = Cart::adjustments()->byType(AdjustmentType::SHIPPING());
+        $this->assertCount(1, $shippingAdjustments);
+        $shippingAdjustment = $shippingAdjustments->first();
+        $this->assertEquals(12.99, $shippingAdjustment->getAmount());
+
+        Checkout::setShippingMethodId($shippingMethod1->id);
+        $shippingAdjustments = Cart::adjustments()->byType(AdjustmentType::SHIPPING());
+        $this->assertCount(1, $shippingAdjustments);
+        $shippingAdjustment = $shippingAdjustments->first();
+        $this->assertEquals(7.99, $shippingAdjustment->getAmount());
+    }
 }
