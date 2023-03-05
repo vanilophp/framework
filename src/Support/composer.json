@@ -20,7 +20,7 @@
         "php": "^8.0",
         "illuminate/support": "^9.2",
         "nette/schema": "^1.2",
-        "vanilo/contracts": "^3.4"
+        "vanilo/contracts": "^3.6"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0"
