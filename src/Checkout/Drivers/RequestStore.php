@@ -16,7 +16,9 @@ namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Event;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
+use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCheckoutState;
@@ -103,7 +105,8 @@ class RequestStore extends BaseCheckoutStore
      */
     public function setShippingAddress(Address $address)
     {
-        return $this->shippingAddress = $address;
+        $this->shippingAddress = $address;
+        Event::dispatch(new ShippingAddressChanged($this));
     }
 
     public function getShippingAmount(): DetailedAmount

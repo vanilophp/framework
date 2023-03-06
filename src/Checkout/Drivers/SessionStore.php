@@ -16,7 +16,9 @@ namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Facades\Event;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
+use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
@@ -51,6 +53,8 @@ class SessionStore extends BaseCheckoutStore
     public function setShippingAddress(Address $address)
     {
         $this->writeRawDataToStore('shipping_address', $address);
+
+        Event::dispatch(new ShippingAddressChanged($this));
     }
 
     public function getShippingAmount(): DetailedAmount
