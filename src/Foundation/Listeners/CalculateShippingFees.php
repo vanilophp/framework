@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the UpdateCheckoutShippingAdjustments class.
+ * Contains the CalculateShippingFees class.
  *
  * @copyright   Copyright (c) 2023 Vanilo UG
  * @author      Attila Fulop
@@ -15,13 +15,13 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
-use Vanilo\Checkout\Events\ShippingMethodSelected;
+use Vanilo\Checkout\Contracts\CheckoutEvent;
 use Vanilo\Shipment\Contracts\ShippingMethod;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 
-class UpdateCheckoutShippingAdjustments
+class CalculateShippingFees
 {
-    public function handle(ShippingMethodSelected $event): void
+    public function handle(CheckoutEvent $event): void
     {
         $checkout = $event->getCheckout();
 
@@ -29,15 +29,13 @@ class UpdateCheckoutShippingAdjustments
 
         // @todo Check if Cart is Adjustable; we're getting a CartManager here
 
-        if (null !== $event->oldShippingMethodId()) {
-            $shippingAdjustments = $cart->adjustments()->byType(AdjustmentTypeProxy::SHIPPING());
-            foreach ($shippingAdjustments as $adjustment) {
-                $shippingAdjustments->remove($adjustment);
-            }
+        $shippingAdjustments = $cart->adjustments()->byType(AdjustmentTypeProxy::SHIPPING());
+        foreach ($shippingAdjustments as $adjustment) {
+            $shippingAdjustments->remove($adjustment);
         }
 
         /** @var ShippingMethod $shippingMethod */
-        if (null === $shippingMethod = ShippingMethodProxy::find($event->selectedShippingMethodId())) {
+        if (null === $shippingMethod = ShippingMethodProxy::find($checkout->getShippingMethodId())) {
             return;
         }
 
