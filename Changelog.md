@@ -37,6 +37,7 @@
     - `getNotes()`
     - `setNotes()`
 - Added optional hooks (callbacks) support to the `OrderFactory::createFromDataArray()` method
+- Added `payable_remote_id` field with getter/setter methods to the Foundation Order model
 - Added implementation of the `Adjustable` interface to the Foundation Order model
 - Added the copying of checkout/cart adjustments to the order created by the Foundation OrderFactory
 - Added `int` cast to OrderItem::quantity property

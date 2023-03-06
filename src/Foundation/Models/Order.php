@@ -40,6 +40,7 @@ use Vanilo\Shipment\Models\ShippingMethodProxy;
  * @property null|int $shipping_method_id
  * @property null|ShippingMethod $shippingMethod
  * @property null|int $customer_id
+ * @property null|string $payable_remote_id
  * @property null|\Vanilo\Contracts\Customer $customer
  * @property-read Collection|Payment[] $payments
  * @property-read Collection|ShipmentContract[] $shipments
@@ -57,6 +58,22 @@ class Order extends BaseOrder implements Payable, Adjustable
     public function getPayableType(): string
     {
         return 'order';
+    }
+
+    /** Get the remote id used by the payment subsystem */
+    public function getPayableRemoteId(): ?string
+    {
+        return $this->payable_remote_id;
+    }
+
+    /** Set the remote id used by the payment subsystem */
+    public function setPayableRemoteId(string $remoteId): void
+    {
+        if ($this->exists) {
+            self::update(['payable_remote_id' => $remoteId]);
+        } else {
+            $this->payable_remote_id = $remoteId;
+        }
     }
 
     public function getTitle(): string
