@@ -67,6 +67,10 @@ class SessionStore extends BaseCheckoutStore
 
     public function setShippingAmount(float|DetailedAmount $amount): void
     {
+        if ($amount instanceof DetailedAmount && empty($amount->getDetails())) {
+            $amount = $amount->getValue();//Otherwise the value gets lost
+        }
+
         $this->writeRawDataToStore('shipping_fees', $amount);
     }
 
@@ -79,6 +83,10 @@ class SessionStore extends BaseCheckoutStore
 
     public function setTaxesAmount(float|DetailedAmount $amount): void
     {
+        if ($amount instanceof DetailedAmount && empty($amount->getDetails())) {
+            $amount = $amount->getValue();//Otherwise the value gets lost
+        }
+
         $this->writeRawDataToStore('taxes', $amount);
     }
 
