@@ -44,6 +44,7 @@
 - Added `dimensions()` and `hasDimensions()` methods to the `MasterProductVariant` model
   Added the `Dimension` DTO class in the support module (provides a default implementation for the same name interface)
 - Added the vanilo/support ^3.6 dependency to the Product module
+- Added the `subtype` field and the `getSubtype()` method to the `Payment` model
 - Refactored the internals of the Checkout stores (session and request)
 - Changed the return value of `Product::dimension()` to be a `Dimension` object from the support package instead of an anonymous class object
 - Changed minimum Address module requirement to v2.5

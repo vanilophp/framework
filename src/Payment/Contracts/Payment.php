@@ -33,6 +33,11 @@ interface Payment
 
     public function getMethod(): PaymentMethod;
 
+    /**
+     * @todo add this in v4
+     * public function getSubtype(): ?string
+     */
+
     public function getPayable(): Payable;
 
     public function getExtraData(): array;

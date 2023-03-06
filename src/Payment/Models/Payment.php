@@ -42,6 +42,7 @@ use Vanilo\Support\Generators\NanoIdGenerator;
  * @property array $data
  * @property float $amount
  * @property string $currency
+ * @property null|string $subtype
  * @property float $amount_paid
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -141,6 +142,11 @@ class Payment extends Model implements PaymentContract
     public function getMethod(): PaymentMethod
     {
         return $this->method;
+    }
+
+    public function getSubtype(): ?string
+    {
+        return $this->subtype;
     }
 
     public function getPayable(): Payable
