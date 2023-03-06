@@ -28,6 +28,11 @@ interface Order
 
     public function getShippingAddress(): ?Address;
 
+    /** @todo add this in v4
+     * /** The two-letter ISO 639-1 code *\/
+     * public function getLanguage(): ?string;
+     */
+
     public function getItems(): Traversable;
 
     /**

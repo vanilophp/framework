@@ -110,6 +110,12 @@ class Order extends Model implements OrderContract
         return $this->shippingAddress;
     }
 
+    /** The two-letter ISO 639-1 code */
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
     public function getItems(): Traversable
     {
         return $this->items;

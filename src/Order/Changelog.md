@@ -9,6 +9,7 @@
 - Added the `ready_for_pickup` fulfillment status enum value
 - Added optional hooks (callbacks) support to the `OrderFactory::createFromDataArray()` method
 - Added `int` cast to OrderItem::quantity property
+- Added the `Order::getLanguage()` method
 
 ## 3.5.1
 ##### 2023-02-23

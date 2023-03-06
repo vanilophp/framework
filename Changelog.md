@@ -10,8 +10,7 @@
 - Added the `ready_for_pickup` fulfillment status enum value
 - Added the `DetailedAmount` interface (Contracts) and its Dto (Support)
 - Added Zone support to shipping methods (optional)
-- Changed minimum Address module requirement to v2.5
-- Refactored the internals of the Checkout stores (session and request)
+- Added the `Order::getLanguage()` method
 - Added the `ShippingMethodSelected` checkout event
 - Added Shipping fee calculator support
 - Added the flat fee shipping fee calculator (Foundation)
@@ -44,7 +43,9 @@
 - Added `dimensions()` and `hasDimensions()` methods to the `MasterProductVariant` model
   Added the `Dimension` DTO class in the support module (provides a default implementation for the same name interface)
 - Added the vanilo/support ^3.6 dependency to the Product module
+- Refactored the internals of the Checkout stores (session and request)
 - Changed the return value of `Product::dimension()` to be a `Dimension` object from the support package instead of an anonymous class object
+- Changed minimum Address module requirement to v2.5
 - Fixed the data loss issue when using the session checkout driver with cookie session driver in Laravel
 
 ## 3.5.1
