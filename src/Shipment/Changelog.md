@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added Laravel 10 support
 - Added Shipping fee calculator support
 - Added Zone support to shipping methods (optional)
 - Changed minimum Address module requirement to v2.5

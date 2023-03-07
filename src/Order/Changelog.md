@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added Laravel 10 support
 - Added the `processing` order status enum value
 - Added the `ready_for_pickup` fulfillment status enum value
 - Added optional hooks (callbacks) support to the `OrderFactory::createFromDataArray()` method
