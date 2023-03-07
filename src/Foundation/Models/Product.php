@@ -34,7 +34,18 @@ class Product extends BaseProduct implements Buyable, HasMedia
     use HasTaxons;
     use HasPropertyValues;
 
-    protected $dates = ['created_at', 'updated_at', 'last_sale_at'];
+    protected $casts = [
+        'price' => 'float',
+        'original_price' => 'float',
+        'weight' => 'float',
+        'height' => 'float',
+        'width' => 'float',
+        'length' => 'float',
+        'stock' => 'float',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'last_sale_at' => 'datetime',
+    ];
 
     public function registerMediaConversions(Media $media = null): void
     {

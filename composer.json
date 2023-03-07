@@ -19,7 +19,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "doctrine/dbal": "^2.13.3|^3.1.4",
-        "laravel/framework": "^9.2",
+        "laravel/framework": "^9.2|^10.0",
         "konekt/enum": "^3.1.1|^4.0",
         "konekt/concord": "^1.12",
         "spatie/laravel-medialibrary": "^10.0",
@@ -52,7 +52,7 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^7.0|^8.0",
         "phpunit/phpunit" : "^9.0",
         "laravel/legacy-factories": "^1.0.4"
     },
