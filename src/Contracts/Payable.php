@@ -33,6 +33,7 @@ interface Payable
      * @todo add in v4
      * public function getPayableRemoteId(): ?string;
      * public function setPayableRemoteId(string $remoteId): void
+     * public static function findByPayableRemoteId(string $remoteId): ?Order
      */
 
     /** The human readable representation, eg.: "Order no. ABC-123" */

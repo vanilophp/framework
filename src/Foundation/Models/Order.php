@@ -50,6 +50,11 @@ class Order extends BaseOrder implements Payable, Adjustable
     use HasAdjustmentsViaRelation;
     use RecalculatesAdjustments;
 
+    public static function findByPayableRemoteId(string $remoteId): ?Order
+    {
+        return static::where('payable_remote_id', $remoteId)->first();
+    }
+
     public function getPayableId(): string
     {
         return (string) $this->id;
