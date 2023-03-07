@@ -20,6 +20,10 @@ interface Adjustable
 {
     public function itemsTotal(): float;
 
+    /**
+     * @todo add this to the interface in v4
+     * public function invalidateAdjustments(): void
+     */
     public function adjustments(): AdjustmentCollection;
 
     public function adjustmentsRelation(): MorphMany;

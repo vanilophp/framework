@@ -27,6 +27,12 @@ trait HasAdjustmentsViaRelation
         return $this->morphMany(AdjustmentProxy::modelClass(), 'adjustable');
     }
 
+    public function invalidateAdjustments(): void
+    {
+        $this->refresh();
+        $this->adjustmentCollection = null;
+    }
+
     public function adjustments(): AdjustmentCollection
     {
         if (null === $this->adjustmentCollection) {

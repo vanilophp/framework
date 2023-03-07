@@ -80,6 +80,13 @@ class ArrayAdjustmentCollection implements AdjustmentCollectionContract
         }
     }
 
+    public function clear(): void
+    {
+        foreach ($this->items as $key => $item) {
+            unset($this->items[$key]);
+        }
+    }
+
     public function byType(AdjustmentType $type): AdjustmentCollectionContract
     {
         $result = new self($this->adjustable);

@@ -34,6 +34,12 @@ interface AdjustmentCollection extends IteratorAggregate, ArrayAccess, Countable
 
     public function remove(Adjustment $adjustment): void;
 
+    /**
+     * @todo Add this method in v4
+     * /** Deletes all adjustment items in the collection /
+     * public function clear(): void
+     */
+
     public function first(): ?Adjustment;
 
     public function last(): ?Adjustment;

@@ -15,19 +15,30 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
+use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
+use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Shipment\Contracts\ShippingMethod;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 
 class CalculateShippingFees
 {
-    public function handle(CheckoutEvent $event): void
+    public function handle(CheckoutEvent|CartEvent $event): void
     {
-        $checkout = $event->getCheckout();
+        if ($event instanceof CheckoutEvent) {
+            $checkout = $event->getCheckout();
+            $cart = $checkout->getCart();
+        } else {
+            $cart = $event->getCart();
+            Checkout::setCart($cart);
+            $checkout = Checkout::getFacadeRoot();
+        }
 
-        $cart = $checkout->getCart();
-
-        // @todo Check if Cart is Adjustable; we're getting a CartManager here
+        // @todo Also check if the cart is Adjustable; we're getting a CartManager here which
+        //       proxies down calls to the store
+        if (null === $cart) {
+            return;
+        }
 
         $shippingAdjustments = $cart->adjustments()->byType(AdjustmentTypeProxy::SHIPPING());
         foreach ($shippingAdjustments as $adjustment) {

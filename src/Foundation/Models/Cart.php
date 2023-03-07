@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Models;
 
 use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Adjustments\Support\HasAdjustmentsViaRelation;
 use Vanilo\Adjustments\Support\RecalculatesAdjustments;
 use Vanilo\Cart\Models\Cart as BaseCart;
@@ -32,5 +33,20 @@ class Cart extends BaseCart implements Adjustable
     public function itemsTotal(): float
     {
         return $this->items->sum('total');
+    }
+
+    public function shippingAdjustmentsTotal(): float
+    {
+        return $this->adjustments()->byType(AdjustmentTypeProxy::SHIPPING())->total();
+    }
+
+    public function taxAdjustmentsTotal(): float
+    {
+        return $this->adjustments()->byType(AdjustmentTypeProxy::TAX())->total();
+    }
+
+    public function promotionAdjustmentsTotal(): float
+    {
+        return $this->adjustments()->byType(AdjustmentTypeProxy::PROMOTION())->total();
     }
 }

@@ -46,6 +46,11 @@
   Added the `Dimension` DTO class in the support module (provides a default implementation for the same name interface)
 - Added the vanilo/support ^3.6 dependency to the Product module
 - Added the `subtype` field and the `getSubtype()` method to the `Payment` model
+- Added the `DeleteCartAdjustments` listener on `CartDeleting` event
+- Added the `CalculateShippingFees` listener connected to shipping address/method change and cart updated events
+- Added the `clear()` method to `AdjustmentCollection` implementations
+- Added the `invalidateAdjustments()` method to `Adjustable` implementations
+- Added the `shippingAdjustmentsTotal()`, `taxAdjustmentsTotal()` and `promotionAdjustmentsTotal()` methods to the Adjustable Cart model in foundation
 - Refactored the internals of the Checkout stores (session and request)
 - Changed the return value of `Product::dimension()` to be a `Dimension` object from the support package instead of an anonymous class object
 - Changed minimum Address module requirement to v2.5

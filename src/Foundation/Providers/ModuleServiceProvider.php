@@ -19,6 +19,7 @@ use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Cart\Contracts\Cart as CartContract;
+use Vanilo\Cart\Models\CartProxy;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Models\TaxonomyProxy;
@@ -83,6 +84,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'taxonomy' => TaxonomyProxy::modelClass(),
             'taxon' => TaxonProxy::modelClass(),
             'order' => OrderProxy::modelClass(),
+            'cart' => CartProxy::modelClass(),
             'shipment' => ShipmentProxy::modelClass(),
         ]);
 
