@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added Laravel 10 support
 - Refactored the internals of the Checkout stores (session and request)
 - Added the `ShippingMethodSelected` checkout event
 - Added the following fields as recognized, regular fields of the checkout:

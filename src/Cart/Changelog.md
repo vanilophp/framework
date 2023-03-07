@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added Laravel 10 support
 - Added the `CartCreated`, `CartUpdated`, `CartDeleted` and `CartDeleting` events
 
 ## 3.5.0

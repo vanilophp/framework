@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added Laravel 10 support
 - Added the `clear()` method to `AdjustmentCollection` implementations
 - Added the `invalidateAdjustments()` method to `Adjustable` implementations
 

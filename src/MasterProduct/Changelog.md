@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added Laravel 10 support
 - Added `dimensions()` and `hasDimensions()` methods to the `MasterProductVariant` model
 
 ## 3.5.0

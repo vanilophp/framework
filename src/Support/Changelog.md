@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added Laravel 10 support
 - Added the `DetailedAmount` DTO class (provides a default implementation for the same name interface)
 - Added the `Dimension` DTO class (provides a default implementation for the same name interface)
 
