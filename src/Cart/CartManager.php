@@ -16,9 +16,14 @@ namespace Vanilo\Cart;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
+use Vanilo\Cart\Events\CartCreated;
+use Vanilo\Cart\Events\CartDeleted;
+use Vanilo\Cart\Events\CartDeleting;
+use Vanilo\Cart\Events\CartUpdated;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
@@ -72,7 +77,10 @@ class CartManager implements CartManagerContract
     {
         $cart = $this->findOrCreateCart();
 
-        return $cart->addItem($product, $qty, $params);
+        $result = $cart->addItem($product, $qty, $params);
+        $this->triggerCartUpdatedEvent();
+
+        return $result;
     }
 
     /**
@@ -82,6 +90,7 @@ class CartManager implements CartManagerContract
     {
         if ($cart = $this->model()) {
             $cart->removeItem($item);
+            $this->triggerCartUpdatedEvent();
         }
     }
 
@@ -92,6 +101,7 @@ class CartManager implements CartManagerContract
     {
         if ($cart = $this->model()) {
             $cart->removeProduct($product);
+            $this->triggerCartUpdatedEvent();
         }
     }
 
@@ -102,6 +112,7 @@ class CartManager implements CartManagerContract
     {
         if ($cart = $this->model()) {
             $cart->clear();
+            $this->triggerCartUpdatedEvent();
         }
     }
 
@@ -176,9 +187,15 @@ class CartManager implements CartManagerContract
      */
     public function destroy()
     {
+        if ($this->exists()) {
+            Event::dispatch(new CartDeleting($this->model()));
+        }
+
         $this->clear();
         $this->model()->delete();
         $this->forget();
+
+        Event::dispatch(new CartDeleted());
     }
 
     /**
@@ -227,6 +244,7 @@ class CartManager implements CartManagerContract
 
         if ($lastActiveCart) {
             $this->setCartModel($lastActiveCart);
+            $this->triggerCartUpdatedEvent();
         }
     }
 
@@ -240,6 +258,7 @@ class CartManager implements CartManagerContract
             }
 
             $lastActiveCart->delete();
+            $this->triggerCartUpdatedEvent();
         }
     }
 
@@ -288,7 +307,7 @@ class CartManager implements CartManagerContract
     }
 
     /**
-     * Creates a new cart model and saves it's id in the session
+     * Creates a new cart model and saves its id in the session
      */
     protected function createCart()
     {
@@ -298,7 +317,11 @@ class CartManager implements CartManagerContract
             ];
         }
 
-        return $this->setCartModel(CartProxy::create($attributes ?? []));
+        $model = $this->setCartModel(CartProxy::create($attributes ?? []));
+
+        Event::dispatch(new CartCreated($model));
+
+        return $model;
     }
 
     protected function setCartModel(CartContract $cart): CartContract
@@ -308,5 +331,12 @@ class CartManager implements CartManagerContract
         session([$this->sessionKey => $this->cart->id]);
 
         return $this->cart;
+    }
+
+    protected function triggerCartUpdatedEvent(): void
+    {
+        if ($this->exists()) {
+            Event::dispatch(new CartUpdated($this->model()));
+        }
     }
 }

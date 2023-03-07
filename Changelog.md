@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the `CartCreated`, `CartUpdated`, `CartDeleted` and `CartDeleting` events
 - Added master product & variant (Foundation) to the morph map
 - Added the `processing` order status enum value
 - Added the `ready_for_pickup` fulfillment status enum value

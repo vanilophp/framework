@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `CartCreated`, `CartUpdated`, `CartDeleted` and `CartDeleting` events
+
 ## 3.5.0
 ##### 2023-02-23
 
