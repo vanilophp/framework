@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2023-XX-YY
+## 3.6.0
+##### 2023-03-07
 
 - Added Laravel 10 support
 - Added the `subtype` field and the `getSubtype()` method to the `Payment` model
