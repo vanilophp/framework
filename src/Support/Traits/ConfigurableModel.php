@@ -29,7 +29,15 @@ trait ConfigurableModel
 
     public function configuration(): ?array
     {
-        return $this->{static::$configurationFieldName};
+        $value = $this->{static::$configurationFieldName};
+        if (is_array($value) || is_null($value)) {
+            return $value;
+        } elseif (is_string($value)) {
+            return json_decode($value, true, JSON_THROW_ON_ERROR);
+        }
+
+        // An Obsessed attempt
+        return (array) $value;
     }
 
     public function hasConfiguration(): bool

@@ -15,7 +15,14 @@ declare(strict_types=1);
 namespace Vanilo\Support\Tests\Dummies;
 
 use Illuminate\Database\Eloquent\Model;
+use Vanilo\Contracts\Configurable;
+use Vanilo\Support\Traits\ConfigurableModel;
 
-class ConfigureMe extends Model
+class ConfigureMe extends Model implements Configurable
 {
+    use ConfigurableModel;
+
+    protected $guarded = [];
+
+    protected $casts = ['configuration' => 'json'];
 }
