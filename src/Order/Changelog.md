@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed incorrect zone lists due to a bug in Address module v2.5.0 (bump to v2.5.1)
+
 ## 3.6.0
 ##### 2023-03-07
 

@@ -5,7 +5,8 @@
 ## Unreleased
 ##### 2023-XX-YY
 
-- Added an improvement to the `ConfigurableModel` trait to handle json strings and other arrayable fields in the underlying model
+- Fixed the `ConfigurableModel` trait to handle json strings and other arrayable fields in the underlying model
+- Fixed incorrect shipping method list due to a bug in v2.5.0 of the Address module (bump to v2.5.1)
 
 ## 3.6.0
 ##### 2023-03-07
