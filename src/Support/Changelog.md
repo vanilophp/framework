@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## 3.6.1
+##### 2023-03-09
+
+- Fixed the `ConfigurableModel` trait to handle json strings and other arrayable fields in the underlying model
+
 ## 3.6.0
 ##### 2023-03-07
 
