@@ -7,6 +7,7 @@
 
 - Fixed the shipping adjustment's undesired JSON->string conversion when cloning the cart adjustment to the order
 - Fixed the missing locking of shipping adjustments on orders
+- Fixed the missing foreign key between `shipping_methods.zone_id` and the `zones` table
 
 ## 3.6.1
 ##### 2023-03-09

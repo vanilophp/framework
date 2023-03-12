@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed the missing foreign key between `shipping_methods.zone_id` and the `zones` table
+
 ## 3.6.1
 ##### 2023-03-09
 
