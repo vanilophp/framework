@@ -31,6 +31,15 @@ class FlatFeeCalculator implements ShippingFeeCalculator
         return __('Flat fee');
     }
 
+    public static function getConfigurationSchema(): array
+    {
+        return [
+            'cost' => 'required|numeric|min:0',
+            'free_threshold' => 'sometimes|nullable|numeric|min|0',
+            'title' => 'sometimes|string|max:64',
+        ];
+    }
+
     public function getAdjuster(?array $configuration = null): ?object
     {
         [$cost, $freeThreshold] = $this->toParameters($configuration);

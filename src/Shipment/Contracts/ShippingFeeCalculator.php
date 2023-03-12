@@ -20,6 +20,10 @@ interface ShippingFeeCalculator
 {
     public static function getName(): string;
 
+    /** @todo add this to the interface in v4
+     * public static function getConfigurationSchema(): array;
+     */
+
     /**
      * We don't set the return type on the language level
      * since the adjustments module is optional

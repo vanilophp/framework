@@ -24,6 +24,11 @@ class NullShippingFeeCalculator implements ShippingFeeCalculator
         return __('No shipping fee');
     }
 
+    public static function getConfigurationSchema(): array
+    {
+        return [];
+    }
+
     public function calculate(object $subject = null, ?array $configuration = null): ShippingFee
     {
         return new ShippingFee(0);
