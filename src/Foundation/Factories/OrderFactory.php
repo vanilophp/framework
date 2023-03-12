@@ -49,7 +49,9 @@ class OrderFactory extends BaseOrderFactory
                 $clone = $adjustment->newInstance(
                     Arr::except($adjustment->getAttributes(), ['id', 'adjustable_type', 'adjustable_id', 'created_at', 'upated_at'])
                 );
+                $clone->data = $adjustment->data; // This gets flattened to string for some reason when fetching from "getAttributes"
                 $order->adjustments()->add($clone);
+                $clone->lock();
             }
         }
     }

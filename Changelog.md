@@ -2,6 +2,12 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed the shipping adjustment's undesired JSON->string conversion when cloning the cart adjustment to the order
+- Fixed the missing locking of shipping adjustments on orders
+
 ## 3.6.1
 ##### 2023-03-09
 
