@@ -6,7 +6,7 @@
 ##### 2023-XX-YY
 
 - Added the `OrderProcessingStarted` event
-- Added the following order item events: `OrderItemShipped`, `OrderItemsIsReadyForDelivery`, `OrderItemsIsReadyForPickup` and `OrderItemHasBeenPutOnHold`
+- Added the following order item events: `OrderItemShipped`, `OrderItemPickedUp`, `OrderItemsIsReadyForDelivery`, `OrderItemsIsReadyForPickup` and `OrderItemHasBeenPutOnHold`
 
 ## 3.6.2
 ##### 2023-03-12
