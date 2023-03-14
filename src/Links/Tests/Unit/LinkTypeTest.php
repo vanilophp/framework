@@ -69,7 +69,7 @@ class LinkTypeTest extends TestCase
     /** @test */
     public function it_is_active_by_default()
     {
-        $this->assertTrue((LinkType::create(['name' => 'Oh I am active']))->fresh()->is_active);
+        $this->assertTrue(LinkType::create(['name' => 'Oh I am active'])->fresh()->is_active);
     }
 
     /** @test */
