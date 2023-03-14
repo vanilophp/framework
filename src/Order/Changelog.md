@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `OrderProcessingStarted` event
+
 ## 3.6.1
 ##### 2023-03-09
 
