@@ -4,5 +4,5 @@ declare(strict_types=1);
 
 return [
     'name' => 'Vanilo Shipment Module',
-    'version' => '3.6.2'
+    'version' => '3.7-dev'
 ];
