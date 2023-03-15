@@ -152,6 +152,20 @@ class OrderFactory implements OrderFactoryContract
     }
 
     /**
+     * @throws \ReflectionException
+     */
+    protected function callHook(callable $hook, mixed $order, array $data, array $items): void
+    {
+        $ref = new ReflectionFunction($hook);
+        match ($ref->getNumberOfParameters()) {
+            0 => $hook(),
+            1 => $hook($order),
+            2 => $hook($order, $data),
+            default => $hook($order, $data, $items),
+        };
+    }
+
+    /**
      * Returns whether an instance contains a buyable object
      *
      * @param array $item
@@ -193,19 +207,5 @@ class OrderFactory implements OrderFactoryContract
         $address['name'] = empty(Arr::get($address, 'name')) ? '-' : $address['name'];
 
         return AddressProxy::create($address);
-    }
-
-    /**
-     * @throws \ReflectionException
-     */
-    protected function callHook(callable $hook, mixed $order, array $data, array $items): void
-    {
-        $ref = new ReflectionFunction($hook);
-        match ($ref->getNumberOfParameters()) {
-            0 => $hook(),
-            1 => $hook($order),
-            2 => $hook($order, $data),
-            default => $hook($order, $data, $items),
-        };
     }
 }
