@@ -198,7 +198,7 @@ class OrderFactory implements OrderFactoryContract
     /**
      * @throws \ReflectionException
      */
-    private function callHook(callable $hook, mixed $order, array $data, array $items): void
+    protected function callHook(callable $hook, mixed $order, array $data, array $items): void
     {
         $ref = new ReflectionFunction($hook);
         match ($ref->getNumberOfParameters()) {

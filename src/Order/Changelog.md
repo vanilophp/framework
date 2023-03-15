@@ -7,6 +7,7 @@
 
 - Added the `OrderProcessingStarted` event
 - Added the following order item events: `OrderItemShipped`, `OrderItemPickedUp`, `OrderItemsIsReadyForDelivery`, `OrderItemsIsReadyForPickup` and `OrderItemHasBeenPutOnHold`
+- Changed the visibility of the `OrderFactory::callHook` method from `private` to `protected`
 
 ## 3.6.1
 ##### 2023-03-09
