@@ -38,6 +38,7 @@ remote product
 remote properties
 remote shipment
 remote support
+remote taxes
 
 split 'src/Adjustments' adjustments
 split 'src/Cart' cart
@@ -53,3 +54,4 @@ split 'src/Product' product
 split 'src/Properties' properties
 split 'src/Shipment' shipment
 split 'src/Support' support 8683e47dd2dbd15ac2ceac4dcfae405c4b271aff
+split 'src/Taxes' taxes
