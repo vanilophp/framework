@@ -15,10 +15,12 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Taxes\Models\TaxCategory;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
+        TaxCategory::class,
     ];
 
     protected $enums = [
