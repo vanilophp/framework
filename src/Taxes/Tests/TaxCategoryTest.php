@@ -18,7 +18,6 @@ use Vanilo\Taxes\Models\TaxCategory;
 
 class TaxCategoryTest extends TestCase
 {
-
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -67,7 +66,7 @@ class TaxCategoryTest extends TestCase
             TaxCategory::create($rate);
         }
 
-        $actives =  TaxCategory::actives()->get();
+        $actives = TaxCategory::actives()->get();
 
         $this->assertCount(3, $actives);
         $this->assertContains('Rate 1', $actives->pluck('name'));
