@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -24,7 +25,13 @@ use Vanilo\Product\Models\Product as BaseProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
+use Vanilo\Taxes\Contracts\TaxCategory;
+use Vanilo\Taxes\Models\TaxCategoryProxy;
 
+/**
+ * @property integer|null $tax_category_id
+ * @property-read TaxCategory|null $taxCategory
+ */
 class Product extends BaseProduct implements Buyable, HasMedia
 {
     use BuyableModel;
@@ -50,5 +57,10 @@ class Product extends BaseProduct implements Buyable, HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->loadConversionsFromVaniloConfig();
+    }
+
+    public function taxCategory(): BelongsTo
+    {
+        return $this->belongsTo(TaxCategoryProxy::modelClass());
     }
 }

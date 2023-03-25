@@ -9,6 +9,7 @@
 - Added the following order item events: `OrderItemShipped`, `OrderItemPickedUp`, `OrderItemsIsReadyForDelivery`, `OrderItemsIsReadyForPickup` and `OrderItemHasBeenPutOnHold`
 - Changed the visibility of the `OrderFactory::callHook` method from `private` to `protected`
 - Added the Taxes module with: Tax Categories, 
+- Added `tax_category_id` field to products/master products/variants
 
 ## 3.6.2
 ##### 2023-03-12
