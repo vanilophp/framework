@@ -44,6 +44,12 @@ use Vanilo\Taxes\Traits\BelongsToTaxCategory;
  * @property Carbon $updated_at
  * @property-read TaxCategory|null $taxCategory
  * @property-read Zone|null $zone
+ *
+ * @method static Builder byTaxCategory(TaxCategory|int $taxCategory)
+ * @method Builder forZone(Zone|int $zone)
+ * @method Builder forZones(array|Collection $zones)
+ * @method Builder actives()
+ * @method Builder inactives()
  */
 class TaxRate extends Model implements TaxRateContract
 {
