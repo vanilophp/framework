@@ -12,6 +12,7 @@
 - Added `tax_category_id` field to products/master products/variants
 - Added the `SimpleTax` adjuster (it calculates the tax amount based on a flat rate in %)
 - Added the extended `CartItem` and `OrderItem` models to Foundation that are `Adjustable`
+- Added the `fromKeyValuePairs` static factory and `getDetail()` methods to the DetailedAmount Dto class
 
 ## 3.6.2
 ##### 2023-03-12
