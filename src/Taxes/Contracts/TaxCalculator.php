@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Taxes\Contracts;
 
+use Vanilo\Contracts\DetailedAmount;
+
 interface TaxCalculator
 {
     public static function getName(): string;
@@ -26,5 +28,5 @@ interface TaxCalculator
      */
     public function getAdjuster(?array $configuration = null): ?object;
 
-    public function calculate(?object $subject = null, ?array $configuration = null);
+    public function calculate(?object $subject = null, ?array $configuration = null): DetailedAmount;
 }
