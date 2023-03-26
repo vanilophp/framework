@@ -6,4 +6,4 @@
 ##### 2023-XX-YY
 
 - Initial release of the module
-- Added Tax Categories
+- Added tax categories, rates and calculators along with calculator registry 

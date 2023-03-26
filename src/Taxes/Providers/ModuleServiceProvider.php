@@ -16,13 +16,12 @@ namespace Vanilo\Taxes\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Taxes\Models\TaxCategory;
+use Vanilo\Taxes\Models\TaxRate;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
         TaxCategory::class,
-    ];
-
-    protected $enums = [
+        TaxRate::class,
     ];
 }

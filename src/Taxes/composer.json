@@ -20,6 +20,8 @@
         "php": "^8.0",
         "konekt/concord": "^1.12",
         "konekt/address": "^2.7",
+        "vanilo/contracts": "^3.6",
+        "vanilo/support": "^3.6",
         "laravel/framework": "^9.2|^10.0"
     },
     "require-dev": {
