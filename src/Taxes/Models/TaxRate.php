@@ -129,4 +129,9 @@ class TaxRate extends Model implements TaxRateContract
 
         return $query->whereIn('zone_id', $zones);
     }
+
+    public function scopeByTaxCategory(Builder $query, TaxCategory|int $taxCategory): Builder
+    {
+        return $query->where('tax_category_id', is_int($taxCategory) ? $taxCategory : $taxCategory->id);
+    }
 }
