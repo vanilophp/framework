@@ -10,6 +10,8 @@
 - Changed the visibility of the `OrderFactory::callHook` method from `private` to `protected`
 - Added the Taxes module with: Tax Categories, 
 - Added `tax_category_id` field to products/master products/variants
+- Added the `SimpleTax` adjuster (it calculates the tax amount based on a flat rate in %)
+- Added the extended `CartItem` and `OrderItem` models to Foundation that are `Adjustable`
 
 ## 3.6.2
 ##### 2023-03-12

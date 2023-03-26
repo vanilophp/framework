@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 /**
- * Contains the SimpleShippingFee class.
+ * Contains the SimpleTax class.
  *
- * @copyright   Copyright (c) 2021 Attila Fulop
+ * @copyright   Copyright (c) 2023 Vanilo UG
  * @author      Attila Fulop
  * @license     MIT
- * @since       2021-05-28
+ * @since       2023-03-26
  *
  */
 
@@ -20,26 +20,24 @@ use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentProxy;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Adjustments\Support\HasWriteableTitleAndDescription;
+use Vanilo\Adjustments\Support\IsIncluded;
 use Vanilo\Adjustments\Support\IsLockable;
-use Vanilo\Adjustments\Support\IsNotIncluded;
 
-final class SimpleShippingFee implements Adjuster
+final class SimpleTax implements Adjuster
 {
     use HasWriteableTitleAndDescription;
     use IsLockable;
-    use IsNotIncluded;
+    use IsIncluded;
 
-    public function __construct(
-        private float $amount,
-        private ?float $freeThreshold = null
-    ) {
+    public function __construct(private float $rate)
+    {
     }
 
     public static function reproduceFromAdjustment(Adjustment $adjustment): Adjuster
     {
         $data = $adjustment->getData();
 
-        return new self(floatval($data['amount'] ?? 0), $data['freeThreshold'] ?? null);
+        return new self(floatval($data['rate'] ?? 0));
     }
 
     public function createAdjustment(Adjustable $adjustable): Adjustment
@@ -51,30 +49,26 @@ final class SimpleShippingFee implements Adjuster
 
     public function recalculate(Adjustment $adjustment, Adjustable $adjustable): Adjustment
     {
-        $adjustment->setAmount($this->calculateAmount($adjustable));
+        $adjustment->setAmount($this->calculateTaxAmount($adjustable));
 
         return $adjustment;
     }
 
-    private function calculateAmount(Adjustable $adjustable): float
+    private function calculateTaxAmount(Adjustable $adjustable): float
     {
-        if (null !== $this->freeThreshold && $adjustable->itemsTotal() >= $this->freeThreshold) {
-            return 0;
-        }
-
-        return $this->amount;
+        return $adjustable->itemsTotal() * $this->rate / 100;
     }
 
     private function getModelAttributes(Adjustable $adjustable): array
     {
         return [
-            'type' => AdjustmentTypeProxy::SHIPPING(),
+            'type' => AdjustmentTypeProxy::TAX(),
             'adjuster' => self::class,
             'origin' => null,
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
-            'data' => ['amount' => $this->amount, 'freeThreshold' => $this->freeThreshold],
-            'amount' => $this->calculateAmount($adjustable),
+            'data' => ['rate' => $this->rate],
+            'amount' => $this->calculateTaxAmount($adjustable),
             'is_locked' => $this->isLocked(),
             'is_included' => $this->isIncluded(),
         ];
