@@ -17,4 +17,6 @@ namespace Vanilo\Taxes\Contracts;
 interface TaxCategory
 {
     public function getName(): string;
+
+    public static function findByName(string $name): ?TaxCategory;
 }

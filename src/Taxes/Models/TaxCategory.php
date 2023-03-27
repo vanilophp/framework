@@ -36,6 +36,11 @@ class TaxCategory extends Model implements TaxCategoryContract
         'updated_at' => 'datetime',
     ];
 
+    public static function findByName(string $name): ?TaxCategoryContract
+    {
+        return static::actives()->where('name', $name)->first();
+    }
+
     public function getName(): string
     {
         return $this->name;
