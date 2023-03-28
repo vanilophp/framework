@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `carrier_cost` decimal field to the shipments table/model
+
 ## 3.6.2
 ##### 2023-03-12
 

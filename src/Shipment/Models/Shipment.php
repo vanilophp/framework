@@ -38,6 +38,7 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property float|null        $width
  * @property float|null        $height
  * @property float|null        $length
+ * @property float|null        $carrier_cost
  * @property string|null       $comment
  * @property array             $configuration
  *
@@ -66,6 +67,7 @@ class Shipment extends Model implements ShipmentContract, Configurable
         'height' => 'float',
         'width' => 'float',
         'length' => 'float',
+        'carrier_cost' => 'float',
     ];
 
     public function status(): ShipmentStatus
