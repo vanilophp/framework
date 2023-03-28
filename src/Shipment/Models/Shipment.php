@@ -39,6 +39,8 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property float|null        $height
  * @property float|null        $length
  * @property float|null        $carrier_cost
+ * @property string|null       $label_url
+ * @property string|null       $label_base64
  * @property string|null       $comment
  * @property array             $configuration
  *

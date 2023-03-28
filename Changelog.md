@@ -13,7 +13,7 @@
 - Added the `SimpleTax` adjuster (it calculates the tax amount based on a flat rate in %)
 - Added the extended `CartItem` and `OrderItem` models to Foundation that are `Adjustable`
 - Added the `fromKeyValuePairs` static factory and `getDetail()` methods to the DetailedAmount Dto class
-- Added the `carrier_cost` decimal field to the shipments table/model
+- Added the `carrier_cost`, `label_url` and `label_base64` fields to the shipments table/model
 
 ## 3.6.2
 ##### 2023-03-12
