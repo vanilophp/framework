@@ -17,10 +17,12 @@ namespace Vanilo\Foundation\Models;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Support\HasAdjustmentsViaRelation;
 use Vanilo\Adjustments\Support\RecalculatesAdjustments;
+use Vanilo\Foundation\Traits\CanBeShipped;
 use Vanilo\Order\Models\OrderItem as BaseOrderItem;
 
 class OrderItem extends BaseOrderItem implements Adjustable
 {
+    use CanBeShipped;
     use HasAdjustmentsViaRelation;
     use RecalculatesAdjustments;
 

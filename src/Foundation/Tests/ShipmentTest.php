@@ -18,6 +18,8 @@ use Illuminate\Support\Str;
 use Konekt\Address\Models\Country;
 use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Order;
+use Vanilo\Foundation\Models\OrderItem;
+use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Shipment;
 use Vanilo\Order\Models\OrderStatus;
 
@@ -82,5 +84,54 @@ class ShipmentTest extends TestCase
         $this->assertCount(2, $shipment->orders);
         $this->assertEquals($order1->id, $shipment->orders->first()->id);
         $this->assertEquals($order2->id, $shipment->orders->last()->id);
+    }
+
+    /** @test */
+    public function a_shipment_can_be_added_to_an_order_item()
+    {
+        $product = Product::create([
+            'name' => 'Test Product',
+            'sku' => Str::uuid()->getHex()->toString(),
+            'price' => 17.95
+        ]);
+        $address = factory(Address::class)->create(['country_id' => 'CA']);
+        $order = Order::create([
+            'number' => Str::uuid()->getHex()->toString(),
+            'status' => OrderStatus::defaultValue(),
+            'shipping_address_id' => $address->id,
+        ]);
+        /** @var OrderItem $theItem */
+        $theItem = $order->items()->create([
+            'product_type' => 'product',
+            'product_id' => $product->id,
+            'name' => 'Test',
+            'price' => 17.95,
+            'quantity' => 1,
+        ]);
+
+        $shipment = Shipment::create(['address_id' => $address->id]);
+        $theItem->addShipment($shipment);
+
+        $this->assertCount(1, $theItem->shipments);
+        $this->assertEquals($shipment->id, $theItem->shipments->first()->id);
+    }
+
+    /** @test */
+    public function one_shipment_can_contain_multiple_order_items()
+    {
+        $product1 = Product::create(['name' => 'Product 1', 'sku' => Str::uuid()->getHex()->toString(), 'price' => 17.95]);
+        $product2 = Product::create(['name' => 'Product 2', 'sku' => Str::uuid()->getHex()->toString(), 'price' => 17.95]);
+        $address = factory(Address::class)->create(['country_id' => 'CA']);
+        $order = Order::create(['shipping_address_id' => $address->id, 'number' => Str::uuid()->getHex()->toString()]);
+        $item1 = $order->items()->create(['product_type' => 'product', 'product_id' => $product1->id, 'name' => 'Product 1', 'price' => 17.95, 'quantity' => 1]);
+        $item2 = $order->items()->create(['product_type' => 'product', 'product_id' => $product2->id, 'name' => 'Product 2', 'price' => 17.95, 'quantity' => 1]);
+        $shipment = Shipment::create(['address_id' => $address->id]);
+
+        $shipment->addOrderItem($item1);
+        $shipment->addOrderItem($item2);
+
+        $this->assertCount(2, $shipment->orderItems);
+        $this->assertEquals($item1->id, $shipment->orderItems->first()->id);
+        $this->assertEquals($item2->id, $shipment->orderItems->last()->id);
     }
 }
