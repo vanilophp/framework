@@ -46,4 +46,11 @@ class Shipment extends BaseShipment
 
         return $this;
     }
+
+    public function addOrderItems(OrderItemContract ...$orderItems): static
+    {
+        $this->orderItems()->saveMany($orderItems);
+
+        return $this;
+    }
 }

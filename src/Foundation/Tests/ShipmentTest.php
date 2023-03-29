@@ -134,4 +134,22 @@ class ShipmentTest extends TestCase
         $this->assertEquals($item1->id, $shipment->orderItems->first()->id);
         $this->assertEquals($item2->id, $shipment->orderItems->last()->id);
     }
+
+    /** @test */
+    public function multiple_order_items_can_be_assigned_to_a_shipment_in_one_step()
+    {
+        $product3 = Product::create(['name' => 'Product 3', 'sku' => Str::uuid()->getHex()->toString(), 'price' => 9.99]);
+        $product4 = Product::create(['name' => 'Product 4', 'sku' => Str::uuid()->getHex()->toString(), 'price' => 25]);
+        $address = factory(Address::class)->create(['country_id' => 'NL']);
+        $order = Order::create(['shipping_address_id' => $address->id, 'number' => Str::uuid()->getHex()->toString()]);
+        $item1 = $order->items()->create(['product_type' => 'product', 'product_id' => $product3->id, 'name' => 'Product 3', 'price' => 9.99, 'quantity' => 1]);
+        $item2 = $order->items()->create(['product_type' => 'product', 'product_id' => $product4->id, 'name' => 'Product 4', 'price' => 25, 'quantity' => 1]);
+        $shipment = Shipment::create(['address_id' => $address->id]);
+
+        $shipment->addOrderItems($item1, $item2);
+
+        $this->assertCount(2, $shipment->orderItems);
+        $this->assertEquals($item1->id, $shipment->orderItems->first()->id);
+        $this->assertEquals($item2->id, $shipment->orderItems->last()->id);
+    }
 }
