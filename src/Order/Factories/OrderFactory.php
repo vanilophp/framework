@@ -25,6 +25,7 @@ use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Contracts\Billpayer;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
+use Vanilo\Order\Contracts\OrderItem;
 use Vanilo\Order\Contracts\OrderNumberGenerator;
 use Vanilo\Order\Events\OrderWasCreated;
 use Vanilo\Order\Exceptions\CreateOrderException;
@@ -112,7 +113,7 @@ class OrderFactory implements OrderFactoryContract
         }
     }
 
-    protected function createItems(Order $order, array $items)
+    protected function createItems(Order $order, array $items, callable ...$hooks)
     {
         $that = $this;
         $hasBuyables = collect($items)->contains(function ($item) use ($that) {
@@ -121,9 +122,17 @@ class OrderFactory implements OrderFactoryContract
 
         if (!$hasBuyables) { // This is faster
             $order->items()->createMany($items);
+            foreach ($order->getItems() as $createdOrderItem) {
+                foreach ($hooks as $hook) {
+                    $this->callItemHook($hook, $createdOrderItem, $order, $items);
+                }
+            }
         } else {
             foreach ($items as $item) {
-                $this->createItem($order, $item);
+                $createdOrderItem = $this->createItem($order, $item);
+                foreach ($hooks as $hook) {
+                    $this->callItemHook($hook, $createdOrderItem, $order, $items);
+                }
             }
         }
     }
@@ -134,7 +143,7 @@ class OrderFactory implements OrderFactoryContract
      * @param Order $order
      * @param array $item
      */
-    protected function createItem(Order $order, array $item)
+    protected function createItem(Order $order, array $item): OrderItem
     {
         if ($this->itemContainsABuyable($item)) {
             /** @var Buyable $product */
@@ -148,7 +157,7 @@ class OrderFactory implements OrderFactoryContract
             unset($item['product']);
         }
 
-        $order->items()->create($item);
+        return $order->items()->create($item);
     }
 
     /**
@@ -162,6 +171,20 @@ class OrderFactory implements OrderFactoryContract
             1 => $hook($order),
             2 => $hook($order, $data),
             default => $hook($order, $data, $items),
+        };
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    protected function callItemHook(callable $hook, OrderItem $orderItem, Order $order, array $sourceItems): void
+    {
+        $ref = new ReflectionFunction($hook);
+        match ($ref->getNumberOfParameters()) {
+            0 => $hook(),
+            1 => $hook($orderItem),
+            2 => $hook($orderItem, $order),
+            default => $hook($orderItem, $order, $sourceItems),
         };
     }
 

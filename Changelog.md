@@ -15,6 +15,7 @@
 - Added the `fromKeyValuePairs` static factory and `getDetail()` methods to the DetailedAmount Dto class
 - Added the `carrier_cost`, `label_url` and `label_base64` fields to the shipments table/model
 - Added feature to assign shipments to order items, and vice versa (Foundation)
+- Added optional hooks (callbacks) support to order items creation in the order factory class
 
 ## 3.6.2
 ##### 2023-03-12
