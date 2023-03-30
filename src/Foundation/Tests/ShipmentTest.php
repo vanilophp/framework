@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Support\Str;
-use Konekt\Address\Models\Country;
+use Konekt\Address\Seeds\Countries;
 use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\OrderItem;
@@ -29,10 +29,7 @@ class ShipmentTest extends TestCase
     {
         parent::setUp();
 
-        Country::firstOrCreate(
-            ['id' => 'CA'],
-            ['name' => 'Canada', 'phonecode' => 1, 'is_eu_member' => false],
-        );
+        $this->artisan('db:seed', ['--class' => Countries::class]);
     }
 
     /** @test */
