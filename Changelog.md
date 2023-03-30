@@ -16,6 +16,7 @@
 - Added the `carrier_cost`, `label_url` and `label_base64` fields to the shipments table/model
 - Added feature to assign shipments to order items, and vice versa (Foundation)
 - Added optional hooks (callbacks) support to order items creation in the order factory class
+- Added item adjustments total to the order grand total (Foundation)
 
 ## 3.6.2
 ##### 2023-03-12

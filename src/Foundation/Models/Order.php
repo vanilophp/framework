@@ -118,7 +118,12 @@ class Order extends BaseOrder implements Payable, Adjustable
 
     public function itemsTotal(): float
     {
-        return $this->items->sum('total');
+        return $this->items->sum('total') + $this->itemsAdjustmentsTotal();
+    }
+
+    public function itemsAdjustmentsTotal(): float
+    {
+        return $this->items->sum(fn($item) => $item->adjustments()->total());
     }
 
     public function getCurrentPayment(): ?Payment
