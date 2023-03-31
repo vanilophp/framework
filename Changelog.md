@@ -17,6 +17,7 @@
 - Added feature to assign shipments to order items, and vice versa (Foundation)
 - Added optional hooks (callbacks) support to order items creation in the order factory class
 - Added item adjustments total to the order grand total (Foundation)
+- Added the `benefit` adjustent type
 
 ## 3.6.2
 ##### 2023-03-12
