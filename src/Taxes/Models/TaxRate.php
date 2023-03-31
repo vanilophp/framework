@@ -62,6 +62,10 @@ class TaxRate extends Model implements TaxRateContract
         'rate' => 'float',
         'configuration' => 'json',
         'is_active' => 'bool',
+        'valid_from' => 'datetime',
+        'valid_until' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public static function availableOnesForZone(Zone|int $zone): Collection
