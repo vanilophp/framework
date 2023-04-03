@@ -18,6 +18,7 @@
 - Added optional hooks (callbacks) support to order items creation in the order factory class
 - Added item adjustments total to the order grand total (Foundation)
 - Added the `benefit` adjustent type
+- Changed the minimal Address module requirement to v2.7.1
 
 ## 3.6.2
 ##### 2023-03-12
