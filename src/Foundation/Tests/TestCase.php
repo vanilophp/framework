@@ -19,6 +19,7 @@ use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Konekt\Menu\Facades\Menu;
+use Konekt\Search\Providers\SearchServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Vanilo\Foundation\Providers\ModuleServiceProvider as VaniloModule;
@@ -51,6 +52,7 @@ abstract class TestCase extends Orchestra
             MediaLibraryServiceProvider::class,
             LaravelMigrationCompatibilityProvider::class,
             SluggableServiceProvider::class,
+            SearchServiceProvider::class,
         ];
     }
 

@@ -18,6 +18,7 @@
 - Added optional hooks (callbacks) support to order items creation in the order factory class
 - Added item adjustments total to the order grand total (Foundation)
 - Added the `benefit` adjustent type
+- Added the experimental `ProductSearch` class to replace ProductFinder with a multi-model (products + masters) variant
 - Changed the minimal Address module requirement to v2.7.1
 
 ## 3.6.2
