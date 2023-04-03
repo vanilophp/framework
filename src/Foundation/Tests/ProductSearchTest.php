@@ -12,7 +12,6 @@ declare(strict_types=1);
  *
  */
 
-
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
