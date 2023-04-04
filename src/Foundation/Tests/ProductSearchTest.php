@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Builder;
+use Konekt\Search\Searcher;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Taxon;
@@ -117,6 +117,25 @@ class ProductSearchTest extends TestCase
     }
 
     /** @test */
+    public function it_finds_both_products_and_master_products_where_name_begins_with()
+    {
+        factory(Product::class, 9)->create();
+        factory(Product::class)->create(['name' => 'Matured Cheese']);
+        factory(MasterProduct::class)->create(['name' => 'Mature People']);
+
+        $finder = new ProductSearch();
+        $result = $finder->nameStartsWith('Mature')->getResults();
+
+        $this->assertCount(2, $result);
+
+        $first = $result->first();
+        $this->assertEquals($first instanceof MasterProduct ? 'Mature People': 'Matured Cheese', $first->name);
+
+        $second = $result->last();
+        $this->assertEquals($second instanceof MasterProduct ? 'Mature People': 'Matured Cheese', $second->name);
+    }
+
+    /** @test */
     public function it_finds_a_product_where_name_ends_with()
     {
         factory(Product::class, 27)->create();
@@ -139,11 +158,12 @@ class ProductSearchTest extends TestCase
     {
         factory(Product::class, 11)->create();
         factory(Product::class)->create(['name' => 'Mandarin As Language']);
-        factory(Product::class)->create(['name' => 'Crazy Mandarins']);
+        factory(MasterProduct::class)->create(['name' => 'Crazy Mandarins']);
         factory(Product::class)->create(['name' => 'Mandarin']);
+        factory(MasterProduct::class)->create(['name' => 'Mandarinic Fruits']);
 
         $finder = new ProductSearch();
-        $this->assertCount(3, $finder->nameContains('Mandarin')->getResults());
+        $this->assertCount(4, $finder->nameContains('Mandarin')->getResults());
     }
 
     /** @test */
@@ -411,10 +431,10 @@ class ProductSearchTest extends TestCase
     }
 
     /** @test */
-    public function returns_query_builder()
+    public function it_returns_searcher()
     {
-        $finder = new ProductSearch();
-        $this->assertInstanceOf(Builder::class, $finder->getQueryBuilder());
+        $search = new ProductSearch();
+        $this->assertInstanceOf(Searcher::class, $search->getSearcher());
     }
 
     /** @test */

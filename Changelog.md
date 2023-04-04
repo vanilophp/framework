@@ -19,6 +19,7 @@
 - Added item adjustments total to the order grand total (Foundation)
 - Added the `benefit` adjustent type
 - Added the experimental `ProductSearch` class to replace ProductFinder with a multi-model (products + masters) variant
+  - Added the required konekt/search v1.1+ dependency
 - Changed the minimal Address module requirement to v2.7.1
 
 ## 3.6.2
