@@ -129,10 +129,10 @@ class ProductSearchTest extends TestCase
         $this->assertCount(2, $result);
 
         $first = $result->first();
-        $this->assertEquals($first instanceof MasterProduct ? 'Mature People': 'Matured Cheese', $first->name);
+        $this->assertEquals($first instanceof MasterProduct ? 'Mature People' : 'Matured Cheese', $first->name);
 
         $second = $result->last();
-        $this->assertEquals($second instanceof MasterProduct ? 'Mature People': 'Matured Cheese', $second->name);
+        $this->assertEquals($second instanceof MasterProduct ? 'Mature People' : 'Matured Cheese', $second->name);
     }
 
     /** @test */

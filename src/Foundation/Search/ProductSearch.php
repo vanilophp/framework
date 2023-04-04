@@ -224,7 +224,6 @@ class ProductSearch
         return $this->getSearcher()->paginate($perPage, $pageName, $page)->search();
     }
 
-
     public function getResults(): Collection
     {
         return $this->getSearcher()->search();
