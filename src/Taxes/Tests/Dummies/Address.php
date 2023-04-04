@@ -46,4 +46,3 @@ class Address extends \Konekt\Address\Models\Address implements \Vanilo\Contract
         return $this->address;
     }
 }
-
