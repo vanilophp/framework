@@ -10,4 +10,4 @@
   so that it only contain the changed modules that will be released. Otherwise, unchanged
   modules will get the tag as well, i.e. the previously released commit will have the
   previous tag and the new tag as well
-- Run `build-tool/release.sh 3.x.y`
+- Run `build-tools/release.sh 3.x.y`
