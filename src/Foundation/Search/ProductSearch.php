@@ -21,7 +21,9 @@ use Illuminate\Support\Collection;
 use Konekt\Search\Facades\Search;
 use Konekt\Search\Searcher;
 use Vanilo\Foundation\Models\Taxon;
+use Vanilo\MasterProduct\Contracts\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
+use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Properties\Contracts\PropertyValue;
@@ -46,6 +48,14 @@ class ProductSearch
             ->withGlobalScope('withoutInactiveProducts', function (Builder $queryBuilder) {
                 return $queryBuilder->whereIn('state', ProductStateProxy::getActiveStates());
             });
+    }
+
+    public function findBySlug(string $slug): null|MasterProduct|Product
+    {
+        $this->productQuery->where('slug', $slug);
+        $this->masterProductQuery->where('slug', $slug);
+
+        return $this->getResults()->first();
     }
 
     public function withinTaxon(Taxon $taxon): self

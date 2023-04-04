@@ -99,6 +99,23 @@ class ProductSearchTest extends TestCase
     }
 
     /** @test */
+    public function it_can_find_a_product_by_slug()
+    {
+        factory(Product::class, 3)->create();
+        factory(Product::class)->create([
+            'name' => 'Whaki Tsipo',
+            'slug' => 'whaki-tsipo',
+        ]);
+
+        $finder = new ProductSearch();
+        $product = $finder->findBySlug('whaki-tsipo');
+
+        $this->assertInstanceOf(Product::class, $product);
+        $this->assertEquals('Whaki Tsipo', $product->name);
+        $this->assertEquals('whaki-tsipo', $product->slug);
+    }
+
+    /** @test */
     public function it_finds_a_product_where_name_begins_with()
     {
         factory(Product::class, 35)->create();
