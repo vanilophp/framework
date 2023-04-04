@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-#### 2023-XX-YY
+## 3.7.0
+##### 2023-04-04
 
 - Added `getRemoteId()` method to the `NullRequest` class - it is a proposed v4 interface extension
 

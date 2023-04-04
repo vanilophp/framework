@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2023-XX-YY
+## 3.7.0
+##### 2023-04-04
 
 - Added the `OrderProcessingStarted` event
 - Added the following order item events: `OrderItemShipped`, `OrderItemPickedUp`, `OrderItemsIsReadyForDelivery`, `OrderItemsIsReadyForPickup` and `OrderItemHasBeenPutOnHold`
@@ -22,6 +22,7 @@
   - Added the required konekt/search v1.2+ dependency
 - Changed the minimal Address module requirement to v2.7.1
 -  Added getRemoteId to NullRequest (PaymentRequest interface v4 method candidate)
+- Added testing against MySQL 8.0 (besides v5.7)
 
 ## 3.6.2
 ##### 2023-03-12
