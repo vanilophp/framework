@@ -29,14 +29,10 @@ final class SimpleShippingFee implements Adjuster
     use IsLockable;
     use IsNotIncluded;
 
-    private float $amount;
-
-    private ?float $freeThreshold;
-
-    public function __construct(float $amount, ?float $freeThreshold = null)
-    {
-        $this->amount = $amount;
-        $this->freeThreshold = $freeThreshold;
+    public function __construct(
+        private float $amount,
+        private ?float $freeThreshold = null
+    ) {
     }
 
     public static function reproduceFromAdjustment(Adjustment $adjustment): Adjuster

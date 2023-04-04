@@ -2,6 +2,12 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `SimpleTax` adjuster (it calculates the tax amount based on a flat rate in %)
+- Added the `benefit` adjustent type
+
 ## 3.6.0
 ##### 2023-03-07
 

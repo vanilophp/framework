@@ -60,6 +60,16 @@ final class DetailedAmount implements DetailedAmountContract
         return $instance;
     }
 
+    public static function fromKeyValuePairs(array $details): self
+    {
+        $mapped = [];
+        foreach ($details as $title => $amount) {
+            $mapped[] = ['title' => $title, 'amount' => $amount];
+        }
+
+        return self::fromArray($mapped);
+    }
+
     public function toArray()
     {
         return $this->getDetails();
@@ -73,6 +83,17 @@ final class DetailedAmount implements DetailedAmountContract
     public function getDetails(): array
     {
         return $this->details;
+    }
+
+    public function getDetail(string $title): float|int|null
+    {
+        foreach ($this->details as $detail) {
+            if ($detail['title'] === $title) {
+                return $detail['amount'];
+            }
+        }
+
+        return null;
     }
 
     public function addDetail(string $title, float $value, bool $recalculate = true): self

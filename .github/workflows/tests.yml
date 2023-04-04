@@ -4,15 +4,17 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+    runs-on: buildjet-4vcpu-ubuntu-2204
+    timeout-minutes: 25
     strategy:
       matrix:
         php: ['8.0', '8.1', '8.2']
-        laravel: ['9.2', '9.52', '10.0']
+        laravel: ['9.2', '9.52', '10.0', '10.5']
         exclude:
           - php: '8.0'
             laravel: '10.0'
+          - php: '8.0'
+            laravel: '10.5'
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
@@ -49,14 +51,26 @@ jobs:
           TEST_DB_ENGINE: pgsql
           TEST_DB_PORT: ${{ job.services.postgres.ports[5432] }}
           TEST_DB_PASSWORD: postgres
-      - name: Run Tests [mysql]
+      - name: Run Tests [mysql 5.7]
         run: php vendor/bin/phpunit --testdox
         env:
           TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql.ports[3306] }}
+      - name: Run Tests [mysql 8.0]
+        run: php vendor/bin/phpunit --testdox
+        env:
+          TEST_DB_ENGINE: mysql
+          TEST_DB_PORT: ${{ job.services.mysql8.ports[3306] }}
     services:
       mysql:
         image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: vanilo_test
+        ports:
+          - 3306
+      mysql8:
+        image: mysql:8.0
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: vanilo_test

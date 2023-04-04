@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface Adjustable
 {
+    /** @todo rename this in v4. In case of a cart item or and order item, this name is just stupid */
     public function itemsTotal(): float;
 
     /**

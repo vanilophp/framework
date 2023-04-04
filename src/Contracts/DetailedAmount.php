@@ -22,4 +22,6 @@ interface DetailedAmount extends Arrayable
 
     /** @return array{0: array{title: string, amount:float}} */
     public function getDetails(): array;
+
+    public function getDetail(string $title): float|int|null;
 }

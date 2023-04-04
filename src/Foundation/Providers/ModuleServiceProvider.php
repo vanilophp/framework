@@ -19,6 +19,7 @@ use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Cart\Contracts\Cart as CartContract;
+use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Cart\Models\CartProxy;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
@@ -29,10 +30,12 @@ use Vanilo\Foundation\Factories\CheckoutDataFactory;
 use Vanilo\Foundation\Factories\OrderFactory;
 use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Cart;
+use Vanilo\Foundation\Models\CartItem;
 use Vanilo\Foundation\Models\Customer;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Order;
+use Vanilo\Foundation\Models\OrderItem;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Shipment;
 use Vanilo\Foundation\Models\Taxon;
@@ -44,6 +47,7 @@ use Vanilo\MasterProduct\Models\MasterProductProxy;
 use Vanilo\MasterProduct\Models\MasterProductVariantProxy;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
+use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 use Vanilo\Order\Models\OrderProxy;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
@@ -72,12 +76,15 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(TaxonContract::class, Taxon::class, $registerRouteModels);
         $this->concord->registerModel(TaxonomyContract::class, Taxonomy::class, $registerRouteModels);
         $this->concord->registerModel(CartContract::class, Cart::class, $registerRouteModels);
+        $this->concord->registerModel(CartItemContract::class, CartItem::class, $registerRouteModels);
         $this->concord->registerModel(OrderContract::class, Order::class, $registerRouteModels);
+        $this->concord->registerModel(OrderItemContract::class, OrderItem::class, $registerRouteModels);
         $this->concord->registerModel(ShipmentContract::class, Shipment::class, $registerRouteModels);
         $this->concord->registerModel(MasterProductContract::class, MasterProduct::class, $registerRouteModels);
         $this->concord->registerModel(MasterProductVariantContract::class, MasterProductVariant::class, $registerRouteModels);
 
         Relation::morphMap([
+            // @todo remove this bullshit in v4. It's not event part of the interface
             app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass(),
             'master_product' => MasterProductProxy::modelClass(),
             'master_product_variant' => MasterProductVariantProxy::modelClass(),

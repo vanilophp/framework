@@ -22,9 +22,11 @@ use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\MasterProduct\Models\MasterProduct as BaseMasterProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
+use Vanilo\Taxes\Traits\BelongsToTaxCategory;
 
 class MasterProduct extends BaseMasterProduct implements HasMedia
 {
+    use BelongsToTaxCategory;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;

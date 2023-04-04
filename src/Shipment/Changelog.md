@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `carrier_cost`, `label_url` and `label_base64` fields to the shipments table/model
+
 ## 3.6.2
 ##### 2023-03-12
 

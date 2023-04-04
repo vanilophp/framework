@@ -21,9 +21,6 @@ trait HasOrder
     /** @var  Order */
     protected $order;
 
-    /**
-     * @return Order
-     */
     public function getOrder(): Order
     {
         return $this->order;

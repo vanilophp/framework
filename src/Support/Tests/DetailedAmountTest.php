@@ -115,4 +115,31 @@ class DetailedAmountTest extends TestCase
             ['amount' => 0],
         ]);
     }
+
+    /** @test */
+    public function it_can_be_created_from_key_value_pairs()
+    {
+        $amount = DetailedAmount::fromKeyValuePairs(['gst' => 5, 'pst' => 9, 'hst' => 0]);
+
+        $this->assertInstanceOf(DetailedAmount::class, $amount);
+        $this->assertCount(3, $amount->getDetails());
+    }
+
+    /** @test */
+    public function individual_details_can_be_retrieved_by_title()
+    {
+        $amount = DetailedAmount::fromKeyValuePairs(['gst' => 5, 'pst' => 9, 'hst' => 10]);
+
+        $this->assertEquals(5, $amount->getDetail('gst'));
+        $this->assertEquals(9, $amount->getDetail('pst'));
+        $this->assertEquals(10, $amount->getDetail('hst'));
+    }
+
+    /** @test */
+    public function an_unknown_detail_returns_null()
+    {
+        $amount = DetailedAmount::fromKeyValuePairs(['gst' => 5, 'pst' => 9, 'hst' => 10]);
+
+        $this->assertNull($amount->getDetail('hahaha'));
+    }
 }

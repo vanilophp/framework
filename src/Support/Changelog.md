@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `fromKeyValuePairs` static factory and `getDetail()` methods to the DetailedAmount Dto class
+
 ## 3.6.1
 ##### 2023-03-09
 

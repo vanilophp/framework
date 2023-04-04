@@ -2,6 +2,26 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `OrderProcessingStarted` event
+- Added the following order item events: `OrderItemShipped`, `OrderItemPickedUp`, `OrderItemsIsReadyForDelivery`, `OrderItemsIsReadyForPickup` and `OrderItemHasBeenPutOnHold`
+- Changed the visibility of the `OrderFactory::callHook` method from `private` to `protected`
+- Added the Taxes module with: Tax Categories, 
+- Added `tax_category_id` field to products/master products/variants
+- Added the `SimpleTax` adjuster (it calculates the tax amount based on a flat rate in %)
+- Added the extended `CartItem` and `OrderItem` models to Foundation that are `Adjustable`
+- Added the `fromKeyValuePairs` static factory and `getDetail()` methods to the DetailedAmount Dto class
+- Added the `carrier_cost`, `label_url` and `label_base64` fields to the shipments table/model
+- Added feature to assign shipments to order items, and vice versa (Foundation)
+- Added optional hooks (callbacks) support to order items creation in the order factory class
+- Added item adjustments total to the order grand total (Foundation)
+- Added the `benefit` adjustent type
+- Added the experimental `ProductSearch` class to replace ProductFinder with a multi-model (products + masters) variant
+  - Added the required konekt/search v1.2+ dependency
+- Changed the minimal Address module requirement to v2.7.1
+
 ## 3.6.2
 ##### 2023-03-12
 

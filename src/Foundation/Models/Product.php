@@ -24,9 +24,11 @@ use Vanilo\Product\Models\Product as BaseProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
+use Vanilo\Taxes\Traits\BelongsToTaxCategory;
 
 class Product extends BaseProduct implements Buyable, HasMedia
 {
+    use BelongsToTaxCategory;
     use BuyableModel;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;

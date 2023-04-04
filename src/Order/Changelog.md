@@ -2,6 +2,14 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `OrderProcessingStarted` event
+- Added the following order item events: `OrderItemShipped`, `OrderItemPickedUp`, `OrderItemsIsReadyForDelivery`, `OrderItemsIsReadyForPickup` and `OrderItemHasBeenPutOnHold`
+- Added optional hooks (callbacks) support to order items creation in the order factory class
+- Changed the visibility of the `OrderFactory::callHook` method from `private` to `protected`
+
 ## 3.6.1
 ##### 2023-03-09
 
