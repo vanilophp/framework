@@ -20,4 +20,8 @@ interface PaymentRequest
     public function getHtmlSnippet(array $options = []): ?string;
 
     public function willRedirect(): bool;
+
+    /** @todo add with v4
+    public function getRemoteId(): ?string;
+    */
 }

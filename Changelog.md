@@ -21,6 +21,7 @@
 - Added the experimental `ProductSearch` class to replace ProductFinder with a multi-model (products + masters) variant
   - Added the required konekt/search v1.2+ dependency
 - Changed the minimal Address module requirement to v2.7.1
+-  Added getRemoteId to NullRequest (PaymentRequest interface v4 method candidate)
 
 ## 3.6.2
 ##### 2023-03-12

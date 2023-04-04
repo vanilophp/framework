@@ -35,4 +35,9 @@ class NullRequest implements PaymentRequest
     {
         return false;
     }
+
+    public function getRemoteId(): ?string
+    {
+        return null;
+    }
 }
