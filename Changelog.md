@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the `is_master_product_variant()` helper function
 - Added the `ProductSearch::findBySlugOrFail()` method
 - Changed the `ProductSearch::findBySlug()` method to be static (it's backwards compatible)
 
