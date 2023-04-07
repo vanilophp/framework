@@ -64,7 +64,7 @@ class ProductSearch
     {
         $result = static::findBySlug($slug);
         if (null === $result) {
-            throw (new ModelNotFoundException)->setModel(ProductProxy::modelClass());
+            throw (new ModelNotFoundException())->setModel(ProductProxy::modelClass());
         }
 
         return $result;
