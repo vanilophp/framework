@@ -2,6 +2,12 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `ProductSearch::findBySlugOrFail()` method
+- Changed the `ProductSearch::findBySlug()` method to be static (it's backwards compatible)
+
 ## 3.7.0
 ##### 2023-04-04
 

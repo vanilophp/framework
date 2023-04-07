@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Konekt\Search\Searcher;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\Product;
@@ -99,7 +100,7 @@ class ProductSearchTest extends TestCase
     }
 
     /** @test */
-    public function it_can_find_a_product_by_slug()
+    public function it_can_find_a_product_by_slug_when_called_as_non_static_method()
     {
         factory(Product::class, 3)->create();
         factory(Product::class)->create([
@@ -113,6 +114,30 @@ class ProductSearchTest extends TestCase
         $this->assertInstanceOf(Product::class, $product);
         $this->assertEquals('Whaki Tsipo', $product->name);
         $this->assertEquals('whaki-tsipo', $product->slug);
+    }
+
+    /** @test */
+    public function it_can_find_a_product_by_slug()
+    {
+        factory(Product::class, 5)->create();
+        factory(Product::class)->create([
+            'name' => 'Nintendo Todd 20cm Plush',
+            'slug' => 'nintendo-todd-20cm-plush',
+        ]);
+
+        $product = ProductSearch::findBySlug('nintendo-todd-20cm-plush');
+
+        $this->assertInstanceOf(Product::class, $product);
+        $this->assertEquals('Nintendo Todd 20cm Plush', $product->name);
+        $this->assertEquals('nintendo-todd-20cm-plush', $product->slug);
+    }
+
+    /** @test */
+    public function it_can_fail_with_model_not_found_exception_if_no_entry_was_found()
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        ProductSearch::findBySlugOrFail('whaki-tsipo');
     }
 
     /** @test */

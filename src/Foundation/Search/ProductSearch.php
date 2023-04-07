@@ -17,6 +17,7 @@ namespace Vanilo\Foundation\Search;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Konekt\Search\Facades\Search;
 use Konekt\Search\Searcher;
@@ -50,12 +51,23 @@ class ProductSearch
             });
     }
 
-    public function findBySlug(string $slug): null|MasterProduct|Product
+    public static function findBySlug(string $slug): null|MasterProduct|Product
     {
-        $this->productQuery->where('slug', $slug);
-        $this->masterProductQuery->where('slug', $slug);
+        $instance = new static();
+        $instance->productQuery->where('slug', $slug);
+        $instance->masterProductQuery->where('slug', $slug);
 
-        return $this->getResults()->first();
+        return $instance->getResults()->first();
+    }
+
+    public static function findBySlugOrFail(string $slug): MasterProduct|Product
+    {
+        $result = static::findBySlug($slug);
+        if (null === $result) {
+            throw (new ModelNotFoundException)->setModel(ProductProxy::modelClass());
+        }
+
+        return $result;
     }
 
     public function withinTaxon(Taxon $taxon): self
