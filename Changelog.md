@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2023-XX-YY
+## 3.7.1
+##### 2023-04-07
 
 - Added the `is_master_product_variant()` helper function
 - Added the `ProductSearch::findBySlugOrFail()` method
