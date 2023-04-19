@@ -48,6 +48,7 @@ use Vanilo\Order\Contracts\OrderStatus;
  * @property OrderItem[]|Collection $items
  * @method static static create(array $attributes = [])
  * @method static Builder open()
+ * @method static Builder ofUser(User|int|string $user)
  */
 class Order extends Model implements OrderContract
 {
@@ -144,6 +145,11 @@ class Order extends Model implements OrderContract
     public function scopeOpen(Builder $query)
     {
         return $query->whereIn('status', OrderStatusProxy::getOpenStatuses());
+    }
+
+    public function scopeOfUser($query, $user)
+    {
+        return $query->where('user_id', is_object($user) ? $user->id : $user);
     }
 
     protected static function booted()
