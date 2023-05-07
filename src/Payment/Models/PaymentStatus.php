@@ -27,6 +27,28 @@ use Vanilo\Payment\Contracts\PaymentStatus as PaymentStatusContract;
  * @method static PaymentStatus CANCELLED()
  * @method static PaymentStatus REFUNDED()
  * @method static PaymentStatus PARTIALLY_REFUNDED()
+ *
+ * @method bool isPending()
+ * @method bool isAuthorized()
+ * @method bool isOnHold()
+ * @method bool isPaid()
+ * @method bool isPartiallyPaid()
+ * @method bool isDeclined()
+ * @method bool isTimeout()
+ * @method bool isCancelled()
+ * @method bool isRefunded()
+ * @method bool isPartiallyRefunded()
+ *
+ * @property-read bool $is_pending
+ * @property-read bool $is_authorized
+ * @property-read bool $is_on_hold
+ * @property-read bool $is_paid
+ * @property-read bool $is_partially_paid
+ * @property-read bool $is_declined
+ * @property-read bool $is_timeout
+ * @property-read bool $is_cancelled
+ * @property-read bool $is_refunded
+ * @property-read bool $is_partially_refunded
  */
 class PaymentStatus extends Enum implements PaymentStatusContract
 {

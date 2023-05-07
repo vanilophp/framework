@@ -6,6 +6,8 @@
 ##### 2023-XX-YY
 
 - Added the `ofUser()` scope to the base Order model
+- Added missing Payment Status magic comparison annotations to the interface/model
+- Added the `hasRemoteId()`, `getRemoteId()` and `isOffline()` helper methods to the Payment model (v4 interface candidates)
 
 ## 3.7.1
 ##### 2023-04-07

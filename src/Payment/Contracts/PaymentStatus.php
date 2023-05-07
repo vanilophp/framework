@@ -24,6 +24,17 @@ namespace Vanilo\Payment\Contracts;
  * @method static PaymentStatus TIMEOUT()
  * @method static PaymentStatus CANCELLED()
  * @method static PaymentStatus REFUNDED()
+ *
+ * @method bool isPending()
+ * @method bool isAuthorized()
+ * @method bool isOnHold()
+ * @method bool isPaid()
+ * @method bool isPartiallyPaid()
+ * @method bool isDeclined()
+ * @method bool isTimeout()
+ * @method bool isCancelled()
+ * @method bool isRefunded()
+ * @method bool isPartiallyRefunded()
  */
 interface PaymentStatus
 {

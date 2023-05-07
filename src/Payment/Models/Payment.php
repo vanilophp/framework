@@ -114,6 +114,21 @@ class Payment extends Model implements PaymentContract
             ->first();
     }
 
+    public function hasRemoteId(): bool
+    {
+        return null !== $this->remote_id;
+    }
+
+    public function getRemoteId(): ?string
+    {
+        return $this->remote_id;
+    }
+
+    public function isOffline(): bool
+    {
+        return $this->method->getGateway()->isOffline();
+    }
+
     public function getPaymentId(): string
     {
         return $this->hash;

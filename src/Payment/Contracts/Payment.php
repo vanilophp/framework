@@ -34,8 +34,11 @@ interface Payment
     public function getMethod(): PaymentMethod;
 
     /**
-     * @todo add this in v4
+     * @todo add these in v4
      * public function getSubtype(): ?string
+     * public function hasRemoteId(): bool
+     * public function getRemoteId(): ?string
+     * public function isOffline(): bool
      */
 
     public function getPayable(): Payable;
