@@ -14,7 +14,7 @@ jobs:
           - php: '8.0'
             laravel: '10.0'
           - php: '8.0'
-            laravel: '10.8'
+            laravel: '10.12'
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
