@@ -1,6 +1,6 @@
 # Vanilo
 
-## The Truly Laravel E-commerce Framework
+## The Laravel E-commerce Framework
 
 [![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/framework/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/framework/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
@@ -10,7 +10,15 @@
 
 Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce applications with **pleasure**.
 
-## Current Version
+## Development Version
+
+You are browsing the unstable, v4.x version of this repository!
+
+Do not use this branch in any real projects yet, as it's a subject of heavy changes!
+
+For the stable version see the `3.x` branch.
+
+## Stable Version
 
 #### 3.x
 
