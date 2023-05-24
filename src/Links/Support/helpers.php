@@ -29,4 +29,3 @@ if (!function_exists('link_type_exists')) {
         return LinkTypeProxy::whereSlug($type)->exists();
     }
 }
-
