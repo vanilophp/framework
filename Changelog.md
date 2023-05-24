@@ -8,6 +8,7 @@
 - Added the `ofUser()` scope to the base Order model
 - Added missing Payment Status magic comparison annotations to the interface/model
 - Added the `hasRemoteId()`, `getRemoteId()` and `isOffline()` helper methods to the Payment model (v4 interface candidates)
+- Added the `link_type_exists()` helper function (to be used in blade templates)
 
 ## 3.7.1
 ##### 2023-04-07

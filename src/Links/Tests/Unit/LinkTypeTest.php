@@ -181,4 +181,15 @@ class LinkTypeTest extends TestCase
             '2019' => '2019',
         ], LinkType::choices(false, true));
     }
+
+    /** @test */
+    public function the_link_type_exists_helper_function_can_tell_whether_a_certain_type_exists()
+    {
+        LinkType::create(['name' => 'Popular Companion']);
+        LinkType::create(['name' => 'Accessories']);
+
+        $this->assertTrue(link_type_exists('popular-companion'));
+        $this->assertTrue(link_type_exists('accessories'));
+        $this->assertFalse(link_type_exists('heavy-metal'));
+    }
 }

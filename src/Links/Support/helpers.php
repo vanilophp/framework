@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Vanilo\Links\Models\LinkTypeProxy;
 use Vanilo\Links\Query\Get;
 
 if (!function_exists('links')) {
@@ -21,3 +22,11 @@ if (!function_exists('link_groups')) {
         return null !== $property ? $result->basedOn($property) : $result;
     }
 }
+
+if (!function_exists('link_type_exists')) {
+    function link_type_exists(string $type): bool
+    {
+        return LinkTypeProxy::whereSlug($type)->exists();
+    }
+}
+

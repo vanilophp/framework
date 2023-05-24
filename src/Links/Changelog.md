@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the `link_type_exists()` helper function (to be used in blade templates)
+
 ## 3.7.0
 ##### 2023-04-04
 
