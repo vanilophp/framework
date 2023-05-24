@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## 3.8.0
+##### 2023-05-24
+
+- Bump module version to mainline (no change)
+
 ## 3.7.0
 ##### 2023-04-04
 

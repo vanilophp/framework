@@ -2,8 +2,8 @@
 
 ## 3.x Series
 
-## Unreleased
-##### 2023-XX-YY
+## 3.8.0
+##### 2023-05-24
 
 - Added the `ofUser()` scope to the base Order model
 - Added missing Payment Status magic comparison annotations to the interface/model
