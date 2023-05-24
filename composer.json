@@ -15,15 +15,15 @@
         "issues": "https://github.com/vanilophp/framework/issues"
     },
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "ext-json": "*",
         "ext-pdo": "*",
         "doctrine/dbal": "^2.13.3|^3.1.4",
-        "laravel/framework": "^9.2|^10.0",
+        "laravel/framework": "^10.0",
         "konekt/enum": "^3.1.1|^4.0",
         "konekt/concord": "^1.12",
         "spatie/laravel-medialibrary": "^10.0",
-        "cviebrock/eloquent-sluggable": "^9.0|^10.0",
+        "cviebrock/eloquent-sluggable": "^10.0",
         "konekt/laravel-migration-compatibility": "^1.5",
         "konekt/address": "^2.7.1",
         "konekt/customer": "^2.3.1",
@@ -31,16 +31,21 @@
         "konekt/search": "^1.2"
     },
     "replace": {
-        "vanilo/contracts": "^2.2 | ^3.0",
-        "vanilo/support": "^2.2 | ^3.0",
-        "vanilo/product": "^2.2 | ^3.0",
-        "vanilo/properties": "^2.2 | ^3.0",
-        "vanilo/category": "^2.2 | ^3.0",
-        "vanilo/channel": "^2.2 | ^3.0",
-        "vanilo/cart": "^2.2 | ^3.0",
-        "vanilo/checkout": "^2.2 | ^3.0",
-        "vanilo/order": "^2.2 | ^3.0",
-        "vanilo/payment": "^2.2 | ^3.0"
+        "vanilo/adjustments": "self.version",
+        "vanilo/cart": "self.version",
+        "vanilo/category": "self.version",
+        "vanilo/channel": "self.version",
+        "vanilo/checkout": "self.version",
+        "vanilo/contracts": "self.version",
+        "vanilo/links": "self.version",
+        "vanilo/master-product": "self.version",
+        "vanilo/order": "self.version",
+        "vanilo/payment": "self.version",
+        "vanilo/product": "self.version",
+        "vanilo/properties": "self.version",
+        "vanilo/shipment": "self.version",
+        "vanilo/support": "self.version",
+        "vanilo/taxes": "self.version"
     },
     "autoload": {
         "psr-4": {
@@ -53,7 +58,7 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0|^8.0",
+        "orchestra/testbench": "^8.0",
         "phpunit/phpunit" : "^9.0",
         "laravel/legacy-factories": "^1.0.4"
     },

@@ -1,5 +1,13 @@
 # Vanilo Payment Module Changelog
 
+## 4.x Series
+
+## Unreleased
+##### 2023-XX-YY
+
+- Dropped PHP 8.0 & PHP 8.1 Support
+- Dropped Laravel 9 Support
+
 ## 3.x Series
 
 ## 3.8.0

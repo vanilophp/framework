@@ -8,11 +8,8 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        php: ['8.0', '8.1', '8.2']
-        laravel: ['9.2', '9.52', '10.0']
-        exclude:
-          - php: '8.0'
-            laravel: '10.0'
+        php: ['8.2']
+        laravel: ['10.0', '10.12']
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
@@ -25,16 +22,6 @@ jobs:
           tools: composer:v2
       - name: Lock Laravel Version
         run: composer require "illuminate/support:${{ matrix.laravel }}.*" --no-update -v && composer require "illuminate/console:${{ matrix.laravel }}.*" --no-update -v
-      - name: Testbench Version Adjustments
-        run: |
-          is_smaller_version() [[ $(echo -e "$1\n$2"|sort -V|head -1) != $2 ]]
-          is_smaller_version "${{ matrix.laravel }}" "9.36" && composer req "orchestra/testbench-core:7.10.2" --no-update
-          is_smaller_version "${{ matrix.laravel }}" "9.34" && composer req "orchestra/testbench-core:7.8.1" --no-update
-          is_smaller_version "${{ matrix.laravel }}" "9.32" && composer req "orchestra/testbench-core:7.7.1" --no-update
-          is_smaller_version "${{ matrix.laravel }}" "9.12" && composer req "orchestra/testbench-core:7.4.0" --no-update
-          is_smaller_version "${{ matrix.laravel }}" "9.7" && composer req "orchestra/testbench-core:7.3.0" --no-update
-          is_smaller_version "${{ matrix.laravel }}" "9.6" && composer req "orchestra/testbench-core:7.2.0" --no-update
-          is_smaller_version "${{ matrix.laravel }}" "9.5" && composer req "orchestra/testbench-core:7.1.0" --no-update || true
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
       - name: Create Database

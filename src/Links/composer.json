@@ -17,14 +17,14 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "cviebrock/eloquent-sluggable": "^9.0|^10.0",
-        "illuminate/support": "^9.2|^10.0",
-        "konekt/concord": "^1.12"
+        "php": "^8.2",
+        "cviebrock/eloquent-sluggable": "^10.0",
+        "illuminate/support": "^10.0",
+        "konekt/concord": "^1.13"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
-        "orchestra/testbench": "^7.0|^8.0"
+        "orchestra/testbench": "^8.0"
     },
     "autoload": {
         "psr-4": {
@@ -35,7 +35,7 @@
         ]
     },
     "suggest": {
-        "vanilo/properties": "Allows setting the differing property between linked models (^3.0)"
+        "vanilo/properties": "Allows setting the differing property between linked models (^4.0)"
     },
     "extra": {
         "branch-alias": {
