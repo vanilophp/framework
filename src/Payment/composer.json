@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.2",
         "konekt/concord": "^1.13",
-        "konekt/enum": "^3.1.1|^4.0",
+        "konekt/enum": "^4.0",
         "laravel/framework": "^10.0",
         "vanilo/contracts": "^4.0",
         "vanilo/support": "^4.0"
