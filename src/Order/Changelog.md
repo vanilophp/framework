@@ -8,6 +8,8 @@
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
+- Changed minimal Enum requirement to v4.1
+- Upgraded to Konekt Address and User modules to v3
 
 ## 3.x Series
 

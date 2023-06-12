@@ -20,7 +20,7 @@
         "php": "^8.2",
         "cviebrock/eloquent-sluggable": "^10.0",
         "konekt/concord": "^1.13",
-        "konekt/enum": "^4.0",
+        "konekt/enum": "^4.1",
         "konekt/enum-eloquent": "^1.9",
         "laravel/framework": "^10.0",
         "vanilo/contracts": "^4.0",
