@@ -11,7 +11,6 @@
 - Changed minimal Enum requirement to v4.1
 - Upgraded to Konekt Address, Customer and User modules to v3
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
-- Fixed the missing `customer` relation from the Address model (Foundation)
 
 ## 3.x Series
 
