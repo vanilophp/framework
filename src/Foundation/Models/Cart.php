@@ -32,7 +32,7 @@ class Cart extends BaseCart implements Adjustable
 
     public function itemsTotal(): float
     {
-        return $this->items->sum('total');
+        return $this->items->sum(fn (CartItem $item) => $item->itemsTotal());
     }
 
     public function shippingAdjustmentsTotal(): float
