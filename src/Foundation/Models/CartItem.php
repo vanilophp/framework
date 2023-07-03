@@ -27,6 +27,6 @@ class CartItem extends BaseCartItem implements Adjustable
     /** @todo rename this in v4 along with the renaming of this method in the Adjustable interface */
     public function itemsTotal(): float
     {
-        return $this->total();
+        return $this->total() + $this->adjustments()->total();
     }
 }
