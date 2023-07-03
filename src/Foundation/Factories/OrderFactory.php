@@ -47,7 +47,7 @@ class OrderFactory extends BaseOrderFactory
         if ($order instanceof Adjustable) {
             foreach ($this->sourceAdjustments as $adjustment) {
                 $clone = $adjustment->newInstance(
-                    Arr::except($adjustment->getAttributes(), ['id', 'adjustable_type', 'adjustable_id', 'created_at', 'upated_at'])
+                    Arr::except($adjustment->getAttributes(), ['id', 'adjustable_type', 'adjustable_id', 'created_at', 'updated_at'])
                 );
                 $clone->data = $adjustment->data; // This gets flattened to string for some reason when fetching from "getAttributes"
                 $order->adjustments()->add($clone);
