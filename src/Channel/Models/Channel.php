@@ -40,7 +40,7 @@ class Channel extends Model implements ChannelContract
 
     protected $table = 'channels';
 
-    protected $fillable = ['name', 'slug', 'configuration'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
         'configuration' => 'array'
