@@ -39,10 +39,12 @@ class ChannelTest extends TestCase
 
         $channel->name = 'Mobile App';
         $channel->slug = 'app';
+        $channel->currency = 'USD';
         $channel->configuration = ['bam' => 'zdish', 'bumm' => 'tsish'];
 
         $this->assertEquals('Mobile App', $channel->name);
         $this->assertEquals('app', $channel->slug);
+        $this->assertEquals('USD', $channel->currency);
 
         $cfg = $channel->configuration;
         // @todo convert to `assertIsArray` once dropping Laravel 5.5 -> PHPUnit < 7.5 support

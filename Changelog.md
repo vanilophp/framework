@@ -12,6 +12,7 @@
 - Upgraded to Konekt Address, Customer and User modules to v3
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
 - Added the `currency` field to the orders table
+- Added `currency` field to the Channel model/table
 
 ## 3.x Series
 

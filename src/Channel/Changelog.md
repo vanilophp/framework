@@ -7,6 +7,7 @@
 
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
+- Added `currency` field to the Channel model/table
 
 ## 3.x Series
 

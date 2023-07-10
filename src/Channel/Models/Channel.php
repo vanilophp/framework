@@ -25,6 +25,7 @@ use Vanilo\Channel\Contracts\Channel as ChannelContract;
  * @property int $id
  * @property string $name
  * @property ?string $slug
+ * @property ?string $currency
  * @property ?array $configuration
  * @property ?Carbon $deleted_at
  * @property Carbon $created_at
