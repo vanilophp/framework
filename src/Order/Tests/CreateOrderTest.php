@@ -203,6 +203,7 @@ class CreateOrderTest extends TestCase
             'status' => OrderStatus::COMPLETED(),
             'fulfillment_status' => FulfillmentStatus::FULFILLED(),
             'language' => 'de',
+            'currency' => 'EUR',
             'ordered_at' => '2023-01-15 11:35:27',
             'user_id' => $user->id,
             'billpayer_id' => $billpayer->id,
@@ -217,6 +218,7 @@ class CreateOrderTest extends TestCase
         $this->assertTrue($order->fulfillment_status->isFulfilled());
 
         $this->assertEquals('de', $order->language);
+        $this->assertEquals('EUR', $order->currency);
         $this->assertEquals('2023-01-15T11:35:27Z', $order->ordered_at->toIso8601ZuluString());
         $this->assertEquals($user->id, $order->user_id);
         $this->assertEquals($billpayer->id, $order->billpayer_id);
