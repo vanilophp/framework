@@ -93,7 +93,7 @@ class Order extends BaseOrder implements Payable, Adjustable
 
     public function getCurrency(): string
     {
-        return config('vanilo.foundation.currency.code');
+        return $this->currency ?? config('vanilo.foundation.currency.code');
     }
 
     public function channel(): BelongsTo
