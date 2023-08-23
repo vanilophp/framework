@@ -154,6 +154,5 @@ class PropertyTest extends TestCase
 
         $this->assertEquals(5, Property::visibleOnes()->count());
         $this->assertEquals(8, Property::hiddenOnes()->count());
-
     }
 }
