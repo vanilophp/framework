@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2023-XX-YY
 
+- Added the `is_hidden` field to the `Property` model
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 

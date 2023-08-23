@@ -13,6 +13,7 @@
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
 - Added the `currency` field to the orders table
 - Added `currency` field to the Channel model/table
+- Added the `is_hidden` field to the `Property` model
 
 ## 3.x Series
 

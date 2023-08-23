@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Properties\Tests;
 
+use Illuminate\Support\Str;
 use Vanilo\Properties\Models\Property;
 
 class PropertyTest extends TestCase
@@ -25,6 +26,7 @@ class PropertyTest extends TestCase
             'name' => 'Funkiness',
             'type' => 'text',
             'slug' => 'funkiness',
+            'is_hidden' => true,
             'configuration' => ['x' => 'y', 'a' => 'b']
         ]);
 
@@ -32,6 +34,7 @@ class PropertyTest extends TestCase
         $this->assertEquals('text', $property->type);
         $this->assertEquals('funkiness', $property->slug);
         $this->assertEquals(['x' => 'y', 'a' => 'b'], $property->configuration);
+        $this->assertTrue($property->is_hidden);
     }
 
     /** @test */
@@ -42,10 +45,15 @@ class PropertyTest extends TestCase
         $property->name = 'Creepiness';
         $property->type = 'number';
         $property->slug = 'creepiness';
+        $property->is_hidden = true;
         $property->configuration = ['bam' => 'zdish', 'bumm' => 'tsish'];
+
+        $property->save();
+        $property->refresh();
 
         $this->assertEquals('Creepiness', $property->name);
         $this->assertEquals('number', $property->type);
+        $this->assertTrue($property->is_hidden);
         $this->assertEquals('creepiness', $property->slug);
 
         $cfg = $property->configuration;
@@ -124,5 +132,28 @@ class PropertyTest extends TestCase
 
         $this->assertInstanceOf(Property::class, $screen);
         $this->assertEquals('Screen Size', $screen->name);
+    }
+
+    /** @test */
+    public function the_hidden_scopes_can_be_used_to_query_models()
+    {
+        for ($i = 0; $i < 8; $i++) {
+            Property::create([
+                'name' => Str::ulid()->toBase58(),
+                'type' => 'text',
+                'is_hidden' => true,
+            ]);
+        }
+        for ($i = 0; $i < 5; $i++) {
+            Property::create([
+                'name' => Str::ulid()->toBase58(),
+                'type' => 'text',
+                'is_hidden' => false,
+            ]);
+        }
+
+        $this->assertEquals(5, Property::visibleOnes()->count());
+        $this->assertEquals(8, Property::hiddenOnes()->count());
+
     }
 }

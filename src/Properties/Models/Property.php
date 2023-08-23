@@ -16,6 +16,7 @@ namespace Vanilo\Properties\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -29,7 +30,11 @@ use Vanilo\Properties\PropertyTypes;
  * @property string     $slug
  * @property string     $type
  * @property array      $configuration
+ * @property bool       $is_hidden
  * @property Collection $propertyValues
+ *
+ * @method static Builder hiddenOnes()
+ * @method static Builder visibleOnes()
  */
 class Property extends Model implements PropertyContract
 {
@@ -43,7 +48,8 @@ class Property extends Model implements PropertyContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'configuration' => 'array'
+        'configuration' => 'array',
+        'is_hidden' => 'boolean',
     ];
 
     public function getType(): PropertyType
@@ -79,12 +85,22 @@ class Property extends Model implements PropertyContract
         return $this->hasMany(PropertyValueProxy::modelClass());
     }
 
+    public function scopeHiddenOnes(Builder $query): Builder
+    {
+        return $query->where('is_hidden', true);
+    }
+
+    public function scopeVisibleOnes(Builder $query): Builder
+    {
+        return $query->where('is_hidden', false);
+    }
+
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 }
