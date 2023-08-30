@@ -14,6 +14,7 @@
 - Added the `currency` field to the orders table
 - Added `currency` field to the Channel model/table
 - Added the `is_hidden` field to the `Property` model
+- Added the `withImages` method to the product search class (eager loads media)
 
 ## 3.x Series
 

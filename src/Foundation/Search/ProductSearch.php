@@ -228,6 +228,14 @@ class ProductSearch
         return $this;
     }
 
+    public function withImages(): self
+    {
+        $this->productQuery->with('media');
+        $this->masterProductQuery->with('media');
+
+        return $this;
+    }
+
     public function getSearcher(): Searcher
     {
         return $this->searcher
