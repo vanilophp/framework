@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Vanilo\Channel\Tests\Dummies\ChannelableDummyPlan;
 use Vanilo\Channel\Models\Channel;
+use Vanilo\Channel\Tests\Dummies\ChannelableDummyPlan;
 use Vanilo\Channel\Tests\TestCase;
 
 /**
