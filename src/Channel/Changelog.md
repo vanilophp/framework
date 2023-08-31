@@ -8,6 +8,7 @@
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 - Added `currency` field to the Channel model/table
+- Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models
 
 ## 3.x Series
 
