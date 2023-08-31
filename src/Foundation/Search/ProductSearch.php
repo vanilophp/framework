@@ -32,11 +32,11 @@ use Vanilo\Properties\Models\PropertyValueProxy;
 
 class ProductSearch
 {
-    private Searcher $searcher;
+    protected Searcher $searcher;
 
-    private Builder $productQuery;
+    protected Builder $productQuery;
 
-    private Builder $masterProductQuery;
+    protected Builder $masterProductQuery;
 
     public function __construct()
     {
