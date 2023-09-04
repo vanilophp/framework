@@ -231,7 +231,7 @@ class ProductSearch
     public function withImages(): self
     {
         $this->productQuery->with('media');
-        $this->masterProductQuery->with('media');
+        $this->masterProductQuery->with(['media', 'variants.media']);
 
         return $this;
     }
