@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Vanilo\Channel\Models\Channel;
 use Vanilo\Channel\Tests\Dummies\ChannelableDummyPlan;
+use Vanilo\Channel\Tests\Dummies\ChannelableDummyProduct;
 use Vanilo\Channel\Tests\TestCase;
 
 /**
@@ -59,5 +60,17 @@ class ChannelablesTest extends TestCase
         $this->assertCount(2, $channel->plans);
         $this->assertEquals($plan1->id, $channel->plans->first()->id);
         $this->assertEquals($plan2->id, $channel->plans->last()->id);
+    }
+
+    /** @test */
+    public function channelables_work_with_older_non_bigint_id_models()
+    {
+        $product = ChannelableDummyProduct::create(['name' => 'Pro-Duct']);
+        $channel = Channel::create(['name' => 'B2B']);
+
+        $product->channels()->save($channel);
+
+        $this->assertCount(1, $product->channels);
+        $this->assertEquals($channel->id, $product->channels->first()->id);
     }
 }
