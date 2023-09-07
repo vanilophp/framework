@@ -32,26 +32,26 @@ class Channel extends BaseChannel
 
     public function masterProducts(): MorphToMany
     {
-        return $this->morphToMany(MasterProductProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(MasterProductProxy::modelClass(), 'channelables');
     }
 
     public function shippingMethods(): MorphToMany
     {
-        return $this->morphToMany(ShippingMethodProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(ShippingMethodProxy::modelClass(), 'channelables');
     }
 
     public function paymentMethods(): MorphToMany
     {
-        return $this->morphToMany(PaymentMethodProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(PaymentMethodProxy::modelClass(), 'channelables');
     }
 
     public function taxonomies(): MorphToMany
     {
-        return $this->morphToMany(TaxonomyProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(TaxonomyProxy::modelClass(), 'channelables');
     }
 
     public function properties(): MorphToMany
     {
-        return $this->morphToMany(PropertyProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(PropertyProxy::modelClass(), 'channelables');
     }
 }
