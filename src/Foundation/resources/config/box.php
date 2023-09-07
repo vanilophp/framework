@@ -40,5 +40,10 @@ return [
         'sign'   => '€',
         'format' => '%1$g%2$s'
         */
-    ]
+    ],
+    'features' => [
+        'multi_channel' => [
+            'is_enabled' => false,
+        ],
+    ],
 ];
