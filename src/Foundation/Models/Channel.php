@@ -27,31 +27,31 @@ class Channel extends BaseChannel
 {
     public function products(): MorphToMany
     {
-        return $this->morphedByMany(ProductProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(ProductProxy::modelClass(), 'channelable');
     }
 
     public function masterProducts(): MorphToMany
     {
-        return $this->morphedByMany(MasterProductProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(MasterProductProxy::modelClass(), 'channelable');
     }
 
     public function shippingMethods(): MorphToMany
     {
-        return $this->morphedByMany(ShippingMethodProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(ShippingMethodProxy::modelClass(), 'channelable');
     }
 
     public function paymentMethods(): MorphToMany
     {
-        return $this->morphedByMany(PaymentMethodProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(PaymentMethodProxy::modelClass(), 'channelable');
     }
 
     public function taxonomies(): MorphToMany
     {
-        return $this->morphedByMany(TaxonomyProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(TaxonomyProxy::modelClass(), 'channelable');
     }
 
     public function properties(): MorphToMany
     {
-        return $this->morphedByMany(PropertyProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(PropertyProxy::modelClass(), 'channelable');
     }
 }
