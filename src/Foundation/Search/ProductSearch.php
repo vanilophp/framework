@@ -134,10 +134,10 @@ class ProductSearch
         $channelIds = collect($channels)->pluck('id');
 
         $this->productQuery->whereHas('channels', function ($query) use ($channelIds) {
-            $query->whereIn('id', $channelIds);
+            $query->whereIn('channel_id', $channelIds);
         });
         $this->masterProductQuery->whereHas('channels', function ($query) use ($channelIds) {
-            $query->whereIn('id', $channelIds);
+            $query->whereIn('channel_id', $channelIds);
         });
 
         return $this;
