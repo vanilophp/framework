@@ -18,12 +18,14 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Models\Taxonomy as BaseTaxonomy;
+use Vanilo\Channel\Traits\Channelable;
 use Vanilo\Contracts\HasImages;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 
 class Taxonomy extends BaseTaxonomy implements HasMedia, HasImages
 {
+    use Channelable;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;

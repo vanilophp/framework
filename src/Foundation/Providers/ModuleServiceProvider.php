@@ -25,12 +25,15 @@ use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Category\Models\TaxonProxy;
+use Vanilo\Channel\Contracts\Channel as ChannelContract;
+use Vanilo\Channel\Models\ChannelProxy;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory as CheckoutDataFactoryContract;
 use Vanilo\Foundation\Factories\CheckoutDataFactory;
 use Vanilo\Foundation\Factories\OrderFactory;
 use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Cart;
 use Vanilo\Foundation\Models\CartItem;
+use Vanilo\Foundation\Models\Channel;
 use Vanilo\Foundation\Models\Customer;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
@@ -70,6 +73,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
         // Use the foundation's extended model classes
         $registerRouteModels = config('concord.register_route_models', true);
+        $this->concord->registerModel(ChannelContract::class, Channel::class, $registerRouteModels);
         $this->concord->registerModel(ProductContract::class, Product::class, $registerRouteModels);
         $this->concord->registerModel(AddressContract::class, Address::class, $registerRouteModels);
         $this->concord->registerModel(CustomerContract::class, Customer::class, $registerRouteModels);
@@ -93,6 +97,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'order' => OrderProxy::modelClass(),
             'cart' => CartProxy::modelClass(),
             'shipment' => ShipmentProxy::modelClass(),
+            'channel' => ChannelProxy::modelClass(),
         ]);
 
         ShippingFeeCalculators::register(FlatFeeCalculator::ID, FlatFeeCalculator::class);

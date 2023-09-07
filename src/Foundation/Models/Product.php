@@ -18,6 +18,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Traits\HasTaxons;
+use Vanilo\Channel\Traits\Channelable;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Product\Models\Product as BaseProduct;
@@ -30,6 +31,7 @@ class Product extends BaseProduct implements Buyable, HasMedia
 {
     use BelongsToTaxCategory;
     use BuyableModel;
+    use Channelable;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;

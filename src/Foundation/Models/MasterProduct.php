@@ -18,6 +18,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Traits\HasTaxons;
+use Vanilo\Channel\Traits\Channelable;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\MasterProduct\Models\MasterProduct as BaseMasterProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
@@ -27,6 +28,7 @@ use Vanilo\Taxes\Traits\BelongsToTaxCategory;
 class MasterProduct extends BaseMasterProduct implements HasMedia
 {
     use BelongsToTaxCategory;
+    use Channelable;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;

@@ -17,6 +17,8 @@
 - Added the `withImages` method to the product search class (eager loads media)
 - Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models
 - Added the `mapInto()` method to the `RelationAdjustmentCollection` class, which forwards the call to the underlying Eloquent collection
+- Added the `Channelable` behavior to Foundation Product, MasterProduct and Taxonomy classes
+- Added and extended Foundation Channel model that contains the known relationships to the "channelable" models
 
 ## 3.x Series
 
