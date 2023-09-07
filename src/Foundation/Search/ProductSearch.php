@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Konekt\Search\Facades\Search;
 use Konekt\Search\Searcher;
+use Vanilo\Channel\Contracts\Channel;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\MasterProduct\Contracts\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
@@ -118,6 +119,25 @@ class ProductSearch
         });
         $this->masterProductQuery->orWhereHas('taxons', function ($query) use ($taxonIds) {
             $query->whereIn('id', $taxonIds);
+        });
+
+        return $this;
+    }
+
+    public function withinChannel(Channel $channel): self
+    {
+        return $this->withinChannels($channel);
+    }
+
+    public function withinChannels(Channel ...$channels): self
+    {
+        $channelIds = collect($channels)->pluck('id');
+
+        $this->productQuery->whereHas('channels', function ($query) use ($channelIds) {
+            $query->whereIn('id', $channelIds);
+        });
+        $this->masterProductQuery->whereHas('channels', function ($query) use ($channelIds) {
+            $query->whereIn('id', $channelIds);
         });
 
         return $this;

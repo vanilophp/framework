@@ -19,6 +19,7 @@
 - Added the `mapInto()` method to the `RelationAdjustmentCollection` class, which forwards the call to the underlying Eloquent collection
 - Added the `Channelable` behavior to Foundation Product, MasterProduct and Taxonomy classes
 - Added and extended Foundation Channel model that contains the known relationships to the "channelable" models
+- Added the `withinChannel[s]` methods to the ProductSearch class
 
 ## 3.x Series
 
