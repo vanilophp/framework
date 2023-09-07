@@ -15,12 +15,12 @@ declare(strict_types=1);
 namespace Vanilo\Channel\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Vanilo\Channel\Models\Channel;
+use Vanilo\Channel\Models\ChannelProxy;
 
 trait Channelable
 {
     public function channels(): MorphToMany
     {
-        return $this->morphToMany(Channel::class, 'channelable');
+        return $this->morphToMany(ChannelProxy::modelClass(), 'channelable');
     }
 }
