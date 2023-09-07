@@ -27,7 +27,7 @@ class Channel extends BaseChannel
 {
     public function products(): MorphToMany
     {
-        return $this->morphToMany(ProductProxy::modelClass(), 'channelables');
+        return $this->morphedByMany(ProductProxy::modelClass(), 'channelables');
     }
 
     public function masterProducts(): MorphToMany
