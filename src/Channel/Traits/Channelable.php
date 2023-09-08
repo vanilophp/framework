@@ -44,4 +44,9 @@ trait Channelable
     {
         $this->channels()->sync($channels);
     }
+
+    public function removeFromAllChannels(): void
+    {
+        $this->channels()->detach();
+    }
 }
