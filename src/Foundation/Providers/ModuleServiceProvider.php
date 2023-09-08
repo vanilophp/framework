@@ -39,8 +39,10 @@ use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\OrderItem;
+use Vanilo\Foundation\Models\PaymentMethod;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Shipment;
+use Vanilo\Foundation\Models\ShippingMethod;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Models\Taxonomy;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
@@ -52,10 +54,14 @@ use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 use Vanilo\Order\Models\OrderProxy;
+use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
+use Vanilo\Payment\Models\PaymentMethodProxy;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
+use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
 use Vanilo\Shipment\Models\ShipmentProxy;
+use Vanilo\Shipment\Models\ShippingMethodProxy;
 use Vanilo\Shipment\ShippingFeeCalculators;
 
 class ModuleServiceProvider extends BaseBoxServiceProvider
@@ -86,6 +92,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(ShipmentContract::class, Shipment::class, $registerRouteModels);
         $this->concord->registerModel(MasterProductContract::class, MasterProduct::class, $registerRouteModels);
         $this->concord->registerModel(MasterProductVariantContract::class, MasterProductVariant::class, $registerRouteModels);
+        $this->concord->registerModel(ShippingMethodContract::class, ShippingMethod::class, $registerRouteModels);
+        $this->concord->registerModel(PaymentMethodContract::class, PaymentMethod::class, $registerRouteModels);
 
         Relation::morphMap([
             // @todo remove this bullshit in v4. It's not event part of the interface
@@ -97,6 +105,8 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'order' => OrderProxy::modelClass(),
             'cart' => CartProxy::modelClass(),
             'shipment' => ShipmentProxy::modelClass(),
+            'shipping_method' => ShippingMethodProxy::modelClass(),
+            'payment_method' => PaymentMethodProxy::modelClass(),
             'channel' => ChannelProxy::modelClass(),
         ]);
 
