@@ -14,13 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Channel\Traits;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Collection;
 use Vanilo\Channel\Contracts\Channel;
 use Vanilo\Channel\Models\ChannelProxy;
 
 /**
- * @property-read Collection $channels
+ * @property-read \Illuminate\Database\Eloquent\Collection $channels
  */
 trait Channelable
 {
@@ -37,5 +38,10 @@ trait Channelable
     public function isNotInChannel(Channel|int|string $channel): bool
     {
         return !$this->isInChannel($channel);
+    }
+
+    public function assignChannels(array|Model|Collection $channels): void
+    {
+        $this->channels()->sync($channels);
     }
 }
