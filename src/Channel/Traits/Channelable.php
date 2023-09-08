@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Channel\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
@@ -22,6 +23,7 @@ use Vanilo\Channel\Models\ChannelProxy;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection $channels
+ * @method static Builder withinChannels(Collection|Channel|array $channels)
  */
 trait Channelable
 {
@@ -48,5 +50,19 @@ trait Channelable
     public function removeFromAllChannels(): void
     {
         $this->channels()->detach();
+    }
+
+    public function scopeWithinChannels(Builder $query, Collection|Channel|array $channels): Builder
+    {
+        $ids = [];
+        if ($channels instanceof Channel) {
+            $ids[] = $channels->getKey();
+        } else {
+            foreach($channels as $channel) {
+                $ids[] = $channel instanceof Channel ? $channel->id : $channel;
+            }
+        }
+
+        return $query->whereHas('channels', fn ($query) => $query->whereIn('channel_id', $ids));
     }
 }
