@@ -58,7 +58,7 @@ trait Channelable
         if ($channels instanceof Channel) {
             $ids[] = $channels->getKey();
         } else {
-            foreach($channels as $channel) {
+            foreach ($channels as $channel) {
                 $ids[] = $channel instanceof Channel ? $channel->id : $channel;
             }
         }
