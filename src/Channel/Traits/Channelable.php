@@ -32,6 +32,16 @@ trait Channelable
         return $this->morphToMany(ChannelProxy::modelClass(), 'channelable');
     }
 
+    public function isAssignedToAnyChannel(): bool
+    {
+        return $this->channels->isNotEmpty();
+    }
+
+    public function isNotAssignedToAnyChannel(): bool
+    {
+        return !$this->isAssignedToAnyChannel();
+    }
+
     public function isInChannel(Channel|int|string $channel): bool
     {
         return $this->channels->contains($channel);
