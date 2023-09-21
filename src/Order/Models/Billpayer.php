@@ -56,7 +56,7 @@ class Billpayer extends Model implements BillpayerContract, VaniloBillpayerContr
 
     public function getName(): string
     {
-        if ($this->isOrganization()) {
+        if ($this->isOrganization() && $this->getCompanyName()) {
             return $this->getCompanyName();
         }
 

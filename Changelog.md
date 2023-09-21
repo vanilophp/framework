@@ -21,6 +21,7 @@
 - Added and extended Foundation Channel model that contains the known relationships to the "channelable" models
 - Added the `withinChannel[s]` methods to the ProductSearch class
 - Added the `Features` accessor class, which is a syntactic sugar for areas of the configuration
+- Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null
 
 ## 3.x Series
 

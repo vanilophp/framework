@@ -11,6 +11,7 @@
 - Changed minimal Enum requirement to v4.1
 - Upgraded to Konekt Address and User modules to v3
 - Added the `currency` field to the orders table
+- Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null 
 
 ## 3.x Series
 
