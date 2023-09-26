@@ -14,7 +14,7 @@
 - Added the `currency` field to the orders table
 - Added `currency` field to the Channel model/table
 - Added the `is_hidden` field to the `Property` model
-- Added the `withImages` method to the product search class (eager loads media)
+- Added the `withImages` and `withChannels` methods to the product search class (eager loads media)
 - Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models
 - Added the `mapInto()` method to the `RelationAdjustmentCollection` class, which forwards the call to the underlying Eloquent collection
 - Added the `Channelable` behavior to Foundation Product, MasterProduct, PaymentMethod, ShippingMethod and Taxonomy classes

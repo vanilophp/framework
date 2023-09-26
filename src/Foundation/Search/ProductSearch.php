@@ -256,6 +256,14 @@ class ProductSearch
         return $this;
     }
 
+    public function withChannels(): self
+    {
+        $this->productQuery->with('channels');
+        $this->masterProductQuery->with('channels');
+
+        return $this;
+    }
+
     public function getSearcher(): Searcher
     {
         return $this->searcher
