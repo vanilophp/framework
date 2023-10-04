@@ -9,6 +9,7 @@
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
+- Added `isZoneRestricted()` & `isNotZoneRestricted()` helper methods to the `ShippingMethod` class
 
 ## 3.x Series
 
