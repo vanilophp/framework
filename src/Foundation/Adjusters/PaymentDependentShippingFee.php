@@ -88,7 +88,7 @@ class PaymentDependentShippingFee implements Adjuster
             'origin' => null,
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
-            'data' => ['amount' => $this->amount, 'freeThreshold' => $this->freeThreshold],
+            'data' => ['prices' => $this->prices, 'freeThreshold' => $this->freeThreshold],
             'amount' => $this->calculateAmount($adjustable),
             'is_locked' => $this->isLocked(),
             'is_included' => $this->isIncluded(),
