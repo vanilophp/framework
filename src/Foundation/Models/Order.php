@@ -122,7 +122,6 @@ class Order extends BaseOrder implements Payable, Adjustable
     public function getPaymentMethodId(): ?string
     {
         return $this->payment_method_id ? (string) $this->payment_method_id : null;
-
     }
 
     public function total(): float
