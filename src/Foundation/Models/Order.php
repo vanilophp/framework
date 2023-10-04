@@ -27,6 +27,7 @@ use Vanilo\Contracts\Payable;
 use Vanilo\Foundation\Traits\CanBeShipped;
 use Vanilo\Order\Models\Order as BaseOrder;
 use Vanilo\Payment\Contracts\Payment;
+use Vanilo\Payment\Models\PaymentMethodProxy;
 use Vanilo\Payment\Models\PaymentProxy;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShippingMethod;
@@ -38,6 +39,8 @@ use Vanilo\Shipment\Models\ShippingMethodProxy;
  * @property null|Channel $channel
  * @property null|int $shipping_method_id
  * @property null|ShippingMethod $shippingMethod
+ * @property null|int $payment_method_id
+ * @property null|PaymentMethod $paymentMethod
  * @property null|int $customer_id
  * @property null|string $payable_remote_id
  * @property null|\Vanilo\Contracts\Customer $customer
@@ -109,6 +112,17 @@ class Order extends BaseOrder implements Payable, Adjustable
     public function shippingMethod(): BelongsTo
     {
         return $this->belongsTo(ShippingMethodProxy::modelClass());
+    }
+
+    public function paymentMethod(): BelongsTo
+    {
+        return $this->belongsTo(PaymentMethodProxy::modelClass());
+    }
+
+    public function getPaymentMethodId(): ?string
+    {
+        return $this->payment_method_id ? (string) $this->payment_method_id : null;
+
     }
 
     public function total(): float

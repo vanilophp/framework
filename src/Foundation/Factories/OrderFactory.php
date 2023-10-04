@@ -33,6 +33,7 @@ class OrderFactory extends BaseOrderFactory
             'billpayer' => $checkout->getBillpayer()->toArray(),
             'shippingAddress' => $checkout->getShippingAddress()->toArray(),
             'shipping_method_id' => $checkout->getShippingMethodId(),
+            'payment_method_id' => $checkout->getPaymentMethodId(),
         ];
 
         $items = $this->convertCartItemsToDataArray($checkout->getCart());
