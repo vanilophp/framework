@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Shipping;
 
-use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
@@ -35,7 +34,7 @@ class PaymentDependentShippingFeeCalculator implements ShippingFeeCalculator
     {
         [$prices, $freeThreshold] = $this->toParameters($configuration);
 
-        $adjuster = new SimpleShippingFee($prices, $freeThreshold);
+        $adjuster = new PaymentDependentShippingFee($prices, $freeThreshold);
         $adjuster->setTitle($configuration['title'] ?? __('Shipping fee'));
 
         return $adjuster;
