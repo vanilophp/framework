@@ -29,6 +29,12 @@
 
 ## 3.x Series
 
+## 3.8.1
+##### 2023-10-09
+
+- Fixed the hinting of `Taxon` interface in the `ProductSearch` class (#163)
+- Changed the visibility of `ProductSearch` properties  from `private` to `proteced` (#161)
+
 ## 3.8.0
 ##### 2023-05-24
 
