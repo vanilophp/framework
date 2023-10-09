@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Konekt\Search\Facades\Search;
 use Konekt\Search\Searcher;
-use Vanilo\Foundation\Models\Taxon;
+use Vanilo\Category\Contracts\Taxon;
 use Vanilo\MasterProduct\Contracts\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
 use Vanilo\Product\Contracts\Product;
@@ -83,7 +83,7 @@ class ProductSearch
         return $this;
     }
 
-    public function orWithinTaxon(\Vanilo\Category\Contracts\Taxon $taxon): self
+    public function orWithinTaxon(Taxon $taxon): self
     {
         $this->productQuery->orWhereHas('taxons', function ($query) use ($taxon) {
             $query->where('id', $taxon->id);
