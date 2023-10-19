@@ -28,7 +28,7 @@ class UpdateSalesFigures
             /** @var OrderItem $item */
             if ($item->product instanceof Buyable) {
                 if ($item->quantity >= 0) {
-                    $item->product->addSale($order->created_at, $item->quantity);
+                    $item->product->addSale($order->ordered_at ?? $order->created_at, $item->quantity);
                 } else {
                     $item->product->removeSale(-1 * $item->quantity);
                 }
