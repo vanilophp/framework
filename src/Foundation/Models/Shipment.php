@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
@@ -21,6 +22,10 @@ use Vanilo\Order\Models\OrderItemProxy;
 use Vanilo\Order\Models\OrderProxy;
 use Vanilo\Shipment\Models\Shipment as BaseShipment;
 
+/**
+ * @property-read Collection|OrderContract[] $orders
+ * @property-read Collection|OrderItemContract[] $orderItems
+ */
 class Shipment extends BaseShipment
 {
     public function orders(): MorphToMany
