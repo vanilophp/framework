@@ -188,7 +188,7 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
         return null;
     }
 
-    public function offsetSet(mixed $offset, mixed $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if ($this->isRegularAttribute($offset)) {
             $this->setAttribute($offset, $value);
@@ -197,7 +197,7 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
         }
     }
 
-    public function offsetGet(mixed $offset)
+    public function offsetGet(mixed $offset): mixed
     {
         if ($this->isRegularAttribute($offset)) {
             return $this->getAttribute($offset);

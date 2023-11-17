@@ -113,7 +113,7 @@ class SessionStore extends BaseCheckoutStore
         return $this->readRawDataFromStore(static::CUSTOM_ATTRIBUTES_KEY) ?? [];
     }
 
-    public function offsetExists(mixed $offset)
+    public function offsetExists(mixed $offset): bool
     {
         if ($this->isAnAliasAttribute($offset)) {
             $offset = $this->getTargetOfAlias($offset);
@@ -122,7 +122,7 @@ class SessionStore extends BaseCheckoutStore
         return in_array($offset, array_merge($this->attributesPlain, $this->attributesViaGetterSetter));
     }
 
-    public function offsetUnset(mixed $offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->session->forget($offset);
     }

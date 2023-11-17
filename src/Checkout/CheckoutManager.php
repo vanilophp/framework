@@ -194,22 +194,22 @@ class CheckoutManager implements CheckoutContract, Shippable, \ArrayAccess
         return $this->store->dimension();
     }
 
-    public function offsetExists(mixed $offset)
+    public function offsetExists(mixed $offset): bool
     {
         return $this->store->offsetExists($offset);
     }
 
-    public function offsetGet(mixed $offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->store->offsetGet($offset);
     }
 
-    public function offsetSet(mixed $offset, mixed $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->store->offsetSet($offset, $value);
     }
 
-    public function offsetUnset(mixed $offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->store->offsetUnset($offset);
     }
