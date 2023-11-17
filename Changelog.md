@@ -8,6 +8,7 @@
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
+- Added PHP 8.3 Support
 - Changed minimal Enum requirement to v4.1
 - Upgraded to Konekt Address, Customer and User modules to v3
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
