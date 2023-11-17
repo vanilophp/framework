@@ -2,6 +2,11 @@
 
 ## 3.x Series
 
+## 3.8.2
+##### 2023-11-17
+
+- Fixed the PHP `IteratorAggregate`, `ArrayAccess` and `Countable` interfaces-related deprecation notices
+
 ## 3.8.1
 ##### 2023-10-09
 
