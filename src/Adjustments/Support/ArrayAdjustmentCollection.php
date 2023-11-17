@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Adjustments\Support;
 
 use ArrayIterator;
+use Traversable;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Contracts\Adjustment;
@@ -99,17 +100,17 @@ class ArrayAdjustmentCollection implements AdjustmentCollectionContract
         return $result;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->items[$offset]);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->items[$offset];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!is_object($value) || ! ($value instanceof Adjustment)) {
             throw new \InvalidArgumentException('Only objects implementing the Adjustment interface can be used');
@@ -118,12 +119,12 @@ class ArrayAdjustmentCollection implements AdjustmentCollectionContract
         $this->items[$offset] = $value;
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->items[$offset]);
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -138,7 +139,7 @@ class ArrayAdjustmentCollection implements AdjustmentCollectionContract
         return $this->items[$this->count() - 1] ?? null;
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->items);
     }

@@ -154,12 +154,12 @@ class RequestStore extends BaseCheckoutStore
         $this->request->replace([]);
     }
 
-    public function offsetExists(mixed $offset)
+    public function offsetExists(mixed $offset): bool
     {
         return $this->request->has($offset);
     }
 
-    public function offsetUnset(mixed $offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->request->offsetUnset($offset);
     }

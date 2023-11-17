@@ -17,6 +17,7 @@ namespace Vanilo\Adjustments\Support;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Traversable;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Contracts\Adjustment;
@@ -97,17 +98,17 @@ class RelationAdjustmentCollection implements AdjustmentCollection
         return $result;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return $this->eloquentCollection()->offsetExists($offset);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->eloquentCollection()->offsetGet($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!is_object($value) || ! ($value instanceof Adjustment)) {
             throw new \InvalidArgumentException('Only objects implementing the Adjustment interface can be used');
@@ -116,12 +117,12 @@ class RelationAdjustmentCollection implements AdjustmentCollection
         $this->eloquentCollection()->offsetSet($offset, $value);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         $this->eloquentCollection()->offsetUnset($offset);
     }
 
-    public function count()
+    public function count(): int
     {
         return $this->eloquentCollection()->count();
     }
@@ -136,7 +137,7 @@ class RelationAdjustmentCollection implements AdjustmentCollection
         return $this->eloquentCollection()->last();
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return $this->eloquentCollection()->getIterator();
     }
