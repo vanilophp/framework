@@ -27,6 +27,7 @@
 - Added `isZoneRestricted()` & `isNotZoneRestricted()` helper methods to the `ShippingMethod` class
 - Added the payment dependent shipping fee calculator
 - Added the `units_sold` and the `last_sale_at` attributes to the master product model (SUM/MAX from variants)
+- Added the `Stockable` interface (Contracts)
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null
 
 ## 3.x Series
