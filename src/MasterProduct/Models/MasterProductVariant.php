@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Vanilo\Contracts\Dimension as DimensionContract;
+use Vanilo\Contracts\Stockable;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
 use Vanilo\Support\Dto\Dimension;
 
@@ -29,6 +30,7 @@ use Vanilo\Support\Dto\Dimension;
  * @property string $name
  * @property string $sku
  * @property float $stock
+ * @property float|null $backorder
  * @property float|null $price
  * @property float|null $original_price
  * @property string|null $excerpt
@@ -44,7 +46,7 @@ use Vanilo\Support\Dto\Dimension;
  *
  * @method static MasterProductVariant create(array $attributes = [])
  */
-class MasterProductVariant extends Model implements MasterProductVariantContract
+class MasterProductVariant extends Model implements MasterProductVariantContract, Stockable
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -66,6 +68,31 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
     public function masterProduct(): BelongsTo
     {
         return $this->belongsTo(MasterProductProxy::modelClass(), 'master_product_id', 'id');
+    }
+
+    public function isOnStock(): bool
+    {
+        return $this->stock > 0;
+    }
+
+    public function onStockQuantity(): float
+    {
+        return (float) $this->stock;
+    }
+
+    public function isBackorderUnrestricted(): bool
+    {
+        return null === $this->backorder;
+    }
+
+    public function backorderQuantity(): ?float
+    {
+        return $this->backorder;
+    }
+
+    public function totalAvailableQuantity(): float
+    {
+        return $this->stock + (float) $this->backorder;
     }
 
     public function hasDimensions(): bool

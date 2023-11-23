@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Dimension as DimensionContract;
+use Vanilo\Contracts\Stockable;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Support\Dto\Dimension;
 
@@ -38,6 +39,8 @@ use Vanilo\Support\Dto\Dimension;
  * @property float|null $width
  * @property float|null $height
  * @property float|null $length
+ * @property float $stock
+ * @property float|null $backorder
  * @property string|null $ext_title
  * @property string|null $meta_keywords
  * @property string|null $meta_description
@@ -47,7 +50,7 @@ use Vanilo\Support\Dto\Dimension;
  *
  * @method static Product create(array $attributes)
  */
-class Product extends Model implements ProductContract
+class Product extends Model implements ProductContract, Stockable
 {
     use CastsEnums;
     use Sluggable;
@@ -65,6 +68,7 @@ class Product extends Model implements ProductContract
         'width' => 'float',
         'length' => 'float',
         'stock' => 'float',
+        'backorder' => 'float',
     ];
 
     protected $enums = [
@@ -98,6 +102,26 @@ class Product extends Model implements ProductContract
     public function isOnStock(): bool
     {
         return $this->stock > 0;
+    }
+
+    public function onStockQuantity(): float
+    {
+        return (float) $this->stock;
+    }
+
+    public function isBackorderUnrestricted(): bool
+    {
+        return null === $this->backorder;
+    }
+
+    public function backorderQuantity(): ?float
+    {
+        return $this->backorder;
+    }
+
+    public function totalAvailableQuantity(): float
+    {
+        return $this->stock + (float) $this->backorder;
     }
 
     public function title(): string

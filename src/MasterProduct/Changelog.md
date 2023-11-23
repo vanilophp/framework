@@ -9,6 +9,8 @@
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
+- Added the `Stockable` interface to the `MasterProductVariant` Model
+- Added the `backorder` field to product variants
 
 ## 3.x Series
 
