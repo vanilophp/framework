@@ -139,6 +139,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertEquals(3, $product->totalAvailableQuantity());
 
         $backOrderProduct = MasterProductVariant::create([
+            'master_product_id' => $this->master->id,
             'name' => 'Yokka Mokka Screen 17',
             'sku' => 'YMSCR4',
             'stock' => -1,
