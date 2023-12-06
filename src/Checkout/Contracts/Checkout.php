@@ -20,12 +20,7 @@ use Vanilo\Contracts\CheckoutSubject;
 
 interface Checkout
 {
-    /**
-     * Returns the cart
-     * @todo add typehint in v4
-     * @return CheckoutSubject|null
-     */
-    public function getCart();
+    public function getCart(): ?CheckoutSubject;
 
     /**
      * Set the cart for the checkout

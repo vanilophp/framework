@@ -9,6 +9,7 @@
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
+- BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 
 ## 3.x Series
 

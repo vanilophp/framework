@@ -56,7 +56,7 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
     ) {
     }
 
-    public function getCart()
+    public function getCart(): ?CheckoutSubject
     {
         return $this->cart;
     }

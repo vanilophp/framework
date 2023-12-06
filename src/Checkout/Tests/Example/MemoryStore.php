@@ -46,7 +46,7 @@ class MemoryStore implements CheckoutStore
         }
     }
 
-    public function getCart()
+    public function getCart(): ?CheckoutSubject
     {
         return $this->cart;
     }

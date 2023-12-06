@@ -52,7 +52,7 @@ class CheckoutManager implements CheckoutContract, Shippable, \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function getCart()
+    public function getCart(): ?CheckoutSubject
     {
         return $this->store->getCart();
     }
