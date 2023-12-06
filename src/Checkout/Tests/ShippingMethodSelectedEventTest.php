@@ -65,7 +65,7 @@ class ShippingMethodSelectedEventTest extends TestCase
     /** @test */
     public function it_works_with_the_request_store_as_well()
     {
-        $checkout = new RequestStore([], new DataFactory());
+        $checkout = new RequestStore(new DataFactory());
         Event::fake();
         $checkout->setShippingMethodId(3);
 

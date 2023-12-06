@@ -10,6 +10,7 @@
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
+- BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
 
 ## 3.x Series
 

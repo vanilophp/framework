@@ -61,12 +61,7 @@ class RequestStore extends BaseCheckoutStore
     /** @var array */
     protected $customData = [];
 
-    /**
-     * @todo remove the first, $config parameter in v4
-     *       it was never in use, but after 5 years
-     *       people might be using it, thus a BC
-     */
-    public function __construct($config, CheckoutDataFactory $dataFactory, Request $request = null)
+    public function __construct(CheckoutDataFactory $dataFactory, Request $request = null)
     {
         parent::__construct($dataFactory);
         $this->request = $request ?? request();
