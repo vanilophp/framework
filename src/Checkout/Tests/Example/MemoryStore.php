@@ -30,7 +30,7 @@ class MemoryStore implements CheckoutStore
 
     private Billpayer $billpayer;
 
-    private Address $shippingAddress;
+    private ?Address $shippingAddress = null;
 
     private $customAttributes = [];
 
@@ -76,14 +76,19 @@ class MemoryStore implements CheckoutStore
         $this->billpayer = $billpayer;
     }
 
-    public function getShippingAddress(): Address
+    public function getShippingAddress(): ?Address
     {
         return $this->shippingAddress;
     }
 
-    public function setShippingAddress(Address $address)
+    public function setShippingAddress(Address $address): void
     {
         $this->shippingAddress = $address;
+    }
+
+    public function removeShippingAddress(): void
+    {
+        $this->shippingAddress = null;
     }
 
     public function setCustomAttribute(string $key, $value): void

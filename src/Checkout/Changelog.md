@@ -11,6 +11,9 @@
 - Changed minimal Enum requirement to v4.1
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
+- BC: Changed `Checkout::getShippingAddress()` return type to be nullable
+- BC: Added the void return type to `Checkout::setShippingAddress()`
+- BC: Added the `removeShippingAddress()` method to the Checkout interface
 
 ## 3.x Series
 

@@ -97,20 +97,19 @@ class CheckoutManager implements CheckoutContract, Shippable, \ArrayAccess
         return $this->store->setBillpayer($billpayer);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getShippingAddress(): Address
+    public function getShippingAddress(): ?Address
     {
         return $this->store->getShippingAddress();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setShippingAddress(Address $address)
+    public function setShippingAddress(Address $address): void
     {
         $this->store->setShippingAddress($address);
+    }
+
+    public function removeShippingAddress(): void
+    {
+        $this->store->removeShippingAddress();
     }
 
     public function setCustomAttribute(string $key, $value): void

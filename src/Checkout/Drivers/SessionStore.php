@@ -40,21 +40,29 @@ class SessionStore extends BaseCheckoutStore
         $this->prefix = $prefix ?? static::DEFAULT_PREFIX;
     }
 
-    public function getShippingAddress(): Address
+    public function getShippingAddress(): ?Address
     {
-        $result = $this->factory->createShippingAddress();
-        if (is_array($rawData = $this->readRawDataFromStore('shipping_address'))) {
-            $this->fill($result, $rawData);
+        $rawData = $this->readRawDataFromStore('shipping_address');
+        if (!is_array($rawData)) {
+            return null;
         }
+
+        $result = $this->factory->createShippingAddress();
+        $this->fill($result, $rawData);
 
         return $result;
     }
 
-    public function setShippingAddress(Address $address)
+    public function setShippingAddress(Address $address): void
     {
         $this->writeRawDataToStore('shipping_address', $address);
 
         Event::dispatch(new ShippingAddressChanged($this));
+    }
+
+    public function removeShippingAddress(): void
+    {
+        $this->writeRawDataToStore('shipping_address', null);
     }
 
     public function getShippingAmount(): DetailedAmount

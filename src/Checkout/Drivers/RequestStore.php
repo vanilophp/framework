@@ -45,8 +45,7 @@ class RequestStore extends BaseCheckoutStore
     /** @var  Billpayer */
     protected $billpayer;
 
-    /** @var  Address */
-    protected $shippingAddress;
+    protected ?Address $shippingAddress = null;
 
     protected ?string $shippingMethodId = null;
 
@@ -66,6 +65,7 @@ class RequestStore extends BaseCheckoutStore
         parent::__construct($dataFactory);
         $this->request = $request ?? request();
         $this->billpayer = $dataFactory->createBillpayer();
+        /** @todo examine the request and only create one if there is one */
         $this->shippingAddress = $dataFactory->createShippingAddress();
         $this->taxes = new DetailedAmountDto(0);
         $this->shippingFees = new DetailedAmountDto(0);
@@ -87,21 +87,20 @@ class RequestStore extends BaseCheckoutStore
         $this->billpayer = $billpayer;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getShippingAddress(): Address
+    public function getShippingAddress(): ?Address
     {
         return $this->shippingAddress;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setShippingAddress(Address $address)
+    public function setShippingAddress(Address $address): void
     {
         $this->shippingAddress = $address;
         Event::dispatch(new ShippingAddressChanged($this));
+    }
+
+    public function removeShippingAddress(): void
+    {
+        $this->shippingAddress = null;
     }
 
     public function getShippingAmount(): DetailedAmount

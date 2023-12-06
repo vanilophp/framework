@@ -57,21 +57,11 @@ interface Checkout
      */
     public function setBillpayer(Billpayer $billpayer);
 
-    /**
-     * Returns the shipping address
-     *
-     * @todo make this nullable in v4
-     *
-     * @return Address
-     */
-    public function getShippingAddress(): Address;
+    public function getShippingAddress(): ?Address;
 
-    /**
-     * Sets the shipping address
-     *
-     * @param Address $address
-     */
-    public function setShippingAddress(Address $address);
+    public function setShippingAddress(Address $address): void;
+
+    public function removeShippingAddress(): void;
 
     public function setCustomAttribute(string $key, $value): void;
 
