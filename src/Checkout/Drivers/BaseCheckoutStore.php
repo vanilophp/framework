@@ -250,9 +250,10 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
 
     protected function updateShippingAddress($data): void
     {
-        $shippingAddress = $this->getShippingAddress();
-        $this->fill($shippingAddress, $data);
-        $this->setShippingAddress($shippingAddress);
+        if (null !== $shippingAddress = $this->getShippingAddress()) {
+            $this->fill($shippingAddress, $data);
+            $this->setShippingAddress($shippingAddress);
+        }
     }
 
     protected function updateShipToBillingAddress($data): void
