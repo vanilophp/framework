@@ -18,6 +18,8 @@ interface Stockable
 {
     public function isOnStock(): bool;
 
+    public function isOutOfStock(): bool;
+
     public function onStockQuantity(): float;
 
     public function isBackorderUnrestricted(): bool;

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
+use Vanilo\Checkout\Contracts\CheckoutRequest;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
@@ -36,7 +37,6 @@ class RequestStore extends BaseCheckoutStore
 {
     use HasCheckoutState;
     use EmulatesFillAttributes;
-    use FillsCommonCheckoutAttributes;
 
     protected $state;
 
@@ -55,18 +55,20 @@ class RequestStore extends BaseCheckoutStore
 
     protected DetailedAmount $taxes;
 
-    protected Request $request;
+    protected CheckoutRequest $request;
 
     /** @var array */
     protected $customData = [];
 
-    public function __construct(CheckoutDataFactory $dataFactory, Request $request = null)
+    public function __construct(CheckoutDataFactory $dataFactory, Request|CheckoutRequest $request = null)
     {
         parent::__construct($dataFactory);
-        $this->request = $request ?? request();
+        $this->request = ImplicitCheckoutRequest::from($request ?? request());
         $this->billpayer = $dataFactory->createBillpayer();
-        /** @todo examine the request and only create one if there is one */
-        $this->shippingAddress = $dataFactory->createShippingAddress();
+        if ($this->request->wantsShipping()) {
+            $this->updateShippingAddress($this->request->getShippingAddress());
+            $this->shippingAddress = $dataFactory->createShippingAddress();
+        }
         $this->taxes = new DetailedAmountDto(0);
         $this->shippingFees = new DetailedAmountDto(0);
     }

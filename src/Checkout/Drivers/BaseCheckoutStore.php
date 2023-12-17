@@ -24,6 +24,7 @@ use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
+use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\DetailedAmount;
@@ -248,12 +249,21 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
         $this->setBillpayer($billpayer);
     }
 
-    protected function updateShippingAddress($data): void
+    protected function updateShippingAddress(null|array|Address $data): void
     {
-        if (null !== $shippingAddress = $this->getShippingAddress()) {
-            $this->fill($shippingAddress, $data);
-            $this->setShippingAddress($shippingAddress);
+        if (empty($data)) {
+            $this->removeShippingAddress();
+            return;
         }
+
+        if ($data instanceof Address) {
+            $shippingAddress = $data;
+        } else {
+            $shippingAddress = $this->getShippingAddress() ?? $this->factory->createShippingAddress();
+            $this->fill($shippingAddress, $data);
+        }
+
+        $this->setShippingAddress($shippingAddress);
     }
 
     protected function updateShipToBillingAddress($data): void
