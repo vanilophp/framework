@@ -21,7 +21,6 @@ use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutRequest;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
-use Vanilo\Checkout\Traits\FillsCommonCheckoutAttributes;
 use Vanilo\Checkout\Traits\HasCheckoutState;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
