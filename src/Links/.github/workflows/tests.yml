@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        php: ['8.0', '8.1', '8.2']
+        php: ['8.0', '8.1', '8.2', '8.3']
         laravel: ['9.2', '9.52', '10.0']
         exclude:
           - php: '8.0'
