@@ -195,7 +195,7 @@
 - Added processing of `configuration` to the order factory, if the checkout item is a configurable
 - Added `Configurable` to the `CartItem` model (incl. implementing the interface)
 - Added `Configurable` to the `OrderItem` model (incl. implementing the interface)
-- Added the `Configurable` and the `Configuration` interfaces
+- Added the `Configurable` interface
 - Added `Configurable` interface to the `PaymentMethod` model
 - Added the missing `ShippingMethod` interface and proxy
 - Added `Configurable` interface to the `Carrier`, `Shipment` and `ShippingMethod` models
