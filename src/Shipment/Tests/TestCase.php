@@ -28,7 +28,7 @@ abstract class TestCase extends Orchestra
         parent::setUp();
 
         $this->setUpDatabase($this->app);
-        concord()->registerModel(Address::class, \Vanilo\Shipment\Tests\Dummies\Address::class);
+        concord()->registerModel(Address::class, Dummies\Address::class);
     }
 
     /**

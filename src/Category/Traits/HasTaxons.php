@@ -39,7 +39,7 @@ trait HasTaxons
     public function addTaxons(iterable $taxons)
     {
         foreach ($taxons as $taxon) {
-            if (! $taxon instanceof Taxon) {
+            if (!$taxon instanceof Taxon) {
                 throw new \InvalidArgumentException(
                     sprintf(
                         'Every element passed to addTaxons must be a Taxon object. Given `%s`.',

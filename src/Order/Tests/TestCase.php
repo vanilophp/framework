@@ -37,7 +37,7 @@ abstract class TestCase extends Orchestra
 
         $this->app->concord->registerModel(
             AddressContract::class,
-            \Vanilo\Order\Tests\Dummies\Address::class
+            Dummies\Address::class
         );
 
         $this->withFactories(__DIR__ . '/factories');

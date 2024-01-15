@@ -50,7 +50,7 @@ class Taxon extends BaseTaxon implements HasMedia, HasImages
     public function addProducts(iterable $products)
     {
         foreach ($products as $product) {
-            if (! $product instanceof Product) {
+            if (!$product instanceof Product) {
                 throw new \InvalidArgumentException(
                     sprintf(
                         'Every element passed to addProduct must be a Product object. Given `%s`.',

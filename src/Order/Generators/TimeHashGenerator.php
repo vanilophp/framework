@@ -139,7 +139,7 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     protected function getRapidMicroNumber()
     {
-        $n = (int) (fmod(((float) microtime())*1000, 1) * 1000) + 36;
+        $n = (int) (fmod(((float) microtime()) * 1000, 1) * 1000) + 36;
 
         return $n;
     }

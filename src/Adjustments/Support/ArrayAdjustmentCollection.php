@@ -112,7 +112,7 @@ class ArrayAdjustmentCollection implements AdjustmentCollectionContract
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (!is_object($value) || ! ($value instanceof Adjustment)) {
+        if (!is_object($value) || !($value instanceof Adjustment)) {
             throw new \InvalidArgumentException('Only objects implementing the Adjustment interface can be used');
         }
 
