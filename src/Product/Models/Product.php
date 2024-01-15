@@ -104,6 +104,11 @@ class Product extends Model implements ProductContract, Stockable
         return $this->stock > 0;
     }
 
+    public function isOutOfStock(): bool
+    {
+        return !$this->isOnStock();
+    }
+
     public function onStockQuantity(): float
     {
         return (float) $this->stock;

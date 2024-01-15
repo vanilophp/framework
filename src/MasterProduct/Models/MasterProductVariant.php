@@ -75,6 +75,11 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
         return $this->stock > 0;
     }
 
+    public function isOutOfStock(): bool
+    {
+        return !$this->isOnStock();
+    }
+
     public function onStockQuantity(): float
     {
         return (float) $this->stock;
