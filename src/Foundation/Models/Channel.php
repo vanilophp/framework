@@ -14,7 +14,10 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Konekt\Address\Contracts\Country;
+use Konekt\Address\Models\CountryProxy;
 use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Channel\Models\Channel as BaseChannel;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
@@ -23,6 +26,9 @@ use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Properties\Models\PropertyProxy;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 
+/**
+ * @property-read Country $billingCountry
+ */
 class Channel extends BaseChannel
 {
     public function products(): MorphToMany
@@ -53,5 +59,10 @@ class Channel extends BaseChannel
     public function properties(): MorphToMany
     {
         return $this->morphedByMany(PropertyProxy::modelClass(), 'channelable');
+    }
+
+    public function billingCountry(): BelongsTo
+    {
+        return $this->belongsTo(CountryProxy::modelClass(), 'billing_country_id');
     }
 }

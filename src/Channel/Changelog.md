@@ -7,7 +7,15 @@
 
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
-- Added `currency` field to the Channel model/table
+- Added the following fields to the Channel model/table:
+  - `currency`
+  - `language`
+  - `domain`
+  - billing fields (emitter's data)
+  - `billing_countries`
+  - `shipping_countries`
+  - `theme`
+  - `color`
 - Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models
 
 ## 3.x Series

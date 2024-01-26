@@ -27,6 +27,24 @@ use Vanilo\Channel\Contracts\Channel as ChannelContract;
  * @property ?string $slug
  * @property ?string $currency
  * @property ?array $configuration
+ * @property ?string $language
+ * @property ?string $domain
+ * @property ?string $billing_company
+ * @property ?string $billing_country_id
+ * @property ?string $billing_province_id
+ * @property ?string $billing_postalcode
+ * @property ?string $billing_city
+ * @property ?string $billing_address
+ * @property ?string $billing_address2
+ * @property ?string $billing_tax_nr
+ * @property ?string $billing_registration_nr
+ * @property ?string $email
+ * @property ?string $phone
+ * @property ?array $billing_countries
+ * @property ?array $shipping_countries
+ * @property string color
+ * @property ?string theme
+ *
  * @property ?Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -43,8 +61,15 @@ class Channel extends Model implements ChannelContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'configuration' => 'array'
+        'configuration' => 'array',
+        'billing_countries' => 'array',
+        'shipping_countries' => 'array',
     ];
+
+    public static function findByDomain(string $domain): ?Channel
+    {
+        return self::query()->where('domain', $domain)->first();
+    }
 
     public function getName(): string
     {

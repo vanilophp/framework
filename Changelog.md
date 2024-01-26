@@ -13,7 +13,15 @@
 - Upgraded to Konekt Address, Customer and User modules to v3
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
 - Added the `currency` field to the orders table
-- Added `currency` field to the Channel model/table
+- Added the following fields to the Channel model/table:
+    - `currency`
+    - `language`
+    - `domain`
+    - billing fields (emitter's data)
+    - `billing_countries`
+    - `shipping_countries`
+    - `theme`
+    - `color`
 - Added the `payment_method_id` to the orders table
 - Added the processing of the `payment_method_id` field to the OrderFactory (Foundation)
 - Added the `is_hidden` field to the `Property` model
