@@ -14,12 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation;
 
-use Vanilo\Foundation\Features\Pricing;
 use Vanilo\Foundation\Features\MultiChannel;
+use Vanilo\Foundation\Features\Pricing;
 
 class Features
 {
     private static ?MultiChannel $multiChannel = null;
+
     private static ?Pricing $pricing = null;
 
     public static function multichannel(): MultiChannel

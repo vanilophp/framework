@@ -12,7 +12,6 @@ declare(strict_types=1);
  *
  */
 
-
 use Konekt\Address\Models\Country;
 use Vanilo\Foundation\Models\Channel;
 use Vanilo\Foundation\Tests\TestCase;
