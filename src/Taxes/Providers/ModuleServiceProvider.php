@@ -17,6 +17,7 @@ namespace Vanilo\Taxes\Providers;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxRate;
+use Vanilo\Taxes\Resolver\TaxEngineManager;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
@@ -24,4 +25,11 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         TaxCategory::class,
         TaxRate::class,
     ];
+
+    public function register(): void
+    {
+        parent::register();
+
+        $this->app->singleton(TaxEngineManager::class, fn($app) => new TaxEngineManager($app));
+    }
 }

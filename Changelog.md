@@ -37,7 +37,9 @@
 - Added the `units_sold` and the `last_sale_at` attributes to the master product model (SUM/MAX from variants)
 - Added the `Stockable` interface (Contracts)
 - Added the `Stockable` interface to the `Product` and `MasterProductVariant` models
-- Added the `backorder` field to products and product variants 
+- Added the `backorder` field to products and product variants
+- Added the `Taxable` interface
+- Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 - BC: Changed `Checkout::getShippingAddress()` return type to be nullable
 - BC: Added the void return type to `Checkout::setShippingAddress()`
