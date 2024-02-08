@@ -30,6 +30,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     {
         parent::register();
 
-        $this->app->singleton(TaxEngineManager::class, fn($app) => new TaxEngineManager($app));
+        $this->app->singleton(TaxEngineManager::class, fn ($app) => new TaxEngineManager($app));
     }
 }

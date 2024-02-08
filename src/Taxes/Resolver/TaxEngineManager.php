@@ -40,6 +40,11 @@ class TaxEngineManager
     ) {
     }
 
+    public function __call(string $method, array $arguments)
+    {
+        return $this->driver()->$method(...$arguments);
+    }
+
     public function driver(?string $name = null): TaxRateResolver
     {
         $name = $name ?: $this->getDefaultDriver();
@@ -64,11 +69,6 @@ class TaxEngineManager
     public function findTaxRate(Taxable $taxable, ?Address $billingAddress = null, ?Address $shippingAddress = null): ?TaxRate
     {
         return $this->driver()->findTaxRate($taxable, $billingAddress, $shippingAddress);
-    }
-
-    public function __call(string $method, array $arguments)
-    {
-        return $this->driver()->$method(...$arguments);
     }
 
     protected function getDefaultDriver(): string
