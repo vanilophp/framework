@@ -23,9 +23,4 @@ class SampleTaxable implements Taxable
     {
         return \Vanilo\Taxes\Models\TaxCategory::create(['name' => 'normal']);
     }
-
-    public function getPriceWithoutTaxes(): float
-    {
-        return 10;
-    }
 }

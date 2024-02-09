@@ -17,6 +17,4 @@ namespace Vanilo\Taxes\Contracts;
 interface Taxable
 {
     public function getTaxCategory(): TaxCategory;
-
-    public function getPriceWithoutTaxes(): float;
 }
