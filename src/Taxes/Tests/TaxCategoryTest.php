@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Tests;
 
 use Vanilo\Taxes\Models\TaxCategory;
+use Vanilo\Taxes\Models\TaxCategoryType;
 
 class TaxCategoryTest extends TestCase
 {
@@ -74,5 +75,23 @@ class TaxCategoryTest extends TestCase
         $this->assertNotContains('Rate 3', $actives->pluck('name'));
         $this->assertNotContains('Rate 4', $actives->pluck('name'));
         $this->assertContains('Rate 5', $actives->pluck('name'));
+    }
+
+    /** @test */
+    public function it_has_the_default_type_if_none_was_specified_at_creation()
+    {
+        $taxCategory = TaxCategory::create(['name' => 'Some Tax Category'])->fresh();
+
+        $this->assertInstanceOf(TaxCategoryType::class, $taxCategory->type);
+        $this->assertInstanceOf(\Vanilo\Taxes\Contracts\TaxCategoryType::class, $taxCategory->type);
+        $this->assertEquals(TaxCategoryType::defaultValue(), $taxCategory->type->value());
+    }
+
+    /** @test */
+    public function the_type_can_be_specified()
+    {
+        $taxCategory = TaxCategory::create(['name' => 'Events', 'type' => TaxCategoryType::EVENT_RELATED_SERVICES])->fresh();
+
+        $this->assertEquals(TaxCategoryType::EVENT_RELATED_SERVICES(), $taxCategory->type);
     }
 }

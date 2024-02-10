@@ -38,6 +38,7 @@
 - Added the `Stockable` interface (Contracts)
 - Added the `Stockable` interface to the `Product` and `MasterProductVariant` models
 - Added the `backorder` field to products and product variants
+- Added the `type` field to the TaxCategory model
 - Added the `Taxable` interface
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface

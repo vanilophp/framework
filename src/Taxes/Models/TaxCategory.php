@@ -17,6 +17,7 @@ namespace Vanilo\Taxes\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Taxes\Contracts\TaxCategory as TaxCategoryContract;
 
 /**
@@ -28,12 +29,18 @@ use Vanilo\Taxes\Contracts\TaxCategory as TaxCategoryContract;
  */
 class TaxCategory extends Model implements TaxCategoryContract
 {
+    use CastsEnums;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
         'is_active' => 'bool',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+    ];
+
+    protected array $enums = [
+        'type' => 'TaxCategoryTypeProxy@enumClass',
     ];
 
     public static function findByName(string $name): ?TaxCategoryContract
