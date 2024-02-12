@@ -48,7 +48,7 @@ class Features
         return self::pricing()->isEnabled();
     }
 
-    public static function is9PricingDisabled(): bool
+    public static function isPricingDisabled(): bool
     {
         return self::pricing()->isDisabled();
     }
