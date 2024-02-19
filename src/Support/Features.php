@@ -12,10 +12,10 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Foundation;
+namespace Vanilo\Support;
 
-use Vanilo\Foundation\Features\MultiChannel;
-use Vanilo\Foundation\Features\Pricing;
+use Vanilo\Support\Features\MultiChannel;
+use Vanilo\Support\Features\Pricing;
 
 class Features
 {

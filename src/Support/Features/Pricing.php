@@ -12,9 +12,9 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Foundation\Features;
+namespace Vanilo\Support\Features;
 
-use Vanilo\Foundation\Contracts\Feature;
+use Vanilo\Contracts\Feature;
 
 class Pricing implements Feature
 {

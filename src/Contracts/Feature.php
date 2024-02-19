@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Foundation\Contracts;
+namespace Vanilo\Contracts;
 
 interface Feature
 {

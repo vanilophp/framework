@@ -12,15 +12,15 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Foundation\Features;
+namespace Vanilo\Support\Features;
 
-use Vanilo\Foundation\Contracts\Feature;
+use Vanilo\Contracts\Feature;
 
 class MultiChannel implements Feature
 {
     public function isEnabled(): bool
     {
-        return (bool) config('vanilo.foundation.features.multi_channel.is_enabled', false);
+        return (bool) config('vanilo.features.multi_channel.is_enabled', false);
     }
 
     public function isDisabled(): bool
