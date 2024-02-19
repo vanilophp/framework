@@ -20,7 +20,7 @@ class Pricing implements Feature
 {
     public function isEnabled(): bool
     {
-        return config('vanilo.foundation.features.pricing.is_enabled', false)
+        return config('vanilo.features.pricing.is_enabled', false)
             && null !== concord()->module('vanilo.pricing');
     }
 
@@ -31,6 +31,6 @@ class Pricing implements Feature
 
     public function configuration(): array
     {
-        return config('vanilo.foundation.features.pricing', []);
+        return config('vanilo.features.pricing', []);
     }
 }

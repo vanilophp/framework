@@ -30,6 +30,6 @@ class MultiChannel implements Feature
 
     public function configuration(): array
     {
-        return config('vanilo.foundation.features.multi_channel', []);
+        return config('vanilo.features.multi_channel', []);
     }
 }
