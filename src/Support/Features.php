@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Support;
 
+use Vanilo\Contracts\Feature;
 use Vanilo\Support\Features\MultiChannel;
 use Vanilo\Support\Features\Pricing;
 
@@ -22,6 +23,15 @@ class Features
     private static ?MultiChannel $multiChannel = null;
 
     private static ?Pricing $pricing = null;
+
+    public static function findByName(string $name): ?Feature
+    {
+        return match ($name) {
+            'pricing' => self::pricing(),
+            'multichannel' => self::multichannel(),
+            default => null,
+        };
+    }
 
     public static function multichannel(): MultiChannel
     {
