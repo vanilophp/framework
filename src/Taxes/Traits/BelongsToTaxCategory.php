@@ -28,4 +28,9 @@ trait BelongsToTaxCategory
     {
         return $this->belongsTo(TaxCategoryProxy::modelClass());
     }
+
+    public function getTaxCategory(): ?TaxCategory
+    {
+        return $this->taxCategory;
+    }
 }

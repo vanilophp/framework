@@ -19,7 +19,7 @@ use Vanilo\Taxes\Contracts\TaxCategory;
 
 class SampleTaxable implements Taxable
 {
-    public function getTaxCategory(): TaxCategory
+    public function getTaxCategory(): ?TaxCategory
     {
         return \Vanilo\Taxes\Models\TaxCategory::create(['name' => 'normal']);
     }
