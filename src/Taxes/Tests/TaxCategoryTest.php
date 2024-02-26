@@ -37,6 +37,21 @@ class TaxCategoryTest extends TestCase
     }
 
     /** @test */
+    public function it_complies_with_the_interface()
+    {
+        $taxCategory = TaxCategory::create(['name' => 'Events', 'type' => TaxCategoryType::EVENT_RELATED_SERVICES])->fresh();
+
+        $this->assertInstanceOf(\Vanilo\Taxes\Contracts\TaxCategory::class, $taxCategory);
+        $this->assertInstanceOf(\Vanilo\Taxes\Contracts\TaxCategoryType::class, $taxCategory->getType());
+        $this->assertEquals('Events', $taxCategory->getName());
+
+        $instanceViaLookup = TaxCategory::findByName('Events');
+        $this->assertInstanceOf(\Vanilo\Taxes\Contracts\TaxCategory::class, $instanceViaLookup);
+        $this->assertInstanceOf(\Vanilo\Taxes\Contracts\TaxCategoryType::class, $instanceViaLookup->getType());
+        $this->assertEquals('Events', $instanceViaLookup->getName());
+    }
+
+    /** @test */
     public function it_is_active_by_default()
     {
         $taxCategory = TaxCategory::create(['name' => 'Normal Rate'])->fresh();

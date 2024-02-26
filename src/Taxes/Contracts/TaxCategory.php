@@ -18,5 +18,7 @@ interface TaxCategory
 {
     public function getName(): string;
 
+    public function getType(): TaxCategoryType;
+
     public static function findByName(string $name): ?TaxCategory;
 }

@@ -19,10 +19,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Taxes\Contracts\TaxCategory as TaxCategoryContract;
+use Vanilo\Taxes\Contracts\TaxCategoryType;
 
 /**
  * @property-read int $id
  * @property string $name
+ * @property TaxCategoryType $type
  * @property bool $is_active
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -51,6 +53,11 @@ class TaxCategory extends Model implements TaxCategoryContract
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getType(): TaxCategoryType
+    {
+        return $this->type;
     }
 
     public function scopeActives(Builder $query): Builder

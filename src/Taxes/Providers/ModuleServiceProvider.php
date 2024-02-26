@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Taxes\Contracts\TaxRateResolver;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxCategoryType;
 use Vanilo\Taxes\Models\TaxRate;
@@ -36,5 +37,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         parent::register();
 
         $this->app->singleton(TaxEngineManager::class, fn ($app) => new TaxEngineManager($app));
+        $this->app->bind(TaxRateResolver::class, fn ($app) => $app->make(TaxEngineManager::class)->driver());
     }
 }
