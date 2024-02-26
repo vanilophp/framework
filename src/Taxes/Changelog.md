@@ -8,6 +8,7 @@
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 - Upgraded to Konekt Address v3
+- Changed the minimal Enum requirement to v4.1
 - Added the `type` field to the TaxCategory model
 - Added the `Taxable` interface
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)

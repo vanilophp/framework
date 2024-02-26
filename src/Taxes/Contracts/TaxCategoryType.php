@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Taxes\Contracts;
 
-interface TaxCategoryType
+use Konekt\Enum\EnumInterface;
+
+interface TaxCategoryType extends EnumInterface
 {
 }
