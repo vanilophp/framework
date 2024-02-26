@@ -19,6 +19,7 @@ use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\DetailedAmount;
 
 class MemoryStore implements CheckoutStore
 {
@@ -109,6 +110,26 @@ class MemoryStore implements CheckoutStore
     public function getCustomAttributes(): array
     {
         return $this->customAttributes;
+    }
+
+    public function getShippingAmount(): DetailedAmount
+    {
+        return new \Vanilo\Support\Dto\DetailedAmount(0);
+    }
+
+    public function setShippingAmount(float|DetailedAmount $amount): void
+    {
+        // TODO: Implement setShippingAmount() method.
+    }
+
+    public function getTaxesAmount(): DetailedAmount
+    {
+        return new \Vanilo\Support\Dto\DetailedAmount(0);
+    }
+
+    public function setTaxesAmount(float|DetailedAmount $amount): void
+    {
+        // TODO: Implement setTaxesAmount() method.
     }
 
     public function update(array $data)
