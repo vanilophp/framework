@@ -10,6 +10,7 @@
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
 - Added the `mapInto()` method to the `RelationAdjustmentCollection` class, which forwards the call to the underlying Eloquent collection
+- BC: Added the `deleteByType()` method to the `AdjustmentCollection` interface + both implementation
 
 ## 3.x Series
 

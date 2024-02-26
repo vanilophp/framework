@@ -90,6 +90,15 @@ class RelationAdjustmentCollection implements AdjustmentCollection
         $this->eloquentCollection()->each(fn (Adjustment|Model $adjustment) => $adjustment->delete());
     }
 
+    public function deleteByType(AdjustmentType $type): void
+    {
+        $this->eloquentCollection()->each(function (Adjustment|Model $adjustment) use ($type) {
+            if ($type->equals($adjustment->getType())) {
+                $adjustment->delete();
+            }
+        });
+    }
+
     public function byType(AdjustmentType $type): AdjustmentCollection
     {
         $result = new self($this->model);

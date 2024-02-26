@@ -47,6 +47,7 @@
 - BC: Added the void return type to `Checkout::setShippingAddress()`
 - BC: Added the `removeShippingAddress()` method to the Checkout interface
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
+- BC: Added the `deleteByType()` and `clear()` methods to the `AdjustmentCollection` interface
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null
 
 ## 3.x Series

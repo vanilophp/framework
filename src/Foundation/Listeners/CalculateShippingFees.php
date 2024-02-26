@@ -40,10 +40,7 @@ class CalculateShippingFees
             return;
         }
 
-        $shippingAdjustments = $cart->adjustments()->byType(AdjustmentTypeProxy::SHIPPING());
-        foreach ($shippingAdjustments as $adjustment) {
-            $shippingAdjustments->remove($adjustment);
-        }
+        $cart->adjustments()->deleteByType(AdjustmentTypeProxy::SHIPPING());
 
         /** @var ShippingMethod $shippingMethod */
         if (null === $shippingMethod = ShippingMethodProxy::find($checkout->getShippingMethodId())) {
