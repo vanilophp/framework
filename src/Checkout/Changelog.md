@@ -13,7 +13,12 @@
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
 - BC: Changed `Checkout::getShippingAddress()` return type to be nullable
 - BC: Added the void return type to `Checkout::setShippingAddress()`
-- BC: Added the `removeShippingAddress()` method to the Checkout interface
+- BC: Added the following methods to the Checkout interface:
+  - `removeShippingAddress()`
+  - `getShippingAmount()`
+  - `setShippingAmount()`
+  - `getTaxesAmount()`
+  - `setTaxesAmount()`
 
 ## 3.x Series
 

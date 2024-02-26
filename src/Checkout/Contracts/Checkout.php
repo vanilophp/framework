@@ -17,6 +17,7 @@ namespace Vanilo\Checkout\Contracts;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\DetailedAmount;
 
 interface Checkout
 {
@@ -70,6 +71,14 @@ interface Checkout
     public function putCustomAttributes(array $data): void;
 
     public function getCustomAttributes(): array;
+
+    public function getShippingAmount(): DetailedAmount;
+
+    public function setShippingAmount(float|DetailedAmount $amount): void;
+
+    public function getTaxesAmount(): DetailedAmount;
+
+    public function setTaxesAmount(float|DetailedAmount $amount): void;
 
     /**
      * Update checkout data with an array of attributes
