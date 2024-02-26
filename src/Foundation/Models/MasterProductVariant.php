@@ -23,9 +23,10 @@ use Vanilo\MasterProduct\Models\MasterProductVariant as BaseMasterProductVariant
 use Vanilo\Properties\Traits\HasPropertyValues;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
+use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Traits\BelongsToTaxCategory;
 
-class MasterProductVariant extends BaseMasterProductVariant implements Buyable, HasMedia
+class MasterProductVariant extends BaseMasterProductVariant implements Buyable, HasMedia, Taxable
 {
     use BelongsToTaxCategory;
     use BuyableModel;

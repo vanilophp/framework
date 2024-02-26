@@ -40,6 +40,7 @@
 - Added the `backorder` field to products and product variants
 - Added the `type` field to the TaxCategory model
 - Added the `Taxable` interface
+- Added the `Taxable` implementation to Foundation's CartItem, Product and MasterProductVariant classes
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)
 - Added the `Merchant` interface
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface

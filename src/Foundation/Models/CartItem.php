@@ -18,11 +18,23 @@ use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Support\HasAdjustmentsViaRelation;
 use Vanilo\Adjustments\Support\RecalculatesAdjustments;
 use Vanilo\Cart\Models\CartItem as BaseCartItem;
+use Vanilo\Taxes\Contracts\Taxable;
+use Vanilo\Taxes\Contracts\TaxCategory;
 
-class CartItem extends BaseCartItem implements Adjustable
+class CartItem extends BaseCartItem implements Adjustable, Taxable
 {
     use HasAdjustmentsViaRelation;
     use RecalculatesAdjustments;
+
+    public function getTaxCategory(): ?TaxCategory
+    {
+        $buyable = $this->getBuyable();
+        if ($buyable instanceof Taxable) {
+            return $buyable->getTaxCategory();
+        }
+
+        return null;
+    }
 
     /** @todo rename this in v4 along with the renaming of this method in the Adjustable interface */
     public function itemsTotal(): float
