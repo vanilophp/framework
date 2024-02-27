@@ -25,6 +25,7 @@ use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Payment\Gateways\NullGateway;
 use Vanilo\Payment\PaymentGateways;
+use Vanilo\Support\Dto\SchemaDefinition;
 use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
@@ -76,17 +77,10 @@ class PaymentMethod extends Model implements PaymentMethodContract
 
     public function getConfigurationSchema(): ?Schematized
     {
-        return new class() implements Schematized {
-            public function getSchema(): Schema
-            {
-                return Expect::structure(['timeout' => Expect::int(PaymentMethodContract::DEFAULT_TIMEOUT)]);
-            }
-
-            public function getSchemaSample(array $mergeWith = null): array
-            {
-                return ['timeout' => PaymentMethodContract::DEFAULT_TIMEOUT];
-            }
-        };
+        return new SchemaDefinition(
+            Expect::structure(['timeout' => Expect::int(PaymentMethodContract::DEFAULT_TIMEOUT)]),
+            ['timeout' => PaymentMethodContract::DEFAULT_TIMEOUT],
+        );
     }
 
 

@@ -26,6 +26,7 @@ use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
 use Vanilo\Shipment\ShippingFeeCalculators;
 use Vanilo\Shipment\Traits\BelongsToCarrier;
+use Vanilo\Support\Dto\SchemaDefinition;
 use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
@@ -98,7 +99,7 @@ class ShippingMethod extends Model implements ShippingMethodContract
 
     public function getConfigurationSchema(): ?Schematized
     {
-        return $this->getCalculator();
+        return SchemaDefinition::wrap($this->getCalculator());
     }
 
     public function zone(): BelongsTo
