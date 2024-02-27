@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\Configurable;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShipmentStatus;
 use Vanilo\Shipment\Traits\BelongsToCarrier;
@@ -51,7 +50,7 @@ use Vanilo\Support\Traits\ConfigurationHasNoSchema;
  *
  * @method static Shipment create(array $attributes)
  */
-class Shipment extends Model implements ShipmentContract, Configurable
+class Shipment extends Model implements ShipmentContract
 {
     use CastsEnums;
     use ConfigurableModel;

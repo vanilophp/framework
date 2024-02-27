@@ -10,6 +10,7 @@
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
 - Added `isZoneRestricted()` & `isNotZoneRestricted()` helper methods to the `ShippingMethod` class
+- BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
 
 ## 3.x Series
 

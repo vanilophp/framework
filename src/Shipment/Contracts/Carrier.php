@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Contracts;
 
-interface Carrier
+use Vanilo\Contracts\Configurable;
+
+interface Carrier extends Configurable
 {
     public function name(): string;
 }

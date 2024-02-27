@@ -16,7 +16,6 @@ namespace Vanilo\Shipment\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Vanilo\Contracts\Configurable;
 use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
 use Vanilo\Support\Traits\ConfigurableModel;
 use Vanilo\Support\Traits\ConfigurationHasNoSchema;
@@ -32,7 +31,7 @@ use Vanilo\Support\Traits\ConfigurationHasNoSchema;
  *
  * @method static Carrier create(array $attributes)
  */
-class Carrier extends Model implements CarrierContract, Configurable
+class Carrier extends Model implements CarrierContract
 {
     use ConfigurableModel;
     use ConfigurationHasNoSchema;

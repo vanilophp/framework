@@ -15,8 +15,9 @@ declare(strict_types=1);
 namespace Vanilo\Shipment\Contracts;
 
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Configurable;
 
-interface Shipment
+interface Shipment extends Configurable
 {
     public function deliveryAddress(): Address;
 
