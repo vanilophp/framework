@@ -137,7 +137,7 @@ class TimeHashTest extends TestCase
         }
     }
 
-    public function edgeCaseDateProvider()
+    public static function edgeCaseDateProvider()
     {
         return [
             ['2000-01-01 00:00:00'],

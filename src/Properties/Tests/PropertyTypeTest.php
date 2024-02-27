@@ -71,7 +71,7 @@ class PropertyTypeTest extends TestCase
         PropertyTypes::register('whatever', \stdClass::class);
     }
 
-    public function builtInTypesProvider()
+    public static function builtInTypesProvider()
     {
         return [
             ['text', Text::class],

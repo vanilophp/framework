@@ -176,7 +176,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals($expected, $numbers);
     }
 
-    public function versatileProvider()
+    public static function versatileProvider()
     {
         return [
             ['C', '100000', 1, '0', 1, ['C100000']],
