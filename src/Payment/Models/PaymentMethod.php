@@ -26,7 +26,6 @@ use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Payment\Gateways\NullGateway;
 use Vanilo\Payment\PaymentGateways;
 use Vanilo\Support\Traits\ConfigurableModel;
-use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property int $id
@@ -44,7 +43,6 @@ use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 class PaymentMethod extends Model implements PaymentMethodContract
 {
     use ConfigurableModel;
-    use ConfigurationHasNoSchema;
 
     protected $guarded = ['id', 'transaction_count', 'created_at', 'updated_at', 'deleted_at'];
 
