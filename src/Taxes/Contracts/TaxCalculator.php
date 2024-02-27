@@ -15,8 +15,9 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Contracts;
 
 use Vanilo\Contracts\DetailedAmount;
+use Vanilo\Contracts\Schematized;
 
-interface TaxCalculator
+interface TaxCalculator extends Schematized
 {
     public static function getName(): string;
 

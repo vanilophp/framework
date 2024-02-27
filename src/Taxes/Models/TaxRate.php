@@ -21,6 +21,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Konekt\Address\Contracts\Zone;
 use Konekt\Address\Models\ZoneProxy;
+use Vanilo\Contracts\Schematized;
+use Vanilo\Support\Dto\SchemaDefinition;
 use Vanilo\Support\Traits\ConfigurableModel;
 use Vanilo\Taxes\Calculators\NullTaxCalculator;
 use Vanilo\Taxes\Contracts\TaxCalculator;
@@ -107,6 +109,11 @@ class TaxRate extends Model implements TaxRateContract
         }
 
         return TaxCalculators::make($this->calculator);
+    }
+
+    public function getConfigurationSchema(): ?Schematized
+    {
+        return SchemaDefinition::wrap($this->getCalculator());
     }
 
     public function zone(): BelongsTo

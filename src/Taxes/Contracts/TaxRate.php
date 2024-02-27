@@ -15,8 +15,9 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Contracts;
 
 use Konekt\Address\Contracts\Zone;
+use Vanilo\Contracts\Configurable;
 
-interface TaxRate
+interface TaxRate extends Configurable
 {
     public function getName(): string;
 

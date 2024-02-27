@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Taxes\Calculators;
 
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
 use Vanilo\Taxes\Contracts\TaxCalculator;
@@ -33,5 +35,15 @@ class NullTaxCalculator implements TaxCalculator
     public function calculate(?object $subject = null, ?array $configuration = null): DetailedAmount
     {
         return new DetailedAmountDto(0);
+    }
+
+    public function getSchema(): Schema
+    {
+        return Expect::array();
+    }
+
+    public function getSchemaSample(array $mergeWith = null): array
+    {
+        return [];
     }
 }

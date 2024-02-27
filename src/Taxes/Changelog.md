@@ -9,6 +9,7 @@
 - Dropped Laravel 9 Support
 - Upgraded to Konekt Address v3
 - Changed the minimal Enum requirement to v4.1
+- BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - Added the `type` field to the TaxCategory model
 - Added the `Taxable` interface
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)
