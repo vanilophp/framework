@@ -27,10 +27,11 @@ final class SimpleTax implements Adjuster
 {
     use HasWriteableTitleAndDescription;
     use IsLockable;
-    use IsIncluded;
 
-    public function __construct(private float $rate)
-    {
+    public function __construct(
+        private float $rate,
+        private bool $isIncluded = true,
+    ) {
     }
 
     public static function reproduceFromAdjustment(Adjustment $adjustment): Adjuster
@@ -52,6 +53,11 @@ final class SimpleTax implements Adjuster
         $adjustment->setAmount($this->calculateTaxAmount($adjustable));
 
         return $adjustment;
+    }
+
+    public function isIncluded(): bool
+    {
+        return $this->isIncluded;
     }
 
     private function calculateTaxAmount(Adjustable $adjustable): float
