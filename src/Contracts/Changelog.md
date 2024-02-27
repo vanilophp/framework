@@ -9,6 +9,9 @@
 - Dropped Laravel 9 Support
 - Added the `Stockable` interface
 - Added the `Merchant` interface
+- Added the `Schematized` interface
+- Added the `getConfigurationSchema()` method to the `Configurable` interface
+- Added the nette/schema package requirement (v1.2.5+)
 
 ## 3.x Series
 

@@ -28,7 +28,8 @@
         "konekt/address": "^3.0",
         "konekt/customer": "^3.0",
         "konekt/user": "^3.0",
-        "konekt/search": "^1.2"
+        "konekt/search": "^1.2",
+        "nette/schema": "^1.2.5"
     },
     "replace": {
         "vanilo/adjustments": "self.version",

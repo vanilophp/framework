@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Calculators;
 
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Models\ShippingFee;
 
@@ -32,5 +34,15 @@ class NullShippingFeeCalculator implements ShippingFeeCalculator
     public function getAdjuster(?array $configuration = null): ?object
     {
         return null;
+    }
+
+    public function getSchema(): Schema
+    {
+        return Expect::array();
+    }
+
+    public function getSchemaSample(array $mergeWith = null): array
+    {
+        return [];
     }
 }

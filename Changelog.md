@@ -54,6 +54,11 @@
     - `setTaxesAmount()`
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
 - BC: Added the `deleteByType()` and `clear()` methods to the `AdjustmentCollection` interface
+- BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
+- BC: Added the `getConfigurationSchema()` method to the `Configurable` interface
+- Added the `Schematized` interface
+- Added the nette/schema package requirement (v1.2.5+)
+
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null
 
 ## 3.x Series

@@ -25,6 +25,7 @@ use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShipmentStatus;
 use Vanilo\Shipment\Traits\BelongsToCarrier;
 use Vanilo\Support\Traits\ConfigurableModel;
+use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property int               $id
@@ -54,6 +55,7 @@ class Shipment extends Model implements ShipmentContract, Configurable
 {
     use CastsEnums;
     use ConfigurableModel;
+    use ConfigurationHasNoSchema;
     use BelongsToCarrier;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];

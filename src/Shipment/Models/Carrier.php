@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Configurable;
 use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
 use Vanilo\Support\Traits\ConfigurableModel;
+use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property int               $id
@@ -34,6 +35,7 @@ use Vanilo\Support\Traits\ConfigurableModel;
 class Carrier extends Model implements CarrierContract, Configurable
 {
     use ConfigurableModel;
+    use ConfigurationHasNoSchema;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

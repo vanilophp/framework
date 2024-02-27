@@ -21,4 +21,6 @@ interface Configurable
     public function hasConfiguration(): bool;
 
     public function doesntHaveConfiguration(): bool;
+
+    public function getConfigurationSchema(): ?Schematized;
 }

@@ -14,9 +14,10 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Contracts;
 
+use Vanilo\Contracts\Schematized;
 use Vanilo\Shipment\Models\ShippingFee;
 
-interface ShippingFeeCalculator
+interface ShippingFeeCalculator extends Schematized
 {
     public static function getName(): string;
 

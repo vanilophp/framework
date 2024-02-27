@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 use Konekt\Address\Contracts\Zone;
 use Konekt\Address\Models\ZoneProxy;
+use Vanilo\Contracts\Schematized;
 use Vanilo\Shipment\Calculators\NullShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
@@ -93,6 +94,11 @@ class ShippingMethod extends Model implements ShippingMethodContract
     public function isNotZoneRestricted(): bool
     {
         return !$this->isZoneRestricted();
+    }
+
+    public function getConfigurationSchema(): ?Schematized
+    {
+        return $this->getCalculator();
     }
 
     public function zone(): BelongsTo
