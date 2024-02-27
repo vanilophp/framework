@@ -29,24 +29,6 @@ abstract class TestCase extends Orchestra
         $this->withFactories(__DIR__ . '/factories');
     }
 
-    public function expectExceptionMessageMatches(string $regularExpression): void
-    {
-        if (is_callable('parent::expectExceptionMessageMatches')) {
-            parent::expectExceptionMessageMatches($regularExpression);
-        } else {
-            $this->expectExceptionMessageRegExp($regularExpression);
-        }
-    }
-
-    public static function assertIsArray($actual, string $message = ''): void
-    {
-        if (is_callable('parent::assertIsArray')) {
-            parent::assertIsArray($actual, $message);
-        } else {
-            self::assertInternalType('array', $actual, $message);
-        }
-    }
-
     /**
      * @param \Illuminate\Foundation\Application $app
      *
