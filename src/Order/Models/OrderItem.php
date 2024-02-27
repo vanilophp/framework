@@ -17,9 +17,9 @@ namespace Vanilo\Order\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
-use Vanilo\Contracts\Configurable;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 use Vanilo\Support\Traits\ConfigurableModel;
+use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property-read int $id
@@ -35,10 +35,11 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property Carbon $updated_at
  * @method static OrderItem create(array $attributes = [])
  */
-class OrderItem extends Model implements OrderItemContract, Configurable
+class OrderItem extends Model implements OrderItemContract
 {
     use CastsEnums;
     use ConfigurableModel;
+    use ConfigurationHasNoSchema;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

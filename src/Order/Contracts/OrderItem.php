@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Contracts;
 
-interface OrderItem
+use Vanilo\Contracts\Configurable;
+
+interface OrderItem extends Configurable
 {
 }
