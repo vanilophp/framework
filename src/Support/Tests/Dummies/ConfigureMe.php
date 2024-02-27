@@ -17,10 +17,12 @@ namespace Vanilo\Support\Tests\Dummies;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Contracts\Configurable;
 use Vanilo\Support\Traits\ConfigurableModel;
+use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 class ConfigureMe extends Model implements Configurable
 {
     use ConfigurableModel;
+    use ConfigurationHasNoSchema;
 
     protected $guarded = [];
 
