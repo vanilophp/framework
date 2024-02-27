@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Shipping;
 
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
@@ -56,6 +58,24 @@ class PaymentDependentShippingFeeCalculator implements ShippingFeeCalculator
         }
 
         return new ShippingFee($price, $isEstimate);
+    }
+
+    public function getSchema(): Schema
+    {
+        return Expect::structure([
+            'title' => Expect::string(__('Shipping fee')),
+            'prices' => Expect::arrayOf('float', 'string'),
+            'free_threshold' => Expect::float(),
+        ]);
+    }
+
+    public function getSchemaSample(array $mergeWith = null): array
+    {
+        return [
+            'title' => __('Shipping fee'),
+            'prices' => ['default' => 8.99, '1' => 4.99],
+            'free_threshold' => null,
+        ];
     }
 
     private function toParameters(?array $configuration): array
