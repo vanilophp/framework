@@ -9,6 +9,7 @@
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
+- BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
 
 ## 3.x Series
 

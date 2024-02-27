@@ -18,16 +18,17 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Contracts\Buyable;
-use Vanilo\Contracts\Configurable;
 use Vanilo\Support\Traits\ConfigurableModel;
+use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property Buyable $product
  * @property float   $total
  */
-class CartItem extends Model implements CartItemContract, Configurable
+class CartItem extends Model implements CartItemContract
 {
     use ConfigurableModel;
+    use ConfigurationHasNoSchema;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

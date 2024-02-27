@@ -56,6 +56,7 @@
 - BC: Added the `deleteByType()` and `clear()` methods to the `AdjustmentCollection` interface
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
+- BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
 - BC: Added the `getConfigurationSchema()` method to the `Configurable` interface
 - Added the `Schematized` interface
 - Added the nette/schema package requirement (v1.2.5+)

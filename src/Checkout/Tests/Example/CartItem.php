@@ -16,9 +16,12 @@ namespace Vanilo\Checkout\Tests\Example;
 
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubjectItem;
+use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 class CartItem implements CheckoutSubjectItem
 {
+    use ConfigurationHasNoSchema;
+
     /** @var  Buyable */
     protected $product;
 
@@ -58,5 +61,20 @@ class CartItem implements CheckoutSubjectItem
     public function total(): float
     {
         return $this->product->getPrice() * $this->qty;
+    }
+
+    public function configuration(): ?array
+    {
+        return [];
+    }
+
+    public function hasConfiguration(): bool
+    {
+        return false;
+    }
+
+    public function doesntHaveConfiguration(): bool
+    {
+        return true;
     }
 }

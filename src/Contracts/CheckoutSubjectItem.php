@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
-interface CheckoutSubjectItem
+interface CheckoutSubjectItem extends Configurable
 {
     /**
      * Returns the buyable (product) of the item
