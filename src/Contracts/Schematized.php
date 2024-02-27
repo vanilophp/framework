@@ -21,5 +21,4 @@ interface Schematized
     public function getSchema(): Schema;
 
     public function getSchemaSample(array $mergeWith = null): array;
-
 }

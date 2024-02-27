@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Nette\Schema\Expect;
-use Nette\Schema\Schema;
 use Vanilo\Contracts\Schematized;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
@@ -82,7 +81,6 @@ class PaymentMethod extends Model implements PaymentMethodContract
             ['timeout' => PaymentMethodContract::DEFAULT_TIMEOUT],
         );
     }
-
 
     public function isEnabled(): bool
     {

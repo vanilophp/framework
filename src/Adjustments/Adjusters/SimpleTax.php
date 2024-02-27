@@ -20,7 +20,6 @@ use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentProxy;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Adjustments\Support\HasWriteableTitleAndDescription;
-use Vanilo\Adjustments\Support\IsIncluded;
 use Vanilo\Adjustments\Support\IsLockable;
 
 final class SimpleTax implements Adjuster
