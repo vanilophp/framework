@@ -65,8 +65,8 @@ class PaymentMethodTest extends TestCase
             'gateway' => 'plastic'
         ]);
 
-        $this->assertIsArray($method->getConfiguration());
-        $this->assertEmpty($method->getConfiguration());
+        $this->assertIsArray($method->configuration());
+        $this->assertEmpty($method->configuration());
     }
 
     /** @test */
@@ -79,7 +79,7 @@ class PaymentMethodTest extends TestCase
         ]);
 
         $method = $method->fresh();
-        $this->assertIsArray($method->getConfiguration());
+        $this->assertIsArray($method->configuration());
         $this->assertEquals('qwe', $method->configuration['asd']);
     }
 

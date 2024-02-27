@@ -59,6 +59,8 @@
 - BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
 - BC: Changed the `OrderItem` interface into Configurable
 - BC: Added the `getConfigurationSchema()` method to the `Configurable` interface
+- BC: Changed the `PaymentMethod` interface into Configurable
+- Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 - Added the `Schematized` interface
 - Added the nette/schema package requirement (v1.2.5+)
 

@@ -18,12 +18,15 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Vanilo\Contracts\Configurable;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
+use Vanilo\Contracts\Schematized;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Payment\Gateways\NullGateway;
 use Vanilo\Payment\PaymentGateways;
 use Vanilo\Support\Traits\ConfigurableModel;
+use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property int $id
@@ -38,9 +41,10 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property null|Carbon $deleted_at
  * @method PaymentMethod create(array $attributes)
  */
-class PaymentMethod extends Model implements PaymentMethodContract, Configurable
+class PaymentMethod extends Model implements PaymentMethodContract
 {
     use ConfigurableModel;
+    use ConfigurationHasNoSchema;
 
     protected $guarded = ['id', 'transaction_count', 'created_at', 'updated_at', 'deleted_at'];
 
@@ -66,10 +70,27 @@ class PaymentMethod extends Model implements PaymentMethodContract, Configurable
         return PaymentGateways::make($this->gateway);
     }
 
+    /** @deprecated use the `configuration()` method instead */
     public function getConfiguration(): array
     {
-        return $this->configuration ?? [];
+        return $this->configuration() ?? [];
     }
+
+    public function getConfigurationSchema(): ?Schematized
+    {
+        return new class() implements Schematized {
+            public function getSchema(): Schema
+            {
+                return Expect::structure(['timeout' => Expect::int(PaymentMethodContract::DEFAULT_TIMEOUT)]);
+            }
+
+            public function getSchemaSample(array $mergeWith = null): array
+            {
+                return ['timeout' => PaymentMethodContract::DEFAULT_TIMEOUT];
+            }
+        };
+    }
+
 
     public function isEnabled(): bool
     {

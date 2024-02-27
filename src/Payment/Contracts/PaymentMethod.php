@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Contracts;
 
-interface PaymentMethod
+use Vanilo\Contracts\Configurable;
+
+interface PaymentMethod extends Configurable
 {
     public const DEFAULT_TIMEOUT = 600;
 
@@ -27,6 +29,7 @@ interface PaymentMethod
 
     public function getGateway(): PaymentGateway;
 
+    /** @deprecated use the `configuration()` method instead */
     public function getConfiguration(): array;
 
     public function isEnabled(): bool;

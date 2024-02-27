@@ -9,6 +9,8 @@
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
 - Changed minimal Enum requirement to v4.1
+- BC: Changed the `PaymentMethod` interface into Configurable
+- Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 
 ## 3.x Series
 
