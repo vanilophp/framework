@@ -65,7 +65,7 @@ class CalculateTaxes
             }
             $checkout->setTaxesAmount(
                 DetailedAmount::fromArray(
-                    Arr::mapWithKeys($taxes, fn($amount, $title) => [['title' => $title, 'amount' => $amount]]),
+                    Arr::mapWithKeys($taxes, fn ($amount, $title) => [['title' => $title, 'amount' => $amount]]),
                 ),
             );
         }
