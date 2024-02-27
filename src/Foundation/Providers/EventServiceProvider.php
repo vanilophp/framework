@@ -20,6 +20,7 @@ use Vanilo\Cart\Events\CartUpdated;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Foundation\Listeners\CalculateShippingFees;
+use Vanilo\Foundation\Listeners\CalculateTaxes;
 use Vanilo\Foundation\Listeners\DeleteCartAdjustments;
 use Vanilo\Foundation\Listeners\UpdateSalesFigures;
 use Vanilo\Order\Events\OrderWasCreated;
@@ -35,9 +36,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         ShippingAddressChanged::class => [
             CalculateShippingFees::class,
+            CalculateTaxes::class,
         ],
         CartUpdated::class => [
             CalculateShippingFees::class,
+            CalculateTaxes::class,
         ],
         CartDeleting::class => [
             DeleteCartAdjustments::class,

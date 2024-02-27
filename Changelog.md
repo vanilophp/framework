@@ -43,6 +43,7 @@
 - Added the `Taxable` implementation to Foundation's CartItem, Product and MasterProductVariant classes
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)
 - Added the `Merchant` interface
+- Added the `CalculateTaxes` listener to cart update and shipping address change events
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 - BC: Changed `Checkout::getShippingAddress()` return type to be nullable
 - BC: Added the void return type to `Checkout::setShippingAddress()`
