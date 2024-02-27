@@ -7,6 +7,8 @@
 
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
+- Added PHP 8.3 Support
+- Changed minimum Laravel version to v10.38.2
 - Added the `Features` accessor class, which is a syntactic sugar for areas of the configuration
 
 ## 3.x Series

@@ -8,6 +8,8 @@
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 - Upgraded to Konekt Address v3
+- Added PHP 8.3 Support
+- Changed minimum Laravel version to v10.38.2
 - Changed the minimal Enum requirement to v4.1
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - Added the `type` field to the TaxCategory model

@@ -19,7 +19,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "doctrine/dbal": "^3.5.1",
-        "laravel/framework": "^10.0",
+        "laravel/framework": "^10.38.2",
         "konekt/enum": "^4.1",
         "konekt/concord": "^1.13",
         "spatie/laravel-medialibrary": "^10.0",

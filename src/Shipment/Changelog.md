@@ -8,6 +8,8 @@
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 - Dropped Enum v3 Support
+- Added PHP 8.3 Support
+- Changed minimum Laravel version to v10.38.2
 - Changed minimal Enum requirement to v4.1
 - Added `isZoneRestricted()` & `isNotZoneRestricted()` helper methods to the `ShippingMethod` class
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized

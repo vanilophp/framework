@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0",
+        "illuminate/support": "^10.38.2",
         "nette/schema": "^1.2",
         "vanilo/contracts": "^4.0"
     },

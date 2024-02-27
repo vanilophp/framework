@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.2",
         "konekt/concord": "^1.13",
-        "laravel/framework": "^10.0",
+        "laravel/framework": "^10.38.2",
         "cviebrock/eloquent-sluggable": "^10.0"
     },
     "require-dev": {
