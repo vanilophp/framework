@@ -1,0 +1,31 @@
+name: 'Mark Stale Issues and PRs'
+on:
+  schedule:
+    - cron: '27 11 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-issue-stale: 120
+          days-before-issue-close: 3
+          stale-issue-message: >
+            This issue has been automatically marked as `stale` because it has not had
+            recent activity. It will be closed within 3 days if no further activity occurs.
+            Thank you for your contributions.
+          close-issue-message: 'Closing because of being stalled for 3 days without activity.'
+          stale-issue-label: 'wontfix'
+          exempt-issue-labels: documentation, enhancement, feature, bug
+
+          stale-pr-message: >
+            This PR has been automatically marked as `stale` because it has not had
+            recent activity. Please review the PR if it is still relevant.
+            If you still would like it to be merged please add a comment to the PR.
+            Otherwise, it will be closed within 3 days.
+
+            Thank you for your contributions.
+          days-before-pr-stale: 90
+          days-before-pr-close: 3
+
