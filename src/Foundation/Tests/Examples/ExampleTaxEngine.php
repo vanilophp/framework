@@ -44,7 +44,6 @@ class ExampleTaxEngine implements TaxRateResolver
             'rate' => $rate,
             'name' => "$rate%",
             'calculator' => 'example',
-            'configuration' => ['rate' => $rate],
-        ]);
+        ], ['configuration' => ['rate' => $rate]]);
     }
 }
