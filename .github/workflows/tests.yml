@@ -4,8 +4,8 @@ on: [push]
 
 jobs:
   build:
-    runs-on: buildjet-4vcpu-ubuntu-2204
-    timeout-minutes: 25
+    runs-on: buildjet-16vcpu-ubuntu-2204
+    timeout-minutes: 30
     strategy:
       matrix:
         php: ['8.2', '8.3']
