@@ -58,7 +58,9 @@ final class SimpleShippingFee implements Adjuster
 
     private function calculateAmount(Adjustable $adjustable): float
     {
-        if (null !== $this->freeThreshold && $adjustable->itemsTotal() >= $this->freeThreshold) {
+        $priceWithoutShippingFees = $adjustable->preAdjustmentTotal() + $adjustable->adjustments()->exceptTypes(AdjustmentTypeProxy::SHIPPING())->total();
+
+        if (null !== $this->freeThreshold && $priceWithoutShippingFees >= $this->freeThreshold) {
             return 0;
         }
 

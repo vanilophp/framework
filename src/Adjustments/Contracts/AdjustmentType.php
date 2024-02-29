@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Adjustments\Contracts;
 
-interface AdjustmentType
+use Konekt\Enum\EnumInterface;
+
+interface AdjustmentType extends EnumInterface
 {
 }

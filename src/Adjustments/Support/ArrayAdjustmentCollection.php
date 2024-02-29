@@ -109,6 +109,18 @@ class ArrayAdjustmentCollection implements AdjustmentCollectionContract
         return $result;
     }
 
+    public function exceptTypes(AdjustmentType ...$types): AdjustmentCollectionContract
+    {
+        $result = new self($this->adjustable);
+        foreach ($this->items as $adjustment) {
+            if ($adjustment->getType()->isNoneOf(...$types)) {
+                $result->add($adjustment);
+            }
+        }
+
+        return $result;
+    }
+
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->items[$offset]);

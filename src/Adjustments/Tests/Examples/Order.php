@@ -29,13 +29,13 @@ class Order extends Model implements Adjustable
 
     protected $guarded = ['created_at', 'updated_at'];
 
-    public function itemsTotal(): float
+    public function preAdjustmentTotal(): float
     {
         return $this->items_total;
     }
 
     public function total(): float
     {
-        return $this->itemsTotal() + $this->adjustments()->total();
+        return $this->preAdjustmentTotal() + $this->adjustments()->total();
     }
 }

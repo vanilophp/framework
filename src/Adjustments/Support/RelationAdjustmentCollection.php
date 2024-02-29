@@ -23,12 +23,14 @@ use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Contracts\AdjustmentType;
+use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 
 class RelationAdjustmentCollection implements AdjustmentCollection
 {
     private Adjustable $model;
 
-    private ?AdjustmentType $typeFilter = null;
+    /** @var array<AdjustmentType>|null $typeFilter */
+    private ?array $typeFilter = null;
 
     public function __construct(Adjustable $model)
     {
@@ -102,7 +104,18 @@ class RelationAdjustmentCollection implements AdjustmentCollection
     public function byType(AdjustmentType $type): AdjustmentCollection
     {
         $result = new self($this->model);
-        $result->typeFilter = $type;
+        $result->typeFilter = [$type];
+
+        return $result;
+    }
+
+    public function exceptTypes(AdjustmentType ...$types): AdjustmentCollection
+    {
+        $result = new self($this->model);
+        $result->typeFilter = collect(AdjustmentTypeProxy::choices())
+            ->except(array_map(fn (AdjustmentType $type) => $type->value(), $types))
+            ->mapWithKeys(fn ($label, $value) => AdjustmentTypeProxy::create($value))
+            ->toArray();
 
         return $result;
     }
@@ -166,10 +179,10 @@ class RelationAdjustmentCollection implements AdjustmentCollection
         /** @var Collection $collection */
         $collection = $this->model->adjustmentsRelation;
 
-        if (null === $this->typeFilter) {
+        if (empty($this->typeFilter)) {
             return $collection;
         }
 
-        return $collection->filter(fn (Adjustment $adjustment) => $this->typeFilter->equals($adjustment->type));
+        return $collection->filter(fn (Adjustment $adjustment) => $adjustment->type->isAnyOf(...$this->typeFilter));
     }
 }

@@ -56,6 +56,10 @@
     - `setTaxesAmount()`
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
 - BC: Added the `deleteByType()` and `clear()` methods to the `AdjustmentCollection` interface
+- BC: The `Adjustable::itemsTotal()` has been renamed to `preAdjustmentTotal()`
+- BC: The `invalidateAdjustments()` method has been added to the `Adjustable` interface
+- BC: The `exceptTypes()` method has been added to the `AdjustmentCollection` interface
+- BC: The `AdjustmentType` interface extends the `EnumInterface`
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
 - BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized

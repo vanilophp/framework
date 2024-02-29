@@ -62,7 +62,7 @@ final class SimpleDiscount implements Adjuster
 
     private function calculateAmount(Adjustable $adjustable): float
     {
-        if (null !== $this->threshold && $adjustable->itemsTotal() <= $this->threshold) {
+        if (null !== $this->threshold && $adjustable->preAdjustmentTotal() <= $this->threshold) {
             return 0;
         }
 

@@ -44,4 +44,7 @@ interface AdjustmentCollection extends IteratorAggregate, ArrayAccess, Countable
 
     /** Returns a **copy** of the collection containing the entries of the given type */
     public function byType(AdjustmentType $type): AdjustmentCollection;
+
+    /** Returns a **copy** of the collection containing the entries except the given types */
+    public function exceptTypes(AdjustmentType ...$types): AdjustmentCollection;
 }
