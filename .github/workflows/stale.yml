@@ -28,4 +28,5 @@ jobs:
             Thank you for your contributions.
           days-before-pr-stale: 90
           days-before-pr-close: 3
+          stale-pr-label: 'wontfix'
 

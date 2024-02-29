@@ -10,7 +10,7 @@
 - Dropped Enum v3 Support
 - Added PHP 8.3 Support
 - Changed minimum Laravel version to v10.38.2
-- Changed minimal Enum requirement to v4.1
+- Changed minimal Enum requirement to v4.2
 - Upgraded to Konekt Address, Customer and User modules to v3
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
 - Added the `currency` field to the orders table
