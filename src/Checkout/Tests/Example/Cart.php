@@ -69,4 +69,9 @@ class Cart implements CheckoutSubject
     {
         return $this->items->sum->total();
     }
+
+    public function itemsTotal(): float
+    {
+        return $this->total();
+    }
 }
