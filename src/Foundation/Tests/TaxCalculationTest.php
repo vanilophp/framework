@@ -74,17 +74,20 @@ class TaxCalculationTest extends TestCase
         $product = factory(Product::class)->create(['price' => 100, 'tax_category_id' => $taxCategory->id]);
         config(['vanilo.taxes.engine.driver' => ExampleTaxEngine::ID]);
 
-        Cart::addItem($product);
+        $item = Cart::addItem($product);
         Checkout::setCart(Cart::getFacadeRoot());
 
         /** @var AdjustmentCollection $taxAdjustments */
-        $taxAdjustments = Cart::adjustments()->byType(AdjustmentType::TAX());
+        $taxAdjustments = $item->adjustments()->byType(AdjustmentType::TAX());
         $this->assertCount(1, $taxAdjustments);
         $taxAdjustment = $taxAdjustments->first();
         $this->assertEquals(19, $taxAdjustment->getAmount());
+        $this->assertEquals(19, $taxAdjustments->total());
         $this->assertTrue($taxAdjustment->isCharge());
         $this->assertFalse($taxAdjustment->isIncluded());
-        $this->assertEquals(100, Cart::itemsTotal());
-        $this->assertEquals(100 + 19, Cart::total());
+        $this->assertEquals(100, $item->preAdjustmentTotal());
+        $this->assertEquals(119, $item->total());
+        $this->assertEquals(119, Cart::itemsTotal());
+        $this->assertEquals(119, Cart::total());
     }
 }

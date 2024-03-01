@@ -28,7 +28,7 @@ use Vanilo\Taxes\Contracts\TaxRateResolver;
 class CalculateTaxes
 {
     public function __construct(
-        protected ?TaxRateResolver $rateResolver,
+        protected ?TaxRateResolver $taxEngine,
     ) {
     }
 
@@ -49,15 +49,17 @@ class CalculateTaxes
 
         $cart->adjustments()->deleteByType(AdjustmentTypeProxy::TAX());
 
-        if (null !== $this->rateResolver) {
+        if (null !== $this->taxEngine) {
             $taxes = [];
             /** @var CartItem $item */
             foreach ($cart->getItems() as $item) {
-                if ($rate = $this->rateResolver->findTaxRate($item)) {
+                if ($rate = $this->taxEngine->findTaxRate($item)) {
                     $calculator = $rate->getCalculator();
                     if ($adjuster = $calculator->getAdjuster($rate->configuration())) {
+                        //@todo the tax engine should tell whether to apply the tax to individual items (eg EU VAT)
+                        //      or the entire cart (eg Canadian Sales Tax)
                         /** @var Adjustment|null $adjustment */
-                        if ($adjustment = $cart->adjustments()?->create($adjuster)) {
+                        if ($adjustment = $item->adjustments()?->create($adjuster)) {
                             $taxes[$adjustment->getTitle()] = ($taxes[$adjustment->getTitle()] ?? 0) + $adjustment->getAmount();
                         }
                     }

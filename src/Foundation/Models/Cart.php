@@ -27,7 +27,17 @@ class Cart extends BaseCart implements Adjustable
 
     public function total(): float
     {
-        return $this->itemsTotal() + $this->adjustments()->total();
+        return $this->preAdjustmentTotal() + $this->adjustments()->total();
+    }
+
+    /**
+     * It equals to itemsTotal(), meaning that it contains the sum of the cart items,
+     * including the adjustments of the cart items. Therefore, the adjustments of
+     * the cart itself are fully segregated from the adjustments of cart items
+     */
+    public function preAdjustmentTotal(): float
+    {
+        return $this->itemsTotal();
     }
 
     public function itemsTotal(): float

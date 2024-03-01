@@ -58,7 +58,7 @@ class PaymentDependentShippingFee implements Adjuster
 
     private function calculateAmount(Adjustable $adjustable): float
     {
-        if (null !== $this->freeThreshold && $adjustable->itemsTotal() >= $this->freeThreshold) {
+        if (null !== $this->freeThreshold && $adjustable->preAdjustmentTotal() >= $this->freeThreshold) {
             return 0;
         }
 

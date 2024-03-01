@@ -36,9 +36,13 @@ class CartItem extends BaseCartItem implements Adjustable, Taxable
         return null;
     }
 
-    /** @todo rename this in v4 along with the renaming of this method in the Adjustable interface */
-    public function itemsTotal(): float
+    public function preAdjustmentTotal(): float
     {
-        return $this->total();
+        return $this->price * $this->quantity;
+    }
+
+    public function total(): float
+    {
+        return $this->preAdjustmentTotal() + $this->adjustments()->total();
     }
 }

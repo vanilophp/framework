@@ -61,6 +61,9 @@
 - BC: The `exceptTypes()` method has been added to the `AdjustmentCollection` interface
 - BC: The `AdjustmentType` interface extends the `EnumInterface`
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
+- BC: Added the `itemsTotal()` method to the `CheckoutSubject` interface
+- BC: Added argument and return types to all `Cart` and `CartManager` interface methods
+- BC: Added the `findOneForZone` static method to the `TaxRate` interface
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
 - BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
 - BC: Changed the `OrderItem` interface into Configurable
