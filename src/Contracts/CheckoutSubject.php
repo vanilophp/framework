@@ -22,9 +22,12 @@ use Illuminate\Support\Collection;
 interface CheckoutSubject
 {
     /**
-     * A collection of CheckoutSubjectItem objects
+     *
+     * @return Collection<CheckoutSubjectItem>
      */
     public function getItems(): Collection;
+
+    public function itemsTotal(): float;
 
     /**
      * Returns the final total of the CheckoutSubject (typically a cart)

@@ -13,6 +13,7 @@
 - Added the `Merchant` interface
 - Added the `Schematized` interface
 - Added the `getConfigurationSchema()` method to the `Configurable` interface
+- BC: Added the `itemsTotal()` method to the `CheckoutSubject` interface
 - Added the nette/schema package requirement (v1.2.5+)
 
 ## 3.x Series

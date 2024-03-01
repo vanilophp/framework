@@ -70,10 +70,12 @@ class CartManager implements CartManagerContract
         return $this->exists() ? $this->model()->getItems() : collect();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function addItem(Buyable $product, $qty = 1, $params = []): CartItem
+    public function itemsTotal(): float
+    {
+        return $this->exists() ? $this->model()->itemsTotal() : 0;
+    }
+
+    public function addItem(Buyable $product, int|float $qty = 1, array $params = []): CartItem
     {
         $cart = $this->findOrCreateCart();
 
