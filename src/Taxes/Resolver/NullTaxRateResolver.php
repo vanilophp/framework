@@ -21,6 +21,8 @@ use Vanilo\Taxes\Contracts\TaxRateResolver;
 
 class NullTaxRateResolver implements TaxRateResolver
 {
+    public const ID = 'none';
+
     public function findTaxRate(Taxable $taxable, ?Address $billingAddress = null, ?Address $shippingAddress = null): ?TaxRate
     {
         return null;

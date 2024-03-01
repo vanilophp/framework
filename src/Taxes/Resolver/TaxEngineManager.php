@@ -26,10 +26,12 @@ use Vanilo\Taxes\Exceptions\InvalidTaxConfigurationException;
 class TaxEngineManager
 {
     public const NULL_DRIVER = 'none';
+    public const SIMPLE_DRIVER = 'simple';
 
     /** The array of registered Tax Resolver drivers */
     protected static array $drivers = [
-        self::NULL_DRIVER => NullTaxRateResolver::class
+        self::NULL_DRIVER => NullTaxRateResolver::class,
+        self::SIMPLE_DRIVER => SimpleTaxRateResolver::class
     ];
 
     /** The array of resolved tax resolver instances.*/
