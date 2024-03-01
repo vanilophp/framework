@@ -18,4 +18,17 @@ use Vanilo\Contracts\Configurable;
 
 interface OrderItem extends Configurable
 {
+    public function total(): float;
+
+    public function getOrder(): Order;
+
+    public function getProduct(): object;
+
+    public function getFulfillmentStatus(): FulfillmentStatus;
+
+    public function getName(): string;
+
+    public function getQuantity(): float;
+
+    public function getPrice(): float;
 }

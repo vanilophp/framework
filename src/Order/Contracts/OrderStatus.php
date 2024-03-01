@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Contracts;
 
-interface OrderStatus
+use Konekt\Enum\EnumInterface;
+
+interface OrderStatus extends EnumInterface
 {
     /**
      * Returns whether the status represents an open state

@@ -67,6 +67,10 @@
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
 - BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
 - BC: Changed the `OrderItem` interface into Configurable
+- BC: Added 7 methods to the `OrderItem` interface
+- BC: Added the `getLanguage()`, `getFulfillmentStatus()` and `itemsTotal()` methods to the `Order` interface
+- BC: Added to float return type to the `total()` method of the `Order` interface
+- BC: The `OrderStatus` and `FulfillmentStatus` interfaces extend the `EnumInterface`
 - BC: Added the `getConfigurationSchema()` method to the `Configurable` interface
 - BC: Changed the `PaymentMethod` interface into Configurable
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`

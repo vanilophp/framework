@@ -25,6 +25,7 @@ use Konekt\User\Models\UserProxy;
 use Traversable;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
+use Vanilo\Order\Contracts\FulfillmentStatus;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus;
 
@@ -138,9 +139,22 @@ class Order extends Model implements OrderContract
         return $this->hasMany(OrderItemProxy::modelClass());
     }
 
-    public function total()
+    public function total(): float
     {
         return $this->items->sum('total');
+    }
+
+    public function itemsTotal(): float
+    {
+        // Total and items total are the same on this level, but they can differ as soon as the
+        // Order gains the optional adjustable behavior which can add non-item related costs
+        // or discounts eg. shipping fee, promotion, coupon, etc. that modify order total
+        return $this->items->sum('total');
+    }
+
+    public function getFulfillmentStatus(): FulfillmentStatus
+    {
+        return $this->fulfillment_status;
     }
 
     public function scopeOpen(Builder $query)

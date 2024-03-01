@@ -24,21 +24,18 @@ interface Order
 
     public function getStatus(): OrderStatus;
 
+    public function getFulfillmentStatus(): FulfillmentStatus;
+
     public function getBillpayer(): ?BillPayer;
 
     public function getShippingAddress(): ?Address;
 
-    /** @todo add this in v4
-     * /** The two-letter ISO 639-1 code *\/
-     * public function getLanguage(): ?string;
-     */
+    /** The two-letter ISO 639-1 code */
+     public function getLanguage(): ?string;
 
     public function getItems(): Traversable;
 
-    /**
-     * Returns the final total of the Order
-     *
-     * @return float
-     */
-    public function total();
+    public function itemsTotal(): float;
+
+    public function total(): float;
 }

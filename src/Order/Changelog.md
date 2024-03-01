@@ -14,6 +14,10 @@
 - Upgraded to Konekt Address and User modules to v3
 - Added the `currency` field to the orders table
 - BC: Changed the `OrderItem` interface into Configurable
+- BC: Added 7 methods to the `OrderItem` interface
+- BC: Added the `getLanguage()`, `getFulfillmentStatus()` and `itemsTotal()` methods to the `Order` interface
+- BC: Added to float return type to the `total()` method of the `Order` interface
+- BC: The `OrderStatus` and `FulfillmentStatus` interfaces extend the `EnumInterface`
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null 
 
 ## 3.x Series

@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Contracts;
 
-interface FulfillmentStatus
+use Konekt\Enum\EnumInterface;
+
+interface FulfillmentStatus extends EnumInterface
 {
 }
