@@ -12,6 +12,7 @@
 - Changed minimum Laravel version to v10.38.2
 - Changed minimal Enum requirement to v4.2
 - BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
+- BC: Added argument and return types to all `Cart` and `CartManager` interface methods
 
 ## 3.x Series
 

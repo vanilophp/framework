@@ -16,9 +16,11 @@ namespace Vanilo\Cart\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Cart\Contracts\Cart as CartContract;
+use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Contracts\Buyable;
 
@@ -34,34 +36,22 @@ class Cart extends Model implements CartContract
         'state' => 'CartStateProxy@enumClass'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(CartItemProxy::modelClass(), 'cart_id', 'id');
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getItems(): Collection
     {
         return $this->items;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function itemCount()
+    public function itemCount(): int
     {
-        return $this->items->sum('quantity');
+        return (int) $this->items->sum('quantity');
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function addItem(Buyable $product, $qty = 1, $params = []): \Vanilo\Cart\Contracts\CartItem
+    public function addItem(Buyable $product, int|float $qty = 1, array $params = []): CartItemContract
     {
         $item = $this->items()->ofCart($this)->byProduct($product)->first();
 
@@ -83,12 +73,9 @@ class Cart extends Model implements CartContract
         return $item;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function removeItem($item)
+    public function removeItem(CartItemContract $item): void
     {
-        if ($item) {
+        if ($item instanceof Model) {
             $item->delete();
         }
 
@@ -98,7 +85,7 @@ class Cart extends Model implements CartContract
     /**
      * @inheritDoc
      */
-    public function removeProduct(Buyable $product)
+    public function removeProduct(Buyable $product): void
     {
         $item = $this->items()->ofCart($this)->byProduct($product)->first();
 
@@ -108,16 +95,13 @@ class Cart extends Model implements CartContract
     /**
      * @inheritDoc
      */
-    public function clear()
+    public function clear(): void
     {
         $this->items()->ofCart($this)->delete();
 
         $this->load('items');
     }
 
-    /**
-     * @inheritDoc
-     */
     public function total(): float
     {
         return $this->items->sum('total');
@@ -140,18 +124,12 @@ class Cart extends Model implements CartContract
         return $this->belongsTo($userModel);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getUser()
+    public function getUser(): ?Authenticatable
     {
         return $this->user;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setUser($user)
+    public function setUser(Authenticatable|int|string|null $user): void
     {
         if ($user instanceof Authenticatable) {
             $user = $user->id;

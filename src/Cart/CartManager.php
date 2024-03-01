@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -33,11 +34,10 @@ class CartManager implements CartManagerContract
 {
     public const CONFIG_SESSION_KEY = 'vanilo.cart.session_key';
 
-    /** @var string The key in session that holds the cart id */
-    protected $sessionKey;
+    /** The key in session that holds the cart id */
+    protected ?string $sessionKey;
 
-    /** @var  Cart  The Cart model instance */
-    protected $cart;
+    protected null|Cart|CartContract $cart = null;
 
     public function __construct()
     {
@@ -62,9 +62,6 @@ class CartManager implements CartManagerContract
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getItems(): Collection
     {
         return $this->exists() ? $this->model()->getItems() : collect();
@@ -85,10 +82,7 @@ class CartManager implements CartManagerContract
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function removeItem($item)
+    public function removeItem(CartItem $item): void
     {
         if ($cart = $this->model()) {
             $cart->removeItem($item);
@@ -96,10 +90,7 @@ class CartManager implements CartManagerContract
         }
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function removeProduct(Buyable $product)
+    public function removeProduct(Buyable $product): void
     {
         if ($cart = $this->model()) {
             $cart->removeProduct($product);
@@ -107,10 +98,7 @@ class CartManager implements CartManagerContract
         }
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function clear()
+    public function clear(): void
     {
         if ($cart = $this->model()) {
             $cart->clear();
@@ -118,42 +106,27 @@ class CartManager implements CartManagerContract
         }
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function itemCount()
+    public function itemCount(): int
     {
         return $this->exists() ? $this->model()->itemCount() : 0;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function total(): float
     {
         return $this->exists() ? $this->model()->total() : 0;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function exists()
+    public function exists(): bool
     {
         return (bool) $this->getCartId() && $this->model();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function doesNotExist()
+    public function doesNotExist(): bool
     {
         return !$this->exists();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function model()
+    public function model(): ?CartContract
     {
         $id = $this->getCartId();
 
@@ -168,26 +141,17 @@ class CartManager implements CartManagerContract
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return 0 == $this->itemCount();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function isNotEmpty()
+    public function isNotEmpty(): bool
     {
         return !$this->isEmpty();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function destroy()
+    public function destroy(): void
     {
         if ($this->exists()) {
             Event::dispatch(new CartDeleting($this->model()));
@@ -200,10 +164,7 @@ class CartManager implements CartManagerContract
         Event::dispatch(new CartDeleted());
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function create($forceCreateIfExists = false)
+    public function create(bool $forceCreateIfExists = false): void
     {
         if ($this->exists() && !$forceCreateIfExists) {
             return;
@@ -212,18 +173,12 @@ class CartManager implements CartManagerContract
         $this->createCart();
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getUser()
+    public function getUser(): ?Authenticatable
     {
         return $this->exists() ? $this->model()->getUser() : null;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setUser($user)
+    public function setUser(Authenticatable|int|string|null $user): void
     {
         if ($this->exists()) {
             $this->cart->setUser($user);
@@ -232,15 +187,12 @@ class CartManager implements CartManagerContract
         }
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function removeUser()
+    public function removeUser(): void
     {
         $this->setUser(null);
     }
 
-    public function restoreLastActiveCart($user)
+    public function restoreLastActiveCart($user): void
     {
         $lastActiveCart = CartProxy::ofUser($user)->actives()->latest()->first();
 
@@ -250,7 +202,7 @@ class CartManager implements CartManagerContract
         }
     }
 
-    public function mergeLastActiveCartWithSessionCart($user)
+    public function mergeLastActiveCartWithSessionCart($user): void
     {
         /** @var Cart $lastActiveCart */
         if ($lastActiveCart = CartProxy::ofUser($user)->actives()->latest()->first()) {
@@ -264,10 +216,7 @@ class CartManager implements CartManagerContract
         }
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function forget()
+    public function forget(): void
     {
         $this->cart = null;
         session()->forget($this->sessionKey);
@@ -275,8 +224,6 @@ class CartManager implements CartManagerContract
 
     /**
      * Refreshes the underlying cart model from the database
-     *
-     * @return $this
      */
     public function fresh(): self
     {
@@ -300,10 +247,8 @@ class CartManager implements CartManagerContract
 
     /**
      * Returns the cart model for the current session by either fetching it or creating one
-     *
-     * @return Cart
      */
-    protected function findOrCreateCart()
+    protected function findOrCreateCart(): Cart|CartContract
     {
         return $this->model() ?: $this->createCart();
     }
@@ -311,7 +256,7 @@ class CartManager implements CartManagerContract
     /**
      * Creates a new cart model and saves its id in the session
      */
-    protected function createCart()
+    protected function createCart(): Cart|CartContract
     {
         if (config('vanilo.cart.auto_assign_user') && Auth::check()) {
             $attributes = [
