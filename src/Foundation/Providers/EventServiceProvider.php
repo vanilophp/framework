@@ -17,6 +17,7 @@ namespace Vanilo\Foundation\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Vanilo\Cart\Events\CartDeleting;
 use Vanilo\Cart\Events\CartUpdated;
+use Vanilo\Checkout\Events\BillpayerChanged;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Foundation\Listeners\CalculateShippingFees;
@@ -36,6 +37,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ShippingAddressChanged::class => [
             CalculateShippingFees::class,
+            CalculateTaxes::class,
+        ],
+        BillpayerChanged::class => [
             CalculateTaxes::class,
         ],
         CartUpdated::class => [

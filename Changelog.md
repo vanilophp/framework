@@ -25,6 +25,7 @@
     - `color`
 - Added the `payment_method_id` to the orders table
 - Added the processing of the `payment_method_id` field to the OrderFactory (Foundation)
+- Added the `BillpayerChanged` checkout event
 - Added the `is_hidden` field to the `Property` model
 - Added the `withImages` and `withChannels` methods to the product search class (eager loads media)
 - Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models

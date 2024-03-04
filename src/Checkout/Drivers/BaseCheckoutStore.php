@@ -21,6 +21,7 @@ use Illuminate\Support\Str;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
+use Vanilo\Checkout\Events\BillpayerChanged;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
@@ -114,6 +115,7 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
     public function setBillpayer(Billpayer $billpayer)
     {
         $this->writeRawDataToStore('billpayer', $billpayer);
+        Event::dispatch(new BillpayerChanged($this));
     }
 
     public function getBillpayer(): Billpayer

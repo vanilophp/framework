@@ -56,13 +56,13 @@ class SessionStore extends BaseCheckoutStore
     public function setShippingAddress(Address $address): void
     {
         $this->writeRawDataToStore('shipping_address', $address);
-
         Event::dispatch(new ShippingAddressChanged($this));
     }
 
     public function removeShippingAddress(): void
     {
         $this->writeRawDataToStore('shipping_address', null);
+        Event::dispatch(new ShippingAddressChanged($this));
     }
 
     public function getShippingAmount(): DetailedAmount

@@ -11,6 +11,7 @@
 - Added PHP 8.3 Support
 - Changed minimum Laravel version to v10.38.2
 - Changed minimal Enum requirement to v4.2
+- Added the `BillpayerChanged` event
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
 - BC: Changed `Checkout::getShippingAddress()` return type to be nullable

@@ -19,6 +19,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutRequest;
+use Vanilo\Checkout\Events\BillpayerChanged;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Checkout\Traits\HasCheckoutState;
@@ -86,6 +87,7 @@ class RequestStore extends BaseCheckoutStore
     public function setBillpayer(Billpayer $billpayer)
     {
         $this->billpayer = $billpayer;
+        Event::dispatch(new BillpayerChanged($this));
     }
 
     public function getShippingAddress(): ?Address
@@ -102,6 +104,7 @@ class RequestStore extends BaseCheckoutStore
     public function removeShippingAddress(): void
     {
         $this->shippingAddress = null;
+        Event::dispatch(new ShippingAddressChanged($this));
     }
 
     public function getShippingAmount(): DetailedAmount
