@@ -47,6 +47,11 @@ class TaxEngineManager
         return $this->driver()->$method(...$arguments);
     }
 
+    public function driverExists(string $driverName): bool
+    {
+        return isset(self::$drivers[$driverName]);
+    }
+
     public function driver(?string $name = null): TaxRateResolver
     {
         $name = $name ?: $this->getDefaultDriver();

@@ -25,6 +25,7 @@ use Vanilo\Taxes\Resolver\TaxEngineManager;
  * @method static TaxRateResolver driver(string|null $name = null)
  * @method static TaxRate|null findTaxRate(Taxable $taxable, Address|null $billingAddress = null, Address|null $shippingAddress = null)
  * @method static void extend(string $name, string|callable $driver)
+ * @method static bool driverExists(string $driverName)
  */
 class TaxEngine extends Facade
 {
