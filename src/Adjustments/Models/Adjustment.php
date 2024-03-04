@@ -150,7 +150,7 @@ class Adjustment extends Model implements AdjustmentContract
         return (bool) $this->is_included;
     }
 
-    public function isNotIncluded() : bool
+    public function isNotIncluded(): bool
     {
         return !$this->isIncluded();
     }

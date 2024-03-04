@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Vanilo\Adjustments\Tests\Unit;
 
 use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
-use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Contracts\Adjustment as AdjustmentContract;
 use Vanilo\Adjustments\Models\Adjustment;
