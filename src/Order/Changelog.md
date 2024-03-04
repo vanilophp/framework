@@ -13,6 +13,7 @@
 - Changed minimal Enum requirement to v4.2
 - Upgraded to Konekt Address and User modules to v3
 - Added the `currency` field to the orders table
+- BC: Added the `$hooks` and `$itemHooks` parameters to the `OrderFactory` interface
 - BC: Changed the `OrderItem` interface into Configurable
 - BC: Added 7 methods to the `OrderItem` interface
 - BC: Added the `getLanguage()`, `getFulfillmentStatus()` and `itemsTotal()` methods to the `Order` interface

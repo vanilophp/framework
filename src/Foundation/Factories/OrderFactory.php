@@ -21,6 +21,7 @@ use Vanilo\Checkout\Contracts\Checkout;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\Configurable;
 use Vanilo\Order\Contracts\Order;
+use Vanilo\Order\Contracts\OrderItem;
 use Vanilo\Order\Factories\OrderFactory as BaseOrderFactory;
 
 class OrderFactory extends BaseOrderFactory
@@ -40,7 +41,7 @@ class OrderFactory extends BaseOrderFactory
 
         $this->sourceAdjustments = $checkout->getCart()->adjustments();
 
-        return $this->createFromDataArray($orderData, $items, \Closure::fromCallable([$this, 'copyAdjustmentsHook']));
+        return $this->createFromDataArray($orderData, $items, $this->copyAdjustmentsHook(...), $this->copyItemAdjustmentsHook(...));
     }
 
     protected function copyAdjustmentsHook(Order $order): void
@@ -57,6 +58,18 @@ class OrderFactory extends BaseOrderFactory
         }
     }
 
+    protected function copyItemAdjustmentsHook(OrderItem $item, Order $order, array $sourceItems, array $sourceItem): void
+    {
+        foreach (($sourceItem['adjustments'] ?? []) as $adjustment) {
+            $clone = $adjustment->newInstance(
+                Arr::except($adjustment->getAttributes(), ['id', 'adjustable_type', 'adjustable_id', 'created_at', 'updated_at'])
+            );
+            $clone->data = $adjustment->data;
+            $item->adjustments()->add($clone);
+            $clone->lock();
+        }
+    }
+
     protected function convertCartItemsToDataArray(CheckoutSubject $cart)
     {
         return $cart->getItems()->map(function ($item) {
@@ -64,6 +77,7 @@ class OrderFactory extends BaseOrderFactory
                 'product' => $item->getBuyable(),
                 'quantity' => $item->getQuantity(),
                 'configuration' => $item->getBuyable() instanceof Configurable ? $item->configuration() : null,
+                'adjustments' => $item instanceof Adjustable ? $item->adjustments() : [],
             ];
         })->all();
     }

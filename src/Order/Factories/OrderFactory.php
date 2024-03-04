@@ -40,10 +40,7 @@ class OrderFactory implements OrderFactoryContract
         $this->orderNumberGenerator = $generator;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function createFromDataArray(array $data, array $items, callable ...$hooks): Order
+    public function createFromDataArray(array $data, array $items, array|callable $hooks = null, array|callable $itemHooks = null): Order
     {
         if (empty($items)) {
             throw new CreateOrderException(__('Can not create an order without items'));
@@ -62,17 +59,9 @@ class OrderFactory implements OrderFactoryContract
             $this->createBillpayer($order, $data);
             $this->createShippingAddress($order, $data);
 
-            $this->createItems(
-                $order,
-                array_map(function ($item) {
-                    // Default quantity is 1 if unspecified
-                    $item['quantity'] = $item['quantity'] ?? 1;
+            $this->createItems($order, array_map(fn ($item) => $item + ['quantity' => 1], $items), ...Arr::wrap($itemHooks));
 
-                    return $item;
-                }, $items)
-            );
-
-            foreach ($hooks as $hook) {
+            foreach (Arr::wrap($hooks) as $hook) {
                 $this->callHook($hook, $order, $data, $items);
             }
 
@@ -115,24 +104,10 @@ class OrderFactory implements OrderFactoryContract
 
     protected function createItems(Order $order, array $items, callable ...$hooks)
     {
-        $that = $this;
-        $hasBuyables = collect($items)->contains(function ($item) use ($that) {
-            return $that->itemContainsABuyable($item);
-        });
-
-        if (!$hasBuyables) { // This is faster
-            $order->items()->createMany($items);
-            foreach ($order->getItems() as $createdOrderItem) {
-                foreach ($hooks as $hook) {
-                    $this->callItemHook($hook, $createdOrderItem, $order, $items);
-                }
-            }
-        } else {
-            foreach ($items as $item) {
-                $createdOrderItem = $this->createItem($order, $item);
-                foreach ($hooks as $hook) {
-                    $this->callItemHook($hook, $createdOrderItem, $order, $items);
-                }
+        foreach ($items as $item) {
+            $createdOrderItem = $this->createItem($order, $item);
+            foreach ($hooks as $hook) {
+                $this->callItemHook($hook, $createdOrderItem, $order, $items, $item);
             }
         }
     }
@@ -177,14 +152,15 @@ class OrderFactory implements OrderFactoryContract
     /**
      * @throws \ReflectionException
      */
-    protected function callItemHook(callable $hook, OrderItem $orderItem, Order $order, array $sourceItems): void
+    protected function callItemHook(callable $hook, OrderItem $orderItem, Order $order, array $sourceItems, array $sourceItem): void
     {
         $ref = new ReflectionFunction($hook);
         match ($ref->getNumberOfParameters()) {
             0 => $hook(),
             1 => $hook($orderItem),
             2 => $hook($orderItem, $order),
-            default => $hook($orderItem, $order, $sourceItems),
+            3 => $hook($orderItem, $order, $sourceItems),
+            default => $hook($orderItem, $order, $sourceItems, $sourceItem),
         };
     }
 
