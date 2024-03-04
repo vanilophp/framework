@@ -17,6 +17,7 @@
 - BC: The `invalidateAdjustments()` method has been added to the `Adjustable` interface
 - BC: The `exceptTypes()` method has been added to the `AdjustmentCollection` interface
 - BC: The `AdjustmentType` interface extends the `EnumInterface`
+- BC: Added the `isNeutral()` method to the `Adjustment` interface (true if the adjustment amount is 0)
 
 ## 3.x Series
 

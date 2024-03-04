@@ -62,12 +62,14 @@
 - BC: The `invalidateAdjustments()` method has been added to the `Adjustable` interface
 - BC: The `exceptTypes()` method has been added to the `AdjustmentCollection` interface
 - BC: The `AdjustmentType` interface extends the `EnumInterface`
+  BC: Added the `isNeutral()` method to the `Adjustment` interface (true if the adjustment amount is 0)
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - BC: Added the `itemsTotal()` method to the `CheckoutSubject` interface
 - BC: Added argument and return types to all `Cart` and `CartManager` interface methods
 - BC: Added the `findOneByZoneAndCategory` static method to the `TaxRate` interface
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
 - BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
+- BC: Added the `$hooks` and `$itemHooks` parameters to the `OrderFactory` interface
 - BC: Changed the `OrderItem` interface into Configurable
 - BC: Added 7 methods to the `OrderItem` interface
 - BC: Added the `getLanguage()`, `getFulfillmentStatus()` and `itemsTotal()` methods to the `Order` interface

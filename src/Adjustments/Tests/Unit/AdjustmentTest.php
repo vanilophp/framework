@@ -250,8 +250,8 @@ class AdjustmentTest extends TestCase
             'is_locked' => true,
         ]);
 
-        $this->assertInstanceOf(Adjustable::class, $adjustment->getAdjustable());
         $this->assertInstanceOf(Order::class, $adjustment->getAdjustable());
+        $this->assertEquals($order->id, $adjustment->getAdjustable()->id);
     }
 
     /** @test */
@@ -280,9 +280,42 @@ class AdjustmentTest extends TestCase
             'adjustable_id' => 1,
             'adjuster' => 'fixed_amount',
             'title' => 'Sales tax',
+            'amount' => 15,
         ]);
 
-        $this->assertInstanceOf(Adjustment::class, $adjustment);
-        $this->assertInstanceOf(AdjustmentContract::class, $adjustment);
+        $this->assertEquals(15, $adjustment->getAmount());
+        $this->assertTrue($adjustment->isCharge());
+    }
+
+    /** @test */
+    public function it_is_a_credit_if_it_decreases_the_total()
+    {
+        $adjustment = Adjustment::create([
+            'type' => AdjustmentType::PROMOTION,
+            'adjustable_type' => 'order',
+            'adjustable_id' => 1,
+            'adjuster' => 'fixed_amount',
+            'title' => 'Promotion',
+            'amount' => -20,
+        ]);
+
+        $this->assertEquals(-20, $adjustment->getAmount());
+        $this->assertTrue($adjustment->isCredit());
+    }
+
+    /** @test */
+    public function it_is_neutral_if_the_amount_is_zero()
+    {
+        $adjustment = Adjustment::create([
+            'type' => AdjustmentType::SHIPPING,
+            'adjustable_type' => 'order',
+            'adjustable_id' => 1,
+            'adjuster' => 'fixed_amount',
+            'title' => 'Promotion',
+            'amount' => 0,
+        ]);
+
+        $this->assertEquals(0, $adjustment->getAmount());
+        $this->assertTrue($adjustment->isNeutral());
     }
 }
