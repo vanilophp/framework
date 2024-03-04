@@ -45,6 +45,7 @@
 - Added the `Taxable` implementation to Foundation's CartItem, Product and MasterProductVariant classes
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)
 - Added the `Merchant` interface
+- Added the `DefaultTaxCalculator` class - calculates simply by rate
 - Added the `CalculateTaxes` listener to cart update and shipping address change events
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 - BC: Changed `Checkout::getShippingAddress()` return type to be nullable
@@ -64,7 +65,7 @@
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - BC: Added the `itemsTotal()` method to the `CheckoutSubject` interface
 - BC: Added argument and return types to all `Cart` and `CartManager` interface methods
-- BC: Added the `findOneForZone` static method to the `TaxRate` interface
+- BC: Added the `findOneByZoneAndCategory` static method to the `TaxRate` interface
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
 - BC: Changed the `CheckoutSubjectItem` interface into Configurable & Schematized
 - BC: Changed the `OrderItem` interface into Configurable
@@ -77,7 +78,6 @@
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 - Added the `Schematized` interface
 - Added the nette/schema package requirement (v1.2.5+)
-
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null
 
 ## 3.x Series

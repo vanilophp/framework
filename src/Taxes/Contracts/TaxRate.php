@@ -19,7 +19,7 @@ use Vanilo\Contracts\Configurable;
 
 interface TaxRate extends Configurable
 {
-    public static function findOneForZone(Zone|int $zone, bool $activesOnly = true): ?TaxRate;
+    public static function findOneByZoneAndCategory(Zone|int $zone, TaxCategory|int $taxCategory, bool $activesOnly = true): ?TaxRate;
 
     public function getName(): string;
 

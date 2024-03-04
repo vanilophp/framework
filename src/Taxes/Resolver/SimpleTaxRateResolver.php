@@ -38,6 +38,6 @@ class SimpleTaxRateResolver implements TaxRateResolver
             return null;
         }
 
-        return TaxRateProxy::findOneForZone($zone);
+        return TaxRateProxy::findOneByZoneAndCategory($zone, $taxable->getTaxCategory(), true);
     }
 }

@@ -17,7 +17,7 @@ namespace Vanilo\Taxes\Models;
 use Konekt\Concord\Proxies\ModelProxy;
 
 /**
- * @method static \Vanilo\Taxes\Contracts\TaxRate|null findOneForZone(\Konekt\Address\Contracts\Zone|int $zone, bool $activesOnly = true)
+ * @method static \Vanilo\Taxes\Contracts\TaxRate|null findOneByZoneAndCategory(\Konekt\Address\Contracts\Zone|int $zone, \Vanilo\Taxes\Contracts\TaxCategory|int $taxCategory, bool $activesOnly = true)
  */
 class TaxRateProxy extends ModelProxy
 {

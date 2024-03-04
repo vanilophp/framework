@@ -70,9 +70,9 @@ class TaxRate extends Model implements TaxRateContract
         'updated_at' => 'datetime',
     ];
 
-    public static function findOneForZone(Zone|int $zone, bool $activesOnly = true): ?TaxRateContract
+    public static function findOneByZoneAndCategory(Zone|int $zone, TaxCategory|int $taxCategory, bool $activesOnly = true): ?TaxRateContract
     {
-        $query = self::forZone($zone);
+        $query = self::forZone($zone)->byTaxCategory($taxCategory);
         if ($activesOnly) {
             $query->actives();
         }
