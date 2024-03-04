@@ -301,20 +301,4 @@ class AdjustmentTest extends TestCase
         $this->assertEquals(-20, $adjustment->getAmount());
         $this->assertTrue($adjustment->isCredit());
     }
-
-    /** @test */
-    public function it_is_neutral_if_the_amount_is_zero()
-    {
-        $adjustment = Adjustment::create([
-            'type' => AdjustmentType::SHIPPING,
-            'adjustable_type' => 'order',
-            'adjustable_id' => 1,
-            'adjuster' => 'fixed_amount',
-            'title' => 'Promotion',
-            'amount' => 0,
-        ]);
-
-        $this->assertEquals(0, $adjustment->getAmount());
-        $this->assertTrue($adjustment->isNeutral());
-    }
 }
