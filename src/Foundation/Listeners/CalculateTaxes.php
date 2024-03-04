@@ -18,6 +18,7 @@ use Illuminate\Support\Arr;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
+use Vanilo\Cart\CartManager;
 use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
 use Vanilo\Checkout\Facades\Checkout;
@@ -43,17 +44,19 @@ class CalculateTaxes
             $checkout = Checkout::getFacadeRoot();
         }
 
-        if (!$cart instanceof Adjustable) {
+        $cartModel = $cart instanceof CartManager ? $cart->model() : $cart;
+
+        if (!$cartModel instanceof Adjustable) {
             return;
         }
 
-        $cart->adjustments()->deleteByType(AdjustmentTypeProxy::TAX());
+        $cart->getItems()->each(fn ($item) => $item->adjustments()->deleteByType(AdjustmentTypeProxy::TAX()));
 
         if (null !== $this->taxEngine) {
             $taxes = [];
             /** @var CartItem $item */
             foreach ($cart->getItems() as $item) {
-                if ($rate = $this->taxEngine->findTaxRate($item)) {
+                if ($rate = $this->taxEngine->findTaxRate($item, $checkout->getBillpayer()->getBillingAddress(), $checkout->getShippingAddress())) {
                     $calculator = $rate->getCalculator();
                     if ($adjuster = $calculator->getAdjuster($rate->configuration())) {
                         //@todo the tax engine should tell whether to apply the tax to individual items (eg EU VAT)
