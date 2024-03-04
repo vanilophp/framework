@@ -39,11 +39,11 @@ class ArrayAdjustmentCollection implements AdjustmentCollectionContract
         return $this->adjustable;
     }
 
-    public function total(): float
+    public function total(bool $withIncluded = false): float
     {
         $result = 0;
         foreach ($this->items as $adjustment) {
-            $result += $adjustment->getAmount();
+            $result += ($adjustment->isNotIncluded() || $withIncluded) ? $adjustment->getAmount() : 0;
         }
 
         return $result;

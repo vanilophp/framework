@@ -112,6 +112,32 @@ class RelationAdjustmentCollectionTest extends TestCase
     }
 
     /** @test */
+    public function the_total_excludes_non_included_elements_by_default()
+    {
+        $collection = new RelationAdjustmentCollection(
+            Order::create(['items_total' => 224])
+        );
+
+        $collection->add($this->makeAnAdjustment(40, included: true));
+        $collection->add($this->makeAnAdjustment(20, included: false));
+
+        $this->assertEquals(20, $collection->total());
+    }
+
+    /** @test */
+    public function the_total_included_adjustments_can_be_incorporated_in_the_total()
+    {
+        $collection = new RelationAdjustmentCollection(
+            Order::create(['items_total' => 224])
+        );
+
+        $collection->add($this->makeAnAdjustment(13, included: true));
+        $collection->add($this->makeAnAdjustment(21, included: false));
+
+        $this->assertEquals(34, $collection->total(true));
+    }
+
+    /** @test */
     public function items_can_be_accessed_as_array_members()
     {
         $collection = new RelationAdjustmentCollection(
@@ -217,7 +243,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertCount(1, $shippingFees);
     }
 
-    private function makeAnAdjustment(float $amount = 4.99, AdjustmentType $type = null): Adjustment
+    private function makeAnAdjustment(float $amount = 4.99, AdjustmentType $type = null, bool $included = false): Adjustment
     {
         return new Adjustment([
             'type' => $type ?? AdjustmentType::SHIPPING(),
@@ -228,7 +254,7 @@ class RelationAdjustmentCollectionTest extends TestCase
             'data' => [],
             'amount' => $amount,
             'is_locked' => false,
-            'is_included' => false,
+            'is_included' => $included,
         ]);
     }
 }

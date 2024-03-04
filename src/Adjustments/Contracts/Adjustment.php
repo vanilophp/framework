@@ -44,12 +44,9 @@ interface Adjustment
      */
     public function isCredit(): bool;
 
-    /**
-     * Adjustments with value 0 are considered neutral
-     */
-    public function isNeutral(): bool;
-
     public function isIncluded(): bool;
+
+    public function isNotIncluded(): bool;
 
     public function isLocked(): bool;
 

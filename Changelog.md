@@ -3,7 +3,7 @@
 ## 4.x Series
 
 ## Unreleased
-##### 2023-XX-YY
+##### 2024-XX-YY
 
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
@@ -62,7 +62,10 @@
 - BC: The `invalidateAdjustments()` method has been added to the `Adjustable` interface
 - BC: The `exceptTypes()` method has been added to the `AdjustmentCollection` interface
 - BC: The `AdjustmentType` interface extends the `EnumInterface`
-  BC: Added the `isNeutral()` method to the `Adjustment` interface (true if the adjustment amount is 0)
+- BC: Added the `isNotIncluded()` method to the `Adjustment` interface
+- BC: Changed the behavior of `AdjustmentCollection::total()`:
+    1. it ignores "included" adjustments by default,
+    2. to incorporate the "included" adjustments pass true to the method: `$adjustments->total(withIncluded: true)`
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - BC: Added the `itemsTotal()` method to the `CheckoutSubject` interface
 - BC: Added argument and return types to all `Cart` and `CartManager` interface methods

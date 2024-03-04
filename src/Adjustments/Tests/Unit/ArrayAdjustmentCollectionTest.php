@@ -101,6 +101,28 @@ class ArrayAdjustmentCollectionTest extends TestCase
     }
 
     /** @test */
+    public function the_total_excludes_non_included_elements_by_default()
+    {
+        $collection = new ArrayAdjustmentCollection(new Order());
+
+        $collection->add(new Adjustment(['amount' => 40, 'is_included' => true]));
+        $collection->add(new Adjustment(['amount' => 20, 'is_included' => false]));
+
+        $this->assertEquals(20, $collection->total());
+    }
+
+    /** @test */
+    public function the_total_included_adjustments_can_be_incorporated_in_the_total()
+    {
+        $collection = new ArrayAdjustmentCollection(new Order());
+
+        $collection->add(new Adjustment(['amount' => 13, 'is_included' => true]));
+        $collection->add(new Adjustment(['amount' => 21, 'is_included' => false]));
+
+        $this->assertEquals(34, $collection->total(true));
+    }
+
+    /** @test */
     public function items_can_be_accessed_as_array_members()
     {
         $collection = new ArrayAdjustmentCollection(new Order());

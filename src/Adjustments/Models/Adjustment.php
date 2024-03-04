@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Arr;
 use Konekt\Enum\Eloquent\CastsEnums;
-use Nette\Utils\Floats;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Contracts\Adjustment as AdjustmentContract;
@@ -146,14 +145,14 @@ class Adjustment extends Model implements AdjustmentContract
         return $this->amount < 0;
     }
 
-    public function isNeutral(): bool
-    {
-        return Floats::isZero($this->amount);
-    }
-
     public function isIncluded(): bool
     {
         return (bool) $this->is_included;
+    }
+
+    public function isNotIncluded() : bool
+    {
+        return !$this->isIncluded();
     }
 
     public function isLocked(): bool

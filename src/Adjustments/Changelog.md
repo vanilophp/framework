@@ -13,11 +13,14 @@
 - Changed minimal Enum requirement to v4.2
 - Added the `mapInto()` method to the `RelationAdjustmentCollection` class, which forwards the call to the underlying Eloquent collection
 - BC: Added the `deleteByType()` method to the `AdjustmentCollection` interface + both implementation
+- BC: Changed the behavior of `AdjustmentCollection::total()`:
+  1. it ignores "included" adjustments by default,
+  2. to incorporate the "included" adjustments pass true to the method: `$adjustments->total(withIncluded: true)` 
 - BC: The `Adjustable::itemsTotal()` has been renamed to `preAdjustmentTotal()`
 - BC: The `invalidateAdjustments()` method has been added to the `Adjustable` interface
 - BC: The `exceptTypes()` method has been added to the `AdjustmentCollection` interface
 - BC: The `AdjustmentType` interface extends the `EnumInterface`
-- BC: Added the `isNeutral()` method to the `Adjustment` interface (true if the adjustment amount is 0)
+- BC: Added the `isNotIncluded()` method to the `Adjustment` interface
 
 ## 3.x Series
 

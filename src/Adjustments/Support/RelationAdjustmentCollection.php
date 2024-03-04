@@ -50,9 +50,12 @@ class RelationAdjustmentCollection implements AdjustmentCollection
         return $adjustment;
     }
 
-    public function total(): float
+    public function total(bool $withIncluded = false): float
     {
-        return floatval($this->eloquentCollection()->sum('amount'));
+        return $withIncluded ?
+            floatval($this->eloquentCollection()->sum('amount'))
+            :
+            floatval($this->eloquentCollection()->filter->isNotIncluded()->sum('amount'));
     }
 
     public function isEmpty(): bool

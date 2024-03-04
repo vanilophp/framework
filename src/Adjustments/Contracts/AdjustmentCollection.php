@@ -22,7 +22,7 @@ interface AdjustmentCollection extends IteratorAggregate, ArrayAccess, Countable
 {
     public function adjustable(): Adjustable;
 
-    public function total(): float;
+    public function total(bool $withIncluded = false): float;
 
     public function isEmpty(): bool;
 

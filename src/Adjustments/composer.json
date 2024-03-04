@@ -21,8 +21,7 @@
         "konekt/concord": "^1.13",
         "konekt/enum": "^4.2",
         "konekt/enum-eloquent": "^1.9",
-        "laravel/framework": "^10.38.2",
-        "nette/utils": "^4.0"
+        "laravel/framework": "^10.38.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
