@@ -313,7 +313,7 @@ class AdjustmentTest extends TestCase
             'title' => 'Shipping Fee',
         ])->fresh();
 
-        $this->assertEquals('shipping_fee', $adjustment->adjuster);
+        $this->assertEquals('simple_shipping_fee', $adjustment->adjuster);
     }
 
     /** @test */
@@ -323,11 +323,11 @@ class AdjustmentTest extends TestCase
             'type' => AdjustmentType::TAX,
             'adjustable_type' => 'order',
             'adjustable_id' => 1,
-            'adjuster' => 'shipping_fee',
+            'adjuster' => 'simple_shipping_fee',
             'title' => 'Shipping Fee',
         ])->fresh();
 
-        $this->assertEquals('shipping_fee', $adjustment->adjuster);
+        $this->assertEquals('simple_shipping_fee', $adjustment->adjuster);
         $this->assertInstanceOf(SimpleShippingFee::class, $adjustment->getAdjuster());
     }
 }
