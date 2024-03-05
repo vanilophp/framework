@@ -28,7 +28,7 @@ class PaymentDependentShippingFee implements Adjuster
     use HasWriteableTitleAndDescription;
     use IsLockable;
     use IsNotIncluded;
-   
+
     public const ALIAS = 'payment_dependent_shipping_fee';
 
     public function __construct(
