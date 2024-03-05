@@ -25,11 +25,10 @@ use Vanilo\Adjustments\Support\IsNotIncluded;
 
 class PaymentDependentShippingFee implements Adjuster
 {
-    public const ALIAS = 'payment_dependent_shipping_fee';
-
     use HasWriteableTitleAndDescription;
     use IsLockable;
     use IsNotIncluded;
+    public const ALIAS = 'payment_dependent_shipping_fee';
 
     public function __construct(
         private array $prices,
