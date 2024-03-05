@@ -49,6 +49,7 @@
 - Added the `CalculateTaxes` listener to cart update and shipping address change events
 - Added the `AdjusterAliases` class that for decoupling FQCNs from the database
 - Added automatic mapping of adjuster FQCN <-> aliases when saving an adjustment into the DB and when calling the `getAdjuster()` method
+- BC: Added cart and order item models to the Relation morph map: the `adjustable_type` field in the `adjustments` table needs to be converted!
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 - BC: Changed `Checkout::getShippingAddress()` return type to be nullable
 - BC: Added the void return type to `Checkout::setShippingAddress()`

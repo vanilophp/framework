@@ -17,10 +17,10 @@ namespace Vanilo\Adjustments\Adjusters;
 final class AdjusterAliases
 {
     private static array $map = [
-        'discount' => SimpleDiscount::class,
-        'fee' => SimpleFee::class,
-        'shipping_fee' => SimpleShippingFee::class,
-        'tax' => SimpleTax::class,
+        'simple_discount' => SimpleDiscount::class,
+        'simple_fee' => SimpleFee::class,
+        'simple_shipping_fee' => SimpleShippingFee::class,
+        'simple_tax' => SimpleTax::class,
     ];
 
     public static function add(string $alias, string $fqcn): void

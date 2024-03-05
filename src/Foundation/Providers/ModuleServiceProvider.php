@@ -21,6 +21,7 @@ use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Vanilo\Adjustments\Adjusters\AdjusterAliases;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
+use Vanilo\Cart\Models\CartItemProxy;
 use Vanilo\Cart\Models\CartProxy;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
@@ -56,6 +57,7 @@ use Vanilo\MasterProduct\Models\MasterProductVariantProxy;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
+use Vanilo\Order\Models\OrderItemProxy;
 use Vanilo\Order\Models\OrderProxy;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Payment\Models\PaymentMethodProxy;
@@ -106,7 +108,9 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'taxonomy' => TaxonomyProxy::modelClass(),
             'taxon' => TaxonProxy::modelClass(),
             'order' => OrderProxy::modelClass(),
+            'order_item' => OrderItemProxy::modelClass(),
             'cart' => CartProxy::modelClass(),
+            'cart_item' => CartItemProxy::modelClass(),
             'shipment' => ShipmentProxy::modelClass(),
             'shipping_method' => ShippingMethodProxy::modelClass(),
             'payment_method' => PaymentMethodProxy::modelClass(),
