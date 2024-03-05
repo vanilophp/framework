@@ -301,4 +301,33 @@ class AdjustmentTest extends TestCase
         $this->assertEquals(-20, $adjustment->getAmount());
         $this->assertTrue($adjustment->isCredit());
     }
+
+    /** @test */
+    public function it_converts_the_adjuster_fqcn_into_its_alias_when_saving_into_the_database_if_an_alias_exists()
+    {
+        $adjustment = Adjustment::create([
+            'type' => AdjustmentType::TAX,
+            'adjustable_type' => 'order',
+            'adjustable_id' => 1,
+            'adjuster' => SimpleShippingFee::class,
+            'title' => 'Shipping Fee',
+        ])->fresh();
+
+        $this->assertEquals('shipping_fee', $adjustment->adjuster);
+    }
+
+    /** @test */
+    public function the_adjuster_gets_properly_resolved_even_if_it_is_saved_as_an_alias()
+    {
+        $adjustment = Adjustment::create([
+            'type' => AdjustmentType::TAX,
+            'adjustable_type' => 'order',
+            'adjustable_id' => 1,
+            'adjuster' => 'shipping_fee',
+            'title' => 'Shipping Fee',
+        ])->fresh();
+
+        $this->assertEquals('shipping_fee', $adjustment->adjuster);
+        $this->assertInstanceOf(SimpleShippingFee::class, $adjustment->getAdjuster());
+    }
 }

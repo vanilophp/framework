@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Concord\BaseBoxServiceProvider;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
+use Vanilo\Adjustments\Adjusters\AdjusterAliases;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Cart\Models\CartProxy;
@@ -46,6 +47,7 @@ use Vanilo\Foundation\Models\ShippingMethod;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Models\Taxonomy;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
+use Vanilo\Foundation\Shipping\PaymentDependentShippingFee;
 use Vanilo\Foundation\Shipping\PaymentDependentShippingFeeCalculator;
 use Vanilo\MasterProduct\Contracts\MasterProduct as MasterProductContract;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
@@ -113,6 +115,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
 
         ShippingFeeCalculators::register(FlatFeeCalculator::ID, FlatFeeCalculator::class);
         ShippingFeeCalculators::register(PaymentDependentShippingFeeCalculator::ID, PaymentDependentShippingFeeCalculator::class);
+        AdjusterAliases::add(PaymentDependentShippingFee::ALIAS, PaymentDependentShippingFee::class);
 
         // Use the foundation's extended order factory
         $this->app->bind(OrderFactoryContract::class, OrderFactory::class);

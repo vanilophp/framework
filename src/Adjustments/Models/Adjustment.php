@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Arr;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Vanilo\Adjustments\Adjusters\AdjusterAliases;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Contracts\Adjustment as AdjustmentContract;
@@ -72,6 +73,9 @@ class Adjustment extends Model implements AdjustmentContract
             if (null === $model->data) {
                 $model->data = [];
             }
+            if (AdjusterAliases::isNotAnAlias($model->adjuster) && $alias = AdjusterAliases::aliasByClass($model->adjuster)) {
+                $model->adjuster = $alias;
+            }
         });
     }
 
@@ -98,9 +102,12 @@ class Adjustment extends Model implements AdjustmentContract
 
     public function getAdjuster(): Adjuster
     {
-        $adjusterType = $this->adjuster;
-        if (class_exists($this->adjuster)) {
-            return forward_static_call([$adjusterType, 'reproduceFromAdjustment'], $this);
+        $adjusterClass = match (AdjusterAliases::isAnAlias($this->adjuster)) {
+            true => AdjusterAliases::classByAlias($this->adjuster),
+            default => $this->adjuster,
+        };
+        if (class_exists($adjusterClass)) {
+            return forward_static_call([$adjusterClass, 'reproduceFromAdjustment'], $this);
         }
     }
 
