@@ -17,6 +17,8 @@ namespace Vanilo\Order\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Enum\Eloquent\CastsEnums;
@@ -124,17 +126,17 @@ class Order extends Model implements OrderContract
         return $this->items;
     }
 
-    public function billpayer()
+    public function billpayer(): BelongsTo
     {
         return $this->belongsTo(BillpayerProxy::modelClass());
     }
 
-    public function shippingAddress()
+    public function shippingAddress(): BelongsTo
     {
         return $this->belongsTo(AddressProxy::modelClass());
     }
 
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(OrderItemProxy::modelClass());
     }
