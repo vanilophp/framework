@@ -157,7 +157,8 @@ class CartManager implements CartManagerContract
             Event::dispatch(new CartDeleting($this->model()));
         }
 
-        $this->clear();
+        // don't call $this->clear() as the triggered CartUpdated event may cause unwanted side effects
+        $this->model()->clear();
         $this->model()->delete();
         $this->forget();
 

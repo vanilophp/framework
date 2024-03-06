@@ -13,6 +13,7 @@
 - Changed minimal Enum requirement to v4.2
 - Upgraded to Konekt Address, Customer and User modules to v3
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
+- Removed the throwing of `CartUpdated` event when destroying a cart (`CartDeleting` and `CartDeleted` remains)
 - Added the `currency` field to the orders table
 - Added the following fields to the Channel model/table:
     - `currency`
