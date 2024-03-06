@@ -16,6 +16,7 @@ namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Cart\Contracts\CartEvent;
+use Vanilo\Cart\Contracts\CartItem;
 
 class DeleteCartAdjustments
 {
@@ -28,5 +29,6 @@ class DeleteCartAdjustments
 
         $cart->invalidateAdjustments();
         $cart->fresh()->adjustments()->clear();// Method is available since v3.6; to be added to the interface in v4
+        $cart->getItems()->each(fn (CartItem $item) => $item instanceof Adjustable ? $item->adjustments()->clear() : null);
     }
 }

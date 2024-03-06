@@ -88,6 +88,7 @@
 - Added the `Schematized` interface
 - Added the nette/schema package requirement (v1.2.5+)
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null
+- Fixed the remnant orphan cart adjustments in the database during cart to order transformation
 
 ## 3.x Series
 
