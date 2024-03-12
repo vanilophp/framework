@@ -48,6 +48,8 @@
 - Added the `Merchant` interface
 - Added the `DefaultTaxCalculator` class - calculates simply by rate
 - Added the `CalculateTaxes` listener to cart update and shipping address change events
+- Added the `Merchant` DTO class, that complies with the common, v4 `Merchant` interface
+- Added the `Address` DTO class (implements the `Address` interface)
 - Added the `AdjusterAliases` class that for decoupling FQCNs from the database
 - Added automatic mapping of adjuster FQCN <-> aliases when saving an adjustment into the DB and when calling the `getAdjuster()` method
 - BC: Added cart and order item models to the Relation morph map: the `adjustable_type` field in the `adjustments` table needs to be converted!
