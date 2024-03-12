@@ -154,7 +154,6 @@ class Channel extends Model implements ChannelContract
         return null;
     }
 
-
     public function sluggable(): array
     {
         return [

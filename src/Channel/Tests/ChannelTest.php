@@ -109,6 +109,5 @@ class ChannelTest extends TestCase
         $this->assertEquals('Building F', $merchant->getAddress()->getAddress2());
         $this->assertEquals('IT', $merchant->getAddress()->getCountryCode());
         $this->assertEquals('41044', $merchant->getAddress()->getPostalCode());
-
     }
 }
