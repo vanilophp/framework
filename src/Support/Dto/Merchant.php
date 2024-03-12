@@ -72,7 +72,7 @@ class Merchant implements MerchantContract
         }
 
         // Poor man's guess, but might work in the vast majority of cases
-        $vatPrefix = match($this->address->getCountryCode()) {
+        $vatPrefix = match ($this->address->getCountryCode()) {
             'UK' => 'GB',
             'GR' => 'EL',
             default => $this->address->getCountryCode(),
