@@ -20,6 +20,10 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Vanilo\Channel\Contracts\Channel as ChannelContract;
+use Vanilo\Contracts\Merchant;
+use Vanilo\Contracts\Schematized;
+use Vanilo\Support\Dto\Address;
+use Vanilo\Support\Traits\ConfigurableModel;
 
 /**
  * @property int $id
@@ -53,6 +57,7 @@ use Vanilo\Channel\Contracts\Channel as ChannelContract;
  */
 class Channel extends Model implements ChannelContract
 {
+    use ConfigurableModel;
     use Sluggable;
     use SluggableScopeHelpers;
 
@@ -98,6 +103,57 @@ class Channel extends Model implements ChannelContract
 
         $this->configuration = $config;
     }
+
+    public function getLanguage(): string
+    {
+        return $this->language;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->language;
+    }
+
+    public function getDomain(): ?string
+    {
+        return $this->domain;
+    }
+
+    public function getMerchant(): ?Merchant
+    {
+        return new \Vanilo\Support\Dto\Merchant(
+            $this->billing_company,
+            new Address(
+                $this->billing_company,
+                $this->billing_country_id,
+                $this->billing_address,
+                $this->billing_city,
+                $this->billing_postalcode,
+                $this->billing_address2,
+            ),
+            $this->billing_tax_nr,
+            $this->billing_registration_nr,
+            $this->email,
+            $this->phone,
+            $this->name,
+        );
+    }
+
+    public function getBillingCountries(): array
+    {
+        return $this->billing_countries ?? [];
+    }
+
+    public function getShippingCountries(): array
+    {
+        return $this->shipping_countries ?? [];
+    }
+
+    public function getConfigurationSchema(): ?Schematized
+    {
+        return null;
+    }
+
 
     public function sluggable(): array
     {

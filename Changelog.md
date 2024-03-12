@@ -86,6 +86,14 @@
 - BC: The `OrderStatus` and `FulfillmentStatus` interfaces extend the `EnumInterface`
 - BC: Added the `getConfigurationSchema()` method to the `Configurable` interface
 - BC: Changed the `PaymentMethod` interface into Configurable
+- BC: The `Channel` interface extends the `Configurable` interface
+- BC: Added the following methods to the `Channel` interface:
+    - `getLanguage()`
+    - `getCurrency()`
+    - `getDomain()`
+    - `getMerchant()`
+    - `getBillingCountries()`
+    - `getShippingCountries()`
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 - Added the `Schematized` interface
 - Added the nette/schema package requirement (v1.2.5+)

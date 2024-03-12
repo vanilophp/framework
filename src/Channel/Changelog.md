@@ -13,12 +13,20 @@
   - `currency`
   - `language`
   - `domain`
-  - billing fields (emitter's data)
+  - billing fields (merchant data)
   - `billing_countries`
   - `shipping_countries`
   - `theme`
   - `color`
 - Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models
+- BC: The `Channel` interface extends the `Configurable` interface
+- BC: Added the following methods to the `Channel` interface:
+  - `getLanguage()`
+  - `getCurrency()`
+  - `getDomain()`
+  - `getMerchant()`
+  - `getBillingCountries()`
+  - `getShippingCountries()`
 
 ## 3.x Series
 
