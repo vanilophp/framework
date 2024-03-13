@@ -9,6 +9,7 @@
 - Dropped Laravel 9 Support
 - Added PHP 8.3 Support
 - Added Laravel 11 Support
+- Added the vanilo/support dependency
 - Changed minimum Laravel version to v10.38.2
 - Added the following fields to the Channel model/table:
   - `currency`
