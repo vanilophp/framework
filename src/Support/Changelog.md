@@ -8,10 +8,13 @@
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
 - Added PHP 8.3 Support
+- Added Laravel 11 Support
 - Changed minimum Laravel version to v10.38.2
 - Added the `Features` accessor class, which is a syntactic sugar for areas of the configuration
 - Added the `Merchant` DTO class, that complies with the common, v4 `Merchant` interface
 - Added the `Address` DTO class (implements the `Address` interface)
+- Removed the deprecated `BuyableImageSpatieV7` and `BuyableImageSpatieV8` traits
+- Upgraded to Laravel Media Library v11
 
 ## 3.x Series
 

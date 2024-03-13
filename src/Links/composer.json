@@ -18,13 +18,13 @@
     ],
     "require": {
         "php": "^8.2",
-        "cviebrock/eloquent-sluggable": "^10.0",
-        "illuminate/support": "^10.38",
+        "cviebrock/eloquent-sluggable": "^10.0|^11.0",
+        "illuminate/support": "^10.38|^11.0",
         "konekt/concord": "^1.13"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0|^10.0",
-        "orchestra/testbench": "^8.0"
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^8.0|^9.0"
     },
     "autoload": {
         "psr-4": {

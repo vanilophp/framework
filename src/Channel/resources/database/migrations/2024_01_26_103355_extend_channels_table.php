@@ -36,6 +36,7 @@ return new class () extends Migration {
             $table->dropColumn('language');
         });
         Schema::table('channels', function (Blueprint $table) {
+            $table->dropUnique('channels_domain_unique');
             $table->dropColumn('domain');
         });
         Schema::table('channels', function (Blueprint $table) {

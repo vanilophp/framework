@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Traits;
 
-use Spatie\Image\Manipulations;
+use Spatie\Image\Enums\Fit;
 
 trait LoadsMediaConversionsFromConfig
 {
@@ -30,7 +30,7 @@ trait LoadsMediaConversionsFromConfig
         foreach ($variants as $name => $settings) {
             $conversion = $this->addMediaConversion($name)
                ->fit(
-                   $settings['fit'] ?? Manipulations::FIT_CONTAIN,
+                   Fit::from($settings['fit'] ?? Fit::Contain->value),
                    $settings['width'] ?? 250,
                    $settings['height'] ?? 250
                );

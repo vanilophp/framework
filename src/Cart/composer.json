@@ -20,14 +20,14 @@
         "php": "^8.2",
         "konekt/concord": "^1.13",
         "konekt/enum": "^4.2",
-        "laravel/framework": "^10.38.2",
+        "laravel/framework": "^10.38.2|^11.0",
         "vanilo/contracts": "^4.0",
         "vanilo/support": "^4.0"
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "phpunit/phpunit": "^9.0",
-        "orchestra/testbench": "^8.0",
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^8.0|^9.0",
         "laravel/legacy-factories": "^1.0"
     },
     "autoload": {
