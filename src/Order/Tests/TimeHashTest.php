@@ -19,8 +19,7 @@ use Vanilo\Order\Generators\TimeHashGenerator;
 
 class TimeHashTest extends TestCase
 {
-    /** @var TimeHashGenerator */
-    protected $generator;
+    protected TimeHashGenerator $generator;
 
     public function setUp(): void
     {
@@ -133,7 +132,9 @@ class TimeHashTest extends TestCase
         Carbon::setTestNow($date);
 
         for ($i = 0; $i < 10; $i++) {
-            $this->assertEquals(13, strlen($this->generator->generateNumber()));
+            $number = $this->generator->generateNumber();
+            $len = strlen($number);
+            $this->assertEquals(13, $len, sprintf('The generated id `%s` should be 13 char long but it is %d', $number, $len));
         }
     }
 

@@ -14,6 +14,7 @@
 - Changed minimal Enum requirement to v4.2
 - Upgraded to Konekt Address and User modules to v3
 - Added the `currency` field to the orders table
+- Added Carbon 3 compatibility
 - BC: Added the `$hooks` and `$itemHooks` parameters to the `OrderFactory` interface
 - BC: Changed the `OrderItem` interface into Configurable
 - BC: Added 7 methods to the `OrderItem` interface

@@ -107,7 +107,7 @@ class TimeHashGenerator implements OrderNumberGenerator
         $number = sprintf(
             '%s-%s-%s%s%s',
             $this->getYearAndDayHash($date),
-            str_pad(base_convert((string) $date->secondsSinceMidnight(), 10, 36), 4, '0', STR_PAD_LEFT),
+            str_pad(base_convert((string) (int) $date->secondsSinceMidnight(), 10, 36), 4, '0', STR_PAD_LEFT),
             str_pad(base_convert((string) $this->getRapidMicroNumber(), 10, 36), 2, '0', STR_PAD_LEFT),
             base_convert((string) random_int(0, 35), 10, 36), //always one char
             ((string) $this->getSlowMicroNumber())[0]
@@ -129,7 +129,7 @@ class TimeHashGenerator implements OrderNumberGenerator
      */
     protected function getYearAndDayHash(Carbon $date)
     {
-        return str_pad(base_convert((string) $date->diffInDays($this->startBaseDate), 10, 36), 3, '0', STR_PAD_LEFT);
+        return str_pad(base_convert((string) (int) $date->diffInDays($this->startBaseDate, true), 10, 36), 3, '0', STR_PAD_LEFT);
     }
 
     /**
