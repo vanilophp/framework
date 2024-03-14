@@ -524,7 +524,6 @@ class ProductSearchTest extends TestCase
         factory(Product::class)->create(['name' => 'Hapsi']);
         factory(Product::class)->create(['name' => 'Kozmix']);
 
-
         $resultset = (new ProductSearch())->orderBy('name')->getResults()->all();
         $this->assertEquals('Aber', $resultset[0]->name);
         $this->assertEquals('Biotronic', $resultset[1]->name);
@@ -542,7 +541,6 @@ class ProductSearchTest extends TestCase
         factory(MasterProduct::class)->create(['name' => 'Bitcoin']);
         factory(Product::class)->create(['name' => 'Dogecoin']);
         factory(Product::class)->create(['name' => 'Avalanche']);
-
 
         $resultset = (new ProductSearch())->orderBy('name')->getResults(3)->all();
         $this->assertEquals('Avalanche', $resultset[0]->name);
