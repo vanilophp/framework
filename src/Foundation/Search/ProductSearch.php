@@ -39,6 +39,8 @@ class ProductSearch
 
     protected Builder $masterProductQuery;
 
+    protected ?string $orderBy = null;
+
     public function __construct()
     {
         $this->searcher = Search::new();
@@ -240,6 +242,21 @@ class ProductSearch
         return $this;
     }
 
+    public function orderBy(string $column, string $direction = 'asc'): self
+    {
+        $this->orderBy = "$column:$direction";
+
+        return $this;
+    }
+
+    public function slugEquals(string $slug): self
+    {
+        $this->productQuery->where('slug', '=', $slug);
+        $this->masterProductQuery->where('slug', '=', $slug);
+
+        return $this;
+    }
+
     public function withInactiveProducts(): self
     {
         $this->productQuery->withoutGlobalScope('withoutInactiveProducts');
@@ -266,9 +283,14 @@ class ProductSearch
 
     public function getSearcher(): Searcher
     {
+        [$orderBy, $direction] = is_null($this->orderBy) ? [null, 'asc'] : explode(':', $this->orderBy);
+        if ('desc' === strtolower($direction)) {
+            $this->searcher->orderByDesc();
+        }
+
         return $this->searcher
-            ->add($this->productQuery)
-            ->add($this->masterProductQuery);
+            ->add($this->productQuery, null, $orderBy)
+            ->add($this->masterProductQuery, null, $orderBy);
     }
 
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
@@ -282,8 +304,8 @@ class ProductSearch
         return $this->getSearcher()->paginate($perPage, $pageName, $page)->search();
     }
 
-    public function getResults(): Collection
+    public function getResults(int $limit = null): Collection
     {
-        return $this->getSearcher()->search();
+        return is_null($limit) ? $this->getSearcher()->search() : $this->getSearcher()->simplePaginate($limit)->search()->getCollection();
     }
 }

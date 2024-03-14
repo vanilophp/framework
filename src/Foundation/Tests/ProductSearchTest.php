@@ -502,4 +502,51 @@ class ProductSearchTest extends TestCase
         $this->assertInstanceOf(LengthAwarePaginator::class, $results);
         $this->assertCount(8, $results->items());
     }
+
+    /** @test */
+    public function it_can_limit_the_number_of_results()
+    {
+        factory(Product::class, 4)->create();
+        factory(MasterProduct::class, 3)->create();
+
+        $finder = new ProductSearch();
+        $this->assertCount(7, $finder->getResults());
+        $this->assertCount(5, $finder->getResults(5));
+    }
+
+    /** @test */
+    public function it_can_order_the_results_by_an_explicit_field()
+    {
+        factory(Product::class)->create(['name' => 'Effendi']);
+        factory(Product::class)->create(['name' => 'Aber']);
+        factory(Product::class)->create(['name' => 'Zgomot']);
+        factory(MasterProduct::class)->create(['name' => 'Biotronic']);
+        factory(Product::class)->create(['name' => 'Hapsi']);
+        factory(Product::class)->create(['name' => 'Kozmix']);
+
+
+        $resultset = (new ProductSearch())->orderBy('name')->getResults()->all();
+        $this->assertEquals('Aber', $resultset[0]->name);
+        $this->assertEquals('Biotronic', $resultset[1]->name);
+        $this->assertEquals('Effendi', $resultset[2]->name);
+        $this->assertEquals('Hapsi', $resultset[3]->name);
+        $this->assertEquals('Kozmix', $resultset[4]->name);
+        $this->assertEquals('Zgomot', $resultset[5]->name);
+    }
+
+    /** @test */
+    public function it_can_order_and_limit_the_results()
+    {
+        factory(Product::class)->create(['name' => 'Ethereum']);
+        factory(Product::class)->create(['name' => 'Tether']);
+        factory(MasterProduct::class)->create(['name' => 'Bitcoin']);
+        factory(Product::class)->create(['name' => 'Dogecoin']);
+        factory(Product::class)->create(['name' => 'Avalanche']);
+
+
+        $resultset = (new ProductSearch())->orderBy('name')->getResults(3)->all();
+        $this->assertEquals('Avalanche', $resultset[0]->name);
+        $this->assertEquals('Bitcoin', $resultset[1]->name);
+        $this->assertEquals('Dogecoin', $resultset[2]->name);
+    }
 }

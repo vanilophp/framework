@@ -27,6 +27,10 @@
     - `shipping_countries`
     - `theme`
     - `color`
+- Added `ProductSearch` features:
+    - added the optional $limit parameter to the `getResults()` method
+    - added the `orderBy()` method
+    - added the `slugEquals()` method: it takes into account other query parameters as well, whereas the findBySlug solely queries by the given slug
 - Added the `payment_method_id` to the orders table
 - Added the processing of the `payment_method_id` field to the OrderFactory (Foundation)
 - Added the `BillpayerChanged` checkout event
