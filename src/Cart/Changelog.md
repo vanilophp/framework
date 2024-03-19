@@ -10,6 +10,7 @@
 - Dropped Enum v3 Support
 - Added PHP 8.3 Support
 - Added Laravel 11 Support
+- Added Cart item configuration support (different configurations constitute separate cart items) to the `Cart::addItem()` method
 - Changed minimum Laravel version to v10.38.2
 - Changed minimal Enum requirement to v4.2
 - Removed the throwing of `CartUpdated` event when destroying a cart (`CartDeleting` and `CartDeleted` remains)

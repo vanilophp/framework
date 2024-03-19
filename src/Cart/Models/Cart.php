@@ -17,6 +17,7 @@ namespace Vanilo\Cart\Models;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Cart\Contracts\Cart as CartContract;
@@ -33,7 +34,7 @@ class Cart extends Model implements CartContract
     protected $guarded = ['id'];
 
     protected $enums = [
-        'state' => 'CartStateProxy@enumClass'
+        'state' => 'CartStateProxy@enumClass',
     ];
 
     public function items(): HasMany
@@ -53,7 +54,7 @@ class Cart extends Model implements CartContract
 
     public function addItem(Buyable $product, int|float $qty = 1, array $params = []): CartItemContract
     {
-        $item = $this->items()->ofCart($this)->byProduct($product)->first();
+        $item = $this->resolveCartItem($product, $params);
 
         if ($item) {
             $item->quantity += $qty;
@@ -148,6 +149,58 @@ class Cart extends Model implements CartContract
         return $query->where('user_id', is_object($user) ? $user->id : $user);
     }
 
+    protected function resolveCartItem(Buyable $buyable, array $parameters): ?CartItemContract
+    {
+        /** @var Collection $existingCartItems */
+        $existingCartItems = $this->items()->ofCart($this)->byProduct($buyable)->get();
+        if ($existingCartItems->isEmpty()) {
+            return null;
+        }
+
+        $itemConfig = Arr::get($parameters, 'attributes.configuration');
+
+        if (1 === $existingCartItems->count()) {
+            $item = $this->items()->ofCart($this)->byProduct($buyable)->first();
+
+            return $this->configurationsMatch($item->configuration(), $itemConfig) ? $item : null;
+        }
+
+        foreach ($existingCartItems as $item) {
+            if ($this->configurationsMatch($item->configuration(), $itemConfig)) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    protected function configurationsMatch(?array $config1, ?array $config2): bool
+    {
+        if (empty($config1) && empty($config2)) {
+            return true;
+        } elseif (empty($config1) && !empty($config2)) {
+            return false;
+        } elseif (empty($config2) && !empty($config1)) {
+            return false;
+        }
+
+        if (array_is_list($config1)) {
+            if (!array_is_list($config2)) {
+                return false;
+            }
+
+            return empty(array_diff($config1, $config2)) && empty(array_diff($config2, $config1));
+        } else { //Config 1 is associative
+            if (array_is_list($config2)) {
+                return false;
+            }
+
+            return empty(array_diff_assoc($config1, $config2)) && empty(array_diff_assoc($config2, $config1));
+        }
+
+        return false;
+    }
+
     /**
      * Returns the default attributes of a Buyable for a cart item
      *
@@ -162,7 +215,7 @@ class Cart extends Model implements CartContract
             'product_type' => $product->morphTypeName(),
             'product_id' => $product->getId(),
             'quantity' => $qty,
-            'price' => $product->getPrice()
+            'price' => $product->getPrice(),
         ];
     }
 
