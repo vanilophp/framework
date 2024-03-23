@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests\Examples;
 
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Contracts\TaxRateResolver;
@@ -32,7 +33,7 @@ class ExampleTaxEngine implements TaxRateResolver
 {
     public const ID = 'example';
 
-    public function findTaxRate(Taxable $taxable, ?Address $billingAddress = null, ?Address $shippingAddress = null): ?TaxRate
+    public function findTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
         $rate = match ($taxable->getTaxCategory()->getType()->value()) {
             TaxCategoryType::PHYSICAL_GOODS => 19,

@@ -15,8 +15,9 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Contracts;
 
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Billpayer;
 
 interface TaxRateResolver
 {
-    public function findTaxRate(Taxable $taxable, ?Address $billingAddress = null, ?Address $shippingAddress = null): ?TaxRate;
+    public function findTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate;
 }

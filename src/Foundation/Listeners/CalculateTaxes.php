@@ -56,7 +56,7 @@ class CalculateTaxes
             $taxes = [];
             /** @var CartItem $item */
             foreach ($cart->getItems() as $item) {
-                if ($rate = $this->taxEngine->findTaxRate($item, $checkout->getBillpayer()->getBillingAddress(), $checkout->getShippingAddress())) {
+                if ($rate = $this->taxEngine->findTaxRate($item, $checkout->getBillpayer(), $checkout->getShippingAddress())) {
                     $calculator = $rate->getCalculator();
                     if ($adjuster = $calculator->getAdjuster($rate->configuration())) {
                         //@todo the tax engine should tell whether to apply the tax to individual items (eg EU VAT)

@@ -16,6 +16,7 @@ namespace Vanilo\Taxes\Resolver;
 
 use Konekt\Address\Query\Zones;
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Contracts\TaxRateResolver;
@@ -28,9 +29,9 @@ class SimpleTaxRateResolver implements TaxRateResolver
     ) {
     }
 
-    public function findTaxRate(Taxable $taxable, ?Address $billingAddress = null, ?Address $shippingAddress = null): ?TaxRate
+    public function findTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
-        if (null === $address = $this->useShippingAddress ? $shippingAddress : $billingAddress) {
+        if (null === $address = $this->useShippingAddress ? $shippingAddress : $billpayer?->getBillingAddress()) {
             return null;
         }
 
