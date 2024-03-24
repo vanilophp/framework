@@ -51,21 +51,6 @@ class TaxCategoryType extends Enum implements TaxCategoryTypeContract
 
     protected static array $labels = [];
 
-    protected static function boot()
-    {
-        static::$labels = [
-            self::PHYSICAL_GOODS => __('Physical Goods'),
-            self::DIGITAL_GOODS_AND_SERVICES => __('Digital Goods/Services (E-Services)'),
-            self::TRANSPORT_SERVICES => __('Transport Services'),
-            self::TELECOM_SERVICES => __('Telecommunications Services'),
-            self::BROADCASTING => __('Broadcasting Services'),
-            self::LOCATION_TIED_SERVICES => __('Location-Tied Services'),
-            self::INTANGIBLE_SERVICES => __('Intangible/Remote Services'),
-            self::REAL_ESTATE_SERVICES => __('Real Estate Services'),
-            self::EVENT_RELATED_SERVICES => __('Event-Related Services'),
-        ];
-    }
-
     public function explanation(): string
     {
         return match ($this->value) {
@@ -79,5 +64,20 @@ class TaxCategoryType extends Enum implements TaxCategoryTypeContract
             self::REAL_ESTATE_SERVICES => __('Activities related to the selling, buying, leasing, or managing of land and buildings. These services include property management, real estate brokerage, appraisal, and legal services associated with property transactions and management.'),
             self::EVENT_RELATED_SERVICES => __('Admission to cultural, artistic, sporting, scientific, educational, entertainment or similar events, such as fairs and exhibitions; and of ancillary services related to the admission like planning, organizing, and managing of events.'),
         };
+    }
+
+    protected static function boot()
+    {
+        static::$labels = [
+            self::PHYSICAL_GOODS => __('Physical Goods'),
+            self::DIGITAL_GOODS_AND_SERVICES => __('Digital Goods/Services (E-Services)'),
+            self::TRANSPORT_SERVICES => __('Transport Services'),
+            self::TELECOM_SERVICES => __('Telecommunications Services'),
+            self::BROADCASTING => __('Broadcasting Services'),
+            self::LOCATION_TIED_SERVICES => __('Location-Tied Services'),
+            self::INTANGIBLE_SERVICES => __('Intangible/Remote Services'),
+            self::REAL_ESTATE_SERVICES => __('Real Estate Services'),
+            self::EVENT_RELATED_SERVICES => __('Event-Related Services'),
+        ];
     }
 }
