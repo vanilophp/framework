@@ -24,7 +24,7 @@ class DummyTaxDriver implements TaxEngineDriver
 {
     public const TEST_RATE = 66;
 
-    public function findTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
+    public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
         return new \Vanilo\Taxes\Models\TaxRate(['rate' => self::TEST_RATE]);
     }

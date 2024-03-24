@@ -18,6 +18,7 @@ use Illuminate\Contracts\Foundation\Application;
 use InvalidArgumentException;
 use LogicException;
 use Vanilo\Contracts\Address;
+use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Contracts\TaxRate;
@@ -73,9 +74,9 @@ class TaxEngineManager
         throw new InvalidArgumentException("Can not register the [{$name}] Tax engine driver, since the passed driver is neither callable, nor a `TaxRateResolver` class");
     }
 
-    public function findTaxRate(Taxable $taxable, ?Address $billingAddress = null, ?Address $shippingAddress = null): ?TaxRate
+    public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
-        return $this->driver()->findTaxRate($taxable, $billingAddress, $shippingAddress);
+        return $this->driver()->resolveTaxRate($taxable, $billpayer, $shippingAddress);
     }
 
     protected function getDefaultDriver(): string

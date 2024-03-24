@@ -19,12 +19,15 @@ use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Cart\CartManager;
+use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartEvent;
+use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Foundation\Models\CartItem;
 use Vanilo\Support\Dto\DetailedAmount;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
+use Vanilo\Taxes\Drivers\NullTaxEngineDriver;
 
 class CalculateTaxes
 {
@@ -46,33 +49,40 @@ class CalculateTaxes
 
         $cartModel = $cart instanceof CartManager ? $cart->model() : $cart;
 
-        if (!$cartModel instanceof Adjustable) {
+        if (
+            null === $this->taxEngine
+            || $this->taxEngine instanceof NullTaxEngineDriver
+            || !$cartModel instanceof Adjustable
+        ) {
             return;
         }
 
         $cart->getItems()->each(fn ($item) => $item->adjustments()->deleteByType(AdjustmentTypeProxy::TAX()));
+        $taxes = $this->calculateTaxesAndApplyToTheItems($cart, $checkout);
 
-        if (null !== $this->taxEngine) {
-            $taxes = [];
-            /** @var CartItem $item */
-            foreach ($cart->getItems() as $item) {
-                if ($rate = $this->taxEngine->findTaxRate($item, $checkout->getBillpayer(), $checkout->getShippingAddress())) {
-                    $calculator = $rate->getCalculator();
-                    if ($adjuster = $calculator->getAdjuster($rate->configuration())) {
-                        //@todo the tax engine should tell whether to apply the tax to individual items (eg EU VAT)
-                        //      or the entire cart (eg Canadian Sales Tax)
-                        /** @var Adjustment|null $adjustment */
-                        if ($adjustment = $item->adjustments()?->create($adjuster)) {
-                            $taxes[$adjustment->getTitle()] = ($taxes[$adjustment->getTitle()] ?? 0) + $adjustment->getAmount();
-                        }
+        $checkout->setTaxesAmount(
+            DetailedAmount::fromArray(
+                Arr::mapWithKeys($taxes, fn ($amount, $title) => [['title' => $title, 'amount' => $amount]]),
+            ),
+        );
+    }
+
+    private function calculateTaxesAndApplyToTheItems(Cart $cart, CheckoutContract $checkout): array
+    {
+        $result = [];
+        /** @var CartItem $item */
+        foreach ($cart->getItems() as $item) {
+            if ($rate = $this->taxEngine->resolveTaxRate($item, $checkout->getBillpayer(), $checkout->getShippingAddress())) {
+                $calculator = $rate->getCalculator();
+                if ($adjuster = $calculator->getAdjuster($rate->configuration())) {
+                    /** @var Adjustment|null $adjustment */
+                    if ($adjustment = $item->adjustments()?->create($adjuster)) {
+                        $result[$adjustment->getTitle()] = ($result[$adjustment->getTitle()] ?? 0) + $adjustment->getAmount();
                     }
                 }
             }
-            $checkout->setTaxesAmount(
-                DetailedAmount::fromArray(
-                    Arr::mapWithKeys($taxes, fn ($amount, $title) => [['title' => $title, 'amount' => $amount]]),
-                ),
-            );
         }
+
+        return $result;
     }
 }

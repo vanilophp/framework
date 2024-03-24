@@ -33,7 +33,7 @@ class ExampleTaxEngine implements TaxEngineDriver
 {
     public const ID = 'example';
 
-    public function findTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
+    public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
         $rate = match ($taxable->getTaxCategory()->getType()->value()) {
             TaxCategoryType::PHYSICAL_GOODS => 19,

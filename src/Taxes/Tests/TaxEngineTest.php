@@ -48,7 +48,7 @@ class TaxEngineTest extends TestCase
     /** @test */
     public function the_find_tax_rate_method_can_be_directly_called_on_the_facade()
     {
-        $this->assertNull(TaxEngine::findTaxRate(new SampleTaxable()));
+        $this->assertNull(TaxEngine::resolveTaxRate(new SampleTaxable()));
     }
 
     /** @test */
@@ -58,6 +58,6 @@ class TaxEngineTest extends TestCase
         config(['vanilo.taxes.engine.driver' => 'dummy']);
 
         $this->assertInstanceOf(DummyTaxDriver::class, TaxEngine::driver());
-        $this->assertEquals(DummyTaxDriver::TEST_RATE, TaxEngine::findTaxRate(new SampleTaxable())->getRate());
+        $this->assertEquals(DummyTaxDriver::TEST_RATE, TaxEngine::resolveTaxRate(new SampleTaxable())->getRate());
     }
 }

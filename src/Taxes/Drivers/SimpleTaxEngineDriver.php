@@ -29,7 +29,7 @@ class SimpleTaxEngineDriver implements TaxEngineDriver
     ) {
     }
 
-    public function findTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
+    public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
         if (null === $address = $this->useShippingAddress ? $shippingAddress : $billpayer?->getBillingAddress()) {
             return null;
