@@ -19,8 +19,8 @@ use InvalidArgumentException;
 use LogicException;
 use Vanilo\Contracts\Address;
 use Vanilo\Taxes\Contracts\Taxable;
-use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
+use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Exceptions\InvalidTaxConfigurationException;
 
 class TaxEngineManager

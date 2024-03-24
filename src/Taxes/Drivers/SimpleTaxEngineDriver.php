@@ -18,8 +18,8 @@ use Konekt\Address\Query\Zones;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
-use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
+use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Models\TaxRateProxy;
 
 class SimpleTaxEngineDriver implements TaxEngineDriver

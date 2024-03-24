@@ -17,8 +17,8 @@ namespace Vanilo\Taxes\Facades;
 use Illuminate\Support\Facades\Facade;
 use Vanilo\Contracts\Address;
 use Vanilo\Taxes\Contracts\Taxable;
-use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
+use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Drivers\TaxEngineManager;
 
 /**

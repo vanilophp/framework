@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\App;
-use Vanilo\Taxes\Facades\TaxEngine;
 use Vanilo\Taxes\Drivers\NullTaxEngineDriver;
 use Vanilo\Taxes\Drivers\TaxEngineManager;
+use Vanilo\Taxes\Facades\TaxEngine;
 use Vanilo\Taxes\Tests\Dummies\DummyTaxDriver;
 use Vanilo\Taxes\Tests\Dummies\SampleTaxable;
 use Vanilo\Taxes\Tests\TestCase;

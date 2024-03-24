@@ -18,10 +18,10 @@ use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Taxes\Calculators\DefaultTaxCalculator;
 use Vanilo\Taxes\Calculators\NullTaxCalculator;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
+use Vanilo\Taxes\Drivers\TaxEngineManager;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxCategoryType;
 use Vanilo\Taxes\Models\TaxRate;
-use Vanilo\Taxes\Drivers\TaxEngineManager;
 use Vanilo\Taxes\TaxCalculators;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
