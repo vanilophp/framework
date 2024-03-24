@@ -24,12 +24,12 @@ use Vanilo\Checkout\Contracts\CheckoutEvent;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Foundation\Models\CartItem;
 use Vanilo\Support\Dto\DetailedAmount;
-use Vanilo\Taxes\Contracts\TaxRateResolver;
+use Vanilo\Taxes\Contracts\TaxEngineDriver;
 
 class CalculateTaxes
 {
     public function __construct(
-        protected ?TaxRateResolver $taxEngine,
+        protected ?TaxEngineDriver $taxEngine,
     ) {
     }
 

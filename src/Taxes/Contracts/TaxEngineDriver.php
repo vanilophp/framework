@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the TaxRateResolver interface.
+ * Contains the TaxEngineDriver interface.
  *
  * @copyright   Copyright (c) 2024 Vanilo UG
  * @author      Attila Fulop
@@ -17,7 +17,7 @@ namespace Vanilo\Taxes\Contracts;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 
-interface TaxRateResolver
+interface TaxEngineDriver
 {
     public function findTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate;
 }

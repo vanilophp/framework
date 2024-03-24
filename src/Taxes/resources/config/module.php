@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Vanilo\Taxes\Resolver\TaxEngineManager;
+use Vanilo\Taxes\Drivers\TaxEngineManager;
 
 return [
     'engine' => [

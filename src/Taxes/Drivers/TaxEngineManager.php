@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Taxes\Resolver;
+namespace Vanilo\Taxes\Drivers;
 
 use Illuminate\Contracts\Foundation\Application;
 use InvalidArgumentException;
@@ -20,7 +20,7 @@ use LogicException;
 use Vanilo\Contracts\Address;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxRate;
-use Vanilo\Taxes\Contracts\TaxRateResolver;
+use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Exceptions\InvalidTaxConfigurationException;
 
 class TaxEngineManager
@@ -30,8 +30,8 @@ class TaxEngineManager
 
     /** The array of registered Tax Resolver drivers */
     protected static array $drivers = [
-        self::NULL_DRIVER => NullTaxRateResolver::class,
-        self::SIMPLE_DRIVER => SimpleTaxRateResolver::class
+        self::NULL_DRIVER => NullTaxEngineDriver::class,
+        self::SIMPLE_DRIVER => SimpleTaxEngineDriver::class
     ];
 
     /** The array of resolved tax resolver instances.*/
@@ -52,7 +52,7 @@ class TaxEngineManager
         return isset(self::$drivers[$driverName]);
     }
 
-    public function driver(?string $name = null): TaxRateResolver
+    public function driver(?string $name = null): TaxEngineDriver
     {
         $name = $name ?: $this->getDefaultDriver();
 
@@ -61,7 +61,7 @@ class TaxEngineManager
 
     public function extend(string $name, string|callable $driver): void
     {
-        if (is_callable($driver) || (is_string($driver) && is_subclass_of($driver, TaxRateResolver::class))) {
+        if (is_callable($driver) || (is_string($driver) && is_subclass_of($driver, TaxEngineDriver::class))) {
             self::$drivers[$name] = $driver;
             if (isset($this->instances[$name])) {
                 unset($this->instances[$name]);
@@ -83,12 +83,12 @@ class TaxEngineManager
         return $this->app['config']['vanilo.taxes.engine.driver'] ?? self::NULL_DRIVER;
     }
 
-    protected function resolve(string $name): TaxRateResolver
+    protected function resolve(string $name): TaxEngineDriver
     {
         if (null === $driver = self::$drivers[$name]) {
             throw new InvalidTaxConfigurationException("The tax engine driver [{$name}] is not defined.");
         } elseif (self::NULL_DRIVER === $driver) {
-            return new NullTaxRateResolver();
+            return new NullTaxEngineDriver();
         }
 
         $instance = match (true) {
@@ -96,7 +96,7 @@ class TaxEngineManager
             is_callable($driver) => call_user_func($driver, $this->app['config']["vanilo.taxes.engine.{$name}"] ?? []),
         };
 
-        if ($instance instanceof TaxRateResolver) {
+        if ($instance instanceof TaxEngineDriver) {
             return $instance;
         }
 

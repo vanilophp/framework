@@ -24,7 +24,7 @@ use Vanilo\Foundation\Tests\Examples\ExampleTaxEngine;
 use Vanilo\Taxes\Facades\TaxEngine;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxCategoryType;
-use Vanilo\Taxes\Resolver\TaxEngineManager;
+use Vanilo\Taxes\Drivers\TaxEngineManager;
 use Vanilo\Taxes\TaxCalculators;
 
 class TaxCalculationTest extends TestCase

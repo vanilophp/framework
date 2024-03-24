@@ -17,11 +17,11 @@ namespace Vanilo\Taxes\Providers;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Taxes\Calculators\DefaultTaxCalculator;
 use Vanilo\Taxes\Calculators\NullTaxCalculator;
-use Vanilo\Taxes\Contracts\TaxRateResolver;
+use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxCategoryType;
 use Vanilo\Taxes\Models\TaxRate;
-use Vanilo\Taxes\Resolver\TaxEngineManager;
+use Vanilo\Taxes\Drivers\TaxEngineManager;
 use Vanilo\Taxes\TaxCalculators;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -40,7 +40,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         parent::register();
 
         $this->app->singleton(TaxEngineManager::class, fn ($app) => new TaxEngineManager($app));
-        $this->app->bind(TaxRateResolver::class, fn ($app) => $app->make(TaxEngineManager::class)->driver());
+        $this->app->bind(TaxEngineDriver::class, fn ($app) => $app->make(TaxEngineManager::class)->driver());
 
         TaxCalculators::register('none', NullTaxCalculator::class);
         TaxCalculators::register('default', DefaultTaxCalculator::class);

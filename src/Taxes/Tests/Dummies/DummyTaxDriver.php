@@ -18,9 +18,9 @@ use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxRate;
-use Vanilo\Taxes\Contracts\TaxRateResolver;
+use Vanilo\Taxes\Contracts\TaxEngineDriver;
 
-class DummyTaxDriver implements TaxRateResolver
+class DummyTaxDriver implements TaxEngineDriver
 {
     public const TEST_RATE = 66;
 

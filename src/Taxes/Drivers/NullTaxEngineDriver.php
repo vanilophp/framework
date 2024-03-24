@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the NullTaxRateResolver class.
+ * Contains the NullTaxEngineDriver class.
  *
  * @copyright   Copyright (c) 2024 Vanilo UG
  * @author      Attila Fulop
@@ -12,15 +12,15 @@ declare(strict_types=1);
  *
  */
 
-namespace Vanilo\Taxes\Resolver;
+namespace Vanilo\Taxes\Drivers;
 
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxRate;
-use Vanilo\Taxes\Contracts\TaxRateResolver;
+use Vanilo\Taxes\Contracts\TaxEngineDriver;
 
-class NullTaxRateResolver implements TaxRateResolver
+class NullTaxEngineDriver implements TaxEngineDriver
 {
     public const ID = 'none';
 

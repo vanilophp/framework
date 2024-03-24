@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Facade;
 use Vanilo\Contracts\Address;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxRate;
-use Vanilo\Taxes\Contracts\TaxRateResolver;
-use Vanilo\Taxes\Resolver\TaxEngineManager;
+use Vanilo\Taxes\Contracts\TaxEngineDriver;
+use Vanilo\Taxes\Drivers\TaxEngineManager;
 
 /**
- * @method static TaxRateResolver driver(string|null $name = null)
+ * @method static TaxEngineDriver driver(string|null $name = null)
  * @method static TaxRate|null findTaxRate(Taxable $taxable, Address|null $billingAddress = null, Address|null $shippingAddress = null)
  * @method static void extend(string $name, string|callable $driver)
  * @method static bool driverExists(string $driverName)

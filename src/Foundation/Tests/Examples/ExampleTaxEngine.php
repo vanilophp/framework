@@ -18,7 +18,7 @@ use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxRate;
-use Vanilo\Taxes\Contracts\TaxRateResolver;
+use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Models\TaxCategoryType;
 
 /**
@@ -29,7 +29,7 @@ use Vanilo\Taxes\Models\TaxCategoryType;
  *  - shipping: 7%
  *  - everything else: 15%
  */
-class ExampleTaxEngine implements TaxRateResolver
+class ExampleTaxEngine implements TaxEngineDriver
 {
     public const ID = 'example';
 
