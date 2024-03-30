@@ -82,6 +82,8 @@ interface Checkout extends Shippable, ArrayAccess
 
     public function setTaxesAmount(float|DetailedAmount $amount): void;
 
+    public function itemsTotal(): float;
+
     /**
      * Update checkout data with an array of attributes
      *

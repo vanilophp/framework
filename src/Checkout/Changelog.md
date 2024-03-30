@@ -24,6 +24,7 @@
   - `setShippingAmount()`
   - `getTaxesAmount()`
   - `setTaxesAmount()`
+  - `itemsTotal()`
 
 ## 3.x Series
 

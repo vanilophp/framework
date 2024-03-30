@@ -71,6 +71,7 @@
     - `setShippingAmount()`
     - `getTaxesAmount()`
     - `setTaxesAmount()`
+    - `itemsTotal()`
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
 - BC: Added the `deleteByType()` and `clear()` methods to the `AdjustmentCollection` interface
 - BC: The `Adjustable::itemsTotal()` has been renamed to `preAdjustmentTotal()`
