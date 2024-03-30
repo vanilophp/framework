@@ -209,16 +209,12 @@ abstract class BaseCheckoutStore implements CheckoutStore
 
     abstract public function clear(): void;
 
-    /** @todo add this to the interface in v4 */
     abstract public function getShippingAmount(): DetailedAmount;
 
-    /** @todo add this to the interface in v4 */
     abstract public function setShippingAmount(float|DetailedAmount $amount): void;
 
-    /** @todo add this to the interface in v4 */
     abstract public function getTaxesAmount(): DetailedAmount;
 
-    /** @todo add this to the interface in v4 */
     abstract public function setTaxesAmount(float|DetailedAmount $amount): void;
 
     /**

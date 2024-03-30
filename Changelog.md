@@ -73,6 +73,10 @@
     - `setTaxesAmount()`
     - `itemsTotal()`
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
+- BC: Removed the following traits from the Checkout module:
+  - `HasCart`
+  - `ComputesShipToName`
+  - `FillsCommonCheckoutAttributes`
 - BC: Added the `deleteByType()` and `clear()` methods to the `AdjustmentCollection` interface
 - BC: The `Adjustable::itemsTotal()` has been renamed to `preAdjustmentTotal()`
 - BC: The `invalidateAdjustments()` method has been added to the `Adjustable` interface

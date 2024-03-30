@@ -13,6 +13,10 @@
 - Changed minimum Laravel version to v10.38.2
 - Changed minimal Enum requirement to v4.2
 - Added the `BillpayerChanged` event
+- BC: Removed the following traits:
+  - `HasCart`
+  - `ComputesShipToName`
+  - `FillsCommonCheckoutAttributes`
 - BC: The `Checkout` interface now extends the `ArrayAccess` and the `Shippable` interfaces (until here, only the concrete classes have implementation it) 
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface
 - BC: The unused `$config` parameter has been removed from the `RequestStore` checkout driver constructor
