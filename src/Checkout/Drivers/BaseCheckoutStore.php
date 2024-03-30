@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Drivers;
 
-use ArrayAccess;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
@@ -30,7 +29,6 @@ use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
-use Vanilo\Contracts\Shippable;
 
 abstract class BaseCheckoutStore implements CheckoutStore
 {
