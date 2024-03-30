@@ -51,7 +51,8 @@ abstract class BaseCheckoutStore implements CheckoutStore
 
     public function __construct(
         protected CheckoutDataFactory $factory,
-    ) {
+    )
+    {
     }
 
     public function getCart(): ?CheckoutSubject
@@ -100,7 +101,7 @@ abstract class BaseCheckoutStore implements CheckoutStore
 
     public function getShipToBillingAddress(bool $default = true): bool
     {
-        return (bool) $this->readRawDataFromStore('ship_to_billing_address', $default);
+        return (bool)$this->readRawDataFromStore('ship_to_billing_address', $default);
     }
 
     public function setShipToBillingAddress(bool $value): void
@@ -258,7 +259,7 @@ abstract class BaseCheckoutStore implements CheckoutStore
 
     protected function updateShipToBillingAddress($data): void
     {
-        $this->setShipToBillingAddress((bool) $data);
+        $this->setShipToBillingAddress((bool)$data);
     }
 
     protected function getAttribute(string $name): mixed
