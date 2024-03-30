@@ -20,6 +20,7 @@ use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\DetailedAmount;
+use Vanilo\Contracts\Dimension;
 
 class MemoryStore implements CheckoutStore
 {
@@ -140,6 +141,46 @@ class MemoryStore implements CheckoutStore
     public function total()
     {
         return 0;
+    }
+
+    public function itemsTotal(): float
+    {
+        return 0;
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        return isset($this->customAttributes[$offset]);
+    }
+
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->customAttributes[$offset] ?? null;
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        $this->customAttributes[$offset] = $value;
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        unset($this->customAttributes[$offset]);
+    }
+
+    public function weight(): float
+    {
+        return 0;
+    }
+
+    public function weightUnit(): string
+    {
+        return 'kg';
+    }
+
+    public function dimension(): ?Dimension
+    {
+        return new \Vanilo\Support\Dto\Dimension(0, 0, 0);
     }
 
     public function customMethod(): string
