@@ -23,11 +23,8 @@ use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
-use Vanilo\Contracts\Shippable;
 
-/** @todo Remove `ArrayAccess` and make the Checkout interface to extend ArrayAccess in v4 */
-/** @todo Remove `Shippable` and make the Checkout interface to extend Shippable in v4 */
-class CheckoutManager implements CheckoutContract, Shippable, \ArrayAccess
+class CheckoutManager implements CheckoutContract
 {
     use ForwardsCalls;
 

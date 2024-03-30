@@ -14,12 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Contracts;
 
+use ArrayAccess;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\DetailedAmount;
+use Vanilo\Contracts\Shippable;
 
-interface Checkout
+interface Checkout extends Shippable, ArrayAccess
 {
     public function getCart(): ?CheckoutSubject;
 
