@@ -509,9 +509,8 @@ class ProductSearchTest extends TestCase
         factory(Product::class, 4)->create();
         factory(MasterProduct::class, 3)->create();
 
-        $finder = new ProductSearch();
-        $this->assertCount(7, $finder->getResults());
-        $this->assertCount(5, $finder->getResults(5));
+        $this->assertCount(7, (new ProductSearch())->getResults());
+        $this->assertCount(5, (new ProductSearch())->getResults(5));
     }
 
     /** @test */
