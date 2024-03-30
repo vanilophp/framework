@@ -106,6 +106,7 @@
   - `hasRemoteId()`
   - `getRemoteId()`
   - `isOffline()`
+- BC: Added the `getTransactionAmount()` method to the `PaymentResponse` interface
 - BC: Added the following methods to the `Payable` interface:
     - `getNumber()`
     - `getPayableRemoteId()`
@@ -121,6 +122,7 @@
     - `getBillingCountries()`
     - `getShippingCountries()`
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
+- Deprecated the `PaymentResponse::getAmountPaid()` method in favor of `getTransactionAmount()`
 - Added the `Schematized` interface
 - Added the nette/schema package requirement (v1.2.5+)
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null

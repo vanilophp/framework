@@ -41,6 +41,11 @@ class NullResponse implements PaymentResponse
         return null;
     }
 
+    public function getTransactionAmount(): float
+    {
+        return 0;
+    }
+
     public function getPaymentId(): string
     {
         return '';

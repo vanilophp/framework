@@ -18,8 +18,10 @@
     - `hasRemoteId()`
     - `getRemoteId()`
     - `isOffline()`
+- BC: Added the `getTransactionAmount()` method to the `PaymentResponse` interface
 - BC: Changed the `PaymentMethod` interface into Configurable
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
+- Deprecated the `Payment::getAmountPaid()` method in favor of `getTransactionAmount()`
 
 ## 3.x Series
 

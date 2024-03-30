@@ -24,7 +24,10 @@ interface PaymentResponse
 
     public function getTransactionId(): ?string;
 
+    /** @deprecated use getTransactionAmount() instead */
     public function getAmountPaid(): ?float;
+
+    public function getTransactionAmount(): float;
 
     public function getPaymentId(): string;
 

@@ -146,7 +146,7 @@ class ResponseHandlerTest extends TestCase
         $this->assertEquals(PaymentStatus::TIMEOUT, $entry->new_status->value());
         $this->assertEquals(PaymentStatus::PENDING, $entry->old_status->value());
         $this->assertEquals('Timed out like a lion', $entry->message);
-        $this->assertNull($entry->transaction_amount);
+        $this->assertEquals(0, $entry->transaction_amount);
     }
 
     /** @test */

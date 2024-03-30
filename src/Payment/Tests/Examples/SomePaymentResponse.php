@@ -26,7 +26,7 @@ class SomePaymentResponse implements PaymentResponse
 
     private string $transactionId;
 
-    private ?float $amountPaid;
+    private ?float $transactionAmount;
 
     private string $paymentId;
 
@@ -38,7 +38,7 @@ class SomePaymentResponse implements PaymentResponse
         string $message,
         bool $wasSuccessful,
         string $transactionId,
-        ?float $amountPaid,
+        ?float $transactionAmount,
         string $paymentId,
         SomeNativeStatus $nativeStatus,
         PaymentStatus $status
@@ -47,7 +47,7 @@ class SomePaymentResponse implements PaymentResponse
         $this->nativeStatus = $nativeStatus;
         $this->wasSuccessful = $wasSuccessful;
         $this->transactionId = $transactionId;
-        $this->amountPaid = $amountPaid;
+        $this->transactionAmount = $transactionAmount;
         $this->paymentId = $paymentId;
         $this->status = $status;
     }
@@ -69,7 +69,12 @@ class SomePaymentResponse implements PaymentResponse
 
     public function getAmountPaid(): ?float
     {
-        return $this->amountPaid;
+        return $this->getTransactionAmount();
+    }
+
+    public function getTransactionAmount(): float
+    {
+        return (float) $this->transactionAmount;
     }
 
     public function getPaymentId(): string

@@ -60,7 +60,7 @@ class PaymentHistory extends Model implements PaymentHistoryContract
            'old_status' => $oldStatus ?: $payment->getStatus()->value(),
            'new_status' => $response->getStatus()->value(),
            'message' => $response->getMessage(),
-           'transaction_amount' => $response->getAmountPaid(),
+           'transaction_amount' => $response->getTransactionAmount(),
            'native_status' => $response->getNativeStatus()->value(),
            'transaction_number' => $response->getTransactionId(),
         ]);

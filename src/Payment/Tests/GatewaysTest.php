@@ -64,7 +64,7 @@ class GatewaysTest extends TestCase
 
         $this->assertInstanceOf(PaymentResponse::class, $result);
         $this->assertEquals(PaymentStatus::PAID(), $result->getStatus());
-        $this->assertEquals(27.99, $result->getAmountPaid());
+        $this->assertEquals(27.99, $result->getTransactionAmount());
         $this->assertEquals('C9278', $result->getTransactionId());
     }
 }

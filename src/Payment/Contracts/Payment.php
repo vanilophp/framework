@@ -24,9 +24,6 @@ interface Payment
 
     public function getCurrency(): string;
 
-    // "Transaction amount" would've been a better name
-    // since the value returned here might represent
-    // an amount of a full/partial refund as well
     public function getAmountPaid(): float;
 
     public function getStatus(): PaymentStatus;
