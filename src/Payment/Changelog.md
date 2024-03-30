@@ -13,6 +13,11 @@
 - Changed minimum Laravel version to v10.38.2
 - Changed minimal Enum requirement to v4.2
 - BC: Added the `getRemoteId()` method to the `PaymentRequest` interface
+- BC: Added the following methods to the `Payment` interface:
+    - `getSubtype()`
+    - `hasRemoteId()`
+    - `getRemoteId()`
+    - `isOffline()`
 - BC: Changed the `PaymentMethod` interface into Configurable
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 
