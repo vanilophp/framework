@@ -51,4 +51,24 @@ class Order extends Model implements Payable
     {
         return new Customer();
     }
+
+    public function getNumber(): string
+    {
+        return (string) $this->id;
+    }
+
+    public function getPayableRemoteId(): ?string
+    {
+        return $this->remote_id;
+    }
+
+    public function setPayableRemoteId(string $remoteId): void
+    {
+        $this->remote_id = $remoteId;
+    }
+
+    public static function findByPayableRemoteId(string $remoteId): ?Payable
+    {
+        return self::query()->where('remote_id', $remoteId)->first();
+    }
 }

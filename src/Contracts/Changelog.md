@@ -15,6 +15,11 @@
 - Added the `Schematized` interface
 - Added the `getConfigurationSchema()` method to the `Configurable` interface
 - BC: Added the `itemsTotal()` method to the `CheckoutSubject` interface
+- BC: Added the following methods to the `Payable` interface:
+  - `getNumber()`
+  - `getPayableRemoteId()`
+  - `setPayableRemoteId()`
+  - `findByPayableRemoteId()`
 - Added the nette/schema package requirement (v1.2.5+)
 
 ## 3.x Series

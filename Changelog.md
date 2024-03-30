@@ -100,6 +100,11 @@
 - BC: The `OrderStatus` and `FulfillmentStatus` interfaces extend the `EnumInterface`
 - BC: Added the `getConfigurationSchema()` method to the `Configurable` interface
 - BC: Changed the `PaymentMethod` interface into Configurable
+- BC: Added the following methods to the `Payable` interface:
+    - `getNumber()`
+    - `getPayableRemoteId()`
+    - `setPayableRemoteId()`
+    - `findByPayableRemoteId()`
 - BC: The `Channel` interface extends the `Configurable` interface
 - BC: Added the following methods to the `Channel` interface:
     - `getLanguage()`

@@ -14,6 +14,7 @@ class CreateOrdersTestTable extends Migration
             Schema::create('orders', function (Blueprint $table) {
                 $table->increments('id');
                 $table->decimal('total', 15, 2);
+                $table->string('remote_id')->nullable();
                 $table->timestamps();
             });
         }

@@ -26,15 +26,13 @@ interface Payable
 
     public function getBillpayer(): ?Billpayer;
 
-    /**
-     * @todo add in v4 so that we don't mess with title/id and make it straightforward
-     * public function getNumber(): string;
-     *
-     * @todo add in v4
-     * public function getPayableRemoteId(): ?string;
-     * public function setPayableRemoteId(string $remoteId): void
-     * public static function findByPayableRemoteId(string $remoteId): ?Order
-     */
+    public function getNumber(): string;
+
+    public function getPayableRemoteId(): ?string;
+
+    public function setPayableRemoteId(string $remoteId): void;
+
+    public static function findByPayableRemoteId(string $remoteId): ?Payable;
 
     /** The human readable representation, eg.: "Order no. ABC-123" */
     public function getTitle(): string;
