@@ -90,9 +90,9 @@ class Order extends Model implements OrderContract
         return static::where('number', $orderNumber)->first();
     }
 
-    public function getNumber(): ?string
+    public function getNumber(): string
     {
-        return $this->number;
+        return (string) $this->number;
     }
 
     public function getStatus(): OrderStatus

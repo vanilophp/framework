@@ -15,6 +15,7 @@
 - Upgraded to Konekt Address and User modules to v3
 - Added the `currency` field to the orders table
 - Added Carbon 3 compatibility
+- BC: The return type of the `getNumber()` method of the Order interface is no longer nullable 
 - BC: Added the `$hooks` and `$itemHooks` parameters to the `OrderFactory` interface
 - BC: Changed the `OrderItem` interface into Configurable
 - BC: Added 7 methods to the `OrderItem` interface

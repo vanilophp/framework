@@ -20,7 +20,7 @@ use Vanilo\Contracts\BillPayer;
 
 interface Order
 {
-    public function getNumber(): ?string;
+    public function getNumber(): string;
 
     public function getStatus(): OrderStatus;
 

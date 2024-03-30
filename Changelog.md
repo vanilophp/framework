@@ -105,6 +105,7 @@
     - `getPayableRemoteId()`
     - `setPayableRemoteId()`
     - `findByPayableRemoteId()`
+- BC: The return type of the `getNumber()` method of the Order interface is no longer nullable
 - BC: The `Channel` interface extends the `Configurable` interface
 - BC: Added the following methods to the `Channel` interface:
     - `getLanguage()`
