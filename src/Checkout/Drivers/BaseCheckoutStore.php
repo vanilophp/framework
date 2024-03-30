@@ -32,9 +32,7 @@ use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
 use Vanilo\Contracts\Shippable;
 
-/** @todo Remove `ArrayAccess` and make the CheckoutStore interface to extend ArrayAccess in v4 */
-/** @todo Remove `Shippable` and make the Checkout interface to extend Shippable in v4 */
-abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAccess
+abstract class BaseCheckoutStore implements CheckoutStore
 {
     use EmulatesFillAttributes;
 
@@ -90,7 +88,7 @@ abstract class BaseCheckoutStore implements CheckoutStore, Shippable, ArrayAcces
         return $this->getCart()?->total();
     }
 
-    public function itemsTotal()
+    public function itemsTotal(): float
     {
         return $this->getCart()?->getItems()->sum('total');
     }
