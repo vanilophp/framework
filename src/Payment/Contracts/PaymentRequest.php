@@ -21,7 +21,5 @@ interface PaymentRequest
 
     public function willRedirect(): bool;
 
-    /** @todo add with v4
-     * public function getRemoteId(): ?string;
-     */
+    public function getRemoteId(): ?string;
 }
