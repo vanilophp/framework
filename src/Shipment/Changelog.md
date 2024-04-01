@@ -14,6 +14,7 @@
 - Changed minimal Enum requirement to v4.2
 - Added `isZoneRestricted()` & `isNotZoneRestricted()` helper methods to the `ShippingMethod` class
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
+- BC: Added the `getCalculator()` & `estimate()` methods to the `ShippingMethod` interface
 
 ## 3.x Series
 
