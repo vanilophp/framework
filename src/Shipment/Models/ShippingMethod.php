@@ -71,7 +71,6 @@ class ShippingMethod extends Model implements ShippingMethodContract
             ->get();
     }
 
-    /** @todo Add this to the ShippingMethod interface in v4 */
     public function getCalculator(): ShippingFeeCalculator
     {
         if (null === $this->calculator) {
@@ -81,7 +80,6 @@ class ShippingMethod extends Model implements ShippingMethodContract
         return ShippingFeeCalculators::make($this->calculator);
     }
 
-    /** @todo Add this to the ShippingMethod interface in v4 */
     public function estimate(?object $subject = null): ShippingFee
     {
         return $this->getCalculator()->calculate($subject, $this->configuration());
