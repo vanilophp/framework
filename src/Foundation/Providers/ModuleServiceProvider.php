@@ -101,8 +101,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(PaymentMethodContract::class, PaymentMethod::class, $registerRouteModels);
 
         Relation::morphMap([
-            // @todo remove this bullshit in v4. It's not event part of the interface
-            app(ProductContract::class)->morphTypeName() => ProductProxy::modelClass(),
+            'product' => ProductProxy::modelClass(),
             'master_product' => MasterProductProxy::modelClass(),
             'master_product_variant' => MasterProductVariantProxy::modelClass(),
             'taxonomy' => TaxonomyProxy::modelClass(),
