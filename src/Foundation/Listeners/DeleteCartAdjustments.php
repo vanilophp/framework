@@ -28,7 +28,7 @@ class DeleteCartAdjustments
         }
 
         $cart->invalidateAdjustments();
-        $cart->fresh()->adjustments()->clear();// Method is available since v3.6; to be added to the interface in v4
+        $cart->fresh()->adjustments()->clear();
         $cart->getItems()->each(fn (CartItem $item) => $item instanceof Adjustable ? $item->adjustments()->clear() : null);
     }
 }
