@@ -14,6 +14,7 @@
 - Changed minimal Enum requirement to v4.2
 - Added the `Stockable` interface to the Product Model
 - Added the `backorder` field to products
+- BC: Added the `findBySku()` method to the `Product` interface
 
 ## 3.x Series
 

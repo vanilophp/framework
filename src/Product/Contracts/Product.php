@@ -25,4 +25,6 @@ interface Product
      * Returns the title of the product. If no `title` was given, returns the `name` of the product
      */
     public function title(): string;
+
+    public static function findBySku(string $sku): ?Product;
 }
