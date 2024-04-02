@@ -207,16 +207,6 @@ abstract class BaseCheckoutStore implements CheckoutStore
         }
     }
 
-    abstract public function clear(): void;
-
-    abstract public function getShippingAmount(): DetailedAmount;
-
-    abstract public function setShippingAmount(float|DetailedAmount $amount): void;
-
-    abstract public function getTaxesAmount(): DetailedAmount;
-
-    abstract public function setTaxesAmount(float|DetailedAmount $amount): void;
-
     protected function getShipToName(Billpayer $billpayer): string
     {
         if ($billpayer->isOrganization()) {

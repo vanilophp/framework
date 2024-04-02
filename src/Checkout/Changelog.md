@@ -24,6 +24,15 @@
 - BC: Added the void return type to `Checkout::setShippingAddress()`
 - BC: Added the following methods to the Checkout interface:
   - `removeShippingAddress()`
+  - `getShipToBillingAddress()`
+  - `setShipToBillingAddress()`
+  - `getShippingMethodId()`
+  - `setShippingMethodId()`
+  - `getPaymentMethodId()`
+  - `setPaymentMethodId()`
+  - `getNotes()`
+  - `setNotes()`
+  - `clear()`
   - `getShippingAmount()`
   - `setShippingAmount()`
   - `getTaxesAmount()`

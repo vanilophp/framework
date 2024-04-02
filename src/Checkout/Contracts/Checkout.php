@@ -25,18 +25,8 @@ interface Checkout extends Shippable, ArrayAccess
 {
     public function getCart(): ?CheckoutSubject;
 
-    /**
-     * Set the cart for the checkout
-     *
-     * @param CheckoutSubject $cart
-     */
     public function setCart(CheckoutSubject $cart);
 
-    /**
-     * Returns the state of the checkout
-     *
-     * @return CheckoutState
-     */
     public function getState(): CheckoutState;
 
     /**
@@ -46,25 +36,31 @@ interface Checkout extends Shippable, ArrayAccess
      */
     public function setState($state);
 
-    /**
-     * Returns the bill payer details
-     *
-     * @return Billpayer
-     */
     public function getBillpayer(): Billpayer;
 
-    /**
-     * Sets the bill payer details
-     *
-     * @param Billpayer $billpayer
-     */
     public function setBillpayer(Billpayer $billpayer);
-
-    public function getShippingAddress(): ?Address;
 
     public function setShippingAddress(Address $address): void;
 
     public function removeShippingAddress(): void;
+
+    public function getShipToBillingAddress(bool $default = true): bool;
+
+    public function setShipToBillingAddress(bool $value): void;
+
+    public function getShippingMethodId(): null|int|string;
+
+    public function setShippingMethodId(null|int|string $shippingMethodId): void;
+
+    public function getPaymentMethodId(): null|int|string;
+
+    public function setPaymentMethodId(null|int|string $paymentMethodId): void;
+
+    public function getNotes(): ?string;
+
+    public function setNotes(?string $text): void;
+
+    public function clear(): void;
 
     public function setCustomAttribute(string $key, $value): void;
 
@@ -93,10 +89,5 @@ interface Checkout extends Shippable, ArrayAccess
      */
     public function update(array $data);
 
-    /**
-     * Returns the grand total of the checkout
-     *
-     * @return float
-     */
     public function total();
 }

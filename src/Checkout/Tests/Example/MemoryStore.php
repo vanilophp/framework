@@ -133,6 +133,51 @@ class MemoryStore implements CheckoutStore
         // TODO: Implement setTaxesAmount() method.
     }
 
+    public function getShipToBillingAddress(bool $default = true): bool
+    {
+        // TODO: Implement getShipToBillingAddress() method.
+    }
+
+    public function setShipToBillingAddress(bool $value): void
+    {
+        // TODO: Implement setShipToBillingAddress() method.
+    }
+
+    public function getShippingMethodId(): null|int|string
+    {
+        // TODO: Implement getShippingMethodId() method.
+    }
+
+    public function setShippingMethodId(int|string|null $shippingMethodId): void
+    {
+        // TODO: Implement setShippingMethodId() method.
+    }
+
+    public function getPaymentMethodId(): null|int|string
+    {
+        // TODO: Implement getPaymentMethodId() method.
+    }
+
+    public function setPaymentMethodId(int|string|null $paymentMethodId): void
+    {
+        // TODO: Implement setPaymentMethodId() method.
+    }
+
+    public function getNotes(): ?string
+    {
+        // TODO: Implement getNotes() method.
+    }
+
+    public function setNotes(?string $text): void
+    {
+        // TODO: Implement setNotes() method.
+    }
+
+    public function clear(): void
+    {
+        // TODO: Implement clear() method.
+    }
+
     public function update(array $data)
     {
         // TODO: Implement update() method.

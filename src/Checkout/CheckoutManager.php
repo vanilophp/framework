@@ -109,6 +109,51 @@ class CheckoutManager implements CheckoutContract
         $this->store->removeShippingAddress();
     }
 
+    public function getShipToBillingAddress(bool $default = true): bool
+    {
+        return $this->store->getShipToBillingAddress($default);
+    }
+
+    public function setShipToBillingAddress(bool $value): void
+    {
+        $this->store->setShipToBillingAddress($value);
+    }
+
+    public function getShippingMethodId(): null|int|string
+    {
+        return $this->store->getShippingMethodId();
+    }
+
+    public function setShippingMethodId(int|string|null $shippingMethodId): void
+    {
+        $this->store->setShippingMethodId($shippingMethodId);
+    }
+
+    public function getPaymentMethodId(): null|int|string
+    {
+        return $this->store->getPaymentMethodId();
+    }
+
+    public function setPaymentMethodId(int|string|null $paymentMethodId): void
+    {
+        $this->store->setPaymentMethodId($paymentMethodId);
+    }
+
+    public function getNotes(): ?string
+    {
+        return $this->store->getNotes();
+    }
+
+    public function setNotes(?string $text): void
+    {
+        $this->store->setNotes($text);
+    }
+
+    public function clear(): void
+    {
+        $this->store->clear();
+    }
+
     public function setCustomAttribute(string $key, $value): void
     {
         $this->store->setCustomAttribute($key, $value);
