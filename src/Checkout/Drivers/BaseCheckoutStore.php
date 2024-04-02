@@ -27,7 +27,6 @@ use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
-use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
 
 abstract class BaseCheckoutStore implements CheckoutStore
