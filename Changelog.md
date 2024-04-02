@@ -60,6 +60,8 @@
 - Added the `Address` DTO class (implements the `Address` interface)
 - Added the `AdjusterAliases` class that for decoupling FQCNs from the database
 - Added automatic mapping of adjuster FQCN <-> aliases when saving an adjustment into the DB and when calling the `getAdjuster()` method
+- BC: Added the `findBySku()` method to the `Product` and `MasterProductVariant` interfaces
+- BC: The `MasterProduct` interface no longer extends the `Product` interface
 - BC: The `Checkout` interface now extends the `ArrayAccess` and the `Shippable` interfaces (until here, only the concrete classes have implementation it)
 - BC: Added cart and order item models to the Relation morph map: the `adjustable_type` field in the `adjustments` table needs to be converted!
 - BC: Added the `?CheckoutSubject` return type to the `getCart()` method of the `Checkout` interface

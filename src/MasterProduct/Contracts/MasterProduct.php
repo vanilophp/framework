@@ -16,13 +16,16 @@ namespace Vanilo\MasterProduct\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
-use Vanilo\Product\Contracts\Product;
 
 /**
  * @property-read Collection|MasterProductVariant[] $variants
  */
-interface MasterProduct extends Product
+interface MasterProduct
 {
+    public function isActive(): bool;
+
+    public function title(): string;
+
     public function variants(): HasMany;
 
     public function createVariant(array $attributes): MasterProductVariant;

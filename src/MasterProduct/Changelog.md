@@ -14,6 +14,9 @@
 - Changed minimal Enum requirement to v4.2
 - Added the `Stockable` interface to the `MasterProductVariant` Model
 - Added the `backorder` field to product variants
+- BC: Added the `findBySku()` method to the `MasterProductVariant` interface
+- BC: The `MasterProduct` interface no longer extends the `Product` interface
+
 
 ## 3.x Series
 

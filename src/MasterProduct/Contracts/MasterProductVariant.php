@@ -16,4 +16,5 @@ namespace Vanilo\MasterProduct\Contracts;
 
 interface MasterProductVariant
 {
+    public static function findBySku(string $sku): ?MasterProductVariant;
 }
