@@ -15,6 +15,7 @@
 - BC: Changed the `TaxRate` interface so that it extends the `Configurable` interface
 - BC: Added the `findOneByZoneAndCategory` static method to the `TaxRate` interface
 - Added the `DefaultTaxCalculator` class - calculates simply by rate
+- Added the `DeductiveTaxCalculator` class similar to the default one, but it deducts the amount
 - Added the `type` field to the TaxCategory model
 - Added the `Taxable` interface
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)

@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 /**
- * Contains the DefaultTaxCalculator class.
+ * Contains the DeductiveTaxCalculator class.
  *
  * @copyright   Copyright (c) 2024 Vanilo UG
  * @author      Attila Fulop
  * @license     MIT
- * @since       2024-03-04
+ * @since       2024-04-03
  *
  */
 
@@ -16,23 +16,23 @@ namespace Vanilo\Taxes\Calculators;
 
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use Vanilo\Adjustments\Adjusters\SimpleTax;
+use Vanilo\Adjustments\Adjusters\SimpleTaxDeduction;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
 use Vanilo\Taxes\Contracts\TaxCalculator;
 
-class DefaultTaxCalculator implements TaxCalculator
+class DeductiveTaxCalculator implements TaxCalculator
 {
     public static function getName(): string
     {
-        return 'Default (rate based)';
+        return __('Deductive');
     }
 
     public function getAdjuster(?array $configuration = null): ?object
     {
         $rate = floatval($configuration['rate'] ?? 0);
-        $adjuster = new SimpleTax($rate, false);
-        $adjuster->setTitle("$rate%");
+        $adjuster = new SimpleTaxDeduction($rate);
+        $adjuster->setTitle($configuration['title'] ?? "Tax deduction $rate%");
 
         return $adjuster;
     }
@@ -41,16 +41,27 @@ class DefaultTaxCalculator implements TaxCalculator
     {
         $rate = floatval($configuration['rate'] ?? 0);
 
-        return DetailedAmountDto::fromArray([['title' => "$rate%", 'amount' => $subject->preAdjustmentTotal() * $rate / 100]]);
+        return DetailedAmountDto::fromArray([
+            [
+                'title' => $configuration['title'] ?? "Tax deduction $rate%",
+                'amount' => -1 * $subject->preAdjustmentTotal() * $rate / 100,
+            ]
+        ]);
     }
 
     public function getSchema(): Schema
     {
-        return Expect::structure(['rate' => Expect::float(0)->required()]);
+        return Expect::structure([
+            'rate' => Expect::float()->required(),
+            'title' => Expect::string()->nullable(),
+        ]);
     }
 
     public function getSchemaSample(array $mergeWith = null): array
     {
-        return ['rate' => 19];
+        return [
+            'rate' => 19,
+            'title' => 'Tax deduction',
+        ];
     }
 }

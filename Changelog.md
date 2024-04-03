@@ -56,6 +56,7 @@
 - Added the extendable `TaxEngine` (facade) that can resolve tax rates from taxables, billing/shipping addresses (a place for various country-specific taxation drivers)
 - Added the `Merchant` interface
 - Added the `DefaultTaxCalculator` class - calculates simply by rate
+- Added the `DeductiveTaxCalculator` class similar to the default one, but it deducts the amount
 - Added the `CalculateTaxes` listener to cart update and shipping address change events
 - Added the `Merchant` DTO class, that complies with the common, v4 `Merchant` interface
 - Added the `Address` DTO class (implements the `Address` interface)
