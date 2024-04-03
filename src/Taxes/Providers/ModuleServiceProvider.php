@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\Taxes\Calculators\DeductiveTaxCalculator;
 use Vanilo\Taxes\Calculators\DefaultTaxCalculator;
 use Vanilo\Taxes\Calculators\NullTaxCalculator;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
@@ -44,5 +45,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
 
         TaxCalculators::register('none', NullTaxCalculator::class);
         TaxCalculators::register('default', DefaultTaxCalculator::class);
+        TaxCalculators::register('deductive', DeductiveTaxCalculator::class);
     }
 }
