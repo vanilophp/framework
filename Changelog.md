@@ -17,6 +17,7 @@
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
 - Removed the throwing of `CartUpdated` event when destroying a cart (`CartDeleting` and `CartDeleted` remains)
 - Removed the deprecated `BuyableImageSpatieV7` and `BuyableImageSpatieV8` traits
+- Added the `SimpleTaxDeduction` adjuster
 - Added Cart item configuration support (different configurations constitute separate cart items) to the `Cart::addItem()` method
 - Added the `currency` field to the orders table
 - Added the following fields to the Channel model/table:

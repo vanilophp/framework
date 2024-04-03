@@ -12,6 +12,7 @@
 - Added Laravel 11 Support
 - Changed minimum Laravel version to v10.38.2
 - Changed minimal Enum requirement to v4.2
+- Added the `SimpleTaxDeduction` adjuster
 - Added the `AdjusterAliases` class that for decoupling FQCNs from the database
 - Added automatic mapping of adjuster FQCN <-> aliases when saving an adjustment into the DB and when calling the `getAdjuster()` method
 - Added the `mapInto()` method to the `RelationAdjustmentCollection` class, which forwards the call to the underlying Eloquent collection
