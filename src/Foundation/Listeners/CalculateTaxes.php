@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Listeners;
 
-use Illuminate\Support\Arr;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
