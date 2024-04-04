@@ -18,7 +18,10 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
+use Konekt\Address\Contracts\Zone;
+use Konekt\Address\Models\ZoneProxy;
 use Vanilo\Channel\Contracts\Channel as ChannelContract;
 use Vanilo\Contracts\Merchant;
 use Vanilo\Contracts\Schematized;
@@ -44,10 +47,13 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property ?string $billing_registration_nr
  * @property ?string $email
  * @property ?string $phone
- * @property ?array $billing_countries
- * @property ?array $shipping_countries
+ * @property ?int $billing_zone_id
+ * @property ?int $shipping_zone_id
  * @property string color
  * @property ?string theme
+ *
+ * @property ?Zone $billingZone
+ * @property ?Zone $shippingZone
  *
  * @property ?Carbon $deleted_at
  * @property Carbon $created_at
@@ -67,8 +73,6 @@ class Channel extends Model implements ChannelContract
 
     protected $casts = [
         'configuration' => 'array',
-        'billing_countries' => 'array',
-        'shipping_countries' => 'array',
     ];
 
     public static function findByDomain(string $domain): ?Channel
@@ -141,12 +145,38 @@ class Channel extends Model implements ChannelContract
 
     public function getBillingCountries(): array
     {
-        return $this->billing_countries ?? [];
+        if (!$this->zoneSupportIsPresent() || null === $this->billingZone) {
+            return [];
+        }
+
+        return $this->billingZone->getMemberCountryIds();
     }
 
     public function getShippingCountries(): array
     {
-        return $this->shipping_countries ?? [];
+        if (!$this->zoneSupportIsPresent() || null === $this->shippingZone) {
+            return [];
+        }
+
+        return $this->shippingZone->getMemberCountryIds();
+    }
+
+    public function billingZone(): ?BelongsTo
+    {
+        if ($this->zoneSupportIsPresent()) {
+            return $this->belongsTo(ZoneProxy::modelClass(), 'billing_zone_id', 'id');
+        }
+
+        return null;
+    }
+
+    public function shippingZone(): ?BelongsTo
+    {
+        if ($this->zoneSupportIsPresent()) {
+            return $this->belongsTo(ZoneProxy::modelClass(), 'shipping_zone_id', 'id');
+        }
+
+        return null;
     }
 
     public function getConfigurationSchema(): ?Schematized
@@ -161,5 +191,10 @@ class Channel extends Model implements ChannelContract
                 'source' => 'name'
             ]
         ];
+    }
+
+    protected function zoneSupportIsPresent(): bool
+    {
+        return class_exists(ZoneProxy::class);
     }
 }

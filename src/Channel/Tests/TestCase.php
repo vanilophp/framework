@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Channel\Tests;
 
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
+use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Channel\Providers\ModuleServiceProvider as ChannelModule;
@@ -68,7 +69,8 @@ abstract class TestCase extends Orchestra
         parent::resolveApplicationConfiguration($app);
 
         $app['config']->set('concord.modules', [
-            ChannelModule::class
+            ChannelModule::class,
+            AddressModule::class,
         ]);
     }
 }

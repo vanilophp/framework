@@ -16,8 +16,8 @@
   - `language`
   - `domain`
   - billing fields (merchant data)
-  - `billing_countries`
-  - `shipping_countries`
+  - `billing_zone_id`
+  - `shipping_zone_id`
   - `theme`
   - `color`
 - Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models

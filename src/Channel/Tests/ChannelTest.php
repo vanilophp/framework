@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Channel\Tests;
 
+use Konekt\Address\Models\Zone;
+use Konekt\Address\Models\ZoneScope;
 use Vanilo\Channel\Models\Channel;
 use Vanilo\Contracts\Merchant;
 
@@ -109,5 +111,57 @@ class ChannelTest extends TestCase
         $this->assertEquals('Building F', $merchant->getAddress()->getAddress2());
         $this->assertEquals('IT', $merchant->getAddress()->getCountryCode());
         $this->assertEquals('41044', $merchant->getAddress()->getPostalCode());
+    }
+
+    /** @test */
+    public function it_returns_an_empty_array_of_shipping_and_billing_countries_by_default()
+    {
+        $channel = Channel::create(['name' => 'Mobile App']);
+
+        $billingCountries = $channel->getBillingCountries();
+        $shippingCountries = $channel->getShippingCountries();
+
+        $this->assertIsArray($billingCountries);
+        $this->assertEmpty($billingCountries);
+        $this->assertIsArray($shippingCountries);
+        $this->assertEmpty($shippingCountries);
+    }
+
+    /** @test */
+    public function billing_countries_can_be_assigned_via_zones()
+    {
+        $zone = Zone::create(['scope' => ZoneScope::BILLING(), 'name' => 'Scandinavia']);
+        $zone->addCountry('SE');
+        $zone->addCountry('FI');
+        $zone->addCountry('DK');
+        $zone->addCountry('NO');
+
+        $channel = Channel::create(['name' => 'Scandinavian Shop', 'billing_zone_id' => $zone->id]);
+
+        $billingCountries = $channel->getBillingCountries();
+
+        $this->assertCount(4, $billingCountries);
+        $this->assertContains('SE', $billingCountries);
+        $this->assertContains('FI', $billingCountries);
+        $this->assertContains('DK', $billingCountries);
+        $this->assertContains('NO', $billingCountries);
+    }
+
+    /** @test */
+    public function shipping_countries_can_be_assigned_via_zones()
+    {
+        $zone = Zone::create(['scope' => ZoneScope::SHIPPING(), 'name' => 'Benelux']);
+        $zone->addCountry('BE');
+        $zone->addCountry('NL');
+        $zone->addCountry('LU');
+
+        $channel = Channel::create(['name' => 'Benelux Shop', 'shipping_zone_id' => $zone->id]);
+
+        $shippingCountries = $channel->getShippingCountries();
+
+        $this->assertCount(3, $shippingCountries);
+        $this->assertContains('BE', $shippingCountries);
+        $this->assertContains('NL', $shippingCountries);
+        $this->assertContains('LU', $shippingCountries);
     }
 }
