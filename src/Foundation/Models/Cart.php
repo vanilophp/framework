@@ -45,6 +45,11 @@ class Cart extends BaseCart implements Adjustable
         return $this->items->sum('total');
     }
 
+    public function itemsPreAdjustmentTotal(): float
+    {
+        return $this->items->sum(fn ($item) => $item->preAdjustmentTotal());
+    }
+
     public function shippingAdjustmentsTotal(): float
     {
         return $this->adjustments()->byType(AdjustmentTypeProxy::SHIPPING())->total();
