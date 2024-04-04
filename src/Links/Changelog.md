@@ -9,7 +9,7 @@
 - Dropped Laravel 9 Support
 - Added PHP 8.3 Support
 - Added Laravel 11 Support
-- Changed minimum Laravel version to v10.38.2
+- Changed minimum Laravel version to v10.43
 
 ## 3.x Series
 

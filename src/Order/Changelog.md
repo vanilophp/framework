@@ -10,7 +10,7 @@
 - Dropped Enum v3 Support
 - Added PHP 8.3 Support
 - Added Laravel 11 Support
-- Changed minimum Laravel version to v10.38.2
+- Changed minimum Laravel version to v10.43
 - Changed minimal Enum requirement to v4.2
 - Upgraded to Konekt Address and User modules to v3
 - Added the `currency` field to the orders table
