@@ -25,8 +25,8 @@
     - `language`
     - `domain`
     - billing fields (emitter's data)
-    - `billing_countries`
-    - `shipping_countries`
+    - `billing_zone_id`
+    - `shipping_zone_id`
     - `theme`
     - `color`
 - Added `ProductSearch` features:
