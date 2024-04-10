@@ -12,6 +12,7 @@
 - Added Laravel 11 Support
 - Changed minimum Laravel version to v10.43
 - Changed minimal Enum requirement to v4.2
+- Changed minimal Address module requirement to v3.3
 - Added `isZoneRestricted()` & `isNotZoneRestricted()` helper methods to the `ShippingMethod` class
 - BC: Changed the ShippingFeeCalculator, Carrier and Shipment interfaces to Configurable & Schematized
 - BC: Added the `getCalculator()` & `estimate()` methods to the `ShippingMethod` interface

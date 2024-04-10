@@ -16,10 +16,9 @@ namespace Vanilo\Shipment\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
+use Konekt\Address\Concerns\Zoneable;
 use Konekt\Address\Contracts\Zone;
-use Konekt\Address\Models\ZoneProxy;
 use Vanilo\Contracts\Schematized;
 use Vanilo\Shipment\Calculators\NullShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
@@ -38,12 +37,8 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property boolean $is_active
  * @property array $configuration
  *
- * @property-read Zone|null $zone
- *
  * @method static Builder actives()
  * @method static Builder inactives()
- * @method static Builder forZone(Zone|int $zone)
- * @method static Builder forZones(array|Collection $zones)
  *
  * @method static ShippingMethod create(array $attributes)
  */
@@ -51,6 +46,7 @@ class ShippingMethod extends Model implements ShippingMethodContract
 {
     use BelongsToCarrier;
     use ConfigurableModel;
+    use Zoneable;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -85,24 +81,9 @@ class ShippingMethod extends Model implements ShippingMethodContract
         return $this->getCalculator()->calculate($subject, $this->configuration());
     }
 
-    public function isZoneRestricted(): bool
-    {
-        return null !== $this->zone_id;
-    }
-
-    public function isNotZoneRestricted(): bool
-    {
-        return !$this->isZoneRestricted();
-    }
-
     public function getConfigurationSchema(): ?Schematized
     {
         return SchemaDefinition::wrap($this->getCalculator());
-    }
-
-    public function zone(): BelongsTo
-    {
-        return $this->belongsTo(ZoneProxy::modelClass(), 'zone_id', 'id');
     }
 
     public function scopeActives(Builder $query): Builder
@@ -113,21 +94,5 @@ class ShippingMethod extends Model implements ShippingMethodContract
     public function scopeInactives(Builder $query): Builder
     {
         return $query->where('is_active', false);
-    }
-
-    public function scopeForZone(Builder $query, Zone|int $zone): Builder
-    {
-        return $query->where('zone_id', is_int($zone) ? $zone : $zone->id);
-    }
-
-    public function scopeForZones(Builder $query, array|Collection $zones): Builder
-    {
-        if (is_array($zones)) {
-            $zones = array_map(fn (Zone|int $zone) => is_int($zone) ? $zone : $zone->id, $zones);
-        } else {
-            $zones = $zones->map(fn (Zone $zone) => $zone->id);
-        }
-
-        return $query->whereIn('zone_id', $zones);
     }
 }

@@ -7,7 +7,7 @@
 
 - Dropped PHP 8.0 & PHP 8.1 Support
 - Dropped Laravel 9 Support
-- Upgraded to Konekt Address v3
+- Upgraded to Konekt Address v3.3+
 - Added PHP 8.3 Support
 - Added Laravel 11 Support
 - Changed minimum Laravel version to v10.43

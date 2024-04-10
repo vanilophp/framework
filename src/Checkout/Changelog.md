@@ -12,6 +12,7 @@
 - Added Laravel 11 Support
 - Changed minimum Laravel version to v10.43
 - Changed minimal Enum requirement to v4.2
+- Changed minimal Address requirement to v3.3
 - Added the `BillpayerChanged` event
 - BC: Removed the following traits:
   - `HasCart`

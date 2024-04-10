@@ -12,6 +12,7 @@
 - Added Laravel 11 Support
 - Changed minimum Laravel version to v10.43
 - Changed minimal Enum requirement to v4.2
+- Changed minimal Address module requirement to v3.3
 - Upgraded to Konekt Address, Customer and User modules to v3
 - Upgraded to Laravel Media Library v11
 - Removed the Vanilo v2 `Framework` namespace compatibility layer
