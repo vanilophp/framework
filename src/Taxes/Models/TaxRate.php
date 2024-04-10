@@ -16,12 +16,10 @@ namespace Vanilo\Taxes\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Konekt\Address\Concerns\Zoneable;
 use Konekt\Address\Contracts\Zone;
-use Konekt\Address\Models\ZoneProxy;
 use Vanilo\Contracts\Schematized;
 use Vanilo\Support\Dto\SchemaDefinition;
 use Vanilo\Support\Traits\ConfigurableModel;
