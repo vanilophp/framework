@@ -281,7 +281,7 @@ class ProductSearch
         return $this;
     }
 
-    public function getSearcher(): Searcher
+    public function getSearcher(string|array $columns = null): Searcher
     {
         [$orderBy, $direction] = is_null($this->orderBy) ? [null, 'asc'] : explode(':', $this->orderBy);
         if ('desc' === strtolower($direction)) {
@@ -289,8 +289,8 @@ class ProductSearch
         }
 
         return $this->searcher
-            ->add($this->productQuery, null, $orderBy)
-            ->add($this->masterProductQuery, null, $orderBy);
+            ->add($this->productQuery, $columns, $orderBy)
+            ->add($this->masterProductQuery, $columns, $orderBy);
     }
 
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
