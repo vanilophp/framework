@@ -16,6 +16,7 @@ namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
+use Vanilo\Cart\CartManager;
 use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
 use Vanilo\Checkout\Facades\Checkout;
@@ -35,7 +36,12 @@ class CalculateShippingFees
             $checkout = Checkout::getFacadeRoot();
         }
 
-        if (null === $cart || !$cart instanceof Adjustable) {
+        if (null === $cart) {
+            return;
+        }
+
+        $cartModel = $cart instanceof CartManager ? $cart->model() : $cart;
+        if (!$cartModel instanceof Adjustable) {
             return;
         }
 
