@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Listeners;
 
+use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
@@ -34,9 +35,7 @@ class CalculateShippingFees
             $checkout = Checkout::getFacadeRoot();
         }
 
-        // @todo Also check if the cart is Adjustable; we're getting a CartManager here which
-        //       proxies down calls to the store
-        if (null === $cart) {
+        if (null === $cart || !$cart instanceof Adjustable) {
             return;
         }
 
