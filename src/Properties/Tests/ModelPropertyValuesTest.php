@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Properties\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
+use Vanilo\Properties\Exceptions\UnknownPropertyException;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
 use Vanilo\Properties\Tests\Examples\Product;
@@ -144,6 +145,17 @@ class ModelPropertyValuesTest extends TestCase
 
         $this->assertEquals('medium', $sword->valueOfProperty('length')->getCastedValue());
         $this->assertEquals('Hua lu guy', $sword->valueOfProperty('shape')->getCastedValue());
+    }
+
+    /** @test */
+    public function attempting_to_assign_values_with_inexistent_properties_throws_an_exception()
+    {
+        $this->expectException(UnknownPropertyException::class);
+
+        $shelf = Product::create(['name' => 'Shelf']);
+        $shelf->assignPropertyValues([
+            'no-such-thing' => 'here',
+        ]);
     }
 
     protected function setUpDatabase($app)

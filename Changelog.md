@@ -38,6 +38,7 @@
 - Added the processing of the `payment_method_id` field to the OrderFactory (Foundation)
 - Added the `BillpayerChanged` checkout event
 - Added the `is_hidden` field to the `Property` model
+- Changed the behavior of assignPropertyValues/assignPropertyValue methods so that it throws an `UnknownPropertyException` when passing an inexistent property slug
 - Added the `withImages` and `withChannels` methods to the product search class (eager loads media)
 - Added the `channelables` table for being many-to-many polymorphic relationships with channels and arbitrary models
 - Added the `mapInto()` method to the `RelationAdjustmentCollection` class, which forwards the call to the underlying Eloquent collection

@@ -11,6 +11,7 @@
 - Added PHP 8.3 Support
 - Added Laravel 11 Support
 - Changed minimum Laravel version to v10.43
+- Changed the behavior of assignPropertyValues/assignPropertyValue methods so that it throws an `UnknownPropertyException` when passing an inexistent property slug
 
 ## 3.x Series
 

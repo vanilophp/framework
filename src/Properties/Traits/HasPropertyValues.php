@@ -17,6 +17,7 @@ namespace Vanilo\Properties\Traits;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Vanilo\Properties\Contracts\Property;
 use Vanilo\Properties\Contracts\PropertyValue;
+use Vanilo\Properties\Exceptions\UnknownPropertyException;
 use Vanilo\Properties\Models\PropertyProxy;
 use Vanilo\Properties\Models\PropertyValueProxy;
 
@@ -32,8 +33,11 @@ trait HasPropertyValues
 
         $propertyValue = PropertyValueProxy::findByPropertyAndValue($property, $value);
         if (null === $propertyValue) {
+            if (null === $propertyId = $property instanceof Property ? $property->id : PropertyProxy::findBySlug($property)?->id) {
+                throw UnknownPropertyException::createFromSlug($property);
+            }
             $propertyValue = PropertyValueProxy::create([
-                'property_id' => $property instanceof Property ? $property->id : PropertyProxy::findBySlug($property)?->id,
+                'property_id' => $propertyId,
                 'value' => $value,
                 'title' => $value,
             ]);
