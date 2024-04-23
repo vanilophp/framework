@@ -28,3 +28,15 @@ jobs:
         run: mkdir -p database && touch database/database.sqlite
       - name: Run Tests
         run: php vendor/bin/phpunit --testdox
+  trigger-drivers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Netopia
+        run: |
+          curl \
+            -X POST \
+            -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/vanilophp/netopia/actions/workflows/tests.yml/dispatches \
+            -d '{"event_type":"run_tests"}'
+
