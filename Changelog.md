@@ -66,6 +66,11 @@
 - Added the `AdjusterAliases` class that for decoupling FQCNs from the database
 - Added automatic mapping of adjuster FQCN <-> aliases when saving an adjustment into the DB and when calling the `getAdjuster()` method
 - Added the `itemsPreAdjustmentTotal()` method to the Foundation's adjustable Cart model
+- Added the `replacePropertyValues()` and `replacePropertyValuesByScalar()` methods to the `HasPropertyValues` trait
+- BC: Added the following methods to the `PropertyValue` interface:
+    - `findByPropertyAndValue()`
+    - `getByScalarPropertiesAndValues()`
+- BC: Added the mixed return type to the `getCastedValue` method of the `PropertyValue` interface
 - BC: Added the `findBySku()` method to the `Product` and `MasterProductVariant` interfaces
 - BC: The `MasterProduct` interface no longer extends the `Product` interface
 - BC: The `Checkout` interface now extends the `ArrayAccess` and the `Shippable` interfaces (until here, only the concrete classes have implementation it)

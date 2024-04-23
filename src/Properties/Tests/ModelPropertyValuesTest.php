@@ -148,6 +148,79 @@ class ModelPropertyValuesTest extends TestCase
     }
 
     /** @test */
+    public function multiple_entries_can_be_replaced_by_scalar_key_value_pairs_at_once()
+    {
+        $wheel = Product::create(['name' => 'Wheel']);
+        $finish = Property::create(['name' => 'Finish', 'slug' => 'finish', 'type' => 'text']);
+        $diameter = Property::create(['name' => 'Diameter', 'slug' => 'diameter', 'type' => 'integer']);
+        $brand = Property::create(['name' => 'Brand', 'slug' => 'brand', 'type' => 'text']);
+        $finish->propertyValues()->createMany([
+            ['title' => 'Glossy', 'value' => 'glossy'],
+            ['title' => 'Matte', 'value' => 'matte'],
+            ['title' => 'Cube', 'value' => 'cube'],
+        ]);
+        $diameter->propertyValues()->createMany([
+            ['title' => '16"', 'value' => 16],
+            ['title' => '17"', 'value' => 17],
+            ['title' => '18"', 'value' => 18],
+        ]);
+        $brand->propertyValues()->createMany([
+            ['title' => 'Dezent', 'value' => 'dezent'],
+            ['title' => 'Carmani', 'value' => 'carmani'],
+            ['title' => 'Borbet', 'value' => 'borbet'],
+            ['title' => 'ATS', 'value' => 'ats'],
+        ]);
+
+        $wheel->replacePropertyValuesByScalar(['finish' => 'glossy', 'diameter' => 16]);
+
+        $this->assertEquals(16, $wheel->valueOfProperty('diameter')->getCastedValue());
+        $this->assertEquals('glossy', $wheel->valueOfProperty('finish')->getCastedValue());
+        $this->assertNull($wheel->valueOfProperty('brand'));
+
+        $wheel->replacePropertyValuesByScalar(['finish' => 'matte', 'diameter' => 17]);
+        $wheel->refresh();
+
+        $this->assertEquals(17, $wheel->valueOfProperty('diameter')->getCastedValue());
+        $this->assertEquals('matte', $wheel->valueOfProperty('finish')->getCastedValue());
+        $this->assertNull($wheel->valueOfProperty('brand'));
+
+        $wheel->replacePropertyValuesByScalar(['diameter' => 17, 'brand' => 'ats']);
+        $wheel->refresh();
+
+        $this->assertEquals(17, $wheel->valueOfProperty('diameter')->getCastedValue());
+        $this->assertNull($wheel->valueOfProperty('finish'));
+        $this->assertEquals('ats', $wheel->valueOfProperty('brand')->getCastedValue());
+
+        $wheel->replacePropertyValuesByScalar(['diameter' => 18, 'brand' => 'ats', 'finish' => 'matte']);
+        $wheel->refresh();
+
+        $this->assertEquals(18, $wheel->valueOfProperty('diameter')->getCastedValue());
+        $this->assertEquals('matte', $wheel->valueOfProperty('finish')->getCastedValue());
+        $this->assertEquals('ats', $wheel->valueOfProperty('brand')->getCastedValue());
+
+        $wheel->replacePropertyValuesByScalar([]);
+        $wheel->refresh();
+
+        $this->assertNull($wheel->valueOfProperty('finish'));
+        $this->assertNull($wheel->valueOfProperty('brand'));
+        $this->assertNull($wheel->valueOfProperty('diameter'));
+    }
+
+    /** @test */
+    public function replace_by_scalar_will_create_new_values_if_necessary()
+    {
+        $tyre = Product::create(['name' => 'Tyre']);
+        $origin = Property::create(['name' => 'Origin', 'slug' => 'origin', 'type' => 'text']);
+        $origin->propertyValues()->createMany([
+            ['title' => 'China', 'value' => 'china'],
+            ['title' => 'India', 'value' => 'india'],
+        ]);
+
+        $tyre->replacePropertyValuesByScalar(['origin' => 'canada']);
+        $this->assertEquals('canada', $tyre->fresh()->valueOfProperty('origin')?->getCastedValue());
+    }
+
+    /** @test */
     public function attempting_to_assign_values_with_inexistent_properties_throws_an_exception()
     {
         $this->expectException(UnknownPropertyException::class);

@@ -12,6 +12,11 @@
 - Added Laravel 11 Support
 - Changed minimum Laravel version to v10.43
 - Changed the behavior of assignPropertyValues/assignPropertyValue methods so that it throws an `UnknownPropertyException` when passing an inexistent property slug
+- Added the `replacePropertyValues()` and `replacePropertyValuesByScalar()` methods to the `HasPropertyValues` trait
+- BC: Added the following methods to the `PropertyValue` interface:
+  - `findByPropertyAndValue()`
+  - `getByScalarPropertiesAndValues()`
+- BC: Added the mixed return type to the `getCastedValue` method of the `PropertyValue` interface
 
 ## 3.x Series
 

@@ -14,8 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Properties\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Konekt\Concord\Proxies\ModelProxy;
 
+/**
+ * @method static PropertyValue|null findByPropertyAndValue(string $propertySlug, mixed $value)
+ * @method static Collection getByScalarPropertiesAndValues(array $conditions)
+ */
 class PropertyValueProxy extends ModelProxy
 {
 }

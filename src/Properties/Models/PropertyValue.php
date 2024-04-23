@@ -17,6 +17,7 @@ namespace Vanilo\Properties\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Vanilo\Properties\Contracts\PropertyValue as PropertyValueContract;
@@ -55,6 +56,32 @@ class PropertyValue extends Model implements PropertyValueContract
         return static::byProperty($property)->whereSlug($value)->first();
     }
 
+    /**
+     * @example ['color' => 'blue', 'shape' => 'heart']
+     * @param array<string, mixed> $conditions The keys of the entries = the property slug, the values = the scalar property value
+     */
+    public static function getByScalarPropertiesAndValues(array $conditions): Collection
+    {
+        if (empty($conditions)) {
+            return new Collection([]);
+        }
+
+        $query = self::query()
+            ->select('property_values.*')
+            ->join('properties', 'property_values.property_id', '=', 'properties.id');
+
+        $count = 0;
+        foreach ($conditions as $property => $value) {
+            match ($count) {
+                0 => $query->where(fn($q) => $q->where('properties.slug', '=', $property)->where('property_values.value', '=', $value)),
+                default => $query->orWhere(fn($q) => $q->where('properties.slug', '=', $property)->where('property_values.value', '=', $value)),
+            };
+            $count++;
+        }
+
+        return $query->get();
+    }
+
     public function property(): BelongsTo
     {
         return $this->belongsTo(PropertyProxy::modelClass());
@@ -80,7 +107,7 @@ class PropertyValue extends Model implements PropertyValueContract
     /**
      * Returns the transformed value according to the underlying type
      */
-    public function getCastedValue()
+    public function getCastedValue(): mixed
     {
         return $this->property->getType()->transformValue((string) $this->value, $this->settings);
     }

@@ -31,19 +31,7 @@ trait HasPropertyValues
             return;
         }
 
-        $propertyValue = PropertyValueProxy::findByPropertyAndValue($property, $value);
-        if (null === $propertyValue) {
-            if (null === $propertyId = $property instanceof Property ? $property->id : PropertyProxy::findBySlug($property)?->id) {
-                throw UnknownPropertyException::createFromSlug($property);
-            }
-            $propertyValue = PropertyValueProxy::create([
-                'property_id' => $propertyId,
-                'value' => $value,
-                'title' => $value,
-            ]);
-        }
-
-        $this->addPropertyValue($propertyValue);
+        $this->addPropertyValue($this->findOrCreateByPropertyValue($property, $value));
     }
 
     public function assignPropertyValues(iterable $propertyValues): void
@@ -51,6 +39,28 @@ trait HasPropertyValues
         foreach ($propertyValues as $property => $value) {
             $this->assignPropertyValue($property, $value);
         }
+    }
+
+    /**
+     * @param array<string, mixed> The key of the array is the property slug, the value is the scalar property value
+     */
+    public function replacePropertyValuesByScalar(array $propertyValues): void
+    {
+        $valuesToSet = PropertyValueProxy::getByScalarPropertiesAndValues($propertyValues);
+        if (count($propertyValues) !== count($valuesToSet)) {
+            foreach ($propertyValues as $property => $value) {
+                if (!$valuesToSet->contains(fn (PropertyValue $pv) => $pv->value == $value && $pv->property->slug === $property)) {
+                    $valuesToSet[] = $this->findOrCreateByPropertyValue($property, $value);
+                }
+            }
+        }
+
+        $this->replacePropertyValues(...$valuesToSet);
+    }
+
+    public function replacePropertyValues(PropertyValue ...$propertyValues): void
+    {
+        $this->propertyValues()->sync(collect($propertyValues)->pluck('id'));
     }
 
     public function valueOfProperty(string|Property $property): ?PropertyValue
@@ -100,5 +110,22 @@ trait HasPropertyValues
     public function removePropertyValue(PropertyValue $propertyValue)
     {
         return $this->propertyValues()->detach($propertyValue);
+    }
+
+    protected function findOrCreateByPropertyValue(string|Property $property, mixed $value): PropertyValue
+    {
+        $result = PropertyValueProxy::findByPropertyAndValue($property, $value);
+        if (null === $result) {
+            if (null === $propertyId = $property instanceof Property ? $property->id : PropertyProxy::findBySlug($property)?->id) {
+                throw UnknownPropertyException::createFromSlug($property);
+            }
+            $result = PropertyValueProxy::create([
+                'property_id' => $propertyId,
+                'value' => $value,
+                'title' => $value,
+            ]);
+        }
+
+        return $result;
     }
 }

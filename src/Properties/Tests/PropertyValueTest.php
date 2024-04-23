@@ -173,4 +173,48 @@ class PropertyValueTest extends TestCase
     {
         $this->assertNull(PropertyValue::findByPropertyAndValue('hey-i-am-so-stupid', 'gold'));
     }
+
+    /** @test */
+    public function multiple_entries_can_be_returned_by_scalar_key_value_pairs()
+    {
+        $shape = Property::create(['name' => 'Shape', 'type' => 'text']);
+        $material = Property::create(['name' => 'Material', 'type' => 'text']);
+        $shape->propertyValues()->createMany([
+            ['title' => 'Heart', 'value' => 'heart'],
+            ['title' => 'Sphere', 'value' => 'sphere'],
+            ['title' => 'Cube', 'value' => 'cube'],
+        ]);
+        $material->propertyValues()->createMany([
+            ['title' => 'Wood', 'value' => 'wood'],
+            ['title' => 'Glass', 'value' => 'glass'],
+            ['title' => 'Metal', 'value' => 'metal'],
+            ['title' => 'Plastic', 'value' => 'plastic'],
+        ]);
+
+        $values = PropertyValue::getByScalarPropertiesAndValues([
+            'shape' => 'heart',
+            'material' => 'wood',
+        ]);
+        $this->assertCount(2, $values);
+        $this->assertInstanceOf(PropertyValue::class, $values[0]);
+        $this->assertInstanceOf(PropertyValue::class, $values[1]);
+        $this->assertContains('shape', $values->map->property->map->slug);
+        $this->assertContains('material', $values->map->property->map->slug);
+        $this->assertContains('heart', $values->map->value);
+        $this->assertContains('wood', $values->map->value);
+    }
+
+    /** @test */
+    public function it_returns_an_empty_resultset_if_not_values_get_passed_to_get_by_scalar_key_value_pairs()
+    {
+        $season = Property::create(['name' => 'Season', 'type' => 'text']);
+        $season->propertyValues()->createMany([
+            ['title' => 'Winter'],
+            ['title' => 'Summer'],
+            ['title' => 'All Seasons'],
+        ]);
+
+        $values = PropertyValue::getByScalarPropertiesAndValues([]);
+        $this->assertCount(0, $values);
+    }
 }
