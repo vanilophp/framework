@@ -73,8 +73,8 @@ class PropertyValue extends Model implements PropertyValueContract
         $count = 0;
         foreach ($conditions as $property => $value) {
             match ($count) {
-                0 => $query->where(fn($q) => $q->where('properties.slug', '=', $property)->where('property_values.value', '=', $value)),
-                default => $query->orWhere(fn($q) => $q->where('properties.slug', '=', $property)->where('property_values.value', '=', $value)),
+                0 => $query->where(fn ($q) => $q->where('properties.slug', '=', $property)->where('property_values.value', '=', $value)),
+                default => $query->orWhere(fn ($q) => $q->where('properties.slug', '=', $property)->where('property_values.value', '=', $value)),
             };
             $count++;
         }
