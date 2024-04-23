@@ -30,6 +30,10 @@ jobs:
         run: php vendor/bin/phpunit --testdox
   trigger-drivers:
     runs-on: ubuntu-latest
+    name: Trigger ${{ matrix.driver }} tests
+    strategy:
+      matrix:
+        driver: ['stripe', 'paypal', 'braintree', 'mollie', 'netopia', 'euplatesc', 'simplepay', 'adyen']
     steps:
       - name: Netopia
         run: |
@@ -37,6 +41,6 @@ jobs:
             -X POST \
             -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/vanilophp/netopia/dispatches \
+            https://api.github.com/repos/vanilophp/${{ matrix.driver }}/dispatches \
             -d '{"event_type":"run_tests"}'
 
