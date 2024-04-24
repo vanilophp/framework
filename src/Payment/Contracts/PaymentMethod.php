@@ -27,6 +27,10 @@ interface PaymentMethod extends Configurable
      */
     public function getTimeout(): int;
 
+    public function getGatewayName(): string;
+
+    public function getGatewayIcon(): string;
+
     public function getGateway(): PaymentGateway;
 
     /** @deprecated use the `configuration()` method instead */

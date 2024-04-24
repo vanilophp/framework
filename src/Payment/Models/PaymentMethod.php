@@ -112,4 +112,15 @@ class PaymentMethod extends Model implements PaymentMethodContract
 
         return $gwClass::getName();
     }
+
+    public function getGatewayIcon(): string
+    {
+        if (null === $this->gateway) {
+            return NullGateway::svgIcon();
+        }
+
+        $gwClass = PaymentGateways::getClass($this->gateway);
+
+        return $gwClass::svgIcon();
+    }
 }
