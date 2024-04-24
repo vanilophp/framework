@@ -131,6 +131,7 @@
   - `isOffline()`
 - BC: Added the `getTransactionAmount()` method to the `PaymentResponse` interface
 - BC: Added the `transactionHandler()` method to the `PaymentGateway` interface (**experimental** feature)
+- BC: Added the `svgIcon()` static method to the `PaymentGateway` interface
 - BC: Added the following methods to the `Payable` interface:
     - `getNumber()`
     - `getPayableRemoteId()`

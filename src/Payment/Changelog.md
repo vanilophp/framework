@@ -20,6 +20,7 @@
     - `isOffline()`
 - BC: Added the `getTransactionAmount()` method to the `PaymentResponse` interface
 - BC: Added the `transactionHandler()` method to the `PaymentGateway` interface (experimental feature)
+- BC: Added the `svgIcon()` static method to the `PaymentGateway` interface
 - BC: Changed the `PaymentMethod` interface into Configurable
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 - Deprecated the `PaymentResponse::getAmountPaid()` method in favor of `getTransactionAmount()`

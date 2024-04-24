@@ -21,6 +21,8 @@ interface PaymentGateway
 {
     public static function getName(): string;
 
+    public static function svgIcon(): string;
+
     public function createPaymentRequest(
         Payment $payment,
         Address $shippingAddress = null,

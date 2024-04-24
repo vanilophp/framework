@@ -4,3 +4,4 @@ composer.lock
 build
 tests/temp
 /.phpunit.result.cache
+/.phpunit.cache/test-results

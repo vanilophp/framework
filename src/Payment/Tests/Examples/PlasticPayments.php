@@ -31,6 +31,11 @@ class PlasticPayments implements PaymentGateway
         return 'Plastic Payments';
     }
 
+    public static function svgIcon(): string
+    {
+        return '';
+    }
+
     public function createPaymentRequest(
         Payment $payment,
         Address $shippingAddress = null,
