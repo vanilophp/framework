@@ -21,6 +21,7 @@ interface PaymentGateway
 {
     public static function getName(): string;
 
+    /** This method must return a 1:1 ratio svg as string */
     public static function svgIcon(): string;
 
     public function createPaymentRequest(
