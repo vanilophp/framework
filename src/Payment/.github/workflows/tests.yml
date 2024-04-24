@@ -1,10 +1,6 @@
 name: tests
 
-on:
-  push:
-  pull_request:
-  repository_dispatch:
-    types: [run_tests]
+on: [push]
 
 jobs:
   build:
