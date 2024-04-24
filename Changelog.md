@@ -100,6 +100,7 @@
   - `ComputesShipToName`
   - `FillsCommonCheckoutAttributes`
 - BC: Added the `deleteByType()` and `clear()` methods to the `AdjustmentCollection` interface
+- BC: Added the `getAddress2()` method to the `Address` interface
 - BC: The `Adjustable::itemsTotal()` has been renamed to `preAdjustmentTotal()`
 - BC: The `invalidateAdjustments()` method has been added to the `Adjustable` interface
 - BC: The `exceptTypes()` method has been added to the `AdjustmentCollection` interface

@@ -75,6 +75,11 @@ class Address implements AddressContract, Arrayable
         return $this->data['address'] ?? '';
     }
 
+    public function getAddress2(): ?string
+    {
+        return $this->data['address2'] ?? null;
+    }
+
     public function fill(array $attributes)
     {
         $this->data = array_merge($this->data, $attributes);

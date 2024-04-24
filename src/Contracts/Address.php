@@ -45,4 +45,6 @@ interface Address
      * The address part (Street, number, building, PO box etc)
      */
     public function getAddress(): string;
+
+    public function getAddress2(): ?string;
 }

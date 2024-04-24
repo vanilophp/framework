@@ -66,4 +66,9 @@ trait AddressModel
     {
         return $this->address ?: '';
     }
+
+    public function getAddress2(): ?string
+    {
+        return $this->address2 ?? null;
+    }
 }

@@ -15,6 +15,7 @@
 - Added the `Schematized` interface
 - Added the `getConfigurationSchema()` method to the `Configurable` interface
 - BC: Added the `itemsTotal()` method to the `CheckoutSubject` interface
+- BC: Added the `getAddress2()` method to the `Address` interface
 - BC: Added the following methods to the `Payable` interface:
   - `getNumber()`
   - `getPayableRemoteId()`

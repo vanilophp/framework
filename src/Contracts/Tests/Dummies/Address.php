@@ -79,4 +79,9 @@ class Address implements \Vanilo\Contracts\Address
     {
         return $this->address;
     }
+
+    public function getAddress2(): ?string
+    {
+        return null;
+    }
 }

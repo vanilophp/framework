@@ -45,4 +45,9 @@ class Address extends \Konekt\Address\Models\Address implements \Vanilo\Contract
     {
         return $this->address;
     }
+
+    public function getAddress2(): ?string
+    {
+        return $this->address2;
+    }
 }
