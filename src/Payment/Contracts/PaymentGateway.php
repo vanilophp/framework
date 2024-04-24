@@ -29,5 +29,8 @@ interface PaymentGateway
 
     public function processPaymentResponse(Request $request, array $options = []): PaymentResponse;
 
+    /** @experimental  */
+    public function transactionHandler(): ?TransactionHandler;
+
     public function isOffline(): bool;
 }

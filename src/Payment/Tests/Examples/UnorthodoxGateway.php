@@ -20,6 +20,7 @@ use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentRequest;
 use Vanilo\Payment\Contracts\PaymentResponse;
+use Vanilo\Payment\Contracts\TransactionHandler;
 use Vanilo\Payment\Models\PaymentStatus;
 use Vanilo\Payment\Requests\NullRequest;
 
@@ -49,6 +50,11 @@ class UnorthodoxGateway implements PaymentGateway
             $request->getStatus(),
             PaymentStatus::PAID()
         );
+    }
+
+    public function transactionHandler(): ?TransactionHandler
+    {
+        return null;
     }
 
     public function isOffline(): bool

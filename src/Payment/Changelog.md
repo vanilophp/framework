@@ -19,9 +19,12 @@
     - `getRemoteId()`
     - `isOffline()`
 - BC: Added the `getTransactionAmount()` method to the `PaymentResponse` interface
+- BC: Added the `transactionHandler()` method to the `PaymentGateway` interface (experimental feature)
 - BC: Changed the `PaymentMethod` interface into Configurable
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 - Deprecated the `PaymentResponse::getAmountPaid()` method in favor of `getTransactionAmount()`
+- Added a series of **experimental** transaction-style interfaces. They shouldn't be used yet, but
+  have been added so that they can be implemented during the v4.x lifecycle without breaking existing implementations 
 
 ## 3.x Series
 

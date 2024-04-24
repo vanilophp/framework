@@ -20,6 +20,7 @@ use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentGateway;
 use Vanilo\Payment\Contracts\PaymentRequest;
 use Vanilo\Payment\Contracts\PaymentResponse;
+use Vanilo\Payment\Contracts\TransactionHandler;
 use Vanilo\Payment\Requests\NullRequest;
 use Vanilo\Payment\Responses\NullResponse;
 
@@ -41,6 +42,11 @@ class NullGateway implements PaymentGateway
     public function processPaymentResponse(Request $request, array $options = []): PaymentResponse
     {
         return new NullResponse();
+    }
+
+    public function transactionHandler(): ?TransactionHandler
+    {
+        return null;
     }
 
     public function isOffline(): bool

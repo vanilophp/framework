@@ -129,6 +129,7 @@
   - `getRemoteId()`
   - `isOffline()`
 - BC: Added the `getTransactionAmount()` method to the `PaymentResponse` interface
+- BC: Added the `transactionHandler()` method to the `PaymentGateway` interface (**experimental** feature)
 - BC: Added the following methods to the `Payable` interface:
     - `getNumber()`
     - `getPayableRemoteId()`
@@ -146,6 +147,8 @@
     - `getShippingCountries()`
 - Deprecated the `PaymentMethod::getConfiguration()` in favor of `configuration()`
 - Deprecated the `PaymentResponse::getAmountPaid()` method in favor of `getTransactionAmount()`
+- Added a series of **experimental** transaction-style interfaces. They shouldn't be used yet, but
+  have been added so that they can be implemented during the v4.x lifecycle without breaking existing implementations
 - Added the `Schematized` interface
 - Added the nette/schema package requirement (v1.2.5+)
 - Fixed possible null return type on Billpayer::getName() when is_organization is true but the company name is null

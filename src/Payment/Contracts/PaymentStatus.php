@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Contracts;
 
+use Konekt\Enum\EnumInterface;
+
 /**
  * @method static PaymentStatus PENDING()
  * @method static PaymentStatus AUTHORIZED()
@@ -36,11 +38,6 @@ namespace Vanilo\Payment\Contracts;
  * @method bool isRefunded()
  * @method bool isPartiallyRefunded()
  */
-interface PaymentStatus
+interface PaymentStatus extends EnumInterface
 {
-    /** @return string */
-    public function value();
-
-    /** @return string */
-    public function label();
 }
