@@ -1,6 +1,10 @@
 name: tests
 
-on: [push]
+on:
+  push:
+  pull_request:
+  repository_dispatch:
+    types: [run_tests]
 
 jobs:
   build:
@@ -35,7 +39,7 @@ jobs:
       matrix:
         driver: ['stripe', 'paypal', 'braintree', 'mollie', 'netopia', 'euplatesc', 'simplepay', 'adyen']
     steps:
-      - name: Netopia
+      - name: Dispatch event to the ${{ matrix.driver }} repo
         run: |
           curl \
             -X POST \
