@@ -31,7 +31,7 @@ class NanoIdGenerator
     public function generate(): string
     {
         $len = strlen($this->alphabet);
-        $mask = (2 << log($len - 1) / M_LN2) - 1;
+        $mask = (2 << (int) (log($len - 1) / M_LN2)) - 1;
         $step = (int) ceil(1.6 * $mask * $this->size / $len);
         $id = '';
         while (true) {
