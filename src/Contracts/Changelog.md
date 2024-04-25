@@ -21,6 +21,8 @@
   - `getPayableRemoteId()`
   - `setPayableRemoteId()`
   - `findByPayableRemoteId()`
+  - `hasItems()`
+  - `getItems()`
 - Added the nette/schema package requirement (v1.2.5+)
 
 ## 3.x Series

@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Tests\Examples;
 
+use ArrayIterator;
 use Illuminate\Database\Eloquent\Model;
+use Traversable;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\Payable;
 
@@ -51,6 +53,17 @@ class Order extends Model implements Payable
     {
         return new Customer();
     }
+
+    public function hasItems(): bool
+    {
+        return false;
+    }
+
+    public function getItems(): Traversable
+    {
+        return new ArrayIterator([]);
+    }
+
 
     public function getNumber(): string
     {

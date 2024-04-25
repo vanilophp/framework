@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
+use Traversable;
+
 interface Payable
 {
     public function getPayableId(): string;
@@ -33,6 +35,10 @@ interface Payable
     public function setPayableRemoteId(string $remoteId): void;
 
     public static function findByPayableRemoteId(string $remoteId): ?Payable;
+
+    public function hasItems(): bool;
+
+    public function getItems(): Traversable;
 
     /** The human readable representation, eg.: "Order no. ABC-123" */
     public function getTitle(): string;

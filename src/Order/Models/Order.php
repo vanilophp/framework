@@ -121,6 +121,11 @@ class Order extends Model implements OrderContract
         return $this->language;
     }
 
+    public function hasItems(): bool
+    {
+        return $this->items->isNotEmpty();
+    }
+
     public function getItems(): Traversable
     {
         return $this->items;
