@@ -10,20 +10,12 @@
 
 Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce applications with **pleasure**.
 
-## Development Version
-
-You are browsing the unstable, v4.x version of this repository!
-
-Do not use this branch in any real projects yet, as it's a subject of heavy changes!
-
-For the stable version see the `3.x` branch.
-
 ## Stable Version
 
-#### 3.x
+#### 4.x
 
-The latest stable release is **3.8.2**, and it was released on Nov 17th, 2023.
-Vanilo v3.8 supports Laravel 9.x & 10.x versions and PHP 8.0 - 8.3
+The latest stable release is **4.0.0**, and it was released on Apr 25th, 2024.
+Vanilo v4.0 supports Laravel 10.x & 11.x versions and PHP 8.2 - 8.3
 
 Refer to the [Roadmap](https://vanilo.io/docs/3.x/roadmap) for upcoming versions.
 
