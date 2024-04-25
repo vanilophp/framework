@@ -18,7 +18,6 @@
         "php": "^8.2",
         "ext-json": "*",
         "ext-pdo": "*",
-        "doctrine/dbal": "^3.5.1",
         "laravel/framework": "^10.43|^11.0",
         "konekt/enum": "^4.2",
         "konekt/concord": "^1.13",
