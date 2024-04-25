@@ -64,7 +64,6 @@ class Order extends Model implements Payable
         return new ArrayIterator([]);
     }
 
-
     public function getNumber(): string
     {
         return (string) $this->id;
