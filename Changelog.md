@@ -2,6 +2,11 @@
 
 ## 4.x Series
 
+## 4.0.1
+##### 2024-04-25
+
+- Removed the Doctrine DBAL dependency
+
 ## 4.0.0
 ##### 2024-04-25
 
