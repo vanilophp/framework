@@ -161,6 +161,14 @@ class ProductSearch
         return $this;
     }
 
+    public function priceGreaterThan(float $max): self
+    {
+        $this->productQuery->where('price', '>=',  $max);
+        $this->masterProductQuery->where('price', '>=',  $max);
+
+        return $this;
+    }
+
     public function nameStartsWith(string $term): self
     {
         $this->productQuery->where('name', 'like', "$term%");
