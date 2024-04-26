@@ -566,9 +566,6 @@ class ProductSearchTest extends TestCase
             'price' => 99
         ]);
 
-        factory(Product::class, 4)->create();
-
-
         $finder = new ProductSearch();
         $result = $finder->priceBetween(30, 40)->getResults();
 
@@ -576,7 +573,7 @@ class ProductSearchTest extends TestCase
 
         $prices = $result->pluck('price');
 
-        foreach($prices as $price){
+        foreach ($prices as $price) {
             $this->assertLessThanOrEqual(40, $price);
             $this->assertGreaterThanOrEqual(20, $price);
         }
@@ -605,9 +602,6 @@ class ProductSearchTest extends TestCase
             'price' => 99
         ]);
 
-        factory(Product::class, 4)->create();
-
-
         $finder = new ProductSearch();
         $result = $finder->priceLessThan(12)->getResults();
 
@@ -615,11 +609,11 @@ class ProductSearchTest extends TestCase
 
         $prices = $result->pluck('price');
 
-        foreach($prices as $price){
+        foreach ($prices as $price) {
             $this->assertLessThanOrEqual(12, $price);
         }
     }
-    
+
     /** @test */
     public function it_can_find_products_above_a_certain_price()
     {
@@ -650,8 +644,8 @@ class ProductSearchTest extends TestCase
 
         $prices = $result->pluck('price');
 
-        foreach($prices as $price){
+        foreach ($prices as $price) {
             $this->assertGreaterThanOrEqual(35, $price);
         }
-    }   
+    }
 }

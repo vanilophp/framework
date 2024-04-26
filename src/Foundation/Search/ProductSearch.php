@@ -163,16 +163,16 @@ class ProductSearch
 
     public function priceGreaterThan(float $min): self
     {
-        $this->productQuery->where('price', '>=',  $min);
-        $this->masterProductQuery->where('price', '>=',  $min);
+        $this->productQuery->where('price', '>=', $min);
+        $this->masterProductQuery->where('price', '>=', $min);
 
         return $this;
     }
 
     public function priceLessThan(float $max): self
     {
-        $this->productQuery->where('price', '<=',  $max);
-        $this->masterProductQuery->where('price', '<=',  $max);
+        $this->productQuery->where('price', '<=', $max);
+        $this->masterProductQuery->where('price', '<=', $max);
 
         return $this;
     }
