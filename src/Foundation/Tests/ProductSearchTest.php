@@ -546,4 +546,39 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Bitcoin', $resultset[1]->name);
         $this->assertEquals('Dogecoin', $resultset[2]->name);
     }
+
+    /** @test */
+    public function it_can_find_product_by_price()
+    {
+        factory(Product::class)->create([
+            'price' => 31
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 35
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 11
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 99
+        ]);
+
+        factory(Product::class, 4)->create();
+
+
+        $finder = new ProductSearch();
+        $result = $finder->priceBetween(30, 40)->getResults();
+
+        $this->assertCount(2, $result);
+
+        $prices = $result->pluck('price');
+
+        foreach($prices as $price){
+            $this->assertLessThanOrEqual(40, $price);
+            $this->assertGreaterThanOrEqual(20, $price);
+        }
+    }
 }
