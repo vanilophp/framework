@@ -548,7 +548,7 @@ class ProductSearchTest extends TestCase
     }
 
     /** @test */
-    public function it_can_find_product_by_price()
+    public function it_can_find_products_by_price_range()
     {
         factory(Product::class)->create([
             'price' => 31
@@ -581,4 +581,42 @@ class ProductSearchTest extends TestCase
             $this->assertGreaterThanOrEqual(20, $price);
         }
     }
+
+    /** @test */
+    public function it_can_find_products_below_a_certain_price()
+    {
+        factory(Product::class)->create([
+            'price' => 31
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 35
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 11
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 10
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 99
+        ]);
+
+        factory(Product::class, 4)->create();
+
+
+        $finder = new ProductSearch();
+        $result = $finder->priceLessThan(12)->getResults();
+
+        $this->assertCount(2, $result);
+
+        $prices = $result->pluck('price');
+
+        foreach($prices as $price){
+            $this->assertLessThanOrEqual(12, $price);
+        }
+    }    
 }
