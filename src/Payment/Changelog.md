@@ -2,6 +2,11 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Changed the offline payment gateway's icon from a circle to a plug+x
+
 ## 4.0.0
 ##### 2024-04-25
 
