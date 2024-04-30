@@ -546,4 +546,106 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Bitcoin', $resultset[1]->name);
         $this->assertEquals('Dogecoin', $resultset[2]->name);
     }
+
+    /** @test */
+    public function it_can_find_products_by_price_range()
+    {
+        factory(Product::class)->create([
+            'price' => 31
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 35
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 11
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 99
+        ]);
+
+        $finder = new ProductSearch();
+        $result = $finder->priceBetween(30, 40)->getResults();
+
+        $this->assertCount(2, $result);
+
+        $prices = $result->pluck('price');
+
+        foreach ($prices as $price) {
+            $this->assertLessThanOrEqual(40, $price);
+            $this->assertGreaterThanOrEqual(20, $price);
+        }
+    }
+
+    /** @test */
+    public function it_can_find_products_below_a_certain_price()
+    {
+        factory(Product::class)->create([
+            'price' => 31
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 35
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 11
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 10
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 99
+        ]);
+
+        $finder = new ProductSearch();
+        $result = $finder->priceLessThan(12)->getResults();
+
+        $this->assertCount(2, $result);
+
+        $prices = $result->pluck('price');
+
+        foreach ($prices as $price) {
+            $this->assertLessThanOrEqual(12, $price);
+        }
+    }
+
+    /** @test */
+    public function it_can_find_products_above_a_certain_price()
+    {
+        factory(Product::class)->create([
+            'price' => 31
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 35
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 11
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 10
+        ]);
+
+        factory(Product::class)->create([
+            'price' => 99
+        ]);
+
+        $finder = new ProductSearch();
+        $result = $finder->priceGreaterThan(35)->getResults();
+
+        $this->assertCount(2, $result);
+
+        $prices = $result->pluck('price');
+
+        foreach ($prices as $price) {
+            $this->assertGreaterThanOrEqual(35, $price);
+        }
+    }
 }

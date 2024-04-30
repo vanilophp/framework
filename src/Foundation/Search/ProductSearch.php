@@ -153,6 +153,30 @@ class ProductSearch
         return $this;
     }
 
+    public function priceBetween(float $min, float $max): self
+    {
+        $this->productQuery->whereBetween('price', [$min, $max]);
+        $this->masterProductQuery->whereBetween('price', [$min, $max]);
+
+        return $this;
+    }
+
+    public function priceGreaterThan(float $min): self
+    {
+        $this->productQuery->where('price', '>=', $min);
+        $this->masterProductQuery->where('price', '>=', $min);
+
+        return $this;
+    }
+
+    public function priceLessThan(float $max): self
+    {
+        $this->productQuery->where('price', '<=', $max);
+        $this->masterProductQuery->where('price', '<=', $max);
+
+        return $this;
+    }
+
     public function nameStartsWith(string $term): self
     {
         $this->productQuery->where('name', 'like', "$term%");
