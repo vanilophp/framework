@@ -690,6 +690,5 @@ class ProductSearchTest extends TestCase
     public function it_can_be_extended_using_macros()
     {
         $finder = new ProductSearch();
-
     }
 }
