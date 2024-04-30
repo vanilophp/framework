@@ -19,6 +19,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Traits\Macroable;
 use Konekt\Search\Facades\Search;
 use Konekt\Search\Searcher;
 use Vanilo\Category\Contracts\Taxon;
@@ -33,6 +34,8 @@ use Vanilo\Properties\Models\PropertyValueProxy;
 
 class ProductSearch
 {
+    use Macroable;
+
     protected Searcher $searcher;
 
     protected Builder $productQuery;
