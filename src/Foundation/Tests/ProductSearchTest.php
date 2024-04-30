@@ -610,12 +610,12 @@ class ProductSearchTest extends TestCase
         $prices = $result->pluck('price');
 
         foreach ($prices as $price) {
-            $this->assertLessThanOrEqual(12, $price);
+            $this->assertLessThan(12, $price);
         }
     }
 
     /** @test */
-    public function it_can_find_products_above_a_certain_price()
+    public function it_can_find_products_above_or_equal_to_a_certain_price()
     {
         factory(Product::class)->create([
             'price' => 31
@@ -638,7 +638,7 @@ class ProductSearchTest extends TestCase
         ]);
 
         $finder = new ProductSearch();
-        $result = $finder->priceGreaterThan(35)->getResults();
+        $result = $finder->priceGreaterThanOrEqualTo(35)->getResults();
 
         $this->assertCount(2, $result);
 
@@ -647,5 +647,49 @@ class ProductSearchTest extends TestCase
         foreach ($prices as $price) {
             $this->assertGreaterThanOrEqual(35, $price);
         }
+    }
+
+    /** @test */
+    public function it_can_find_products_above_a_given_price()
+    {
+        factory(Product::class)->createMany([
+            ['price' => 7],
+            ['price' => 8],
+            ['price' => 9],
+            ['price' => 10],
+            ['price' => 200],
+            ['price' => 1999884],
+        ]);
+
+        $result = (new ProductSearch())->priceGreaterThan(8)->getResults();
+
+        $this->assertCount(4, $result);
+        $result->each(fn (Product $product) => $this->assertGreaterThan(8, $product->price));
+    }
+
+    /** @test */
+    public function it_can_find_products_below_or_equal_to_a_given_price()
+    {
+        factory(Product::class)->createMany([
+            ['price' => 300],
+            ['price' => 300.01],
+            ['price' => 301.01],
+            ['price' => 301.01],
+            ['price' => 301.02],
+            ['price' => 301.03],
+            ['price' => 301.011],
+        ]);
+
+        $result = (new ProductSearch())->priceLessThanOrEqualTo(301.01)->getResults();
+
+        $this->assertCount(4, $result);
+        $result->each(fn (Product $product) => $this->assertLessThanOrEqual(301.01, $product->price));
+    }
+
+    /** @test */
+    public function it_can_be_extended_using_macros()
+    {
+        $finder = new ProductSearch();
+
     }
 }
