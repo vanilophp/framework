@@ -42,9 +42,21 @@ final class Get
             return $groups;
         }
 
-        $links = collect();
-        $groups->each(function ($group) use ($links, $model) {
-            $links->push(
+        $result = collect();
+        if ('linkItems' === $this->wants) {
+            $groups->each(function ($group) use ($result, $model) {
+                $result->push(
+                    ...$group
+                    ->items
+                    ->reject(fn ($item) => $item->linkable_id === $model->id)
+                );
+            });
+
+            return $result;
+        }
+
+        $groups->each(function ($group) use ($result, $model) {
+            $result->push(
                 ...$group
                 ->items
                 ->map
@@ -53,6 +65,6 @@ final class Get
             );
         });
 
-        return $links;
+        return $result;
     }
 }

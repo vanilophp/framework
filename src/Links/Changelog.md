@@ -2,6 +2,12 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
+- Added the `link_items` helper (shortcut to Get::the()->linkItems()
+
 ## 4.0.0
 ##### 2024-04-25
 

@@ -14,6 +14,15 @@ if (!function_exists('links')) {
     }
 }
 
+if (!function_exists('link_items')) {
+    function link_items(string $type, string $property = null): Get
+    {
+        $result = Get::the($type)->linkItems();
+
+        return null !== $property ? $result->basedOn($property) : $result;
+    }
+}
+
 if (!function_exists('link_groups')) {
     function link_groups(string $type, string $property = null): Get
     {

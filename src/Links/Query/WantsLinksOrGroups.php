@@ -31,4 +31,11 @@ trait WantsLinksOrGroups
 
         return $this;
     }
+
+    public function linkItems(): self
+    {
+        $this->wants = 'linkItems';
+
+        return $this;
+    }
 }
