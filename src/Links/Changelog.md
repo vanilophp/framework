@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2024-XX-YY
 
+- Added the unidirectional links feature
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
 - Added the `link_items` helper (shortcut to Get::the()->linkItems()
 

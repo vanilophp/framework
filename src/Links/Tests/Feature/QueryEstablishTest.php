@@ -119,6 +119,40 @@ class QueryEstablishTest extends TestCase
         $this->assertCount(1, Get::the('variant')->links()->of($prod2));
     }
 
+    /** @test */
+    public function unidirectional_links_can_be_established()
+    {
+        $phone = TestLinkableProduct::create(['name' => 'iPhone 15'])->fresh();
+        $case1 = TestLinkableProduct::create(['name' => 'iPhone 15 Plastic Case 1'])->fresh();
+        LinkType::create(['name' => 'Accessory']);
+
+        Establish::a('accessory')->unidirectional()->link()->between($phone)->and($case1);
+
+        $this->assertCount(1, $phone->links('accessory'));
+        $this->assertEquals($case1->id, $phone->links('accessory')->first()->id);
+
+        $this->assertCount(0, $case1->links('accessory'));
+    }
+
+    /** @test */
+    public function unidirectional_links_can_be_established_between_multiple_entries()
+    {
+        $phone = TestLinkableProduct::create(['name' => 'iPhone 16'])->fresh();
+        $case1 = TestLinkableProduct::create(['name' => 'iPhone 16 Plastic Case 1'])->fresh();
+        $case2 = TestLinkableProduct::create(['name' => 'iPhone 16 Plastic Case 2'])->fresh();
+        LinkType::create(['name' => 'Protection']);
+
+        Establish::a('protection')->unidirectional()->link()->between($phone)->and($case1);
+        Establish::a('protection')->link()->between($phone)->and($case2);
+
+        $this->assertCount(2, $phone->links('protection'));
+        $this->assertEquals($case1->id, $phone->links('protection')->first()->id);
+        $this->assertEquals($case2->id, $phone->links('protection')->last()->id);
+
+        $this->assertCount(0, $case1->links('protection'));
+        $this->assertCount(0, $case2->links('protection'));
+    }
+
     protected function setUpDatabase($app)
     {
         $this->loadMigrationsFrom(dirname(__DIR__) . '/migrations_of_property_module');

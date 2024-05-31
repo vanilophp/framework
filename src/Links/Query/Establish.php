@@ -27,6 +27,8 @@ final class Establish
     use HasBaseModel;
     use CachesMorphTypes;
 
+    private bool $unidirectional = false;
+
     private string $wants = 'link';
 
     public static function a(LinkType|string $type): self
@@ -37,6 +39,13 @@ final class Establish
     public static function an(LinkType|string $type): self
     {
         return self::a($type);
+    }
+
+    public function unidirectional(): self
+    {
+        $this->unidirectional = true;
+
+        return $this;
     }
 
     public function link(): self
@@ -59,11 +68,15 @@ final class Establish
         $destinationGroup = $groups->first();
         if (null === $destinationGroup) {
             $destinationGroup = $this->createNewLinkGroup();
-            LinkGroupItemProxy::create([
+            $rootItem = LinkGroupItemProxy::create([
                 'link_group_id' => $destinationGroup->id,
                 'linkable_id' => $this->baseModel->id,
                 'linkable_type' => $this->morphTypeOf($this->baseModel::class),
             ]);
+            if ($this->unidirectional) {
+                $destinationGroup->root_item_id = $rootItem->id;
+                $destinationGroup->save();
+            }
         }
 
         foreach ($models as $model) {

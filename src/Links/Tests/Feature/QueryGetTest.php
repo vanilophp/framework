@@ -19,6 +19,7 @@ use InvalidArgumentException;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
+use Vanilo\Links\Query\Establish;
 use Vanilo\Links\Query\Get;
 use Vanilo\Links\Tests\Dummies\Property;
 use Vanilo\Links\Tests\Dummies\TestLinkableProduct;
@@ -277,6 +278,34 @@ class QueryGetTest extends TestCase
         $variantGroups = link_groups('variant')->of($this->galaxyS22);
         $this->assertCount(1, $variantGroups);
         $this->assertInstanceOf(LinkGroup::class, $variantGroups->first());
+    }
+
+    /** @test */
+    public function unidirectional_links_can_be_properly_queried()
+    {
+        $phone = TestLinkableProduct::create(['name' => 'iPhone 17'])->fresh();
+        $caseX = TestLinkableProduct::create(['name' => 'iPhone 17 Plastic Case X'])->fresh();
+        $caseY = TestLinkableProduct::create(['name' => 'iPhone 17 Plastic Case Y'])->fresh();
+        LinkType::create(['name' => 'Sleeves']);
+
+        Establish::a('sleeves')->unidirectional()->link()->between($phone)->and($caseX);
+        Establish::a('sleeves')->unidirectional()->link()->between($phone)->and($caseY);
+
+        $sleeves = Get::the('sleeves')->links()->of($phone);
+        $this->assertCount(2, $sleeves);
+        $this->assertEquals($caseX->id, $sleeves->first()->id);
+        $this->assertEquals($caseY->id, $sleeves->last()->id);
+
+        $this->assertCount(0, Get::the('sleeves')->links()->of($caseX));
+        $this->assertCount(0, Get::the('sleeves')->links()->of($caseY));
+
+        $sleeveItems = Get::the('sleeves')->linkItems()->of($phone);
+        $this->assertCount(2, $sleeveItems);
+        $this->assertEquals($caseX->id, $sleeveItems->first()->linkable_id);
+        $this->assertEquals($caseY->id, $sleeveItems->last()->linkable_id);
+
+        $this->assertCount(0, Get::the('sleeves')->linkItems()->of($caseX));
+        $this->assertCount(0, Get::the('sleeves')->linkItems()->of($caseY));
     }
 
     protected function setUpDatabase($app)

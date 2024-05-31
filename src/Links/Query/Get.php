@@ -45,24 +45,28 @@ final class Get
         $result = collect();
         if ('linkItems' === $this->wants) {
             $groups->each(function ($group) use ($result, $model) {
-                $result->push(
-                    ...$group
-                    ->items
-                    ->reject(fn ($item) => $item->linkable_id === $model->id)
-                );
+                if (is_null($group->root_item_id) || $group->rootItem->linkable_id === $model->id) {
+                    $result->push(
+                        ...$group
+                        ->items
+                        ->reject(fn($item) => $item->linkable_id === $model->id)
+                    );
+                }
             });
 
             return $result;
         }
 
         $groups->each(function ($group) use ($result, $model) {
-            $result->push(
-                ...$group
-                ->items
-                ->map
-                ->linkable
-                ->reject(fn ($item) => $item->id === $model->id)
-            );
+            if (is_null($group->root_item_id) || $group->rootItem->linkable_id === $model->id) {
+                $result->push(
+                    ...$group
+                    ->items
+                    ->map
+                    ->linkable
+                    ->reject(fn($item) => $item->id === $model->id)
+                );
+            }
         });
 
         return $result;

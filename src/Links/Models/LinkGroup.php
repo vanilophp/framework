@@ -26,11 +26,13 @@ use Vanilo\Links\Contracts\LinkGroup as LinkGroupContract;
  * @property int $id
  * @property int $link_type_id
  * @property int|null $property_id
+ * @property int|null $root_item_id
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  *
  * @property-read LinkType $type
  * @property-read Collection $items
+ * @property-read LinkGroupItem $rootItem
  *
  * @method static LinkGroup create(array $attributes)
  */
@@ -50,5 +52,10 @@ class LinkGroup extends Model implements LinkGroupContract
     public function items(): HasMany
     {
         return $this->hasMany(LinkGroupItemProxy::modelClass(), 'link_group_id', 'id');
+    }
+
+    public function rootItem(): BelongsTo
+    {
+        return $this->belongsTo(LinkGroupItemProxy::modelClass(), 'root_item_id', 'id');
     }
 }

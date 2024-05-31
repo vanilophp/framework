@@ -37,14 +37,18 @@ trait Linkable
 
         // @todo Optimize this to a single query
         $result = Collection::make();
-        foreach ($this->linkGroups()->filter(fn ($group) => $group->type->id === $type->id) as $group) {
-            $result->push(
-                ...$group
-                ->items
-                ->map
-                ->linkable
-                ->reject(fn ($item) => $item->id === $this->id)
-            );
+
+        $groups = $this->linkGroups()->filter(fn ($group) => $group->type->id === $type->id);
+        foreach ($groups as $group) {
+            if (is_null($group->root_item_id) || $group->rootItem->linkable_id === $this->id) {
+                $result->push(
+                    ...$group
+                    ->items
+                    ->map
+                    ->linkable
+                    ->reject(fn ($item) => $item->id === $this->id)
+                );
+            }
         }
 
         return $result;
