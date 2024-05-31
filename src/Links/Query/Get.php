@@ -49,7 +49,7 @@ final class Get
                     $result->push(
                         ...$group
                         ->items
-                        ->reject(fn($item) => $item->linkable_id === $model->id)
+                        ->reject(fn ($item) => $item->linkable_id === $model->id)
                     );
                 }
             });
@@ -64,7 +64,7 @@ final class Get
                     ->items
                     ->map
                     ->linkable
-                    ->reject(fn($item) => $item->id === $model->id)
+                    ->reject(fn ($item) => $item->id === $model->id)
                 );
             }
         });
