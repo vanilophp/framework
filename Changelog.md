@@ -10,6 +10,7 @@
 - Added the unidirectional links feature
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
 - Added the `link_items` helper (shortcut to Get::the()->linkItems()
+- Added the `taxes_total`, `shipping_total` and `total` attribute getters to the Foundation `Order` model
 - Changed the offline payment gateway's icon from a circle to a plug+x
 
 ## 4.0.1

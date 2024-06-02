@@ -15,10 +15,12 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Konekt\Customer\Models\CustomerProxy;
 use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Adjustments\Support\HasAdjustmentsViaRelation;
 use Vanilo\Adjustments\Support\RecalculatesAdjustments;
 use Vanilo\Channel\Contracts\Channel;
@@ -43,7 +45,9 @@ use Vanilo\Shipment\Models\ShippingMethodProxy;
  * @property null|PaymentMethod $paymentMethod
  * @property null|int $customer_id
  * @property null|string $payable_remote_id
- * @property null|\Vanilo\Contracts\Customer $customer
+ * @property-read float taxes_total
+ * @property-read float shipping_total
+ * @property-read null|\Vanilo\Contracts\Customer $customer
  * @property-read Collection|Payment[] $payments
  * @property-read Collection|ShipmentContract[] $shipments
  */
@@ -164,12 +168,31 @@ class Order extends BaseOrder implements Payable, Adjustable
             ->whereColumn('payable_id', 'orders.id')
             ->where('payable_type', $this->getPayableType())
             ->orderByDesc('id')
-            ->take(1)
+            ->take(1),
         ])->with('currentPayment');
     }
 
     public function payments()
     {
         return $this->morphMany(PaymentProxy::modelClass(), 'payable');
+    }
+
+    protected function taxesTotal(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value) => $this->adjustments()->byType(AdjustmentType::TAX())->total(true),
+        );
+    }
+
+    protected function shippingTotal(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value) => $this->adjustments()->byType(AdjustmentType::SHIPPING())->total(true),
+        );
+    }
+
+    protected function getTotalAttribute(): float
+    {
+        return $this->total();
     }
 }
