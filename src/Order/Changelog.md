@@ -2,6 +2,18 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Added the follwing getters to the default Billpayer model (proxies down to the underlying address):
+  - `country_id`
+  - `province_id`
+  - `postalcode`
+  - `city`
+  - `street_address` (fetches $billpayer->address->address) - can't use `address` since that collides with the address() relation
+  - `address2`
+  - `access_code`
+
 ## 4.0.0
 ##### 2024-04-25
 

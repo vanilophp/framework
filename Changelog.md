@@ -11,6 +11,15 @@
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
 - Added the `link_items` helper (shortcut to Get::the()->linkItems()
 - Added the `taxes_total`, `shipping_total` and `total` attribute getters to the Foundation `Order` model
+- Added the follwing getters to the default Billpayer model (proxies down to the underlying address):
+  - `country_id`
+  - `province_id`
+  - `postalcode`
+  - `city`
+  - `street_address` (fetches $billpayer->address->address) - can't use `address` since that collides with the address() relation
+  - `address2`
+  - `access_code`
+
 - Changed the offline payment gateway's icon from a circle to a plug+x
 
 ## 4.0.1
