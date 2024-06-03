@@ -44,4 +44,14 @@ class HelpersTest extends TestCase
     {
         $this->assertTrue(is_master_product(new IndependentMaster()));
     }
+
+    /** @test */
+    public function the_format_price_helper_accepts_decimal_separator()
+    {
+        config(['vanilo.foundation.currency.decimal_separator' => ',']);
+        config(['vanilo.foundation.currency.sign' => '£']);
+        config(['vanilo.foundation.currency.format' => '%1$.2f %2$s']);
+
+        $this->assertEquals('12,99 £', format_price(12.99));
+    }
 }

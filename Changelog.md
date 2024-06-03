@@ -10,6 +10,7 @@
 - Added the unidirectional links feature
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
 - Added the `link_items` helper, shortcut to Get::the()->linkItems()
+- Added support for configurable decimal separator used by the `format_price()` helper function
 - Added the discountable shipping fee calculator
 - Added the `taxes_total`, `shipping_total` and `total` attribute getters to the Foundation `Order` model
 - Added the follwing getters to the default Billpayer model (proxies down to the underlying address):

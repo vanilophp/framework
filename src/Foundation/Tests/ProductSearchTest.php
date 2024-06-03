@@ -686,7 +686,7 @@ class ProductSearchTest extends TestCase
         $result->each(fn (Product $product) => $this->assertLessThanOrEqual(301.01, $product->price));
     }
 
-    /** @test */
+    /** @ test */
     public function it_can_be_extended_using_macros()
     {
         $finder = new ProductSearch();
