@@ -20,14 +20,15 @@ use Vanilo\Payment\Models\PaymentProxy;
 
 final class NoTransaction implements TransactionNotCreated
 {
+    public mixed $details = null;
+
     private readonly string $paymentId;
+
     private ?Payment $payment = null;
 
     private ?string $reason = null;
 
     private bool $shouldBeRetried = false;
-
-    public mixed $details = null;
 
     public function __construct(
         Payment|string $payment,
