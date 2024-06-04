@@ -76,7 +76,7 @@ class OrderFactory extends BaseOrderFactory
             return [
                 'product' => $item->getBuyable(),
                 'quantity' => $item->getQuantity(),
-                'configuration' => $item->getBuyable() instanceof Configurable ? $item->configuration() : null,
+                'configuration' => $item instanceof Configurable ? $item->configuration() : null,
                 'adjustments' => $item instanceof Adjustable ? $item->adjustments() : [],
             ];
         })->all();

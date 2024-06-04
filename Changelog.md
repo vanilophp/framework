@@ -22,6 +22,7 @@
   - `address2`
   - `access_code`
 - Changed the offline payment gateway's icon from a circle to a plug+x
+- Fixed the possible missing configuration copy from cart_items to order_items in the OrderFactory
 
 ## 4.0.1
 ##### 2024-04-25
