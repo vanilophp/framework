@@ -19,7 +19,16 @@ namespace Vanilo\Payment\Contracts;
  */
 interface TransactionHandler
 {
+    /** @todo Move this to the Gateway in v5 along with all future supports<Feature> methods */
     public function supportsRefunds(): bool;
 
+    public function supportsRetry(): bool;
+
+    public function allowsRefund(Payment $payment): bool;
+
     public function issueRefund(Payment $payment, float $amount, array $options = []): Transaction|TransactionNotCreated;
+
+    public function canBeRetried(Payment $payment): bool;
+
+    public function getRetryRequest(Payment $payment, array $options = []): PaymentRequest|TransactionNotCreated;
 }

@@ -6,6 +6,8 @@
 ##### 2024-XX-YY
 
 - Changed the offline payment gateway's icon from a circle to a plug+x
+- [EXPERIMENTAL] Added the supportsRetry, allowsRefund, canBeRetried and getRetryRequest methods to the TransactionHandler interface
+- [EXPERIMENTAL] Added the `NoTransaction` DTO
 
 ## 4.0.0
 ##### 2024-04-25
