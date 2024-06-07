@@ -19,10 +19,31 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 
+/**
+ * @property-read int $id
+ * @property string $name
+ * @property string $slug
+ * @property int|null $parent_id
+ * @property int|null $priority
+ * @property string|null $ext_title
+ * @property string|null $meta_keywords
+ * @property string|null $meta_description
+ * @property string|null $subtitle
+ * @property string|null $excerpt
+ * @property string|null $description
+ * @property string|null $top_content
+ * @property string|null $bottom_content
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
+ *
+ * @property-read Taxonomy $taxonomy
+ * @property-read Taxon|null $parent
+ */
 class Taxon extends Model implements TaxonContract
 {
     use Sluggable;

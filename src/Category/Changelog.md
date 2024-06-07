@@ -2,6 +2,16 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Added the following content fields to the Taxon model/table:
+  - `subtitle`
+  - `excerpt`
+  - `description`
+  - `top_content`
+  - `bottom_content`
+
 ## 4.0.0
 ##### 2024-04-25
 

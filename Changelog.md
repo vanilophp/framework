@@ -21,6 +21,12 @@
   - `street_address` (fetches $billpayer->address->address) - can't use `address` since that collides with the address() relation
   - `address2`
   - `access_code`
+- Added the following content fields to the Taxon model/table:
+  - `subtitle`
+  - `excerpt`
+  - `description`
+  - `top_content`
+  - `bottom_content`
 - Changed the offline payment gateway's icon from a circle to a plug+x
 - Fixed the possible missing configuration copy from cart_items to order_items in the OrderFactory
 

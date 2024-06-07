@@ -373,4 +373,26 @@ class TaxonTest extends TestCase
         $child->removeParent();
         $this->assertTrue($child->isRootLevel());
     }
+
+    /** @test */
+    public function content_fields_can_be_mass_assigned()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Occasion']);
+        $taxon = Taxon::create([
+            'name' => 'Birthday',
+            'taxonomy_id' => $taxonomy->id,
+            'subtitle' => 'Birthday Gifts',
+            'excerpt' => 'Birthday gifts should be given for Bday',
+            'description' => 'This is a longer description, should be enough for unit tests',
+            'top_content' => 'Hey I am an html content above the product list',
+            'bottom_content' => 'I am a markdown content below the product list',
+        ])->fresh();
+
+        $this->assertEquals('Birthday', $taxon->name);
+        $this->assertEquals('Birthday Gifts', $taxon->subtitle);
+        $this->assertEquals('Birthday gifts should be given for Bday', $taxon->excerpt);
+        $this->assertEquals('This is a longer description, should be enough for unit tests', $taxon->description);
+        $this->assertEquals('Hey I am an html content above the product list', $taxon->top_content);
+        $this->assertEquals('I am a markdown content below the product list', $taxon->bottom_content);
+    }
 }
