@@ -37,10 +37,7 @@ final class EliminateLinks
         foreach ($this->linkGroupsOfModel($this->baseModel) as $group) {
             $itemsToDelete = $group
                 ->items
-                ->filter(fn ($item) => $toRemove->contains(function ($modelToRemove) use ($item) {
-                    return $modelToRemove->id == $item->linkable_id &&
-                        $this->morphTypeOf($modelToRemove::class) === $item->linkable_type;
-                }));
+                ->filter(fn ($item) => $toRemove->contains(fn ($modelToRemove) => $item->pointsTo($modelToRemove)));
             LinkGroupItemProxy::destroy($itemsToDelete->map->id);
         }
     }

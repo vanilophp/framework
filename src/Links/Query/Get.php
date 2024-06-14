@@ -45,7 +45,7 @@ final class Get
         $result = collect();
         if ('linkItems' === $this->wants) {
             $groups->each(function ($group) use ($result, $model) {
-                if (is_null($group->root_item_id) || $group->rootItem->linkable_id === $model->id) {
+                if (is_null($group->root_item_id) || $group->rootItem->pointsTo($model)) {
                     $result->push(
                         ...$group
                         ->items
@@ -58,7 +58,7 @@ final class Get
         }
 
         $groups->each(function ($group) use ($result, $model) {
-            if (is_null($group->root_item_id) || $group->rootItem->linkable_id === $model->id) {
+            if (is_null($group->root_item_id) || $group->rootItem->pointsTo($model)) {
                 $result->push(
                     ...$group
                     ->items

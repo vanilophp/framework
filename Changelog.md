@@ -8,6 +8,8 @@
 - Added the `priceGreaterThan`, `priceLessThan` and `priceBetween` methods to the ProductSearch class by [Matima](https://github.com/mahdirezaei-dev) in [#176](https://github.com/vanilophp/framework/pull/176)
 - Added the `Macroable` trait to the `ProductSearch` class
 - Added the unidirectional links feature
+- Added the `isUnidirectional()`, `isOmnidirectional()` and `isEmpty()` methods to the `LinkGroup` class
+- Added the `pointsTo()` method to the `LinkGroupItem` class
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
 - Added the `link_items` helper, shortcut to Get::the()->linkItems()
 - Added support for configurable decimal separator used by the `format_price()` helper function

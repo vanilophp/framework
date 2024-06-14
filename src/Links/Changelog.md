@@ -6,6 +6,8 @@
 ##### 2024-XX-YY
 
 - Added the unidirectional links feature
+- Added the `isUnidirectional()`, `isOmnidirectional()` and `isEmpty()` methods to the `LinkGroup` class
+- Added the `pointsTo()` method to the `LinkGroupItem` class
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
 - Added the `link_items` helper, shortcut to Get::the()->linkItems()
 

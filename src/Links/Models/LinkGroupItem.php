@@ -45,4 +45,10 @@ class LinkGroupItem extends Model implements LinkGroupItemContract
     {
         return $this->morphTo();
     }
+
+    public function pointsTo(Model $model): bool
+    {
+        return $this->linkable_id == $model->id && // Weak typing is intentional
+            $this->linkable_type === morph_type_of($model);
+    }
 }

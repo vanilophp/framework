@@ -58,4 +58,19 @@ class LinkGroup extends Model implements LinkGroupContract
     {
         return $this->belongsTo(LinkGroupItemProxy::modelClass(), 'root_item_id', 'id');
     }
+
+    public function isUnidirectional(): bool
+    {
+        return null !== $this->root_item_id;
+    }
+
+    public function isOmnidirectional(): bool
+    {
+        return null === $this->root_item_id;
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->items->isEmpty();
+    }
 }
