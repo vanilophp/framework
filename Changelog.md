@@ -12,6 +12,7 @@
 - Added the `pointsTo()` method to the `LinkGroupItem` class
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
 - Added the `link_items` helper, shortcut to Get::the()->linkItems()
+- Added the possibility to force new link group creation using the `new()` method of the `Establish` class
 - Added support for configurable decimal separator used by the `format_price()` helper function
 - Added the discountable shipping fee calculator
 - Added the `taxes_total`, `shipping_total` and `total` attribute getters to the Foundation `Order` model

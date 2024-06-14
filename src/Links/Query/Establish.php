@@ -29,6 +29,8 @@ final class Establish
 
     private bool $unidirectional = false;
 
+    private bool $dontUseExistingGroup = false;
+
     private string $wants = 'link';
 
     public static function a(LinkType|string $type): self
@@ -44,6 +46,13 @@ final class Establish
     public function unidirectional(): self
     {
         $this->unidirectional = true;
+
+        return $this;
+    }
+
+    public function new(): self
+    {
+        $this->dontUseExistingGroup = true;
 
         return $this;
     }
@@ -64,8 +73,10 @@ final class Establish
 
     public function and(Model ...$models): void
     {
-        $groups = $this->linkGroupsOfModel($this->baseModel);
-        $destinationGroup = $groups->first();
+        $destinationGroup = match ($this->dontUseExistingGroup) {
+            true => null,
+            false => $this->linkGroupsOfModel($this->baseModel)->first(),
+        };
         if (null === $destinationGroup) {
             $destinationGroup = $this->createNewLinkGroup();
             $rootItem = LinkGroupItemProxy::create([

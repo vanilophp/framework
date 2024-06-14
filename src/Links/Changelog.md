@@ -9,6 +9,7 @@
 - Added the `isUnidirectional()`, `isOmnidirectional()` and `isEmpty()` methods to the `LinkGroup` class
 - Added the `pointsTo()` method to the `LinkGroupItem` class
 - Added the possibility to retrieve the link items directly using `linkItems()` method as `Get::the($type)->linkItems()->of($model)`
+- Added the possibility to force new link group creation using the `new()` method of the `Establish` class
 - Added the `link_items` helper, shortcut to Get::the()->linkItems()
 
 ## 4.0.0

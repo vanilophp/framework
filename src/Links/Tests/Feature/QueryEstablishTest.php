@@ -153,6 +153,23 @@ class QueryEstablishTest extends TestCase
         $this->assertCount(0, $case2->links('protection'));
     }
 
+    /** @test */
+    public function it_can_be_requested_to_create_new_groups_instead_of_reusing_existing_ones()
+    {
+        $phone = TestLinkableProduct::create(['name' => 'iPhone 19'])->fresh();
+        $caseBlue = TestLinkableProduct::create(['name' => 'iPhone 19 Silicon Case Blue'])->fresh();
+        $caseGreen = TestLinkableProduct::create(['name' => 'iPhone 19 Silicon Case Green'])->fresh();
+        LinkType::create(['name' => 'Supplements']);
+
+        Establish::a('supplements')->new()->link()->between($phone)->and($caseBlue);
+        Establish::a('supplements')->new()->link()->between($phone)->and($caseGreen);
+
+        $this->assertCount(2, Get::the('supplements')->groups()->of($phone));
+        $this->assertCount(2, $phone->links('supplements'));
+        $this->assertCount(1, $caseBlue->links('supplements'));
+        $this->assertCount(1, $caseGreen->links('supplements'));
+    }
+
     protected function setUpDatabase($app)
     {
         $this->loadMigrationsFrom(dirname(__DIR__) . '/migrations_of_property_module');
