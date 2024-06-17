@@ -24,9 +24,17 @@ return new class () extends Migration {
     {
         Schema::table('taxons', function (Blueprint $table) {
             $table->dropColumn('subtitle');
+        });
+        Schema::table('taxons', function (Blueprint $table) {
             $table->dropColumn('excerpt');
+        });
+        Schema::table('taxons', function (Blueprint $table) {
             $table->dropColumn('description');
+        });
+        Schema::table('taxons', function (Blueprint $table) {
             $table->dropColumn('top_content');
+        });
+        Schema::table('taxons', function (Blueprint $table) {
             $table->dropColumn('bottom_content');
         });
     }
