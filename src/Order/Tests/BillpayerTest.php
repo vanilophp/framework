@@ -14,11 +14,26 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
+use Konekt\Address\Models\Country;
 use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Tests\Dummies\Address;
 
 class BillpayerTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Country::createOrFirst([
+            'id' => 'NL',
+        ], [
+            'name' => 'Netherlands',
+            'phonecode' => 31,
+            'is_eu_member' => 1
+        ]);
+    }
+
+
     /** @test */
     public function it_returns_proper_bool_types_when_the_model_is_empty()
     {
