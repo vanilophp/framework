@@ -351,4 +351,9 @@ class ProductSearch
     {
         return is_null($limit) ? $this->getSearcher()->search() : $this->getSearcher()->simplePaginate($limit)->search()->getCollection();
     }
+
+    public function includeVariants(): self
+    {
+        return $this;
+    }
 }

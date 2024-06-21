@@ -17,6 +17,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Konekt\Search\Searcher;
 use Vanilo\Foundation\Models\MasterProduct;
+use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Search\ProductSearch;
@@ -690,5 +691,26 @@ class ProductSearchTest extends TestCase
     public function it_can_be_extended_using_macros()
     {
         $finder = new ProductSearch();
+    }
+
+    /** @test */
+    public function it_can_optionally_include_variants()
+    {
+        factory(Product::class, 7)->create([
+            'state' => ProductState::ACTIVE,
+        ]);
+        $master = factory(MasterProduct::class)->create([
+            'state' => ProductState::ACTIVE,
+        ]);
+        factory(MasterProductVariant::class, 3)->create([
+            'state' => ProductState::ACTIVE,
+            'master_product_id' => $master->id,
+        ]);
+
+        $this->assertCount(8, (new ProductSearch())->getResults());
+
+        $finder = new ProductSearch();
+        $finder->includeVariants();
+        $this->assertCount(11, $finder->getResults());
     }
 }
