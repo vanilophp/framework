@@ -26,6 +26,7 @@ use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Channel\Contracts\Channel;
 use Vanilo\MasterProduct\Contracts\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
+use Vanilo\MasterProduct\Models\MasterProductVariantProxy;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
@@ -41,6 +42,8 @@ class ProductSearch
     protected Builder $productQuery;
 
     protected Builder $masterProductQuery;
+
+    protected ?Builder $variantQuery = null;
 
     protected ?string $orderBy = null;
 
@@ -85,6 +88,10 @@ class ProductSearch
         $this->masterProductQuery->whereHas('taxons', function ($query) use ($taxon) {
             $query->where('id', $taxon->id);
         });
+
+        if (null !== $this->variantQuery) {
+
+        }
 
         return $this;
     }
@@ -152,6 +159,7 @@ class ProductSearch
     {
         $this->productQuery->where('name', 'like', "%$term%");
         $this->masterProductQuery->where('name', 'like', "%$term%");
+        $this->variantQuery?->where('name', 'like', "%$term%");
 
         return $this;
     }
@@ -333,7 +341,8 @@ class ProductSearch
 
         return $this->searcher
             ->add($this->productQuery, $columns, $orderBy)
-            ->add($this->masterProductQuery, $columns, $orderBy);
+            ->add($this->masterProductQuery, $columns, $orderBy)
+            ->when(null !== $this->variantQuery, fn($search) => $search->add($this->variantQuery));
     }
 
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
@@ -354,6 +363,8 @@ class ProductSearch
 
     public function includeVariants(): self
     {
+        $this->variantQuery = MasterProductVariantProxy::query();
+
         return $this;
     }
 }
