@@ -90,7 +90,6 @@ class ProductSearch
         });
 
         if (null !== $this->variantQuery) {
-
         }
 
         return $this;
@@ -342,7 +341,7 @@ class ProductSearch
         return $this->searcher
             ->add($this->productQuery, $columns, $orderBy)
             ->add($this->masterProductQuery, $columns, $orderBy)
-            ->when(null !== $this->variantQuery, fn($search) => $search->add($this->variantQuery));
+            ->when(null !== $this->variantQuery, fn ($search) => $search->add($this->variantQuery));
     }
 
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
