@@ -33,7 +33,6 @@ class BillpayerTest extends TestCase
         ]);
     }
 
-
     /** @test */
     public function it_returns_proper_bool_types_when_the_model_is_empty()
     {
