@@ -89,8 +89,11 @@ class ProductSearch
             $query->where('id', $taxon->id);
         });
 
-        if (null !== $this->variantQuery) {
-        }
+        $this->variantQuery?->whereHas('masterProduct', function ($query) use ($taxon) {
+            $query->whereHas('taxons', function ($query) use ($taxon) {
+                $query->where('id', $taxon->id);
+            });
+        });
 
         return $this;
     }
@@ -102,6 +105,11 @@ class ProductSearch
         });
         $this->masterProductQuery->orWhereHas('taxons', function ($query) use ($taxon) {
             $query->where('id', $taxon->id);
+        });
+        $this->variantQuery?->orWhereHas('masterProduct', function ($query) use ($taxon) {
+            $query->whereHas('taxons', function ($query) use ($taxon) {
+                $query->where('id', $taxon->id);
+            });
         });
 
         return $this;
@@ -117,6 +125,11 @@ class ProductSearch
         $this->masterProductQuery->whereHas('taxons', function ($query) use ($taxonIds) {
             $query->whereIn('id', $taxonIds);
         });
+        $this->variantQuery?->whereHas('masterProduct', function ($query) use ($taxonIds) {
+            $query->whereHas('taxons', function ($query) use ($taxonIds) {
+                $query->whereIn('id', $taxonIds);
+            });
+        });
 
         return $this;
     }
@@ -130,6 +143,11 @@ class ProductSearch
         });
         $this->masterProductQuery->orWhereHas('taxons', function ($query) use ($taxonIds) {
             $query->whereIn('id', $taxonIds);
+        });
+        $this->variantQuery?->orWhereHas('masterProduct', function ($query) use ($taxonIds) {
+            $query->whereHas('taxons', function ($query) use ($taxonIds) {
+                $query->whereIn('id', $taxonIds);
+            });
         });
 
         return $this;
@@ -150,6 +168,11 @@ class ProductSearch
         $this->masterProductQuery->whereHas('channels', function ($query) use ($channelIds) {
             $query->whereIn('channel_id', $channelIds);
         });
+        $this->variantQuery?->whereHas('masterProduct', function ($query) use ($channelIds) {
+            $query->whereHas('channels', function ($query) use ($channelIds) {
+                $query->whereIn('channel_id', $channelIds);
+            });
+        });
 
         return $this;
     }
@@ -167,6 +190,7 @@ class ProductSearch
     {
         $this->productQuery->whereBetween('price', [$min, $max]);
         $this->masterProductQuery->whereBetween('price', [$min, $max]);
+        $this->variantQuery?->whereBetween('price', [$min, $max]);
 
         return $this;
     }
@@ -175,6 +199,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '>', $min);
         $this->masterProductQuery->where('price', '>', $min);
+        $this->variantQuery?->where('price', '>', $min);
 
         return $this;
     }
@@ -183,6 +208,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '>=', $min);
         $this->masterProductQuery->where('price', '>=', $min);
+        $this->variantQuery?->where('price', '>=', $min);
 
         return $this;
     }
@@ -191,6 +217,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '<', $max);
         $this->masterProductQuery->where('price', '<', $max);
+        $this->variantQuery?->where('price', '<', $max);
 
         return $this;
     }
@@ -199,6 +226,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '<=', $max);
         $this->masterProductQuery->where('price', '<=', $max);
+        $this->variantQuery?->where('price', '<=', $max);
 
         return $this;
     }
@@ -207,6 +235,7 @@ class ProductSearch
     {
         $this->productQuery->where('name', 'like', "$term%");
         $this->masterProductQuery->where('name', 'like', "$term%");
+        $this->variantQuery?->where('name', 'like', "$term%");
 
         return $this;
     }
@@ -215,6 +244,7 @@ class ProductSearch
     {
         $this->productQuery->orWhere('name', 'like', "$term%");
         $this->masterProductQuery->orWhere('name', 'like', "$term%");
+        $this->variantQuery?->orWhere('name', 'like', "$term%");
 
         return $this;
     }
@@ -223,6 +253,7 @@ class ProductSearch
     {
         $this->productQuery->where('name', 'like', "%$term");
         $this->masterProductQuery->where('name', 'like', "%$term");
+        $this->variantQuery?->where('name', 'like', "%$term");
 
         return $this;
     }
@@ -233,6 +264,9 @@ class ProductSearch
             $query->where('id', $propertyValue->id);
         });
         $this->masterProductQuery->whereHas('propertyValues', function ($query) use ($propertyValue) {
+            $query->where('id', $propertyValue->id);
+        });
+        $this->variantQuery?->whereHas('propertyValues', function ($query) use ($propertyValue) {
             $query->where('id', $propertyValue->id);
         });
 
@@ -247,6 +281,9 @@ class ProductSearch
         $this->masterProductQuery->orWhereHas('propertyValues', function ($query) use ($propertyValue) {
             $query->where('id', $propertyValue->id);
         });
+        $this->variantQuery?->orWhereHas('propertyValues', function ($query) use ($propertyValue) {
+            $query->where('id', $propertyValue->id);
+        });
 
         return $this;
     }
@@ -259,6 +296,9 @@ class ProductSearch
             $query->whereIn('id', $propertyValueIds);
         });
         $this->masterProductQuery->whereHas('propertyValues', function ($query) use ($propertyValueIds) {
+            $query->whereIn('id', $propertyValueIds);
+        });
+        $this->variantQuery?->whereHas('propertyValues', function ($query) use ($propertyValueIds) {
             $query->whereIn('id', $propertyValueIds);
         });
 
@@ -286,6 +326,9 @@ class ProductSearch
             $query->whereIn('id', $propertyValueIds);
         });
         $this->masterProductQuery->orWhereHas('propertyValues', function ($query) use ($propertyValueIds) {
+            $query->whereIn('id', $propertyValueIds);
+        });
+        $this->variantQuery?->orWhereHas('propertyValues', function ($query) use ($propertyValueIds) {
             $query->whereIn('id', $propertyValueIds);
         });
 
@@ -319,6 +362,7 @@ class ProductSearch
     {
         $this->productQuery->with('media');
         $this->masterProductQuery->with(['media', 'variants.media']);
+        $this->variantQuery?->with('media');
 
         return $this;
     }
@@ -327,6 +371,7 @@ class ProductSearch
     {
         $this->productQuery->with('channels');
         $this->masterProductQuery->with('channels');
+        $this->variantQuery?->with('masterProduct.channels');
 
         return $this;
     }
