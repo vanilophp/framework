@@ -928,7 +928,6 @@ class ProductSearchTest extends TestCase
             ['price' => 40],
         ]);
 
-
         $master = factory(MasterProduct::class)->create([
             'state' => ProductState::ACTIVE,
             'price' => 10,
@@ -997,7 +996,6 @@ class ProductSearchTest extends TestCase
             ['price' => 10, 'master_product_id' => $master->id],
             ['price' => 99, 'master_product_id' => $master->id],
         ]);
-
 
         $resultWithoutVariants = (new ProductSearch())->priceGreaterThanOrEqualTo(35)->getResults();
         $this->assertCount(1, $resultWithoutVariants);
@@ -1173,7 +1171,6 @@ class ProductSearchTest extends TestCase
             ['name' => 'Tugo Waka Batagang'],
         ]);
 
-
         $master = factory(MasterProduct::class)->create([
             'name' => 'Master',
             'state' => ProductState::ACTIVE,
@@ -1242,7 +1239,6 @@ class ProductSearchTest extends TestCase
             ['name' => 'Awesome Blueberries'],
             ['name' => 'Blueberries Not Here'],
         ]);
-
 
         $master = factory(MasterProduct::class)->create([
             'name' => 'Master',
