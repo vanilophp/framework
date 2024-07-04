@@ -26,6 +26,7 @@ use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Channel\Contracts\Channel;
 use Vanilo\MasterProduct\Contracts\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
+use Vanilo\MasterProduct\Models\MasterProductVariantProxy;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Product\Models\ProductStateProxy;
@@ -41,6 +42,8 @@ class ProductSearch
     protected Builder $productQuery;
 
     protected Builder $masterProductQuery;
+
+    protected ?Builder $variantQuery = null;
 
     protected ?string $orderBy = null;
 
@@ -86,6 +89,12 @@ class ProductSearch
             $query->where('id', $taxon->id);
         });
 
+        $this->variantQuery?->whereHas('masterProduct', function ($query) use ($taxon) {
+            $query->whereHas('taxons', function ($query) use ($taxon) {
+                $query->where('id', $taxon->id);
+            });
+        });
+
         return $this;
     }
 
@@ -96,6 +105,11 @@ class ProductSearch
         });
         $this->masterProductQuery->orWhereHas('taxons', function ($query) use ($taxon) {
             $query->where('id', $taxon->id);
+        });
+        $this->variantQuery?->orWhereHas('masterProduct', function ($query) use ($taxon) {
+            $query->whereHas('taxons', function ($query) use ($taxon) {
+                $query->where('id', $taxon->id);
+            });
         });
 
         return $this;
@@ -111,6 +125,11 @@ class ProductSearch
         $this->masterProductQuery->whereHas('taxons', function ($query) use ($taxonIds) {
             $query->whereIn('id', $taxonIds);
         });
+        $this->variantQuery?->whereHas('masterProduct', function ($query) use ($taxonIds) {
+            $query->whereHas('taxons', function ($query) use ($taxonIds) {
+                $query->whereIn('id', $taxonIds);
+            });
+        });
 
         return $this;
     }
@@ -124,6 +143,11 @@ class ProductSearch
         });
         $this->masterProductQuery->orWhereHas('taxons', function ($query) use ($taxonIds) {
             $query->whereIn('id', $taxonIds);
+        });
+        $this->variantQuery?->orWhereHas('masterProduct', function ($query) use ($taxonIds) {
+            $query->whereHas('taxons', function ($query) use ($taxonIds) {
+                $query->whereIn('id', $taxonIds);
+            });
         });
 
         return $this;
@@ -144,6 +168,11 @@ class ProductSearch
         $this->masterProductQuery->whereHas('channels', function ($query) use ($channelIds) {
             $query->whereIn('channel_id', $channelIds);
         });
+        $this->variantQuery?->whereHas('masterProduct', function ($query) use ($channelIds) {
+            $query->whereHas('channels', function ($query) use ($channelIds) {
+                $query->whereIn('channel_id', $channelIds);
+            });
+        });
 
         return $this;
     }
@@ -152,6 +181,7 @@ class ProductSearch
     {
         $this->productQuery->where('name', 'like', "%$term%");
         $this->masterProductQuery->where('name', 'like', "%$term%");
+        $this->variantQuery?->where('name', 'like', "%$term%");
 
         return $this;
     }
@@ -160,6 +190,7 @@ class ProductSearch
     {
         $this->productQuery->whereBetween('price', [$min, $max]);
         $this->masterProductQuery->whereBetween('price', [$min, $max]);
+        $this->variantQuery?->whereBetween('price', [$min, $max]);
 
         return $this;
     }
@@ -168,6 +199,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '>', $min);
         $this->masterProductQuery->where('price', '>', $min);
+        $this->variantQuery?->where('price', '>', $min);
 
         return $this;
     }
@@ -176,6 +208,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '>=', $min);
         $this->masterProductQuery->where('price', '>=', $min);
+        $this->variantQuery?->where('price', '>=', $min);
 
         return $this;
     }
@@ -184,6 +217,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '<', $max);
         $this->masterProductQuery->where('price', '<', $max);
+        $this->variantQuery?->where('price', '<', $max);
 
         return $this;
     }
@@ -192,6 +226,7 @@ class ProductSearch
     {
         $this->productQuery->where('price', '<=', $max);
         $this->masterProductQuery->where('price', '<=', $max);
+        $this->variantQuery?->where('price', '<=', $max);
 
         return $this;
     }
@@ -200,6 +235,7 @@ class ProductSearch
     {
         $this->productQuery->where('name', 'like', "$term%");
         $this->masterProductQuery->where('name', 'like', "$term%");
+        $this->variantQuery?->where('name', 'like', "$term%");
 
         return $this;
     }
@@ -208,6 +244,7 @@ class ProductSearch
     {
         $this->productQuery->orWhere('name', 'like', "$term%");
         $this->masterProductQuery->orWhere('name', 'like', "$term%");
+        $this->variantQuery?->orWhere('name', 'like', "$term%");
 
         return $this;
     }
@@ -216,6 +253,7 @@ class ProductSearch
     {
         $this->productQuery->where('name', 'like', "%$term");
         $this->masterProductQuery->where('name', 'like', "%$term");
+        $this->variantQuery?->where('name', 'like', "%$term");
 
         return $this;
     }
@@ -226,6 +264,9 @@ class ProductSearch
             $query->where('id', $propertyValue->id);
         });
         $this->masterProductQuery->whereHas('propertyValues', function ($query) use ($propertyValue) {
+            $query->where('id', $propertyValue->id);
+        });
+        $this->variantQuery?->whereHas('propertyValues', function ($query) use ($propertyValue) {
             $query->where('id', $propertyValue->id);
         });
 
@@ -240,6 +281,9 @@ class ProductSearch
         $this->masterProductQuery->orWhereHas('propertyValues', function ($query) use ($propertyValue) {
             $query->where('id', $propertyValue->id);
         });
+        $this->variantQuery?->orWhereHas('propertyValues', function ($query) use ($propertyValue) {
+            $query->where('id', $propertyValue->id);
+        });
 
         return $this;
     }
@@ -252,6 +296,9 @@ class ProductSearch
             $query->whereIn('id', $propertyValueIds);
         });
         $this->masterProductQuery->whereHas('propertyValues', function ($query) use ($propertyValueIds) {
+            $query->whereIn('id', $propertyValueIds);
+        });
+        $this->variantQuery?->whereHas('propertyValues', function ($query) use ($propertyValueIds) {
             $query->whereIn('id', $propertyValueIds);
         });
 
@@ -279,6 +326,9 @@ class ProductSearch
             $query->whereIn('id', $propertyValueIds);
         });
         $this->masterProductQuery->orWhereHas('propertyValues', function ($query) use ($propertyValueIds) {
+            $query->whereIn('id', $propertyValueIds);
+        });
+        $this->variantQuery?->orWhereHas('propertyValues', function ($query) use ($propertyValueIds) {
             $query->whereIn('id', $propertyValueIds);
         });
 
@@ -312,6 +362,7 @@ class ProductSearch
     {
         $this->productQuery->with('media');
         $this->masterProductQuery->with(['media', 'variants.media']);
+        $this->variantQuery?->with('media');
 
         return $this;
     }
@@ -320,6 +371,7 @@ class ProductSearch
     {
         $this->productQuery->with('channels');
         $this->masterProductQuery->with('channels');
+        $this->variantQuery?->with('masterProduct.channels');
 
         return $this;
     }
@@ -333,7 +385,8 @@ class ProductSearch
 
         return $this->searcher
             ->add($this->productQuery, $columns, $orderBy)
-            ->add($this->masterProductQuery, $columns, $orderBy);
+            ->add($this->masterProductQuery, $columns, $orderBy)
+            ->when(null !== $this->variantQuery, fn ($search) => $search->add($this->variantQuery));
     }
 
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
@@ -350,5 +403,12 @@ class ProductSearch
     public function getResults(int $limit = null): Collection
     {
         return is_null($limit) ? $this->getSearcher()->search() : $this->getSearcher()->simplePaginate($limit)->search()->getCollection();
+    }
+
+    public function includeVariants(): self
+    {
+        $this->variantQuery = MasterProductVariantProxy::query();
+
+        return $this;
     }
 }
