@@ -7,6 +7,7 @@ namespace Vanilo\Promotion\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Vanilo\Promotion\Contracts\Coupon as CouponInterface;
 
 /**
  * @property int $id
@@ -18,7 +19,7 @@ use Illuminate\Support\Carbon;
  *
  * @property Promotion $promotion
  */
-class Coupon extends Model
+class Coupon extends Model implements CouponInterface
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

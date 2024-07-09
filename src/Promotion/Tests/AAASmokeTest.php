@@ -6,11 +6,9 @@ namespace Vanilo\Promotion\Tests;
 
 class AAASmokeTest extends TestCase
 {
-    private const MIN_PHP_VERSION = '8.0.0';
+    private const MIN_PHP_VERSION = '8.2.0';
 
-    /**
-     * @test
-     */
+    /** @test */
     public function smoke()
     {
         $this->assertTrue(true);

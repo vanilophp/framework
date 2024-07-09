@@ -38,7 +38,6 @@ abstract class TestCase extends Orchestra
 
     protected function setUpDatabase($app)
     {
-        //$this->loadMigrationsFrom(__DIR__.'/migrations');
         Artisan::call('migrate', ['--force' => true]);
     }
 

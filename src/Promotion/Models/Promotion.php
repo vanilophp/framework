@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Vanilo\Promotion\Contracts\Promotion as PromotionContract;
 
 /**
  * @property int $id
@@ -25,7 +26,7 @@ use Illuminate\Support\Collection;
  *
  * @property Coupon[]|Collection $coupons
  */
-class Promotion extends Model
+class Promotion extends Model implements PromotionContract
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
