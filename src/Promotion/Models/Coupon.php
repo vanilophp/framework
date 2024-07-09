@@ -14,7 +14,7 @@ use Vanilo\Promotion\Contracts\Coupon as CouponInterface;
  * @property string $code
  * @property ?int $usage_limit
  * @property ?int $per_customer_usage_limit
- * @property int $used
+ * @property int $usage_count
  * @property ?Carbon $expires_at
  *
  * @property Promotion $promotion

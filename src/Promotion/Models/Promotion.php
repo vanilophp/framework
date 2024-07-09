@@ -15,10 +15,10 @@ use Vanilo\Promotion\Contracts\Promotion as PromotionContract;
  * @property string $name
  * @property ?string $description
  * @property int $priority
- * @property bool $exclusive
+ * @property bool $is_exclusive
  * @property ?int $usage_limit
- * @property int $used
- * @property bool $coupon_based
+ * @property int $usage_count
+ * @property bool $is_coupon_based
  * @property bool $applies_to_discounted
  * @property ?Carbon $starts_at
  * @property ?Carbon $ends_at
@@ -34,6 +34,12 @@ class Promotion extends Model implements PromotionContract
         'ends_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'priority' => 'int',
+        'usage_limit' => 'int',
+        'usage_count' => 'int',
+        'is_exclusive' => 'bool',
+        'is_coupon_based' => 'bool',
+        'applies_to_discounted' => 'bool',
     ];
 
     public function coupons(): HasMany

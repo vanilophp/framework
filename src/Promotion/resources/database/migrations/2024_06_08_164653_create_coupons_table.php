@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->string('code')->unique();
             $table->unsignedInteger('usage_limit')->nullable();
             $table->unsignedInteger('per_customer_usage_limit')->nullable();
-            $table->unsignedInteger('used')->default(0);
+            $table->unsignedInteger('usage_count')->default(0);
             $table->dateTime('expires_at')->nullable();
 
             $table->timestamps();

@@ -14,9 +14,9 @@ return new class () extends Migration {
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('priority')->unsigned()->default(0);
-            $table->boolean('exclusive')->default(false);
+            $table->boolean('is_exclusive')->default(false);
             $table->unsignedInteger('usage_limit')->nullable();
-            $table->unsignedInteger('used')->default(0);
+            $table->unsignedInteger('usage_count')->default(0);
             $table->boolean('is_coupon_based')->default(false);
             $table->dateTime('starts_at')->nullable();
             $table->dateTime('ends_at')->nullable();
