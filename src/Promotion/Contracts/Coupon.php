@@ -16,4 +16,13 @@ namespace Vanilo\Promotion\Contracts;
 
 interface Coupon
 {
+    public static function findByCode(string $code): ?Coupon;
+
+    public function getPromotion(): Promotion;
+
+    public function canBeUsed(): bool;
+
+    public function isExpired(): bool;
+
+    public function isDepleted(): bool;
 }
