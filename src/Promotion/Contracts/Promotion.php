@@ -16,5 +16,4 @@ namespace Vanilo\Promotion\Contracts;
 
 interface Promotion
 {
-
 }
