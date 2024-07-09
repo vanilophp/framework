@@ -12,6 +12,10 @@
     },
     "authors": [
         {
+            "name": "Hunor Kedves",
+            "homepage": "https://github.com/kedves"
+        },
+        {
             "name": "Attila Fulop",
             "homepage": "https://github.com/fulopattila122"
         }
@@ -24,15 +28,14 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
-        "orchestra/testbench": "^8.0|^9.0",
-        "laravel/legacy-factories": "^1.0"
+        "orchestra/testbench": "^8.0|^9.0"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Promotion\\": "" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "dev"
+            "dev-master": "4.2-dev"
         }
     }
 }

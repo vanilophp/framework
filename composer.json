@@ -42,11 +42,11 @@
         "vanilo/order": "self.version",
         "vanilo/payment": "self.version",
         "vanilo/product": "self.version",
+        "vanilo/promotion": "self.version",
         "vanilo/properties": "self.version",
         "vanilo/shipment": "self.version",
         "vanilo/support": "self.version",
-        "vanilo/taxes": "self.version",
-        "vanilo/promotion": "self.version"
+        "vanilo/taxes": "self.version"
     },
     "autoload": {
         "psr-4": {

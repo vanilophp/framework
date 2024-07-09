@@ -16,6 +16,9 @@
     <testsuite name="Properties Tests">
       <directory>src/Properties/Tests</directory>
     </testsuite>
+    <testsuite name="Promotion Tests">
+      <directory>src/Promotion/Tests</directory>
+    </testsuite>
     <testsuite name="Category Tests">
       <directory>src/Category/Tests</directory>
     </testsuite>
