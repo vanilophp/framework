@@ -1,0 +1,38 @@
+{
+    "name": "vanilo/promotion",
+    "description": "Vanilo Promotion Module",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "keywords": ["promotion", "ecommerce", "vanilo", "laravel"],
+    "support": {
+        "issues": "https://github.com/vanilophp/framework/issues",
+        "source": "https://github.com/vanilophp/promotion"
+    },
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "konekt/concord": "^1.13",
+        "laravel/framework": "^10.43|^11.0",
+        "vanilo/support": "^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^8.0|^9.0",
+        "laravel/legacy-factories": "^1.0"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Promotion\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev"
+        }
+    }
+}
