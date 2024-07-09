@@ -11,19 +11,16 @@ return new class () extends Migration {
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-
-            $table->string('code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('priority')->default(0);
+            $table->integer('priority')->unsigned()->default(0);
             $table->boolean('exclusive')->default(false);
             $table->unsignedInteger('usage_limit')->nullable();
             $table->unsignedInteger('used')->default(0);
-            $table->boolean('coupon_based')->default(0);
+            $table->boolean('is_coupon_based')->default(false);
             $table->dateTime('starts_at')->nullable();
             $table->dateTime('ends_at')->nullable();
-            $table->boolean('applies_to_discounted')->default(1);
-
+            $table->boolean('applies_to_discounted')->default(true);
             $table->timestamps();
         });
     }
