@@ -14,7 +14,7 @@ class CouponFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' =>$this->faker->text(15),
+            'code' => $this->faker->text(15),
             'promotion_id' => PromotionFactory::new()->create()->id,
         ];
     }

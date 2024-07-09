@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests;
 
 use Carbon\Carbon;
-use Vanilo\Promotion\Tests\Factories\CouponFactory;
 use Vanilo\Promotion\Models\Coupon;
+use Vanilo\Promotion\Tests\Factories\CouponFactory;
 use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
 class CouponTest extends TestCase
