@@ -12,7 +12,6 @@ use Vanilo\Promotion\Contracts\Promotion as PromotionContract;
 
 /**
  * @property int $id
- * @property string $code
  * @property string $name
  * @property ?string $description
  * @property int $priority
