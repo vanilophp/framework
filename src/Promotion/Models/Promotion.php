@@ -44,6 +44,6 @@ class Promotion extends Model implements PromotionContract
 
     public function coupons(): HasMany
     {
-        return $this->hasMany(Coupon::class);
+        return $this->hasMany(CouponProxy::modelClass());
     }
 }

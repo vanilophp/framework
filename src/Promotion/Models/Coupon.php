@@ -29,6 +29,6 @@ class Coupon extends Model implements CouponInterface
 
     public function promotion(): BelongsTo
     {
-        return $this->belongsTo(Promotion::class);
+        return $this->belongsTo(PromotionProxy::modelClass());
     }
 }
