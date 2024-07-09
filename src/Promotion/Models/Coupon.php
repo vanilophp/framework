@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Models;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
