@@ -46,4 +46,21 @@ class Promotion extends Model implements PromotionContract
     {
         return $this->hasMany(CouponProxy::modelClass());
     }
+
+    public function isValid(?\DateTimeInterface $at = null): bool
+    {
+        if ($this->usage_count >= $this->usage_limit) {
+            return false;
+        }
+
+        if (!$this->ends_at) {
+            return true;
+        }
+
+        if ($at) {
+            return $this->ends_at->isAfter($at);
+        }
+
+        return $this->ends_at->isFuture();
+    }
 }

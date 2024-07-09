@@ -6,6 +6,7 @@ namespace Vanilo\Promotion\Tests;
 
 use Carbon\Carbon;
 use Vanilo\Promotion\Models\Promotion;
+use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
 class PromotionTest extends TestCase
 {
@@ -103,5 +104,39 @@ class PromotionTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $promotion->ends_at);
         $this->assertInstanceOf(Carbon::class, $promotion->created_at);
         $this->assertInstanceOf(Carbon::class, $promotion->updated_at);
+    }
+
+    /** @test */
+    public function can_determine_if_its_valid()
+    {
+        $validPromotionA = PromotionFactory::new([
+            'ends_at' => Carbon::now()->addMonth(),
+            'usage_limit' => 100,
+            'usage_count' => 35,
+        ])->create();
+
+        $validPromotionB = PromotionFactory::new([
+            'usage_limit' => 100,
+            'usage_count' => 35,
+        ])->create();
+
+        $invalidPromotionA = PromotionFactory::new([
+            'ends_at' => Carbon::now()->addMonth(),
+            'usage_limit' => 100,
+            'usage_count' => 101,
+        ])->create();
+
+        $invalidPromotionB = PromotionFactory::new([
+            'ends_at' => Carbon::now()->subMonths(),
+            'usage_limit' => 100,
+            'usage_count' => 5,
+        ])->create();
+
+        $this->assertTrue($validPromotionA->isValid());
+        $this->assertTrue($validPromotionB->isValid());
+        $this->assertFalse($invalidPromotionA->isValid());
+        $this->assertFalse($invalidPromotionB->isValid());
+        $this->assertFalse($validPromotionA->isValid(Carbon::now()->addYear()));
+        $this->assertTrue($validPromotionA->isValid(Carbon::now()->addWeek()));
     }
 }

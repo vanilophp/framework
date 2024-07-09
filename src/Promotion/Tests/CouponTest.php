@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests;
 
 use Carbon\Carbon;
+use Vanilo\Promotion\Tests\Factories\CouponFactory;
 use Vanilo\Promotion\Models\Coupon;
 use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
@@ -86,5 +87,68 @@ class CouponTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $coupon->expires_at);
         $this->assertInstanceOf(Carbon::class, $coupon->created_at);
         $this->assertInstanceOf(Carbon::class, $coupon->updated_at);
+    }
+
+    /** @test */
+    public function can_return_coupon_by_code()
+    {
+        CouponFactory::new(['code' => 'test-code'])->create();
+
+        $this->assertEquals('test-code', Coupon::findByCode('test-code')->code);
+    }
+
+    /** @test */
+    public function cat_return_promotion()
+    {
+        $promotion = PromotionFactory::new(['name' => 'Test promo'])->create();
+        $coupon = CouponFactory::new(['promotion_id' => $promotion->id])->create();
+
+        $this->assertEquals('Test promo', $coupon->getPromotion()->name);
+    }
+
+    /** @test */
+    public function determines_if_its_depleted()
+    {
+        $depleted = CouponFactory::new(['usage_limit' => 3, 'usage_count' => 3])->create();
+        $notDepleted = CouponFactory::new(['usage_limit' => 3, 'usage_count' => 2])->create();
+
+        $this->assertTrue($depleted->isDepleted());
+        $this->assertFalse($notDepleted->isDepleted());
+    }
+
+    /** @test */
+    public function determines_if_its_expired()
+    {
+        $expiredCoupon = CouponFactory::new(['expires_at' => Carbon::now()->subWeek()])->create();
+        $notExpired = CouponFactory::new(['expires_at' => Carbon::now()->addWeek()])->create();
+
+        $this->assertTrue($expiredCoupon->isExpired());
+        $this->assertFalse($notExpired->isExpired());
+    }
+
+    /** @test */
+    public function determines_if_can_be_used()
+    {
+        $canBeUsed = CouponFactory::new([
+            'expires_at' => Carbon::now()->addWeek(),
+            'usage_limit' => 3,
+            'usage_count' => 2,
+        ])->create();
+
+        $cantBeUsedA = CouponFactory::new([
+            'expires_at' => Carbon::now()->subWeek(),
+            'usage_limit' => 3,
+            'usage_count' => 2,
+        ])->create();
+
+        $cantBeUsedB = CouponFactory::new([
+            'expires_at' => Carbon::now()->addweek(),
+            'usage_limit' => 3,
+            'usage_count' => 3,
+        ])->create();
+
+        $this->assertTrue($canBeUsed->canBeUsed());
+        $this->assertFalse($cantBeUsedA->canBeUsed());
+        $this->assertFalse($cantBeUsedB->canBeUsed());
     }
 }
