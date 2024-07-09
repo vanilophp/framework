@@ -27,7 +27,6 @@ class PromotionTest extends TestCase
             'starts_at' => $now,
             'ends_at' => $nextMonth,
             'applies_to_discounted' => false,
-
         ]);
 
         $this->assertEquals('PROMO-1', $promotion->code);
@@ -62,7 +61,6 @@ class PromotionTest extends TestCase
         $promotion->applies_to_discounted = false;
         $promotion->starts_at = $now;
         $promotion->ends_at = $nextMonth;
-
 
         $this->assertEquals('PROMO-1', $promotion->code);
         $this->assertEquals('Awesome promotion', $promotion->name);

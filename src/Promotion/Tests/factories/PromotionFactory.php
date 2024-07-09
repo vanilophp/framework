@@ -21,4 +21,3 @@ $factory->define(\Vanilo\Promotion\Models\Promotion::class, function (Faker $fak
         'applies_to_discounted' => false,
     ];
 });
-
