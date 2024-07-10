@@ -19,6 +19,10 @@ return new class () extends Migration {
     public function down(): void
     {
         Schema::table('link_groups', function (Blueprint $table) {
+            $table->dropForeign('link_groups_root_item_id_foreign');
+        });
+
+        Schema::table('link_groups', function (Blueprint $table) {
             $table->dropColumn('root_item_id');
         });
     }

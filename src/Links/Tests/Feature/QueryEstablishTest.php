@@ -77,7 +77,7 @@ class QueryEstablishTest extends TestCase
         Establish::usePropertiesModel(Property::class);
         Get::usePropertiesModel(Property::class);
 
-        Property::create(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'])->fresh();
+        Property::upsert(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'], ['slug']);
         $laptop13 = TestProduct::create(['name' => 'Laptop 13"'])->fresh();
         $laptop15 = TestProduct::create(['name' => 'Laptop 15"'])->fresh();
         LinkType::create(['name' => 'Variant']);

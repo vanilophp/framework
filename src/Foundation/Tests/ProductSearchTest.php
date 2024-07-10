@@ -1147,14 +1147,13 @@ class ProductSearchTest extends TestCase
         $resultWithVariants = (new ProductSearch())->includeVariants()->nameStartsWith('Mature')->getResults();
         $this->assertCount(3, $resultWithVariants);
 
-        $first = $resultWithVariants->first();
-        $this->assertEquals($first instanceof MasterProductVariant ? 'Matured Wine' : 'Mature People', $first->name);
+        $product = $resultWithVariants->first(fn ($product) => $product instanceof Product);
+        $master = $resultWithVariants->first(fn ($product) => $product instanceof MasterProduct);
+        $variant = $resultWithVariants->first(fn ($product) => $product instanceof MasterProductVariant);
 
-        $second = $resultWithVariants->get(1);
-        $this->assertEquals($second instanceof MasterProduct ? 'Mature People' : 'Matured Cheese', $second->name);
-
-        $third = $resultWithVariants->last();
-        $this->assertEquals($third instanceof MasterProduct ? 'Mature People' : 'Matured Cheese', $third->name);
+        $this->assertEquals('Matured Cheese', $product->name);
+        $this->assertEquals('Mature People', $master->name);
+        $this->assertEquals('Matured Wine', $variant->name);
     }
 
     /** @test */
@@ -1251,9 +1250,10 @@ class ProductSearchTest extends TestCase
         $resultWithVariants = (new ProductSearch())->includeVariants()->nameEndsWith('Transformator')->getResults();
         $this->assertCount(2, $resultWithVariants);
 
-        $first = $resultWithVariants->first();
-        $this->assertInstanceOf(MasterProductVariant::class, $first);
-        $this->assertEquals('High Voltage Transformator', $first->name);
+        $variant = $resultWithVariants->first(fn ($product) => $product instanceof MasterProductVariant);
+        $this->assertNotNull($variant);
+        $this->assertInstanceOf(MasterProductVariant::class, $variant);
+        $this->assertEquals('High Voltage Transformator', $variant->name);
     }
 
     /** @test */
