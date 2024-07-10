@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" bootstrap="vendor/autoload.php" backupGlobals="false" colors="true" processIsolation="false" stopOnFailure="false" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
-  <testsuites>
-    <testsuite name="Contract Tests">
-      <directory>src/Contracts/Tests</directory>
-    </testsuite>
-    <testsuite name="Support Tests">
-      <directory>src/Support/Tests</directory>
-    </testsuite>
-    <testsuite name="Product Tests">
-      <directory>src/Product/Tests</directory>
-    </testsuite>
-    <testsuite name="Master Product Tests">
-      <directory>src/MasterProduct/Tests</directory>
-    </testsuite>
-    <testsuite name="Properties Tests">
-      <directory>src/Properties/Tests</directory>
-    </testsuite>
-    <testsuite name="Category Tests">
-      <directory>src/Category/Tests</directory>
-    </testsuite>
-    <testsuite name="Links Tests">
-      <directory>src/Links/Tests</directory>
-    </testsuite>
-    <testsuite name="Channel Tests">
-      <directory>src/Channel/Tests</directory>
-    </testsuite>
-    <testsuite name="Cart Tests">
-      <directory>src/Cart/Tests</directory>
-    </testsuite>
-    <testsuite name="Checkout Tests">
-      <directory>src/Checkout/Tests</directory>
-    </testsuite>
-    <testsuite name="Order Tests">
-      <directory>src/Order/Tests</directory>
-    </testsuite>
-    <testsuite name="Payment Tests">
-      <directory>src/Payment/Tests</directory>
-    </testsuite>
-    <testsuite name="Shipment Tests">
-      <directory>src/Shipment/Tests</directory>
-    </testsuite>
-    <testsuite name="Adjustments Tests">
-      <directory>src/Adjustments/Tests</directory>
-    </testsuite>
-    <testsuite name="Taxes Tests">
-      <directory>src/Taxes/Tests</directory>
-    </testsuite>
-    <testsuite name="Foundation Tests">
-      <directory>src/Foundation/Tests</directory>
-    </testsuite>
-  </testsuites>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" bootstrap="vendor/autoload.php"
+         backupGlobals="false" colors="true" processIsolation="false" stopOnDefect="true"
+         cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+    <testsuites>
+        <testsuite name="Contract Tests">
+            <directory>src/Contracts/Tests</directory>
+        </testsuite>
+        <testsuite name="Support Tests">
+            <directory>src/Support/Tests</directory>
+        </testsuite>
+        <testsuite name="Product Tests">
+            <directory>src/Product/Tests</directory>
+        </testsuite>
+        <testsuite name="Master Product Tests">
+            <directory>src/MasterProduct/Tests</directory>
+        </testsuite>
+        <testsuite name="Properties Tests">
+            <directory>src/Properties/Tests</directory>
+        </testsuite>
+        <testsuite name="Category Tests">
+            <directory>src/Category/Tests</directory>
+        </testsuite>
+        <testsuite name="Links Tests">
+            <directory>src/Links/Tests</directory>
+        </testsuite>
+        <testsuite name="Channel Tests">
+            <directory>src/Channel/Tests</directory>
+        </testsuite>
+        <testsuite name="Cart Tests">
+            <directory>src/Cart/Tests</directory>
+        </testsuite>
+        <testsuite name="Checkout Tests">
+            <directory>src/Checkout/Tests</directory>
+        </testsuite>
+        <testsuite name="Order Tests">
+            <directory>src/Order/Tests</directory>
+        </testsuite>
+        <testsuite name="Payment Tests">
+            <directory>src/Payment/Tests</directory>
+        </testsuite>
+        <testsuite name="Shipment Tests">
+            <directory>src/Shipment/Tests</directory>
+        </testsuite>
+        <testsuite name="Adjustments Tests">
+            <directory>src/Adjustments/Tests</directory>
+        </testsuite>
+        <testsuite name="Taxes Tests">
+            <directory>src/Taxes/Tests</directory>
+        </testsuite>
+        <testsuite name="Foundation Tests">
+            <directory>src/Foundation/Tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
