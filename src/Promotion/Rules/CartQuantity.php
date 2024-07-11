@@ -30,7 +30,7 @@ class CartQuantity implements PromotionRuleType
             $configuration = (new Processor())->process($this->getSchema(), $configuration);
         }
 
-        $this->configuration = (array)$configuration;
+        $this->configuration = (array) $configuration;
 
         return $this;
     }
@@ -43,7 +43,7 @@ class CartQuantity implements PromotionRuleType
             $configuration = (new Processor())->process($this->getSchema(), $configuration);
         }
 
-        return (array)$configuration;
+        return (array) $configuration;
     }
 
     public function getSchema(): ?Schema

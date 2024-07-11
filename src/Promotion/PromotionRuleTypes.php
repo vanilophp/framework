@@ -20,7 +20,7 @@ final class PromotionRuleTypes
         if (!in_array(PromotionRuleType::class, class_implements($class))) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'The class you are trying to register (%s) as promotion rule, '.
+                    'The class you are trying to register (%s) as promotion rule, ' .
                     'must implement the %s interface.',
                     $class,
                     PromotionRuleType::class

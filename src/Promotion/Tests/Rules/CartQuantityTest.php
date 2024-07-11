@@ -43,4 +43,3 @@ class CartQuantityTest extends TestCase
         $this->assertTrue($ruleB->isPassing(new DummyCart()));
     }
 }
-

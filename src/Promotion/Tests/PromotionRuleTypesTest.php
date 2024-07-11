@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Tests;
 
+use Vanilo\Promotion\PromotionRuleTypes;
 use Vanilo\Promotion\Tests\Examples\CartTotalRule;
 use Vanilo\Promotion\Tests\Examples\NthOrderRule;
-use Vanilo\Promotion\PromotionRuleTypes;
 
 class PromotionRuleTypesTest extends TestCase
 {

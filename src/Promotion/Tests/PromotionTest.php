@@ -6,8 +6,8 @@ namespace Vanilo\Promotion\Tests;
 
 use Carbon\Carbon;
 use Vanilo\Promotion\Models\Promotion;
-use Vanilo\Promotion\Rules\CartQuantity;
 use Vanilo\Promotion\PromotionRuleTypes;
+use Vanilo\Promotion\Rules\CartQuantity;
 use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
 class PromotionTest extends TestCase

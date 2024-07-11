@@ -8,8 +8,8 @@ use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Promotion\Models\Coupon;
 use Vanilo\Promotion\Models\Promotion;
 use Vanilo\Promotion\Models\PromotionRule;
-use Vanilo\Promotion\Rules\CartQuantity;
 use Vanilo\Promotion\PromotionRuleTypes;
+use Vanilo\Promotion\Rules\CartQuantity;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
