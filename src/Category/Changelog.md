@@ -2,8 +2,8 @@
 
 ## 4.x Series
 
-## Unreleased
-##### 2024-XX-YY
+## 4.1.0
+##### 2024-07-11
 
 - Added the following content fields to the Taxon model/table:
   - `subtitle`

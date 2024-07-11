@@ -2,8 +2,8 @@
 
 ## 4.x Series
 
-## Unreleased
-##### 2024-XX-YY
+## 4.1.0
+##### 2024-07-11
 
 - Added the `includeVariants()` method to the ProductSearch class ⚠️ DOES NOT WORK ON POSTGRES (YET) ⚠️
 - Added the `priceGreaterThan`, `priceLessThan` and `priceBetween` methods to the ProductSearch class by [Matima](https://github.com/mahdirezaei-dev) in [#176](https://github.com/vanilophp/framework/pull/176)
