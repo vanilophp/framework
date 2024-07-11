@@ -16,7 +16,7 @@ namespace Vanilo\Product\Tests;
 
 class AAASmokeTest extends TestCase
 {
-    private const MIN_PHP_VERSION = '8.0.0';
+    private const MIN_PHP_VERSION = '8.2.0';
 
     /**
      * @test

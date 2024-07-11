@@ -159,8 +159,10 @@ class QueryGetTest extends TestCase
     {
         Get::usePropertiesModel(Property::class);
 
-        $seriesProperty = Property::create(['name' => 'Series', 'slug' => 'series', 'type' => 'string'])->fresh();
-        $screenProperty = Property::create(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'])->fresh();
+        Property::upsert(['name' => 'Series', 'slug' => 'series', 'type' => 'string'], ['slug']);
+        $seriesProperty = Property::findBySlug('series');
+        Property::upsert(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'], ['slug']);
+        $screenProperty = Property::findBySlug('screen');
         $groupSeries = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $seriesProperty->id])->fresh();
         $groupScreen = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $screenProperty->id])->fresh();
 
@@ -245,7 +247,8 @@ class QueryGetTest extends TestCase
     {
         Get::usePropertiesModel(Property::class);
 
-        $screenProperty = Property::create(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'])->fresh();
+        Property::upsert(['name' => 'Screen', 'slug' => 'screen', 'type' => 'string'], ['slug']);
+        $screenProperty = Property::findBySlug('screen');
         $groupScreen = LinkGroup::create(['link_type_id' => $this->variant->id, 'property_id' => $screenProperty->id])->fresh();
 
         $attrs = ['link_group_id' => $groupScreen->id, 'linkable_type' => TestLinkableProduct::class];

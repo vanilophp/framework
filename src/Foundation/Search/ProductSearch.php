@@ -19,7 +19,9 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Traits\Macroable;
+use Konekt\Search\Exceptions\UnsupportedOperationException;
 use Konekt\Search\Facades\Search;
 use Konekt\Search\Searcher;
 use Vanilo\Category\Contracts\Taxon;
@@ -386,7 +388,7 @@ class ProductSearch
         return $this->searcher
             ->add($this->productQuery, $columns, $orderBy)
             ->add($this->masterProductQuery, $columns, $orderBy)
-            ->when(null !== $this->variantQuery, fn ($search) => $search->add($this->variantQuery));
+            ->when(null !== $this->variantQuery, fn ($search) => $search->add($this->variantQuery, $columns, $orderBy));
     }
 
     public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
@@ -405,8 +407,14 @@ class ProductSearch
         return is_null($limit) ? $this->getSearcher()->search() : $this->getSearcher()->simplePaginate($limit)->search()->getCollection();
     }
 
+    /**
+     * @throws UnsupportedOperationException
+     */
     public function includeVariants(): self
     {
+        if ('pgsql' === DB::connection()->getDriverName()) {
+            throw new UnsupportedOperationException('The `includeVariants()` feature is not supported on PostgreSQL databases.');
+        }
         $this->variantQuery = MasterProductVariantProxy::query();
 
         return $this;
