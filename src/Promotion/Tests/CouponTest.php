@@ -98,7 +98,7 @@ class CouponTest extends TestCase
     }
 
     /** @test */
-    public function cat_return_promotion()
+    public function can_return_promotion()
     {
         $promotion = PromotionFactory::new(['name' => 'Test promo'])->create();
         $coupon = CouponFactory::new(['promotion_id' => $promotion->id])->create();

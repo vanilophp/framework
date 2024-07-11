@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Vanilo\Promotion\Contracts\Promotion as PromotionContract;
+use Vanilo\Promotion\Contracts\PromotionRuleType;
 
 /**
  * @property int $id
@@ -47,6 +48,11 @@ class Promotion extends Model implements PromotionContract
         return $this->hasMany(CouponProxy::modelClass());
     }
 
+    public function rules(): HasMany
+    {
+        return $this->hasMany(PromotionRuleProxy::modelClass());
+    }
+
     public function isValid(?\DateTimeInterface $at = null): bool
     {
         if ($this->usage_count >= $this->usage_limit) {
@@ -62,5 +68,15 @@ class Promotion extends Model implements PromotionContract
         }
 
         return $this->ends_at->isFuture();
+    }
+
+    public function addRule(PromotionRuleType $ruleType): PromotionContract
+    {
+        $this->rules()->create([
+            'type' => $ruleType::getID(),
+            'configuration' => $ruleType->getConfiguration(),
+        ]);
+
+        return $this;
     }
 }

@@ -12,6 +12,7 @@ use Vanilo\Promotion\Contracts\Promotion;
 
 /**
  * @property int $id
+ * @property int $promotion_id
  * @property string $code
  * @property ?int $usage_limit
  * @property ?int $per_customer_usage_limit

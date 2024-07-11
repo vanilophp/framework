@@ -17,4 +17,6 @@ namespace Vanilo\Promotion\Contracts;
 interface Promotion
 {
     public function isValid(?\DateTimeInterface $at = null): bool;
+
+    public function addRule(PromotionRuleType $ruleType): self;
 }

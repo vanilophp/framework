@@ -6,6 +6,8 @@ namespace Vanilo\Promotion\Tests;
 
 use Carbon\Carbon;
 use Vanilo\Promotion\Models\Promotion;
+use Vanilo\Promotion\Rules\CartQuantity;
+use Vanilo\Promotion\PromotionRuleTypes;
 use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
 class PromotionTest extends TestCase
@@ -138,5 +140,16 @@ class PromotionTest extends TestCase
         $this->assertFalse($invalidPromotionB->isValid());
         $this->assertFalse($validPromotionA->isValid(Carbon::now()->addYear()));
         $this->assertTrue($validPromotionA->isValid(Carbon::now()->addWeek()));
+    }
+
+    /** @test */
+    public function it_can_add_rule_and_validate()
+    {
+        $promotion = PromotionFactory::new()->create();
+        $promotion->addRule(PromotionRuleTypes::make(CartQuantity::getID())->setConfiguration(['count' => 3]));
+
+        $this->assertEquals(1, $promotion->rules()->count());
+        $this->assertEquals(['count' => 3], $promotion->rules()->first()->configuration);
+        $this->assertEquals(CartQuantity::getID(), $promotion->rules()->first()->type);
     }
 }
