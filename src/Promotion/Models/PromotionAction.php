@@ -10,8 +10,6 @@ use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Promotion\Contracts\Promotion;
 use Vanilo\Promotion\Contracts\PromotionAction as PromotionActionContract;
 use Vanilo\Promotion\Contracts\PromotionActionType;
-use Vanilo\Promotion\Contracts\PromotionRuleType;
-use Vanilo\Promotion\PromotionRuleTypes;
 use Vanilo\Support\Traits\ConfigurableModel;
 use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 

@@ -29,7 +29,7 @@ class CartFixedDiscount implements PromotionActionType
     public function adjust(object $subject): Adjuster
     {
         if (!$subject instanceof Cart) {
-            throw new \InvalidArgumentException('Subject must be an instance of '.Cart::class);
+            throw new \InvalidArgumentException('Subject must be an instance of ' . Cart::class);
         }
 
         return new SimpleDiscount($this->getConfiguration()['discount_amount'] / 100 * $subject->total());
@@ -46,7 +46,7 @@ class CartFixedDiscount implements PromotionActionType
             $configuration = (new Processor())->process($this->getSchema(), $configuration);
         }
 
-        $this->configuration = (array)$configuration;
+        $this->configuration = (array) $configuration;
 
         return $this;
     }
@@ -59,6 +59,6 @@ class CartFixedDiscount implements PromotionActionType
             $configuration = (new Processor())->process($this->getSchema(), $configuration);
         }
 
-        return (array)$configuration;
+        return (array) $configuration;
     }
 }
