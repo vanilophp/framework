@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion;
 
-use Vanilo\Promotion\Contracts\PromotionRuleType;
-use Vanilo\Promotion\Exceptions\InexistentPromotionRuleException;
+use Vanilo\Promotion\Contracts\PromotionActionType;
+use Vanilo\Promotion\Exceptions\InexistentPromotionActionException;
 
-final class PromotionRuleTypes
+final class PromotionActionTypes
 {
     private static array $registry = [];
 
@@ -17,13 +17,13 @@ final class PromotionRuleTypes
             return;
         }
 
-        if (!in_array(PromotionRuleType::class, class_implements($class))) {
+        if (!in_array(PromotionActionType::class, class_implements($class))) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'The class you are trying to register (%s) as promotion rule, ' .
+                    'The class you are trying to register (%s) as promotion action, ' .
                     'must implement the %s interface.',
                     $class,
-                    PromotionRuleType::class
+                    PromotionActionType::class
                 )
             );
         }
@@ -31,13 +31,13 @@ final class PromotionRuleTypes
         self::$registry[$id] = $class;
     }
 
-    public static function make(string $id): PromotionRuleType
+    public static function make(string $id): PromotionActionType
     {
         $gwClass = self::getClass($id);
 
         if (null === $gwClass) {
-            throw new InexistentPromotionRuleException(
-                "No rule is registered with the id `$id`."
+            throw new InexistentPromotionActionException(
+                "No action is registered with the id `$id`."
             );
         }
 

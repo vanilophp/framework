@@ -7,6 +7,7 @@ namespace Vanilo\Promotion\Providers;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Promotion\Models\Coupon;
 use Vanilo\Promotion\Models\Promotion;
+use Vanilo\Promotion\Models\PromotionAction;
 use Vanilo\Promotion\Models\PromotionRule;
 use Vanilo\Promotion\PromotionRuleTypes;
 use Vanilo\Promotion\Rules\CartQuantity;
@@ -17,6 +18,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         Promotion::class,
         Coupon::class,
         PromotionRule::class,
+        PromotionAction::class,
     ];
 
     public function boot()

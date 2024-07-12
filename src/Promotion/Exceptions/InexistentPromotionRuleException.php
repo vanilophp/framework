@@ -6,6 +6,6 @@ namespace Vanilo\Promotion\Exceptions;
 
 use RuntimeException;
 
-class InexistentRuleException extends RuntimeException
+class InexistentPromotionRuleException extends RuntimeException
 {
 }
