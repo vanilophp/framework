@@ -6,7 +6,6 @@ namespace Vanilo\Promotion\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Nette\Schema\Schema;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Promotion\Contracts\Promotion;
 use Vanilo\Promotion\Contracts\PromotionAction as PromotionActionContract;
