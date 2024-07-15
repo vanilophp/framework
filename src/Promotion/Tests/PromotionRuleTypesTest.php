@@ -31,7 +31,7 @@ class PromotionRuleTypesTest extends TestCase
     /** @test */
     public function attempting_to_retrieve_an_unregistered_gateway_returns_null()
     {
-        $this->assertNull(PromotionRuleTypes::getClass('randomness'));
+        $this->assertNull(PromotionRuleTypes::getClassOf('randomness'));
     }
 
     /** @test */
