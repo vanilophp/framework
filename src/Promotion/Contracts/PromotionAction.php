@@ -11,5 +11,5 @@ interface PromotionAction extends Configurable
 {
     public function getActionType(): PromotionActionType;
 
-    public function executeActionType(object $subject): Adjustable;
+    public function execute(object $subject): Adjustable;
 }

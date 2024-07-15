@@ -24,14 +24,14 @@ final class PromotionActionTypes implements Registry
 
     public static function make(string $id, array $parameters = []): PromotionActionType
     {
-        $gwClass = self::getClassOf($id);
+        $class = self::getClassOf($id);
 
-        if (null === $gwClass) {
+        if (null === $class) {
             throw new InexistentPromotionActionException(
                 "No action is registered with the id `$id`."
             );
         }
 
-        return app()->make($gwClass);
+        return app()->make($class, $parameters);
     }
 }

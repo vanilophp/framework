@@ -14,19 +14,14 @@ use Vanilo\Promotion\Contracts\PromotionActionType;
 
 class CartFixedDiscount implements PromotionActionType
 {
-    private ?array $configuration = null;
+    public const DEFAULT_ID = 'cart_fixed_discount';
 
     public static function getName(): string
     {
-        return __('Cart fixed discount');
+        return __('Cart Fixed Discount');
     }
 
-    public static function getID(): string
-    {
-        return 'cart_fixed_discount';
-    }
-
-    public function adjust(object $subject): Adjuster
+    public function getAdjuster(array $configuration): Adjuster
     {
         if (!$subject instanceof Cart) {
             throw new \InvalidArgumentException('Subject must be an instance of ' . Cart::class);
@@ -35,30 +30,13 @@ class CartFixedDiscount implements PromotionActionType
         return new SimpleDiscount($this->getConfiguration()['discount_amount'] / 100 * $subject->total());
     }
 
-    public function getSchema(): ?Schema
+    public function getSchema(): Schema
     {
-        return Expect::structure(['discount_amount' => Expect::int(0)->required()]);
+        return Expect::structure(['discount_amount' => Expect::float(0)->required()])->castTo('array');
     }
 
-    public function setConfiguration(array $configuration): self
+    public function getSchemaSample(array $mergeWith = null): array
     {
-        if ($this->getSchema()) {
-            $configuration = (new Processor())->process($this->getSchema(), $configuration);
-        }
-
-        $this->configuration = (array) $configuration;
-
-        return $this;
-    }
-
-    public function getConfiguration(): ?array
-    {
-        $configuration = $this->configuration;
-
-        if ($this->getSchema()) {
-            $configuration = (new Processor())->process($this->getSchema(), $configuration);
-        }
-
-        return (array) $configuration;
+        return ['discount_amount' => 19.99];
     }
 }

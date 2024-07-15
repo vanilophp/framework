@@ -6,6 +6,7 @@ namespace Vanilo\Promotion\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Nette\Schema\Schema;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Promotion\Contracts\Promotion;
 use Vanilo\Promotion\Contracts\PromotionAction as PromotionActionContract;
@@ -42,7 +43,7 @@ class PromotionAction extends Model implements PromotionActionContract
         // TODO: Implement getActionType() method.
     }
 
-    public function executeActionType(object $subject): Adjustable
+    public function execute(object $subject): Adjustable
     {
         // TODO: Implement executeActionType() method.
     }
