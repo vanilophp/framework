@@ -30,7 +30,7 @@ class CartQuantity implements PromotionRuleType
 
     public function isPassing(object $subject, array $configuration): bool
     {
-        $count = match(true) {
+        $count = match (true) {
             method_exists($subject, 'itemCount') => $subject->itemCount(),
             method_exists($subject, 'getItems') => count($subject->getItems()),
             default => throw new \InvalidArgumentException('The cart quantity promotion rule requires either `itemCount()` or `getItems()` method on its subject'),

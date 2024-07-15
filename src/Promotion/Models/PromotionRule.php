@@ -13,7 +13,6 @@ use Vanilo\Promotion\Contracts\PromotionRuleType;
 use Vanilo\Promotion\PromotionRuleTypes;
 use Vanilo\Support\Dto\SchemaDefinition;
 use Vanilo\Support\Traits\ConfigurableModel;
-use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property int $id
