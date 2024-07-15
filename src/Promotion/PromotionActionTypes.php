@@ -4,36 +4,27 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion;
 
+use Konekt\Extend\Concerns\HasRegistry;
+use Konekt\Extend\Concerns\RequiresClassOrInterface;
+use Konekt\Extend\Contracts\Registry;
 use Vanilo\Promotion\Contracts\PromotionActionType;
 use Vanilo\Promotion\Exceptions\InexistentPromotionActionException;
 
-final class PromotionActionTypes
+final class PromotionActionTypes implements Registry
 {
-    private static array $registry = [];
+    use HasRegistry;
+    use RequiresClassOrInterface;
+
+    private static string $requiredInterface = PromotionActionType::class;
 
     public static function register(string $id, string $class)
     {
-        if (array_key_exists($id, self::$registry)) {
-            return;
-        }
-
-        if (!in_array(PromotionActionType::class, class_implements($class))) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The class you are trying to register (%s) as promotion action, ' .
-                    'must implement the %s interface.',
-                    $class,
-                    PromotionActionType::class
-                )
-            );
-        }
-
-        self::$registry[$id] = $class;
+        self::add($id, $class);
     }
 
-    public static function make(string $id): PromotionActionType
+    public static function make(string $id, array $parameters = []): PromotionActionType
     {
-        $gwClass = self::getClass($id);
+        $gwClass = self::getClassOf($id);
 
         if (null === $gwClass) {
             throw new InexistentPromotionActionException(
@@ -42,31 +33,5 @@ final class PromotionActionTypes
         }
 
         return app()->make($gwClass);
-    }
-
-    public static function reset(): void
-    {
-        self::$registry = [];
-    }
-
-    public static function getClass(string $id): ?string
-    {
-        return self::$registry[$id] ?? null;
-    }
-
-    public static function ids(): array
-    {
-        return array_keys(self::$registry);
-    }
-
-    public static function choices(): array
-    {
-        $result = [];
-
-        foreach (self::$registry as $type => $class) {
-            $result[$type] = $class::getName();
-        }
-
-        return $result;
     }
 }
