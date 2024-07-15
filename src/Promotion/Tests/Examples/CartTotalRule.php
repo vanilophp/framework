@@ -14,28 +14,18 @@ class CartTotalRule implements PromotionRuleType
         return 'Cart Total';
     }
 
-    public static function getID(): string
-    {
-        // TODO: Implement getID() method.
-    }
-
-    public function isPassing(object $subject): bool
+    public function isPassing(object $subject, array $configuration): bool
     {
         // TODO: Implement isPassing() method.
     }
 
-    public function getSchema(): ?Schema
+    public function getSchema(): Schema
     {
         // TODO: Implement getSchema() method.
     }
 
-    public function setConfiguration(array $configuration): PromotionRuleType
+    public function getSchemaSample(array $mergeWith = null): array
     {
-        // TODO: Implement setConfiguration() method.
-    }
-
-    public function getConfiguration(): ?array
-    {
-        // TODO: Implement getConfiguration() method.
+        // TODO: Implement getSchemaSample() method.
     }
 }

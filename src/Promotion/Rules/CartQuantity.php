@@ -7,60 +7,37 @@ namespace Vanilo\Promotion\Rules;
 use Nette\Schema\Expect;
 use Nette\Schema\Processor;
 use Nette\Schema\Schema;
-use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Promotion\Contracts\PromotionRuleType;
 
 class CartQuantity implements PromotionRuleType
 {
-    private ?array $configuration = null;
+    public const ID = 'cart_quantity';
 
     public static function getName(): string
     {
-        return __('Cart quantity');
+        return __('Cart Quantity');
     }
 
-    public static function getID(): string
+    public function getSchema(): Schema
     {
-        return 'cart_quantity';
+        return Expect::structure(['count' => Expect::int(0)->required()])->castTo('array');
     }
 
-    public function setConfiguration(array $configuration): self
+    public function getSchemaSample(array $mergeWith = null): array
     {
-        if ($this->getSchema()) {
-            $configuration = (new Processor())->process($this->getSchema(), $configuration);
-        }
-
-        $this->configuration = (array) $configuration;
-
-        return $this;
+        return ['count' => 2];
     }
 
-    public function getConfiguration(): ?array
+    public function isPassing(object $subject, array $configuration): bool
     {
-        $configuration = $this->configuration;
+        $count = match(true) {
+            method_exists($subject, 'itemCount') => $subject->itemCount(),
+            method_exists($subject, 'getItems') => count($subject->getItems()),
+            default => throw new \InvalidArgumentException('The cart quantity promotion rule requires either `itemCount()` or `getItems()` method on its subject'),
+        };
 
-        if ($this->getSchema()) {
-            $configuration = (new Processor())->process($this->getSchema(), $configuration);
-        }
+        $configuration = (new Processor())->process($this->getSchema(), $configuration);
 
-        return (array) $configuration;
-    }
-
-    public function getSchema(): ?Schema
-    {
-        return Expect::structure(['count' => Expect::int(0)->required()]);
-    }
-
-    public function isPassing(object $subject): bool
-    {
-        if (!$subject instanceof Cart) {
-            throw new \InvalidArgumentException('Subject must be an instance of Vanilo\Cart\Contracts\Cart');
-        }
-
-        if (!$this->getConfiguration()) {
-            return false;
-        }
-
-        return $subject->itemCount() <= $this->configuration['count'];
+        return $count >= $configuration['count'];
     }
 }

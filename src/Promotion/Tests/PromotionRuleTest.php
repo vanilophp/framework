@@ -44,7 +44,7 @@ class PromotionRuleTest extends TestCase
     {
         $ruleA = PromotionRule::create(
             [
-                'type' => CartQuantity::getID(),
+                'type' => CartQuantity::ID,
                 'promotion_id' => PromotionFactory::new()->create()->id,
                 'configuration' => ['count' => 10],
             ]
@@ -52,17 +52,17 @@ class PromotionRuleTest extends TestCase
 
         $ruleB = PromotionRule::create(
             [
-                'type' => CartQuantity::getID(),
+                'type' => CartQuantity::ID,
                 'promotion_id' => PromotionFactory::new()->create()->id,
                 'configuration' => ['count' => 3],
             ]
         );
 
         $this->assertEquals(['count' => 10], $ruleA->configuration());
-        $this->assertTrue($ruleA->isRuleTypPassing(new DummyCart()));
+        $this->assertFalse($ruleA->isPassing(new DummyCart()));
 
         $this->assertEquals(['count' => 3], $ruleB->configuration());
-        $this->assertFalse($ruleB->isRuleTypPassing(new DummyCart()));
+        $this->assertTrue($ruleB->isPassing(new DummyCart()));
     }
 
     /** @test */
@@ -71,9 +71,9 @@ class PromotionRuleTest extends TestCase
         $this->expectException(ValidationException::class);
 
         $rule = PromotionRule::create(
-            ['type' => CartQuantity::getID(), 'promotion_id' => PromotionFactory::new()->create()->id]
+            ['type' => CartQuantity::ID, 'promotion_id' => PromotionFactory::new()->create()->id]
         );
 
-        $rule->isRuleTypPassing(new DummyCart());
+        $rule->isPassing(new DummyCart());
     }
 }

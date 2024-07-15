@@ -15,31 +15,26 @@ class CartQuantityTest extends TestCase
     /** @test */
     public function can_be_created()
     {
-        PromotionRuleTypes::register(CartQuantity::getID(), CartQuantity::class);
+        $ruleType = PromotionRuleTypes::make(CartQuantity::ID);
 
-        $rule = PromotionRuleTypes::make(CartQuantity::getID());
-
-        $this->assertInstanceOf(CartQuantity::class, $rule);
+        $this->assertInstanceOf(CartQuantity::class, $ruleType);
     }
 
     /** @test */
     public function throws_exception_if_configuration_is_wrong()
     {
         $this->expectException(ValidationException::class);
-        PromotionRuleTypes::register(CartQuantity::getID(), CartQuantity::class);
-        $rule = PromotionRuleTypes::make(CartQuantity::getID());
+        $cartQuantityRule = PromotionRuleTypes::make(CartQuantity::ID);
 
-        $this->assertFalse($rule->isPassing(new DummyCart()));
+        $this->assertFalse($cartQuantityRule->isPassing(new DummyCart(), ['wrong' => 'config']));
     }
 
     /** @test */
     public function passes_if_rule_is_valid()
     {
-        PromotionRuleTypes::register(CartQuantity::getID(), CartQuantity::class);
-        $ruleA = PromotionRuleTypes::make(CartQuantity::getID())->setConfiguration(['count' => 3]);
-        $ruleB = PromotionRuleTypes::make(CartQuantity::getID())->setConfiguration(['count' => 6]);
+        $cartQuantityRuleType = PromotionRuleTypes::make(CartQuantity::ID);
 
-        $this->assertFalse($ruleA->isPassing(new DummyCart()));
-        $this->assertTrue($ruleB->isPassing(new DummyCart()));
+        $this->assertTrue($cartQuantityRuleType->isPassing(new DummyCart(4), ['count' => 3]));
+        $this->assertFalse($cartQuantityRuleType->isPassing(new DummyCart(6), ['count' => 7]));
     }
 }

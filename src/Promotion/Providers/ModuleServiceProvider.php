@@ -25,6 +25,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     {
         parent::boot();
 
-        PromotionRuleTypes::register(CartQuantity::getID(), CartQuantity::class);
+        PromotionRuleTypes::register(CartQuantity::ID, CartQuantity::class);
     }
 }

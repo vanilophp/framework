@@ -6,10 +6,12 @@ namespace Vanilo\Promotion\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Vanilo\Contracts\Schematized;
 use Vanilo\Promotion\Contracts\Promotion;
 use Vanilo\Promotion\Contracts\PromotionRule as PromotionRuleContract;
 use Vanilo\Promotion\Contracts\PromotionRuleType;
 use Vanilo\Promotion\PromotionRuleTypes;
+use Vanilo\Support\Dto\SchemaDefinition;
 use Vanilo\Support\Traits\ConfigurableModel;
 use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
@@ -24,7 +26,6 @@ use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 class PromotionRule extends Model implements PromotionRuleContract
 {
     use ConfigurableModel;
-    use ConfigurationHasNoSchema;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -39,11 +40,16 @@ class PromotionRule extends Model implements PromotionRuleContract
 
     public function getRuleType(): PromotionRuleType
     {
-        return PromotionRuleTypes::make($this->type)->setConfiguration($this->configuration);
+        return PromotionRuleTypes::make($this->type);
     }
 
-    public function isRuleTypPassing(object $subject): bool
+    public function isPassing(object $subject): bool
     {
-        return $this->getRuleType()->isPassing($subject);
+        return $this->getRuleType()->isPassing($subject, $this->configuration());
+    }
+
+    public function getConfigurationSchema(): ?Schematized
+    {
+        return SchemaDefinition::wrap($this->getRuleType());
     }
 }

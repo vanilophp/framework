@@ -18,5 +18,5 @@ interface Promotion
 {
     public function isValid(?\DateTimeInterface $at = null): bool;
 
-    public function addRule(PromotionRuleType $ruleType): self;
+    public function addRule(PromotionRuleType|string $type, array $configuration): self;
 }

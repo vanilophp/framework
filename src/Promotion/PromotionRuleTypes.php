@@ -24,14 +24,14 @@ final class PromotionRuleTypes implements Registry
 
     public static function make(string $id, array $parameters = []): PromotionRuleType
     {
-        $gwClass = self::getClassOf($id);
+        $class = self::getClassOf($id);
 
-        if (null === $gwClass) {
+        if (null === $class) {
             throw new InexistentPromotionRuleException(
                 "No rule is registered with the id `$id`."
             );
         }
 
-        return app()->make($gwClass, $parameters);
+        return app()->make($class, $parameters);
     }
 }

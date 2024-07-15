@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Vanilo\Promotion\Contracts\Promotion as PromotionContract;
 use Vanilo\Promotion\Contracts\PromotionRuleType;
+use Vanilo\Promotion\PromotionRuleTypes;
 
 /**
  * @property int $id
@@ -70,11 +71,17 @@ class Promotion extends Model implements PromotionContract
         return $this->ends_at->isFuture();
     }
 
-    public function addRule(PromotionRuleType $ruleType): PromotionContract
+    public function addRule(PromotionRuleType|string $type, array $configuration): self
     {
+        $typeId = match (true) {
+            $type instanceof PromotionRuleType => PromotionRuleTypes::getIdOf($type::class), // $type is an object
+            null !== PromotionRuleTypes::getClassOf($type) => $type, // $type is the registered type ID
+            default => PromotionRuleTypes::getIdOf($type), // $type is the class name of the rule type
+        };
+
         $this->rules()->create([
-            'type' => $ruleType::getID(),
-            'configuration' => $ruleType->getConfiguration(),
+            'type' => $typeId,
+            'configuration' => $configuration,
         ]);
 
         return $this;

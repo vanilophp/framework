@@ -10,5 +10,5 @@ interface PromotionRule extends Configurable
 {
     public function getRuleType(): PromotionRuleType;
 
-    public function isRuleTypPassing(object $subject): bool;
+    public function isPassing(object $subject): bool;
 }

@@ -4,19 +4,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Contracts;
 
-use Nette\Schema\Schema;
+use Konekt\Extend\Contracts\Registerable;
+use Vanilo\Contracts\Schematized;
 
-interface PromotionRuleType
+interface PromotionRuleType extends Schematized, Registerable
 {
     public static function getName(): string;
 
-    public static function getID(): string;
-
-    public function isPassing(object $subject): bool;
-
-    public function getSchema(): ?Schema;
-
-    public function setConfiguration(array $configuration): self;
-
-    public function getConfiguration(): ?array;
+    public function isPassing(object $subject, array $configuration): bool;
 }

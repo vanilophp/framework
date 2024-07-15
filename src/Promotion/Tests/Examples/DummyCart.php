@@ -12,6 +12,11 @@ use Vanilo\Contracts\Buyable;
 
 class DummyCart implements Cart
 {
+    public function __construct(
+        private int $itemCount = 5
+    ) {
+    }
+
     public function addItem(Buyable $product, float|int $qty = 1, array $params = []): CartItem
     {
         // TODO: Implement addItem() method.
@@ -34,7 +39,7 @@ class DummyCart implements Cart
 
     public function itemCount(): int
     {
-        return 5;
+        return $this->itemCount;
     }
 
     public function getUser(): ?Authenticatable

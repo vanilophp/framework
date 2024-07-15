@@ -146,10 +146,10 @@ class PromotionTest extends TestCase
     public function it_can_add_rule_and_validate()
     {
         $promotion = PromotionFactory::new()->create();
-        $promotion->addRule(PromotionRuleTypes::make(CartQuantity::getID())->setConfiguration(['count' => 3]));
+        $promotion->addRule(PromotionRuleTypes::make(CartQuantity::ID), ['count' => 3]);
 
         $this->assertEquals(1, $promotion->rules()->count());
         $this->assertEquals(['count' => 3], $promotion->rules()->first()->configuration);
-        $this->assertEquals(CartQuantity::getID(), $promotion->rules()->first()->type);
+        $this->assertEquals(CartQuantity::ID, $promotion->rules()->first()->type);
     }
 }
