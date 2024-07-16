@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Actions;
 
 use Nette\Schema\Expect;
-use Nette\Schema\Processor;
 use Nette\Schema\Schema;
 use Vanilo\Adjustments\Adjusters\SimpleDiscount;
 use Vanilo\Adjustments\Contracts\Adjuster;
