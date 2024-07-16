@@ -8,7 +8,6 @@ use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use Vanilo\Adjustments\Adjusters\SimpleDiscount;
 use Vanilo\Adjustments\Contracts\Adjuster;
-use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Promotion\Contracts\PromotionActionType;
 
 class CartFixedDiscount implements PromotionActionType
