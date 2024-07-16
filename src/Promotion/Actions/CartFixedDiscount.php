@@ -23,20 +23,16 @@ class CartFixedDiscount implements PromotionActionType
 
     public function getAdjuster(array $configuration): Adjuster
     {
-        if (!$subject instanceof Cart) {
-            throw new \InvalidArgumentException('Subject must be an instance of ' . Cart::class);
-        }
-
-        return new SimpleDiscount($this->getConfiguration()['discount_amount'] / 100 * $subject->total());
+        return new SimpleDiscount($configuration['amount']);
     }
 
     public function getSchema(): Schema
     {
-        return Expect::structure(['discount_amount' => Expect::float(0)->required()])->castTo('array');
+        return Expect::structure(['amount' => Expect::float(0)->required()])->castTo('array');
     }
 
     public function getSchemaSample(array $mergeWith = null): array
     {
-        return ['discount_amount' => 19.99];
+        return ['amount' => 19.99];
     }
 }
