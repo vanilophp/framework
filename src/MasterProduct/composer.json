@@ -25,7 +25,7 @@
         "laravel/framework": "^10.43|^11.0",
         "vanilo/contracts": "^4.0",
         "vanilo/product": "^4.0",
-        "vanilo/support": "^4.0"
+        "vanilo/support": "^4.2"
     },
     "suggest": {
         "vanilo/properties": "Allows establishing variants based on properties like color, size, etc"

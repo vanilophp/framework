@@ -23,7 +23,7 @@
         "konekt/enum-eloquent": "^1.9",
         "laravel/framework": "^10.43|^11.0",
         "vanilo/contracts": "^4.0",
-        "vanilo/support": "^4.0",
+        "vanilo/support": "^4.2",
         "cviebrock/eloquent-sluggable": "^10.0|^11.0"
     },
     "require-dev": {

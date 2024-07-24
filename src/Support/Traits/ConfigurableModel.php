@@ -42,7 +42,7 @@ trait ConfigurableModel
 
     public function hasConfiguration(): bool
     {
-        return null !== $this->{static::$configurationFieldName};
+        return !empty($this->{static::$configurationFieldName});
     }
 
     public function doesntHaveConfiguration(): bool

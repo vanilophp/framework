@@ -71,7 +71,7 @@ class OrderItemTest extends TestCase
     }
 
     /** @test */
-    public function order_items_can_be_configured()
+    public function it_can_be_configured()
     {
         $order = Order::create([
             'number' => 'WYHP7'
@@ -89,6 +89,26 @@ class OrderItemTest extends TestCase
         $item = $order->items->first();
 
         $this->assertEquals('dolly buster', $item->configuration['hello']);
+    }
+
+    /** @test */
+    public function it_has_no_configuration_by_default()
+    {
+        $order = Order::create([
+            'number' => 'W0DRN'
+        ]);
+
+        $order->items()->create([
+            'product_type' => 'product',
+            'product_id' => $this->theMoonRing->getId(),
+            'quantity' => 1,
+            'name' => $this->theMoonRing->getName(),
+            'price' => $this->theMoonRing->getPrice()
+        ]);
+
+        $item = $order->items->first();
+
+        $this->assertFalse($item->hasConfiguration());
     }
 
     /** @test */

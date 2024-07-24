@@ -2,6 +2,11 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Changed `PaymentMethod::hasConfiguration()` to return false on empty arrays as well
+
 ## 4.1.0
 ##### 2024-07-11
 

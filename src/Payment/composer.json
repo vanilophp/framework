@@ -22,7 +22,7 @@
         "konekt/enum": "^4.2",
         "laravel/framework": "^10.43|^11.0",
         "vanilo/contracts": "^4.0",
-        "vanilo/support": "^4.0"
+        "vanilo/support": "^4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
