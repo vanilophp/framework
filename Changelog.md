@@ -2,6 +2,20 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Changed the `ConfigurableModel::hasConfiguration()` trait to return false on empty arrays as well
+  (until now, only `null` was considered as no config). It affects the following models:
+    - `Carrier`
+    - `CartItem`
+    - `Channel`
+    - `OrderItem`
+    - `PaymentMethod`
+    - `Shipment`
+    - `ShippingMethod`
+    - `TaxRate`
+
 ## 4.1.0
 ##### 2024-07-11
 

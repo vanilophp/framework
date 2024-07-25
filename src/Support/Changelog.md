@@ -2,6 +2,11 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Changed the `ConfigurableModel::hasConfiguration()` trait to return false on empty arrays as well (until now, only `null` was considered as no config)
+
 ## 4.1.0
 ##### 2024-07-11
 

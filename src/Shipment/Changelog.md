@@ -2,6 +2,13 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Changed `ShippingMethod::hasConfiguration()` to return false on empty arrays as well
+- Changed `Shipment::hasConfiguration()` to return false on empty arrays as well
+- Changed `Carrier::hasConfiguration()` to return false on empty arrays as well
+
 ## 4.1.0
 ##### 2024-07-11
 
