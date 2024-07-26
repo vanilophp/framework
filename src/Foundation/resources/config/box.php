@@ -20,6 +20,7 @@ return [
         Vanilo\MasterProduct\Providers\ModuleServiceProvider::class => [],
         Vanilo\Shipment\Providers\ModuleServiceProvider::class => [],
         Vanilo\Taxes\Providers\ModuleServiceProvider::class => [],
+        Vanilo\Promotion\Providers\ModuleServiceProvider::class => [],
     ],
     'event_listeners' => true,
     'image' => [
