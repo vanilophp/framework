@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Listeners;
 
-use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Cart\CartManager;

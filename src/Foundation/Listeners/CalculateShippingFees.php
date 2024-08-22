@@ -14,12 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Listeners;
 
-use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
-use Vanilo\Cart\CartManager;
 use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
-use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Shipment\Contracts\ShippingMethod;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 

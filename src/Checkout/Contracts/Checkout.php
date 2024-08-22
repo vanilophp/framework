@@ -79,11 +79,11 @@ interface Checkout extends Shippable, ArrayAccess
     public function setTaxesAmount(float|DetailedAmount $amount): void;
 
     /** Add these methods in v5 to the interface (their implementations exist since v4.2):
-    public function addCoupon(string $couponCode): void;
-    public function removeCoupon(string $couponCode): void;
-    public function hasCoupon(string $couponCode): bool;
-    public function getCoupons(): array;
-    */
+     * public function addCoupon(string $couponCode): void;
+     * public function removeCoupon(string $couponCode): void;
+     * public function hasCoupon(string $couponCode): bool;
+     * public function getCoupons(): array;
+     */
 
     public function itemsTotal(): float;
 
