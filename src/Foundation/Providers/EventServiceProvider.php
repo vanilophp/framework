@@ -18,6 +18,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Vanilo\Cart\Events\CartDeleting;
 use Vanilo\Cart\Events\CartUpdated;
 use Vanilo\Checkout\Events\BillpayerChanged;
+use Vanilo\Checkout\Events\CouponAdded;
+use Vanilo\Checkout\Events\CouponRemoved;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Foundation\Listeners\CalculateShippingFees;
@@ -48,6 +50,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         CartDeleting::class => [
             DeleteCartAdjustments::class,
+        ],
+        CouponAdded::class => [
+            CalculatePromotions::class,
+        ],
+        CouponRemoved::class => [
+            CalculatePromotions::class,
         ]
     ];
 }

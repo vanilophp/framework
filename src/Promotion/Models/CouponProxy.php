@@ -15,7 +15,11 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
+use Vanilo\Promotion\Contracts\Coupon;
 
+/**
+ * @method static null|Coupon findByCode(string $code)
+ */
 class CouponProxy extends ModelProxy
 {
 }

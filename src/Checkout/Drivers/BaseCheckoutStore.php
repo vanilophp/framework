@@ -21,6 +21,8 @@ use Vanilo\Checkout\Contracts\CheckoutDataFactory;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Events\BillpayerChanged;
+use Vanilo\Checkout\Events\CouponAdded;
+use Vanilo\Checkout\Events\CouponRemoved;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
@@ -168,6 +170,40 @@ abstract class BaseCheckoutStore implements CheckoutStore
     public function setState($state)
     {
         $this->writeRawDataToStore('state', $state instanceof CheckoutState ? $state->value() : $state);
+    }
+
+    public function addCoupon(string $couponCode): void
+    {
+        if ($this->hasCoupon($couponCode)) {
+            return;
+        }
+
+        $coupons = $this->getCoupons();
+        $coupons[] = $couponCode;
+        $this->writeRawDataToStore('coupons', $coupons);
+
+        Event::dispatch(new CouponAdded($this, $couponCode));
+    }
+
+    public function removeCoupon(string $couponCode): void
+    {
+        if (!$this->hasCoupon($couponCode)) {
+            return;
+        }
+
+        $this->writeRawDataToStore('coupons', array_diff($this->getCoupons(), [$couponCode]));
+
+        Event::dispatch(new CouponRemoved($this, $couponCode));
+    }
+
+    public function hasCoupon(string $couponCode): bool
+    {
+        in_array($couponCode, $this->getCoupons());
+    }
+
+    public function getCoupons(): array
+    {
+        Arr::wrap($this->readRawDataFromStore('coupons'));
     }
 
     public function weight(): float

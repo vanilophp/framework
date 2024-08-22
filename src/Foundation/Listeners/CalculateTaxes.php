@@ -30,6 +30,8 @@ use Vanilo\Taxes\Drivers\NullTaxEngineDriver;
 
 class CalculateTaxes
 {
+    use HasCartAndCheckout;
+
     public function __construct(
         protected ?TaxEngineDriver $taxEngine,
     ) {
@@ -38,28 +40,28 @@ class CalculateTaxes
     public function handle(CheckoutEvent|CartEvent $event): void
     {
         if ($event instanceof CheckoutEvent) {
-            $checkout = $event->getCheckout();
-            $cart = $checkout->getCart();
+            $this->checkout = $event->getCheckout();
+            $this->cart = $this->checkout->getCart();
         } else {
-            $cart = $event->getCart();
-            Checkout::setCart($cart);
-            $checkout = Checkout::getFacadeRoot();
+            $this->cart = $event->getCart();
+            Checkout::setCart($this->cart);
+            $this->checkout = Checkout::getFacadeRoot();
         }
 
-        $cartModel = $cart instanceof CartManager ? $cart->model() : $cart;
+        $this->cartModel = $this->cart instanceof CartManager ? $this->cart->model() : $this->cart;
 
         if (
             null === $this->taxEngine
             || $this->taxEngine instanceof NullTaxEngineDriver
-            || !$cartModel instanceof Adjustable
+            || $this->theCartModelIsNotAdjustable()
         ) {
             return;
         }
 
-        $cart->getItems()->each(fn ($item) => $item->adjustments()->deleteByType(AdjustmentTypeProxy::TAX()));
-        $taxes = $this->calculateTaxesAndApplyToTheItems($cart, $checkout);
+        $this->cart->getItems()->each(fn ($item) => $item->adjustments()->deleteByType(AdjustmentTypeProxy::TAX()));
+        $taxes = $this->calculateTaxesAndApplyToTheItems($this->cart, $this->checkout);
 
-        $checkout->setTaxesAmount(
+        $this->checkout->setTaxesAmount(
             DetailedAmount::fromArray(
                 collect($taxes)->map(fn ($amount, $title) => ['title' => $title, 'amount' => $amount])->values()->all(),
             ),

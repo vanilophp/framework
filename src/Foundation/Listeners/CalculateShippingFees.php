@@ -25,37 +25,27 @@ use Vanilo\Shipment\Models\ShippingMethodProxy;
 
 class CalculateShippingFees
 {
+    use HasCartAndCheckout;
+
     public function handle(CheckoutEvent|CartEvent $event): void
     {
-        if ($event instanceof CheckoutEvent) {
-            $checkout = $event->getCheckout();
-            $cart = $checkout->getCart();
-        } else {
-            $cart = $event->getCart();
-            Checkout::setCart($cart);
-            $checkout = Checkout::getFacadeRoot();
-        }
+        $this->initialize($event);
 
-        if (null === $cart) {
+        if (null === $this->cart || $this->theCartModelIsNotAdjustable()) {
             return;
         }
 
-        $cartModel = $cart instanceof CartManager ? $cart->model() : $cart;
-        if (!$cartModel instanceof Adjustable) {
-            return;
-        }
-
-        $cart->adjustments()->deleteByType(AdjustmentTypeProxy::SHIPPING());
+        $this->cart->adjustments()->deleteByType(AdjustmentTypeProxy::SHIPPING());
 
         /** @var ShippingMethod $shippingMethod */
-        if (null === $shippingMethod = ShippingMethodProxy::find($checkout->getShippingMethodId())) {
+        if (null === $shippingMethod = ShippingMethodProxy::find($this->checkout->getShippingMethodId())) {
             return;
         }
 
         $calculator = $shippingMethod->getCalculator();
         if ($adjuster = $calculator->getAdjuster($shippingMethod->configuration())) {
-            $cart->adjustments()->create($adjuster);
+            $this->cart->adjustments()->create($adjuster);
         }
-        $checkout->setShippingAmount($shippingMethod->estimate($checkout)->amount());
+        $this->checkout->setShippingAmount($shippingMethod->estimate($this->checkout)->amount());
     }
 }

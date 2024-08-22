@@ -6,12 +6,13 @@ namespace Vanilo\Promotion\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Contracts\Schematized;
 use Vanilo\Promotion\Contracts\Promotion;
 use Vanilo\Promotion\Contracts\PromotionAction as PromotionActionContract;
 use Vanilo\Promotion\Contracts\PromotionActionType;
+use Vanilo\Promotion\PromotionActionTypes;
+use Vanilo\Support\Dto\SchemaDefinition;
 use Vanilo\Support\Traits\ConfigurableModel;
-use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
  * @property int $id
@@ -24,7 +25,6 @@ use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 class PromotionAction extends Model implements PromotionActionContract
 {
     use ConfigurableModel;
-    use ConfigurationHasNoSchema;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -39,11 +39,16 @@ class PromotionAction extends Model implements PromotionActionContract
 
     public function getActionType(): PromotionActionType
     {
-        // TODO: Implement getActionType() method.
+        return PromotionActionTypes::make($this->type);
     }
 
-    public function execute(object $subject): Adjustable
+    public function execute(object $subject): array
     {
-        // TODO: Implement executeActionType() method.
+        return $this->getActionType()->apply($subject, $this->configuration());
+    }
+
+    public function getConfigurationSchema(): ?Schematized
+    {
+        return SchemaDefinition::wrap($this->getActionType());
     }
 }

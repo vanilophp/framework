@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Vanilo\Promotion\Contracts\Promotion as PromotionContract;
+use Vanilo\Promotion\Contracts\PromotionAction;
+use Vanilo\Promotion\Contracts\PromotionActionType;
+use Vanilo\Promotion\Contracts\PromotionRule;
 use Vanilo\Promotion\Contracts\PromotionRuleType;
+use Vanilo\Promotion\PromotionActionTypes;
 use Vanilo\Promotion\PromotionRuleTypes;
 
 /**
@@ -26,6 +30,8 @@ use Vanilo\Promotion\PromotionRuleTypes;
  * @property ?Carbon $ends_at
  *
  * @property Coupon[]|Collection $coupons
+ * @property PromotionRule[]|Collection $rules
+ * @property PromotionAction[]|Collection $actions
  */
 class Promotion extends Model implements PromotionContract
 {
@@ -44,14 +50,44 @@ class Promotion extends Model implements PromotionContract
         'applies_to_discounted' => 'bool',
     ];
 
+    public static function findByCouponCode(string $couponCode): ?PromotionContract
+    {
+        return CouponProxy::findByCode($couponCode)?->getPromotion();
+    }
+
+    public function isCouponBased(): bool
+    {
+        return (bool) $this->is_coupon_based;
+    }
+
     public function coupons(): HasMany
     {
         return $this->hasMany(CouponProxy::modelClass());
     }
 
+    public function getCoupons(): Collection
+    {
+        return $this->coupons;
+    }
+
     public function rules(): HasMany
     {
         return $this->hasMany(PromotionRuleProxy::modelClass());
+    }
+
+    public function getRules(): Collection
+    {
+        return $this->rules;
+    }
+
+    public function actions(): HasMany
+    {
+        return $this->hasMany(PromotionActionProxy::modelClass());
+    }
+
+    public function getActions(): Collection
+    {
+        return $this->actions;
     }
 
     public function isValid(?\DateTimeInterface $at = null): bool
@@ -60,15 +96,19 @@ class Promotion extends Model implements PromotionContract
             return false;
         }
 
-        if (!$this->ends_at) {
-            return true;
+        return null === $this->ends_at || $this->ends_at->isAfter($at ?? Carbon::now($this->ends_at->getTimezone()));
+    }
+
+    public function isEligible(object $subject): bool
+    {
+        /** @var PromotionRule $rule */
+        foreach ($this->rules as $rule) {
+            if (!$rule->isPassing($subject)) {
+                return false;
+            }
         }
 
-        if ($at) {
-            return $this->ends_at->isAfter($at);
-        }
-
-        return $this->ends_at->isFuture();
+        return true;
     }
 
     public function addRule(PromotionRuleType|string $type, array $configuration): self
@@ -80,6 +120,22 @@ class Promotion extends Model implements PromotionContract
         };
 
         $this->rules()->create([
+            'type' => $typeId,
+            'configuration' => $configuration,
+        ]);
+
+        return $this;
+    }
+
+    public function addAction(PromotionActionType|string $type, array $configuration): self
+    {
+        $typeId = match (true) {
+            $type instanceof PromotionActionType => PromotionActionTypes::getIdOf($type::class), // $type is an object
+            null !== PromotionActionTypes::getClassOf($type) => $type, // $type is the registered type ID
+            default => PromotionActionTypes::getIdOf($type), // $type is the class name of the rule type
+        };
+
+        $this->actions()->create([
             'type' => $typeId,
             'configuration' => $configuration,
         ]);
