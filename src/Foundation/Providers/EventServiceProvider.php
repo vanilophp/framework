@@ -22,6 +22,7 @@ use Vanilo\Checkout\Events\CouponAdded;
 use Vanilo\Checkout\Events\CouponRemoved;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
+use Vanilo\Foundation\Listeners\CalculatePromotions;
 use Vanilo\Foundation\Listeners\CalculateShippingFees;
 use Vanilo\Foundation\Listeners\CalculateTaxes;
 use Vanilo\Foundation\Listeners\DeleteCartAdjustments;

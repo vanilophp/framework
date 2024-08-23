@@ -38,16 +38,7 @@ class CalculateTaxes
 
     public function handle(CheckoutEvent|CartEvent $event): void
     {
-        if ($event instanceof CheckoutEvent) {
-            $this->checkout = $event->getCheckout();
-            $this->cart = $this->checkout->getCart();
-        } else {
-            $this->cart = $event->getCart();
-            Checkout::setCart($this->cart);
-            $this->checkout = Checkout::getFacadeRoot();
-        }
-
-        $this->cartModel = $this->cart instanceof CartManager ? $this->cart->model() : $this->cart;
+        $this->initialize($event);
 
         if (
             null === $this->taxEngine

@@ -2,6 +2,18 @@
 
 ## 4.x Series
 
+## Unreleased
+##### 2024-XX-YY
+
+- Added the following, v5 interface candidate methods to the Checkout implementations:
+  - `addCoupon()`
+  - `removeCoupon()`
+  - `hasCoupon()`
+  - `getCoupons()`
+  - `hasAnyCoupon()`
+  - `getPromotionsAmount()`
+  - `setPromotionsAmount()`
+
 ## 4.1.0
 ##### 2024-07-11
 

@@ -196,14 +196,19 @@ abstract class BaseCheckoutStore implements CheckoutStore
         Event::dispatch(new CouponRemoved($this, $couponCode));
     }
 
+    public function hasAnyCoupon(): bool
+    {
+        return 0 !== count($this->getCoupons());
+    }
+
     public function hasCoupon(string $couponCode): bool
     {
-        in_array($couponCode, $this->getCoupons());
+        return in_array($couponCode, $this->getCoupons());
     }
 
     public function getCoupons(): array
     {
-        Arr::wrap($this->readRawDataFromStore('coupons'));
+        return Arr::wrap($this->readRawDataFromStore('coupons'));
     }
 
     public function weight(): float

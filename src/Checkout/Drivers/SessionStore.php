@@ -98,6 +98,16 @@ class SessionStore extends BaseCheckoutStore
         $this->writeRawDataToStore('taxes', $amount);
     }
 
+    public function getPromotionsAmount(): DetailedAmount
+    {
+        return $this->getDetailedAmountAttribute('promotions');
+    }
+
+    public function setPromotionsAmount(float|DetailedAmount $amount): void
+    {
+        $this->setDetailedAmountAttribute('promotions', $amount);
+    }
+
     public function setCustomAttribute(string $key, $value): void
     {
         $customAttributes = $this->getCustomAttributes();
@@ -138,6 +148,23 @@ class SessionStore extends BaseCheckoutStore
     public function clear(): void
     {
         $this->session->forget($this->prefix);
+    }
+
+    public function getDetailedAmountAttribute(string $name): DetailedAmount
+    {
+        $raw = $this->readRawDataFromStore($name, []);
+
+        return is_array($raw) ?
+            DetailedAmountDto::fromArray($raw) : new DetailedAmountDto(is_numeric($raw) ? floatval($raw) : 0);
+    }
+
+    public function setDetailedAmountAttribute(string $name, float|DetailedAmount $amount): void
+    {
+        if ($amount instanceof DetailedAmount && empty($amount->getDetails())) {
+            $amount = $amount->getValue();//Otherwise the value gets lost
+        }
+
+        $this->writeRawDataToStore($name, $amount);
     }
 
     protected function readRawDataFromStore(string $key, $default = null): mixed

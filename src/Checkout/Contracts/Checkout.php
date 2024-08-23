@@ -83,6 +83,9 @@ interface Checkout extends Shippable, ArrayAccess
      * public function removeCoupon(string $couponCode): void;
      * public function hasCoupon(string $couponCode): bool;
      * public function getCoupons(): array;
+     * public function hasAnyCoupon(): bool;
+     * public function getPromotionsAmount(): DetailedAmount;
+     * public function setPromotionsAmount(float|DetailedAmount $amount): void;
      */
 
     public function itemsTotal(): float;

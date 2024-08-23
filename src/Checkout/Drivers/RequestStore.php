@@ -55,6 +55,8 @@ class RequestStore extends BaseCheckoutStore
 
     protected DetailedAmount $taxes;
 
+    protected DetailedAmount $promotions;
+
     protected CheckoutRequest $request;
 
     /** @var array */
@@ -71,6 +73,7 @@ class RequestStore extends BaseCheckoutStore
         }
         $this->taxes = new DetailedAmountDto(0);
         $this->shippingFees = new DetailedAmountDto(0);
+        $this->promotions = new DetailedAmountDto(0);
     }
 
     /**
@@ -125,6 +128,16 @@ class RequestStore extends BaseCheckoutStore
     public function setTaxesAmount(float|DetailedAmount $amount): void
     {
         $this->taxes = $amount instanceof DetailedAmount ? $amount : new DetailedAmountDto($amount);
+    }
+
+    public function getPromotionsAmount(): DetailedAmount
+    {
+        return $this->promotions;
+    }
+
+    public function setPromotionsAmount(float|DetailedAmount $amount): void
+    {
+        $this->promotions = $amount instanceof DetailedAmount ? $amount : new DetailedAmountDto($amount);
     }
 
     public function setCustomAttribute(string $key, $value): void
