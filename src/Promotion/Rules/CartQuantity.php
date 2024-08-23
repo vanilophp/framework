@@ -24,7 +24,7 @@ class CartQuantity implements PromotionRuleType
             return __('Invalid Configuration: The `:parameter` parameter is missing', ['parameter' => 'count']);
         }
 
-        return __('At least :count items in the cart', ['count' => format_price($count)]);
+        return __('At least :count items in the cart', ['count' => (int) $count]);
     }
 
     public function getSchema(): Schema
