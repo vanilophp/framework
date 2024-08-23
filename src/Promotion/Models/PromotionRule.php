@@ -54,6 +54,6 @@ class PromotionRule extends Model implements PromotionRuleContract
 
     public function getTitle(): string
     {
-        return $this->getActionType()->getTitle($this->configuration());
+        return $this->getRuleType()->getTitle($this->configuration());
     }
 }
