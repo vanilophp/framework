@@ -11,7 +11,7 @@ return new class () extends Migration {
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('promotion_id');
+            $table->foreignId('promotion_id');
             $table->foreign('promotion_id')->references('id')->on('promotions');
 
             $table->string('code')->unique();

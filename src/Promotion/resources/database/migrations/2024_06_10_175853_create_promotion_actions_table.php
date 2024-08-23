@@ -11,7 +11,7 @@ return new class () extends Migration {
     {
         Schema::create('promotion_actions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('promotion_id');
+            $table->foreignId('promotion_id');
             $table->string('type');
             $table->json('configuration')->nullable();
             $table->timestamps();
