@@ -19,7 +19,7 @@ final class PromotionActionTypes implements Registry
 
     public static function register(string $id, string $class)
     {
-        self::add($id, $class);
+        return self::add($id, $class);
     }
 
     public static function make(string $id, array $parameters = []): PromotionActionType
