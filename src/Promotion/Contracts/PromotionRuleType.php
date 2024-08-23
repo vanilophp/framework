@@ -11,5 +11,7 @@ interface PromotionRuleType extends Schematized, Registerable
 {
     public static function getName(): string;
 
+    public function getTitle(array $configuration): string;
+
     public function isPassing(object $subject, array $configuration): bool;
 }

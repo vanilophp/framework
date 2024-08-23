@@ -14,6 +14,11 @@ class NthOrderRule implements PromotionRuleType
         return 'Nth Order';
     }
 
+    public function getTitle(array $configuration): string
+    {
+        return 'Nth Order';
+    }
+
     public function isPassing(object $subject, array $configuration): bool
     {
         // TODO: Implement isPassing() method.

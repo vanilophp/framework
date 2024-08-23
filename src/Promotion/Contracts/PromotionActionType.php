@@ -12,6 +12,8 @@ interface PromotionActionType extends Schematized, Registerable
 {
     public static function getName(): string;
 
+    public function getTitle(array $configuration): string;
+
     /** @return Adjustment[] Returns the list of adjustments created */
     public function apply(object $subject, array $configuration): array;
 }

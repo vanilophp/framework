@@ -13,4 +13,6 @@ interface PromotionAction extends Configurable
 
     /** @return Adjustment[] Returns the list of adjustments created */
     public function execute(object $subject): array;
+
+    public function getTitle(): string;
 }

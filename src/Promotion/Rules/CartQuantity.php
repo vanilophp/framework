@@ -18,6 +18,15 @@ class CartQuantity implements PromotionRuleType
         return __('Cart Quantity');
     }
 
+    public function getTitle(array $configuration): string
+    {
+        if (null === $count = $configuration['count'] ?? null) {
+            return __('Invalid Configuration: The `:parameter` parameter is missing', ['parameter' => 'count']);
+        }
+
+        return __('At least :count items in the cart', ['count' => format_price($count)]);
+    }
+
     public function getSchema(): Schema
     {
         return Expect::structure(['count' => Expect::int(0)->required()])->castTo('array');

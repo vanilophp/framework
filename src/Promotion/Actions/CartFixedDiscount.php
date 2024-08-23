@@ -20,6 +20,15 @@ class CartFixedDiscount implements PromotionActionType
         return __('Cart Fixed Discount');
     }
 
+    public function getTitle(array $configuration): string
+    {
+        if (null === $amount = $configuration['amount'] ?? null) {
+            return __('Invalid Configuration: The `:parameter` parameter is missing', ['parameter' => 'amount']);
+        }
+
+        return __(':amount discount on the entire cart', ['amount' => format_price($amount)]);
+    }
+
     public function getAdjuster(array $configuration): Adjuster
     {
         return new SimpleDiscount($configuration['amount']);

@@ -29,7 +29,7 @@ class PromotionAction extends Model implements PromotionActionContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'configuration' => 'array',
+        'configuration' => 'json',
     ];
 
     public function promotion(): BelongsTo
@@ -50,5 +50,10 @@ class PromotionAction extends Model implements PromotionActionContract
     public function getConfigurationSchema(): ?Schematized
     {
         return SchemaDefinition::wrap($this->getActionType());
+    }
+
+    public function getTitle(): string
+    {
+        return $this->getActionType()->getTitle($this->configuration());
     }
 }

@@ -29,7 +29,7 @@ class PromotionRule extends Model implements PromotionRuleContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'configuration' => 'array',
+        'configuration' => 'json',
     ];
 
     public function promotion(): BelongsTo
@@ -50,5 +50,10 @@ class PromotionRule extends Model implements PromotionRuleContract
     public function getConfigurationSchema(): ?Schematized
     {
         return SchemaDefinition::wrap($this->getRuleType());
+    }
+
+    public function getTitle(): string
+    {
+        return $this->getActionType()->getTitle($this->configuration());
     }
 }

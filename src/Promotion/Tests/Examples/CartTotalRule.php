@@ -14,6 +14,11 @@ class CartTotalRule implements PromotionRuleType
         return 'Cart Total';
     }
 
+    public function getTitle(array $configuration): string
+    {
+        return 'Cart Total';
+    }
+
     public function isPassing(object $subject, array $configuration): bool
     {
         // TODO: Implement isPassing() method.
