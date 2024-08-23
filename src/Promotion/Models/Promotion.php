@@ -92,7 +92,7 @@ class Promotion extends Model implements PromotionContract
 
     public function isValid(?\DateTimeInterface $at = null): bool
     {
-        if ($this->usage_count >= $this->usage_limit) {
+        if (null !== $this->usage_limit && $this->usage_count >= $this->usage_limit) {
             return false;
         }
 

@@ -51,6 +51,10 @@ class Coupon extends Model implements CouponInterface
 
     public function isExpired(): bool
     {
+        if (null === $this->expires_at) {
+            return false;
+        }
+
         return $this->expires_at->isPast();
     }
 

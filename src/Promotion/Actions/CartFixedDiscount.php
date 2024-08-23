@@ -40,6 +40,7 @@ class CartFixedDiscount implements PromotionActionType
         if ($subject instanceof Adjustable) {
             $result[] = $subject->adjustments()->create($this->getAdjuster($configuration));
         }
+        //@todo also set the origin
 
         return $result;
     }
