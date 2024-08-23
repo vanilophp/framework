@@ -16,12 +16,10 @@ namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
-use Vanilo\Cart\CartManager;
 use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
-use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Foundation\Models\CartItem;
 use Vanilo\Support\Dto\DetailedAmount;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;

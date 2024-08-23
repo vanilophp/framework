@@ -34,7 +34,7 @@ class CalculatePromotions
                 if ($promotion->isValid() && $promotion->isEligible($this->cartModel)) {
                     /** @var PromotionAction $action */
                     foreach ($promotion->getActions() as $action) {
-                        foreach($action->execute($this->cartModel) as $adjustment) {
+                        foreach ($action->execute($this->cartModel) as $adjustment) {
                             if ($this->isAppliedToOurCart($adjustment)) {
                                 $cartPromotionsTotal += $adjustment->getAmount();
                             }
@@ -49,7 +49,7 @@ class CalculatePromotions
 
     public function isAppliedToOurCart(Adjustment $adjustment): bool
     {
-        if ($adjustment->getAdjustable()::class !== $this->cartModel::class) {
+        if ($this->cartModel::class !== $adjustment->getAdjustable()::class) {
             return false;
         }
 
