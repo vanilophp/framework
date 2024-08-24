@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the CouponRemoved class.
+ * Contains the CouponRemoved event class.
  *
  * @copyright   Copyright (c) 2024 Vanilo UG
  * @author      Attila Fulop
@@ -14,15 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Events;
 
-use Vanilo\Checkout\Contracts\Checkout;
-
-class CouponRemoved extends BaseCheckoutEvent
+class CouponRemoved extends BaseCouponEvent
 {
-    public readonly string $couponCode;
-
-    public function __construct(Checkout $checkout, string $couponCode)
-    {
-        parent::__construct($checkout);
-        $this->couponCode = $couponCode;
-    }
 }

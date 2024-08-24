@@ -24,6 +24,11 @@
     - `hasAnyCoupon()`
     - `getPromotionsAmount()`
     - `setPromotionsAmount()`
+- Added the following checkout events:
+    - `CouponAdded` (to checkout)
+    - `CouponRemoved` (from checkout)
+    - `CouponUtilized` (after a successful checkout converted to an order)
+
 
 ## 4.1.0
 ##### 2024-07-11
