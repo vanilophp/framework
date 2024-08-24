@@ -109,5 +109,4 @@ class PromotionValidityTest extends TestCase
 
         $this->assertTrue($promo->isValid());
     }
-
 }
