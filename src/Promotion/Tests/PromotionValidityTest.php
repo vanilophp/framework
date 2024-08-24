@@ -18,7 +18,7 @@ class PromotionValidityTest extends TestCase
     /** @test */
     public function it_is_not_valid_if_it_has_already_expired()
     {
-        $this->assertFalse((new Promotion(['ends_at' => Carbon::tomorrow()]))->isValid());
+        $this->assertFalse((new Promotion(['ends_at' => Carbon::yesterday()]))->isValid());
     }
 
     /** @test */
