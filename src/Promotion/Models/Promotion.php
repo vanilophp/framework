@@ -132,6 +132,16 @@ class Promotion extends Model implements PromotionContract
         return $this->usage_count >= $this->usage_limit;
     }
 
+    public function getStatus(): PromotionStatus
+    {
+        return match(true) {
+            $this->isExpired() => PromotionStatus::Expired,
+            $this->isDepleted() => PromotionStatus::Depleted,
+            $this->isValid() => PromotionStatus::Active,
+            default => PromotionStatus::Inactive,
+        };
+    }
+
     public function isEligible(object $subject): bool
     {
         /** @var PromotionRule $rule */

@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Contracts;
 
 use Illuminate\Support\Collection;
+use Vanilo\Promotion\Models\PromotionStatus;
 
 interface Promotion
 {
@@ -27,6 +28,9 @@ interface Promotion
     public function isExpired(?\DateTimeInterface $at = null): bool;
 
     public function isDepleted(): bool;
+
+    /** A read-only, calculated enum */
+    public function getStatus(): PromotionStatus;
 
     public function isEligible(object $subject): bool;
 
