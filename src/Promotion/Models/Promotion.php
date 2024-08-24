@@ -134,7 +134,7 @@ class Promotion extends Model implements PromotionContract
 
     public function getStatus(): PromotionStatus
     {
-        return match(true) {
+        return match (true) {
             $this->isExpired() => PromotionStatus::Expired,
             $this->isDepleted() => PromotionStatus::Depleted,
             $this->isValid() => PromotionStatus::Active,
