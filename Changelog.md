@@ -28,7 +28,8 @@
     - `CouponAdded` (to checkout)
     - `CouponRemoved` (from checkout)
     - `CouponUtilized` (after a successful checkout converted to an order)
-
+- Added a listener to update coupon and promo usage after a `CouponUtilized` event (Foundation)
+- Added a promotion calculation listener (on CouponAdded and CouponRemoved events)
 
 ## 4.1.0
 ##### 2024-07-11
