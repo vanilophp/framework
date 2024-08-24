@@ -60,7 +60,7 @@ class Coupon extends Model implements CouponInterface
 
     public function isDepleted(): bool
     {
-        if (!$this->usage_limit) {
+        if (null === $this->usage_limit) {
             return false;
         }
 
