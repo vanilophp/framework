@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Foundation\Listeners;
 
 use Illuminate\Support\Facades\DB;
