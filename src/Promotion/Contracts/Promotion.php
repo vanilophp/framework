@@ -22,6 +22,12 @@ interface Promotion
 
     public function isValid(?\DateTimeInterface $at = null): bool;
 
+    public function hasStarted(?\DateTimeInterface $at = null): bool;
+
+    public function isExpired(?\DateTimeInterface $at = null): bool;
+
+    public function isDepleted(): bool;
+
     public function isEligible(object $subject): bool;
 
     public function isCouponBased(): bool;

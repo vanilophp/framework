@@ -92,11 +92,44 @@ class Promotion extends Model implements PromotionContract
 
     public function isValid(?\DateTimeInterface $at = null): bool
     {
-        if (null !== $this->usage_limit && $this->usage_count >= $this->usage_limit) {
+        return !$this->isDepleted() && $this->hasStarted() && !$this->isExpired($at);
+    }
+
+    public function hasStarted(?\DateTimeInterface $at = null): bool
+    {
+        if (null === $this->starts_at) {
+            return true;
+        }
+
+        $baseDate = $at ?? Carbon::now($this->starts_at->getTimezone());
+        if (!$baseDate instanceof Carbon) {
+            $baseDate = Carbon::instance($baseDate);
+        }
+
+        return $baseDate->isAfter($this->starts_at);
+    }
+
+    public function isExpired(?\DateTimeInterface $at = null): bool
+    {
+        if (null === $this->ends_at) {
             return false;
         }
 
-        return null === $this->ends_at || $this->ends_at->isAfter($at ?? Carbon::now($this->ends_at->getTimezone()));
+        $baseDate = $at ?? Carbon::now($this->ends_at->getTimezone());
+        if (!$baseDate instanceof Carbon) {
+            $baseDate = Carbon::instance($baseDate);
+        }
+
+        return $baseDate->isAfter($this->ends_at);
+    }
+
+    public function isDepleted(): bool
+    {
+        if (null === $this->usage_limit) {
+            return false;
+        }
+
+        return $this->usage_count >= $this->usage_limit;
     }
 
     public function isEligible(object $subject): bool
