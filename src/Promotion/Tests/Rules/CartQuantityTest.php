@@ -26,7 +26,7 @@ class CartQuantityTest extends TestCase
         $this->expectException(ValidationException::class);
         $cartQuantityRule = PromotionRuleTypes::make(CartQuantity::ID);
 
-        $this->assertFalse($cartQuantityRule->isPassing(new DummyCart(), ['wrong' => 'config']));
+        $cartQuantityRule->isPassing(new DummyCart(), ['wrong' => 'config']);
     }
 
     /** @test */

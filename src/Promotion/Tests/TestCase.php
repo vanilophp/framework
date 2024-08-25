@@ -7,6 +7,7 @@ namespace Vanilo\Promotion\Tests;
 use Illuminate\Support\Facades\Artisan;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vanilo\Adjustments\Providers\ModuleServiceProvider as AdjustmentsModule;
 use Vanilo\Promotion\Providers\ModuleServiceProvider as PromotionModule;
 
 abstract class TestCase extends Orchestra
@@ -45,6 +46,7 @@ abstract class TestCase extends Orchestra
         parent::resolveApplicationConfiguration($app);
 
         $app['config']->set('concord.modules', [
+            AdjustmentsModule::class,
             PromotionModule::class,
         ]);
     }

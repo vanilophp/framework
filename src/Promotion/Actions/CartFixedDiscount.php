@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Actions;
 
 use Nette\Schema\Expect;
+use Nette\Schema\Processor;
 use Nette\Schema\Schema;
 use Vanilo\Adjustments\Adjusters\SimpleDiscount;
 use Vanilo\Adjustments\Contracts\Adjustable;
@@ -31,6 +32,8 @@ class CartFixedDiscount implements PromotionActionType
 
     public function getAdjuster(array $configuration): Adjuster
     {
+        $configuration = (new Processor())->process($this->getSchema(), $configuration);
+
         return new SimpleDiscount($configuration['amount']);
     }
 
@@ -47,7 +50,7 @@ class CartFixedDiscount implements PromotionActionType
 
     public function getSchema(): Schema
     {
-        return Expect::structure(['amount' => Expect::float(0)->required()])->castTo('array');
+        return Expect::structure(['amount' => Expect::anyOf(Expect::float(0), Expect::int(0))->required()])->castTo('array');
     }
 
     public function getSchemaSample(array $mergeWith = null): array
