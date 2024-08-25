@@ -16,14 +16,15 @@ class SampleAdjustable implements Adjustable
 
     private ArrayAdjustmentCollection $adjustments;
 
-    public function __construct()
-    {
+    public function __construct(
+        private readonly float $preAdjustmentsTotal = 0,
+    ) {
         $this->adjustments = new ArrayAdjustmentCollection($this);
     }
 
     public function preAdjustmentTotal(): float
     {
-        return 0;
+        return $this->preAdjustmentsTotal;
     }
 
     public function invalidateAdjustments(): void

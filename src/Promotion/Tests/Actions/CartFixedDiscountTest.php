@@ -22,7 +22,7 @@ class CartFixedDiscountTest extends TestCase
     }
 
     /** @test */
-    public function throws_exception_if_configuration_is_wrong()
+    public function it_throws_an_exception_if_the_configuration_is_wrong()
     {
         $this->expectException(ValidationException::class);
 
