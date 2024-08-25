@@ -50,6 +50,7 @@ class EventServiceProvider extends ServiceProvider
         CartUpdated::class => [
             CalculateShippingFees::class,
             CalculateTaxes::class,
+            CalculatePromotions::class,
         ],
         CartDeleting::class => [
             DeleteCartAdjustments::class,

@@ -6,8 +6,8 @@ namespace Vanilo\Foundation\Listeners;
 
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
-use Vanilo\Checkout\Events\CouponAdded;
-use Vanilo\Checkout\Events\CouponRemoved;
+use Vanilo\Cart\Contracts\CartEvent;
+use Vanilo\Checkout\Contracts\CheckoutEvent;
 use Vanilo\Promotion\Contracts\PromotionAction;
 use Vanilo\Promotion\Models\CouponProxy;
 
@@ -15,7 +15,7 @@ class CalculatePromotions
 {
     use HasCartAndCheckout;
 
-    public function handle(CouponAdded|CouponRemoved $event): void
+    public function handle(CheckoutEvent|CartEvent $event): void
     {
         $this->initialize($event);
 
@@ -35,6 +35,7 @@ class CalculatePromotions
                     /** @var PromotionAction $action */
                     foreach ($promotion->getActions() as $action) {
                         foreach ($action->execute($this->cartModel) as $adjustment) {
+                            $adjustment->update(['origin' => $couponCode]);
                             if ($this->isAppliedToOurCart($adjustment)) {
                                 $cartPromotionsTotal += $adjustment->getAmount();
                             }
