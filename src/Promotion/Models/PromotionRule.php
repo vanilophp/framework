@@ -49,7 +49,7 @@ class PromotionRule extends Model implements PromotionRuleContract
 
     public function getConfigurationSchema(): ?Schematized
     {
-        return SchemaDefinition::wrap($this->getRuleType());
+        return null !== $this->type ? SchemaDefinition::wrap($this->getRuleType()) : null;
     }
 
     public function getTitle(): string

@@ -21,7 +21,7 @@ class CartQuantity implements PromotionRuleType
     public function getTitle(array $configuration): string
     {
         if (null === $count = $configuration['count'] ?? null) {
-            return __('Invalid Configuration: The `:parameter` parameter is missing', ['parameter' => 'count']);
+            return __('At least X items in the cart [Invalid Configuration: The `:parameter` parameter is missing]', ['parameter' => 'count']);
         }
 
         return __('At least :count items in the cart', ['count' => (int) $count]);

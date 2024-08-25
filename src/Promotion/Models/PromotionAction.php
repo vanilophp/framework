@@ -49,7 +49,7 @@ class PromotionAction extends Model implements PromotionActionContract
 
     public function getConfigurationSchema(): ?Schematized
     {
-        return SchemaDefinition::wrap($this->getActionType());
+        return null !== $this->type ? SchemaDefinition::wrap($this->getActionType()) : null;
     }
 
     public function getTitle(): string

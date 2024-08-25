@@ -34,7 +34,7 @@ class CartPercentageDiscount implements PromotionActionType
     public function getTitle(array $configuration): string
     {
         if (null === $percent = $configuration['percent'] ?? null) {
-            return __('X% discount on the entire cart. Invalid Configuration: the `:parameter` parameter is missing', ['parameter' => 'percent']);
+            return __('X% discount on the entire cart [Invalid Configuration: the `:parameter` parameter is missing]', ['parameter' => 'percent']);
         }
 
         return __(':percent% discount on the entire cart', ['percent' => $percent]);
