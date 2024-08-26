@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Tests\Examples;
 
-
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
@@ -18,7 +17,7 @@ class DummyAdjustableCart implements Cart, Adjustable
 {
     public function __construct(
         private float $preAdjustmentTotal
-    )  {
+    ) {
     }
 
     public function preAdjustmentTotal(): float
