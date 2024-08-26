@@ -34,7 +34,7 @@ class CartMinimumValue implements PromotionRuleType
             return __('At least X cart value [Invalid Configuration: The `:parameter` parameter is missing]', ['parameter' => 'amount']);
         }
 
-        return __('At least :amount cart value', ['amount' => (int) $amount]);
+        return __('At least :amount cart value', ['amount' => format_price($amount)]);
     }
 
     public function getSchema(): Schema
