@@ -13,6 +13,7 @@ use Vanilo\Promotion\Models\PromotionAction;
 use Vanilo\Promotion\Models\PromotionRule;
 use Vanilo\Promotion\PromotionActionTypes;
 use Vanilo\Promotion\PromotionRuleTypes;
+use Vanilo\Promotion\Rules\CartMinimumValue;
 use Vanilo\Promotion\Rules\CartQuantity;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -28,6 +29,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     {
         parent::boot();
 
+        PromotionRuleTypes::register(CartMinimumValue::DEFAULT_ID, CartMinimumValue::class);
         PromotionRuleTypes::register(CartQuantity::ID, CartQuantity::class);
         PromotionActionTypes::register(CartFixedDiscount::DEFAULT_ID, CartFixedDiscount::class);
         PromotionActionTypes::register(CartPercentageDiscount::DEFAULT_ID, CartPercentageDiscount::class);

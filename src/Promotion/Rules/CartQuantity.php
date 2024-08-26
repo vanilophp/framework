@@ -15,7 +15,7 @@ class CartQuantity implements PromotionRuleType
 
     public static function getName(): string
     {
-        return __('Cart Quantity');
+        return __('Cart Minimum Quantity');
     }
 
     public function getTitle(array $configuration): string

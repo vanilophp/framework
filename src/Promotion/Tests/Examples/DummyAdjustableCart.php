@@ -4,18 +4,46 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Tests\Examples;
 
+
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
+use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Contracts\Buyable;
 
-class DummyCart implements Cart
+class DummyAdjustableCart implements Cart, Adjustable
 {
     public function __construct(
-        private int $itemCount = 5,
-        private float $itemsTotal = 0,
-    ) {
+        private float $preAdjustmentTotal
+    )  {
+    }
+
+    public function preAdjustmentTotal(): float
+    {
+        return $this->preAdjustmentTotal;
+    }
+
+    public function invalidateAdjustments(): void
+    {
+        // TODO: Implement invalidateAdjustments() method.
+    }
+
+    public function adjustments(): AdjustmentCollection
+    {
+        // TODO: Implement adjustments() method.
+    }
+
+    public function adjustmentsRelation(): MorphMany
+    {
+        // TODO: Implement adjustmentsRelation() method.
+    }
+
+    public function recalculateAdjustments(): void
+    {
+        // TODO: Implement recalculateAdjustments() method.
     }
 
     public function addItem(Buyable $product, float|int $qty = 1, array $params = []): CartItem
@@ -40,7 +68,7 @@ class DummyCart implements Cart
 
     public function itemCount(): int
     {
-        return $this->itemCount;
+        // TODO: Implement itemCount() method.
     }
 
     public function getUser(): ?Authenticatable
@@ -60,7 +88,7 @@ class DummyCart implements Cart
 
     public function itemsTotal(): float
     {
-        return $this->itemsTotal;
+        // TODO: Implement itemsTotal() method.
     }
 
     public function total(): float
