@@ -34,7 +34,6 @@ class OrderFactoryTest extends TestCase
     /** @var Product */
     protected $z650rs;
 
-
     /** @var OrderFactoryContract */
     protected $factory;
 
