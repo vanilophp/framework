@@ -31,6 +31,10 @@ class OrderFactoryTest extends TestCase
     /** @var Product */
     protected $volvoV90;
 
+    /** @var Product */
+    protected $z650rs;
+
+
     /** @var OrderFactoryContract */
     protected $factory;
 
@@ -48,6 +52,12 @@ class OrderFactoryTest extends TestCase
             'name' => 'Volvo V90',
             'sku' => 'B4204T20',
             'price' => 59600
+        ]);
+
+        $this->z650rs = Product::create([
+            'name' => 'Kawasaki Z650RS 2024',
+            'sku' => 'ER650RRFBN',
+            'price' => 6891
         ]);
 
         $this->factory = app(OrderFactoryContract::class);
@@ -88,6 +98,47 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals($this->mazdaRX8->getName(), $item->name);
         $this->assertEquals($this->mazdaRX8->getPrice(), $item->price);
         $this->assertEquals(1, $item->quantity);
+    }
+
+    /** @test */
+    public function it_automatically_adds_the_domain_name_to_the_order()
+    {
+        $order = $this->factory->createFromDataArray(
+            [],
+            [
+                [
+                    'product_type' => 'product',
+                    'product_id' => $this->z650rs->getId(),
+                    'name' => $this->z650rs->getName(),
+                    'quantity' => 1,
+                    'price' => $this->z650rs->getPrice()
+                ]
+            ]
+        );
+
+        $this->assertInstanceOf(Order::class, $order);
+        $this->assertNotNull($order->domain);
+        $this->assertEquals(parse_url(url('/'), PHP_URL_HOST), $order->domain);
+    }
+
+    /** @test */
+    public function it_preserves_the_domain_name_when_passed_in_the_data_array()
+    {
+        $order = $this->factory->createFromDataArray(
+            ['domain' => 'kawasaki.com'],
+            [
+                [
+                    'product_type' => 'product',
+                    'product_id' => $this->z650rs->getId(),
+                    'name' => $this->z650rs->getName(),
+                    'quantity' => 1,
+                    'price' => $this->z650rs->getPrice()
+                ]
+            ]
+        );
+
+        $this->assertInstanceOf(Order::class, $order);
+        $this->assertEquals('kawasaki.com', $order->domain);
     }
 
     /**

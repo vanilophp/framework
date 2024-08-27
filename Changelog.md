@@ -31,6 +31,8 @@
 - Added a listener to update coupon and promo usage after a `CouponUtilized` event (Foundation)
 - Added a promotion calculation listener (on CouponAdded and CouponRemoved events)
 - Added the `PercentDiscount` adjuster class
+- Added `domain` field to the orders table
+- Added then automatic completion of `$order->domain` from the current request to the OrderFactory
 
 ## 4.1.0
 ##### 2024-07-11

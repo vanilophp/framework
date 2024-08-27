@@ -54,6 +54,7 @@ class OrderFactory implements OrderFactoryContract
             $order->fill(Arr::except($data, ['billpayer', 'shippingAddress']));
             $order->number = $data['number'] ?? $this->orderNumberGenerator->generateNumber($order);
             $order->user_id = $data['user_id'] ?? auth()->id();
+            $order->domain ??= request()?->getHost();
             $order->save();
 
             $this->createBillpayer($order, $data);

@@ -39,6 +39,7 @@ use Vanilo\Order\Contracts\OrderStatus;
  * @property FulfillmentStatus $fulfillment_status
  * @property null|string $language The two-letter ISO 639-1 code
  * @property null|string $currency The 3 letter currency code
+ * @property null|string $domain The domain at which the order was placed
  * @property null|int $billpayer_id
  * @property null|Billpayer $billpayer
  * @property null|int $user_id
