@@ -33,6 +33,7 @@
 - Added the `PercentDiscount` adjuster class
 - Added `domain` field to the orders table
 - Added then automatic completion of `$order->domain` from the current request to the OrderFactory
+- Added the `promotions_total` attribute getter to the Foundation `Order` model
 
 ## 4.1.0
 ##### 2024-07-11

@@ -47,6 +47,7 @@ use Vanilo\Shipment\Models\ShippingMethodProxy;
  * @property null|string $payable_remote_id
  * @property-read float taxes_total
  * @property-read float shipping_total
+ * @property-read float promotions_total
  * @property-read null|\Vanilo\Contracts\Customer $customer
  * @property-read Collection|Payment[] $payments
  * @property-read Collection|ShipmentContract[] $shipments
@@ -188,6 +189,13 @@ class Order extends BaseOrder implements Payable, Adjustable
     {
         return Attribute::make(
             get: fn (mixed $value) => $this->adjustments()->byType(AdjustmentType::SHIPPING())->total(true),
+        );
+    }
+
+    protected function promotionsTotal(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value) => $this->adjustments()->byType(AdjustmentType::PROMOTION())->total(true),
         );
     }
 
