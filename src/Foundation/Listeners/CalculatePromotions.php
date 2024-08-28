@@ -35,7 +35,7 @@ class CalculatePromotions
                     /** @var PromotionAction $action */
                     foreach ($promotion->getActions() as $action) {
                         foreach ($action->execute($this->cartModel) as $adjustment) {
-                            $adjustment->update(['origin' => $couponCode]);
+                            $adjustment->update(['title' => $promotion->name, 'origin' => $couponCode]);
                             if ($this->isAppliedToOurCart($adjustment)) {
                                 $cartPromotionsTotal += $adjustment->getAmount();
                             }

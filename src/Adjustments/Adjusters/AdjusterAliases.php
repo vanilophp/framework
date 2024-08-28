@@ -21,6 +21,7 @@ final class AdjusterAliases
         'simple_fee' => SimpleFee::class,
         'simple_shipping_fee' => SimpleShippingFee::class,
         'simple_tax' => SimpleTax::class,
+        'percent_discount' => PercentDiscount::class,
     ];
 
     public static function add(string $alias, string $fqcn): void
