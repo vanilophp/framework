@@ -55,13 +55,11 @@ trait Channelable
     public function assignChannels(array|Model|Collection $channels): void
     {
         $this->channels()->sync($channels);
-        $this->touch();
     }
 
     public function removeFromAllChannels(): void
     {
         $this->channels()->detach();
-        $this->touch();
     }
 
     public function scopeWithinChannels(Builder $query, Collection|Channel|array $channels): Builder

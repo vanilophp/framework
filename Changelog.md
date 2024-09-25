@@ -34,7 +34,6 @@
 - Added `domain` field to the orders table
 - Added then automatic completion of `$order->domain` from the current request to the OrderFactory
 - Added the `promotions_total` attribute getter to the Foundation `Order` model
-- Added the touching of parent to the `Channelable` trait on assign/remove channels
 
 ## 4.1.0
 ##### 2024-07-11

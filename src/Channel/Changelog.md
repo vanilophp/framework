@@ -6,7 +6,6 @@
 ##### 2024-XX-YY
 
 - Changed `Channel::hasConfiguration()` to return false on empty arrays as well
-- Added the touching of parent to the `Channelable` trait on assign/remove channels
 
 ## 4.1.0
 ##### 2024-07-11
