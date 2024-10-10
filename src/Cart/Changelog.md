@@ -6,6 +6,7 @@
 ##### 2024-XX-YY
 
 - Changed `CartItem::hasConfiguration()` to return false on empty arrays as well
+- Fixed an error when attempting to remove a product from the cart which is not in the by [xujiongze](https://github.com/xujiongze) in [#188](https://github.com/vanilophp/framework/pull/188)
 
 ## 4.1.0
 ##### 2024-07-11
