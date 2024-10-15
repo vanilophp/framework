@@ -115,7 +115,7 @@ class Channel extends Model implements ChannelContract
 
     public function getCurrency(): ?string
     {
-        return $this->language;
+        return $this->currency;
     }
 
     public function getDomain(): ?string
