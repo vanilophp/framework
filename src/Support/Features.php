@@ -15,8 +15,10 @@ declare(strict_types=1);
 namespace Vanilo\Support;
 
 use Vanilo\Contracts\Feature;
+use Vanilo\Support\Features\Inventory;
 use Vanilo\Support\Features\MultiChannel;
 use Vanilo\Support\Features\Pricing;
+use Vanilo\Support\Features\SearchEngine;
 
 class Features
 {
@@ -24,23 +26,39 @@ class Features
 
     private static ?Pricing $pricing = null;
 
+    private static ?SearchEngine $searchEngine = null;
+
+    private static ?Inventory $inventory = null;
+
     public static function findByName(string $name): ?Feature
     {
         return match ($name) {
             'pricing' => self::pricing(),
             'multichannel' => self::multichannel(),
+            'search_engine' => self::searchEngine(),
+            'inventory' => self::inventory(),
             default => null,
         };
     }
 
     public static function multichannel(): MultiChannel
     {
-        return self::$multiChannel ?: (self::$multiChannel = new MultiChannel());
+        return self::$multiChannel ??= new MultiChannel();
     }
 
     public static function pricing(): Pricing
     {
-        return self::$pricing ?: (self::$pricing = new Pricing());
+        return self::$pricing ??= new Pricing();
+    }
+
+    private static function searchEngine(): SearchEngine
+    {
+        return self::$searchEngine ??= new SearchEngine();
+    }
+
+    public static function inventory(): Inventory
+    {
+        return self::$inventory ??= new Inventory();
     }
 
     public static function isMultiChannelEnabled(): bool
@@ -61,5 +79,25 @@ class Features
     public static function isPricingDisabled(): bool
     {
         return self::pricing()->isDisabled();
+    }
+
+    public static function isSearchEngineEnabled(): bool
+    {
+        return self::searchEngine()->isEnabled();
+    }
+
+    public static function isSearchEngineDisabled(): bool
+    {
+        return self::searchEngine()->isDisabled();
+    }
+
+    public static function isInventoryEnabled(): bool
+    {
+        return self::inventory()->isEnabled();
+    }
+
+    public static function isInventoryDisabled(): bool
+    {
+        return self::inventory()->isDisabled();
     }
 }
