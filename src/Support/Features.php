@@ -51,11 +51,6 @@ class Features
         return self::$pricing ??= new Pricing();
     }
 
-    private static function searchEngine(): SearchEngine
-    {
-        return self::$searchEngine ??= new SearchEngine();
-    }
-
     public static function inventory(): Inventory
     {
         return self::$inventory ??= new Inventory();
@@ -99,5 +94,10 @@ class Features
     public static function isInventoryDisabled(): bool
     {
         return self::inventory()->isDisabled();
+    }
+
+    private static function searchEngine(): SearchEngine
+    {
+        return self::$searchEngine ??= new SearchEngine();
     }
 }
