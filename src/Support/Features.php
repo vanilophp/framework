@@ -56,6 +56,11 @@ class Features
         return self::$inventory ??= new Inventory();
     }
 
+    public static function searchEngine(): SearchEngine
+    {
+        return self::$searchEngine ??= new SearchEngine();
+    }
+
     public static function isMultiChannelEnabled(): bool
     {
         return self::multichannel()->isEnabled();
@@ -94,10 +99,5 @@ class Features
     public static function isInventoryDisabled(): bool
     {
         return self::inventory()->isDisabled();
-    }
-
-    private static function searchEngine(): SearchEngine
-    {
-        return self::$searchEngine ??= new SearchEngine();
     }
 }
