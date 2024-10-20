@@ -20,7 +20,7 @@ class Inventory implements Feature
 {
     public function isEnabled(): bool
     {
-        return config('vanilo.features.pricing.inventory', false)
+        return config('vanilo.features.inventory.is_enabled', false)
             && null !== concord()->module('inventory');
     }
 

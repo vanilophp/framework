@@ -20,7 +20,7 @@ class SearchEngine implements Feature
 {
     public function isEnabled(): bool
     {
-        return config('vanilo.features.pricing.search_engine', false)
+        return config('vanilo.features.search_engine.is_enabled', false)
             && null !== concord()->module('search');
     }
 
