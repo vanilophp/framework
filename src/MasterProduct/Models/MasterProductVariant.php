@@ -72,7 +72,7 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
 
     public function isOnStock(): bool
     {
-        return $this->stock > 0;
+        return $this->onStockQuantity() > 0;
     }
 
     public function isOutOfStock(): bool
@@ -87,7 +87,7 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
 
     public function isBackorderUnrestricted(): bool
     {
-        return null === $this->backorder;
+        return null === $this->backorderQuantity();
     }
 
     public function backorderQuantity(): ?float
@@ -97,7 +97,7 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
 
     public function totalAvailableQuantity(): float
     {
-        return $this->stock + (float) $this->backorder;
+        return $this->onStockQuantity() + (float) $this->backorderQuantity();
     }
 
     public function hasDimensions(): bool

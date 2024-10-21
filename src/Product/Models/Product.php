@@ -101,7 +101,7 @@ class Product extends Model implements ProductContract, Stockable
 
     public function isOnStock(): bool
     {
-        return $this->stock > 0;
+        return $this->onStockQuantity() > 0;
     }
 
     public function isOutOfStock(): bool
@@ -116,7 +116,7 @@ class Product extends Model implements ProductContract, Stockable
 
     public function isBackorderUnrestricted(): bool
     {
-        return null === $this->backorder;
+        return null === $this->backorderQuantity();
     }
 
     public function backorderQuantity(): ?float
@@ -126,7 +126,7 @@ class Product extends Model implements ProductContract, Stockable
 
     public function totalAvailableQuantity(): float
     {
-        return $this->stock + (float) $this->backorder;
+        return $this->onStockQuantity() + (float) $this->backorderQuantity();
     }
 
     public function title(): string

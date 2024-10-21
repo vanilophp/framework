@@ -16,6 +16,9 @@
     - `Shipment`
     - `ShippingMethod`
     - `TaxRate`
+- Changed the product and variant Stockable logic so that the derived getters use `onStockQuantity()` and `backorderQuantity()`
+  instead of direct `stock` and `backorder` field access. This makes possible to override stock logic and remain consistent
+  in extended classes
 - Added the following, v5 interface candidate methods to the Checkout implementations:
     - `addCoupon()`
     - `removeCoupon()`
