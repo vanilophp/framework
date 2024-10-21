@@ -6,6 +6,7 @@
 ##### 2024-XX-YY
 
 - Changed `Channel::hasConfiguration()` to return false on empty arrays as well
+- Changed the `Channelable` trait's MorphToMany relationship definition so that the pivot definitions are explicitly declared
 - Fixed the `Channel::getCurrency()` method returning the wrong attribute by [Ouail](https://github.com/ouail) in [#189](https://github.com/vanilophp/framework/pull/189)
 
 ## 4.1.0

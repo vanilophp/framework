@@ -29,7 +29,7 @@ trait Channelable
 {
     public function channels(): MorphToMany
     {
-        return $this->morphToMany(ChannelProxy::modelClass(), 'channelable');
+        return $this->morphToMany(ChannelProxy::modelClass(), 'channelable', 'channelables', 'channelable_id', 'channel_id');
     }
 
     public function isAssignedToAnyChannel(): bool
