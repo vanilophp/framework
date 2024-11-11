@@ -17,6 +17,7 @@
   - `CouponAdded` (to checkout)
   - `CouponRemoved` (from checkout)
   - `CouponUtilized` (after a successful checkout converted to an order)
+  - `PaymentMethodSelected`
 
 ## 4.1.0
 ##### 2024-07-11

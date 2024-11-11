@@ -23,6 +23,7 @@ use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Events\BillpayerChanged;
 use Vanilo\Checkout\Events\CouponAdded;
 use Vanilo\Checkout\Events\CouponRemoved;
+use Vanilo\Checkout\Events\PaymentMethodSelected;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Checkout\Models\CheckoutStateProxy;
 use Vanilo\Checkout\Traits\EmulatesFillAttributes;
@@ -154,7 +155,12 @@ abstract class BaseCheckoutStore implements CheckoutStore
 
     public function setPaymentMethodId(null|int|string $paymentMethodId): void
     {
+        $old = $this->getPaymentMethodId();
         $this->writeRawDataToStore('payment_method_id', $paymentMethodId);
+
+        if ($old !== $paymentMethodId) {
+            Event::dispatch(new PaymentMethodSelected($this, $old));
+        }
     }
 
     public function getNotes(): ?string
