@@ -21,6 +21,7 @@ use Vanilo\Checkout\Events\BillpayerChanged;
 use Vanilo\Checkout\Events\CouponAdded;
 use Vanilo\Checkout\Events\CouponRemoved;
 use Vanilo\Checkout\Events\CouponUtilized;
+use Vanilo\Checkout\Events\PaymentMethodSelected;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
 use Vanilo\Foundation\Listeners\CalculatePromotions;
@@ -38,6 +39,9 @@ class EventServiceProvider extends ServiceProvider
             UpdateSalesFigures::class,
         ],
         ShippingMethodSelected::class => [
+            CalculateShippingFees::class,
+        ],
+        PaymentMethodSelected::class => [
             CalculateShippingFees::class,
         ],
         ShippingAddressChanged::class => [

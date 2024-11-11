@@ -34,6 +34,7 @@
     - `CouponUtilized` (after a successful checkout converted to an order)
     - `PaymentMethodSelected`
 - Added a listener to update coupon and promo usage after a `CouponUtilized` event (Foundation)
+- Added a listener to recalculate shipping fees after a `PaymentMethodSelected` event (Foundation)
 - Added a promotion calculation listener (on CouponAdded and CouponRemoved events)
 - Added the `PercentDiscount` adjuster class
 - Added `domain` field to the orders table

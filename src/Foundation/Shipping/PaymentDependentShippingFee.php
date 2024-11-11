@@ -22,6 +22,8 @@ use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Adjustments\Support\HasWriteableTitleAndDescription;
 use Vanilo\Adjustments\Support\IsLockable;
 use Vanilo\Adjustments\Support\IsNotIncluded;
+use Vanilo\Cart\Contracts\Cart;
+use Vanilo\Checkout\Facades\Checkout;
 
 class PaymentDependentShippingFee implements Adjuster
 {
@@ -77,6 +79,10 @@ class PaymentDependentShippingFee implements Adjuster
     {
         if (method_exists($adjustable, 'getPaymentMethodId')) {
             return $adjustable->getPaymentMethodId();
+        } elseif ($adjustable instanceof Cart) {
+            $result = Checkout::getPaymentMethodId(); // will it always fly? (˙_˙)ゞ゛
+
+            return null === $result ? null : (string) $result;
         }
 
         return null;
