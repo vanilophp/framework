@@ -64,8 +64,8 @@ class PaymentDependentShippingFeeCalculator implements ShippingFeeCalculator
     {
         return Expect::structure([
             'title' => Expect::string(__('Shipping fee')),
-            'prices' => Expect::arrayOf('float', 'string'),
-            'free_threshold' => Expect::float(),
+            'prices' => Expect::arrayOf(Expect::anyOf('float', 'int'), 'string'),
+            'free_threshold' => Expect::anyOf('float', 'int'),
         ]);
     }
 
@@ -120,10 +120,9 @@ class PaymentDependentShippingFeeCalculator implements ShippingFeeCalculator
             $isEstimate = true;
             $method = 'default';
         }
-        if (null === $price = data_get($prices, $method) && 'default' !== $method) {
-            if (null === $price = data_get($price, 'default')) {
-                $isEstimate = true;
-            }
+
+        if ((null === $price = data_get($prices, $method)) && 'default' !== $method) {
+            $price = data_get($prices, 'default');
         }
 
         return [floatval($price), $isEstimate];

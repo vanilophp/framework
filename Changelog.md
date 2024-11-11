@@ -41,6 +41,7 @@
 - Added the search engine and inventory feature configuration wrappers 
 - Fixed an error when attempting to remove a product from the cart which is not in the by [xujiongze](https://github.com/xujiongze) in [#188](https://github.com/vanilophp/framework/pull/188)
 - Fixed the `Channel::getCurrency()` method returning the wrong attribute by [Ouail](https://github.com/ouail) in [#189](https://github.com/vanilophp/framework/pull/189)
+- Fixed the logic of the payment-dependent shipping fee calculator
 
 ## 4.1.0
 ##### 2024-07-11
