@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
-
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
@@ -79,12 +78,12 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Slow',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
-            'configuration' => ['prices'=> ['default' => 5.99]],
+            'configuration' => ['prices' => ['default' => 5.99]],
         ]);
         $shippingMethod2 = ShippingMethod::create([
             'name' => 'Fast',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
-            'configuration' => ['prices'=> ['default' => 8.99]],
+            'configuration' => ['prices' => ['default' => 8.99]],
         ]);
 
         Cart::addItem($product);
@@ -105,12 +104,12 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Delivery Standard #1',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
-            'configuration' => ['prices'=> ['default' => 5.99]],
+            'configuration' => ['prices' => ['default' => 5.99]],
         ]);
         $shippingMethod2 = ShippingMethod::create([
             'name' => 'Delivery Rapid #2',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
-            'configuration' => ['prices'=> ['default' => 8.99]],
+            'configuration' => ['prices' => ['default' => 8.99]],
         ]);
 
         Cart::addItem($product);
@@ -142,7 +141,7 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Delivery X',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
-            'configuration' => ['prices'=> ['default' => 5.99, '1' => 8]],
+            'configuration' => ['prices' => ['default' => 5.99, '1' => 8]],
         ]);
 
         Cart::addItem($product);
@@ -163,7 +162,7 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Delivery Y',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
-            'configuration' => ['prices'=> ['default' => 20, '3' => 15]],
+            'configuration' => ['prices' => ['default' => 20, '3' => 15]],
         ]);
 
         Cart::addItem($product);
