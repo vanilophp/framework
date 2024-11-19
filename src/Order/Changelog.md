@@ -9,6 +9,7 @@
 - Added then automatic completion of `$order->domain` from the current request to the OrderFactory
 - Changed `OrderItem::hasConfiguration()` to return false on empty arrays as well
 - Added the `OrderBillpayerUpdated` event
+- Added the `OrderShippingAddressUpdated` event
 
 ## 4.1.0
 ##### 2024-07-11
