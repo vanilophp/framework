@@ -45,6 +45,7 @@
 - Fixed the `Channel::getCurrency()` method returning the wrong attribute by [Ouail](https://github.com/ouail) in [#189](https://github.com/vanilophp/framework/pull/189)
 - Fixed the logic of the payment-dependent shipping fee calculator
 - Added the `OrderBillpayerUpdated` event
+- Added the `OrderShippingAddressUpdated` event
 
 ## 4.1.0
 ##### 2024-07-11
