@@ -13,7 +13,9 @@ return new class () extends Migration {
         Schema::table('link_groups', function (Blueprint $table) {
             $table->unsignedBigInteger('root_item_id')->nullable();
 
-            $table->foreign('root_item_id')->references('id')->on('link_group_items');
+            if ('sqlite' !== DB::connection()->getDriverName()) {
+                $table->foreign('root_item_id')->references('id')->on('link_group_items');
+            }
         });
     }
 
