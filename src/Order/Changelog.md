@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2024-XX-YY
 
+- Changed the minimal Address module requirement to v3.4.1
 - Added `domain` field to the orders table
 - Added then automatic completion of `$order->domain` from the current request to the OrderFactory
 - Changed `OrderItem::hasConfiguration()` to return false on empty arrays as well

@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2024-XX-YY
 
+- Changed the minimal Address module requirement to v3.4.1
 - Added the following, v5 interface candidate methods to the Checkout implementations:
   - `addCoupon()`
   - `removeCoupon()`

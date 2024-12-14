@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2024-XX-YY
 
+- Changed the minimal Address module requirement to v3.4.1
 - Changed `TaxRate::hasConfiguration()` to return false on empty arrays as well
 
 ## 4.1.0

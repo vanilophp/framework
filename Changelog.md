@@ -6,6 +6,7 @@
 ##### 2024-XX-YY
 
 - Added the Promotion module with promotions, actions, rules and coupons support
+- Changed the minimal Address module requirement to v3.4.1
 - Changed the `ConfigurableModel::hasConfiguration()` trait to return false on empty arrays as well
   (until now, only `null` was considered as no config). It affects the following models:
     - `Carrier`

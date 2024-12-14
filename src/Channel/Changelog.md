@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2024-XX-YY
 
+- Changed the minimal Address module requirement to v3.4.1
 - Changed `Channel::hasConfiguration()` to return false on empty arrays as well
 - Changed the `Channelable` trait's MorphToMany relationship definition so that the pivot definitions are explicitly declared
 - Fixed the `Channel::getCurrency()` method returning the wrong attribute by [Ouail](https://github.com/ouail) in [#189](https://github.com/vanilophp/framework/pull/189)

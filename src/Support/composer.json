@@ -34,7 +34,7 @@
     "suggest": {
         "spatie/laravel-medialibrary": "Allows associating images or other files with Eloquent models (^11.0)",
         "konekt/concord": "Library to write Modular Applications (^1.13)",
-        "konekt/address": "Improves the EU membership and VAT ID validation (^3.3)"
+        "konekt/address": "Improves the EU membership and VAT ID validation (^3.4)"
     },
     "extra": {
         "branch-alias": {
