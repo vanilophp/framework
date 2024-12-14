@@ -26,7 +26,7 @@
         "cviebrock/eloquent-sluggable": "^10.0|^11.0",
         "konekt/laravel-migration-compatibility": "^1.6",
         "konekt/address": "^3.4.1",
-        "konekt/customer": "^3.0",
+        "konekt/customer": "^3.2",
         "konekt/user": "^3.0",
         "konekt/search": "^1.2",
         "nette/schema": "^1.2.5"
