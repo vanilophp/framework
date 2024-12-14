@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2024-XX-YY
 
+- Added PHP 8.4 support
 - Added the Promotion module with promotions, actions, rules and coupons support
 - Changed the minimal Address module requirement to v3.4.1
 - Changed the minimal Customer module requirement to v3.2
