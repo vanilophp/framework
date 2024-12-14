@@ -13,7 +13,7 @@ return new class () extends Migration {
             $table->unsignedBigInteger('billing_zone_id')->nullable();
             $table->unsignedBigInteger('shipping_zone_id')->nullable();
 
-            if (Schema::hasTable('zones')) {
+            if (!$this->isSqlite() && Schema::hasTable('zones')) {
                 $table->foreign('billing_zone_id')->references('id')->on('zones');
                 $table->foreign('shipping_zone_id')->references('id')->on('zones');
             }

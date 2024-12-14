@@ -10,7 +10,9 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('shipping_methods', function (Blueprint $table) {
-            $table->foreign('zone_id')->references('id')->on('zones');
+            if (!$this->isSqlite()) {
+                $table->foreign('zone_id')->references('id')->on('zones');
+            }
         });
     }
 

@@ -12,7 +12,9 @@ return new class () extends Migration {
         Schema::table('orders', function (Blueprint $table) {
             if (!Schema::hasColumn('orders', 'payment_method_id')) {
                 $table->bigInteger('payment_method_id')->unsigned()->nullable();
-                $table->foreign('payment_method_id')->references('id')->on('payment_methods');
+                if (!$this->isSqlite()) {
+                    $table->foreign('payment_method_id')->references('id')->on('payment_methods');
+                }
             }
         });
     }
