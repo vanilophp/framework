@@ -2,8 +2,8 @@
 
 ## 4.x Series
 
-## Unreleased
-##### 2024-XX-YY
+## 4.2.0
+##### 2024-12-15
 
 - Changed the product's Stockable logic so that the derived getters use `onStockQuantity()` and `backorderQuantity()`
   instead of direct `stock` and `backorder` field access. This makes possible to override stock logic and remain consistent

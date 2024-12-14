@@ -2,8 +2,8 @@
 
 ## 4.x Series
 
-## Unreleased
-##### 2024-XX-YY
+## 4.2.0
+##### 2024-12-14
 
 - Added the `PercentDiscount` adjuster class
 

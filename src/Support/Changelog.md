@@ -2,8 +2,8 @@
 
 ## 4.x Series
 
-## Unreleased
-##### 2024-XX-YY
+## 4.2.0
+##### 2024-12-15
 
 - Changed the minimal Address module requirement to v3.4.1
 - Changed the `ConfigurableModel::hasConfiguration()` trait to return false on empty arrays as well (until now, only `null` was considered as no config)

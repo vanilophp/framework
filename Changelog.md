@@ -2,8 +2,8 @@
 
 ## 4.x Series
 
-## Unreleased
-##### 2024-XX-YY
+## 4.2.0
+##### 2024-12-14
 
 - Added PHP 8.4 support
 - Added the Promotion module with promotions, actions, rules and coupons support

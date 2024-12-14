@@ -2,6 +2,11 @@
 
 ## 4.x Series
 
+## 4.2.0
+##### 2024-12-14
+
+- Bump module version to mainline (no change)
+
 ## 4.1.0
 ##### 2024-07-11
 
