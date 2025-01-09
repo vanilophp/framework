@@ -29,7 +29,7 @@ For the stable version see the `4.x` branch.
 The latest stable release is **4.2.0**, and it was released on Dec 14th, 2024.
 Vanilo v4 supports Laravel 10.x & 11.x versions and PHP 8.2 - 8.4
 
-Refer to the [Roadmap](https://vanilo.io/docs/3.x/roadmap) for upcoming versions.
+Refer to the [Roadmap](https://vanilo.io/docs/4.x/roadmap) for upcoming versions.
 
 ## Further Information
 
