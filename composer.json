@@ -15,21 +15,21 @@
         "issues": "https://github.com/vanilophp/framework/issues"
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-json": "*",
         "ext-pdo": "*",
-        "laravel/framework": "^10.43|^11.0",
+        "laravel/framework": "^11.0|^12.0",
         "konekt/enum": "^4.2",
-        "konekt/concord": "^1.13",
+        "konekt/concord": "^1.15",
         "konekt/xtend": "^1.2",
-        "spatie/laravel-medialibrary": "^11.0",
-        "cviebrock/eloquent-sluggable": "^10.0|^11.0",
-        "konekt/laravel-migration-compatibility": "^1.6",
+        "spatie/laravel-medialibrary": "^11.9",
+        "cviebrock/eloquent-sluggable": "^11.0|^12.0",
+        "konekt/laravel-migration-compatibility": "^1.9",
         "konekt/address": "^3.4.1",
         "konekt/customer": "^3.2",
         "konekt/user": "^3.0",
-        "konekt/search": "^1.2",
-        "nette/schema": "^1.2.5"
+        "konekt/search": "^1.4",
+        "nette/schema": "^1.3.2"
     },
     "replace": {
         "vanilo/adjustments": "self.version",
@@ -59,9 +59,9 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0|^9.0",
-        "phpunit/phpunit" : "^10.0",
-        "laravel/legacy-factories": "^1.0.4"
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit" : "^10.0|^11.0",
+        "laravel/legacy-factories": "^1.4"
     },
     "scripts": {
         "test": "phpunit"
