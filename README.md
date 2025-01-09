@@ -12,11 +12,13 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 
 ## Development Version
 
-You are browsing the unstable, v5.x version of this repository!
+> [!WARNING]  
+> You are browsing the unstable, v5.x version of this repository!
+> 
+> Do not use this branch in any real projects yet, as it's a subject of heavy changes!
 
-Vanilo v5 is expected to be released in April 2025, but there's no final deadline yet.
-
-Do not use this branch in any real projects yet, as it's a subject of heavy changes!
+> [!NOTE]  
+> Vanilo v5 is expected to be released in April 2025, but there's no final deadline yet.
 
 For the stable version see the `4.x` branch.
 
