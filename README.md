@@ -2,13 +2,23 @@
 
 ## The Laravel E-commerce Framework
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/framework/tests.yml?branch=4.x&style=flat-square)](https://github.com/vanilophp/framework/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/framework/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/framework/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/framework.svg?style=flat-square)](https://packagist.org/packages/vanilo/framework)
-[![StyleCI](https://styleci.io/repos/101036876/shield?branch=4.x)](https://styleci.io/repos/101036876)
+[![StyleCI](https://styleci.io/repos/101036876/shield?branch=master)](https://styleci.io/repos/101036876)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
 Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce applications with **pleasure**.
+
+## Development Version
+
+You are browsing the unstable, v5.x version of this repository!
+
+Vanilo v5 is expected to be released in April 2025, but there's no final deadline yet.
+
+Do not use this branch in any real projects yet, as it's a subject of heavy changes!
+
+For the stable version see the `4.x` branch.
 
 ## Stable Version
 
