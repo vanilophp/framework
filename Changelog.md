@@ -9,6 +9,7 @@
 - Dropped Laravel 10 Support
 - Added Laravel 12 Support
 - Added the `gtin` field to the products and master product variants tables
+- PHP 8.4 deprecation notice fixes
 
 ## 4.x Series
 
