@@ -3,11 +3,12 @@
 ## 5.x Series
 
 ## Unreleased
-##### 2024-04-XX
+##### 2025-XX-XX
 
 - Dropped PHP 8.2 Support
 - Dropped Laravel 10 Support
 - Added Laravel 12 Support
+- Added the `gtin` field to the products and master product variants tables
 
 ## 4.x Series
 

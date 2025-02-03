@@ -125,4 +125,42 @@ class MasterProductVariantTest extends TestCase
 
         $this->assertNull($variant->meta_description);
     }
+
+    /** @test */
+    public function the_variant_gtin_field_can_be_set(): void
+    {
+        $master = MasterProduct::create([
+            'name' => 'Kosmodisk',
+        ]);
+
+        $variant = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'kosmodisk',
+            'gtin' => '777888999'
+        ]);
+
+        $this->assertEquals('777888999', $variant->gtin);
+    }
+
+    /** @test */
+    public function the_variant_gtin_field_is_nullable(): void
+    {
+        $master = MasterProduct::create([
+            'name' => 'Kosmodisk',
+        ]);
+
+        $variant = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'kosmodisk',
+            'gtin' => '777888999'
+        ]);
+
+        $variant->update([
+            'gtin' => null,
+        ]);
+
+        $variant->fresh();
+
+        $this->assertNull($variant->gtin);
+    }
 }
