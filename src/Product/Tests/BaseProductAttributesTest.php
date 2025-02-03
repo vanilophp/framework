@@ -63,7 +63,8 @@ class BaseProductAttributesTest extends TestCase
             'description' => 'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
             'state' => 'active',
             'meta_keywords' => 'maxi, baxi, dreams',
-            'meta_description' => 'The THING you always have dreamt of'
+            'meta_description' => 'The THING you always have dreamt of',
+            'gtin' => '8675309',
         ]);
 
         $this->assertGreaterThanOrEqual(1, $product->id);
@@ -80,6 +81,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('active', $product->state->value());
         $this->assertEquals('maxi, baxi, dreams', $product->meta_keywords);
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
+        $this->assertEquals('8675309', $product->gtin);
     }
 
     /**
@@ -159,5 +161,23 @@ class BaseProductAttributesTest extends TestCase
     public function find_by_sku_returns_null_if_no_product_was_found_by_the_requested_sku()
     {
         $this->assertNull(Product::findBySku('Oh man such SKU could not exist in the Wild. Nor in a lab'));
+    }
+
+    /** @test */
+    public function the_product_gtin_field_is_nullable(): void
+    {
+        $product = Product::create([
+            'name' => 'Kosmodisk',
+            'sku' => 'kosmodisk',
+            'gtin' => '9876543210',
+        ]);
+
+        $product->update([
+            'gtin' => null,
+        ]);
+
+        $product->fresh();
+
+        $this->assertNull($product->gtin);
     }
 }
