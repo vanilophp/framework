@@ -52,6 +52,7 @@ class OrderItem extends Model implements OrderItemContract
     protected $casts = [
         'configuration' => 'json',
         'quantity' => 'int',
+        'price' => 'float',
     ];
 
     public function order()
@@ -91,7 +92,7 @@ class OrderItem extends Model implements OrderItemContract
 
     public function getPrice(): float
     {
-        return $this->price;
+        return floatval($this->price);
     }
 
     public function total(): float
