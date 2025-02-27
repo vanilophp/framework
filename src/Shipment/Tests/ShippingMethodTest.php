@@ -14,8 +14,10 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Shipment\Models\Carrier;
 use Vanilo\Shipment\Models\ShippingMethod;
+use Vanilo\Shipment\Models\TimeUnit;
 
 class ShippingMethodTest extends TestCase
 {
@@ -103,5 +105,57 @@ class ShippingMethodTest extends TestCase
         ShippingMethod::create(['name' => 'Messenger 5', 'is_active' => false]);
 
         $this->assertCount(2, ShippingMethod::actives()->get());
+    }
+
+    #[Test] public function it_saves_eta_fields_on_creation(): void
+    {
+        $shippingMethod = ShippingMethod::create([
+            'name' => 'Test Shipping Method',
+            'eta_min' => 1,
+            'eta_max' => 2,
+            'eta_units' => TimeUnit::WEEKS,
+        ])->fresh();
+
+        $this->assertCount(1, ShippingMethod::get());
+        $this->assertModelExists($shippingMethod);
+        $this->assertEquals(1, $shippingMethod->eta_min);
+        $this->assertEquals(2, $shippingMethod->eta_max);
+        $this->assertEquals(TimeUnit::WEEKS->value, $shippingMethod->eta_units);
+    }
+
+    #[Test] public function it_updates_eta_fields_correctly(): void
+    {
+        $shippingMethod = ShippingMethod::create([
+            'name' => 'Test Shipping Method',
+            'eta_min' => 1,
+            'eta_max' => 2,
+            'eta_units' => TimeUnit::WEEKS,
+        ])->fresh();
+
+        $shippingMethod->update([
+            'eta_min' => 3,
+            'eta_max' => 5,
+            'eta_units' => TimeUnit::DAYS,
+        ]);
+
+        $updatedShippingMethod = ShippingMethod::find($shippingMethod->id);
+
+        $this->assertCount(1, ShippingMethod::get());
+        $this->assertModelExists($updatedShippingMethod);
+        $this->assertEquals(3, $updatedShippingMethod->eta_min);
+        $this->assertEquals(5, $updatedShippingMethod->eta_max);
+        $this->assertEquals(TimeUnit::DAYS->value, $updatedShippingMethod->eta_units);
+
+        $shippingMethod->update([
+            'eta_min' => null,
+            'eta_max' => null,
+            'eta_units' => null,
+        ]);
+
+        $updatedShippingMethod = ShippingMethod::find($shippingMethod->id);
+
+        $this->assertNull($updatedShippingMethod->eta_min);
+        $this->assertNull($updatedShippingMethod->eta_max);
+        $this->assertNull($updatedShippingMethod->eta_units);
     }
 }

@@ -35,6 +35,9 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property int|null $carrier_id
  * @property int|null $zone_id
  * @property boolean $is_active
+ * @property int|null $eta_min
+ * @property int|null $eta_max
+ * @property string|null $eta_units
  * @property array $configuration
  *
  * @method static Builder actives()
