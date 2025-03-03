@@ -1,5 +1,15 @@
 # Vanilo Shipment Module Changelog
 
+## 5.x Series
+
+## Unreleased
+##### 2025-XX-XX
+
+- Dropped PHP 8.2 Support
+- Dropped Laravel 10 Support
+- Added Laravel 12 Support
+- Added ETA fields to Shipping Methods
+
 ## 4.x Series
 
 ## 4.2.0
