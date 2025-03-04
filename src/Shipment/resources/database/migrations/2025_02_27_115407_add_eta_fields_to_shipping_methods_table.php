@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->dropColumn('eta_max');
         });
         Schema::table('shipping_methods', static function (Blueprint $table) {
-        $table->dropColumn('eta_units');
-    });
+            $table->dropColumn('eta_units');
+        });
     }
 };
