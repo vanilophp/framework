@@ -14,8 +14,7 @@ enum TimeUnit: string
 
     public function label(): string
     {
-        return match($this)
-        {
+        return match ($this) {
             self::Seconds => __('Seconds'),
             self::Minutes => __('Minutes'),
             self::Hours => __('Hours'),
