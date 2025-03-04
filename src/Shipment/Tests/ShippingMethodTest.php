@@ -113,14 +113,14 @@ class ShippingMethodTest extends TestCase
             'name' => 'Test Shipping Method',
             'eta_min' => 1,
             'eta_max' => 2,
-            'eta_units' => TimeUnit::WEEKS,
+            'eta_units' => TimeUnit::Weeks,
         ])->fresh();
 
         $this->assertCount(1, ShippingMethod::get());
         $this->assertModelExists($shippingMethod);
         $this->assertEquals(1, $shippingMethod->eta_min);
         $this->assertEquals(2, $shippingMethod->eta_max);
-        $this->assertEquals(TimeUnit::WEEKS->value, $shippingMethod->eta_units);
+        $this->assertEquals(TimeUnit::Weeks->value, $shippingMethod->eta_units);
     }
 
     #[Test] public function it_updates_eta_fields_correctly(): void
@@ -129,13 +129,13 @@ class ShippingMethodTest extends TestCase
             'name' => 'Test Shipping Method',
             'eta_min' => 1,
             'eta_max' => 2,
-            'eta_units' => TimeUnit::WEEKS,
+            'eta_units' => TimeUnit::Weeks,
         ])->fresh();
 
         $shippingMethod->update([
             'eta_min' => 3,
             'eta_max' => 5,
-            'eta_units' => TimeUnit::DAYS,
+            'eta_units' => TimeUnit::Days,
         ]);
 
         $updatedShippingMethod = ShippingMethod::find($shippingMethod->id);
@@ -144,7 +144,7 @@ class ShippingMethodTest extends TestCase
         $this->assertModelExists($updatedShippingMethod);
         $this->assertEquals(3, $updatedShippingMethod->eta_min);
         $this->assertEquals(5, $updatedShippingMethod->eta_max);
-        $this->assertEquals(TimeUnit::DAYS->value, $updatedShippingMethod->eta_units);
+        $this->assertEquals(TimeUnit::Days->value, $updatedShippingMethod->eta_units);
 
         $shippingMethod->update([
             'eta_min' => null,
