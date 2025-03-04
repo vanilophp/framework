@@ -29,6 +29,7 @@ use Vanilo\Support\Dto\Dimension;
  * @property \Vanilo\MasterProduct\Contracts\MasterProduct $masterProduct
  * @property string $name
  * @property string $sku
+ * @property string|null $gtin
  * @property float $stock
  * @property float|null $backorder
  * @property float|null $price
