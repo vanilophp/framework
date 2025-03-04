@@ -23,7 +23,7 @@
         "konekt/concord": "^1.15",
         "konekt/xtend": "^1.2",
         "spatie/laravel-medialibrary": "^11.9",
-        "cviebrock/eloquent-sluggable": "^11.0|^12.0",
+        "cviebrock/eloquent-sluggable": "^10.0|^11.0|^12.0",
         "konekt/laravel-migration-compatibility": "^1.9",
         "konekt/address": "^3.4.1",
         "konekt/customer": "^3.2",
@@ -59,7 +59,7 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "^9.0|^10.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
         "phpunit/phpunit" : "^10.0|^11.0",
         "laravel/legacy-factories": "^1.4"
     },
