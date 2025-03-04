@@ -51,6 +51,8 @@ use Vanilo\Shipment\Models\ShippingMethodProxy;
  * @property-read null|\Vanilo\Contracts\Customer $customer
  * @property-read Collection|Payment[] $payments
  * @property-read Collection|ShipmentContract[] $shipments
+ *
+ * @method static Builder inChannel(Channel|string|int $channel)
  */
 class Order extends BaseOrder implements Payable, Adjustable
 {
@@ -171,6 +173,11 @@ class Order extends BaseOrder implements Payable, Adjustable
             ->orderByDesc('id')
             ->take(1),
         ])->with('currentPayment');
+    }
+
+    public function scopeInChannel(Builder $query, Channel|string|int $channel): Builder
+    {
+        return $query->where('channel_id', $channel instanceof Channel ? $channel->id : $channel);
     }
 
     public function payments()

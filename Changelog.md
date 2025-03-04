@@ -12,6 +12,7 @@
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes
 - Added ETA fields to Shipping Methods
+- Added the Order::inChannel() scope (Foundation)
 
 ## 4.x Series
 

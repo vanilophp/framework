@@ -63,4 +63,20 @@ class OrderExtensionsTest extends TestCase
         $this->assertInstanceOf(ShippingMethod::class, $order->shippingMethod);
         $this->assertEquals($shippingMethod->id, $order->shippingMethod->id);
     }
+
+    /** @test */
+    public function the_in_channel_scope_works()
+    {
+        $channel = Channel::create(['name' => 'Trond Trollenstein']);
+        Order::create([
+            'number' => 'TR1-STN9',
+            'status' => OrderStatus::defaultValue(),
+            'channel_id' => $channel->id,
+        ]);
+
+        $ordersInChannel = Order::inChannel($channel)->get();
+        $this->assertCount(1, $ordersInChannel);
+        $this->assertInstanceOf(Order::class, $ordersInChannel->first());
+        $this->assertEquals($channel->id, $ordersInChannel->first()->channel_id);
+    }
 }
