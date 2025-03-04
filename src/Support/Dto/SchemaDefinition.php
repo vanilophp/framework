@@ -35,7 +35,7 @@ final class SchemaDefinition implements Schematized
         return $this->schema;
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return $this->sample;
     }

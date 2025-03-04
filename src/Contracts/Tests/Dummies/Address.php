@@ -35,9 +35,9 @@ class Address implements \Vanilo\Contracts\Address
     private $city;
 
     public function __construct(
-        string $name = null,
-        string $countryCode = null,
-        string $address = null,
+        ?string $name = null,
+        ?string $countryCode = null,
+        ?string $address = null,
         ?string $provinceCode = null,
         ?string $postalCode = null,
         ?string $city = null

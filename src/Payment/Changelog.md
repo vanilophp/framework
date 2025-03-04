@@ -1,5 +1,15 @@
 # Vanilo Payment Module Changelog
 
+## 5.x Series
+
+## Unreleased
+##### 2025-XX-XX
+
+- Dropped PHP 8.2 Support
+- Added Laravel 12 Support
+- PHP 8.4 deprecation notice fixes:
+   - The `$shippingAddress` parameter in the `PaymentGateway::createPaymentRequest()` interface method is now explicitly nullable 
+
 ## 4.x Series
 
 ## 4.2.0

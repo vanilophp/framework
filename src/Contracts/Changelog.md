@@ -1,5 +1,15 @@
 # Vanilo Contracts Changelog
 
+## 5.x Series
+
+## Unreleased
+##### 2025-XX-XX
+
+- Dropped PHP 8.2 Support
+- Added Laravel 12 Support
+- PHP 8.4 deprecation fixes:
+   - the `Schematized::getSchemaSample()` parameter is now explicitly nullabel 
+
 ## 4.x Series
 
 ## 4.2.0

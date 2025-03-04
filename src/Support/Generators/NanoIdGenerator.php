@@ -22,7 +22,7 @@ class NanoIdGenerator
 
     private $size = 21;
 
-    public function __construct(int $size = null, string $alphabet = null)
+    public function __construct(?int $size = null, ?string $alphabet = null)
     {
         $this->alphabet = $alphabet ?? self::ALPHABET;
         $this->size = $size ?? $this->size;

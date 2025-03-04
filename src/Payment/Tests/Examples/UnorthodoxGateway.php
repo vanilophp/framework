@@ -38,7 +38,7 @@ class UnorthodoxGateway implements PaymentGateway
 
     public function createPaymentRequest(
         Payment $payment,
-        Address $shippingAddress = null,
+        ?Address $shippingAddress = null,
         array $options = []
     ): PaymentRequest {
         return new NullRequest($payment);
