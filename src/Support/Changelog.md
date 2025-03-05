@@ -9,6 +9,7 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - PHP 8.4 deprecation fixes
+- Added the GTIN validator (standalone) and Laravel Validation rule classes
 
 ## 4.x Series
 
