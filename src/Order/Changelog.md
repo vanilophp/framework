@@ -6,7 +6,7 @@
 ##### 2025-XX-XX
 
 - Dropped PHP 8.2 Support
-- ~~Dropped Laravel 10 Support~~
+- Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes
