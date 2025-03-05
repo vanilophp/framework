@@ -11,7 +11,7 @@ class GtinValidator
     public static function isValid(string|int $gtin): bool
     {
         $gtin = (string) $gtin;
-        if (! is_numeric($gtin)) {
+        if (!is_numeric($gtin)) {
             return false;
         }
 
@@ -19,7 +19,7 @@ class GtinValidator
             return static::$cache[$gtin];
         }
 
-        if (! preg_match('/^\d{8}(?:\d{4,6})?$/', $gtin)) {
+        if (!preg_match('/^\d{8}(?:\d{4,6})?$/', $gtin)) {
             return false;
         }
 
@@ -28,15 +28,15 @@ class GtinValidator
 
     protected static function isCheckSumCorrect(string $value): bool
     {
-        return substr($value, 0, -1).collect(str_split($value))
+        return substr($value, 0, -1) . collect(str_split($value))
                 ->slice(0, -1)
                 ->pipe(function ($collection) {
-                    return $collection->sum() === 0 ? collect(1) : $collection;
+                    return 0 === $collection->sum() ? collect(1) : $collection;
                 })
                 ->reverse()
                 ->values()
                 ->map(function ($digit, $key) {
-                    return $key % 2 === 0 ? $digit * 3 : $digit;
+                    return 0 === $key % 2 ? $digit * 3 : $digit;
                 })
                 ->pipe(function ($collection) {
                     return ceil($collection->sum() / 10) * 10 - $collection->sum();
