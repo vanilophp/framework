@@ -8,5 +8,4 @@ use Vanilo\Video\Models\Video as BaseVideo;
 
 class Video extends BaseVideo
 {
-
 }

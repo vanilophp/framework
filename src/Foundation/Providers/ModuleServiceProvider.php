@@ -64,8 +64,6 @@ use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 use Vanilo\Order\Models\OrderItemProxy;
 use Vanilo\Order\Models\OrderProxy;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
-use Vanilo\Video\Contracts\ModelVideo as ModelVideoContract;
-use Vanilo\Video\Contracts\Video as VideoContract;
 use Vanilo\Payment\Models\PaymentMethodProxy;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
@@ -74,6 +72,8 @@ use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
 use Vanilo\Shipment\Models\ShipmentProxy;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 use Vanilo\Shipment\ShippingFeeCalculators;
+use Vanilo\Video\Contracts\ModelVideo as ModelVideoContract;
+use Vanilo\Video\Contracts\Video as VideoContract;
 use Vanilo\Video\Models\ModelVideoProxy;
 use Vanilo\Video\Models\VideoProxy;
 

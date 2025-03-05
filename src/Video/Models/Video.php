@@ -6,7 +6,7 @@ namespace Vanilo\Video\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use \Vanilo\Video\Contracts\Video as VideoContract;
+use Vanilo\Video\Contracts\Video as VideoContract;
 
 class Video extends Model implements VideoContract
 {
