@@ -6,5 +6,4 @@ namespace Vanilo\Video\Contracts;
 
 interface Video
 {
-
 }
