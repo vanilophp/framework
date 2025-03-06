@@ -15,6 +15,8 @@ abstract class TestCase extends Orchestra
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->setUpDatabase($this->app);
     }
 
     /**
@@ -43,6 +45,17 @@ abstract class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
+    }
+
+    /**
+     * Set up the database.
+     *
+     * @param Application $app
+     */
+    protected function setUpDatabase(Application $app): void
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        \Artisan::call('migrate', ['--force' => true]);
     }
 
     /**

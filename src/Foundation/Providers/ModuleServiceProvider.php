@@ -39,7 +39,6 @@ use Vanilo\Foundation\Models\Channel;
 use Vanilo\Foundation\Models\Customer;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
-use Vanilo\Foundation\Models\ModelVideo;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\OrderItem;
 use Vanilo\Foundation\Models\PaymentMethod;
@@ -48,7 +47,6 @@ use Vanilo\Foundation\Models\Shipment;
 use Vanilo\Foundation\Models\ShippingMethod;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Models\Taxonomy;
-use Vanilo\Foundation\Models\Video;
 use Vanilo\Foundation\Shipping\DiscountableShippingFee;
 use Vanilo\Foundation\Shipping\DiscountableShippingFeeCalculator;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
@@ -64,8 +62,6 @@ use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
 use Vanilo\Order\Models\OrderItemProxy;
 use Vanilo\Order\Models\OrderProxy;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
-use Vanilo\Video\Contracts\ModelVideo as ModelVideoContract;
-use Vanilo\Video\Contracts\Video as VideoContract;
 use Vanilo\Payment\Models\PaymentMethodProxy;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
@@ -74,8 +70,6 @@ use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
 use Vanilo\Shipment\Models\ShipmentProxy;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 use Vanilo\Shipment\ShippingFeeCalculators;
-use Vanilo\Video\Models\ModelVideoProxy;
-use Vanilo\Video\Models\VideoProxy;
 
 class ModuleServiceProvider extends BaseBoxServiceProvider
 {
@@ -107,8 +101,6 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
         $this->concord->registerModel(MasterProductVariantContract::class, MasterProductVariant::class, $registerRouteModels);
         $this->concord->registerModel(ShippingMethodContract::class, ShippingMethod::class, $registerRouteModels);
         $this->concord->registerModel(PaymentMethodContract::class, PaymentMethod::class, $registerRouteModels);
-        $this->concord->registerModel(VideoContract::class, Video::class, $registerRouteModels);
-        $this->concord->registerModel(ModelVideoContract::class, ModelVideo::class, $registerRouteModels);
 
         Relation::morphMap([
             'product' => ProductProxy::modelClass(),
@@ -124,8 +116,6 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'shipping_method' => ShippingMethodProxy::modelClass(),
             'payment_method' => PaymentMethodProxy::modelClass(),
             'channel' => ChannelProxy::modelClass(),
-            'video' => VideoProxy::modelClass(),
-            'model_video' => ModelVideoProxy::modelClass(),
         ]);
 
         ShippingFeeCalculators::register(FlatFeeCalculator::ID, FlatFeeCalculator::class);
