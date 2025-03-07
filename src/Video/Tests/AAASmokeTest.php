@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 
 class AAASmokeTest extends TestCase
 {
-    private const string MIN_PHP_VERSION = '8.2.0';
+    private const string MIN_PHP_VERSION = '8.3.0';
 
     #[Test] public function smoke(): void
     {
