@@ -13,6 +13,7 @@
 - PHP 8.4 deprecation notice fixes
 - Added ETA fields to Shipping Methods
 - Added the Order::inChannel() scope (Foundation)
+- Added the Video module
 
 ## 4.x Series
 

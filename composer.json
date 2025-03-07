@@ -47,7 +47,8 @@
         "vanilo/properties": "self.version",
         "vanilo/shipment": "self.version",
         "vanilo/support": "self.version",
-        "vanilo/taxes": "self.version"
+        "vanilo/taxes": "self.version",
+        "vanilo/video": "self.version"
     },
     "autoload": {
         "psr-4": {
