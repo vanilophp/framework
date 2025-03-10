@@ -6,7 +6,6 @@ namespace Vanilo\Video\Tests;
 
 use Illuminate\Foundation\Application;
 use Konekt\Concord\ConcordServiceProvider;
-use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Video\Providers\ModuleServiceProvider as VideoModule;
 
@@ -19,25 +18,14 @@ abstract class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
     }
 
-    /**
-     * @param Application $app
-     *
-     * @return array
-     */
-    protected function getPackageProviders($app): array
+    protected function getPackageProviders(Application $app): array
     {
         return [
-            LaravelMigrationCompatibilityProvider::class,
             ConcordServiceProvider::class
         ];
     }
 
-    /**
-     * Set up the environment.
-     *
-     * @param Application $app
-     */
-    protected function getEnvironmentSetUp($app): void
+    protected function getEnvironmentSetUp(Application $app): void
     {
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
@@ -53,7 +41,7 @@ abstract class TestCase extends Orchestra
         \Artisan::call('migrate', ['--force' => true]);
     }
 
-    protected function resolveApplicationConfiguration($app): void
+    protected function resolveApplicationConfiguration(Application $app): void
     {
         parent::resolveApplicationConfiguration($app);
 
