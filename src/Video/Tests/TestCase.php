@@ -18,14 +18,14 @@ abstract class TestCase extends Orchestra
         $this->setUpDatabase($this->app);
     }
 
-    protected function getPackageProviders(Application $app): array
+    protected function getPackageProviders($app): array
     {
         return [
             ConcordServiceProvider::class
         ];
     }
 
-    protected function getEnvironmentSetUp(Application $app): void
+    protected function getEnvironmentSetUp($app): void
     {
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
@@ -41,7 +41,7 @@ abstract class TestCase extends Orchestra
         \Artisan::call('migrate', ['--force' => true]);
     }
 
-    protected function resolveApplicationConfiguration(Application $app): void
+    protected function resolveApplicationConfiguration($app): void
     {
         parent::resolveApplicationConfiguration($app);
 
