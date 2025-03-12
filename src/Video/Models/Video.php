@@ -7,6 +7,7 @@ namespace Vanilo\Video\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Vanilo\Support\Generators\NanoIdGenerator;
 use Vanilo\Video\Contracts\Video as VideoContract;
 
 /**
@@ -37,8 +38,30 @@ class Video extends Model implements VideoContract
         'data' => 'array',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        if (!isset($attributes['hash'])) {
+            $this->generateHash();
+        }
+
+        parent::__construct($attributes);
+    }
+
     public function model(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    private function generateHash(): void
+    {
+        $this->setRawAttributes(
+            array_merge(
+                $this->attributes,
+                [
+                    'hash' => (new NanoIdGenerator())->generate()
+                ]
+            ),
+            true
+        );
     }
 }
