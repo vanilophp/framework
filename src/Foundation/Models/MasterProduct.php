@@ -26,6 +26,7 @@ use Vanilo\MasterProduct\Models\MasterProduct as BaseMasterProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 use Vanilo\Taxes\Traits\BelongsToTaxCategory;
+use Vanilo\Video\Traits\HasVideos;
 
 /**
  * @property-read int $units_sold
@@ -40,6 +41,7 @@ class MasterProduct extends BaseMasterProduct implements HasMedia
     use LoadsMediaConversionsFromConfig;
     use HasTaxons;
     use HasPropertyValues;
+    use HasVideos;
 
     public function registerMediaConversions(Media $media = null): void
     {

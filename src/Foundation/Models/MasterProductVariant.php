@@ -25,6 +25,7 @@ use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Traits\BelongsToTaxCategory;
+use Vanilo\Video\Traits\HasVideos;
 
 class MasterProductVariant extends BaseMasterProductVariant implements Buyable, HasMedia, Taxable
 {
@@ -34,6 +35,7 @@ class MasterProductVariant extends BaseMasterProductVariant implements Buyable, 
     use HasImagesFromMediaLibrary;
     use InteractsWithMedia;
     use LoadsMediaConversionsFromConfig;
+    use HasVideos;
 
     public function registerMediaConversions(Media $media = null): void
     {

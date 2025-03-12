@@ -24,12 +24,14 @@ use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Product\Contracts\Product;
 use Vanilo\Product\Models\ProductProxy;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
+use Vanilo\Video\Traits\HasVideos;
 
 class Taxon extends BaseTaxon implements HasMedia, HasImages
 {
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;
+    use HasVideos;
 
     public function products(): MorphToMany
     {

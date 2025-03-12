@@ -27,6 +27,7 @@ use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Traits\BelongsToTaxCategory;
+use Vanilo\Video\Traits\HasVideos;
 
 class Product extends BaseProduct implements Buyable, HasMedia, Taxable
 {
@@ -38,6 +39,7 @@ class Product extends BaseProduct implements Buyable, HasMedia, Taxable
     use LoadsMediaConversionsFromConfig;
     use HasTaxons;
     use HasPropertyValues;
+    use HasVideos;
 
     protected $casts = [
         'price' => 'float',

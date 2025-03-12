@@ -22,6 +22,7 @@ use Vanilo\Channel\Traits\Channelable;
 use Vanilo\Contracts\HasImages;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
+use Vanilo\Video\Traits\HasVideos;
 
 class Taxonomy extends BaseTaxonomy implements HasMedia, HasImages
 {
@@ -29,6 +30,7 @@ class Taxonomy extends BaseTaxonomy implements HasMedia, HasImages
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;
+    use HasVideos;
 
     public function registerMediaConversions(Media $media = null): void
     {
