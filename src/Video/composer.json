@@ -13,6 +13,7 @@
     "require": {
         "php": "^8.3",
         "konekt/concord": "^1.15",
+        "konekt/xtend": "^2.0",
         "laravel/framework": "^10.48|^11.0|^12.0"
     },
     "require-dev": {
