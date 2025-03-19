@@ -9,6 +9,7 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - PHP 8.4 deprecation fixes
+- Added the possibility to extend the `Features` helper
 
 ## 4.x Series
 

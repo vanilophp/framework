@@ -15,6 +15,7 @@
 - Added the Order::inChannel() scope (Foundation)
 - Added the Video module
 - Added the `HasVideos` trait to the `Product`, `MasterProduct`, `MasterProductVariant`, `Taxon` and `Taxonomy` models in the Foundation module
+- Added the possibility to extend the `Features` helper
 
 ## 4.x Series
 
