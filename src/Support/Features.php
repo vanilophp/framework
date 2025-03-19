@@ -136,6 +136,6 @@ class Features
             return null;
         }
 
-        return self::$registry[$name]['instance'] ??= new self::$registry[$name]['class'];
+        return self::$registry[$name]['instance'] ??= new self::$registry[$name]['class']();
     }
 }
