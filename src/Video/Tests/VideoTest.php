@@ -21,7 +21,7 @@ class VideoTest extends TestCase
         $hash = Str::uuid()->getHex();
         $product->videos()->create([
             'hash' => $hash,
-            'type' => 'youtube',
+            'driver' => 'youtube',
             'reference' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab',
         ])->fresh();
 
@@ -29,12 +29,12 @@ class VideoTest extends TestCase
 
         $this->assertInstanceOf(Video::class, $video);
         $this->assertEquals($hash, $video->hash);
-        $this->assertEquals('youtube', $video->type);
+        $this->assertEquals('youtube', $video->driver);
         $this->assertEquals('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab', $video->reference);
 
         $this->assertDatabaseHas('videos', [
             'hash' => $hash,
-            'type' => 'youtube',
+            'driver' => 'youtube',
             'reference' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab',
         ]);
     }
@@ -60,7 +60,7 @@ class VideoTest extends TestCase
 
         $product->videos()->create([
             'hash' => $hash,
-            'type' => 'youtube',
+            'driver' => 'youtube',
             'title' => 'Totally Not Suspicious URL',
             'description' => 'Watch it right now!',
             'width' => 640,
@@ -77,7 +77,7 @@ class VideoTest extends TestCase
 
         $this->assertInstanceOf(Video::class, $video);
         $this->assertEquals($hash, $video->hash);
-        $this->assertEquals('youtube', $video->type);
+        $this->assertEquals('youtube', $video->driver);
         $this->assertEquals('Totally Not Suspicious URL', $video->title);
         $this->assertEquals('Watch it right now!', $video->description);
         $this->assertEquals(640, $video->width);
@@ -91,7 +91,7 @@ class VideoTest extends TestCase
 
         $this->assertDatabaseHas('videos', [
             'hash' => $hash,
-            'type' => 'youtube',
+            'driver' => 'youtube',
             'title' => 'Totally Not Suspicious URL',
             'description' => 'Watch it right now!',
             'width' => 640,
@@ -116,7 +116,7 @@ class VideoTest extends TestCase
 
         $product->videos()->create([
             'hash' => $hash,
-            'type' => 'youtube',
+            'driver' => 'youtube',
             'reference' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab',
         ]);
 
@@ -126,7 +126,7 @@ class VideoTest extends TestCase
 
         $product->videos()->create([
             'hash' => $hash,
-            'type' => 'youtube',
+            'driver' => 'youtube',
             'reference' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab',
         ]);
     }

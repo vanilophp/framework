@@ -12,7 +12,7 @@ return new class () extends Migration {
         Schema::create('videos', static function (Blueprint $table) {
             $table->id();
             $table->string('hash')->unique();
-            $table->string('type');
+            $table->string('driver');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('width')->nullable();
