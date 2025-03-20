@@ -27,5 +27,5 @@ interface VideoDriver
 
     public function getFileUrl(Video $video, array $options = []): ?string;
 
-    public function getEmbedCode(Video $video, array $options = []): string;
+    public function getEmbedCode(Video $video, array $options = []): ?string;
 }
