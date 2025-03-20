@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Support;
 
+use Illuminate\Support\Str;
 use Vanilo\Contracts\Feature;
 use Vanilo\Support\Features\Inventory;
 use Vanilo\Support\Features\MultiChannel;
@@ -22,6 +23,8 @@ use Vanilo\Support\Features\SearchEngine;
 
 class Features
 {
+    protected static array $registry = [];
+
     private static ?MultiChannel $multiChannel = null;
 
     private static ?Pricing $pricing = null;
@@ -37,8 +40,34 @@ class Features
             'multichannel' => self::multichannel(),
             'search_engine' => self::searchEngine(),
             'inventory' => self::inventory(),
-            default => null,
+            default => self::instanceByName($name),
         };
+    }
+
+    public static function extend(string $class, ?string $name = null): void
+    {
+        if (!is_subclass_of($class, Feature::class)) {
+            throw new \InvalidArgumentException(
+                sprintf('The class you are trying to register (%s) must implement the Feature interface.', $class)
+            );
+        }
+
+        $name ??= Str::camel(class_basename($class));
+
+        self::$registry[$name] = [
+            'class' => $class,
+            'instance' => null,
+        ];
+    }
+
+    public static function isEnabled(string $name): bool
+    {
+        return self::findByName($name)?->isEnabled() ?? false;
+    }
+
+    public static function isDisabled(string $name): bool
+    {
+        return !self::isEnabled($name);
     }
 
     public static function multichannel(): MultiChannel
@@ -99,5 +128,14 @@ class Features
     public static function isInventoryDisabled(): bool
     {
         return self::inventory()->isDisabled();
+    }
+
+    private static function instanceByName(string $name): ?Feature
+    {
+        if (null === $feat = self::$registry[$name] ?? null) {
+            return null;
+        }
+
+        return self::$registry[$name]['instance'] ??= new self::$registry[$name]['class'];
     }
 }
