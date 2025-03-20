@@ -17,6 +17,11 @@ class Youtube implements VideoDriver
 
     protected static ?DriverCapabilities $capabilities = null;
 
+    public static function getName(): string
+    {
+        return 'Youtube';
+    }
+
     public static function capabilities(): DriverCapabilities
     {
         return self::$capabilities ??= new DriverCapabilities(

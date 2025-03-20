@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Video\Contracts;
 
+use Konekt\Extend\Contracts\Registerable;
 use Vanilo\Video\Dto\DriverCapabilities;
 use Vanilo\Video\Dto\MetaData;
 use Vanilo\Video\Dto\Stats;
 use Vanilo\Video\Dto\Thumbnail;
 
-interface VideoDriver
+interface VideoDriver extends Registerable
 {
     public static function capabilities(): DriverCapabilities;
 
