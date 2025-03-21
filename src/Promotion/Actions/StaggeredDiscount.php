@@ -90,7 +90,7 @@ class StaggeredDiscount implements PromotionActionType
                 'Quantities must be numeric.'
             )
             ->assert(
-                fn ($arr) => array_filter(array_keys($arr), fn ($key) => (float) $key == round($key)) === array_keys($arr),
+                fn ($arr) => array_filter(array_keys($arr), fn ($key) => (float) $key == round((float) $key)) === array_keys($arr),
                 'Quantities must be whole numbers.'
             )
             ->assert(
