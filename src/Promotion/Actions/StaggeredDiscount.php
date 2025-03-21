@@ -34,9 +34,13 @@ class StaggeredDiscount  implements PromotionActionType
     {
         $configuration = (new Processor())->process($this->getSchema(), $configuration);
 
+        if (!$subject instanceof Adjustable) {
+            return [];
+        }
+
         $applicablePercentage = $this->findApplicablePercentage($subject, $configuration);
 
-        if (!$applicablePercentage) {
+        if (is_null($applicablePercentage)) {
             return [];
         }
 
@@ -46,9 +50,8 @@ class StaggeredDiscount  implements PromotionActionType
         ];
 
         $result = [];
-        if ($subject instanceof Adjustable) {
-            $result[] = $subject->adjustments()->create($this->getAdjuster($derivedConfig));
-        }
+        $result[] = $subject->adjustments()->create($this->getAdjuster($derivedConfig));
+
         //@todo also set the origin
 
         return $result;
@@ -104,6 +107,19 @@ class StaggeredDiscount  implements PromotionActionType
 
     private function findApplicablePercentage(object $subject, array $configuration): ?int
     {
-        return 10;
+        $thresholds = array_map('intval', array_keys($configuration['discount']));
+
+        $applicableDiscount = null;
+
+        foreach ($thresholds as $threshold) {
+            // TOREVIEW: I am relying here that a CartItem/OrderItem is passed in as a subject...
+            if ($subject->getQuantity() >= $threshold) {
+                $applicableDiscount = $configuration['discount'][$threshold];
+            } else {
+                break;
+            }
+        }
+
+        return $applicableDiscount;
     }
 }

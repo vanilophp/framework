@@ -10,6 +10,7 @@ use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Models\Adjustment;
 use Vanilo\Promotion\Actions\StaggeredDiscount;
 use Vanilo\Promotion\PromotionActionTypes;
+use Vanilo\Promotion\Tests\Examples\DummyCartItem;
 use Vanilo\Promotion\Tests\Examples\SampleAdjustable;
 use Vanilo\Promotion\Tests\TestCase;
 
@@ -155,36 +156,75 @@ class StaggeredDiscountTest extends TestCase
     {
         $discount = new StaggeredDiscount();
 
-        $subject = new SampleAdjustable(179);
+        $subject = new DummyCartItem(preAdjustmentsTotal: 100, quantity: 2);
         $config = [
             'discount' => [
                 '5' => 50,
-                10 => 50,
-                12.00 => 50,
+                10 => 70,
+                12.00 => 80,
             ]
         ];
 
         $adjustments = $discount->apply($subject, $config);
-        $this->assertNotEmpty($adjustments);
-        $this->assertInstanceOf(Adjustment::class, $adjustments[0]);
+
+        // We just check that no exception was thrown
+        $this->assertTrue(true);
     }
 
-    // /** @test */
-    // public function it_accepts_various_numeric_keys_representing_whole_numbers()
-    // {
-    //     $discount = new StaggeredDiscount();
-    //
-    //     $config = [
-    //         'discount' => [
-    //             '5' => 50,
-    //             10 => 50,
-    //             10.00 => 50,
-    //         ]
-    //     ];
-    //     $adjuster = $discount->getAdjuster($config);
-    //     $this->assertInstanceOf(PercentDiscount::class, $adjuster);
-    // }
+    /** @test */
+    public function it_doesnt_apply_any_adjustments_for_quantities_below_the_first_threshold()
+    {
+        $discount = new StaggeredDiscount();
 
+        $subject = new DummyCartItem(preAdjustmentsTotal: 100, quantity: 2);
+        $config = [
+            'discount' => [
+                '5' => 50,
+                '10' => 70,
+                '12' => 80,
+            ]
+        ];
+
+        $adjustments = $discount->apply($subject, $config);
+        $this->assertEmpty($adjustments);
+    }
+
+    public static function quantityDiscountProvider(): array
+    {
+        return [
+            'Exact threshold 5'           => [5, -50],
+            'Between 5 and 10'            => [9, -50],
+            'Exact threshold 10'         => [10, -70],
+            'Between 10 and 12'          => [11, -70],
+            'Exact threshold 12'         => [12, -80],
+            'Above all thresholds'       => [15, -80],
+        ];
+    }
+
+    /**
+     * @dataProvider quantityDiscountProvider
+     */
+    public function test_it_applies_the_right_adjustments_based_on_the_quantity(int $quantity, int $expectedAmount)
+    {
+        $discount = new StaggeredDiscount();
+        $config = [
+            'discount' => [
+                '5' => 50,
+                '10' => 70,
+                '12' => 80,
+            ]
+        ];
+
+        $subject = new DummyCartItem(preAdjustmentsTotal: 100, quantity: $quantity);
+        $adjustments = $discount->apply($subject, $config);
+
+        $this->assertCount(1, $adjustments, "Expected one discount adjustment for quantity $quantity");
+        $this->assertEquals(
+            $expectedAmount,
+            $adjustments[0]->getAmount(),
+            "Expected discount of -$expectedAmount for quantity $quantity"
+        );
+    }
 
 
     //
