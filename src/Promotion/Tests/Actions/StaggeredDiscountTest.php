@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Actions;
 
 use Nette\Schema\ValidationException;
-use Vanilo\Adjustments\Adjusters\PercentDiscount;
-use Vanilo\Adjustments\Contracts\Adjuster;
-use Vanilo\Adjustments\Models\Adjustment;
 use Vanilo\Promotion\Actions\StaggeredDiscount;
 use Vanilo\Promotion\PromotionActionTypes;
 use Vanilo\Promotion\Tests\Examples\DummyCartItem;
@@ -227,36 +224,49 @@ class StaggeredDiscountTest extends TestCase
     }
 
 
-    //
-    // /** @test */
-    // public function the_title_contains_the_configured_percent()
-    // {
-    //     $this->assertStringContainsString('7%', (new StaggeredDiscount())->getTitle(['percent' => 7]));
-    // }
-    //
-    // /** @test */
-    // public function the_title_warns_if_the_percent_configuration_is_missing()
-    // {
-    //     $this->assertStringContainsString('Invalid', (new StaggeredDiscount())->getTitle([]));
-    // }
-    //
-    // /** @test */
-    // public function it_returns_a_percent_discount_adjuster_if_the_configuration_is_correct()
-    // {
-    //     $this->assertInstanceOf(PercentDiscount::class, (new StaggeredDiscount())->getAdjuster(['percent' => 20]));
-    // }
-    //
-    // /** @test */
-    // public function it_adds_a_promotion_adjustment_to_the_subject_if_applied()
-    // {
-    //     $discount = new StaggeredDiscount();
-    //     $subject = new SampleAdjustable(179);
-    //
-    //     $discount->apply($subject, ['percent' => 10]);
-    //
-    //     $this->assertCount(1, $subject->adjustments());
-    //     $adjustment = $subject->adjustments()->first();
-    //     $this->assertInstanceOf(PercentDiscount::class, $adjustment->getAdjuster());
-    //     $this->assertEquals(-17.9, $adjustment->getAmount());
-    // }
+    /** @test */
+    public function the_title_contains_the_configured_min_percentage_if_a_single_line_is_present()
+    {
+        $config = [
+            'discount' => [
+                '5' => 50,
+            ]
+        ];
+
+        $this->assertStringContainsString('50%', (new StaggeredDiscount())->getTitle($config));
+    }
+
+    /** @test */
+    public function the_title_contains_the_configured_min_and_max_percentages()
+    {
+        $config = [
+            'discount' => [
+                '5' => 50,
+                '15' => 60,
+                '25' => 80,
+            ]
+        ];
+
+        $this->assertStringContainsString('50-80%', (new StaggeredDiscount())->getTitle($config));
+    }
+
+    /** @test */
+    public function the_title_contains_the_configured_min_and_max_percentages_even_if_they_are_not_ascending()
+    {
+        $config = [
+            'discount' => [
+                '5' => 50,
+                '15' => 10,
+                '25' => 5,
+            ]
+        ];
+
+        $this->assertStringContainsString('5-50%', (new StaggeredDiscount())->getTitle($config));
+    }
+
+    /** @test */
+    public function the_title_warns_about_invalid_configuration()
+    {
+        $this->assertStringContainsString('Invalid', (new StaggeredDiscount())->getTitle([]));
+    }
 }

@@ -5,6 +5,7 @@ namespace Vanilo\Promotion\Actions;
 use Nette\Schema\Expect;
 use Nette\Schema\Processor;
 use Nette\Schema\Schema;
+use Nette\Schema\ValidationException;
 use Vanilo\Adjustments\Adjusters\PercentDiscount;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
@@ -21,8 +22,19 @@ class StaggeredDiscount  implements PromotionActionType
 
     public function getTitle(array $configuration): string
     {
-        // TOREVIEW: create it based on the config?
-        return __('Staggered discount');
+        try {
+            (new Processor())->process($this->getSchema(), $configuration);
+        } catch (ValidationException $exception) {
+            return __('X-Y% discount based on quantity [Invalid Configuration: :error]', ['error' => $exception->getMessage()]);
+        }
+
+        $percentages = array_values($configuration['discount']);
+
+        if (count($percentages) === 1) {
+            return __(':percent% discount based on quantity', ['percent' => $percentages[0]]);
+        } else {
+            return __(':minPercent-:maxPercent% discount based on quantity', ['minPercent' => min($percentages), 'maxPercent' => max($percentages)]);
+        }
     }
 
     public function getAdjuster(array $configuration): Adjuster
