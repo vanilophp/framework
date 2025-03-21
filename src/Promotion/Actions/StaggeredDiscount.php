@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Promotion\Actions;
 
 use Nette\Schema\Expect;
@@ -11,7 +13,7 @@ use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Promotion\Contracts\PromotionActionType;
 
-class StaggeredDiscount  implements PromotionActionType
+class StaggeredDiscount implements PromotionActionType
 {
     public const DEFAULT_ID = 'staggered_discount';
 
@@ -30,7 +32,7 @@ class StaggeredDiscount  implements PromotionActionType
 
         $percentages = array_values($configuration['discount']);
 
-        if (count($percentages) === 1) {
+        if (1 === count($percentages)) {
             return __(':percent% discount based on quantity', ['percent' => $percentages[0]]);
         } else {
             return __(':minPercent-:maxPercent% discount based on quantity', ['minPercent' => min($percentages), 'maxPercent' => max($percentages)]);
@@ -84,11 +86,11 @@ class StaggeredDiscount  implements PromotionActionType
                 )
             )
             ->assert(
-                fn($arr) => array_filter(array_keys($arr), fn($key) => is_numeric($key)) === array_keys($arr),
+                fn ($arr) => array_filter(array_keys($arr), fn ($key) => is_numeric($key)) === array_keys($arr),
                 'Quantities must be numeric.'
             )
             ->assert(
-                fn($arr) => array_filter(array_keys($arr), fn($key) => (float) $key == round($key)) === array_keys($arr),
+                fn ($arr) => array_filter(array_keys($arr), fn ($key) => (float) $key == round($key)) === array_keys($arr),
                 'Quantities must be whole numbers.'
             )
             ->assert(

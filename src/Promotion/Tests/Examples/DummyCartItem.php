@@ -17,7 +17,7 @@ class DummyCartItem implements CartItem, Adjustable
     private ArrayAdjustmentCollection $adjustments;
 
     public function __construct(
-        private float $preAdjustmentsTotal = 0,
+        private float $preAdjustmentsTotal,
         private int $quantity
     ) {
         $this->adjustments = new ArrayAdjustmentCollection($this);

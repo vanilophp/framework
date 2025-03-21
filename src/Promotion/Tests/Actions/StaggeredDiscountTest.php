@@ -189,12 +189,12 @@ class StaggeredDiscountTest extends TestCase
     public static function quantityDiscountProvider(): array
     {
         return [
-            'Exact threshold 5'           => [5, -50],
-            'Between 5 and 10'            => [9, -50],
-            'Exact threshold 10'         => [10, -70],
-            'Between 10 and 12'          => [11, -70],
-            'Exact threshold 12'         => [12, -80],
-            'Above all thresholds'       => [15, -80],
+            'Exact threshold 5' => [5, -50],
+            'Between 5 and 10' => [9, -50],
+            'Exact threshold 10' => [10, -70],
+            'Between 10 and 12' => [11, -70],
+            'Exact threshold 12' => [12, -80],
+            'Above all thresholds' => [15, -80],
         ];
     }
 
@@ -222,7 +222,6 @@ class StaggeredDiscountTest extends TestCase
             "Expected discount of -$expectedAmount for quantity $quantity"
         );
     }
-
 
     /** @test */
     public function the_title_contains_the_configured_min_percentage_if_a_single_line_is_present()
