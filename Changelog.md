@@ -16,6 +16,7 @@
 - Added the Video module
 - Added the `HasVideos` trait to the `Product`, `MasterProduct`, `MasterProductVariant`, `Taxon` and `Taxonomy` models in the Foundation module
 - Added the possibility to extend the `Features` helper
+- Fixed issue where the `linkabel` pointed to a missing product thus returning null
 
 ## 4.x Series
 

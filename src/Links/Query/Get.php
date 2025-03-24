@@ -64,6 +64,7 @@ final class Get
                     ->items
                     ->map
                     ->linkable
+                    ->filter()
                     ->reject(fn ($item) => $item->id === $model->id)
                 );
             }
