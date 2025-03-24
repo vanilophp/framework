@@ -43,7 +43,7 @@ class Youtube implements VideoDriver
 
     public function getMetadata(Video $video): MetaData
     {
-        return new Metadata();
+        return new MetaData();
     }
 
     public function getThumbnail(Video $video): Thumbnail
