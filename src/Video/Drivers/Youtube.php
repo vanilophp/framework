@@ -15,6 +15,11 @@ class Youtube implements VideoDriver
 {
     public const string ID = 'youtube';
 
+    public const int DEFAULT_THUMBNAIL_WIDTH = 480;
+    public const int DEFAULT_THUMBNAIL_HEIGHT = 360;
+    public const int DEFAULT_EMBED_WIDTH = 560;
+    public const int DEFAULT_EMBED_HEIGHT = 315;
+
     protected static ?DriverCapabilities $capabilities = null;
 
     public static function getName(): string
@@ -46,16 +51,16 @@ class Youtube implements VideoDriver
         return new MetaData();
     }
 
-    public function getThumbnail(Video $video): Thumbnail
+    public function getThumbnail(Video $video, array $options = []): Thumbnail
     {
         return new Thumbnail(
             url: sprintf('https://i.ytimg.com/vi/%s/hqdefault.jpg', $video->getReference()),
-            width: 480,
-            height: 360,
+            width: self::DEFAULT_THUMBNAIL_WIDTH,
+            height: self::DEFAULT_THUMBNAIL_HEIGHT,
         );
     }
 
-    public function getVideoUrl(Video $video): ?string
+    public function getVideoUrl(Video $video, array $options = []): ?string
     {
         return 'https://www.youtube.com/watch?v=' . $video->getReference();
     }
@@ -72,13 +77,16 @@ class Youtube implements VideoDriver
 
     public function getEmbedCode(Video $video, array $options = []): ?string
     {
+        $width = is_numeric($options['width'] ?? null) ? (int) $options['width'] : ($video->getWidth() ?: self::DEFAULT_EMBED_WIDTH);
+        $height = is_numeric($options['height'] ?? null) ? (int) $options['height'] : ($video->getHeight() ?: self::DEFAULT_EMBED_HEIGHT);
+
         return sprintf(
             '<iframe width="%d" height="%d" src="https://www.youtube.com/embed/%s"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
-            (int) $options['width'] ?? 560,
-            (int) $options['height'] ?? 315,
+            $width,
+            $height,
             $video->getReference(),
         );
     }

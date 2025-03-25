@@ -20,9 +20,9 @@ interface VideoDriver extends Registerable
 
     public function getMetadata(Video $video): MetaData;
 
-    public function getThumbnail(Video $video): Thumbnail;
+    public function getThumbnail(Video $video, array $options = []): Thumbnail;
 
-    public function getVideoUrl(Video $video): ?string;
+    public function getVideoUrl(Video $video, array $options = []): ?string;
 
     public function getStreamUrl(Video $video, array $options = []): ?string;
 
