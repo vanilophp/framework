@@ -17,6 +17,7 @@
 - Added the `HasVideos` trait to the `Product`, `MasterProduct`, `MasterProductVariant`, `Taxon` and `Taxonomy` models in the Foundation module
 - Added the possibility to extend the `Features` helper
 - Added the `StaggeredDiscount` promotion action type
+- Fixed issue where the `linkable` pointed to a missing product thus returning null
 
 ## 4.x Series
 
