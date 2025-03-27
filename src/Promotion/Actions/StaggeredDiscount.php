@@ -60,7 +60,7 @@ class StaggeredDiscount implements PromotionActionType
 
         $result = [];
 
-        $items = match(true) {
+        $items = match (true) {
             $subject instanceof CheckoutSubjectItem || $subject instanceof SaleItem => Arr::wrap($subject),
             $subject instanceof CheckoutSubject || $subject instanceof Sale => $subject->getItems(),
             default => [],
