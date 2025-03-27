@@ -12,6 +12,7 @@
 - Added the `gtin` field to the products and master product variants tables
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes
+- Added support for calculating item-level promotions on checkout
 - Added ETA fields to Shipping Methods
 - Added the Order::inChannel() scope (Foundation)
 - Added the Video module

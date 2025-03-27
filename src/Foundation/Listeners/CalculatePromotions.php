@@ -7,7 +7,9 @@ namespace Vanilo\Foundation\Listeners;
 use Vanilo\Adjustments\Contracts\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Cart\Contracts\CartEvent;
+use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
+use Vanilo\Contracts\SaleItem;
 use Vanilo\Promotion\Contracts\PromotionAction;
 use Vanilo\Promotion\Models\CouponProxy;
 
@@ -50,10 +52,16 @@ class CalculatePromotions
 
     public function isAppliedToOurCart(Adjustment $adjustment): bool
     {
-        if ($this->cartModel::class !== $adjustment->getAdjustable()::class) {
-            return false;
+        $subject = $adjustment->getAdjustable();
+
+        if ($this->cartModel::class === $subject::class && $subject->id === $this->cartModel->id) { // It applies directly to the cart
+            return true;
         }
 
-        return $adjustment->getAdjustable()->id === $this->cartModel->id;
+        if ($subject instanceof CartItem && $subject->cart_id === $this->cartModel->id) { // it applies to an item in this cart
+            return true;
+        }
+
+        return false;
     }
 }
