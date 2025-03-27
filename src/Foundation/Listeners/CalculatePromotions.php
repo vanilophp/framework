@@ -9,7 +9,6 @@ use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
-use Vanilo\Contracts\SaleItem;
 use Vanilo\Promotion\Contracts\PromotionAction;
 use Vanilo\Promotion\Models\CouponProxy;
 
