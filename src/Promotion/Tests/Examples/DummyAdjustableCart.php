@@ -15,6 +15,8 @@ use Vanilo\Contracts\Buyable;
 
 class DummyAdjustableCart implements Cart, Adjustable
 {
+    private array $items = [];
+
     public function __construct(
         private float $preAdjustmentTotal
     ) {
@@ -47,7 +49,10 @@ class DummyAdjustableCart implements Cart, Adjustable
 
     public function addItem(Buyable $product, float|int $qty = 1, array $params = []): CartItem
     {
-        // TODO: Implement addItem() method.
+        $item = new DummyCartItem($qty * $product->getPrice(), $qty);
+        $this->items[] = $item;
+
+        return $item;
     }
 
     public function removeItem(CartItem $item): void
@@ -62,12 +67,12 @@ class DummyAdjustableCart implements Cart, Adjustable
 
     public function clear(): void
     {
-        // TODO: Implement clear() method.
+        $this->items = [];
     }
 
     public function itemCount(): int
     {
-        // TODO: Implement itemCount() method.
+        return count($this->items);
     }
 
     public function getUser(): ?Authenticatable
@@ -82,7 +87,7 @@ class DummyAdjustableCart implements Cart, Adjustable
 
     public function getItems(): Collection
     {
-        // TODO: Implement getItems() method.
+        return collect($this->items);
     }
 
     public function itemsTotal(): float

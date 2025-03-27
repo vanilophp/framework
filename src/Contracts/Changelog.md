@@ -9,7 +9,8 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - PHP 8.4 deprecation fixes:
-   - the `Schematized::getSchemaSample()` parameter is now explicitly nullabel 
+   - the `Schematized::getSchemaSample()` parameter is now explicitly nullable
+- Added the `Sale` and `SaleItem` interfaces 
 
 ## 4.x Series
 

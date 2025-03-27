@@ -14,11 +14,10 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Contracts;
 
-use Traversable;
 use Vanilo\Contracts\Address;
-use Vanilo\Contracts\BillPayer;
+use Vanilo\Contracts\Sale;
 
-interface Order
+interface Order extends Sale
 {
     public function getNumber(): string;
 
@@ -26,16 +25,8 @@ interface Order
 
     public function getFulfillmentStatus(): FulfillmentStatus;
 
-    public function getBillpayer(): ?BillPayer;
-
     public function getShippingAddress(): ?Address;
 
     /** The two-letter ISO 639-1 code */
     public function getLanguage(): ?string;
-
-    public function getItems(): Traversable;
-
-    public function itemsTotal(): float;
-
-    public function total(): float;
 }

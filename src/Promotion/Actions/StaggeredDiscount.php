@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Actions;
 
+use Illuminate\Support\Arr;
 use Nette\Schema\Expect;
 use Nette\Schema\Processor;
 use Nette\Schema\Schema;
@@ -11,6 +12,11 @@ use Nette\Schema\ValidationException;
 use Vanilo\Adjustments\Adjusters\PercentDiscount;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
+use Vanilo\Adjustments\Contracts\Adjustment;
+use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\CheckoutSubjectItem;
+use Vanilo\Contracts\Sale;
+use Vanilo\Contracts\SaleItem;
 use Vanilo\Promotion\Contracts\PromotionActionType;
 
 class StaggeredDiscount implements PromotionActionType
@@ -52,21 +58,19 @@ class StaggeredDiscount implements PromotionActionType
             return [];
         }
 
-        $applicablePercentage = $this->findApplicablePercentage($subject, $configuration);
-
-        if (is_null($applicablePercentage)) {
-            return [];
-        }
-
-        // Based on the applicable percentage we create a new derived configuration object
-        $derivedConfig = [
-            'percent' => $applicablePercentage
-        ];
-
         $result = [];
-        $result[] = $subject->adjustments()->create($this->getAdjuster($derivedConfig));
 
-        //@todo also set the origin
+        $items = match(true) {
+            $subject instanceof CheckoutSubjectItem || $subject instanceof SaleItem => Arr::wrap($subject),
+            $subject instanceof CheckoutSubject || $subject instanceof Sale => $subject->getItems(),
+            default => [],
+        };
+
+        foreach ($items as $item) {
+            if (null !== $adjustment = $this->applyToAnItem($item, $configuration)) {
+                $result[] = $adjustment;
+            }
+        }
 
         return $result;
     }
@@ -87,11 +91,11 @@ class StaggeredDiscount implements PromotionActionType
             )
             ->assert(
                 fn ($arr) => array_filter(array_keys($arr), fn ($key) => is_numeric($key)) === array_keys($arr),
-                'Quantities must be numeric.'
+                __('Quantities must be numeric.')
             )
             ->assert(
                 fn ($arr) => array_filter(array_keys($arr), fn ($key) => (float) $key == round((float) $key)) === array_keys($arr),
-                'Quantities must be whole numbers.'
+                __('Quantities must be whole numbers.')
             )
             ->assert(
                 function ($arr) {
@@ -99,7 +103,7 @@ class StaggeredDiscount implements PromotionActionType
                     sort($sortedKeys, SORT_NUMERIC);
                     return $keys === $sortedKeys;
                 },
-                'Quantities must be in ascending order.'
+                __('Quantities must be in ascending order.')
             )
             ->required()
             ->min(1)
@@ -119,15 +123,23 @@ class StaggeredDiscount implements PromotionActionType
         return is_null($mergeWith) ? $sample : array_merge($sample, $mergeWith);
     }
 
-    private function findApplicablePercentage(object $subject, array $configuration): ?int
+    private function applyToAnItem(CheckoutSubjectItem|SaleItem $item, $configuration): ?Adjustment
+    {
+        if (null === $applicablePercentage = $this->findApplicablePercentage($item->getQuantity(), $configuration)) {
+            return null;
+        }
+
+        return $item->adjustments()->create($this->getAdjuster(['percent' => $applicablePercentage]));
+    }
+
+    private function findApplicablePercentage(int|float $quantity, array $configuration): ?int
     {
         $thresholds = array_map('intval', array_keys($configuration['discount']));
 
         $applicableDiscount = null;
 
         foreach ($thresholds as $threshold) {
-            // TOREVIEW: I am relying here that a CartItem/OrderItem is passed in as a subject...
-            if ($subject->getQuantity() >= $threshold) {
+            if ($quantity >= $threshold) {
                 $applicableDiscount = $configuration['discount'][$threshold];
             } else {
                 break;

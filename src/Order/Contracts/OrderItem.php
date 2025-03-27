@@ -14,21 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Contracts;
 
-use Vanilo\Contracts\Configurable;
+use Vanilo\Contracts\SaleItem;
 
-interface OrderItem extends Configurable
+interface OrderItem extends SaleItem
 {
-    public function total(): float;
-
     public function getOrder(): Order;
 
     public function getProduct(): object;
 
     public function getFulfillmentStatus(): FulfillmentStatus;
-
-    public function getName(): string;
-
-    public function getQuantity(): float;
-
-    public function getPrice(): float;
 }
