@@ -8,6 +8,7 @@
 - Dropped PHP 8.2 Support
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
+- BC: Added the `getBuyable()` method to the `OrderItem` interface
 - Added the `gtin` field to the products and master product variants tables
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes
@@ -18,7 +19,7 @@
 - Added the possibility to extend the `Features` helper
 - Added the `StaggeredDiscount` promotion action type
 - Added the `Sale` and `SaleItem` interfaces to the contracts module
-- Changed the `Order` and `OrderItem` interfaces to extend the new `Sale` and `SaleItem` interfaces from the contracts module (the resulting interface signature is unchanged)
+- Changed the `Order` and `OrderItem` interfaces to extend the new `Sale` and `SaleItem` interfaces from the contracts module
 - Fixed issue where the `linkable` pointed to a missing product thus returning null
 
 ## 4.x Series

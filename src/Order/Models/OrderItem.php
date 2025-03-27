@@ -17,6 +17,7 @@ namespace Vanilo\Order\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Enum\Eloquent\CastsEnums;
+use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Contracts\FulfillmentStatus;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderItem as OrderItemContract;
@@ -63,6 +64,11 @@ class OrderItem extends Model implements OrderItemContract
     public function product()
     {
         return $this->morphTo();
+    }
+
+    public function getBuyable(): Buyable
+    {
+        return $this->getProduct();
     }
 
     public function getOrder(): Order
