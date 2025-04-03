@@ -11,6 +11,8 @@ use Illuminate\Support\Arr;
 use Vanilo\Support\Generators\NanoIdGenerator;
 use Vanilo\Video\Contracts\Video as VideoContract;
 use Vanilo\Video\Contracts\VideoDriver;
+use Vanilo\Video\Dto\Stats;
+use Vanilo\Video\Dto\Thumbnail;
 use Vanilo\Video\VideoDrivers;
 
 /**
@@ -105,6 +107,35 @@ class Video extends Model implements VideoContract
     public function getDuration(): ?int
     {
         return $this->duration;
+    }
+
+    public function getThumbnail(array $options = []): Thumbnail
+    {
+        return $this->getDriver()->getThumbnail($this, $options);
+    }
+
+    public function getVideoUrl(array $options = []): ?string
+    {
+        $driver = $this->getDriver();
+        $caps = $driver::capabilities();
+
+        if ($caps->fileUpload) {
+            return $driver->getFileUrl($this, $options);
+        } elseif ($caps->streaming) {
+            return $driver->getStreamUrl($this, $options);
+        }
+
+        return $driver->getVideoUrl($this, $options);
+    }
+
+    public function getEmbedCode(array $options = []): ?string
+    {
+        return $this->getDriver()->getEmbedCode($this, $options);
+    }
+
+    public function stats(): Stats
+    {
+        return $this->getDriver()->stats($this);
     }
 
     public function isPublished(): bool
