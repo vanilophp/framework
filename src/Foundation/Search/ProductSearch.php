@@ -179,6 +179,14 @@ class ProductSearch
         return $this;
     }
 
+    public function notWithinSkus(array $skus): self
+    {
+        $this->productQuery->whereNotIn('sku', $skus);
+        $this->variantQuery?->whereNotIn('sku', $skus);
+
+        return $this;
+    }
+
     public function nameContains(string $term): self
     {
         $this->productQuery->where('name', 'like', "%$term%");
