@@ -179,7 +179,7 @@ class ProductSearch
         return $this;
     }
 
-    public function excludingSkus(string  ...$skus): self
+    public function excludingSkus(string ...$skus): self
     {
         $this->productQuery->whereNotIn('sku', $skus);
         $this->variantQuery?->whereNotIn('sku', $skus);
