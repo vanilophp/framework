@@ -22,6 +22,7 @@
 - Added the `Sale` and `SaleItem` interfaces to the contracts module
 - Changed the `Order` and `OrderItem` interfaces to extend the new `Sale` and `SaleItem` interfaces from the contracts module
 - Fixed issue where the `linkable` pointed to a missing product thus returning null
+- Added the `excludingSkus()` method to `ProductSearch`
 
 ## 4.x Series
 
