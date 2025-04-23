@@ -10,11 +10,17 @@ use Vanilo\Translation\Models\TranslationProxy;
 if (!function_exists('_mt')) {
     function _mt(Model $model, ?string $language = null, ?string $attribute = null): null|string|Translation
     {
-        if (null === $translation = StaticTranslationCache::get(morph_type_of($model), $model->getKey(), $language)) {
-            $translation = TranslationProxy::findByModel($model, $language ?? app()->getLocale());
-            if (null !== $translation) {
-                StaticTranslationCache::set(morph_type_of($model), $model->getKey(), $language, $translation);
+        $language ??= app()->getLocale();
+
+        if (config('vanilo.translation.cache.enabled')) {
+            if (null === $translation = StaticTranslationCache::get(morph_type_of($model), $model->getKey(), $language)) {
+                $translation = TranslationProxy::findByModel($model, $language);
+                if (null !== $translation) {
+                    StaticTranslationCache::set(morph_type_of($model), $model->getKey(), $language, $translation);
+                }
             }
+        } else {
+            $translation = TranslationProxy::findByModel($model, $language);
         }
 
         if (null === $attribute) {

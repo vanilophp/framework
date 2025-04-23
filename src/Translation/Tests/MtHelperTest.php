@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Translation\Tests;
 
+use Illuminate\Support\Facades\Config;
 use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Translation\Models\Translation;
 use Vanilo\Translation\Tests\Examples\Product;
@@ -76,8 +77,10 @@ class MtHelperTest extends TestCase
         $this->assertNull(_mt($product, 'en', ''));
     }
 
-    #[Test] public function it_caches_the_translation_model_so_subsequent_calls_do_not_query_the_database()
+    #[Test] public function it_can_cache_the_translation_model_so_subsequent_calls_do_not_query_the_database()
     {
+        Config::set('vanilo.translation.cache.enabled', true);
+
         $product = Product::create(['name' => 'Table', 'slug' => 'table']);
         Translation::createForModel($product, 'es', ['name' => 'Mesa', 'slug' => 'mesa']);
 
