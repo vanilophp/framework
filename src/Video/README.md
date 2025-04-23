@@ -5,7 +5,7 @@
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/video.svg?style=flat-square)](https://packagist.org/packages/vanilo/video)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-This is the standalone Taxes module from the [Vanilo E-commerce framework](https://vanilo.io)
+This is the standalone Video module from the [Vanilo E-commerce framework](https://vanilo.io)
 
 ## Installation
 
