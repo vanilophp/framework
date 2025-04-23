@@ -9,6 +9,7 @@ use Vanilo\Translation\Contracts\Translation;
 final class StaticTranslationCache
 {
     public const int DEFAULT_TTL = 15;
+
     private static array $cache = [];
 
     public static function exists(string $type, int|string $id, string $language): bool
