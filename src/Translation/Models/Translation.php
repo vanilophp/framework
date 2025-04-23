@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Translation\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;

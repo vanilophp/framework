@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-
     protected $table = 'products_translatable_test';
 
     protected $guarded = ['id'];
