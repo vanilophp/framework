@@ -10,7 +10,6 @@ use Vanilo\Translation\Tests\Examples\Product;
 
 class MtHelperTest extends TestCase
 {
-
     #[Test] public function it_returns_translation_object_when_attribute_is_null()
     {
         $product = Product::create(['name' => 'Well', 'slug' => 'well']);
