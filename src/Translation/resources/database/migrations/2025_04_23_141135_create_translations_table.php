@@ -18,6 +18,9 @@ return new class () extends Migration {
             $table->boolean('is_published')->default(true);
             $table->json('fields')->nullable();
             $table->timestamps();
+
+            $table->unique(['translatable_type', 'translatable_id', 'language']);
+            $table->unique(['translatable_type', 'slug', 'language']);
         });
     }
 

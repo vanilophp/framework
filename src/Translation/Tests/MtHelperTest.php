@@ -75,4 +75,31 @@ class MtHelperTest extends TestCase
 
         $this->assertNull(_mt($product, 'en', ''));
     }
+
+    #[Test] public function it_caches_the_translation_model_so_subsequent_calls_do_not_query_the_database()
+    {
+        $product = Product::create(['name' => 'Table', 'slug' => 'table']);
+        Translation::createForModel($product, 'es', ['name' => 'Mesa', 'slug' => 'mesa']);
+
+        \DB::enableQueryLog();
+
+        // First call - should query the translation from the DB
+        $translation1 = _mt($product, 'es');
+        $queriesAfterFirstCall = count(\DB::getQueryLog());
+
+        // Second call - should not touch the DB for the translation again
+        $translation2 = _mt($product, 'es');
+        $queriesAfterSecondCall = count(\DB::getQueryLog());
+
+        $this->assertInstanceOf(Translation::class, $translation1);
+        $this->assertInstanceOf(Translation::class, $translation2);
+        $this->assertEquals('es', $translation2->getLanguage());
+
+        // Assert that the number of queries did not increase after the second call (caching in effect)
+        $this->assertEquals(
+            $queriesAfterFirstCall,
+            $queriesAfterSecondCall,
+            'The second _mt call should not issue additional SQL queries'
+        );
+    }
 }
