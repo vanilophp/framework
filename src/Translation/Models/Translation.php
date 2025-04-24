@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Translation\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Vanilo\Translation\Contracts\Translation as TranslationContract;
@@ -20,6 +21,8 @@ use Vanilo\Translation\Contracts\Translation as TranslationContract;
  * @property bool $is_published
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @property-read Model $translatable
  *
  * @method static Translation create(array $attributes)
  */
@@ -60,6 +63,16 @@ class Translation extends Model implements TranslationContract
             'slug' => $translatedAttributes['slug'] ?? null,
             'fields' => Arr::except($translatedAttributes, ['name', 'slug']),
         ]);
+    }
+
+    public function translatable(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    public function getTranslatable(): Model
+    {
+        return $this->translatable;
     }
 
     public function getLanguage(): string

@@ -14,6 +14,8 @@ interface Translation
 
     public static function findBySlug(string $type, string $slug, string $language): ?Translation;
 
+    public function getTranslatable(): Model;
+
     /** The two-letter ISO 639-1 code */
     public function getLanguage(): string;
 

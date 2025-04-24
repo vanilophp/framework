@@ -168,4 +168,16 @@ class TranslationTest extends TestCase
         $this->assertNull(Translation::findBySlug(morph_type_of($product), 'was-anderes', 'es'));
         $this->assertNull(Translation::findBySlug(morph_type_of($product), 'etwas-anderes', 'de'));
     }
+
+    #[Test] public function translation_has_a_reference_to_its_translatable_model()
+    {
+        $product = Product::create(['name' => 'Sigma Boy', 'slug' => 'sigma-boy']);
+        Translation::createForModel($product, 'ru', ['name' => 'Сигма Бой', 'slug' => 'sigma-boy']);
+
+        $translation = Translation::findByModel($product, 'ru');
+
+        $this->assertInstanceOf(Product::class, $translation->getTranslatable());
+        $this->assertSame($product->id, $translation->getTranslatable()->getKey());
+        $this->assertEquals('Сигма Бой', $translation->getName());
+    }
 }
