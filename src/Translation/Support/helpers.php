@@ -8,7 +8,7 @@ use Vanilo\Translation\Contracts\Translation;
 use Vanilo\Translation\Models\TranslationProxy;
 
 if (!function_exists('_mt')) {
-    function _mt(Model $model, ?string $language = null, ?string $attribute = null): null|string|Translation
+    function _mt(Model $model, ?string $attribute = null, ?string $language = null): null|string|Translation
     {
         $language ??= app()->getLocale();
 

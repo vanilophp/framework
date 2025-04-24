@@ -16,7 +16,7 @@ class MtHelperTest extends TestCase
         $product = Product::create(['name' => 'Well', 'slug' => 'well']);
         Translation::createForModel($product, 'hu', ['name' => 'Nos', 'slug' => 'nos']);
 
-        $translation = _mt($product, 'hu');
+        $translation = _mt($product, null, 'hu');
 
         $this->assertInstanceOf(Translation::class, $translation);
         $this->assertEquals('hu', $translation->getLanguage());
@@ -29,7 +29,7 @@ class MtHelperTest extends TestCase
         $product = Product::create(['name' => 'Fence', 'slug' => 'fence']);
         Translation::createForModel($product, 'ro', ['name' => 'Grajd', 'slug' => 'grajd']);
 
-        $this->assertEquals('grajd', _mt($product, 'ro', 'slug'));
+        $this->assertEquals('grajd', _mt($product, 'slug', 'ro'));
     }
 
     #[Test] public function it_uses_the_app_locale_when_language_is_not_provided()
@@ -57,8 +57,8 @@ class MtHelperTest extends TestCase
     {
         $product = Product::create(['name' => 'Screwdriver', 'slug' => 'screwdriver']);
 
-        $this->assertNull(_mt($product, 'cz', 'name'));
-        $this->assertNull(_mt($product, 'cz'));
+        $this->assertNull(_mt($product, 'name', 'cz'));
+        $this->assertNull(_mt($product, null, 'cz'));
         $this->assertNull(_mt($product));
     }
 
@@ -67,14 +67,14 @@ class MtHelperTest extends TestCase
         $product = Product::create(['name' => 'Kitchen', 'slug' => 'kitchen']);
         Translation::createForModel($product, 'cz', ['name' => 'Kuchyně', 'slug' => 'kuchyne']);
 
-        $this->assertNull(_mt($product, 'cz', 'non_existent_field'));
+        $this->assertNull(_mt($product, 'non_existent_field', 'cz'));
     }
 
     #[Test] public function it_handles_empty_string_attribute_parameter()
     {
         $product = Product::create(['name' => 'Sink', 'slug' => 'sink']);
 
-        $this->assertNull(_mt($product, 'en', ''));
+        $this->assertNull(_mt($product, '', 'en'));
     }
 
     #[Test] public function it_can_cache_the_translation_model_so_subsequent_calls_do_not_query_the_database()
@@ -87,11 +87,11 @@ class MtHelperTest extends TestCase
         \DB::enableQueryLog();
 
         // First call - should query the translation from the DB
-        $translation1 = _mt($product, 'es');
+        $translation1 = _mt($product, null, 'es');
         $queriesAfterFirstCall = count(\DB::getQueryLog());
 
         // Second call - should not touch the DB for the translation again
-        $translation2 = _mt($product, 'es');
+        $translation2 = _mt($product, null, 'es');
         $queriesAfterSecondCall = count(\DB::getQueryLog());
 
         $this->assertInstanceOf(Translation::class, $translation1);
