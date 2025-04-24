@@ -56,6 +56,7 @@
         },
         "files": [
             "src/Links/Support/helpers.php",
+            "src/Translation/Support/helpers.php",
             "src/Foundation/Support/helpers.php"
         ]
     },

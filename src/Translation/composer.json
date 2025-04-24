@@ -1,0 +1,34 @@
+{
+    "name": "vanilo/translation",
+    "description": "Vanilo Translation Module",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "keywords": ["translation", "i18n", "ecommerce", "vanilo", "laravel"],
+    "support": {
+        "issues": "https://github.com/vanilophp/framework/issues",
+        "source": "https://github.com/vanilophp/translation"
+    },
+    "require": {
+        "php": "^8.3",
+        "konekt/concord": "^1.15",
+        "konekt/xtend": "^2.0",
+        "laravel/framework": "^10.48|^11.0|^12.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0|^11.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0"
+    },
+    "autoload": {
+        "psr-4": { "Vanilo\\Translation\\": "" },
+        "files": [
+            "Support/helpers.php"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.0.x-dev"
+        }
+    }
+}

@@ -22,6 +22,7 @@ return [
         Vanilo\Taxes\Providers\ModuleServiceProvider::class => [],
         Vanilo\Promotion\Providers\ModuleServiceProvider::class => [],
         Vanilo\Video\Providers\ModuleServiceProvider::class => [],
+        Vanilo\Translation\Providers\ModuleServiceProvider::class => [],
     ],
     'event_listeners' => true,
     'image' => [

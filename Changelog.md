@@ -16,6 +16,7 @@
 - Added ETA fields to Shipping Methods
 - Added the Order::inChannel() scope (Foundation)
 - Added the Video module
+- Added the Translation module
 - Added the `HasVideos` trait to the `Product`, `MasterProduct`, `MasterProductVariant`, `Taxon` and `Taxonomy` models in the Foundation module
 - Added the possibility to extend the `Features` helper
 - Added the `StaggeredDiscount` promotion action type
