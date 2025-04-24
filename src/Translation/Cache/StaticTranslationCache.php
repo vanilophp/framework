@@ -12,6 +12,11 @@ final class StaticTranslationCache
 
     private static array $cache = [];
 
+    public static function reset(): void
+    {
+        self::$cache = [];
+    }
+
     public static function exists(string $type, int|string $id, string $language): bool
     {
         return null !== self::get($type, $id, $language);
