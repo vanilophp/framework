@@ -106,7 +106,7 @@ class Order extends Model implements OrderContract
         return $this->belongsTo(UserProxy::modelClass());
     }
 
-    public function getBillpayer(): ?BillPayer
+    public function getBillpayer(): ?Billpayer
     {
         return $this->billpayer;
     }
