@@ -6,7 +6,7 @@ use Vanilo\Links\Models\LinkTypeProxy;
 use Vanilo\Links\Query\Get;
 
 if (!function_exists('links')) {
-    function links(string $type, string $property = null): Get
+    function links(string $type, ?string $property = null): Get
     {
         $result = Get::the($type)->links();
 
@@ -15,7 +15,7 @@ if (!function_exists('links')) {
 }
 
 if (!function_exists('link_items')) {
-    function link_items(string $type, string $property = null): Get
+    function link_items(string $type, ?string $property = null): Get
     {
         $result = Get::the($type)->linkItems();
 
@@ -24,7 +24,7 @@ if (!function_exists('link_items')) {
 }
 
 if (!function_exists('link_groups')) {
-    function link_groups(string $type, string $property = null): Get
+    function link_groups(string $type, ?string $property = null): Get
     {
         $result = Get::the($type)->groups();
 

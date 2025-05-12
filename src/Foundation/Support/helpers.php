@@ -12,7 +12,7 @@ use Vanilo\MasterProduct\Contracts\MasterProductVariant;
  *
  * @return string
  */
-function format_price($price, string $currency = null)
+function format_price($price, ?string $currency = null)
 {
     $result = sprintf(
         config('vanilo.foundation.currency.format'),
