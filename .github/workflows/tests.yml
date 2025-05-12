@@ -1,6 +1,9 @@
 name: tests
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'src/**.php'
 
 jobs:
   build:
