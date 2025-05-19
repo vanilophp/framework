@@ -202,13 +202,16 @@ class TranslationTest extends TestCase
     #[Test] public function multiple_translation_fields_can_be_set_using_the_setter_method()
     {
         $product = Product::create(['name' => 'Dylan', 'slug' => 'dylan']);
-        $translation = Translation::createForModel($product, 'it', ['name' => 'Figlio del mare', 'slug' => 'figlio-del-mare', 'ext_tile' => 'Nome']);
+        $translation = Translation::createForModel($product, 'it', ['name' => 'Figlio del mare', 'slug' => 'figlio-del-mare', 'ext_tile' => 'Nome'])->fresh();
+
+        $this->assertTrue($translation->is_published);
 
         $translation->setTranslatedFields([
             'name' => 'Nato dall\'oceano',
             'slug' => 'nato-dall-oceano',
             'description' => 'Dylan è un nome di origine gallese',
             'ext_title' => 'Nome di origine gallese',
+            'is_published' => false,
         ]);
 
         $translation->save();
@@ -222,5 +225,8 @@ class TranslationTest extends TestCase
 
         $this->assertEquals('Dylan è un nome di origine gallese', $translation->getTranslatedField('description'));
         $this->assertEquals('Nome di origine gallese', $translation->getTranslatedField('ext_title'));
+
+        $this->assertFalse($translation->is_published);
+        $this->assertNull($translation->getTranslatedField('is_published'));
     }
 }

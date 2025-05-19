@@ -101,7 +101,7 @@ class Translation extends Model implements TranslationContract
 
     public function setTranslatedField(string $field, mixed $value): void
     {
-        if (in_array($field, ['name', 'slug'])) {
+        if (in_array($field, ['name', 'slug', 'is_published'])) {
             $this->{$field} = $value;
         } else {
             $fields = $this->fields ?? [];
