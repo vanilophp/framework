@@ -15,6 +15,8 @@ use Konekt\Concord\Proxies\ModelProxy;
  * @method string|null getName()
  * @method string|null getSlug()
  * @method string|null getTranslatedField(string $field)
+ * @method void setTranslatedField(string $field, mixed $value)
+ * @method void setTranslatedFields(array $values)
  */
 class TranslationProxy extends ModelProxy
 {

@@ -98,4 +98,24 @@ class Translation extends Model implements TranslationContract
             default => is_array($this->fields) ? ($this->fields[$field] ?? null) : null,
         };
     }
+
+    public function setTranslatedField(string $field, mixed $value): void
+    {
+        if (in_array($field, ['name', 'slug'])) {
+            $this->{$field} = $value;
+        } else {
+            $fields = $this->fields ?? [];
+            $fields[$field] = $value;
+            $this->fields = $fields;
+        }
+    }
+
+    public function setTranslatedFields(array $values): void
+    {
+        foreach ($values as $field => $value) {
+            if (is_string($field)) {
+                $this->setTranslatedField($field, $value);
+            }
+        }
+    }
 }

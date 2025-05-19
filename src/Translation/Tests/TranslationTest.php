@@ -180,4 +180,47 @@ class TranslationTest extends TestCase
         $this->assertSame($product->id, $translation->getTranslatable()->getKey());
         $this->assertEquals('Сигма Бой', $translation->getName());
     }
+
+    #[Test] public function a_single_translation_field_can_be_set_via_the_setter_method()
+    {
+        $product = Product::create(['name' => 'My wife', 'slug' => 'my-wife']);
+        $translation = Translation::createForModel($product, 'es', ['name' => 'Mi mujer', 'slug' => 'mi-mujer']);
+
+        $translation->setTranslatedField('name', 'Mi esposa');
+        $translation->setTranslatedField('slug', 'mi-esposa');
+        $translation->setTranslatedField('description', 'Mi esposa tiene una moto y le gusta mucho conducirla.');
+
+        $this->assertEquals('Mi esposa', $translation->getName());
+        $this->assertEquals('Mi esposa', $translation->name);
+
+        $this->assertEquals('mi-esposa', $translation->getSlug());
+        $this->assertEquals('mi-esposa', $translation->slug);
+
+        $this->assertEquals('Mi esposa tiene una moto y le gusta mucho conducirla.', $translation->getTranslatedField('description'));
+    }
+
+    #[Test] public function multiple_translation_fields_can_be_set_using_the_setter_method()
+    {
+        $product = Product::create(['name' => 'Dylan', 'slug' => 'dylan']);
+        $translation = Translation::createForModel($product, 'it', ['name' => 'Figlio del mare', 'slug' => 'figlio-del-mare', 'ext_tile' => 'Nome']);
+
+        $translation->setTranslatedFields([
+            'name' => 'Nato dall\'oceano',
+            'slug' => 'nato-dall-oceano',
+            'description' => 'Dylan è un nome di origine gallese',
+            'ext_title' => 'Nome di origine gallese',
+        ]);
+
+        $translation->save();
+        $translation->refresh();
+
+        $this->assertEquals('Nato dall\'oceano', $translation->getName());
+        $this->assertEquals('Nato dall\'oceano', $translation->name);
+
+        $this->assertEquals('nato-dall-oceano', $translation->getSlug());
+        $this->assertEquals('nato-dall-oceano', $translation->slug);
+
+        $this->assertEquals('Dylan è un nome di origine gallese', $translation->getTranslatedField('description'));
+        $this->assertEquals('Nome di origine gallese', $translation->getTranslatedField('ext_title'));
+    }
 }
