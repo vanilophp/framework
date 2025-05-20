@@ -19,6 +19,7 @@
 - Added the Translation module
 - Added the `HasVideos` trait to the `Product`, `MasterProduct`, `MasterProductVariant`, `Taxon` and `Taxonomy` models in the Foundation module
 - Added the possibility to extend the `Features` helper
+- Added the MultiLanguage feature configuration wrapper
 - Added the `StaggeredDiscount` promotion action type
 - Added the `Sale` and `SaleItem` interfaces to the contracts module
 - Changed the `Order` and `OrderItem` interfaces to extend the new `Sale` and `SaleItem` interfaces from the contracts module

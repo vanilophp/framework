@@ -10,6 +10,7 @@
 - Added Laravel 12 Support
 - PHP 8.4 deprecation fixes
 - Added the GTIN validator (standalone) and Laravel Validation rule classes
+- Added the MultiLanguage feature configuration wrapper
 
 ## 4.x Series
 

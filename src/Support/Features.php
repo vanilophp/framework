@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 use Vanilo\Contracts\Feature;
 use Vanilo\Support\Features\Inventory;
 use Vanilo\Support\Features\MultiChannel;
+use Vanilo\Support\Features\MultiLanguage;
 use Vanilo\Support\Features\Pricing;
 use Vanilo\Support\Features\SearchEngine;
 
@@ -33,6 +34,8 @@ class Features
 
     private static ?Inventory $inventory = null;
 
+    private static ?MultiLanguage $multiLanguage = null;
+
     public static function findByName(string $name): ?Feature
     {
         return match ($name) {
@@ -40,6 +43,7 @@ class Features
             'multichannel' => self::multichannel(),
             'search_engine' => self::searchEngine(),
             'inventory' => self::inventory(),
+            'multilanguage' => self::multilanguage(),
             default => self::instanceByName($name),
         };
     }
@@ -75,6 +79,11 @@ class Features
         return self::$multiChannel ??= new MultiChannel();
     }
 
+    public static function multilanguage(): MultiLanguage
+    {
+        return self::$multiLanguage ??= new MultiLanguage();
+    }
+
     public static function pricing(): Pricing
     {
         return self::$pricing ??= new Pricing();
@@ -98,6 +107,16 @@ class Features
     public static function isMultiChannelDisabled(): bool
     {
         return self::multichannel()->isDisabled();
+    }
+
+    public static function isMultiLanguageEnabled(): bool
+    {
+        return self::multilanguage()->isEnabled();
+    }
+
+    public static function isMultiLanguageDisabled(): bool
+    {
+        return self::multilanguage()->isDisabled();
     }
 
     public static function isPricingEnabled(): bool
