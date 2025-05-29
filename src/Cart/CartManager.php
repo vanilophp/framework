@@ -82,6 +82,11 @@ class CartManager implements CartManagerContract
         return $result;
     }
 
+    public function addSubItem(CartItem $parent, Buyable $product, float|int $qty = 1, array $params = []): CartItem
+    {
+        return $this->addItem($product, $qty, array_merge($params, ['attributes' => ['parent_id' => $parent->id]]));
+    }
+
     public function removeItem(CartItem $item): void
     {
         if ($cart = $this->model()) {

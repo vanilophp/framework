@@ -14,17 +14,16 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Course;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class CartItemProductTest extends TestCase
 {
-    /** @var  Product */
-    protected $alaskaSnow;
+    protected Product $alaskaSnow;
 
-    /** @var  Course */
-    protected $reactForBeginners;
+    protected Course $reactForBeginners;
 
     protected function setUp(): void
     {
@@ -41,27 +40,21 @@ class CartItemProductTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function the_cart_item_returns_the_associated_product_with_a_custom_morph_type_name()
+    #[Test] public function the_cart_item_returns_the_associated_product_with_a_custom_morph_type_name()
     {
         Cart::addItem($this->alaskaSnow);
 
-        $product = Cart::model()->items->first()->product;
+        $product = Cart::model()->getItems()->first()->product;
 
         $this->assertInstanceOf(Product::class, $product);
         $this->assertEquals($this->alaskaSnow->id, $product->id);
     }
 
-    /**
-     * @test
-     */
-    public function the_cart_item_returns_the_associated_product_with_fqcn_as_morph_type_name()
+    #[Test] public function the_cart_item_returns_the_associated_product_with_fqcn_as_morph_type_name()
     {
         Cart::addItem($this->reactForBeginners);
 
-        $course = Cart::model()->items->first()->product;
+        $course = Cart::model()->getItems()->first()->product;
 
         $this->assertInstanceOf(Course::class, $course);
         $this->assertEquals($this->reactForBeginners->id, $course->id);

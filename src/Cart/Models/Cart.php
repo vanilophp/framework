@@ -74,6 +74,11 @@ class Cart extends Model implements CartContract
         return $item;
     }
 
+    public function addSubItem(CartItemContract $parent, Buyable $product, float|int $qty = 1, array $params = []): CartItemContract
+    {
+        return $this->addItem($product, $qty, array_merge($params, ['attributes' => ['parent_id' => $parent->id]]));
+    }
+
     public function removeItem(CartItemContract $item): void
     {
         if ($item instanceof Model) {

@@ -16,14 +16,24 @@ namespace Vanilo\Cart\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\ConfigurableModel;
 use Vanilo\Support\Traits\ConfigurationHasNoSchema;
 
 /**
- * @property Buyable $product
- * @property float   $total
+ * @property int $id
+ * @property int $cart_id
+ * @property int|null $parent_id
+ * @property string $product_type
+ * @property int $product_id
+ * @property float $price
+ * @property int $quantity
+ * @property array|null $configuration
+ * @property-read Buyable $product
+ * @property-read float $total
+ * @property-read CartItem|null $parent
  */
 class CartItem extends Model implements CartItemContract
 {
@@ -41,25 +51,31 @@ class CartItem extends Model implements CartItemContract
         return $this->morphTo();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getBuyable(): Buyable
     {
         return $this->product;
     }
 
-    /**
-     * @inheritDoc
-     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(CartItemProxy::modelClass(), 'parent_id');
+    }
+
+    public function hasParent(): bool
+    {
+        return null !== $this->parent_id;
+    }
+
+    public function getParent(): ?CartItemContract
+    {
+        return $this->parent;
+    }
+
     public function getQuantity(): int
     {
         return (int) $this->quantity;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function total(): float
     {
         return $this->price * $this->quantity;

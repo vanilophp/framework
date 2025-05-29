@@ -31,6 +31,8 @@ interface Cart extends CheckoutSubject
      */
     public function addItem(Buyable $product, int|float $qty = 1, array $params = []): CartItem;
 
+    public function addSubItem(CartItem $parent, Buyable $product, int|float $qty = 1, array $params = []): CartItem;
+
     /**
      * Removes an item from the cart
      */
