@@ -25,6 +25,8 @@ interface ShippingFeeCalculator extends Schematized
      * We don't set the return type on the language level
      * since the adjustments module is optional
      *
+     * @todo v5 - make the adjustments module explicitly required and change the return type?
+     *
      * @return null|\Vanilo\Adjustments\Contracts\Adjuster
      */
     public function getAdjuster(?array $configuration = null): ?object;
