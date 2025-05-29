@@ -53,6 +53,16 @@ class DummyCartItem implements CartItem, Adjustable
         // TODO: Implement getBuyable() method.
     }
 
+    public function hasParent(): bool
+    {
+        return false;
+    }
+
+    public function getParent(): ?self
+    {
+        return null;
+    }
+
     public function getQuantity(): int
     {
         return $this->quantity;
