@@ -55,6 +55,11 @@ class DummyAdjustableCart implements Cart, Adjustable
         return $item;
     }
 
+    public function addSubItem(CartItem $parent, Buyable $product, float|int $qty = 1, array $params = []): CartItem
+    {
+        // TODO: Implement addSubItem() method.
+    }
+
     public function removeItem(CartItem $item): void
     {
         // TODO: Implement removeItem() method.
