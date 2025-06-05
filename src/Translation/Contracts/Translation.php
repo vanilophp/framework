@@ -23,7 +23,7 @@ interface Translation
 
     public function getSlug(): ?string;
 
-    public function getTranslatedField(string $field): ?string;
+    public function getTranslatedField(string $field): mixed;
 
     public function setTranslatedField(string $field, mixed $value): void;
 

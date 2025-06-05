@@ -90,7 +90,7 @@ class Translation extends Model implements TranslationContract
         return $this->slug;
     }
 
-    public function getTranslatedField(string $field): ?string
+    public function getTranslatedField(string $field): mixed
     {
         return match ($field) {
             'name' => $this->getName(),
