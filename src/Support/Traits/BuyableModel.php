@@ -43,7 +43,7 @@ trait BuyableModel
 
     public function hasAHigherOriginalPrice(): bool
     {
-        return $this->original_price !== null && $this->original_price > $this->price;
+        return null !== $this->original_price && $this->original_price > $this->price;
     }
 
     public function addSale(Carbon $date, int|float $units = 1): void
