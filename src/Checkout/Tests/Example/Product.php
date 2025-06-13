@@ -33,57 +33,46 @@ class Product implements Buyable
         $this->price = $price;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getId(): int|string
     {
         return $this->id;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * @inheritDoc
-     */
+    public function getOriginalPrice(): ?float
+    {
+        return null;
+    }
+
+    public function hasAHigherOriginalPrice(): bool
+    {
+        return false;
+    }
+
     public function hasImage(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getThumbnailUrl(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getImageUrl(string $variant = ''): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function morphTypeName(): string
     {
         return 'product';

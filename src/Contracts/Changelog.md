@@ -10,7 +10,8 @@
 - Added Laravel 12 Support
 - PHP 8.4 deprecation fixes:
    - the `Schematized::getSchemaSample()` parameter is now explicitly nullable
-- Added the `Sale` and `SaleItem` interfaces 
+- Added the `Sale` and `SaleItem` interfaces
+- BC: Added the `getOriginalPrice()` and `hasAHigherOriginalPrice()` methods to the Buyable interface
 
 ## 4.x Series
 

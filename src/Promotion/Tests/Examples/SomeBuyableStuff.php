@@ -32,6 +32,16 @@ class SomeBuyableStuff implements Buyable
         return $this->price;
     }
 
+    public function getOriginalPrice(): ?float
+    {
+        return null;
+    }
+
+    public function hasAHigherOriginalPrice(): bool
+    {
+        return false;
+    }
+
     public function addSale(Carbon $date, float|int $units = 1): void
     {
         // TODO: Implement addSale() method.

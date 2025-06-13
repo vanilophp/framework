@@ -36,6 +36,16 @@ trait BuyableModel
         return (float) $this->price;
     }
 
+    public function getOriginalPrice(): ?float
+    {
+        return $this->original_price ? (float) $this->original_price : null;
+    }
+
+    public function hasAHigherOriginalPrice(): bool
+    {
+        return $this->original_price !== null && $this->original_price > $this->price;
+    }
+
     public function addSale(Carbon $date, int|float $units = 1): void
     {
         $this->last_sale_at = $date;

@@ -24,6 +24,10 @@ interface Buyable extends HasImages
 
     public function getPrice(): float;
 
+    public function getOriginalPrice(): ?float;
+
+    public function hasAHigherOriginalPrice(): bool;
+
     public function addSale(Carbon $date, int|float $units = 1): void;
 
     public function removeSale(int|float $units = 1): void;

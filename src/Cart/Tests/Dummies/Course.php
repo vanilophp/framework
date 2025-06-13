@@ -40,6 +40,16 @@ class Course extends Model implements Buyable
         return $this->price;
     }
 
+    public function getOriginalPrice(): ?float
+    {
+        return null;
+    }
+
+    public function hasAHigherOriginalPrice(): bool
+    {
+        return false;
+    }
+
     public function morphTypeName(): string
     {
         return static::class;

@@ -11,6 +11,7 @@
 - PHP 8.4 deprecation fixes
 - Added the GTIN validator (standalone) and Laravel Validation rule classes
 - Added the MultiLanguage feature configuration wrapper
+- Added the `getOriginalPrice()` and `hasAHigherOriginalPrice()` methods to the Buyable interface
 
 ## 4.x Series
 
