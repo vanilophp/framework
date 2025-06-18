@@ -18,6 +18,7 @@ use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Links\Providers\ModuleServiceProvider as LinksModule;
+use Vanilo\MasterProduct\Providers\ModuleServiceProvider as MasterProductModule;
 
 class TestCase extends Orchestra
 {
@@ -67,7 +68,8 @@ class TestCase extends Orchestra
     {
         parent::resolveApplicationConfiguration($app);
         $app['config']->set('concord.modules', [
-            LinksModule::class
+            LinksModule::class,
+            MasterProductModule::class,
         ]);
     }
 
