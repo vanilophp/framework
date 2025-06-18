@@ -9,6 +9,8 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - PHP 8.4 deprecation notice fixes
+- Fixed issue where the `linkable` pointed to a missing product thus returning null
+- Fixed linked products retrieval: linked products with the same ID but a different type are now returned correctly
 
 ## 4.x Series
 
