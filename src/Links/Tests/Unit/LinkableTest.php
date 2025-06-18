@@ -184,8 +184,10 @@ class LinkableTest extends TestCase
         $variant = MasterProductVariant::create(['name' => 'Variant 1', 'sku' => 'SKU', 'master_product_id' => $master->id]);
 
         // Make sure the master and variant product IDs are the same as the product's ID
-        $master->id = $product->id; $master->save();
-        $variant->id = $product->id; $variant->save();
+        $master->id = $product->id;
+        $master->save();
+        $variant->id = $product->id;
+        $variant->save();
 
         $attrs = ['link_group_id' => $this->group1->id];
         LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $product->id, 'linkable_type' => morph_type_of($product)]));
