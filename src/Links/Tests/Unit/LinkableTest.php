@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Unit;
 
+use Vanilo\Foundation\Models\MasterProduct;
+use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
@@ -172,6 +174,29 @@ class LinkableTest extends TestCase
             [$this->red->id, $this->yellow->id],
             $greensLinks->map(fn ($linkable) => $linkable->id)->all()
         );
+    }
+
+    /** @test */
+    public function it_returns_the_linked_models_when_they_have_the_same_id_but_different_type()
+    {
+        $product = TestLinkableProduct::create(['name' => 'Simple Product']);
+        $master = MasterProduct::create(['name' => 'Master Product']);
+        $variant = MasterProductVariant::create(['name' => 'Variant 1', 'sku' => 'SKU', 'master_product_id' => $master->id]);
+
+        // Make sure the master and variant product IDs are the same as the product's ID
+        $master->id = $product->id; $master->save();
+        $variant->id = $product->id; $variant->save();
+
+        $attrs = ['link_group_id' => $this->group1->id];
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $product->id, 'linkable_type' => morph_type_of($product)]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $master->id, 'linkable_type' => morph_type_of($master)]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $variant->id, 'linkable_type' => morph_type_of($variant)]));
+
+        $productLinks = $product->links($this->variantType);
+
+        $this->assertCount(2, $productLinks);
+        $this->assertTrue($productLinks[0]->is($master));
+        $this->assertTrue($productLinks[1]->is($variant));
     }
 
     /** @test */

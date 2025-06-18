@@ -46,7 +46,7 @@ trait Linkable
                     ->items
                     ->map
                     ->linkable
-                    ->reject(fn ($item) => $item->id === $this->id)
+                    ->reject(fn ($linkable) => $linkable->is($this))
                 );
             }
         }

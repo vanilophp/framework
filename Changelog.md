@@ -29,6 +29,7 @@
 - Fixed issue where the `linkable` pointed to a missing product thus returning null
 - Added the `excludingSkus()` method to `ProductSearch`
 - Added SubItem support to the cart items
+- Fixed linked products retrieval: linked products with the same ID but a different type are now returned correctly
 
 ## 4.x Series
 

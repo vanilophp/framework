@@ -49,7 +49,7 @@ final class Get
                     $result->push(
                         ...$group
                         ->items
-                        ->reject(fn ($item) => $item->linkable_id === $model->id)
+                        ->reject(fn ($item) => $item->linkable_id === $model->id && $item->linkable_type === morph_type_of($model))
                     );
                 }
             });
@@ -65,7 +65,7 @@ final class Get
                     ->map
                     ->linkable
                     ->filter()
-                    ->reject(fn ($item) => $item->id === $model->id)
+                    ->reject(fn ($linkable) => $linkable->is($model))
                 );
             }
         });

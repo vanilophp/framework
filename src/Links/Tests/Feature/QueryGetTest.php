@@ -16,6 +16,8 @@ namespace Vanilo\Links\Tests\Feature;
 
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
+use Vanilo\Foundation\Models\MasterProduct;
+use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
@@ -61,6 +63,50 @@ class QueryGetTest extends TestCase
         $this->assertCount(2, $linksOfS22);
         $this->assertContains($this->galaxyS22Plus->id, $linksOfS22->map->id);
         $this->assertContains($this->galaxyS22Ultra->id, $linksOfS22->map->id);
+    }
+
+    /** @test */
+    public function it_returns_the_linked_models_when_they_have_the_same_id_but_different_type()
+    {
+        $product = TestLinkableProduct::create(['name' => 'Simple Product']);
+        $master = MasterProduct::create(['name' => 'Master Product']);
+        $variant = MasterProductVariant::create(['name' => 'Variant 1', 'sku' => 'SKU', 'master_product_id' => $master->id]);
+
+        // Make sure the master and variant product IDs are the same as the product's ID
+        $master->id = $product->id; $master->save();
+        $variant->id = $product->id; $variant->save();
+
+        $attrs = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $product->id, 'linkable_type' => morph_type_of($product)]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $master->id, 'linkable_type' => morph_type_of($master)]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $variant->id, 'linkable_type' => morph_type_of($variant)]));
+
+        $linksOfProduct = Get::the('series')->links()->of($product);
+
+        $this->assertCount(2, $linksOfProduct);
+        $this->assertTrue($linksOfProduct[0]->is($master));
+        $this->assertTrue($linksOfProduct[1]->is($variant));
+    }
+
+    /** @test */
+    public function it_returns_the_link_items_when_they_have_the_same_id_but_different_type()
+    {
+        $product = TestLinkableProduct::create(['name' => 'Simple Product']);
+        $master = MasterProduct::create(['name' => 'Master Product']);
+        $variant = MasterProductVariant::create(['name' => 'Variant 1', 'sku' => 'SKU', 'master_product_id' => $master->id]);
+
+        // Make sure the master and variant product IDs are the same as the product's ID
+        $master->id = $product->id; $master->save();
+        $variant->id = $product->id; $variant->save();
+
+        $attrs = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $product->id, 'linkable_type' => morph_type_of($product)]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $master->id, 'linkable_type' => morph_type_of($master)]));
+        LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $variant->id, 'linkable_type' => morph_type_of($variant)]));
+
+        $linkItemsOfProduct = Get::the('series')->linkItems()->of($product);
+
+        $this->assertCount(2, $linkItemsOfProduct);
     }
 
     /** @test */
