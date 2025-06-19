@@ -17,7 +17,6 @@ return new class () extends Migration {
             $table->boolean('requires_temperature_control')->default(false);
             $table->boolean('requires_signature')->default(false);
             $table->timestamps();
-
         });
     }
 

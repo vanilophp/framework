@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 use Vanilo\Shipment\Contracts\ShippingCategory as ShippingCategoryContract;
 use Vanilo\Shipment\Models\ShippingCategory;
 use Vanilo\Shipment\Tests\TestCase;
@@ -16,12 +15,12 @@ class ShippingCategoryTest extends TestCase
 
         $this->assertInstanceOf(ShippingCategory::class, $shippingCategory);
     }
-    
+
     /** @test */
     public function it_can_be_created_with_minimal_data()
     {
         $shippingCategory = ShippingCategory::create(['name' => 'Stackable']);
-    
+
         $this->assertInstanceOf(ShippingCategory::class, $shippingCategory);
         $this->assertEquals('Stackable', $shippingCategory->getName());
         $this->assertEquals($shippingCategory->id, $shippingCategory->getId());
@@ -50,7 +49,6 @@ class ShippingCategoryTest extends TestCase
         $this->assertFalse($shippingCategory->requiresTemperatureControl());
         $this->assertFalse($shippingCategory->requiresSignature());
     }
-
 
     /** @test */
     public function it_can_be_set_all_bool_flags()
