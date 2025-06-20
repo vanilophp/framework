@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Vanilo\Shipment\Contracts\ShippingCategory as ShippingCategoryContract;
 use Vanilo\Shipment\Models\ShippingCategory;
+use Vanilo\Shipment\Models\ShippingCategoryProxy;
 use Vanilo\Shipment\Tests\TestCase;
 
 class ShippingCategoryTest extends TestCase
@@ -67,5 +68,16 @@ class ShippingCategoryTest extends TestCase
         $this->assertFalse($shippingCategory->isStackable());
         $this->assertTrue($shippingCategory->requiresTemperatureControl());
         $this->assertTrue($shippingCategory->requiresSignature());
+    }
+
+    /** @test */
+    public function it_can_be_created_via_its_proxy()
+    {
+        $category = ShippingCategoryProxy::create([
+            'name' => 'Standard'
+        ]);
+
+        $this->assertNotNull($category->id);
+        $this->assertEquals('Standard', $category->name);
     }
 }
