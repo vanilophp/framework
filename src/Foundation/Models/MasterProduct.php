@@ -24,6 +24,7 @@ use Vanilo\Channel\Traits\Channelable;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\MasterProduct\Models\MasterProduct as BaseMasterProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
+use Vanilo\Shipment\Traits\BelongsToShippingCategory;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 use Vanilo\Taxes\Traits\BelongsToTaxCategory;
 use Vanilo\Video\Traits\HasVideos;
@@ -35,6 +36,7 @@ use Vanilo\Video\Traits\HasVideos;
 class MasterProduct extends BaseMasterProduct implements HasMedia
 {
     use BelongsToTaxCategory;
+    use BelongsToShippingCategory;
     use Channelable;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;

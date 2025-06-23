@@ -23,6 +23,7 @@ use Vanilo\Contracts\Buyable;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Product\Models\Product as BaseProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
+use Vanilo\Shipment\Traits\BelongsToShippingCategory;
 use Vanilo\Support\Traits\BuyableModel;
 use Vanilo\Support\Traits\HasImagesFromMediaLibrary;
 use Vanilo\Taxes\Contracts\Taxable;
@@ -32,6 +33,7 @@ use Vanilo\Video\Traits\HasVideos;
 class Product extends BaseProduct implements Buyable, HasMedia, Taxable
 {
     use BelongsToTaxCategory;
+    use BelongsToShippingCategory;
     use BuyableModel;
     use Channelable;
     use InteractsWithMedia;
