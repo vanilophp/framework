@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+namespace Vanilo\Foundation\Tests;
+
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Product;
-use Vanilo\Foundation\Tests\TestCase;
 use Vanilo\Shipment\Models\ShippingCategory;
 
 class ShippingCategoryTest extends TestCase

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Vanilo\Shipment\Tests;
+
 use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShippingCategory as ShippingCategoryContract;
