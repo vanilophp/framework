@@ -69,8 +69,6 @@ class MasterProductVariant extends BaseMasterProductVariant implements Buyable, 
         if ($this->hasOwnShippingCategory() || is_null($this->masterProduct)) {
             return $this->belongsTo(ShippingCategoryProxy::modelClass());
         } else {
-            // This returns the relationship of another product, which is semantically incorrect, it is not what the
-            // client code assumes, thus can lead to problems.
             return $this->masterProduct->shippingCategory();
         }
     }
