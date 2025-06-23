@@ -145,6 +145,6 @@ class ShippingCategoryTest extends TestCase
             'master_product_id' => $masterProduct->id,
         ]);
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\BelongsTo::class, $variant->shippingCategory());
+        $this->assertInstanceOf(Illuminate\Database\Eloquent\Relations\BelongsTo::class, $variant->shippingCategory());
     }
 }

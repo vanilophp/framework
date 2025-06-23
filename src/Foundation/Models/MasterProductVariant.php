@@ -57,13 +57,6 @@ class MasterProductVariant extends BaseMasterProductVariant implements Buyable, 
         return null !== $this->getRawOriginal('shipping_category_id');
     }
 
-    protected function shippingCategoryId(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => is_null($value) ? $this->masterProduct?->shipping_category_id : intval($value),
-        );
-    }
-
     public function shippingCategory(): BelongsTo
     {
         if ($this->hasOwnShippingCategory() || is_null($this->masterProduct)) {
@@ -76,5 +69,12 @@ class MasterProductVariant extends BaseMasterProductVariant implements Buyable, 
     public function getShippingCategory(): ?ShippingCategory
     {
         return $this->shippingCategory;
+    }
+
+    protected function shippingCategoryId(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->shipping_category_id : intval($value),
+        );
     }
 }
