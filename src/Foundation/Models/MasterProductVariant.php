@@ -59,7 +59,7 @@ class MasterProductVariant extends BaseMasterProductVariant implements Buyable, 
 
     public function shippingCategory(): BelongsTo
     {
-        if ($this->hasOwnShippingCategory() || is_null($this->masterProduct)) {
+        if ($this->hasOwnShippingCategory()) {
             return $this->belongsTo(ShippingCategoryProxy::modelClass());
         } else {
             return $this->masterProduct->shippingCategory();
