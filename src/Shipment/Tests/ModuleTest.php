@@ -13,7 +13,6 @@ use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Models\ShippingCategory;
 use Vanilo\Shipment\Models\ShippingMethod;
 use Vanilo\Shipment\Providers\ModuleServiceProvider;
-use Vanilo\Shipment\Tests\TestCase;
 
 class ModuleTest extends TestCase
 {
