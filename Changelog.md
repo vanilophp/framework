@@ -12,6 +12,14 @@
 - BC: Added the `addSubItem()` method to the Cart interface
 - BC: Added the `hasParent()` and `getParent()` methods to the CartItem interface
 - BC: Added the `getOriginalPrice()` and `hasAHigherOriginalPrice()` methods to the Buyable interface
+- BC: Added the following methods to the `ProductState` interface:
+    - `isListable()`
+    - `isViewable()`
+    - `isBuyable()`
+    - `getListableStates()`
+    - `getViewableStates()`
+    - `getBuyableStates()`
+- Added the `unlisted` product state
 - Added the `gtin` field to the products and master product variants tables
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes

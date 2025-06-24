@@ -9,6 +9,14 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - Added the `gtin` field to the products and master product variants tables
+- Added the `unlisted` product state
+- BC: Added the following methods to the `ProductState` interface:
+  - `isListable()`
+  - `isViewable()`
+  - `isBuyable()`
+  - `getListableStates()`
+  - `getViewableStates()`
+  - `getBuyableStates()`
 
 ## 4.x Series
 

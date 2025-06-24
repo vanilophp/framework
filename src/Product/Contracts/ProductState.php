@@ -17,16 +17,24 @@ namespace Vanilo\Product\Contracts;
 interface ProductState
 {
     /**
-     * Returns whether the state represents an active state
-     *
-     * @return boolean
+     * @deprecated Use the more granular isViewable(), isListable() and isBuyable() methods instead
      */
     public function isActive(): bool;
 
+    public function isViewable(): bool;
+
+    public function isListable(): bool;
+
+    public function isBuyable(): bool;
+
     /**
-     * Returns an array of states that represent an active product state
-     *
-     * @return array
+     * @deprecated use the more granular getViewableStates(), getListableStates() and getBuyableStates() methods instead
      */
     public static function getActiveStates(): array;
+
+    public static function getViewableStates(): array;
+
+    public static function getListableStates(): array;
+
+    public static function getBuyableStates(): array;
 }
