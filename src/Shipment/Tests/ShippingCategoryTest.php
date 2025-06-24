@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+namespace Vanilo\Shipment\Tests;
+
 use Vanilo\Shipment\Contracts\ShippingCategory as ShippingCategoryContract;
 use Vanilo\Shipment\Models\ShippingCategory;
 use Vanilo\Shipment\Models\ShippingCategoryProxy;
-use Vanilo\Shipment\Tests\TestCase;
 
 class ShippingCategoryTest extends TestCase
 {

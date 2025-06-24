@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Vanilo\Shipment\Tests;
+
 use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShippingCategory as ShippingCategoryContract;
@@ -11,7 +13,6 @@ use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Models\ShippingCategory;
 use Vanilo\Shipment\Models\ShippingMethod;
 use Vanilo\Shipment\Providers\ModuleServiceProvider;
-use Vanilo\Shipment\Tests\TestCase;
 
 class ModuleTest extends TestCase
 {
