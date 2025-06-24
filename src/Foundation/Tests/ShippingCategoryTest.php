@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Product;
@@ -146,6 +147,6 @@ class ShippingCategoryTest extends TestCase
             'master_product_id' => $masterProduct->id,
         ]);
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\BelongsTo::class, $variant->shippingCategory());
+        $this->assertInstanceOf(BelongsTo::class, $variant->shippingCategory());
     }
 }
