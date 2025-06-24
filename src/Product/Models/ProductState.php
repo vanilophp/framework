@@ -44,8 +44,11 @@ class ProductState extends Enum implements ProductStateContract
     public const RETIRED = 'retired';
 
     protected static array $activeStates = [self::ACTIVE, self::UNLISTED];
+
     protected static array $viewableStates = [self::ACTIVE, self::UNLISTED, self::UNAVAILABLE, self::RETIRED];
+
     protected static array $listableStates = [self::ACTIVE, self::UNAVAILABLE];
+
     protected static array $buyableStates = [self::ACTIVE, self::UNLISTED];
 
     public function isActive(): bool
