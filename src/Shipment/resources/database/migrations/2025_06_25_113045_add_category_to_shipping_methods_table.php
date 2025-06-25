@@ -25,10 +25,11 @@ return new class () extends Migration {
             if (!$this->isSqlite()) {
                 $table->dropForeign(['shipping_category_id']);
             }
+
+            $table->dropColumn('shipping_category_id');
         });
 
         Schema::table('shipping_methods', function (Blueprint $table) {
-            $table->dropColumn('shipping_category_id');
             $table->dropColumn('shipping_category_matching_condition');
         });
     }
