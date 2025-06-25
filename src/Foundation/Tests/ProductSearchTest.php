@@ -17,6 +17,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Konekt\Search\Searcher;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Product;
@@ -37,8 +38,7 @@ class ProductSearchTest extends TestCase
         Property::query()->delete();
     }
 
-    /** @test */
-    public function it_excludes_inactive_products_by_default()
+    #[Test] public function it_excludes_inactive_products_by_default()
     {
         factory(Product::class, 11)->create([
             'state' => ProductState::ACTIVE
@@ -60,8 +60,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(11, $search->getResults());
     }
 
-    /** @test */
-    public function inactive_products_can_be_included()
+    #[Test] public function inactive_products_can_be_included()
     {
         factory(Product::class, 7)->create([
             'state' => ProductState::ACTIVE
@@ -83,8 +82,76 @@ class ProductSearchTest extends TestCase
         $this->assertCount(17, $finder->withInactiveProducts()->getResults());
     }
 
-    /** @test */
-    public function it_finds_a_product_by_exact_name()
+    #[Test] public function it_can_be_scoped_to_listable_entries()
+    {
+        factory(Product::class, 10)->create([
+            'state' => ProductState::ACTIVE
+        ]);
+        factory(Product::class, 6)->create([
+            'state' => ProductState::INACTIVE
+        ]);
+        factory(Product::class, 21)->create([
+            'state' => ProductState::DRAFT
+        ]);
+        factory(Product::class, 2)->create([
+            'state' => ProductState::UNLISTED
+        ]);
+        factory(Product::class, 3)->create([
+            'state' => ProductState::UNAVAILABLE
+        ]);
+
+        $this->assertCount(13, ProductSearch::forListing()->getResults());
+    }
+
+    #[Test] public function it_can_be_scoped_to_viewable_entries()
+    {
+        factory(Product::class, 2)->create([
+            'state' => ProductState::ACTIVE
+        ]);
+        factory(Product::class, 11)->create([
+            'state' => ProductState::INACTIVE
+        ]);
+        factory(Product::class, 5)->create([
+            'state' => ProductState::DRAFT
+        ]);
+        factory(Product::class, 23)->create([
+            'state' => ProductState::UNLISTED
+        ]);
+        factory(Product::class, 7)->create([
+            'state' => ProductState::UNAVAILABLE
+        ]);
+        factory(Product::class, 1)->create([
+            'state' => ProductState::RETIRED
+        ]);
+
+        $this->assertCount(33, ProductSearch::forViewing()->getResults());
+    }
+
+    #[Test] public function it_can_be_scoped_to_buyable_entries()
+    {
+        factory(Product::class, 2)->create([
+            'state' => ProductState::ACTIVE
+        ]);
+        factory(Product::class, 13)->create([
+            'state' => ProductState::INACTIVE
+        ]);
+        factory(Product::class, 1)->create([
+            'state' => ProductState::DRAFT
+        ]);
+        factory(Product::class, 7)->create([
+            'state' => ProductState::UNLISTED
+        ]);
+        factory(Product::class, 21)->create([
+            'state' => ProductState::UNAVAILABLE
+        ]);
+        factory(Product::class, 35)->create([
+            'state' => ProductState::RETIRED
+        ]);
+
+        $this->assertCount(9, ProductSearch::forBuying()->getResults());
+    }
+
+    #[Test] public function it_finds_a_product_by_exact_name()
     {
         factory(Product::class, 83)->create();
         factory(Product::class)->create([
@@ -101,8 +168,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Shiny Glue', $first->name);
     }
 
-    /** @test */
-    public function it_can_find_a_product_by_slug_when_called_as_non_static_method()
+    #[Test] public function it_can_find_a_product_by_slug_when_called_as_non_static_method()
     {
         factory(Product::class, 3)->create();
         factory(Product::class)->create([
@@ -118,8 +184,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('whaki-tsipo', $product->slug);
     }
 
-    /** @test */
-    public function it_can_find_a_product_by_slug()
+    #[Test] public function it_can_find_a_product_by_slug()
     {
         factory(Product::class, 5)->create();
         factory(Product::class)->create([
@@ -134,16 +199,14 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('nintendo-todd-20cm-plush', $product->slug);
     }
 
-    /** @test */
-    public function it_can_fail_with_model_not_found_exception_if_no_entry_was_found()
+    #[Test] public function it_can_fail_with_model_not_found_exception_if_no_entry_was_found()
     {
         $this->expectException(ModelNotFoundException::class);
 
         ProductSearch::findBySlugOrFail('whaki-tsipo');
     }
 
-    /** @test */
-    public function it_finds_a_product_where_name_begins_with()
+    #[Test] public function it_finds_a_product_where_name_begins_with()
     {
         factory(Product::class, 35)->create();
         factory(Product::class)->create([
@@ -160,8 +223,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Matured Cheese', $first->name);
     }
 
-    /** @test */
-    public function it_finds_both_products_and_master_products_where_name_begins_with()
+    #[Test] public function it_finds_both_products_and_master_products_where_name_begins_with()
     {
         factory(Product::class, 9)->create();
         factory(Product::class)->create(['name' => 'Matured Cheese']);
@@ -179,8 +241,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals($second instanceof MasterProduct ? 'Mature People' : 'Matured Cheese', $second->name);
     }
 
-    /** @test */
-    public function it_finds_a_product_where_name_ends_with()
+    #[Test] public function it_finds_a_product_where_name_ends_with()
     {
         factory(Product::class, 27)->create();
         factory(Product::class)->create([
@@ -197,8 +258,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Bobinated Transformator', $first->name);
     }
 
-    /** @test */
-    public function it_finds_multiple_results_where_name_contains_search_term()
+    #[Test] public function it_finds_multiple_results_where_name_contains_search_term()
     {
         factory(Product::class, 11)->create();
         factory(Product::class)->create(['name' => 'Mandarin As Language']);
@@ -210,8 +270,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(4, $finder->nameContains('Mandarin')->getResults());
     }
 
-    /** @test */
-    public function it_finds_multiple_results_where_name_starts_with_search_term()
+    #[Test] public function it_finds_multiple_results_where_name_starts_with_search_term()
     {
         factory(Product::class, 18)->create();
         factory(Product::class)->create(['name' => 'Orange Is Good']);
@@ -222,8 +281,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(2, $finder->nameStartsWith('Orange')->getResults());
     }
 
-    /** @test */
-    public function it_finds_multiple_results_where_name_ends_with_search_term()
+    #[Test] public function it_finds_multiple_results_where_name_ends_with_search_term()
     {
         factory(Product::class, 7)->create();
         factory(Product::class)->create(['name' => 'Awesome Blueberries']);
@@ -235,8 +293,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(3, $finder->nameEndsWith('Blueberries')->getResults());
     }
 
-    /** @test */
-    public function name_based_finders_can_be_combined()
+    #[Test] public function name_based_finders_can_be_combined()
     {
         factory(Product::class, 21)->create();
         factory(Product::class)->create(['name' => 'Waka Time']);
@@ -252,8 +309,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(2, $result);
     }
 
-    /** @test */
-    public function returns_products_based_on_a_single_taxon()
+    #[Test] public function returns_products_based_on_a_single_taxon()
     {
         // Products without taxons
         factory(Product::class, 20)->create();
@@ -274,8 +330,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(3, (new ProductSearch())->withinTaxon($taxon2)->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_two_taxons_set_in_two_consecutive_calls()
+    #[Test] public function returns_products_based_on_two_taxons_set_in_two_consecutive_calls()
     {
         // Products without taxons
         factory(Product::class, 20)->create();
@@ -297,8 +352,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(6, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_several_taxons()
+    #[Test] public function returns_products_based_on_several_taxons()
     {
         // Products without taxons
         factory(Product::class, 10)->create();
@@ -316,8 +370,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(16, (new ProductSearch())->withinTaxons([$taxon1, $taxon2])->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_several_taxons_set_in_consecutive_calls()
+    #[Test] public function returns_products_based_on_several_taxons_set_in_consecutive_calls()
     {
         // Products without taxons
         factory(Product::class, 10)->create();
@@ -337,8 +390,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(12, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_a_single_property_value()
+    #[Test] public function returns_products_based_on_a_single_property_value()
     {
         // Background products without attributes
         factory(Product::class, 10)->create();
@@ -357,8 +409,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(9, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_a_single_property_name_and_several_value_names()
+    #[Test] public function returns_products_based_on_a_single_property_name_and_several_value_names()
     {
         // Background products without attributes
         factory(Product::class, 10)->create();
@@ -393,8 +444,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(27, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_several_property_values()
+    #[Test] public function returns_products_based_on_several_property_values()
     {
         // Background products without attributes
         factory(Product::class, 25)->create();
@@ -415,8 +465,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(15, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_property_values_and_on_taxons()
+    #[Test] public function returns_products_based_on_property_values_and_on_taxons()
     {
         // Products without taxons
         factory(Product::class, 90)->create();
@@ -436,8 +485,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(64, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_property_values_and_on_taxons_with_search_terms()
+    #[Test] public function returns_products_based_on_property_values_and_on_taxons_with_search_terms()
     {
         // Products without taxons
         factory(Product::class, 37)->create();
@@ -474,15 +522,13 @@ class ProductSearchTest extends TestCase
         $this->assertCount(11, $finder->getResults());
     }
 
-    /** @test */
-    public function it_returns_searcher()
+    #[Test] public function it_returns_searcher()
     {
         $search = new ProductSearch();
         $this->assertInstanceOf(Searcher::class, $search->getSearcher());
     }
 
-    /** @test */
-    public function it_can_simple_paginate()
+    #[Test] public function it_can_simple_paginate()
     {
         factory(Product::class, 15)->create();
 
@@ -493,8 +539,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(8, $results->items());
     }
 
-    /** @test */
-    public function it_can_paginate()
+    #[Test] public function it_can_paginate()
     {
         factory(Product::class, 15)->create();
 
@@ -505,8 +550,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(8, $results->items());
     }
 
-    /** @test */
-    public function it_can_limit_the_number_of_results()
+    #[Test] public function it_can_limit_the_number_of_results()
     {
         factory(Product::class, 4)->create();
         factory(MasterProduct::class, 3)->create();
@@ -515,8 +559,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(5, (new ProductSearch())->getResults(5));
     }
 
-    /** @test */
-    public function it_can_order_the_results_by_an_explicit_field()
+    #[Test] public function it_can_order_the_results_by_an_explicit_field()
     {
         factory(Product::class)->create(['name' => 'Effendi']);
         factory(Product::class)->create(['name' => 'Aber']);
@@ -534,8 +577,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Zgomot', $resultset[5]->name);
     }
 
-    /** @test */
-    public function it_can_order_and_limit_the_results()
+    #[Test] public function it_can_order_and_limit_the_results()
     {
         factory(Product::class)->create(['name' => 'Ethereum']);
         factory(Product::class)->create(['name' => 'Tether']);
@@ -549,8 +591,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Dogecoin', $resultset[2]->name);
     }
 
-    /** @test */
-    public function it_can_find_products_by_price_range()
+    #[Test] public function it_can_find_products_by_price_range()
     {
         factory(Product::class)->create([
             'price' => 31
@@ -581,8 +622,7 @@ class ProductSearchTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_can_find_products_below_a_certain_price()
+    #[Test] public function it_can_find_products_below_a_certain_price()
     {
         factory(Product::class)->create([
             'price' => 31
@@ -616,8 +656,7 @@ class ProductSearchTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_can_find_products_above_or_equal_to_a_certain_price()
+    #[Test] public function it_can_find_products_above_or_equal_to_a_certain_price()
     {
         factory(Product::class)->create([
             'price' => 31
@@ -651,8 +690,7 @@ class ProductSearchTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_can_find_products_above_a_given_price()
+    #[Test] public function it_can_find_products_above_a_given_price()
     {
         factory(Product::class)->createMany([
             ['price' => 7],
@@ -669,8 +707,7 @@ class ProductSearchTest extends TestCase
         $result->each(fn (Product $product) => $this->assertGreaterThan(8, $product->price));
     }
 
-    /** @test */
-    public function it_can_find_products_below_or_equal_to_a_given_price()
+    #[Test] public function it_can_find_products_below_or_equal_to_a_given_price()
     {
         factory(Product::class)->createMany([
             ['price' => 300],
@@ -694,8 +731,7 @@ class ProductSearchTest extends TestCase
         $finder = new ProductSearch();
     }
 
-    /** @test */
-    public function it_can_optionally_include_variants()
+    #[Test] public function it_can_optionally_include_variants()
     {
         // @todo re-enable this once includeVariants gets fixed on Postgres
         $this->skipOnPostgres();
@@ -718,8 +754,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(11, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_a_single_taxon()
+    #[Test] public function returns_variants_based_on_a_single_taxon()
     {
         $this->skipOnPostgres();
 
@@ -753,8 +788,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(10, (new ProductSearch())->includeVariants()->withinTaxon($taxon)->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_two_taxons_set_in_two_consecutive_calls()
+    #[Test] public function returns_variants_based_on_two_taxons_set_in_two_consecutive_calls()
     {
         $this->skipOnPostgres();
 
@@ -796,8 +830,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(12, (new ProductSearch())->includeVariants()->withinTaxon($taxon1)->orWithinTaxon($taxon2)->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_several_taxons()
+    #[Test] public function returns_variants_based_on_several_taxons()
     {
         $this->skipOnPostgres();
 
@@ -839,8 +872,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(12, (new ProductSearch())->includeVariants()->withinTaxons([$taxon1, $taxon2])->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_several_taxons_set_in_consecutive_calls()
+    #[Test] public function returns_variants_based_on_several_taxons_set_in_consecutive_calls()
     {
         $this->skipOnPostgres();
 
@@ -882,8 +914,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(12, (new ProductSearch())->includeVariants()->withinTaxons([$taxon1])->orWithinTaxons([$taxon2])->getResults());
     }
 
-    /** @test */
-    public function it_finds_a_variant_by_exact_name()
+    #[Test] public function it_finds_a_variant_by_exact_name()
     {
         $this->skipOnPostgres();
         // Products
@@ -911,8 +942,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('The Infinity Gauntlet', $firstWithVariants->name);
     }
 
-    /** @test */
-    public function it_finds_multiple_variant_results_where_name_contains_search_term()
+    #[Test] public function it_finds_multiple_variant_results_where_name_contains_search_term()
     {
         $this->skipOnPostgres();
         factory(Product::class, 10)->create();
@@ -932,8 +962,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(4, (new ProductSearch())->includeVariants()->nameContains('Mandarin')->getResults());
     }
 
-    /** @test */
-    public function it_can_find_variants_by_price_range()
+    #[Test] public function it_can_find_variants_by_price_range()
     {
         $this->skipOnPostgres();
         // Products
@@ -959,8 +988,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(4, (new ProductSearch())->includeVariants()->priceBetween(30, 40)->getResults());
     }
 
-    /** @test */
-    public function it_can_find_variants_above_a_given_price()
+    #[Test] public function it_can_find_variants_above_a_given_price()
     {
         $this->skipOnPostgres();
         // Products
@@ -992,8 +1020,7 @@ class ProductSearchTest extends TestCase
         $resultWithVariants->each(fn ($product) => $this->assertGreaterThan(8, $product->price));
     }
 
-    /** @test */
-    public function it_can_find_variants_above_or_equal_to_a_certain_price()
+    #[Test] public function it_can_find_variants_above_or_equal_to_a_certain_price()
     {
         $this->skipOnPostgres();
         // Product
@@ -1026,8 +1053,7 @@ class ProductSearchTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_can_find_variants_below_a_certain_price()
+    #[Test] public function it_can_find_variants_below_a_certain_price()
     {
         $this->skipOnPostgres();
         // Products
@@ -1060,8 +1086,7 @@ class ProductSearchTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_can_find_variants_below_or_equal_to_a_given_price()
+    #[Test] public function it_can_find_variants_below_or_equal_to_a_given_price()
     {
         $this->skipOnPostgres();
         // Products
@@ -1095,8 +1120,7 @@ class ProductSearchTest extends TestCase
         $resultWithVariants->each(fn ($product) => $this->assertLessThanOrEqual(301.01, $product->price));
     }
 
-    /** @test */
-    public function it_finds_a_variant_where_name_begins_with()
+    #[Test] public function it_finds_a_variant_where_name_begins_with()
     {
         $this->skipOnPostgres();
         factory(MasterProductVariant::class, 35)->create();
@@ -1123,8 +1147,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Straw Hat', $first->name);
     }
 
-    /** @test */
-    public function it_finds_products_master_products_and_variants_where_name_begins_with()
+    #[Test] public function it_finds_products_master_products_and_variants_where_name_begins_with()
     {
         $this->skipOnPostgres();
         factory(Product::class, 9)->create();
@@ -1156,8 +1179,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('Matured Wine', $variant->name);
     }
 
-    /** @test */
-    public function it_finds_multiple_results_with_variants_where_name_starts_with_search_term()
+    #[Test] public function it_finds_multiple_results_with_variants_where_name_starts_with_search_term()
     {
         $this->skipOnPostgres();
 
@@ -1182,8 +1204,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(3, (new ProductSearch())->includeVariants()->nameStartsWith('Orange')->getResults());
     }
 
-    /** @test */
-    public function name_based_finders_can_be_combined_and_return_variants()
+    #[Test] public function name_based_finders_can_be_combined_and_return_variants()
     {
         $this->skipOnPostgres();
 
@@ -1223,8 +1244,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(4, $resultWithVariants);
     }
 
-    /** @test */
-    public function it_finds_a_variant_where_name_ends_with()
+    #[Test] public function it_finds_a_variant_where_name_ends_with()
     {
         $this->skipOnPostgres();
         // Products
@@ -1256,8 +1276,7 @@ class ProductSearchTest extends TestCase
         $this->assertEquals('High Voltage Transformator', $variant->name);
     }
 
-    /** @test */
-    public function it_finds_multiple_variants_where_name_ends_with_search_term()
+    #[Test] public function it_finds_multiple_variants_where_name_ends_with_search_term()
     {
         $this->skipOnPostgres();
         // Products
@@ -1283,8 +1302,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(3, (new ProductSearch())->includeVariants()->nameEndsWith('Blueberries')->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_a_single_property_value()
+    #[Test] public function returns_variants_based_on_a_single_property_value()
     {
         $this->skipOnPostgres();
         // Background products without attributes
@@ -1312,8 +1330,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(5, $finder->includeVariants()->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_property_values_and_on_taxons_with_search_terms()
+    #[Test] public function returns_variants_based_on_property_values_and_on_taxons_with_search_terms()
     {
         $this->skipOnPostgres();
 
@@ -1371,8 +1388,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(15, (new ProductSearch())->includeVariants()->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER')->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_property_values_and_on_taxons()
+    #[Test] public function returns_variants_based_on_property_values_and_on_taxons()
     {
         $this->skipOnPostgres();
 
@@ -1409,8 +1425,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(75, (new ProductSearch())->includeVariants()->withinTaxon($taxon)->orHavingPropertyValue($propertyValue)->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_several_property_values()
+    #[Test] public function returns_variants_based_on_several_property_values()
     {
         $this->skipOnPostgres();
 
@@ -1452,8 +1467,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(30, (new ProductSearch())->includeVariants()->havingPropertyValues([$value1, $value2])->getResults());
     }
 
-    /** @test */
-    public function returns_variants_based_on_a_single_property_name_and_several_value_names()
+    #[Test] public function returns_variants_based_on_a_single_property_name_and_several_value_names()
     {
         $this->skipOnPostgres();
 

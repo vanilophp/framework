@@ -35,7 +35,11 @@
 - Added the `Sale` and `SaleItem` interfaces to the contracts module
 - Changed the `Order` and `OrderItem` interfaces to extend the new `Sale` and `SaleItem` interfaces from the contracts module
 - Fixed issue where the `linkable` pointed to a missing product thus returning null
-- Added the `excludingSkus()` method to `ProductSearch`
+- Added the following methods to the `ProductSearch` class:
+   - `excludingSkus()`
+   - `forListing()` - static factory method that initializes with a `listable` global scope
+   - `forViewing()` - static factory method that initializes with a `viewable` global scope
+   - `forBuying()` - static factory method that initializes with a `buyable` global scope
 - Added SubItem support to the cart items
 - Fixed linked products retrieval: linked products with the same ID but a different type are now returned correctly
 

@@ -49,17 +49,21 @@ class ProductSearch
 
     protected ?string $orderBy = null;
 
-    public function __construct()
+    public function __construct(bool $omitInactiveProducts = true)
     {
         $this->searcher = Search::new();
-        $this->productQuery = ProductProxy::query()
-            ->withGlobalScope('withoutInactiveProducts', function (Builder $queryBuilder) {
+        $this->productQuery = ProductProxy::query();
+        $this->masterProductQuery = MasterProductProxy::query();
+
+        if ($omitInactiveProducts) {
+            $this->productQuery->withGlobalScope('withoutInactiveProducts', function (Builder $queryBuilder) {
                 return $queryBuilder->whereIn('state', ProductStateProxy::getActiveStates());
             });
-        $this->masterProductQuery = MasterProductProxy::query()
-            ->withGlobalScope('withoutInactiveProducts', function (Builder $queryBuilder) {
+
+            $this->masterProductQuery->withGlobalScope('withoutInactiveProducts', function (Builder $queryBuilder) {
                 return $queryBuilder->whereIn('state', ProductStateProxy::getActiveStates());
             });
+        }
     }
 
     public static function findBySlug(string $slug): null|MasterProduct|Product
@@ -77,6 +81,51 @@ class ProductSearch
         if (null === $result) {
             throw (new ModelNotFoundException())->setModel(ProductProxy::modelClass());
         }
+
+        return $result;
+    }
+
+    public static function forListing(): static
+    {
+        $result = new static(omitInactiveProducts: false);
+
+        $result->productQuery->withGlobalScope('listableStateOnly', function (Builder $queryBuilder) {
+            return $queryBuilder->whereIn('state', ProductStateProxy::getListableStates());
+        });
+
+        $result->masterProductQuery->withGlobalScope('listableStateOnly', function (Builder $queryBuilder) {
+            return $queryBuilder->whereIn('state', ProductStateProxy::getListableStates());
+        });
+
+        return $result;
+    }
+
+    public static function forViewing(): static
+    {
+        $result = new static(omitInactiveProducts: false);
+
+        $result->productQuery->withGlobalScope('viewableStateOnly', function (Builder $queryBuilder) {
+            return $queryBuilder->whereIn('state', ProductStateProxy::getViewableStates());
+        });
+
+        $result->masterProductQuery->withGlobalScope('viewableStateOnly', function (Builder $queryBuilder) {
+            return $queryBuilder->whereIn('state', ProductStateProxy::getViewableStates());
+        });
+
+        return $result;
+    }
+
+    public static function forBuying(): static
+    {
+        $result = new static(omitInactiveProducts: false);
+
+        $result->productQuery->withGlobalScope('buyableStateOnly', function (Builder $queryBuilder) {
+            return $queryBuilder->whereIn('state', ProductStateProxy::getBuyableStates());
+        });
+
+        $result->masterProductQuery->withGlobalScope('buyableStateOnly', function (Builder $queryBuilder) {
+            return $queryBuilder->whereIn('state', ProductStateProxy::getBuyableStates());
+        });
 
         return $result;
     }
