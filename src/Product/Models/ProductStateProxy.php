@@ -16,6 +16,12 @@ namespace Vanilo\Product\Models;
 
 use Konekt\Concord\Proxies\EnumProxy;
 
+/**
+ * @method static array getActiveStates()
+ * @method static array getViewableStates()
+ * @method static array getListableStates()
+ * @method static array getBuyableStates()
+ */
 class ProductStateProxy extends EnumProxy
 {
 }
