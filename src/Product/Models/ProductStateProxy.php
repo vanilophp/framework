@@ -17,6 +17,13 @@ namespace Vanilo\Product\Models;
 use Konekt\Concord\Proxies\EnumProxy;
 
 /**
+ * @method static \Vanilo\Product\Contracts\ProductState DRAFT()
+ * @method static \Vanilo\Product\Contracts\ProductState INACTIVE()
+ * @method static \Vanilo\Product\Contracts\ProductState UNLISTED()
+ * @method static \Vanilo\Product\Contracts\ProductState ACTIVE()
+ * @method static \Vanilo\Product\Contracts\ProductState UNAVAILABLE()
+ * @method static \Vanilo\Product\Contracts\ProductState RETIRED()
+ *
  * @method static array getActiveStates()
  * @method static array getViewableStates()
  * @method static array getListableStates()
