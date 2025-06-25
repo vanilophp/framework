@@ -20,6 +20,7 @@
     - `getViewableStates()`
     - `getBuyableStates()`
 - Added the `unlisted` product state
+- Added the `ProductAvailabilityScope` enum class with `listing`, `viewing` and `buying` values
 - Added the `gtin` field to the products and master product variants tables
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes

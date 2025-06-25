@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Product\Models;
 
 use Konekt\Enum\Enum;
+use Vanilo\Product\Contracts\ProductAvailabilityScope as ProductAvailabilityScopeContract;
 use Vanilo\Product\Contracts\ProductState as ProductStateContract;
 
 /**
@@ -43,51 +44,60 @@ class ProductState extends Enum implements ProductStateContract
     public const UNAVAILABLE = 'unavailable';
     public const RETIRED = 'retired';
 
-    protected static array $activeStates = [self::ACTIVE, self::UNLISTED];
-
-    protected static array $viewableStates = [self::ACTIVE, self::UNLISTED, self::UNAVAILABLE, self::RETIRED];
-
-    protected static array $listableStates = [self::ACTIVE, self::UNAVAILABLE];
-
-    protected static array $buyableStates = [self::ACTIVE, self::UNLISTED];
+    protected static array $scopeStates = [
+        'active' => [self::ACTIVE, self::UNLISTED],
+        ProductAvailabilityScope::LISTING => [self::ACTIVE, self::UNAVAILABLE],
+        ProductAvailabilityScope::VIEWING => [self::ACTIVE, self::UNLISTED, self::UNAVAILABLE, self::RETIRED],
+        ProductAvailabilityScope::BUYING => [self::ACTIVE, self::UNLISTED],
+    ];
 
     public function isActive(): bool
     {
-        return in_array($this->value, static::$activeStates);
+        return in_array($this->value, static::$scopeStates['active']);
     }
 
     public function isViewable(): bool
     {
-        return in_array($this->value, static::$viewableStates);
+        return $this->isInScope(ProductAvailabilityScope::VIEWING());
     }
 
     public function isListable(): bool
     {
-        return in_array($this->value, static::$listableStates);
+        return $this->isInScope(ProductAvailabilityScope::LISTING());
     }
 
     public function isBuyable(): bool
     {
-        return in_array($this->value, static::$buyableStates);
+        return $this->isInScope(ProductAvailabilityScope::BUYING());
+    }
+
+    public function isInScope(ProductAvailabilityScopeContract $scope): bool
+    {
+        return in_array($this->value, static::$scopeStates[$scope->value()]);
     }
 
     public static function getViewableStates(): array
     {
-        return static::$viewableStates;
+        return static::getStatesOfScope(ProductAvailabilityScope::VIEWING());
     }
 
     public static function getListableStates(): array
     {
-        return static::$listableStates;
+        return static::getStatesOfScope(ProductAvailabilityScope::LISTING());
     }
 
     public static function getBuyableStates(): array
     {
-        return static::$buyableStates;
+        return static::getStatesOfScope(ProductAvailabilityScope::BUYING());
     }
 
     public static function getActiveStates(): array
     {
-        return static::$activeStates;
+        return static::$scopeStates['active'];
+    }
+
+    public static function getStatesOfScope(ProductAvailabilityScopeContract $scope): array
+    {
+        return static::$scopeStates[$scope->value()] ?? [];
     }
 }

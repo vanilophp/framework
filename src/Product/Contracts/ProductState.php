@@ -27,6 +27,8 @@ interface ProductState
 
     public function isBuyable(): bool;
 
+    public function isInScope(ProductAvailabilityScope $scope): bool;
+
     /**
      * @deprecated use the more granular getViewableStates(), getListableStates() and getBuyableStates() methods instead
      */
@@ -37,4 +39,6 @@ interface ProductState
     public static function getListableStates(): array;
 
     public static function getBuyableStates(): array;
+
+    public static function getStatesOfScope(ProductAvailabilityScope $scope): array;
 }

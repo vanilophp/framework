@@ -16,6 +16,7 @@ namespace Vanilo\Product\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Product\Models\Product;
+use Vanilo\Product\Models\ProductAvailabilityScope;
 use Vanilo\Product\Models\ProductState;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -25,6 +26,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     ];
 
     protected $enums = [
-        ProductState::class
+        ProductAvailabilityScope::class,
+        ProductState::class,
     ];
 }

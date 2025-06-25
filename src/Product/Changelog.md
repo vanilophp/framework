@@ -10,6 +10,7 @@
 - Added Laravel 12 Support
 - Added the `gtin` field to the products and master product variants tables
 - Added the `unlisted` product state
+- Added the `ProductAvailabilityScope` enum class with `listing`, `viewing` and `buying` values
 - BC: Added the following methods to the `ProductState` interface:
   - `isListable()`
   - `isViewable()`

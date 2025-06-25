@@ -21,6 +21,7 @@ use Konekt\Concord\Proxies\EnumProxy;
  * @method static array getViewableStates()
  * @method static array getListableStates()
  * @method static array getBuyableStates()
+ * @method static array getStatesOfScope(\Vanilo\Product\Contracts\ProductAvailabilityScope $scope)
  */
 class ProductStateProxy extends EnumProxy
 {
