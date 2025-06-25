@@ -15,9 +15,11 @@
   - `isListable()`
   - `isViewable()`
   - `isBuyable()`
+  - `isInScope()`
   - `getListableStates()`
   - `getViewableStates()`
   - `getBuyableStates()`
+  - `getStatesOfScope()`
 
 ## 4.x Series
 

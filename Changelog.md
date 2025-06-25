@@ -16,9 +16,11 @@
     - `isListable()`
     - `isViewable()`
     - `isBuyable()`
+    - `isInScope()`
     - `getListableStates()`
     - `getViewableStates()`
     - `getBuyableStates()`
+    - `getStatesOfScope()`
 - Added the `unlisted` product state
 - Added the `ProductAvailabilityScope` enum class with `listing`, `viewing` and `buying` values
 - Added the `gtin` field to the products and master product variants tables
