@@ -17,8 +17,8 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->enum('state', ProductStateProxy::values())->default(ProductStateProxy::defaultValue())->change();
-        });
+        // Do nothing. We won't reverse this, because it's way too complicated considering
+        // Doctrine DBAL's involvement in this, the fragile DBAL v3, v4 incompatibility
+        // with Laravel 10-12 + the heavy changes to Laravel 12 migrations internals
     }
 };
