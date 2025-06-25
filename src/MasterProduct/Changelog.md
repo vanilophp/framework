@@ -9,6 +9,7 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - Added the `gtin` field to the products and master product variants tables
+- Removed the enum constraint from the `product.state` database field
 
 ## 4.x Series
 
