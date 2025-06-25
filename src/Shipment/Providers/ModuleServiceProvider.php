@@ -19,6 +19,7 @@ use Vanilo\Shipment\Models\Carrier;
 use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Models\ShipmentStatus;
 use Vanilo\Shipment\Models\ShippingCategory;
+use Vanilo\Shipment\Models\ShippingCategoryMatchingCondition;
 use Vanilo\Shipment\Models\ShippingMethod;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -32,5 +33,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
 
     protected $enums = [
         ShipmentStatus::class,
+        ShippingCategoryMatchingCondition::class,
     ];
 }
