@@ -16,11 +16,15 @@ namespace Vanilo\Shipment\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 use Konekt\Address\Concerns\Zoneable;
 use Konekt\Address\Contracts\Zone;
+use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Schematized;
 use Vanilo\Shipment\Calculators\NullShippingFeeCalculator;
+use Vanilo\Shipment\Contracts\ShippingCategory;
+use Vanilo\Shipment\Contracts\ShippingCategoryMatchingCondition;
 use Vanilo\Shipment\Contracts\ShippingFeeCalculator;
 use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
 use Vanilo\Shipment\ShippingFeeCalculators;
@@ -39,6 +43,8 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property int|null $eta_max
  * @property string|null $eta_units
  * @property array $configuration
+ * @property int|null $shipping_category_id
+ * @property ShippingCategoryMatchingCondition $shipping_category_matching_condition
  *
  * @method static Builder actives()
  * @method static Builder inactives()
@@ -50,8 +56,13 @@ class ShippingMethod extends Model implements ShippingMethodContract
     use BelongsToCarrier;
     use ConfigurableModel;
     use Zoneable;
+    use CastsEnums;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected array $enums = [
+        'shipping_category_matching_condition' => 'ShippingCategoryMatchingConditionProxy@enumClass',
+    ];
 
     protected $casts = [
         'configuration' => 'json',
@@ -87,6 +98,26 @@ class ShippingMethod extends Model implements ShippingMethodContract
     public function getConfigurationSchema(): ?Schematized
     {
         return SchemaDefinition::wrap($this->getCalculator());
+    }
+
+    public function hasShippingCategory(): bool
+    {
+        return !is_null($this->shipping_category_id);
+    }
+
+    public function getShippingCategory(): ?ShippingCategory
+    {
+        return $this->shippingCategory;
+    }
+
+    public function getShippingCategoryMatchingCondition(): ?ShippingCategoryMatchingCondition
+    {
+        return $this->shipping_category_matching_condition;
+    }
+
+    public function shippingCategory(): BelongsTo
+    {
+        return $this->belongsTo(ShippingCategoryProxy::modelClass(), 'shipping_category_id', 'id');
     }
 
     public function scopeActives(Builder $query): Builder

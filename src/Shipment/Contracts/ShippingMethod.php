@@ -31,6 +31,12 @@ interface ShippingMethod extends Configurable
 
     public function isNotZoneRestricted(): bool;
 
+    public function hasShippingCategory(): bool;
+
+    public function getShippingCategory(): ?ShippingCategory;
+
+    public function getShippingCategoryMatchingCondition(): ?ShippingCategoryMatchingCondition;
+
     public static function availableOnesForZone(Zone|int $zone): Collection;
 
     public static function availableOnesForZones(Zone|int ...$zones): Collection;
