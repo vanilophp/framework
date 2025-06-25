@@ -13,7 +13,7 @@ use Vanilo\Shipment\Contracts\ShippingCategoryMatchingCondition as ShippingCateg
  * @property-read bool $is_at_least_one
  *
  * @method bool isNone()
- * @method bool isAll()                                    
+ * @method bool isAll()
  * @method bool isAtLeastOne()
  *
  * @method static self NONE()
