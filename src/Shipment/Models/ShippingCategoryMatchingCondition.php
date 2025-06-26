@@ -22,16 +22,22 @@ use Vanilo\Shipment\Contracts\ShippingCategoryMatchingCondition as ShippingCateg
  */
 class ShippingCategoryMatchingCondition extends Enum implements ShippingCategoryMatchingConditionContract
 {
-    public const __DEFAULT = self::NONE;
+    public const __DEFAULT = self::UNUSED;
 
-    public const NONE = null;
+    public const UNUSED = null;
+    public const NONE = 'none;
     public const ALL = 'all';
     public const AT_LEAST_ONE = 'at_least_one';
 
-    /** @var array Labels are optional */
-    protected static $labels = [
-        self::NONE => 'None of the products have to match',
-        self::ALL => 'All of the products have to match',
-        self::AT_LEAST_ONE => 'At least one product has to match',
-    ];
+    protected static array $labels = [];
+    
+    protected static function boot()
+    {
+        static::$labels = [
+            self::UNUSED => __('Not used'),
+            self::NONE => __('None of the products must match'),
+            self::ALL => __('All of the products must to match'),
+            self::AT_LEAST_ONE => __('At least one product has to match'),
+        ];
+    }
 }
