@@ -31,7 +31,7 @@ class ShippingCategoryMatchingCondition extends Enum implements ShippingCategory
     /** @var array Labels are optional */
     protected static $labels = [
         self::NONE => 'None of the products have to match',
-        self::ALL  => 'All of the products have to match',
+        self::ALL => 'All of the products have to match',
         self::AT_LEAST_ONE => 'At least one product has to match',
     ];
 }
