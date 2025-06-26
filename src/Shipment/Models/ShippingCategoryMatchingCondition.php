@@ -25,12 +25,12 @@ class ShippingCategoryMatchingCondition extends Enum implements ShippingCategory
     public const __DEFAULT = self::UNUSED;
 
     public const UNUSED = null;
-    public const NONE = 'none;
+    public const NONE = 'none';
     public const ALL = 'all';
     public const AT_LEAST_ONE = 'at_least_one';
 
     protected static array $labels = [];
-    
+
     protected static function boot()
     {
         static::$labels = [
