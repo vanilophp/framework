@@ -24,7 +24,14 @@ class ShippingCategoryMatchingCondition extends Enum implements ShippingCategory
 {
     public const __DEFAULT = self::NONE;
 
-    public const NONE = 'none';
+    public const NONE = null;
     public const ALL = 'all';
     public const AT_LEAST_ONE = 'at_least_one';
+
+    /** @var array Labels are optional */
+    protected static $labels = [
+        self::NONE => 'None of the products have to match',
+        self::ALL  => 'All of the products have to match',
+        self::AT_LEAST_ONE => 'At least one product has to match',
+    ];
 }
