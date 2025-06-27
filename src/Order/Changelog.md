@@ -12,6 +12,7 @@
 - Added Laravel 12 Support
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes
+- Added SubItem support to the order items
 
 ## 4.x Series
 

@@ -23,4 +23,8 @@ interface OrderItem extends SaleItem
     public function getProduct(): object;
 
     public function getFulfillmentStatus(): FulfillmentStatus;
+
+    public function hasParent(): bool;
+
+    public function getParent(): ?self;
 }
