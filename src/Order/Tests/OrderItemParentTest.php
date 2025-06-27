@@ -44,7 +44,6 @@ class OrderItemParentTest extends TestCase
             'price' => $this->product1->getPrice()
         ]);
 
-
         $order->items()->create([
             'product_type' => 'product',
             'product_id' => $this->product2->getId(),
@@ -76,7 +75,6 @@ class OrderItemParentTest extends TestCase
             'name' => $this->product1->getName(),
             'price' => $this->product1->getPrice()
         ]);
-
 
         $order->items()->create([
             'product_type' => 'product',
