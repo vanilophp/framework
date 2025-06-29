@@ -31,7 +31,7 @@ class ShippingCategoryChecker implements Checker
         $shippingCategoryId = $method->getShippingCategory()->getId();
         $itemsWithSelectedCategory = $checkout->getCart()->getItems()->filter(fn ($item) => $item->getBuyable()->shipping_category_id === $shippingCategoryId)->count();
 
-        return match($method->getShippingCategoryMatchingCondition()->value()) {
+        return match ($method->getShippingCategoryMatchingCondition()->value()) {
             ShippingCategoryMatchingCondition::NONE => 0 === $itemsWithSelectedCategory,
             ShippingCategoryMatchingCondition::AT_LEAST_ONE => 1 >= $itemsWithSelectedCategory,
             ShippingCategoryMatchingCondition::ALL => $itemsWithSelectedCategory === $itemCount,

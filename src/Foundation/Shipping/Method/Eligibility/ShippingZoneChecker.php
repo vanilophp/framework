@@ -18,7 +18,7 @@ class ShippingZoneChecker implements Checker
         if (null !== $address?->getCountryCode()) {
             $zones = Zones::withScope(ZoneScope::SHIPPING)->theAddressBelongsTo($address);
             if ($zones->isNotEmpty()) {
-                $shippingMethodQuery->where(fn($q) => $q->forZones($zones)->orWhereNull('zone_id'));
+                $shippingMethodQuery->where(fn ($q) => $q->forZones($zones)->orWhereNull('zone_id'));
             } else {
                 $shippingMethodQuery->whereNull('zone_id');
             }
