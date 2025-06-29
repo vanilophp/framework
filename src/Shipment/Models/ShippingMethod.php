@@ -110,7 +110,7 @@ class ShippingMethod extends Model implements ShippingMethodContract
         return $this->shippingCategory;
     }
 
-    public function getShippingCategoryMatchingCondition(): ?ShippingCategoryMatchingCondition
+    public function getShippingCategoryMatchingCondition(): ShippingCategoryMatchingCondition
     {
         return $this->shipping_category_matching_condition;
     }

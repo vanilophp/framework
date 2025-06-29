@@ -35,7 +35,7 @@ interface ShippingMethod extends Configurable
 
     public function getShippingCategory(): ?ShippingCategory;
 
-    public function getShippingCategoryMatchingCondition(): ?ShippingCategoryMatchingCondition;
+    public function getShippingCategoryMatchingCondition(): ShippingCategoryMatchingCondition;
 
     public static function availableOnesForZone(Zone|int $zone): Collection;
 
