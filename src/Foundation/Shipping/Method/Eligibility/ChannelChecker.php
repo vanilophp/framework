@@ -11,15 +11,16 @@ use Vanilo\Checkout\Contracts\Checkout;
 
 class ChannelChecker implements Checker
 {
-    public function __construct(
-        private ?Channel $channel
-    ) {
+    private array $channels;
+    public function __construct(Channel ...$channels)
+    {
+        $this->channels = $channels;
     }
 
     public function onBuildQuery(Builder $shippingMethodQuery, Checkout $checkout): void
     {
-        if (null !== $this->channel) {
-            $shippingMethodQuery->withinChannels($this->channel);
+        if (!empty($this->channels)) {
+            $shippingMethodQuery->withinChannels($this->channels);
         }
     }
 
