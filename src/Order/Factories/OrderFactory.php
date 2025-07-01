@@ -35,6 +35,9 @@ class OrderFactory implements OrderFactoryContract
     /** @var OrderNumberGenerator */
     protected $orderNumberGenerator;
 
+    /** @var array|int[] Contains the mapping of the original item IDs to the created order item IDs  */
+    private array $itemIdMap;
+
     public function __construct(OrderNumberGenerator $generator)
     {
         $this->orderNumberGenerator = $generator;
@@ -61,6 +64,8 @@ class OrderFactory implements OrderFactoryContract
             $this->createShippingAddress($order, $data);
 
             $this->createItems($order, array_map(fn ($item) => $item + ['quantity' => 1], $items), ...Arr::wrap($itemHooks));
+
+            $this->mapParentRelationships($order, $items);
 
             foreach (Arr::wrap($hooks) as $hook) {
                 $this->callHook($hook, $order, $data, $items);
@@ -133,7 +138,11 @@ class OrderFactory implements OrderFactoryContract
             unset($item['product']);
         }
 
-        return $order->items()->create($item);
+        $orderItem = $order->items()->create($item);
+
+        $this->mapItemId($item, $orderItem);
+
+        return $orderItem;
     }
 
     /**
@@ -207,5 +216,28 @@ class OrderFactory implements OrderFactoryContract
         $address['name'] = empty(Arr::get($address, 'name')) ? '-' : $address['name'];
 
         return AddressProxy::create($address);
+    }
+
+    private function mapItemId(array $item, OrderItem $orderItem): void
+    {
+        if (isset($item['id'])) {
+            $this->itemIdMap[$item['id']] = $orderItem->id;
+        }
+    }
+
+    private function mapParentRelationships(Order $order, array $items)
+    {
+        foreach ($items as $item) {
+            if (isset($item['id']) && isset($item['parent_id'])) {
+                $orderItemId = $this->itemIdMap[$item['id']] ?? null;
+                $parentOrderItemId = $this->itemIdMap[$item['parent_id']] ?? null;
+
+                // If we have the right ID mappings, we can properly set the parent order item relationship based on the source item relationship
+                if ($orderItemId && $parentOrderItemId) {
+                    $orderItem = $order->items()->find($orderItemId);
+                    $orderItem->update(['parent_id' => $parentOrderItemId]);
+                }
+            }
+        }
     }
 }
