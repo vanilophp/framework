@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use Konekt\Address\Models\Country;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
@@ -65,6 +66,31 @@ class ExtendedOrderFactoryTest extends TestCase
         $this->assertEquals(AdjustmentType::SHIPPING(), $adjustments->first()->getType());
         $this->assertEquals(30, $order->total());
         $this->assertEquals(25, $order->itemsTotal());
+    }
+
+    #[Test] public function it_maps_the_parent_relationships_correctly()
+    {
+        $product = factory(Product::class)->create(['price' => 25]);
+        $product2 = factory(Product::class)->create(['price' => 50]);
+
+        $shippingMethod = ShippingMethod::create([
+            'name' => 'Delivery to your Door',
+            'calculator' => FlatFeeCalculator::ID,
+            'configuration' => ['cost' => 5],
+        ]);
+
+        $mainItem = Cart::addItem($product);
+        $subItem = Cart::addSubItem($mainItem, $product2);
+
+        Checkout::setCart(Cart::getFacadeRoot());
+        $this->completeCheckout($shippingMethod->id);
+
+        $factory = new OrderFactory(new NanoIdGenerator());
+        $order = $factory->createFromCheckout(Checkout::getFacadeRoot());
+
+        $item1 = $order->getItems()[0];
+        $item2 = $order->getItems()[1];
+        $this->assertEquals($item1->id, $item2->parent_id);
     }
 
     private function completeCheckout(int $useShippingMethodId): void
