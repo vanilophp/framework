@@ -45,6 +45,7 @@
    - `forViewing()` - static factory method that initializes with a `viewable` global scope
    - `forBuying()` - static factory method that initializes with a `buyable` global scope
 - Added SubItem support to the cart items
+- Added SubItem support to the order items
 - Fixed linked products retrieval: linked products with the same ID but a different type are now returned correctly
 - Removed the enum constraint from the `product.state` database field
 

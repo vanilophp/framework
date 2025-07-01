@@ -16,6 +16,7 @@ namespace Vanilo\Order\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Contracts\FulfillmentStatus;
@@ -114,5 +115,20 @@ class OrderItem extends Model implements OrderItemContract
     public function getTotalAttribute()
     {
         return $this->total();
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(OrderItemProxy::modelClass(), 'parent_id');
+    }
+
+    public function hasParent(): bool
+    {
+        return null !== $this->parent_id;
+    }
+
+    public function getParent(): ?OrderItemContract
+    {
+        return $this->parent;
     }
 }
