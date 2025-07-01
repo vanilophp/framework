@@ -40,8 +40,7 @@ class ExtendedOrderFactoryTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_copies_the_shipping_adjustment_over_from_the_cart_to_the_order()
+    #[Test] public function it_copies_the_shipping_adjustment_over_from_the_cart_to_the_order()
     {
         $product = factory(Product::class)->create(['price' => 25]);
         $shippingMethod = ShippingMethod::create([
