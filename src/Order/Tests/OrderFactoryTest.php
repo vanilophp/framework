@@ -16,6 +16,7 @@ namespace Vanilo\Order\Tests;
 
 use Illuminate\Support\Facades\Event;
 use Konekt\Address\Models\Country;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderFactory as OrderFactoryContract;
 use Vanilo\Order\Events\OrderWasCreated;
@@ -62,10 +63,7 @@ class OrderFactoryTest extends TestCase
         $this->factory = app(OrderFactoryContract::class);
     }
 
-    /**
-     * @test
-     */
-    public function order_can_be_created_from_simple_array_of_attributes()
+    #[Test] public function order_can_be_created_from_simple_array_of_attributes()
     {
         $order = $this->factory->createFromDataArray(
             [
@@ -99,8 +97,7 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals(1, $item->quantity);
     }
 
-    /** @test */
-    public function it_automatically_adds_the_domain_name_to_the_order()
+    #[Test] public function it_automatically_adds_the_domain_name_to_the_order()
     {
         $order = $this->factory->createFromDataArray(
             [],
@@ -120,8 +117,7 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals(parse_url(url('/'), PHP_URL_HOST), $order->domain);
     }
 
-    /** @test */
-    public function it_preserves_the_domain_name_when_passed_in_the_data_array()
+    #[Test] public function it_preserves_the_domain_name_when_passed_in_the_data_array()
     {
         $order = $this->factory->createFromDataArray(
             ['domain' => 'kawasaki.com'],
@@ -140,20 +136,14 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals('kawasaki.com', $order->domain);
     }
 
-    /**
-     * @test
-     */
-    public function it_throws_an_exception_if_trying_to_create_an_order_without_items()
+    #[Test] public function it_throws_an_exception_if_trying_to_create_an_order_without_items()
     {
         $this->expectException(CreateOrderException::class);
 
         $this->factory->createFromDataArray([], []);
     }
 
-    /**
-     * @test
-     */
-    public function automatically_generates_an_order_number_if_none_was_passed()
+    #[Test] public function automatically_generates_an_order_number_if_none_was_passed()
     {
         $order = $this->factory->createFromDataArray([], [
             [
@@ -168,10 +158,7 @@ class OrderFactoryTest extends TestCase
         $this->assertNotEmpty($order->getNumber());
     }
 
-    /**
-     * @test
-     */
-    public function order_was_created_event_gets_emitted_when_creating_an_order()
+    #[Test] public function order_was_created_event_gets_emitted_when_creating_an_order()
     {
         Event::fake();
 
@@ -190,10 +177,7 @@ class OrderFactoryTest extends TestCase
         });
     }
 
-    /**
-     * @test
-     */
-    public function item_quantity_is_1_by_default_if_none_gets_passed()
+    #[Test] public function item_quantity_is_1_by_default_if_none_gets_passed()
     {
         $order = $this->factory->createFromDataArray(
             [],
@@ -217,10 +201,60 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals(1, $item->quantity);
     }
 
-    /**
-     * @test
-     */
-    public function item_quantity_does_not_get_altered_if_a_value_was_passed()
+    #[Test] public function item_parent_ids_are_null_by_default()
+    {
+        $order = $this->factory->createFromDataArray(
+            [],
+            [
+                [
+                    'product_type' => 'product',
+                    'product_id' => $this->mazdaRX8->getId(),
+                    'name' => $this->mazdaRX8->getName(),
+                    'price' => $this->mazdaRX8->getPrice()
+                ]
+            ]
+        );
+
+        $item = $order->getItems()->first();
+        $this->assertNull($item->parent_id);
+
+        // Let's see if DB was properly hit
+        $order = $order->fresh();
+
+        $item = $order->getItems()->first();
+        $this->assertNull($item->parent_id);
+    }
+
+    #[Test] public function item_parent_id_is_mapped_properly_if_specified()
+    {
+        $order = $this->factory->createFromDataArray(
+            [],
+            [
+                [
+                    'id' => 111,
+                    'product_type' => 'product',
+                    'product_id' => $this->mazdaRX8->getId(),
+                    'name' => $this->mazdaRX8->getName(),
+                    'price' => $this->mazdaRX8->getPrice(),
+                    'parent_id' => null
+                ],
+                [
+                    'id' => 112,
+                    'product_type' => 'product',
+                    'product_id' => $this->mazdaRX8->getId(),
+                    'name' => $this->mazdaRX8->getName(),
+                    'price' => $this->mazdaRX8->getPrice(),
+                    'parent_id' => 111
+                ]
+            ]
+        );
+
+        $item1 = $order->getItems()[0];
+        $item2 = $order->getItems()[1];
+        $this->assertEquals($item1->id, $item2->parent_id);
+    }
+
+    #[Test] public function item_quantity_does_not_get_altered_if_a_value_was_passed()
     {
         $order = $this->factory->createFromDataArray(
             [],
@@ -242,10 +276,7 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals(3, $item->quantity);
     }
 
-    /**
-     * @test
-     */
-    public function item_can_be_created_from_a_buyable()
+    #[Test] public function item_can_be_created_from_a_buyable()
     {
         $order = $this->factory->createFromDataArray([], [
             [
@@ -271,10 +302,7 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals($this->mazdaRX8->morphTypeName(), $item->product_type);
     }
 
-    /**
-     * @test
-     */
-    public function items_can_be_passed_in_a_mixed_manner_so_that_one_is_a_buyable_another_is_simple_attributes()
+    #[Test] public function items_can_be_passed_in_a_mixed_manner_so_that_one_is_a_buyable_another_is_simple_attributes()
     {
         $order = $this->factory->createFromDataArray([], [
             [
@@ -324,10 +352,7 @@ class OrderFactoryTest extends TestCase
         $this->assertEquals($this->volvoV90->morphTypeName(), $volvo->product_type);
     }
 
-    /**
-     * @test
-     */
-    public function separate_billing_address_entry_gets_created_for_the_order()
+    #[Test] public function separate_billing_address_entry_gets_created_for_the_order()
     {
         Country::create([
             'id' => 'DE',

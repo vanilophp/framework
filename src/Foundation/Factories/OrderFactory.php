@@ -73,12 +73,22 @@ class OrderFactory extends BaseOrderFactory
     protected function convertCartItemsToDataArray(CheckoutSubject $cart)
     {
         return $cart->getItems()->map(function ($item) {
-            return [
+            $result = [
                 'product' => $item->getBuyable(),
                 'quantity' => $item->getQuantity(),
                 'configuration' => $item instanceof Configurable ? $item->configuration() : null,
                 'adjustments' => $item instanceof Adjustable ? $item->adjustments() : [],
             ];
+
+            if (isset($item->id)) {
+                $result['id'] = $item->id;
+            }
+
+            if (isset($item->parent_id)) {
+                $result['parent_id'] = $item->parent_id;
+            }
+
+            return $result;
         })->all();
     }
 }
