@@ -220,7 +220,7 @@ class OrderFactory implements OrderFactoryContract
     private function addToSourceItemIdMap(array $sourceItem, OrderItem $createdOrderItem): void
     {
         if (isset($sourceItem['id'])) {
-            $this->sourceItemToOrderItemIdMap[$sourceItem['id']] = $createdOrderItem->id;
+            $this->sourceItemToOrderItemIdMap[(string) $sourceItem['id']] = $createdOrderItem->id;
         }
     }
 
@@ -228,8 +228,8 @@ class OrderFactory implements OrderFactoryContract
     {
         foreach ($sourceItems as $sourceItem) {
             if (isset($sourceItem['id']) && isset($sourceItem['parent_id'])) {
-                $idOfTheOrderItemThatHasToHaveAParent = $this->sourceItemToOrderItemIdMap[$sourceItem['id']] ?? null;
-                $idOfTheParentOrderItem = $this->sourceItemToOrderItemIdMap[$sourceItem['parent_id']] ?? null;
+                $idOfTheOrderItemThatHasToHaveAParent = $this->sourceItemToOrderItemIdMap[(string) $sourceItem['id']] ?? null;
+                $idOfTheParentOrderItem = $this->sourceItemToOrderItemIdMap[(string) $sourceItem['parent_id']] ?? null;
 
                 // If we have the right ID mappings, we can properly set the parent order item relationship based on the source item relationship
                 if ($idOfTheOrderItemThatHasToHaveAParent && $idOfTheParentOrderItem) {
