@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests;
 
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Promotion\Models\Coupon;
 use Vanilo\Promotion\Tests\Factories\CouponFactory;
 use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
 class CouponTest extends TestCase
 {
-    /** @test */
-    public function all_mutable_fields_can_be_mass_assigned()
+    #[Test] public function all_mutable_fields_can_be_mass_assigned()
     {
         $expiryDate = Carbon::now()->endOfDay();
         $coupon = Coupon::create([
@@ -33,8 +33,7 @@ class CouponTest extends TestCase
         $this->assertEquals($expiryDate->toDateTimeString(), $coupon->expires_at->toDateTimeString());
     }
 
-    /** @test */
-    public function all_mutable_fields_can_be_set()
+    #[Test] public function all_mutable_fields_can_be_set()
     {
         $coupon = new Coupon();
 
@@ -51,8 +50,7 @@ class CouponTest extends TestCase
         $this->assertEquals(Carbon::now()->endOfDay()->toDateTimeString(), $coupon->expires_at);
     }
 
-    /** @test */
-    public function code_must_be_unique()
+    #[Test] public function code_must_be_unique()
     {
         $this->expectExceptionMessageMatches('/UNIQUE constraint failed/');
 
@@ -67,8 +65,7 @@ class CouponTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function the_fields_are_of_proper_types()
+    #[Test] public function the_fields_are_of_proper_types()
     {
         $coupon = Coupon::create([
             'promotion_id' => PromotionFactory::new()->create()->id,
@@ -89,16 +86,14 @@ class CouponTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $coupon->updated_at);
     }
 
-    /** @test */
-    public function can_return_coupon_by_code()
+    #[Test] public function can_return_coupon_by_code()
     {
         CouponFactory::new(['code' => 'test-code'])->create();
 
         $this->assertEquals('test-code', Coupon::findByCode('test-code')->code);
     }
 
-    /** @test */
-    public function can_return_promotion()
+    #[Test] public function can_return_the_promotion()
     {
         $promotion = PromotionFactory::new(['name' => 'Test promo'])->create();
         $coupon = CouponFactory::new(['promotion_id' => $promotion->id])->create();
@@ -106,8 +101,7 @@ class CouponTest extends TestCase
         $this->assertEquals('Test promo', $coupon->getPromotion()->name);
     }
 
-    /** @test */
-    public function determines_if_its_depleted()
+    #[Test] public function can_determine_if_it_is_depleted()
     {
         $depleted = CouponFactory::new(['usage_limit' => 3, 'usage_count' => 3])->create();
         $notDepleted = CouponFactory::new(['usage_limit' => 3, 'usage_count' => 2])->create();
@@ -116,8 +110,7 @@ class CouponTest extends TestCase
         $this->assertFalse($notDepleted->isDepleted());
     }
 
-    /** @test */
-    public function determines_if_its_expired()
+    #[Test] public function can_determine_if_it_is_expired()
     {
         $expiredCoupon = CouponFactory::new(['expires_at' => Carbon::now()->subWeek()])->create();
         $notExpired = CouponFactory::new(['expires_at' => Carbon::now()->addWeek()])->create();
@@ -126,8 +119,7 @@ class CouponTest extends TestCase
         $this->assertFalse($notExpired->isExpired());
     }
 
-    /** @test */
-    public function determines_if_can_be_used()
+    #[Test] public function can_determine_if_it_can_be_used()
     {
         $canBeUsed = CouponFactory::new([
             'expires_at' => Carbon::now()->addWeek(),

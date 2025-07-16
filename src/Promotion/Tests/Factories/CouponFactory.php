@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use Vanilo\Promotion\Models\Coupon;
 
 class CouponFactory extends Factory
@@ -14,7 +15,7 @@ class CouponFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => $this->faker->text(15),
+            'code' => Str::ulid()->toBase58(),
             'promotion_id' => PromotionFactory::new()->create()->id,
         ];
     }
