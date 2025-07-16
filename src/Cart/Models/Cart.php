@@ -49,7 +49,7 @@ class Cart extends Model implements CartContract
 
     public function itemCount(): int
     {
-        return (int)$this->items->sum('quantity');
+        return (int) $this->items->sum('quantity');
     }
 
     public function addItem(Buyable $product, int|float $qty = 1, array $params = [], bool $forceNewItem = false): CartItemContract
