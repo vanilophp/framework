@@ -86,7 +86,7 @@ class CartManager implements CartManagerContract
     {
         $params = array_merge($params, ['attributes' => ['parent_id' => $parent->id]]);
 
-        $result = $this->addItem($product, $qty, $params, true);
+        $result = $this->addItem($product, $qty, $params);
         if ($parent->relationLoaded('children')) {
             $parent->unsetRelation('children');
         }

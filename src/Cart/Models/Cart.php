@@ -49,7 +49,7 @@ class Cart extends Model implements CartContract
 
     public function itemCount(): int
     {
-        return (int) $this->items->sum('quantity');
+        return (int)$this->items->sum('quantity');
     }
 
     public function addItem(Buyable $product, int|float $qty = 1, array $params = [], bool $forceNewItem = false): CartItemContract
@@ -81,7 +81,7 @@ class Cart extends Model implements CartContract
     {
         $params = array_merge($params, ['attributes' => ['parent_id' => $parent->id]]);
 
-        $result = $this->addItem($product, $qty, $params, true);
+        $result = $this->addItem($product, $qty, $params);
         if ($parent->relationLoaded('children')) {
             $parent->unsetRelation('children');
         }
@@ -174,15 +174,20 @@ class Cart extends Model implements CartContract
         }
 
         $itemConfig = Arr::get($parameters, 'attributes.configuration');
+        $parentId = Arr::get($parameters, 'attributes.parent_id');
 
         if (1 === $existingCartItems->count()) {
             $item = $this->items()->ofCart($this)->byProduct($buyable)->first();
 
-            return $this->configurationsMatch($item->configuration(), $itemConfig) ? $item : null;
+            if ($this->configurationsMatch($item->configuration(), $itemConfig) && $this->parentIdMatches($parentId, $item)) {
+                return $item;
+            }
+
+            return null;
         }
 
         foreach ($existingCartItems as $item) {
-            if ($this->configurationsMatch($item->configuration(), $itemConfig)) {
+            if ($this->configurationsMatch($item->configuration(), $itemConfig) && $this->parentIdMatches($parentId, $item)) {
                 return $item;
             }
         }
@@ -215,6 +220,15 @@ class Cart extends Model implements CartContract
         }
 
         return false;
+    }
+
+    protected function parentIdMatches(mixed $parentId, CartItemContract $item): bool
+    {
+        if (null === $parentId && null === $item->parent_id) {
+            return true;
+        }
+
+        return intval($parentId) === $item->parent_id;
     }
 
     /**

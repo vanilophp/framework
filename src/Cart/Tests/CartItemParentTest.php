@@ -70,6 +70,25 @@ class CartItemParentTest extends TestCase
         $this->assertEquals($mainItem->id, $subItem->parent_id);
     }
 
+    #[Test] public function items_of_the_same_product_and_parent_are_grouped_when_multiple_added()
+    {
+        $main1 = Cart::addItem($this->course);
+        Cart::addSubItem($main1, $this->product);
+        Cart::addSubItem($main1, $this->product);
+
+        $main2 = Cart::addItem($this->course, forceNewItem: true);
+        Cart::addSubItem($main2, $this->product);
+        Cart::addSubItem($main2, $this->product);
+        Cart::addSubItem($main2, $this->product);
+
+        $this->assertNotEquals($main1->id, $main2->id);
+        $this->assertCount(1, $main1->getChildItems());
+        $this->assertEquals(2, $main1->getChildItems()->first()->getQuantity());
+        $this->assertCount(1, $main2->getChildItems());
+        $this->assertEquals(3, $main2->getChildItems()->first()->getQuantity());
+        $this->assertEquals(7, Cart::itemCount());
+    }
+
     #[Test] public function the_child_items_can_be_retrieved_as_a_collection()
     {
         $mainItem = Cart::addItem($this->course);
