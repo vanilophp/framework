@@ -65,7 +65,7 @@ class CartItem extends Model implements CartItemContract
 
     public function children(): HasMany
     {
-        return $this->hasMany(CartItemProxy::modelClass(), 'parent_id');
+        return $this->hasMany(CartItemProxy::modelClass(), 'parent_id')->orderBy('id');
     }
 
     public function hasParent(): bool
