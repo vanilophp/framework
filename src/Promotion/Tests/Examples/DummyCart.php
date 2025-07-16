@@ -60,7 +60,12 @@ class DummyCart implements Cart
 
     public function getItems(): Collection
     {
-        // TODO: Implement getItems() method.
+        return collect();
+    }
+
+    public function getRootItems(): Collection
+    {
+        return collect();
     }
 
     public function itemsTotal(): float

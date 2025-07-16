@@ -52,6 +52,11 @@ class Cart extends Model implements CartContract
         return (int) $this->items->sum('quantity');
     }
 
+    public function getRootItems(): Collection
+    {
+        return $this->getItems()->filter(fn ($item) => !$item->hasParent());
+    }
+
     public function addItem(Buyable $product, int|float $qty = 1, array $params = [], bool $forceNewItem = false): CartItemContract
     {
         $item = match ($forceNewItem) {

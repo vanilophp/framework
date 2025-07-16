@@ -9,7 +9,7 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - BC: Added the `getBuyable()` method to the `OrderItem` interface
-- BC: Added the `addSubItem()` method to the Cart interface
+- BC: Added the `addSubItem()` and `getRootItems()` methods to the Cart interface
 - BC: Added the `$forceNewItem` (default false) parameter to the `Cart::addItem()` method
 - BC: Added the following methods to the CartItem interface:
     - `hasParent()`

@@ -89,6 +89,20 @@ class CartItemParentTest extends TestCase
         $this->assertEquals(7, Cart::itemCount());
     }
 
+    #[Test] public function root_items_can_be_retrieved_as_a_collection()
+    {
+        $mainItem = Cart::addItem($this->course);
+        Cart::addSubItem($mainItem, $this->product);
+        Cart::addSubItem($mainItem, $this->product2);
+
+        $this->assertCount(3, Cart::getItems());
+        $this->assertCount(1, Cart::getRootItems());
+
+        Cart::addItem($this->course, forceNewItem: true);
+        $this->assertCount(4, Cart::getItems());
+        $this->assertCount(2, Cart::getRootItems());
+    }
+
     #[Test] public function the_child_items_can_be_retrieved_as_a_collection()
     {
         $mainItem = Cart::addItem($this->course);

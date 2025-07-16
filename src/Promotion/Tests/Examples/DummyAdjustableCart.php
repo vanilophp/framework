@@ -95,6 +95,11 @@ class DummyAdjustableCart implements Cart, Adjustable
         return collect($this->items);
     }
 
+    public function getRootItems(): Collection
+    {
+        return collect(array_filter($this->items, fn (DummyCartItem $item) => !$item->hasParent()));
+    }
+
     public function itemsTotal(): float
     {
         // TODO: Implement itemsTotal() method.

@@ -5,7 +5,7 @@
 ## Unreleased
 ##### 2025-XX-XX
 
-- BC: Added the `addSubItem()` method to the Cart interface
+- BC: Added the `addSubItem()` and `getRootItems()` methods to the Cart interface
 - BC: Added the `$forceNewItem` (default false) parameter to the `Cart::addItem()` method
 - BC: Added the following methods to the CartItem interface:
    - `hasParent()`

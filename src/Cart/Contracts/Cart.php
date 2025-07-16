@@ -15,17 +15,26 @@ declare(strict_types=1);
 namespace Vanilo\Cart\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Collection;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\CheckoutSubject;
 
 interface Cart extends CheckoutSubject
 {
     /**
+     * Returns the cart items which are "root" items i.e., have no parent
+     *
+     * @return Collection<CartItem>
+     */
+    public function getRootItems(): Collection;
+
+    /**
      * Add an item to the cart (or adds the quantity if the product is already in the cart)
      *
      * @param Buyable $product Any Buyable object
      * @param int|float $qty The quantity to add
      * @param array $params Additional parameters, eg. coupon code
+     * @param bool $forceNewItem If true, a new item will be created even if the same product exists in cart
      *
      * @return CartItem Returns the item object that has been created (or updated)
      */
@@ -33,33 +42,15 @@ interface Cart extends CheckoutSubject
 
     public function addSubItem(CartItem $parent, Buyable $product, int|float $qty = 1, array $params = []): CartItem;
 
-    /**
-     * Removes an item from the cart
-     */
     public function removeItem(CartItem $item): void;
 
-    /**
-     * Removes a product from the cart
-     */
     public function removeProduct(Buyable $product): void;
 
-    /**
-     * Clears the entire cart
-     */
     public function clear(): void;
 
-    /**
-     * Returns the number of items in the cart
-     */
     public function itemCount(): int;
 
-    /**
-     * Returns the cart's associated user, or NULL
-     */
     public function getUser(): ?Authenticatable;
 
-    /**
-     * Set the user of the cart by passing a user object or user id
-     */
     public function setUser(Authenticatable|int|string|null $user): void;
 }
