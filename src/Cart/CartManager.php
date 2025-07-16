@@ -72,11 +72,11 @@ class CartManager implements CartManagerContract
         return $this->exists() ? $this->model()->itemsTotal() : 0;
     }
 
-    public function addItem(Buyable $product, int|float $qty = 1, array $params = []): CartItem
+    public function addItem(Buyable $product, int|float $qty = 1, array $params = [], bool $forceNewItem = false): CartItem
     {
         $cart = $this->findOrCreateCart();
 
-        $result = $cart->addItem($product, $qty, $params);
+        $result = $cart->addItem($product, $qty, $params, $forceNewItem);
         $this->triggerCartUpdatedEvent();
 
         return $result;
@@ -84,7 +84,14 @@ class CartManager implements CartManagerContract
 
     public function addSubItem(CartItem $parent, Buyable $product, float|int $qty = 1, array $params = []): CartItem
     {
-        return $this->addItem($product, $qty, array_merge($params, ['attributes' => ['parent_id' => $parent->id]]));
+        $params = array_merge($params, ['attributes' => ['parent_id' => $parent->id]]);
+
+        $result = $this->addItem($product, $qty, $params, true);
+        if ($parent->relationLoaded('children')) {
+            $parent->unsetRelation('children');
+        }
+
+        return $result;
     }
 
     public function removeItem(CartItem $item): void

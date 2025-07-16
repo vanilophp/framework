@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests\Examples;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Collection;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Support\ArrayAdjustmentCollection;
@@ -61,6 +62,16 @@ class DummyCartItem implements CartItem, Adjustable
     public function getParent(): ?self
     {
         return null;
+    }
+
+    public function hasChildItems(): bool
+    {
+        return false;
+    }
+
+    public function getChildItems(): Collection
+    {
+        return collect();
     }
 
     public function getQuantity(): int

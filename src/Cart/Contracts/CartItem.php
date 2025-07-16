@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Contracts;
 
+use Illuminate\Support\Collection;
 use Vanilo\Contracts\CheckoutSubjectItem;
 
 interface CartItem extends CheckoutSubjectItem
@@ -21,4 +22,8 @@ interface CartItem extends CheckoutSubjectItem
     public function hasParent(): bool;
 
     public function getParent(): ?self;
+
+    public function hasChildItems(): bool;
+
+    public function getChildItems(): Collection;
 }

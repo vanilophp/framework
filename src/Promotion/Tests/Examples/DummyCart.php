@@ -18,7 +18,7 @@ class DummyCart implements Cart
     ) {
     }
 
-    public function addItem(Buyable $product, float|int $qty = 1, array $params = []): CartItem
+    public function addItem(Buyable $product, float|int $qty = 1, array $params = [], bool $forceNewItem = false): CartItem
     {
         // TODO: Implement addItem() method.
     }

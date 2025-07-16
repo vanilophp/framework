@@ -17,6 +17,8 @@ namespace Vanilo\Cart\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\ConfigurableModel;
@@ -61,6 +63,11 @@ class CartItem extends Model implements CartItemContract
         return $this->belongsTo(CartItemProxy::modelClass(), 'parent_id');
     }
 
+    public function children(): HasMany
+    {
+        return $this->hasMany(CartItemProxy::modelClass(), 'parent_id');
+    }
+
     public function hasParent(): bool
     {
         return null !== $this->parent_id;
@@ -69,6 +76,16 @@ class CartItem extends Model implements CartItemContract
     public function getParent(): ?CartItemContract
     {
         return $this->parent;
+    }
+
+    public function hasChildItems(): bool
+    {
+        return $this->children->isNotEmpty();
+    }
+
+    public function getChildItems(): Collection
+    {
+        return $this->children;
     }
 
     public function getQuantity(): int

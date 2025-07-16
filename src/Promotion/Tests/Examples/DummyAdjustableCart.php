@@ -47,7 +47,7 @@ class DummyAdjustableCart implements Cart, Adjustable
         // TODO: Implement recalculateAdjustments() method.
     }
 
-    public function addItem(Buyable $product, float|int $qty = 1, array $params = []): CartItem
+    public function addItem(Buyable $product, float|int $qty = 1, array $params = [], bool $forceNewItem = false): CartItem
     {
         $item = new DummyCartItem($qty * $product->getPrice(), $qty);
         $this->items[] = $item;

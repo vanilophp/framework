@@ -29,7 +29,7 @@ interface Cart extends CheckoutSubject
      *
      * @return CartItem Returns the item object that has been created (or updated)
      */
-    public function addItem(Buyable $product, int|float $qty = 1, array $params = []): CartItem;
+    public function addItem(Buyable $product, int|float $qty = 1, array $params = [], bool $forceNewItem = false): CartItem;
 
     public function addSubItem(CartItem $parent, Buyable $product, int|float $qty = 1, array $params = []): CartItem;
 

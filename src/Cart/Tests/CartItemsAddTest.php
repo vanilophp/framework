@@ -14,17 +14,16 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class CartItemsAddTest extends TestCase
 {
-    /** @var  Product */
-    protected $product1;
+    protected Product $product1;
 
-    /** @var  Product */
-    protected $product2;
+    protected Product $product2;
 
     protected function setUp(): void
     {
@@ -40,70 +39,55 @@ class CartItemsAddTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function an_item_can_be_added_to_the_cart()
+    #[Test] public function an_item_can_be_added_to_the_cart()
     {
         Cart::addItem($this->product1);
 
         $this->assertEquals(1, Cart::itemCount());
-        $this->assertCount(1, Cart::model()->items);
-        $this->assertEquals($this->product1->id, Cart::model()->items->first()->product_id);
+        $this->assertCount(1, Cart::model()->getItems());
+        $this->assertEquals($this->product1->id, Cart::model()->getItems()->first()->product_id);
     }
 
-    /**
-     * @test
-     */
-    public function adding_an_item_results_a_non_empty_cart()
+    #[Test] public function adding_an_item_results_a_non_empty_cart()
     {
         Cart::addItem($this->product1);
 
         $this->assertTrue(Cart::isNotEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function multiple_items_can_be_added_to_the_cart()
+    #[Test] public function multiple_items_can_be_added_to_the_cart()
     {
         Cart::addItem($this->product1);
 
         $this->assertEquals(1, Cart::itemCount());
-        $this->assertCount(1, Cart::model()->items);
+        $this->assertCount(1, Cart::model()->getItems());
 
         Cart::addItem($this->product2);
 
         $this->assertEquals(2, Cart::itemCount());
-        $this->assertCount(2, Cart::model()->items);
+        $this->assertCount(2, Cart::model()->getItems());
 
         $expectedProductIds = [$this->product1->id, $this->product2->id];
         $this->assertEquals(
             $expectedProductIds,
-            Cart::model()->items->pluck('product_id')->all()
+            Cart::model()->getItems()->pluck('product_id')->all()
         );
     }
 
-    /**
-     * @test
-     */
-    public function adding_the_same_item_twice_doesnt_duplicate_lines_but_increases_quantity()
+    #[Test] public function adding_the_same_item_twice_doesnt_duplicate_lines_but_increases_quantity()
     {
         Cart::addItem($this->product1);
 
         $this->assertEquals(1, Cart::itemCount());
-        $this->assertCount(1, Cart::model()->items);
+        $this->assertCount(1, Cart::model()->getItems());
 
         Cart::addItem($this->product1);
 
         $this->assertEquals(2, Cart::itemCount());
-        $this->assertCount(1, Cart::model()->items);
+        $this->assertCount(1, Cart::model()->getItems());
     }
 
-    /**
-     * @test
-     */
-    public function quantity_can_be_specified_when_adding_an_item()
+    #[Test] public function quantity_can_be_specified_when_adding_an_item()
     {
         Cart::addItem($this->product1, 3);
 
@@ -112,13 +96,10 @@ class CartItemsAddTest extends TestCase
         Cart::addItem($this->product1, 2);
 
         $this->assertEquals(5, Cart::itemCount());
-        $this->assertCount(1, Cart::model()->items);
+        $this->assertCount(1, Cart::model()->getItems());
     }
 
-    /**
-     * @test
-     */
-    public function adding_an_item_returns_the_item_object()
+    #[Test] public function adding_an_item_returns_the_item_object()
     {
         $this->assertInstanceOf(
             CartItem::class,
@@ -126,10 +107,7 @@ class CartItemsAddTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function adding_a_product_twice_also_returns_the_item_object()
+    #[Test] public function adding_a_product_twice_also_returns_the_item_object()
     {
         Cart::addItem($this->product1);
 
@@ -139,8 +117,20 @@ class CartItemsAddTest extends TestCase
         );
     }
 
-    /** @test */
-    public function cart_items_can_be_assigned_a_configuration_array()
+    #[Test] public function it_can_be_forced_to_create_a_new_item_when_adding_a_product_twice()
+    {
+        $item1 = Cart::addItem($this->product1);
+        $item2 = Cart::addItem($this->product1, forceNewItem: true);
+
+        $this->assertInstanceOf(CartItem::class, $item1);
+        $this->assertInstanceOf(CartItem::class, $item2);
+        $this->assertNotSame($item1, $item2);
+        $this->assertNotEquals($item1->id, $item2->id);
+        $this->assertEquals(2, Cart::itemCount());
+        $this->assertCount(2, Cart::model()->getItems());
+    }
+
+    #[Test] public function cart_items_can_be_assigned_a_configuration_array()
     {
         $item = Cart::addItem($this->product1, 1, ['attributes' => ['configuration' => ['custom_message' => 'Hey Hello']]]);
 

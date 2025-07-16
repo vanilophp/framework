@@ -52,11 +52,14 @@ class Cart extends Model implements CartContract
         return (int) $this->items->sum('quantity');
     }
 
-    public function addItem(Buyable $product, int|float $qty = 1, array $params = []): CartItemContract
+    public function addItem(Buyable $product, int|float $qty = 1, array $params = [], bool $forceNewItem = false): CartItemContract
     {
-        $item = $this->resolveCartItem($product, $params);
+        $item = match ($forceNewItem) {
+            false => $this->resolveCartItem($product, $params),
+            default => null,
+        };
 
-        if ($item) {
+        if (null !== $item) {
             $item->quantity += $qty;
             $item->save();
         } else {
@@ -76,7 +79,14 @@ class Cart extends Model implements CartContract
 
     public function addSubItem(CartItemContract $parent, Buyable $product, float|int $qty = 1, array $params = []): CartItemContract
     {
-        return $this->addItem($product, $qty, array_merge($params, ['attributes' => ['parent_id' => $parent->id]]));
+        $params = array_merge($params, ['attributes' => ['parent_id' => $parent->id]]);
+
+        $result = $this->addItem($product, $qty, $params, true);
+        if ($parent->relationLoaded('children')) {
+            $parent->unsetRelation('children');
+        }
+
+        return $result;
     }
 
     public function removeItem(CartItemContract $item): void

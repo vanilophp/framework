@@ -6,7 +6,12 @@
 ##### 2025-XX-XX
 
 - BC: Added the `addSubItem()` method to the Cart interface
-- BC: Added the `hasParent()` and `getParent()` methods to the CartItem interface
+- BC: Added the `$forceNewItem` (default false) parameter to the `Cart::addItem()` method
+- BC: Added the following methods to the CartItem interface:
+   - `hasParent()`
+   - `getParent()`
+   - `hasChildItems()`
+   - `getChildItems()`
 - Dropped PHP 8.2 Support
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
