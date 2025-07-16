@@ -39,7 +39,7 @@ class Cart extends Model implements CartContract
 
     public function items(): HasMany
     {
-        return $this->hasMany(CartItemProxy::modelClass(), 'cart_id', 'id');
+        return $this->hasMany(CartItemProxy::modelClass(), 'cart_id', 'id')->orderBy('id');
     }
 
     public function getItems(): Collection
