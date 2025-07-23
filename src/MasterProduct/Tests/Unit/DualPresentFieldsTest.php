@@ -248,11 +248,13 @@ class DualPresentFieldsTest extends TestCase
         ]);
 
         $this->assertFalse($variant1->hasOwnState());
-        $this->assertInstanceOf(ProductState::class, $variant1->state);;
+        $this->assertInstanceOf(ProductState::class, $variant1->state);
+        ;
         $this->assertTrue($variant1->state->equals(ProductState::RETIRED()));
 
         $this->assertFalse($variant2->hasOwnState());
-        $this->assertInstanceOf(ProductState::class, $variant2->state);;
+        $this->assertInstanceOf(ProductState::class, $variant2->state);
+        ;
         $this->assertTrue($variant2->state->equals(ProductState::RETIRED()));
     }
 
@@ -278,15 +280,18 @@ class DualPresentFieldsTest extends TestCase
         ]);
 
         $this->assertTrue($varRetired->hasOwnState());
-        $this->assertInstanceOf(ProductState::class, $varRetired->state);;
+        $this->assertInstanceOf(ProductState::class, $varRetired->state);
+        ;
         $this->assertTrue($varRetired->state->equals(ProductState::RETIRED()));
 
         $this->assertTrue($varActive->hasOwnState());
-        $this->assertInstanceOf(ProductState::class, $varActive->state);;
+        $this->assertInstanceOf(ProductState::class, $varActive->state);
+        ;
         $this->assertTrue($varActive->state->equals(ProductState::ACTIVE()));
 
         $this->assertFalse($varAgnostic->hasOwnState());
-        $this->assertInstanceOf(ProductState::class, $varAgnostic->state);;
+        $this->assertInstanceOf(ProductState::class, $varAgnostic->state);
+        ;
         $this->assertTrue($varAgnostic->state->equals(ProductState::UNLISTED()));
     }
 
