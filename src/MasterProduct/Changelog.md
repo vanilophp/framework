@@ -10,6 +10,7 @@
 - Added Laravel 12 Support
 - Added the `gtin` field to the products and master product variants tables
 - Removed the enum constraint from the `product.state` database field
+- Added the dual-field logic + Enum conversion to the MasterProductVariant model's `state` field
 
 ## 4.x Series
 

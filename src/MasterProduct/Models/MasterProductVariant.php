@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Vanilo\Contracts\Dimension as DimensionContract;
 use Vanilo\Contracts\Stockable;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
+use Vanilo\Product\Contracts\ProductState;
+use Vanilo\Product\Models\ProductStateProxy;
 use Vanilo\Support\Dto\Dimension;
 
 /**
@@ -155,6 +157,11 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
         return null !== $this->getRawOriginal('weight');
     }
 
+    public function hasOwnState(): bool
+    {
+        return null !== $this->getRawOriginal('state');
+    }
+
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -208,6 +215,19 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
     {
         return Attribute::make(
             get: fn ($value) => is_null($value) ? $this->masterProduct?->weight : floatval($value),
+        );
+    }
+
+    protected function state(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if ($value instanceof ProductState) {
+                    return $value;
+                }
+
+                return is_null($value) ? $this->masterProduct?->state : ProductStateProxy::create($value);
+            },
         );
     }
 }

@@ -14,9 +14,11 @@ declare(strict_types=1);
 
 namespace Vanilo\MasterProduct\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductVariant;
 use Vanilo\MasterProduct\Tests\TestCase;
+use Vanilo\Product\Models\ProductState;
 
 class DualPresentFieldsTest extends TestCase
 {
@@ -228,6 +230,64 @@ class DualPresentFieldsTest extends TestCase
 
         $this->assertFalse($gin05->hasOwnExcerpt());
         $this->assertEquals('Create the sweetest cocktails with this Gin.', $gin05->excerpt);
+    }
+
+    #[Test] public function the_state_of_the_master_is_used_on_the_variant_if_the_variant_state_is_null()
+    {
+        $master = MasterProduct::create([
+            'name' => 'Edinburgh Raspberry Gin',
+            'state' => ProductState::RETIRED,
+        ]);
+        $variant1 = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'XXS1',
+        ]);
+        $variant2 = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'XXS2',
+        ]);
+
+        $this->assertFalse($variant1->hasOwnState());
+        $this->assertInstanceOf(ProductState::class, $variant1->state);;
+        $this->assertTrue($variant1->state->equals(ProductState::RETIRED()));
+
+        $this->assertFalse($variant2->hasOwnState());
+        $this->assertInstanceOf(ProductState::class, $variant2->state);;
+        $this->assertTrue($variant2->state->equals(ProductState::RETIRED()));
+    }
+
+    #[Test] public function own_state_is_used_on_the_variant_if_the_variant_has_its_own_state()
+    {
+        $master = MasterProduct::create([
+            'name' => 'Edinburgh Raspberry Gin',
+            'state' => ProductState::UNLISTED,
+        ]);
+        $varRetired = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'VRS1',
+            'state' => ProductState::RETIRED,
+        ]);
+        $varActive = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'VAS2',
+            'state' => ProductState::ACTIVE(),
+        ]);
+        $varAgnostic = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'VAG3',
+        ]);
+
+        $this->assertTrue($varRetired->hasOwnState());
+        $this->assertInstanceOf(ProductState::class, $varRetired->state);;
+        $this->assertTrue($varRetired->state->equals(ProductState::RETIRED()));
+
+        $this->assertTrue($varActive->hasOwnState());
+        $this->assertInstanceOf(ProductState::class, $varActive->state);;
+        $this->assertTrue($varActive->state->equals(ProductState::ACTIVE()));
+
+        $this->assertFalse($varAgnostic->hasOwnState());
+        $this->assertInstanceOf(ProductState::class, $varAgnostic->state);;
+        $this->assertTrue($varAgnostic->state->equals(ProductState::UNLISTED()));
     }
 
     /** @test */
