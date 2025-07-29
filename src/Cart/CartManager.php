@@ -29,7 +29,6 @@ use Vanilo\Cart\Events\CartUpdated;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
-use Vanilo\Cart\Models\CartStateProxy;
 use Vanilo\Contracts\Buyable;
 
 class CartManager implements CartManagerContract
