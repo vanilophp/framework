@@ -15,31 +15,29 @@ declare(strict_types=1);
 namespace Vanilo\Cart\Tests;
 
 use Konekt\Enum\Enum;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Contracts\CartState as CartStateContract;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartState;
 
 class CartStateTest extends TestCase
 {
-    /** @test */
-    public function cart_state_is_an_enum_and_implements_the_cart_state_interface()
+    #[Test] public function cart_state_is_an_enum_and_implements_the_cart_state_interface()
     {
         $cart = Cart::create([]);
 
         $this->assertInstanceOf(CartStateContract::class, $cart->state);
-        $this->assertInstanceOf(Enum::class, $cart->state);
+        $this->assertInstanceOf(Enum::class, $cart->getState());
     }
 
-    /** @test */
-    public function a_new_cart_has_the_default_state()
+    #[Test] public function a_new_cart_has_the_default_state()
     {
         $cart = Cart::create([]);
 
-        $this->assertEquals(CartState::defaultValue(), $cart->state->value());
+        $this->assertEquals(CartState::defaultValue(), $cart->getState()->value());
     }
 
-    /** @test */
-    public function the_cart_state_can_be_changed()
+    #[Test] public function the_cart_state_can_be_changed()
     {
         $cart = Cart::create(['state' => CartState::CHECKOUT]);
         $this->assertTrue(CartState::CHECKOUT()->equals($cart->state));
@@ -51,8 +49,7 @@ class CartStateTest extends TestCase
         $this->assertTrue(CartState::COMPLETED()->equals($cart->state));
     }
 
-    /** @test */
-    public function active_states_can_be_retrieved()
+    #[Test] public function active_states_can_be_retrieved()
     {
         $this->assertCount(2, CartState::getActiveStates());
 
@@ -60,8 +57,7 @@ class CartStateTest extends TestCase
         $this->assertContains(CartState::CHECKOUT, CartState::getActiveStates());
     }
 
-    /** @test */
-    public function active_carts_can_be_retrieved()
+    #[Test] public function active_carts_can_be_retrieved()
     {
         Cart::create(['state' => CartState::ACTIVE]);
         Cart::create(['state' => CartState::ACTIVE]);

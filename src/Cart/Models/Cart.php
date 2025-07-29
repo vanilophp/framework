@@ -22,6 +22,7 @@ use Illuminate\Support\Collection;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
+use Vanilo\Cart\Contracts\CartState as CartStateContract;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Contracts\Buyable;
 
@@ -50,6 +51,11 @@ class Cart extends Model implements CartContract
     public function itemCount(): int
     {
         return (int) $this->items->sum('quantity');
+    }
+
+    public function getState(): CartStateContract
+    {
+        return $this->state;
     }
 
     public function getRootItems(): Collection

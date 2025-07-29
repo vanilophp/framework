@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Event;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Contracts\CartManager as CartManagerContract;
+use Vanilo\Cart\Contracts\CartState;
 use Vanilo\Cart\Events\CartCreated;
 use Vanilo\Cart\Events\CartDeleted;
 use Vanilo\Cart\Events\CartDeleting;
@@ -28,6 +29,7 @@ use Vanilo\Cart\Events\CartUpdated;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Cart\Models\Cart;
 use Vanilo\Cart\Models\CartProxy;
+use Vanilo\Cart\Models\CartStateProxy;
 use Vanilo\Contracts\Buyable;
 
 class CartManager implements CartManagerContract
@@ -60,6 +62,11 @@ class CartManager implements CartManagerContract
         }
 
         return null;
+    }
+
+    public function getState(): ?CartState
+    {
+        return $this->exists() ? $this->model()->getState() : null;
     }
 
     public function getItems(): Collection

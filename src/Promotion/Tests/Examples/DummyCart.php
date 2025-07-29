@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Collection;
 use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartItem;
+use Vanilo\Cart\Contracts\CartState;
 use Vanilo\Contracts\Buyable;
 
 class DummyCart implements Cart
@@ -56,6 +57,11 @@ class DummyCart implements Cart
     public function setUser(int|Authenticatable|string|null $user): void
     {
         // TODO: Implement setUser() method.
+    }
+
+    public function getState(): ?CartState
+    {
+        return null;
     }
 
     public function getItems(): Collection

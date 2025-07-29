@@ -11,6 +11,7 @@ use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartItem;
+use Vanilo\Cart\Contracts\CartState;
 use Vanilo\Contracts\Buyable;
 
 class DummyAdjustableCart implements Cart, Adjustable
@@ -45,6 +46,11 @@ class DummyAdjustableCart implements Cart, Adjustable
     public function recalculateAdjustments(): void
     {
         // TODO: Implement recalculateAdjustments() method.
+    }
+
+    public function getState(): ?CartState
+    {
+        return null;
     }
 
     public function addItem(Buyable $product, float|int $qty = 1, array $params = [], bool $forceNewItem = false): CartItem

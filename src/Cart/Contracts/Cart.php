@@ -50,6 +50,8 @@ interface Cart extends CheckoutSubject
 
     public function itemCount(): int;
 
+    public function getState(): ?CartState;
+
     public function getUser(): ?Authenticatable;
 
     public function setUser(Authenticatable|int|string|null $user): void;
