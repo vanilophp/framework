@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Vanilo\Cart\Tests;
 
 use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 use Vanilo\Cart\Tests\Dummies\User;
+use Vanilo\Cart\Tests\Factories\ProductFactory;
+use Vanilo\Cart\Tests\Factories\UserFactory;
 
 class MergeCartsTest extends TestCase
 {
@@ -28,15 +31,18 @@ class MergeCartsTest extends TestCase
         config(['vanilo.cart.preserve_for_user' => true]);
     }
 
-    /** @test */
-    public function a_users_previous_cart_can_be_merged_with_the_current_sessions_cart()
+    #[Test] public function a_users_previous_cart_can_be_merged_with_the_current_sessions_cart()
     {
         config(['vanilo.cart.merge_duplicates' => true]);
 
-        $user = factory(User::class)->create();
-        $product1 = factory(Product::class)->create();
-        $product2 = factory(Product::class)->create();
-        $product3 = factory(Product::class)->create();
+        /** @var User $user */
+        $user = UserFactory::new()->create();
+        /** @var Product $product1 */
+        $product1 = ProductFactory::new()->create();;
+        /** @var Product $product2 */
+        $product2 = ProductFactory::new()->create();;
+        /** @var Product $product3 */
+        $product3 = ProductFactory::new()->create();;
 
         $this->be($user);
         $this->assertAuthenticatedAs($user);
@@ -69,15 +75,14 @@ class MergeCartsTest extends TestCase
         $this->assertContains($product3->name, $names);
     }
 
-    /** @test */
-    public function cart_will_not_be_merged_if_config_option_is_not_enabled()
+    #[Test] public function cart_will_not_be_merged_if_config_option_is_not_enabled()
     {
         config(['vanilo.cart.merge_duplicates' => false]);
 
-        $user = factory(User::class)->create();
-        $product1 = factory(Product::class)->create();
-        $product2 = factory(Product::class)->create();
-        $product3 = factory(Product::class)->create();
+        $user = UserFactory::new()->create();
+        $product1 = ProductFactory::new()->create();;
+        $product2 = ProductFactory::new()->create();;
+        $product3 = ProductFactory::new()->create();;
 
         $this->be($user);
         $this->assertAuthenticatedAs($user);
