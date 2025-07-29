@@ -17,12 +17,12 @@
         }
     ],
     "require": {
-        "php": "^8.2",
-        "konekt/concord": "^1.13",
+        "php": "^8.3",
+        "konekt/concord": "^1.15",
         "konekt/enum": "^4.2",
-        "laravel/framework": "^10.43|^11.0",
-        "vanilo/contracts": "^4.0",
-        "vanilo/support": "^4.2"
+        "laravel/framework": "^10.48|^11.0|^12.0",
+        "vanilo/contracts": "^5.0",
+        "vanilo/support": "^5.0"
     },
     "require-dev": {
         "ext-sqlite3": "*",
