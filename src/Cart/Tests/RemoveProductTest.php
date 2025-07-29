@@ -14,16 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class RemoveProductTest extends TestCase
 {
-    /** @var  Product */
-    protected $product3;
+    protected Product $product3;
 
-    /** @var  Product */
-    protected $product4;
+    protected Product $product4;
 
     protected function setUp(): void
     {
@@ -39,10 +38,7 @@ class RemoveProductTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function a_single_item_can_be_removed()
+    #[Test] public function a_single_item_can_be_removed()
     {
         Cart::addItem($this->product4);
 
@@ -51,14 +47,11 @@ class RemoveProductTest extends TestCase
         Cart::removeProduct($this->product4);
 
         $this->assertEquals(0, Cart::itemCount());
-        $this->assertCount(0, Cart::model()->items);
+        $this->assertCount(0, Cart::model()->getItems());
         $this->assertTrue(Cart::isEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function removing_an_item_leaves_other_items_intact()
+    #[Test] public function removing_an_item_leaves_other_items_intact()
     {
         Cart::addItem($this->product3);
         Cart::addItem($this->product4);
@@ -68,8 +61,8 @@ class RemoveProductTest extends TestCase
         Cart::removeProduct($this->product3);
 
         $this->assertEquals(1, Cart::itemCount());
-        $this->assertCount(1, Cart::model()->items);
-        $this->assertEquals($this->product4->id, Cart::model()->items->first()->product_id);
+        $this->assertCount(1, Cart::model()->getItems());
+        $this->assertEquals($this->product4->id, Cart::model()->getItems()->first()->product_id);
         $this->assertTrue(Cart::isNotEmpty());
     }
 }

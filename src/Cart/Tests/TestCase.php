@@ -24,8 +24,6 @@ use Vanilo\Cart\Tests\Dummies\User;
 
 abstract class TestCase extends Orchestra
 {
-    use Laravel54TestCompatibility;
-
     protected function setUp(): void
     {
         parent::setUp();

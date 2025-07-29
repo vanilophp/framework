@@ -14,13 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class CartItemConfigurationTest extends TestCase
 {
-    /** @test */
-    public function a_cart_items_configuration_can_be_saved()
+    #[Test] public function a_cart_items_configuration_can_be_saved()
     {
         $product = Product::create([
             'name' => 'Tasty Burger',
@@ -34,8 +34,7 @@ class CartItemConfigurationTest extends TestCase
         $this->assertEquals(['extra_cheese', 'bacon'], $item->configuration());
     }
 
-    /** @test */
-    public function when_adding_a_product_that_has_a_different_configuration_then_two_separate_cart_items_will_be_added()
+    #[Test] public function when_adding_a_product_that_has_a_different_configuration_then_two_separate_cart_items_will_be_added()
     {
         $product = Product::create([
             'name' => 'Eleven Burger',
@@ -50,8 +49,7 @@ class CartItemConfigurationTest extends TestCase
         $this->assertEquals(['no_pommes', 'extra_coleslaw'], Cart::getItems()->last()->configuration());
     }
 
-    /** @test */
-    public function when_adding_a_product_where_one_has_an_associative_array_config_and_the_other_one_a_list_then_two_separate_items_will_be_created()
+    #[Test] public function when_adding_a_product_where_one_has_an_associative_array_config_and_the_other_one_a_list_then_two_separate_items_will_be_created()
     {
         $product = Product::create([
             'name' => 'Juicy Lucy',
@@ -77,8 +75,7 @@ class CartItemConfigurationTest extends TestCase
         $this->assertEquals(['extra_coleslaw'], Cart::getItems()->last()->configuration());
     }
 
-    /** @test */
-    public function it_creates_one_item_if_the_configurations_match()
+    #[Test] public function it_creates_one_item_if_the_configurations_match()
     {
         $product = Product::create([
             'name' => 'Italian Burger',
@@ -92,8 +89,7 @@ class CartItemConfigurationTest extends TestCase
         $this->assertEquals(['extra_coleslaw'], Cart::getItems()->first()->configuration());
     }
 
-    /** @test */
-    public function it_groups_configurationless_entries_and_keeps_configured_ones_separated()
+    #[Test] public function it_groups_configurationless_entries_and_keeps_configured_ones_separated()
     {
         $product = Product::create([
             'name' => 'Wendy\'s Burger',
@@ -115,8 +111,7 @@ class CartItemConfigurationTest extends TestCase
         $this->assertEquals(4, Cart::getItems()->last()->getQuantity());
     }
 
-    /** @test */
-    public function it_distinguishes_configurations_across_multiple_add_to_cart_calls()
+    #[Test] public function it_distinguishes_configurations_across_multiple_add_to_cart_calls()
     {
         $product = Product::create([
             'name' => 'McFarm',

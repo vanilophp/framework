@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Cart\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
@@ -22,10 +23,7 @@ use Vanilo\Cart\Tests\Dummies\SizedProduct;
 
 class CartCustomItemAttributesTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function custom_product_attributes_specified_in_config_are_copied_to_cart_item_on_adding_product_to_cart()
+    #[Test] public function custom_product_attributes_specified_in_config_are_copied_to_cart_item_on_adding_product_to_cart()
     {
         config([
             'vanilo.cart.extra_product_attributes' => [
@@ -48,10 +46,7 @@ class CartCustomItemAttributesTest extends TestCase
         $this->assertEquals(15, $item->depth);
     }
 
-    /**
-     * @test
-     */
-    public function custom_cart_item_attributes_can_be_passed_and_are_stored_when_adding_a_product_to_cart()
+    #[Test] public function custom_cart_item_attributes_can_be_passed_and_are_stored_when_adding_a_product_to_cart()
     {
         $product = Product::create([
             'name' => 'Kids Backpack Dinosaur',
@@ -69,10 +64,7 @@ class CartCustomItemAttributesTest extends TestCase
         $this->assertEquals(9, $item->depth);
     }
 
-    /**
-     * @test
-     */
-    public function setting_nonstring_extra_product_attributes_with_configuration_throws_an_exception()
+    #[Test] public function setting_nonstring_extra_product_attributes_with_configuration_throws_an_exception()
     {
         $this->expectException(InvalidCartConfigurationException::class);
 
@@ -86,10 +78,7 @@ class CartCustomItemAttributesTest extends TestCase
         Cart::addItem($product);
     }
 
-    /**
-     * @test
-     */
-    public function setting_nonarray_as_extra_product_attributes_configuration_throws_an_exception()
+    #[Test] public function setting_nonarray_as_extra_product_attributes_configuration_throws_an_exception()
     {
         $this->expectException(InvalidCartConfigurationException::class);
 
@@ -103,10 +92,7 @@ class CartCustomItemAttributesTest extends TestCase
         Cart::addItem($product);
     }
 
-    /**
-     * @test
-     */
-    public function explicitly_passed_extra_attributes_override_configured_extra_attributes_from_model()
+    #[Test] public function explicitly_passed_extra_attributes_override_configured_extra_attributes_from_model()
     {
         config([
             'vanilo.cart.extra_product_attributes' => [

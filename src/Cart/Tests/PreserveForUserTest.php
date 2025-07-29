@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Cart\Tests;
 
 use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Models\Cart as CartModel;
 use Vanilo\Cart\Models\CartState;
@@ -23,11 +24,9 @@ use Vanilo\Cart\Tests\Dummies\User;
 
 class PreserveForUserTest extends TestCase
 {
-    /** @var User */
-    protected $user;
+    protected User $user;
 
-    /** @var Product */
-    protected $product;
+    protected Product$product;
 
     protected function setUp(): void
     {
@@ -47,8 +46,7 @@ class PreserveForUserTest extends TestCase
         ])->fresh();
     }
 
-    /** @test */
-    public function it_preserves_the_cart_for_the_user_after_logout_if_feature_is_enabled()
+    #[Test] public function it_preserves_the_cart_for_the_user_after_logout_if_feature_is_enabled()
     {
         $this->be($this->user);
         $this->assertAuthenticatedAs($this->user);
@@ -62,8 +60,7 @@ class PreserveForUserTest extends TestCase
         $this->assertCount(1, CartModel::ofUser($this->user)->get());
     }
 
-    /** @test */
-    public function it_restores_the_cart_if_user_logs_back_in_and_feature_is_enabled()
+    #[Test] public function it_restores_the_cart_if_user_logs_back_in_and_feature_is_enabled()
     {
         $this->be($this->user);
         $this->assertAuthenticatedAs($this->user);
@@ -85,8 +82,7 @@ class PreserveForUserTest extends TestCase
         $this->assertEquals(3, Cart::getItems()->first()->quantity);
     }
 
-    /** @test */
-    public function it_does_not_restore_the_saved_cart_if_there_is_another_cart_for_the_session()
+    #[Test] public function it_does_not_restore_the_saved_cart_if_there_is_another_cart_for_the_session()
     {
         $this->be($this->user);
         $this->assertAuthenticatedAs($this->user);
@@ -117,8 +113,7 @@ class PreserveForUserTest extends TestCase
         $this->assertEquals(5, Cart::getItems()->first()->quantity);
     }
 
-    /** @test */
-    public function it_does_not_restore_a_checked_out_cart()
+    #[Test] public function it_does_not_restore_a_checked_out_cart()
     {
         $this->be($this->user);
         $this->assertAuthenticatedAs($this->user);

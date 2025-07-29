@@ -14,17 +14,16 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Models\CartItemProxy;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class ClearCartTest extends TestCase
 {
-    /** @var  Product */
-    protected $product5;
+    protected Product $product5;
 
-    /** @var  Product */
-    protected $product6;
+    protected Product $product6;
 
     protected function setUp(): void
     {
@@ -41,45 +40,36 @@ class ClearCartTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function clearing_items_results_in_an_empty_cart()
+    #[Test] public function clearing_items_results_in_an_empty_cart()
     {
         Cart::addItem($this->product5);
 
         $this->assertEquals(1, Cart::itemCount());
-        $this->assertCount(1, Cart::model()->items);
+        $this->assertCount(1, Cart::model()->getItems());
 
         Cart::clear();
 
         $this->assertEquals(0, Cart::itemCount());
-        $this->assertCount(0, Cart::model()->items);
+        $this->assertCount(0, Cart::model()->getItems());
         $this->assertTrue(Cart::isEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function and_yes_of_course_multiple_items_get_all_deleted()
+    #[Test] public function and_yes_of_course_multiple_items_get_all_deleted()
     {
         Cart::addItem($this->product5, 3);
         Cart::addItem($this->product6, 4);
 
         $this->assertEquals(7, Cart::itemCount());
-        $this->assertCount(2, Cart::model()->items);
+        $this->assertCount(2, Cart::model()->getItems());
 
         Cart::clear();
 
         $this->assertEquals(0, Cart::itemCount());
-        $this->assertCount(0, Cart::model()->items);
+        $this->assertCount(0, Cart::model()->getItems());
         $this->assertTrue(Cart::isEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function clear_cart_removes_items_from_the_db()
+    #[Test] public function clear_cart_removes_items_from_the_db()
     {
         Cart::addItem($this->product5);
         Cart::addItem($this->product6);

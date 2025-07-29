@@ -14,17 +14,16 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Contracts\Cart as CartContract;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class DestroyCartTest extends TestCase
 {
-    /** @var  Product */
-    protected $product7;
+    protected Product $product7;
 
-    /** @var  Product */
-    protected $product8;
+    protected Product $product8;
 
     protected function setUp(): void
     {
@@ -41,10 +40,7 @@ class DestroyCartTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function cart_will_be_empty_if_you_destroy_the_cart()
+    #[Test] public function cart_will_be_empty_if_you_destroy_the_cart()
     {
         Cart::addItem($this->product7);
 
@@ -54,10 +50,7 @@ class DestroyCartTest extends TestCase
         $this->assertTrue(Cart::isEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function cart_becomes_nonexistent_after_destroy()
+    #[Test] public function cart_becomes_nonexistent_after_destroy()
     {
         Cart::addItem($this->product7);
         Cart::addItem($this->product8);
@@ -68,10 +61,7 @@ class DestroyCartTest extends TestCase
         $this->assertTrue(Cart::doesNotExist());
     }
 
-    /**
-     * @test
-     */
-    public function cart_does_not_have_a_model_after_destroy()
+    #[Test] public function cart_does_not_have_a_model_after_destroy()
     {
         Cart::addItem($this->product8);
 

@@ -14,15 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class CreateCartTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function a_cart_gets_created_if_you_add_an_item_to_it()
+    #[Test] public function a_cart_gets_created_if_you_add_an_item_to_it()
     {
         $this->assertTrue(Cart::doesNotExist());
         $product = Product::create([
@@ -35,10 +33,7 @@ class CreateCartTest extends TestCase
         $this->assertTrue(Cart::exists());
     }
 
-    /**
-     * @test
-     */
-    public function item_count_returns_the_number_of_items_in_the_cart()
+    #[Test] public function item_count_returns_the_number_of_items_in_the_cart()
     {
         $product = Product::create([
             'name' => 'S8 Mineral Water 0.5',
@@ -54,10 +49,7 @@ class CreateCartTest extends TestCase
         $this->assertEquals(2, Cart::itemCount());
     }
 
-    /**
-     * @test
-     */
-    public function number_of_items_to_add_can_be_specified()
+    #[Test] public function number_of_items_to_add_can_be_specified()
     {
         $product = Product::create([
             'name' => 'V8 Mineral Water 2L',

@@ -14,16 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class CartTotalTest extends TestCase
 {
-    /** @var  Product */
-    protected $blackCat;
+    protected Product $blackCat;
 
-    /** @var  Product */
-    protected $whiteCat;
+    protected Product $whiteCat;
 
     protected function setUp(): void
     {
@@ -40,18 +39,12 @@ class CartTotalTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function a_non_existent_cart_has_a_zero_total()
+    #[Test] public function a_non_existent_cart_has_a_zero_total()
     {
         $this->assertEquals(0, Cart::total());
     }
 
-    /**
-     * @test
-     */
-    public function cart_total_returns_the_total_of_the_items()
+    #[Test] public function cart_total_returns_the_total_of_the_items()
     {
         $item1 = Cart::addItem($this->whiteCat, 2);
         $item2 = Cart::addItem($this->blackCat);
@@ -66,10 +59,7 @@ class CartTotalTest extends TestCase
         $this->assertEquals($manualCheckSum, Cart::total());
     }
 
-    /**
-     * @test
-     */
-    public function cart_total_remains_correct_after_removing_items()
+    #[Test] public function cart_total_remains_correct_after_removing_items()
     {
         Cart::addItem($this->whiteCat);
         Cart::addItem($this->blackCat);
@@ -84,10 +74,7 @@ class CartTotalTest extends TestCase
         $this->assertEquals($this->whiteCat->getPrice(), Cart::total());
     }
 
-    /**
-     * @test
-     */
-    public function an_empty_but_existent_cart_has_a_zero_total()
+    #[Test] public function an_empty_but_existent_cart_has_a_zero_total()
     {
         Cart::addItem($this->blackCat);
         Cart::removeProduct($this->blackCat);
@@ -95,10 +82,7 @@ class CartTotalTest extends TestCase
         $this->assertEquals(0, Cart::total());
     }
 
-    /**
-     * @test
-     */
-    public function a_cleared_cart_has_zero_total()
+    #[Test] public function a_cleared_cart_has_zero_total()
     {
         Cart::addItem($this->blackCat);
         Cart::clear();

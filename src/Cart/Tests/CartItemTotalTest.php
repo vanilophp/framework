@@ -14,16 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Cart\Tests\Dummies\Product;
 
 class CartItemTotalTest extends TestCase
 {
-    /** @var  Product */
-    protected $greenBook;
+    protected Product $greenBook;
 
-    /** @var  Product */
-    protected $blueBook;
+    protected Product $blueBook;
 
     protected function setUp(): void
     {
@@ -40,10 +39,7 @@ class CartItemTotalTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function the_item_total_method_returns_price_times_quantity()
+    #[Test] public function the_item_total_method_returns_price_times_quantity()
     {
         $item1 = Cart::addItem($this->blueBook);
         $item2 = Cart::addItem($this->greenBook, 3);
@@ -73,10 +69,7 @@ class CartItemTotalTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function the_item_total_can_be_accessed_via_the_total_property_as_well()
+    #[Test] public function the_item_total_can_be_accessed_via_the_total_property_as_well()
     {
         $item = Cart::addItem($this->blueBook, 2);
 
