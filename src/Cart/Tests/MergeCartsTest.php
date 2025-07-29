@@ -38,11 +38,14 @@ class MergeCartsTest extends TestCase
         /** @var User $user */
         $user = UserFactory::new()->create();
         /** @var Product $product1 */
-        $product1 = ProductFactory::new()->create();;
+        $product1 = ProductFactory::new()->create();
+        ;
         /** @var Product $product2 */
-        $product2 = ProductFactory::new()->create();;
+        $product2 = ProductFactory::new()->create();
+        ;
         /** @var Product $product3 */
-        $product3 = ProductFactory::new()->create();;
+        $product3 = ProductFactory::new()->create();
+        ;
 
         $this->be($user);
         $this->assertAuthenticatedAs($user);
@@ -80,9 +83,12 @@ class MergeCartsTest extends TestCase
         config(['vanilo.cart.merge_duplicates' => false]);
 
         $user = UserFactory::new()->create();
-        $product1 = ProductFactory::new()->create();;
-        $product2 = ProductFactory::new()->create();;
-        $product3 = ProductFactory::new()->create();;
+        $product1 = ProductFactory::new()->create();
+        ;
+        $product2 = ProductFactory::new()->create();
+        ;
+        $product3 = ProductFactory::new()->create();
+        ;
 
         $this->be($user);
         $this->assertAuthenticatedAs($user);

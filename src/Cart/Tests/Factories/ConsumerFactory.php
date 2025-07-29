@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Vanilo\Cart\Tests\Dummies\Consumer;
 
-
 class ConsumerFactory extends Factory
 {
     protected $model = Consumer::class;
