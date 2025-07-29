@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Channel\Models\Channel;
 use Vanilo\Channel\Tests\Dummies\ChannelableDummyPlan;
 use Vanilo\Channel\Tests\Dummies\ChannelableDummyProduct;
+use Vanilo\Channel\Tests\Factories\ChannelFactory;
 use Vanilo\Channel\Tests\TestCase;
 
 /**
@@ -18,11 +20,10 @@ use Vanilo\Channel\Tests\TestCase;
  */
 class ChannelablesTest extends TestCase
 {
-    /** @test */
-    public function a_channel_can_be_assigned_to_a_single_channelable()
+    #[Test] public function a_channel_can_be_assigned_to_a_single_channelable()
     {
         $plan = ChannelableDummyPlan::create(['name' => 'Pro Plan']);
-        $channel = Channel::create(['name' => 'B2C']);
+        $channel = ChannelFactory::new()->create();
 
         $plan->channels()->save($channel);
 
@@ -30,12 +31,11 @@ class ChannelablesTest extends TestCase
         $this->assertEquals($channel->id, $plan->channels->first()->id);
     }
 
-    /** @test */
-    public function multiple_shipments_can_be_assigned_to_a_single_shippable()
+    #[Test] public function multiple_shipments_can_be_assigned_to_a_single_shippable()
     {
         $plan = ChannelableDummyPlan::create(['name' => 'Basic Plan']);
-        $channel1 = Channel::create(['name' => 'Channel 1']);
-        $channel2 = Channel::create(['name' => 'Channel 2']);
+        $channel1 = ChannelFactory::new()->create();
+        $channel2 = ChannelFactory::new()->create();
 
         $plan->channels()->saveMany([$channel1, $channel2]);
 
@@ -44,8 +44,7 @@ class ChannelablesTest extends TestCase
         $this->assertEquals($channel2->id, $plan->channels->last()->id);
     }
 
-    /** @test */
-    public function one_shipment_can_belong_to_multiple_shippables()
+    #[Test] public function one_shipment_can_belong_to_multiple_shippables()
     {
         Channel::resolveRelationUsing('plans', function (Channel $channel) {
             return $channel->morphedByMany(ChannelableDummyPlan::class, 'channelable');
@@ -53,7 +52,7 @@ class ChannelablesTest extends TestCase
 
         $plan1 = ChannelableDummyPlan::create(['name' => 'Plan 1']);
         $plan2 = ChannelableDummyPlan::create(['name' => 'Plan 2']);
-        $channel = Channel::create(['name' => 'Sky Channel']);
+        $channel = ChannelFactory::new()->create();
 
         $channel->plans()->saveMany([$plan1, $plan2]);
 
@@ -62,11 +61,10 @@ class ChannelablesTest extends TestCase
         $this->assertEquals($plan2->id, $channel->plans->last()->id);
     }
 
-    /** @test */
-    public function channelables_work_with_older_non_bigint_id_models()
+    #[Test] public function channelables_work_with_older_non_bigint_id_models()
     {
         $product = ChannelableDummyProduct::create(['name' => 'Pro-Duct']);
-        $channel = Channel::create(['name' => 'B2B']);
+        $channel = ChannelFactory::new()->create();
 
         $product->channels()->save($channel);
 

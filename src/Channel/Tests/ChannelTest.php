@@ -16,13 +16,14 @@ namespace Vanilo\Channel\Tests;
 
 use Konekt\Address\Models\Zone;
 use Konekt\Address\Models\ZoneScope;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Channel\Models\Channel;
+use Vanilo\Channel\Tests\Factories\ChannelFactory;
 use Vanilo\Contracts\Merchant;
 
 class ChannelTest extends TestCase
 {
-    /** @test */
-    public function all_mutable_fields_can_be_mass_assigned()
+    #[Test] public function all_mutable_fields_can_be_mass_assigned()
     {
         $channel = Channel::create([
             'name' => 'Sweden Online',
@@ -35,8 +36,7 @@ class ChannelTest extends TestCase
         $this->assertEquals(['country' => 'se', 'currency' => 'SEK'], $channel->configuration);
     }
 
-    /** @test */
-    public function all_mutable_fields_can_be_set()
+    #[Test] public function all_mutable_fields_can_be_set()
     {
         $channel = new Channel();
 
@@ -50,14 +50,12 @@ class ChannelTest extends TestCase
         $this->assertEquals('USD', $channel->currency);
 
         $cfg = $channel->configuration;
-        // @todo convert to `assertIsArray` once dropping Laravel 5.5 -> PHPUnit < 7.5 support
         $this->assertIsArray($cfg);
         $this->assertEquals('zdish', $cfg['bam']);
         $this->assertEquals('tsish', $cfg['bumm']);
     }
 
-    /** @test */
-    public function slug_must_be_unique()
+    #[Test] public function slug_must_be_unique()
     {
         $this->expectExceptionMessageMatches('/UNIQUE constraint failed/');
 
@@ -74,16 +72,14 @@ class ChannelTest extends TestCase
         $this->assertNotEquals($c1->slug, $c2->slug);
     }
 
-    /** @test */
-    public function the_slug_gets_generated_automatically()
+    #[Test] public function the_slug_gets_generated_automatically()
     {
         $channel = Channel::create(['name' => 'A bottle of water']);
 
         $this->assertEquals('a-bottle-of-water', $channel->slug);
     }
 
-    /** @test  */
-    public function it_can_return_the_merchant_from_model_data()
+    #[Test] public function it_can_return_the_merchant_from_model_data()
     {
         $channel = Channel::create([
             'name' => 'Ferrari Shop',
@@ -113,10 +109,9 @@ class ChannelTest extends TestCase
         $this->assertEquals('41044', $merchant->getAddress()->getPostalCode());
     }
 
-    /** @test */
-    public function it_returns_an_empty_array_of_shipping_and_billing_countries_by_default()
+    #[Test] public function it_returns_an_empty_array_of_shipping_and_billing_countries_by_default()
     {
-        $channel = Channel::create(['name' => 'Mobile App']);
+        $channel = ChannelFactory::new()->create();
 
         $billingCountries = $channel->getBillingCountries();
         $shippingCountries = $channel->getShippingCountries();
@@ -127,8 +122,7 @@ class ChannelTest extends TestCase
         $this->assertEmpty($shippingCountries);
     }
 
-    /** @test */
-    public function billing_countries_can_be_assigned_via_zones()
+    #[Test] public function billing_countries_can_be_assigned_via_zones()
     {
         $zone = Zone::create(['scope' => ZoneScope::BILLING(), 'name' => 'Scandinavia']);
         $zone->addCountry('SE');
@@ -147,8 +141,7 @@ class ChannelTest extends TestCase
         $this->assertContains('NO', $billingCountries);
     }
 
-    /** @test */
-    public function shipping_countries_can_be_assigned_via_zones()
+    #[Test] public function shipping_countries_can_be_assigned_via_zones()
     {
         $zone = Zone::create(['scope' => ZoneScope::SHIPPING(), 'name' => 'Benelux']);
         $zone->addCountry('BE');
