@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Unit;
 
-use Vanilo\Foundation\Models\MasterProduct;
-use Vanilo\Foundation\Models\MasterProductVariant;
+use Vanilo\MasterProduct\Models\MasterProduct;
+use Vanilo\MasterProduct\Models\MasterProductVariant;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
