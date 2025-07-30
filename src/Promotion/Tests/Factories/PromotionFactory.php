@@ -15,7 +15,7 @@ class PromotionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->words(mt_rand(2, 5), true),
+            'name' => fake()->words(mt_rand(2, 5), true),
         ];
     }
 

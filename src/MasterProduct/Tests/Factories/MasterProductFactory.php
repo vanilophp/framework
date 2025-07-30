@@ -25,26 +25,18 @@ class MasterProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->words(mt_rand(2, 5), true),
+            'name' => fake()->words(mt_rand(2, 5), true),
             'state' => ProductStateProxy::defaultValue(),
         ];
     }
 
     public function inactive(): self
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'state' => ProductStateProxy::INACTIVE(),
-            ];
-        });
+        return $this->state(fn ($attrs) => ['state' => ProductStateProxy::INACTIVE()]);
     }
 
     public function active(): self
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'state' => ProductStateProxy::ACTIVE(),
-            ];
-        });
+        return $this->state(fn ($attrs) => ['state' => ProductStateProxy::ACTIVE()]);
     }
 }
