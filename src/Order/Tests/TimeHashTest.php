@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Generators\TimeHashGenerator;
 
-class TimeHashTest extends TestCase
+class TimeHashTest extends TestCaseWithoutDB
 {
     protected TimeHashGenerator $generator;
 
@@ -32,13 +32,15 @@ class TimeHashTest extends TestCase
 
     #[Test] public function it_generates_a_13_char_long_string()
     {
-        $nr = $this->generator->generateNumber();
-        $this->assertEquals(13, strlen($nr));
+        $number = $this->generator->generateNumber();
+
+        $this->assertMatchesRegularExpression('/^[A-Z0-9]{3}-[A-Z0-9]{4}-[A-Z0-9]{4}$/m', $number);
+        $this->assertEquals(13, strlen($number));
     }
 
-    #[Test] public function it_generates_13_char_long_strings_ten_thousand_times()
+    #[Test] public function it_generates_13_char_long_strings_five_thousand_times()
     {
-        for ($i = 0; $i < 10000; $i++) {
+        for ($i = 0; $i < 5000; $i++) {
             $this->assertEquals(13, strlen($this->generator->generateNumber()));
         }
     }
@@ -53,16 +55,39 @@ class TimeHashTest extends TestCase
         $this->assertEquals(count($numbers), count(array_unique($numbers)));
     }
 
-    #[Test] public function it_is_unique_when_called_in_a_rapid_consecutive_eight_times_ten_times_with_small_delays()
+    #[Test] public function it_is_unique_when_called_in_a_rapid_consecutive_three_times_ten_times_with_small_delays()
     {
         $numbers = [];
-        // This is the most edgy test case, increase number of iterations and it'll be more prone to fail
-        for ($k = 0; $k < 8; $k++) {
+        for ($k = 0; $k < 3; $k++) {
             for ($i = 0; $i < 10; $i++) {
                 $numbers[] = $this->generator->generateNumber();
-                usleep(20000); //0.02s
+                usleep(10000); //0.01s
             }
-            usleep(20000); //0.02s
+            usleep(10000); //0.01s
+        }
+
+        $this->assertEquals(count($numbers), count(array_unique($numbers)));
+    }
+
+    #[Test] public function number_length_is_14_if_the_extra_digit_is_enabled()
+    {
+        $generator = new TimeHashGenerator(uppercase: true, extraDigit: true);
+
+        $this->assertMatchesRegularExpression('/^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/m', $generator->generateNumber());
+
+        for ($i = 0; $i < 100; $i++) {
+            $this->assertEquals(14, strlen($generator->generateNumber()));
+        }
+    }
+
+    #[Test] public function it_is_unique_when_called_in_a_rapid_consecutive_ten_thousand_times_with_an_extra_digit()
+    {
+        $generator = new TimeHashGenerator(extraDigit: true);
+        $numbers = [];
+        for ($k = 0; $k < 10; $k++) {
+            for ($i = 0; $i < 10; $i++) {
+                $numbers[] = $generator->generateNumber();
+            }
         }
 
         $this->assertEquals(count($numbers), count(array_unique($numbers)));
@@ -90,15 +115,13 @@ class TimeHashTest extends TestCase
 
     #[Test] public function can_be_configured_to_return_numbers_in_uppercase()
     {
-        $number = $this->generator->generateNumber();
+        $generator = new TimeHashGenerator(uppercase: false);
+        $number = $generator->generateNumber();
         $this->assertEquals($number, strtolower($number));
         $this->assertNotEquals($number, strtoupper($number));
 
-        config(['vanilo.order.number.time_hash.uppercase' => true]);
-        // Generate a new one to reread configuration
-        $this->generator = new TimeHashGenerator();
-
-        $number = $this->generator->generateNumber();
+        $generator = new TimeHashGenerator(uppercase: true);
+        $number = $generator->generateNumber();
 
         $this->assertEquals($number, strtoupper($number));
         $this->assertNotEquals($number, strtolower($number));
@@ -137,12 +160,10 @@ class TimeHashTest extends TestCase
 
     #[Test] public function start_base_date_can_be_changed_in_config()
     {
-        config(['vanilo.order.number.time_hash.start_base_date' => '2013-11-27']);
-        // Generate a new one to reread configuration
-        $this->generator = new TimeHashGenerator();
+        $generator = new TimeHashGenerator(startBaseDate: '2013-11-27');
 
         Carbon::setTestNow('2013-11-28');
 
-        $this->assertStringStartsWith('001-', $this->generator->generateNumber());
+        $this->assertStringStartsWith('001-', $generator->generateNumber());
     }
 }

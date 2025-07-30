@@ -14,31 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Artisan;
-use Konekt\Address\Contracts\Address as AddressContract;
-use Konekt\Address\Providers\ModuleServiceProvider as KonektAddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
-use Konekt\User\Providers\ModuleServiceProvider as KonektUserModule;
-use Orchestra\Testbench\TestCase as Orchestra;
-use Vanilo\Order\Providers\ModuleServiceProvider as OrderModule;
-use Vanilo\Order\Tests\Dummies\Product;
 
-abstract class TestCase extends Orchestra
+abstract class TestCase extends TestCaseWithoutDB
 {
     public function setUp(): void
     {
         parent::setUp();
-
-        Relation::morphMap([
-            shorten(Product::class) => Product::class
-        ]);
-
-        $this->app->concord->registerModel(
-            AddressContract::class,
-            Dummies\Address::class
-        );
 
         $this->setUpDatabase($this->app);
     }
@@ -49,11 +33,6 @@ abstract class TestCase extends Orchestra
         parent::tearDown();
     }
 
-    /**
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
     protected function getPackageProviders($app)
     {
         return [
@@ -62,11 +41,6 @@ abstract class TestCase extends Orchestra
         ];
     }
 
-    /**
-     * Set up the environment.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
     protected function getEnvironmentSetUp($app)
     {
         $engine = env('TEST_DB_ENGINE', 'sqlite');
@@ -92,16 +66,5 @@ abstract class TestCase extends Orchestra
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         Artisan::call('migrate', ['--force' => true]);
-    }
-
-    protected function resolveApplicationConfiguration($app)
-    {
-        parent::resolveApplicationConfiguration($app);
-
-        $app['config']->set('concord.modules', [
-            KonektUserModule::class,
-            KonektAddressModule::class,
-            OrderModule::class
-        ]);
     }
 }

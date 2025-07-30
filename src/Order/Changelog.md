@@ -7,9 +7,11 @@
 
 - Dropped PHP 8.2 Support
 - Changed the minimum Laravel 10 version to v10.48
+- Added Laravel 12 Support
 - BC: Added the `getBuyable()` method to the `OrderItem` interface
 - Changed the `Order` and `OrderItem` interfaces to extend the new `Sale` and `SaleItem` interfaces from the contracts module
-- Added Laravel 12 Support
+- Changed the TimeHash order number generator to use uppercase by default
+- Added the `extra_digit` flag to the Time Hash generator that created 4+4+4 char number (eg. "77IG-13T3-5FH9") instead of 3+4+4 ones (eg. "77I-13TX-C002")
 - Fixed the missing float cast of the order item's price field
 - PHP 8.4 deprecation notice fixes
 - Added SubItem support to the order items

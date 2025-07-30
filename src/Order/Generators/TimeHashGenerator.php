@@ -30,19 +30,24 @@ use Vanilo\Order\Contracts\OrderNumberGenerator;
  */
 class TimeHashGenerator implements OrderNumberGenerator
 {
-    /** @var bool */
-    protected $highVariance;
+    protected bool $highVariance = false;
 
-    protected $startBaseDate = '2000-01-01';
+    protected bool $extraDigit = false;
 
-    /** @var bool */
-    protected $uppercase;
+    protected Carbon|string $startBaseDate = '2000-01-01';
 
-    public function __construct()
-    {
-        $this->highVariance = $this->config('high_variance', false);
-        $this->uppercase = $this->config('uppercase', false);
-        $this->startBaseDate = Carbon::parse($this->config('start_base_date', $this->startBaseDate));
+    protected bool $uppercase = true;
+
+    public function __construct(
+        ?bool $highVariance = null,
+        ?bool $uppercase = null,
+        ?string $startBaseDate = null,
+        ?bool $extraDigit = null,
+    ) {
+        $this->highVariance = $highVariance ?? (bool) $this->config('high_variance', false);
+        $this->uppercase = $uppercase ?? (bool) $this->config('uppercase', true);
+        $this->extraDigit = $extraDigit ?? (bool) $this->config('extra_digit', false);
+        $this->startBaseDate = Carbon::parse($startBaseDate ?? $this->config('start_base_date', $this->startBaseDate));
     }
 
     /**
@@ -67,17 +72,17 @@ class TimeHashGenerator implements OrderNumberGenerator
      * ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
      * │ Format is:                                                                                   │
      * │  - 3 digits: Days since 2000-01-01 (configurable) converted to 36 scale.                     │
-     * │              eg. 2017-12-02: 6545 days => '51t'                                              │
+     * │              eg. 2017-12-02: 6545 days => '51T'                                              │
      * │  - dash                                                                                      │
-     * │  - 4 digits: second of the day in 36 scale, 0 padded (eg. 82300 -> 1ri4)                     │
+     * │  - 4 digits: second of the day in 36 scale, 0 padded (eg. 82300 -> 1RI4)                     │
      * │  - dash                                                                                      │
-     * │  - 2 digits: microtime digits 4-6 in 36scale, (eg. 271 -> 7j, 240 -> 6o)                     │
-     * │  - 1 digits: random letter 0-z (0-35)                                                        │
+     * │  - 2 digits: microtime digits 4-6 in 36scale, (eg. 271 -> 7J, 240 -> 6O)                     │
+     * │  - 1 digits: random letter 0-Z (0-35)                                                        │
      * │  - 1 digit:  microtime first digit (slowest changing part of microtime)                      │
      * │  If *high_variance* is enabled:                                                              │
      * │  - dash                                                                                      │
-     * │  - 2 digits: microtime digits 1-3 in 36scale, (eg. 171 -> 4r)                                │
-     * │  - 2 digits: random 2 chars 00-zz                                                            │
+     * │  - 2 digits: microtime digits 1-3 in 36scale, (eg. 171 -> 4R)                                │
+     * │  - 2 digits: random 2 chars 00-ZZ                                                            │
      * │                                                                                              │
      * │ N O T E S                                                                                    │
      * │   - The first part turns into 4 digits long after 2127-09-27                                 │
@@ -85,20 +90,16 @@ class TimeHashGenerator implements OrderNumberGenerator
      * │ Example 1                                                                                    │
      * │ =========                                                                                    │
      * │ ┌───────────────┐                                                                            │
-     * │ │ 4ob-1hau-bzf4 │                                                                            │
+     * │ │ 4OB-1HAU-BZF4 │                                                                            │
      * │ └───────────────┘                                                                            │
-     * │    Ordering on 2016 aug 3 at 19:11:18 => 4ob-1hau   -  bz f 4                                │
+     * │    Ordering on 2016 aug 3 at 19:11:18 => 4OB-1HAU   -  BZ F 4                                │
      * │                                          ▲   ▲         ▲  ▲ ▲                                │
      * │                                          │   │         │  │ └──── microtime slow first char  │
-     * │                                2016 aug 3┘   └69078sec │  └─ random nr (0-z)                 │
+     * │                                2016 aug 3┘   └69078sec │  └─ random nr (0-Z)                 │
      * │                                                        │                                     │
      * │                                    283, microtime rapid┘                                     │
      * │                                                                                              │
      * └──────────────────────────────────────────────────────────────────────────────────────────────┘
-     *
-     * @param Order $order
-     *
-     * @return string
      */
     public function generateNumber(Order $order = null): string
     {
@@ -122,22 +123,17 @@ class TimeHashGenerator implements OrderNumberGenerator
         return $this->uppercase ? strtoupper($number) : $number;
     }
 
-    /**
-     * @param Carbon $date
-     *
-     * @return string
-     */
-    protected function getYearAndDayHash(Carbon $date)
+    protected function getYearAndDayHash(Carbon $date): string
     {
-        return str_pad(base_convert((string) (int) $date->diffInDays($this->startBaseDate, true), 10, 36), 3, '0', STR_PAD_LEFT);
+        $result = str_pad(base_convert((string) (int) $date->diffInDays($this->startBaseDate, true), 10, 36), 3, '0', STR_PAD_LEFT);
+
+        return $this->extraDigit ? $result . base_convert((string) random_int(0, 35), 10, 36) : $result;
     }
 
     /**
      * Returns the rapidly changing part of microtime, and makes sure it is >= 36 & < 1296
-     *
-     * @return int
      */
-    protected function getRapidMicroNumber()
+    protected function getRapidMicroNumber(): int
     {
         $n = (int) (fmod(((float) microtime()) * 1000, 1) * 1000) + 36;
 
@@ -146,25 +142,15 @@ class TimeHashGenerator implements OrderNumberGenerator
 
     /**
      * Returns the slower changing part of microtime (100 < $result <= 999)
-     *
-     * @return int
      */
-    protected function getSlowMicroNumber()
+    protected function getSlowMicroNumber(): int
     {
         $n = (int) (fmod((float) microtime(), 1) * 1000);
 
         return $n;
     }
 
-    /**
-     * Returns a configuration value for this particular service
-     *
-     * @param string    $key
-     * @param null      $default
-     *
-     * @return mixed
-     */
-    private function config($key, $default = null)
+    private function config(string $key, mixed$default = null): mixed
     {
         return config('vanilo.order.number.time_hash.' . $key, $default);
     }

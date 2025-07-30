@@ -44,6 +44,8 @@
 - Added the `StaggeredDiscount` promotion action type
 - Added the `Sale` and `SaleItem` interfaces to the contracts module
 - Changed the `Order` and `OrderItem` interfaces to extend the new `Sale` and `SaleItem` interfaces from the contracts module
+- Changed the TimeHash order number generator to use uppercase by default
+- Added the `extra_digit` flag to the Time Hash generator that created 4+4+4 char number (eg. "77IG-13T3-5FH9") instead of 3+4+4 ones (eg. "77I-13TX-C002")
 - Fixed issue where the `linkable` pointed to a missing product thus returning null
 - Added the following methods to the `ProductSearch` class:
    - `excludingSkus()`

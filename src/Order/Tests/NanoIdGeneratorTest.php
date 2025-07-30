@@ -17,10 +17,9 @@ namespace Vanilo\Order\Tests;
 use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Generators\NanoIdGenerator;
 
-class NanoIdGeneratorTest extends TestCase
+class NanoIdGeneratorTest extends TestCaseWithoutDB
 {
-    /** @var NanoIdGenerator */
-    private $generator;
+    private NanoIdGenerator $generator;
 
     public function setUp(): void
     {
