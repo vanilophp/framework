@@ -16,8 +16,6 @@ namespace Vanilo\Links\Tests\Feature;
 
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
-use Vanilo\Foundation\Models\MasterProduct;
-use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
@@ -26,6 +24,8 @@ use Vanilo\Links\Query\Get;
 use Vanilo\Links\Tests\Dummies\Property;
 use Vanilo\Links\Tests\Dummies\TestLinkableProduct;
 use Vanilo\Links\Tests\TestCase;
+use Vanilo\MasterProduct\Models\MasterProduct;
+use Vanilo\MasterProduct\Models\MasterProductVariant;
 
 class QueryGetTest extends TestCase
 {
