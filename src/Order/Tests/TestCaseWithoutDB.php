@@ -7,8 +7,8 @@ namespace Vanilo\Order\Tests;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Address\Contracts\Address as AddressContract;
 use Konekt\Address\Providers\ModuleServiceProvider as KonektAddressModule;
-use Konekt\User\Providers\ModuleServiceProvider as KonektUserModule;
 use Konekt\Concord\ConcordServiceProvider;
+use Konekt\User\Providers\ModuleServiceProvider as KonektUserModule;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Vanilo\Order\Providers\ModuleServiceProvider as OrderModule;
 use Vanilo\Order\Tests\Dummies\Product;
@@ -29,7 +29,6 @@ abstract class TestCaseWithoutDB extends Orchestra
         );
     }
 
-
     protected function getPackageProviders($app)
     {
         return [
@@ -47,5 +46,4 @@ abstract class TestCaseWithoutDB extends Orchestra
             OrderModule::class
         ]);
     }
-
 }

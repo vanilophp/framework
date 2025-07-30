@@ -150,7 +150,7 @@ class TimeHashGenerator implements OrderNumberGenerator
         return $n;
     }
 
-    private function config(string $key, mixed$default = null): mixed
+    private function config(string $key, mixed $default = null): mixed
     {
         return config('vanilo.order.number.time_hash.' . $key, $default);
     }
