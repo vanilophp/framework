@@ -22,6 +22,9 @@ jobs:
           tools: composer:v2
       - name: Lock Laravel Version
         run: composer require "illuminate/support:${{ matrix.laravel }}.*" --no-update -v && composer require "illuminate/console:${{ matrix.laravel }}.*" --no-update -v
+      - name: Install DBAL for Laravel 10
+        run: |
+          [ "10.48" = "${{ matrix.laravel }}"] && composer req "doctrine/dbal" --no-update || true
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
       - name: Run Tests
