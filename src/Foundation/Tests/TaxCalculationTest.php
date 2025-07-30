@@ -19,7 +19,6 @@ use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
-use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Tests\Examples\ExampleTaxCalculator;
 use Vanilo\Foundation\Tests\Examples\ExampleTaxEngine;
 use Vanilo\Foundation\Tests\Factories\ProductFactory;

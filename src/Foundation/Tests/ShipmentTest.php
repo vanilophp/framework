@@ -17,7 +17,6 @@ namespace Vanilo\Foundation\Tests;
 use Illuminate\Support\Str;
 use Konekt\Address\Seeds\Countries;
 use PHPUnit\Framework\Attributes\Test;
-use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\OrderItem;
 use Vanilo\Foundation\Models\Product;

@@ -27,7 +27,6 @@ use Vanilo\Foundation\Tests\Factories\PropertyValueFactory;
 use Vanilo\Foundation\Tests\Factories\TaxonFactory;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
-use Vanilo\Properties\Models\PropertyValue;
 
 class ProductFinderTest extends TestCase
 {

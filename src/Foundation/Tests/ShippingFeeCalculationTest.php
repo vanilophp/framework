@@ -20,7 +20,6 @@ use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Contracts\DetailedAmount;
-use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
 use Vanilo\Foundation\Tests\Factories\ProductFactory;
 use Vanilo\Shipment\Models\ShippingMethod;

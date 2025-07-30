@@ -26,7 +26,6 @@ use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
-use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\FulfillmentStatus;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Models\OrderStatus;

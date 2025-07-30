@@ -6,9 +6,6 @@ namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use PHPUnit\Framework\Attributes\Test;
-use Vanilo\Foundation\Models\MasterProduct;
-use Vanilo\Foundation\Models\MasterProductVariant;
-use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Tests\Factories\MasterProductFactory;
 use Vanilo\Foundation\Tests\Factories\MasterProductVariantFactory;
 use Vanilo\Foundation\Tests\Factories\ProductFactory;

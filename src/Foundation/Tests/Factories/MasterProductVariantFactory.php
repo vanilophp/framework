@@ -16,7 +16,7 @@ class MasterProductVariantFactory extends Factory
     {
         return [
             'name' => fake()->words(mt_rand(1, 3), true),
-            'master_product_id' => fn() => MasterProductFactory::new()->create()->id,
+            'master_product_id' => fn () => MasterProductFactory::new()->create()->id,
             'sku' => fake()->unique()->ean8(),
             'price' => fake()->numberBetween(10, 2000),
             'stock' => fake()->numberBetween(10, 2000),

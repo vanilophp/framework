@@ -32,7 +32,6 @@ use Vanilo\Foundation\Tests\Factories\TaxonFactory;
 use Vanilo\Foundation\Tests\TestCase;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
-use Vanilo\Properties\Models\PropertyValue;
 
 class ProductSearchTest extends TestCase
 {

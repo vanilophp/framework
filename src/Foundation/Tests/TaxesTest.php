@@ -15,9 +15,6 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
-use Vanilo\Foundation\Models\MasterProduct;
-use Vanilo\Foundation\Models\MasterProductVariant;
-use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Tests\Factories\MasterProductFactory;
 use Vanilo\Foundation\Tests\Factories\MasterProductVariantFactory;
 use Vanilo\Foundation\Tests\Factories\ProductFactory;

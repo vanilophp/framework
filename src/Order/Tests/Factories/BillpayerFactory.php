@@ -23,7 +23,7 @@ class BillpayerFactory extends Factory
             'registration_nr' => fake()->randomAscii . fake()->randomNumber(5) . fake()->randomAscii,
             'is_eu_registered' => fake()->boolean,
             'is_organization' => true,
-            'address_id' => fn() => AddressFactory::new()->create()->id,
+            'address_id' => fn () => AddressFactory::new()->create()->id,
         ];
     }
 }

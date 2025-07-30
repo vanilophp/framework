@@ -20,15 +20,12 @@ use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Foundation\Factories\OrderFactory;
-use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Order;
-use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
 use Vanilo\Foundation\Tests\Factories\AddressFactory;
 use Vanilo\Foundation\Tests\Factories\BillpayerFactory;
 use Vanilo\Foundation\Tests\Factories\ProductFactory;
 use Vanilo\Order\Generators\NanoIdGenerator;
-use Vanilo\Order\Models\Billpayer;
 use Vanilo\Shipment\Models\ShippingMethod;
 
 class ExtendedOrderFactoryTest extends TestCase
