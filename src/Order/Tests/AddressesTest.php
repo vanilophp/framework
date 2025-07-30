@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Order\Tests;
 
 use Konekt\Address\Models\Country;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Contracts\Address as AddressContract;
 use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\Order;
@@ -41,8 +42,7 @@ class AddressesTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function billing_and_shipping_addresses_implement_vanilo_address()
+    #[Test] public function billing_and_shipping_addresses_implement_vanilo_address()
     {
         $order = Order::create([
             'number' => 'OXC904'
@@ -78,8 +78,7 @@ class AddressesTest extends TestCase
         $this->assertInstanceOf(AddressContract::class, $order->shippingAddress);
     }
 
-    /** @test */
-    public function billing_address_data_can_be_saved()
+    #[Test] public function billing_address_data_can_be_saved()
     {
         $order = Order::create([
             'number' => 'OXC905'
@@ -122,8 +121,7 @@ class AddressesTest extends TestCase
         $this->assertEquals('Strandvej 111', $billingAddress->getAddress());
     }
 
-    /** @test */
-    public function shipping_address_data_can_be_saved()
+    #[Test] public function shipping_address_data_can_be_saved()
     {
         $order = Order::create([
             'number' => 'OXC905'

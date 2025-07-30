@@ -13,13 +13,13 @@ declare(strict_types=1);
  */
 
 use Konekt\Address\Models\Country;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Foundation\Models\Channel;
 use Vanilo\Foundation\Tests\TestCase;
 
 class ExtendedChannelTest extends TestCase
 {
-    /** @test */
-    public function it_can_retrieve_the_billing_country()
+    #[Test] public function it_can_retrieve_the_billing_country()
     {
         Country::create(['id' => 'DE', 'name' => 'Germany', 'phonecode' => 49, 'is_eu_member' => true]);
 

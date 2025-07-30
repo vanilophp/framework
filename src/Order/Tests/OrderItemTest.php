@@ -16,6 +16,7 @@ namespace Vanilo\Order\Tests;
 
 use Illuminate\Support\Str;
 use Konekt\Enum\Enum;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
 use Vanilo\Order\Models\FulfillmentStatus;
@@ -24,8 +25,7 @@ use Vanilo\Order\Tests\Dummies\Product;
 
 class OrderItemTest extends TestCase
 {
-    /** @var Product */
-    protected $theMoonRing;
+    protected Product $theMoonRing;
 
     public function setUp(): void
     {
@@ -38,8 +38,7 @@ class OrderItemTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function product_can_be_added_to_order_item()
+    #[Test] public function product_can_be_added_to_order_item()
     {
         $order = Order::create([
             'number' => 'FVJH8'
@@ -70,8 +69,7 @@ class OrderItemTest extends TestCase
         $this->assertEquals($this->theMoonRing->getName(), $product->getName());
     }
 
-    /** @test */
-    public function it_can_be_configured()
+    #[Test] public function it_can_be_configured()
     {
         $order = Order::create([
             'number' => 'WYHP7'
@@ -91,8 +89,7 @@ class OrderItemTest extends TestCase
         $this->assertEquals('dolly buster', $item->configuration['hello']);
     }
 
-    /** @test */
-    public function it_has_no_configuration_by_default()
+    #[Test] public function it_has_no_configuration_by_default()
     {
         $order = Order::create([
             'number' => 'W0DRN'
@@ -111,8 +108,7 @@ class OrderItemTest extends TestCase
         $this->assertFalse($item->hasConfiguration());
     }
 
-    /** @test */
-    public function an_order_item_has_a_default_fullfillment_state()
+    #[Test] public function an_order_item_has_a_default_fullfillment_state()
     {
         $order = Order::create(['number' => Str::uuid()->getHex()->toString()]);
 

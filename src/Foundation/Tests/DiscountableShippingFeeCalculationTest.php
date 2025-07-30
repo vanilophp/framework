@@ -14,21 +14,21 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Contracts\DetailedAmount;
-use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Shipping\DiscountableShippingFeeCalculator;
+use Vanilo\Foundation\Tests\Factories\ProductFactory;
 use Vanilo\Shipment\Models\ShippingMethod;
 
 class DiscountableShippingFeeCalculationTest extends TestCase
 {
-    /** @test */
-    public function a_normal_shipping_fee_gets_calculated_when_there_is_no_discount_deal_and_the_free_shipping_threshold_is_not_exceeded()
+    #[Test] public function a_normal_shipping_fee_gets_calculated_when_there_is_no_discount_deal_and_the_free_shipping_threshold_is_not_exceeded()
     {
-        $product = factory(Product::class)->create(['price' => 50]);
+        $product = ProductFactory::new()->create(['price' => 50]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Shippping',
             'calculator' => DiscountableShippingFeeCalculator::ID,
@@ -54,10 +54,9 @@ class DiscountableShippingFeeCalculationTest extends TestCase
         $this->assertEquals(14.99, $shippingAmount->getValue());
     }
 
-    /** @test */
-    public function it_creates_a_shipping_adjustment_having_a_zero_sum_when_the_free_shipping_threshold_is_exceeded()
+    #[Test] public function it_creates_a_shipping_adjustment_having_a_zero_sum_when_the_free_shipping_threshold_is_exceeded()
     {
-        $product = factory(Product::class)->create(['price' => 40]);
+        $product = ProductFactory::new()->create(['price' => 40]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Discounted Fee Free',
             'calculator' => DiscountableShippingFeeCalculator::ID,
@@ -81,10 +80,9 @@ class DiscountableShippingFeeCalculationTest extends TestCase
         $this->assertCount(2, $shippingDetails->getDetails());
     }
 
-    /** @test */
-    public function it_creates_a_shipping_adjustment_with_the_discounted_price_when_the_discounted_shipping_threshold_is_exceeded()
+    #[Test] public function it_creates_a_shipping_adjustment_with_the_discounted_price_when_the_discounted_shipping_threshold_is_exceeded()
     {
-        $product = factory(Product::class)->create(['price' => 100]);
+        $product = ProductFactory::new()->create(['price' => 100]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Discounted Fee',
             'calculator' => DiscountableShippingFeeCalculator::ID,

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
@@ -21,14 +22,14 @@ use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
+use Vanilo\Foundation\Tests\Factories\ProductFactory;
 use Vanilo\Shipment\Models\ShippingMethod;
 
 class ShippingFeeCalculationTest extends TestCase
 {
-    /** @test */
-    public function no_adjustment_gets_created_if_the_shipping_method_doesnt_have_a_calculator()
+    #[Test] public function no_adjustment_gets_created_if_the_shipping_method_doesnt_have_a_calculator()
     {
-        $product = factory(Product::class)->create();
+        $product = ProductFactory::new()->create();
         $shippingMethod = ShippingMethod::create(['name' => 'Free Delivery']);
 
         Cart::addItem($product);
@@ -39,10 +40,9 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertEquals(Cart::itemsTotal(), Cart::total());
     }
 
-    /** @test */
-    public function it_creates_a_shipping_adjustment_when_setting_the_shipping_method_with_a_flat_fee_calculator()
+    #[Test] public function it_creates_a_shipping_adjustment_when_setting_the_shipping_method_with_a_flat_fee_calculator()
     {
-        $product = factory(Product::class)->create(['price' => 12.79]);
+        $product = ProductFactory::new()->create(['price' => 12.79]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Flat Fee',
             'calculator' => FlatFeeCalculator::ID,
@@ -64,10 +64,9 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertEquals(12.79 + 4.99, Cart::total());
     }
 
-    /** @test */
-    public function a_normal_shipping_fee_gets_calculated_when_the_free_shipping_threshold_is_not_exceeded()
+    #[Test] public function a_normal_shipping_fee_gets_calculated_when_the_free_shipping_threshold_is_not_exceeded()
     {
-        $product = factory(Product::class)->create(['price' => 20]);
+        $product = ProductFactory::new()->create(['price' => 20]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Flat Fee with Free Threshold',
             'calculator' => FlatFeeCalculator::ID,
@@ -91,10 +90,9 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertEquals(3.99, $shippingAmount->getValue());
     }
 
-    /** @test */
-    public function it_creates_a_shipping_adjustment_having_a_zero_sum_when_the_free_shipping_threshold_is_exceeded()
+    #[Test] public function it_creates_a_shipping_adjustment_having_a_zero_sum_when_the_free_shipping_threshold_is_exceeded()
     {
-        $product = factory(Product::class)->create(['price' => 30]);
+        $product = ProductFactory::new()->create(['price' => 30]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Flat Fee Free',
             'calculator' => FlatFeeCalculator::ID,
@@ -114,10 +112,9 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertEquals(30, Cart::total());
     }
 
-    /** @test */
-    public function it_creates_two_lines_of_shipping_details_if_the_free_shipping_threshold_is_exceeded()
+    #[Test] public function it_creates_two_lines_of_shipping_details_if_the_free_shipping_threshold_is_exceeded()
     {
-        $product = factory(Product::class)->create(['price' => 100]);
+        $product = ProductFactory::new()->create(['price' => 100]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Yo! Gabba Gabba!',
             'calculator' => FlatFeeCalculator::ID,
@@ -133,10 +130,9 @@ class ShippingFeeCalculationTest extends TestCase
         $this->assertCount(2, $shippingDetails->getDetails());
     }
 
-    /** @test */
-    public function it_doesnt_create_multiple_shipping_adjustments_when_changing_the_shipping_method_multiple_times()
+    #[Test] public function it_doesnt_create_multiple_shipping_adjustments_when_changing_the_shipping_method_multiple_times()
     {
-        $product = factory(Product::class)->create(['price' => 79.99]);
+        $product = ProductFactory::new()->create(['price' => 79.99]);
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Paperboy #1',
             'calculator' => FlatFeeCalculator::ID,

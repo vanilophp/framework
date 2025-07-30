@@ -15,10 +15,8 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
-use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
-use Konekt\Menu\Facades\Menu;
 use Konekt\Search\Providers\SearchServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
@@ -30,7 +28,6 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->withFactories(realpath(__DIR__ . '/factories'));
         $this->setUpDatabase($this->app);
     }
 
@@ -40,11 +37,6 @@ abstract class TestCase extends Orchestra
         parent::tearDown();
     }
 
-    /**
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
     protected function getPackageProviders($app)
     {
         return [
@@ -56,19 +48,6 @@ abstract class TestCase extends Orchestra
         ];
     }
 
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Breadcrumbs' => Breadcrumbs::class,
-            'Menu' => Menu::class,
-        ];
-    }
-
-    /**
-     * Set up the environment.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
     protected function getEnvironmentSetUp($app)
     {
         $engine = env('TEST_DB_ENGINE', 'sqlite');
@@ -89,20 +68,12 @@ abstract class TestCase extends Orchestra
         }
     }
 
-    /**
-     * Set up the database.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
     protected function setUpDatabase($app)
     {
         $this->loadLaravelMigrations();
         $this->artisan('migrate', ['--force' => true]);
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function resolveApplicationConfiguration($app)
     {
         parent::resolveApplicationConfiguration($app);

@@ -14,18 +14,21 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Product;
+use Vanilo\Foundation\Tests\Factories\MasterProductFactory;
+use Vanilo\Foundation\Tests\Factories\MasterProductVariantFactory;
+use Vanilo\Foundation\Tests\Factories\ProductFactory;
 use Vanilo\Taxes\Models\TaxCategory;
 
 class TaxesTest extends TestCase
 {
-    /** @test */
-    public function the_product_model_can_belong_to_a_tax_category()
+    #[Test] public function the_product_model_can_belong_to_a_tax_category()
     {
         $taxCategory = TaxCategory::create(['name' => 'Standard']);
-        $product = factory(Product::class)->create([
+        $product = ProductFactory::new()->create([
             'tax_category_id' => $taxCategory->id,
         ]);
 
@@ -33,11 +36,10 @@ class TaxesTest extends TestCase
         $this->assertEquals($taxCategory->id, $product->taxCategory->id);
     }
 
-    /** @test */
-    public function the_master_product_model_can_belong_to_a_tax_category()
+    #[Test] public function the_master_product_model_can_belong_to_a_tax_category()
     {
         $taxCategory = TaxCategory::create(['name' => 'Standard']);
-        $product = factory(MasterProduct::class)->create([
+        $product = MasterProductFactory::new()->create([
             'tax_category_id' => $taxCategory->id,
         ]);
 
@@ -45,11 +47,10 @@ class TaxesTest extends TestCase
         $this->assertEquals($taxCategory->id, $product->taxCategory->id);
     }
 
-    /** @test */
-    public function the_master_product_variant_model_can_belong_to_a_tax_category()
+    #[Test] public function the_master_product_variant_model_can_belong_to_a_tax_category()
     {
         $taxCategory = TaxCategory::create(['name' => 'Standard']);
-        $product = factory(MasterProductVariant::class)->create([
+        $product = MasterProductVariantFactory::new()->create([
             'tax_category_id' => $taxCategory->id,
         ]);
 

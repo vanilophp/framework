@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Models\Taxonomy;
 use Vanilo\Foundation\Models\Product;
@@ -22,8 +23,7 @@ use Vanilo\Foundation\Models\Taxon;
 
 class CategoryTest extends TestCase
 {
-    /** @var Taxonomy */
-    private $taxonomy;
+    private Taxonomy $taxonomy;
 
     protected function setUp(): void
     {
@@ -32,8 +32,7 @@ class CategoryTest extends TestCase
         $this->taxonomy = Taxonomy::create(['name' => 'Category']);
     }
 
-    /** @test */
-    public function the_system_uses_the_taxon_model_from_this_module()
+    #[Test] public function the_system_uses_the_taxon_model_from_this_module()
     {
         $taxon = $this->app->make(TaxonContract::class);
 
@@ -41,8 +40,7 @@ class CategoryTest extends TestCase
         $this->assertEquals(Taxon::class, concord()->model(TaxonContract::class));
     }
 
-    /** @test */
-    public function a_single_taxon_can_be_assigned_to_a_product()
+    #[Test] public function a_single_taxon_can_be_assigned_to_a_product()
     {
         $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Donuts']);
 
@@ -55,8 +53,7 @@ class CategoryTest extends TestCase
         $this->assertEquals('Donuts', $product->taxons->first()->name);
     }
 
-    /** @test */
-    public function a_single_taxon_can_be_retracted_from_a_product()
+    #[Test] public function a_single_taxon_can_be_retracted_from_a_product()
     {
         $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Coffee']);
 
@@ -73,8 +70,7 @@ class CategoryTest extends TestCase
         $this->assertCount(0, $product->taxons);
     }
 
-    /** @test */
-    public function multiple_taxons_can_be_assigned_to_a_product()
+    #[Test] public function multiple_taxons_can_be_assigned_to_a_product()
     {
         $dogFood = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Dog Food']);
         $catFood = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Cat Food']);
@@ -89,8 +85,7 @@ class CategoryTest extends TestCase
         $this->assertEquals('Cat Food', $product->taxons[1]->name);
     }
 
-    /** @test */
-    public function trying_to_add_non_taxons_throws_invalid_argument_exception()
+    #[Test] public function trying_to_add_non_taxons_throws_invalid_argument_exception()
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -102,8 +97,7 @@ class CategoryTest extends TestCase
         ]));
     }
 
-    /** @test */
-    public function taxon_can_retrieve_the_list_of_products_it_has()
+    #[Test] public function taxon_can_retrieve_the_list_of_products_it_has()
     {
         $backpacks = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Backpacks'])->fresh();
 
@@ -121,8 +115,7 @@ class CategoryTest extends TestCase
         $this->assertEquals('Pastel Flowers Backpack', $backpacks->products[2]->name);
     }
 
-    /** @test */
-    public function a_single_product_can_be_added_to_a_taxon()
+    #[Test] public function a_single_product_can_be_added_to_a_taxon()
     {
         $speakers = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Speakers'])->fresh();
 
@@ -137,8 +130,7 @@ class CategoryTest extends TestCase
         $this->assertEquals('JBL Xtreme Blue', $speakers->products[1]->name);
     }
 
-    /** @test */
-    public function multiple_products_can_be_added_to_a_taxon()
+    #[Test] public function multiple_products_can_be_added_to_a_taxon()
     {
         $speakers = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Speakers'])->fresh();
 
@@ -152,8 +144,7 @@ class CategoryTest extends TestCase
         $this->assertEquals('JBL Xtreme Blue', $speakers->products[1]->name);
     }
 
-    /** @test */
-    public function taxon_assignment_saves_the_short_morph_type_name_in_the_db()
+    #[Test] public function taxon_assignment_saves_the_short_morph_type_name_in_the_db()
     {
         $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Italian'])->fresh();
 

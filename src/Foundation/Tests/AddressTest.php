@@ -19,16 +19,16 @@ use Konekt\Address\Models\Country;
 use Konekt\Address\Models\Province;
 use Konekt\Address\Seeds\Countries;
 use Konekt\Address\Seeds\StatesOfUsa;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Contracts\Address as AddressContract;
 use Vanilo\Foundation\Models\Address;
+use Vanilo\Foundation\Tests\Factories\AddressFactory;
 
 class AddressTest extends TestCase
 {
-    /** @var Country */
-    private $usa;
+    private Country $usa;
 
-    /** @var Province */
-    private $newYork;
+    private Province $newYork;
 
     protected function setUp(): void
     {
@@ -50,17 +50,16 @@ class AddressTest extends TestCase
         parent::tearDown();
     }
 
-    /** @test */
-    public function address_model_implements_the_vanilo_address_contract()
+    #[Test] public function address_model_implements_the_vanilo_address_contract()
     {
-        $address = factory(Address::class)->make([
+        $address = AddressFactory::new([
             'name' => 'Robert De Niro',
             'province_id' => $this->newYork->id,
             'country_id' => $this->usa->id,
             'postalcode' => 'NY 10013',
             'address' => '123 Greenwich St',
             'city' => 'New York'
-        ]);
+        ])->make();
 
         $this->assertInstanceOf(Address::class, $address);
         $this->assertInstanceOf(AddressContract::class, $address);
@@ -72,16 +71,14 @@ class AddressTest extends TestCase
         $this->assertEquals('Robert De Niro', $address->getName());
     }
 
-    /** @test */
-    public function has_the_default_address_type_when_unspecified()
+    #[Test] public function has_the_default_address_type_when_unspecified()
     {
-        $address = factory(Address::class)->make();
+        $address = AddressFactory::new()->make();
 
         $this->assertTrue(AddressType::create()->equals($address->type));
     }
 
-    /** @test */
-    public function the_root_address_interface_is_bound_to_this_modules_model()
+    #[Test] public function the_root_address_interface_is_bound_to_this_modules_model()
     {
         $address = $this->app->make(\Konekt\Address\Contracts\Address::class);
 

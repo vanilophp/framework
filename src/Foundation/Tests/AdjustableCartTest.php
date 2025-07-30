@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Adjusters\SimpleDiscount;
 use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
 use Vanilo\Adjustments\Contracts\Adjustable;
@@ -22,15 +23,13 @@ use Vanilo\Foundation\Models\Product;
 
 class AdjustableCartTest extends TestCase
 {
-    /** @test */
-    public function the_cart_model_is_an_adjustable()
+    #[Test] public function the_cart_model_is_an_adjustable()
     {
         Cart::create();
         $this->assertInstanceOf(Adjustable::class, Cart::model());
     }
 
-    /** @test */
-    public function an_adjustment_can_be_added()
+    #[Test] public function an_adjustment_can_be_added()
     {
         $product = Product::create(['sku' => 'ASD-123', 'name' => 'Something', 'price' => 83.99]);
         Cart::addItem($product);
@@ -40,8 +39,7 @@ class AdjustableCartTest extends TestCase
         $this->assertEquals(83.99, Cart::itemsTotal());
     }
 
-    /** @test */
-    public function adjustments_can_be_retrieved()
+    #[Test] public function adjustments_can_be_retrieved()
     {
         $product = Product::create(['sku' => 'ASD-123', 'name' => 'Some Shippable Thing', 'price' => 12.79]);
         Cart::addItem($product);
@@ -54,8 +52,7 @@ class AdjustableCartTest extends TestCase
         $this->assertEquals('FedEx Ground Shipping 1-3 days', Cart::adjustments()->first()->title);
     }
 
-    /** @test */
-    public function multiple_adjustments_can_be_added()
+    #[Test] public function multiple_adjustments_can_be_added()
     {
         $product = Product::create(['sku' => 'QWE-456', 'name' => 'Something', 'price' => 50]);
         Cart::addItem($product);

@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Payment\Factories\PaymentFactory;
 use Vanilo\Payment\Models\Payment;
@@ -35,21 +36,19 @@ class PaymentsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function an_order_can_have_multiple_payments()
+    #[Test] public function an_order_can_have_multiple_payments()
     {
         $order = Order::create([
             'number' => '5732952',
         ]);
 
-        $payment1 = PaymentFactory::createFromPayable($order, $this->paymentMethod);
-        $payment2 = PaymentFactory::createFromPayable($order, $this->paymentMethod);
+        PaymentFactory::createFromPayable($order, $this->paymentMethod);
+        PaymentFactory::createFromPayable($order, $this->paymentMethod);
 
         $this->assertCount(2, $order->payments);
     }
 
-    /** @test */
-    public function the_current_payment_on_orders_returns_the_latest_payment_associated()
+    #[Test] public function the_current_payment_on_orders_returns_the_latest_payment_associated()
     {
         /** @var Order $order */
         $order = Order::create([
@@ -71,8 +70,7 @@ class PaymentsTest extends TestCase
         $this->assertEquals('N', $order->getCurrentPayment()->getExtraData()['x']);
     }
 
-    /** @test */
-    public function the_current_payment_is_being_loaded_with_the_minimal_number_of_queries()
+    #[Test] public function the_current_payment_is_being_loaded_with_the_minimal_number_of_queries()
     {
         $numbers = ['UHN7G59' => 3, 'UHN7G60' => 1, 'UHN7G61' => 2, 'UHN7G62' => 1, 'UHN7G63' => 2];
         foreach ($numbers as $number => $paymentsToCreate) {
@@ -91,8 +89,7 @@ class PaymentsTest extends TestCase
         DB::disableQueryLog();
     }
 
-    /** @test */
-    public function the_latest_payment_can_be_retrieved_via_the_getter_method_if_the_dynamic_relationship_is_not_loaded()
+    #[Test] public function the_latest_payment_can_be_retrieved_via_the_getter_method_if_the_dynamic_relationship_is_not_loaded()
     {
         /** @var Order $order */
         $order = Order::create([
@@ -112,8 +109,7 @@ class PaymentsTest extends TestCase
         $this->assertEquals('002', $currentPayment->getExtraData()['mark']);
     }
 
-    /** @test */
-    public function the_latest_payment_can_be_retrieved_via_the_getter_method_without_an_extra_query_if_the_dynamic_relationship_is_loaded()
+    #[Test] public function the_latest_payment_can_be_retrieved_via_the_getter_method_without_an_extra_query_if_the_dynamic_relationship_is_loaded()
     {
         /** @var Order $order */
         $order = Order::create([

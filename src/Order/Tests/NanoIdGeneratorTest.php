@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Generators\NanoIdGenerator;
 
 class NanoIdGeneratorTest extends TestCase
@@ -28,23 +29,20 @@ class NanoIdGeneratorTest extends TestCase
         $this->generator = new NanoIdGenerator();
     }
 
-    /** @test */
-    public function it_generates_a_12_char_long_string_by_default()
+    #[Test] public function it_generates_a_12_char_long_string_by_default()
     {
         $nr = $this->generator->generateNumber();
         $this->assertEquals(12, strlen($nr));
     }
 
-    /** @test */
-    public function it_generates_12_char_long_strings_two_hundred_thousand_times()
+    #[Test] public function it_generates_12_char_long_strings_two_hundred_thousand_times()
     {
         for ($i = 0; $i < 200000; $i++) {
             $this->assertEquals(12, strlen($this->generator->generateNumber()));
         }
     }
 
-    /** @test */
-    public function it_is_unique_when_called_in_a_rapid_consecutive_100k_times()
+    #[Test] public function it_is_unique_when_called_in_a_rapid_consecutive_100k_times()
     {
         $numbers = [];
         for ($k = 0; $k < 100000; $k++) {
@@ -54,8 +52,7 @@ class NanoIdGeneratorTest extends TestCase
         $this->assertEquals(count($numbers), count(array_unique($numbers)));
     }
 
-    /** @test */
-    public function size_of_the_id_can_be_specified_within_the_constructor()
+    #[Test] public function size_of_the_id_can_be_specified_within_the_constructor()
     {
         $generator = new NanoIdGenerator(7);
 
@@ -70,8 +67,7 @@ class NanoIdGeneratorTest extends TestCase
         }
     }
 
-    /** @test */
-    public function the_alphabet_can_be_specified_within_the_constructor()
+    #[Test] public function the_alphabet_can_be_specified_within_the_constructor()
     {
         $alphabetsAndSizes = [
             'abcdefghijklmnopqrstwxyz' => 12,
@@ -93,8 +89,7 @@ class NanoIdGeneratorTest extends TestCase
         }
     }
 
-    /** @test */
-    public function size_can_be_changed_in_config()
+    #[Test] public function size_can_be_changed_in_config()
     {
         $sizes = [21, 15, 9, 4];
         foreach ($sizes as $size) {
@@ -107,8 +102,7 @@ class NanoIdGeneratorTest extends TestCase
         }
     }
 
-    /** @test */
-    public function alphabet_can_be_changed_in_config()
+    #[Test] public function alphabet_can_be_changed_in_config()
     {
         $alphabets = [
             '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',

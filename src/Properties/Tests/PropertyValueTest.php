@@ -14,15 +14,16 @@ declare(strict_types=1);
 
 namespace Vanilo\Properties\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
+use Vanilo\Properties\Tests\Factories\PropertyFactory;
 
 class PropertyValueTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created()
+    #[Test] public function it_can_be_created()
     {
-        $property = factory(Property::class)->create(['type' => 'integer']);
+        $property = PropertyFactory::new()->create(['type' => 'integer']);
 
         $value1 = PropertyValue::create([
             'property_id' => $property->id,
@@ -40,10 +41,9 @@ class PropertyValueTest extends TestCase
         $this->assertEquals('2', $value2->value);
     }
 
-    /** @test */
-    public function get_value_method_returns_the_transformed_value_on_integer_fields()
+    #[Test] public function get_value_method_returns_the_transformed_value_on_integer_fields()
     {
-        $property = factory(Property::class)->create(['type' => 'integer']);
+        $property = PropertyFactory::new()->create(['type' => 'integer']);
 
         $value3007 = PropertyValue::create([
             'property_id' => $property->id,
@@ -55,10 +55,9 @@ class PropertyValueTest extends TestCase
         $this->assertIsInt($value3007->getCastedValue());
     }
 
-    /** @test */
-    public function get_value_method_returns_the_transformed_value_on_boolean_fields()
+    #[Test] public function get_value_method_returns_the_transformed_value_on_boolean_fields()
     {
-        $property = factory(Property::class)->create(['type' => 'boolean']);
+        $property = PropertyFactory::new()->create(['type' => 'boolean']);
 
         $valueTrue = PropertyValue::create([
             'property_id' => $property->id,
@@ -88,10 +87,9 @@ class PropertyValueTest extends TestCase
         $this->assertIsBool($valueZero->getCastedValue());
     }
 
-    /** @test */
-    public function get_value_method_returns_the_transformed_value_on_number_fields()
+    #[Test] public function get_value_method_returns_the_transformed_value_on_number_fields()
     {
-        $property = factory(Property::class)->create(['type' => 'number']);
+        $property = PropertyFactory::new()->create(['type' => 'number']);
 
         $value11point27 = PropertyValue::create([
             'property_id' => $property->id,
@@ -103,10 +101,9 @@ class PropertyValueTest extends TestCase
         $this->assertIsFloat($value11point27->getCastedValue());
     }
 
-    /** @test */
-    public function the_settings_field_is_an_array()
+    #[Test] public function the_settings_field_is_an_array()
     {
-        $property = factory(Property::class)->create();
+        $property = PropertyFactory::new()->create();
 
         $valueX = PropertyValue::create([
             'property_id' => $property->id,
@@ -118,8 +115,7 @@ class PropertyValueTest extends TestCase
         $this->assertEquals(['x' => 123, 'y' => 456], $valueX->settings);
     }
 
-    /** @test */
-    public function it_can_be_retrieved_by_the_property_slug_and_value()
+    #[Test] public function it_can_be_retrieved_by_the_property_slug_and_value()
     {
         /** @var Property $color */
         $color = Property::create(['name' => 'Color', 'type' => 'text']);
@@ -135,8 +131,7 @@ class PropertyValueTest extends TestCase
         $this->assertEquals('gold', $goldColor->value);
     }
 
-    /** @test */
-    public function it_can_be_retrieved_by_the_property_slug_and_value_when_the_value_is_int()
+    #[Test] public function it_can_be_retrieved_by_the_property_slug_and_value_when_the_value_is_int()
     {
         /** @var Property $doors */
         $doors = Property::create(['name' => 'doors', 'type' => 'integer']);
@@ -152,8 +147,7 @@ class PropertyValueTest extends TestCase
         $this->assertEquals(4, $fourDoor->value);
     }
 
-    /** @test */
-    public function it_can_be_retrieved_by_the_property_slug_and_value_when_the_value_is_boolean()
+    #[Test] public function it_can_be_retrieved_by_the_property_slug_and_value_when_the_value_is_boolean()
     {
         /** @var Property $sunroof */
         $sunroof = Property::create(['name' => 'sunroof', 'type' => 'boolean']);
@@ -168,14 +162,12 @@ class PropertyValueTest extends TestCase
         $this->assertEquals(true, $withSunroof->value);
     }
 
-    /** @test */
-    public function the_property_and_value_finder_returns_null_when_attempting_to_locate_by_a_nonexistent_property_slug()
+    #[Test] public function the_property_and_value_finder_returns_null_when_attempting_to_locate_by_a_nonexistent_property_slug()
     {
         $this->assertNull(PropertyValue::findByPropertyAndValue('hey-i-am-so-stupid', 'gold'));
     }
 
-    /** @test */
-    public function multiple_entries_can_be_returned_by_scalar_key_value_pairs()
+    #[Test] public function multiple_entries_can_be_returned_by_scalar_key_value_pairs()
     {
         $shape = Property::create(['name' => 'Shape', 'type' => 'text']);
         $material = Property::create(['name' => 'Material', 'type' => 'text']);
@@ -204,8 +196,7 @@ class PropertyValueTest extends TestCase
         $this->assertContains('wood', $values->map->value);
     }
 
-    /** @test */
-    public function it_returns_an_empty_resultset_if_not_values_get_passed_to_get_by_scalar_key_value_pairs()
+    #[Test] public function it_returns_an_empty_resultset_if_not_values_get_passed_to_get_by_scalar_key_value_pairs()
     {
         $season = Property::create(['name' => 'Season', 'type' => 'text']);
         $season->propertyValues()->createMany([

@@ -14,14 +14,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Models\Order;
 
 class CreateOrderWithItemsTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function order_with_a_single_item_can_be_created()
+    #[Test] public function order_with_a_single_item_can_be_created()
     {
         $order = Order::create([
             'number' => 'CXOIL41'
@@ -58,10 +56,7 @@ class CreateOrderWithItemsTest extends TestCase
         $this->assertEquals(179.99, $item->price);
     }
 
-    /**
-     * @test
-     */
-    public function order_with_multiple_items_can_be_created()
+    #[Test] public function order_with_multiple_items_can_be_created()
     {
         $order = Order::create([
             'number' => 'X5C1HW'

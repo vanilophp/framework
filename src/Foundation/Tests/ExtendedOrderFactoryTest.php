@@ -24,6 +24,9 @@ use Vanilo\Foundation\Models\Address;
 use Vanilo\Foundation\Models\Order;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Shipping\FlatFeeCalculator;
+use Vanilo\Foundation\Tests\Factories\AddressFactory;
+use Vanilo\Foundation\Tests\Factories\BillpayerFactory;
+use Vanilo\Foundation\Tests\Factories\ProductFactory;
 use Vanilo\Order\Generators\NanoIdGenerator;
 use Vanilo\Order\Models\Billpayer;
 use Vanilo\Shipment\Models\ShippingMethod;
@@ -42,7 +45,7 @@ class ExtendedOrderFactoryTest extends TestCase
 
     #[Test] public function it_copies_the_shipping_adjustment_over_from_the_cart_to_the_order()
     {
-        $product = factory(Product::class)->create(['price' => 25]);
+        $product = ProductFactory::new()->create(['price' => 25]);
         $shippingMethod = ShippingMethod::create([
             'name' => 'Delivery to your Door',
             'calculator' => FlatFeeCalculator::ID,
@@ -69,8 +72,8 @@ class ExtendedOrderFactoryTest extends TestCase
 
     #[Test] public function it_maps_the_parent_relationships_correctly()
     {
-        $product = factory(Product::class)->create(['price' => 25]);
-        $product2 = factory(Product::class)->create(['price' => 50]);
+        $product = ProductFactory::new()->create(['price' => 25]);
+        $product2 = ProductFactory::new()->create(['price' => 50]);
 
         $shippingMethod = ShippingMethod::create([
             'name' => 'Delivery to your Door',
@@ -94,8 +97,8 @@ class ExtendedOrderFactoryTest extends TestCase
 
     private function completeCheckout(int $useShippingMethodId): void
     {
-        $data['billpayer'] = factory(Billpayer::class)->make()->toArray();
-        $data['billpayer']['address'] = factory(Address::class)->make(['country_id' => 'RU'])->toArray();
+        $data['billpayer'] = BillpayerFactory::new()->make()->toArray();
+        $data['billpayer']['address'] = AddressFactory::new()->make(['country_id' => 'RU'])->toArray();
         $data['ship_to_billing_address'] = true;
         $data['shipping_method_id'] = $useShippingMethodId;
 

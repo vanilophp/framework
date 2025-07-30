@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\Properties\Models\Property;
@@ -21,8 +22,7 @@ use Vanilo\Properties\Models\PropertyValue;
 
 class CreateVariantWithPropertiesTest extends TestCase
 {
-    /** @test */
-    public function a_variant_can_be_created_based_on_one_property()
+    #[Test] public function a_variant_can_be_created_based_on_one_property()
     {
         $pazolini = MasterProduct::create([
             'name' => 'Pazolini',
@@ -47,7 +47,7 @@ class CreateVariantWithPropertiesTest extends TestCase
         $this->assertEquals(37, $pazoliniOfSize37->valueOfProperty('shoe-size')->getCastedValue());
     }
 
-    public function variants_differ_based_on_one_property()
+    #[Test] public function variants_differ_based_on_one_property()
     {
         $skechers = MasterProduct::create([
             'name' => 'Skechers',

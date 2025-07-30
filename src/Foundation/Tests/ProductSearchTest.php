@@ -23,6 +23,12 @@ use Vanilo\Foundation\Models\MasterProductVariant;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Search\ProductSearch;
+use Vanilo\Foundation\Tests\Factories\MasterProductFactory;
+use Vanilo\Foundation\Tests\Factories\MasterProductVariantFactory;
+use Vanilo\Foundation\Tests\Factories\ProductFactory;
+use Vanilo\Foundation\Tests\Factories\PropertyFactory;
+use Vanilo\Foundation\Tests\Factories\PropertyValueFactory;
+use Vanilo\Foundation\Tests\Factories\TaxonFactory;
 use Vanilo\Foundation\Tests\TestCase;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
@@ -40,111 +46,109 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_excludes_inactive_products_by_default()
     {
-        factory(Product::class, 11)->create([
+        ProductFactory::new()->count(9)->create([
             'state' => ProductState::ACTIVE
         ]);
-        factory(Product::class, 3)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::INACTIVE
         ]);
-        factory(Product::class, 1)->create([
+        ProductFactory::new()->count(3)->create([
             'state' => ProductState::DRAFT
         ]);
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::RETIRED
         ]);
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::UNAVAILABLE
         ]);
 
-        $search = new ProductSearch();
-        $this->assertCount(11, $search->getResults());
+        $this->assertCount(9, (new ProductSearch())->getResults());
     }
 
     #[Test] public function inactive_products_can_be_included()
     {
-        factory(Product::class, 7)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::ACTIVE
         ]);
-        factory(Product::class, 1)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::INACTIVE
         ]);
-        factory(Product::class, 3)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::DRAFT
         ]);
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::RETIRED
         ]);
-        factory(Product::class, 4)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::UNAVAILABLE
         ]);
 
-        $finder = new ProductSearch();
-        $this->assertCount(17, $finder->withInactiveProducts()->getResults());
+        $this->assertCount(8, (new ProductSearch())->withInactiveProducts()->getResults());
     }
 
     #[Test] public function it_can_be_scoped_to_listable_entries()
     {
-        factory(Product::class, 10)->create([
+        ProductFactory::new()->count(4)->create([
             'state' => ProductState::ACTIVE
         ]);
-        factory(Product::class, 6)->create([
+        ProductFactory::new()->count(7)->create([
             'state' => ProductState::INACTIVE
         ]);
-        factory(Product::class, 21)->create([
+        ProductFactory::new()->count(5)->create([
             'state' => ProductState::DRAFT
         ]);
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(3)->create([
             'state' => ProductState::UNLISTED
         ]);
-        factory(Product::class, 3)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::UNAVAILABLE
         ]);
 
-        $this->assertCount(13, ProductSearch::forListing()->getResults());
+        $this->assertCount(6, ProductSearch::forListing()->getResults());
     }
 
     #[Test] public function it_can_be_scoped_to_viewable_entries()
     {
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(5)->create([
             'state' => ProductState::ACTIVE
         ]);
-        factory(Product::class, 11)->create([
+        ProductFactory::new()->count(4)->create([
             'state' => ProductState::INACTIVE
         ]);
-        factory(Product::class, 5)->create([
+        ProductFactory::new()->count(3)->create([
             'state' => ProductState::DRAFT
         ]);
-        factory(Product::class, 23)->create([
+        ProductFactory::new()->count(5)->create([
             'state' => ProductState::UNLISTED
         ]);
-        factory(Product::class, 7)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::UNAVAILABLE
         ]);
-        factory(Product::class, 1)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::RETIRED
         ]);
 
-        $this->assertCount(33, ProductSearch::forViewing()->getResults());
+        $this->assertCount(12, ProductSearch::forViewing()->getResults());
     }
 
     #[Test] public function it_can_be_scoped_to_buyable_entries()
     {
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::ACTIVE
         ]);
-        factory(Product::class, 13)->create([
+        ProductFactory::new()->count(3)->create([
             'state' => ProductState::INACTIVE
         ]);
-        factory(Product::class, 1)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::DRAFT
         ]);
-        factory(Product::class, 7)->create([
+        ProductFactory::new()->count(7)->create([
             'state' => ProductState::UNLISTED
         ]);
-        factory(Product::class, 21)->create([
+        ProductFactory::new()->count(4)->create([
             'state' => ProductState::UNAVAILABLE
         ]);
-        factory(Product::class, 35)->create([
+        ProductFactory::new()->count(10)->create([
             'state' => ProductState::RETIRED
         ]);
 
@@ -153,13 +157,12 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_finds_a_product_by_exact_name()
     {
-        factory(Product::class, 83)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(5)->create();
+        ProductFactory::new()->create([
             'name' => 'Shiny Glue'
         ]);
 
-        $finder = new ProductSearch();
-        $result = $finder->nameContains('Shiny Glue')->getResults();
+        $result = (new ProductSearch())->nameContains('Shiny Glue')->getResults();
 
         $this->assertCount(1, $result);
 
@@ -170,8 +173,8 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_find_a_product_by_slug_when_called_as_non_static_method()
     {
-        factory(Product::class, 3)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(3)->create();
+        ProductFactory::new()->create([
             'name' => 'Whaki Tsipo',
             'slug' => 'whaki-tsipo',
         ]);
@@ -186,8 +189,8 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_find_a_product_by_slug()
     {
-        factory(Product::class, 5)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(4)->create();
+        ProductFactory::new()->create([
             'name' => 'Nintendo Todd 20cm Plush',
             'slug' => 'nintendo-todd-20cm-plush',
         ]);
@@ -208,8 +211,8 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_finds_a_product_where_name_begins_with()
     {
-        factory(Product::class, 35)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(6)->create();
+        ProductFactory::new()->create([
             'name' => 'Matured Cheese'
         ]);
 
@@ -225,9 +228,9 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_finds_both_products_and_master_products_where_name_begins_with()
     {
-        factory(Product::class, 9)->create();
-        factory(Product::class)->create(['name' => 'Matured Cheese']);
-        factory(MasterProduct::class)->create(['name' => 'Mature People']);
+        ProductFactory::new()->count(3)->create();
+        ProductFactory::new()->create(['name' => 'Matured Cheese']);
+        MasterProductFactory::new()->create(['name' => 'Mature People']);
 
         $finder = new ProductSearch();
         $result = $finder->nameStartsWith('Mature')->getResults();
@@ -243,8 +246,8 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_finds_a_product_where_name_ends_with()
     {
-        factory(Product::class, 27)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(7)->create();
+        ProductFactory::new()->create([
             'name' => 'Bobinated Transformator'
         ]);
 
@@ -260,11 +263,11 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_finds_multiple_results_where_name_contains_search_term()
     {
-        factory(Product::class, 11)->create();
-        factory(Product::class)->create(['name' => 'Mandarin As Language']);
-        factory(MasterProduct::class)->create(['name' => 'Crazy Mandarins']);
-        factory(Product::class)->create(['name' => 'Mandarin']);
-        factory(MasterProduct::class)->create(['name' => 'Mandarinic Fruits']);
+        ProductFactory::new()->count(6)->create();
+        ProductFactory::new()->create(['name' => 'Mandarin As Language']);
+        MasterProductFactory::new()->create(['name' => 'Crazy Mandarins']);
+        ProductFactory::new()->create(['name' => 'Mandarin']);
+        MasterProductFactory::new()->create(['name' => 'Mandarinic Fruits']);
 
         $finder = new ProductSearch();
         $this->assertCount(4, $finder->nameContains('Mandarin')->getResults());
@@ -272,10 +275,10 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_finds_multiple_results_where_name_starts_with_search_term()
     {
-        factory(Product::class, 18)->create();
-        factory(Product::class)->create(['name' => 'Orange Is Good']);
-        factory(Product::class)->create(['name' => 'This Should Not Be Found']);
-        factory(Product::class)->create(['name' => 'Oranges From Morocco']);
+        ProductFactory::new()->count(8)->create();
+        ProductFactory::new()->create(['name' => 'Orange Is Good']);
+        ProductFactory::new()->create(['name' => 'This Should Not Be Found']);
+        ProductFactory::new()->create(['name' => 'Oranges From Morocco']);
 
         $finder = new ProductSearch();
         $this->assertCount(2, $finder->nameStartsWith('Orange')->getResults());
@@ -283,11 +286,11 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_finds_multiple_results_where_name_ends_with_search_term()
     {
-        factory(Product::class, 7)->create();
-        factory(Product::class)->create(['name' => 'Awesome Blueberries']);
-        factory(Product::class)->create(['name' => 'Blueberries Not Here']);
-        factory(Product::class)->create(['name' => 'Blueberries']);
-        factory(Product::class)->create(['name' => 'Vanilla + Blueberries']);
+        ProductFactory::new()->count(5)->create();
+        ProductFactory::new()->create(['name' => 'Awesome Blueberries']);
+        ProductFactory::new()->create(['name' => 'Blueberries Not Here']);
+        ProductFactory::new()->create(['name' => 'Blueberries']);
+        ProductFactory::new()->create(['name' => 'Vanilla + Blueberries']);
 
         $finder = new ProductSearch();
         $this->assertCount(3, $finder->nameEndsWith('Blueberries')->getResults());
@@ -295,13 +298,12 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function name_based_finders_can_be_combined()
     {
-        factory(Product::class, 21)->create();
-        factory(Product::class)->create(['name' => 'Waka Time']);
-        factory(Product::class)->create(['name' => 'Kaka Waka']);
-        factory(Product::class)->create(['name' => 'Tugo Waka Batagang']);
+        ProductFactory::new()->count(5)->create();
+        ProductFactory::new()->create(['name' => 'Waka Time']);
+        ProductFactory::new()->create(['name' => 'Kaka Waka']);
+        ProductFactory::new()->create(['name' => 'Tugo Waka Batagang']);
 
-        $finder = new ProductSearch();
-        $result = $finder
+        $result = (new ProductSearch())
                     ->nameEndsWith('Waka')
                     ->orNameStartsWith('Waka')
                     ->getResults();
@@ -312,17 +314,17 @@ class ProductSearchTest extends TestCase
     #[Test] public function returns_products_based_on_a_single_taxon()
     {
         // Products without taxons
-        factory(Product::class, 20)->create();
+        ProductFactory::new()->count(11)->create();
 
         // Products within taxon 1
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 7)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(7)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxon($taxon1);
         });
 
         // Products within taxon 2
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 3)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(3)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
@@ -333,17 +335,17 @@ class ProductSearchTest extends TestCase
     #[Test] public function returns_products_based_on_two_taxons_set_in_two_consecutive_calls()
     {
         // Products without taxons
-        factory(Product::class, 20)->create();
+        ProductFactory::new()->count(8)->create();
 
         // Products within taxon 1
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 4)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxon($taxon1);
         });
 
         // Products within taxon 2
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
@@ -355,205 +357,199 @@ class ProductSearchTest extends TestCase
     #[Test] public function returns_products_based_on_several_taxons()
     {
         // Products without taxons
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(7)->create();
 
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 11)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(3)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxons([$taxon1]);
         });
 
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 5)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(5)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
-        $this->assertCount(16, (new ProductSearch())->withinTaxons([$taxon1, $taxon2])->getResults());
+        $this->assertCount(8, (new ProductSearch())->withinTaxons([$taxon1, $taxon2])->getResults());
     }
 
     #[Test] public function returns_products_based_on_several_taxons_set_in_consecutive_calls()
     {
         // Products without taxons
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(3)->create();
 
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 4)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxons([$taxon1]);
         });
 
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 8)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(5)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
         $finder = new ProductSearch();
         $finder->withinTaxons([$taxon1])->orWithinTaxons([$taxon2]);
-        $this->assertCount(12, $finder->getResults());
+        $this->assertCount(9, $finder->getResults());
     }
 
     #[Test] public function returns_products_based_on_a_single_property_value()
     {
         // Background products without attributes
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(5)->create();
 
-        $red = factory(PropertyValue::class)->create([
+        $red = PropertyValueFactory::new()->create([
             'value' => 'red',
             'title' => 'Red'
         ]);
 
-        factory(Product::class, 9)->create()->each(function (Product $product) use ($red) {
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($red) {
             $product->addPropertyValue($red);
         });
 
-        $finder = new ProductSearch();
-        $finder->havingPropertyValue($red);
-        $this->assertCount(9, $finder->getResults());
+        $this->assertCount(4, (new ProductSearch())->havingPropertyValue($red)->getResults());
     }
 
     #[Test] public function returns_products_based_on_a_single_property_name_and_several_value_names()
     {
         // Background products without attributes
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(4)->create();
 
-        $property = factory(Property::class)->create([
+        $property = PropertyFactory::new()->create([
             'name' => 'Wheel Size',
             'slug' => 'wheel'
         ]);
 
-        $twentyseven = factory(PropertyValue::class)->create([
+        $twentyseven = PropertyValueFactory::new()->create([
             'value' => '27',
             'title' => '27"',
             'property_id' => $property
         ]);
 
-        $twentynine = factory(PropertyValue::class)->create([
+        $twentynine = PropertyValueFactory::new()->create([
             'value' => '29',
             'title' => '29"',
             'property_id' => $property
         ]);
 
-        factory(Product::class, 8)->create()->each(function (Product $product) use ($twentyseven) {
+        ProductFactory::new()->count(8)->create()->each(function (Product $product) use ($twentyseven) {
             $product->addPropertyValue($twentyseven);
         });
 
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($twentynine) {
+        ProductFactory::new()->count(9)->create()->each(function (Product $product) use ($twentynine) {
             $product->addPropertyValue($twentynine);
         });
 
-        $finder = new ProductSearch();
-        $finder->havingPropertyValuesByName('wheel', ['27','29']);
-        $this->assertCount(27, $finder->getResults());
+        $this->assertCount(17, (new ProductSearch())->havingPropertyValuesByName('wheel', ['27','29'])->getResults());
     }
 
     #[Test] public function returns_products_based_on_several_property_values()
     {
         // Background products without attributes
-        factory(Product::class, 25)->create();
+        ProductFactory::new()->count(4)->create();
 
-        $value1 = factory(PropertyValue::class)->create();
-        $value2 = factory(PropertyValue::class)->create();
+        $value1 = PropertyValueFactory::new()->create();
+        $value2 = PropertyValueFactory::new()->create();
 
-        factory(Product::class, 13)->create()->each(function (Product $product) use ($value1) {
+        ProductFactory::new()->count(3)->create()->each(function (Product $product) use ($value1) {
             $product->addPropertyValue($value1);
         });
 
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($value2) {
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($value2) {
             $product->addPropertyValue($value2);
         });
 
-        $finder = new ProductSearch();
-        $finder->havingPropertyValues([$value1, $value2]);
-        $this->assertCount(15, $finder->getResults());
+        $this->assertCount(5, (new ProductSearch())->havingPropertyValues([$value1, $value2])->getResults());
     }
 
     #[Test] public function returns_products_based_on_property_values_and_on_taxons()
     {
         // Products without taxons
-        factory(Product::class, 90)->create();
+        ProductFactory::new()->count(4)->create();
 
-        $taxon = factory(Taxon::class)->create();
-        factory(Product::class, 45)->create()->each(function (Product $product) use ($taxon) {
+        $taxon = TaxonFactory::new()->create();
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
 
-        $propertyValue = factory(PropertyValue::class)->create();
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($propertyValue) {
+        $propertyValue = PropertyValueFactory::new()->create();
+        ProductFactory::new()->count(1)->create()->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
 
-        $finder = new ProductSearch();
-        $finder->withinTaxon($taxon)->orHavingPropertyValue($propertyValue);
-        $this->assertCount(64, $finder->getResults());
+        $this->assertCount(3, (new ProductSearch())->withinTaxon($taxon)->orHavingPropertyValue($propertyValue)->getResults());
     }
 
     #[Test] public function returns_products_based_on_property_values_and_on_taxons_with_search_terms()
     {
         // Products without taxons
-        factory(Product::class, 37)->create();
+        ProductFactory::new()->count(9)->create();
 
-        $taxon = factory(Taxon::class)->create();
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($taxon) {
+        $taxon = TaxonFactory::new()->create();
+        ProductFactory::new()->count(8)->create()->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
-        factory(Product::class, 4)->create([
+        ProductFactory::new()->count(4)->create([
             'name' => 'NER Posvany'
         ])->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
 
-        $propertyValue = factory(PropertyValue::class)->create();
-        factory(Product::class, 7)->create()->each(function (Product $product) use ($propertyValue) {
+        $propertyValue = PropertyValueFactory::new()->create();
+        ProductFactory::new()->count(7)->create()->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
-        factory(Product::class, 6)->create([
+        ProductFactory::new()->count(6)->create([
             'name' => 'Phillip NER'
         ])->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
 
-        factory(Product::class, 11)->create([
+        ProductFactory::new()->count(3)->create([
             'name' => 'Phillip NER'
         ])->each(function (Product $product) use ($propertyValue, $taxon) {
             $product->addTaxon($taxon);
             $product->addPropertyValue($propertyValue);
         });
 
-        $finder = new ProductSearch();
-        $finder->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER');
-        $this->assertCount(11, $finder->getResults());
+        $finder = (new ProductSearch())
+            ->withinTaxon($taxon)
+            ->havingPropertyValue($propertyValue)
+            ->nameContains('NER');
+
+        $this->assertCount(3, $finder->getResults());
     }
 
-    #[Test] public function it_returns_searcher()
+    #[Test] public function it_returns_the_searcher()
     {
-        $search = new ProductSearch();
-        $this->assertInstanceOf(Searcher::class, $search->getSearcher());
+        $this->assertInstanceOf(Searcher::class, (new ProductSearch())->getSearcher());
     }
 
     #[Test] public function it_can_simple_paginate()
     {
-        factory(Product::class, 15)->create();
+        ProductFactory::new()->count(5)->create();
 
         $finder = new ProductSearch();
-        $results = $finder->simplePaginate(8);
+        $results = $finder->simplePaginate(4);
 
         $this->assertInstanceOf(Paginator::class, $results);
-        $this->assertCount(8, $results->items());
+        $this->assertCount(4, $results->items());
     }
 
     #[Test] public function it_can_paginate()
     {
-        factory(Product::class, 15)->create();
+        ProductFactory::new()->count(8)->create();
 
         $finder = new ProductSearch();
-        $results = $finder->paginate(8);
+        $results = $finder->paginate(4);
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $results);
-        $this->assertCount(8, $results->items());
+        $this->assertCount(4, $results->items());
     }
 
     #[Test] public function it_can_limit_the_number_of_results()
     {
-        factory(Product::class, 4)->create();
-        factory(MasterProduct::class, 3)->create();
+        ProductFactory::new()->count(4)->create();
+        MasterProductFactory::new()->count(3)->create();
 
         $this->assertCount(7, (new ProductSearch())->getResults());
         $this->assertCount(5, (new ProductSearch())->getResults(5));
@@ -561,12 +557,12 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_order_the_results_by_an_explicit_field()
     {
-        factory(Product::class)->create(['name' => 'Effendi']);
-        factory(Product::class)->create(['name' => 'Aber']);
-        factory(Product::class)->create(['name' => 'Zgomot']);
-        factory(MasterProduct::class)->create(['name' => 'Biotronic']);
-        factory(Product::class)->create(['name' => 'Hapsi']);
-        factory(Product::class)->create(['name' => 'Kozmix']);
+        ProductFactory::new()->create(['name' => 'Effendi']);
+        ProductFactory::new()->create(['name' => 'Aber']);
+        ProductFactory::new()->create(['name' => 'Zgomot']);
+        MasterProductFactory::new()->create(['name' => 'Biotronic']);
+        ProductFactory::new()->create(['name' => 'Hapsi']);
+        ProductFactory::new()->create(['name' => 'Kozmix']);
 
         $resultset = (new ProductSearch())->orderBy('name')->getResults()->all();
         $this->assertEquals('Aber', $resultset[0]->name);
@@ -579,11 +575,11 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_order_and_limit_the_results()
     {
-        factory(Product::class)->create(['name' => 'Ethereum']);
-        factory(Product::class)->create(['name' => 'Tether']);
-        factory(MasterProduct::class)->create(['name' => 'Bitcoin']);
-        factory(Product::class)->create(['name' => 'Dogecoin']);
-        factory(Product::class)->create(['name' => 'Avalanche']);
+        ProductFactory::new()->create(['name' => 'Ethereum']);
+        ProductFactory::new()->create(['name' => 'Tether']);
+        MasterProductFactory::new()->create(['name' => 'Bitcoin']);
+        ProductFactory::new()->create(['name' => 'Dogecoin']);
+        ProductFactory::new()->create(['name' => 'Avalanche']);
 
         $resultset = (new ProductSearch())->orderBy('name')->getResults(3)->all();
         $this->assertEquals('Avalanche', $resultset[0]->name);
@@ -593,19 +589,19 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_find_products_by_price_range()
     {
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 31
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 35
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 11
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 99
         ]);
 
@@ -624,23 +620,23 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_find_products_below_a_certain_price()
     {
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 31
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 35
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 11
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 10
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 99
         ]);
 
@@ -658,23 +654,23 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_find_products_above_or_equal_to_a_certain_price()
     {
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 31
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 35
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 11
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 10
         ]);
 
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 99
         ]);
 
@@ -692,7 +688,7 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_find_products_above_a_given_price()
     {
-        factory(Product::class)->createMany([
+        ProductFactory::new()->createMany([
             ['price' => 7],
             ['price' => 8],
             ['price' => 9],
@@ -709,7 +705,7 @@ class ProductSearchTest extends TestCase
 
     #[Test] public function it_can_find_products_below_or_equal_to_a_given_price()
     {
-        factory(Product::class)->createMany([
+        ProductFactory::new()->createMany([
             ['price' => 300],
             ['price' => 300.01],
             ['price' => 301.01],
@@ -736,48 +732,48 @@ class ProductSearchTest extends TestCase
         // @todo re-enable this once includeVariants gets fixed on Postgres
         $this->skipOnPostgres();
 
-        factory(Product::class, 7)->create([
+        ProductFactory::new()->count(3)->create([
             'state' => ProductState::ACTIVE,
         ]);
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
-        factory(MasterProductVariant::class, 3)->create([
+        MasterProductVariantFactory::new()->count(2)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master->id,
         ]);
 
-        $this->assertCount(8, (new ProductSearch())->getResults());
+        $this->assertCount(4, (new ProductSearch())->getResults());
 
         $finder = new ProductSearch();
         $finder->includeVariants();
-        $this->assertCount(11, $finder->getResults());
+        $this->assertCount(6, $finder->getResults());
     }
 
     #[Test] public function returns_variants_based_on_a_single_taxon()
     {
         $this->skipOnPostgres();
 
-        $taxon = factory(Taxon::class)->create();
-        factory(Product::class, 5)->create()->each(function (Product $product) use ($taxon) {
+        $taxon = TaxonFactory::new()->create();
+        ProductFactory::new()->count(5)->create()->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
 
-        $master1 = factory(MasterProduct::class)->create([
+        $master1 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
-        $master2 = factory(MasterProduct::class)->create([
+        $master2 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class, 4)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master1->id,
         ]);
 
-        factory(MasterProductVariant::class, 5)->create([
+        MasterProductVariantFactory::new()->count(5)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master2->id,
         ]);
@@ -793,32 +789,32 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Taxons with products
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 1)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(1)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxon($taxon1);
         });
 
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
         // Masters
-        $master1 = factory(MasterProduct::class)->create([
+        $master1 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
-        $master2 = factory(MasterProduct::class)->create([
+        $master2 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class, 3)->create([
+        MasterProductVariantFactory::new()->count(3)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master1->id,
         ]);
 
-        factory(MasterProductVariant::class, 4)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master2->id,
         ]);
@@ -835,32 +831,32 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Taxons with products
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 1)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(1)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxons([$taxon1]);
         });
 
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
         // Masters
-        $master1 = factory(MasterProduct::class)->create([
+        $master1 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
-        $master2 = factory(MasterProduct::class)->create([
+        $master2 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class, 3)->create([
+        MasterProductVariantFactory::new()->count(3)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master1->id,
         ]);
 
-        factory(MasterProductVariant::class, 4)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master2->id,
         ]);
@@ -877,32 +873,32 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Taxons with products
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 1)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(1)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxons([$taxon1]);
         });
 
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
         // Masters
-        $master1 = factory(MasterProduct::class)->create([
+        $master1 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
-        $master2 = factory(MasterProduct::class)->create([
+        $master2 = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class, 3)->create([
+        MasterProductVariantFactory::new()->count(3)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master1->id,
         ]);
 
-        factory(MasterProductVariant::class, 4)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'state' => ProductState::ACTIVE,
             'master_product_id' => $master2->id,
         ]);
@@ -918,15 +914,15 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Products
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(10)->create();
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Just A Master Product',
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['master_product_id' => $master->id, 'name' => 'The Infinity Gauntlet'],
             ['master_product_id' => $master->id, 'name' => 'Mjölnir']
         ]);
@@ -945,14 +941,14 @@ class ProductSearchTest extends TestCase
     #[Test] public function it_finds_multiple_variant_results_where_name_contains_search_term()
     {
         $this->skipOnPostgres();
-        factory(Product::class, 10)->create();
-        factory(Product::class)->createMany([
+        ProductFactory::new()->count(10)->create();
+        ProductFactory::new()->createMany([
             ['name' => 'Mandarin'],
         ]);
-        factory(MasterProduct::class)->create(['name' => 'Crazy Mandarins']);
+        MasterProductFactory::new()->create(['name' => 'Crazy Mandarins']);
 
-        $master = factory(MasterProduct::class)->create(['name' => 'Apple Fruits']);
-        factory(MasterProductVariant::class)->createMany([
+        $master = MasterProductFactory::new()->create(['name' => 'Apple Fruits']);
+        MasterProductVariantFactory::new()->createMany([
             ['name' => 'Mandarin Paint', 'master_product_id' => $master->id],
             ['name' => 'Mandarin As Language', 'master_product_id' => $master->id],
             ['name' => 'Crazy Apples', 'master_product_id' => $master->id]
@@ -966,19 +962,19 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Products
-        factory(Product::class)->createMany([
+        ProductFactory::new()->createMany([
             ['price' => 55],
             ['price' => 30],
             ['price' => 40],
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
             'price' => 10,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['price' => 35, 'master_product_id' => $master->id],
             ['price' => 33, 'master_product_id' => $master->id],
             ['price' => 1, 'master_product_id' => $master->id],
@@ -992,19 +988,19 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Products
-        factory(Product::class)->createMany([
+        ProductFactory::new()->createMany([
             ['price' => 8],
             ['price' => 200],
             ['price' => 1999884],
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
             'price' => 1,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['price' => 7, 'master_product_id' => $master->id],
             ['price' => 8, 'master_product_id' => $master->id],
             ['price' => 9, 'master_product_id' => $master->id],
@@ -1024,17 +1020,17 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Product
-        factory(Product::class)->create([
+        ProductFactory::new()->create([
             'price' => 40,
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
             'price' => 10,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['price' => 35, 'master_product_id' => $master->id],
             ['price' => 11, 'master_product_id' => $master->id],
             ['price' => 10, 'master_product_id' => $master->id],
@@ -1057,18 +1053,18 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Products
-        factory(Product::class)->createMany([
+        ProductFactory::new()->createMany([
             ['price' => 12],
             ['price' => 2],
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
             'price' => 9999,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['price' => 11, 'master_product_id' => $master->id],
             ['price' => 10, 'master_product_id' => $master->id],
             ['price' => 12, 'master_product_id' => $master->id],
@@ -1090,18 +1086,18 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Products
-        factory(Product::class)->createMany([
+        ProductFactory::new()->createMany([
             ['price' => 300],
             ['price' => 300.01],
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
             'price' => 9999,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['price' => 300.00, 'master_product_id' => $master->id],
             ['price' => 300.01, 'master_product_id' => $master->id],
             ['price' => 301.01, 'master_product_id' => $master->id],
@@ -1123,15 +1119,15 @@ class ProductSearchTest extends TestCase
     #[Test] public function it_finds_a_variant_where_name_begins_with()
     {
         $this->skipOnPostgres();
-        factory(MasterProductVariant::class, 35)->create();
-        factory(Product::class, 3)->create();
+        MasterProductVariantFactory::new()->count(35)->create();
+        ProductFactory::new()->count(3)->create();
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Cube',
             'state' => ProductState::ACTIVE,
         ]);
 
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['name' => 'Straw Hat', 'master_product_id' => $master->id],
             ['name' => 'Gomu Gomu No Mi', 'master_product_id' => $master->id],
         ]);
@@ -1150,16 +1146,16 @@ class ProductSearchTest extends TestCase
     #[Test] public function it_finds_products_master_products_and_variants_where_name_begins_with()
     {
         $this->skipOnPostgres();
-        factory(Product::class, 9)->create();
-        factory(Product::class)->create(['name' => 'Matured Cheese']);
-        factory(MasterProduct::class)->create(['name' => 'Mature People']);
+        ProductFactory::new()->count(9)->create();
+        ProductFactory::new()->create(['name' => 'Matured Cheese']);
+        MasterProductFactory::new()->create(['name' => 'Mature People']);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'A Regular Master Product',
             'state' => ProductState::ACTIVE,
         ]);
 
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['name' => 'Matured Wine', 'master_product_id' => $master->id],
             ['name' => 'Cube', 'master_product_id' => $master->id],
         ]);
@@ -1183,19 +1179,19 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
 
-        factory(Product::class, 18)->create();
-        factory(Product::class)->createMany([
+        ProductFactory::new()->count(18)->create();
+        ProductFactory::new()->createMany([
             ['name' => 'Orange Is Good'],
             ['name' => 'Orange Is Orange'],
             ['name' => 'This Should Not Be Found'],
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Master',
             'state' => ProductState::ACTIVE,
         ]);
 
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['name' => 'Oranges From Morocco', 'master_product_id' => $master->id],
             ['name' => 'This Orange Should Not Be Found As Well', 'master_product_id' => $master->id],
         ]);
@@ -1209,20 +1205,20 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Products
-        factory(Product::class, 21)->create();
-        factory(Product::class)->createMany([
+        ProductFactory::new()->count(21)->create();
+        ProductFactory::new()->createMany([
             ['name' => 'Waka Time'],
             ['name' => 'Kaka Waka'],
             ['name' => 'Tugo Waka Batagang'],
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Master',
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['name' => 'Waka Waka Eh Eh', 'master_product_id' => $master->id],
             ['name' => 'Taka Waka', 'master_product_id' => $master->id],
             ['name' => 'Aserejé', 'master_product_id' => $master->id],
@@ -1248,18 +1244,18 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Products
-        factory(Product::class, 27)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(27)->create();
+        ProductFactory::new()->create([
             'name' => 'Bobinated Transformator'
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Master',
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variant
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['name' => 'High Voltage Transformator', 'master_product_id' => $master->id],
             ['name' => 'Something', 'master_product_id' => $master->id],
         ]);
@@ -1280,19 +1276,19 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Products
-        factory(Product::class, 7)->create();
-        factory(Product::class)->createMany([
+        ProductFactory::new()->count(7)->create();
+        ProductFactory::new()->createMany([
             ['name' => 'Awesome Blueberries'],
             ['name' => 'Blueberries Not Here'],
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Master',
             'state' => ProductState::ACTIVE,
         ]);
 
         // Variants
-        factory(MasterProductVariant::class)->createMany([
+        MasterProductVariantFactory::new()->createMany([
             ['name' => 'Blueberries Are Blue Berries', 'master_product_id' => $master->id],
             ['name' => 'Black Blueberries', 'master_product_id' => $master->id],
             ['name' => 'Blueberries', 'master_product_id' => $master->id],
@@ -1306,19 +1302,19 @@ class ProductSearchTest extends TestCase
     {
         $this->skipOnPostgres();
         // Background products without attributes
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(10)->create();
 
-        $red = factory(PropertyValue::class)->create([
+        $red = PropertyValueFactory::new()->create([
             'value' => 'red',
             'title' => 'Red'
         ]);
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Master',
             'state' => ProductState::ACTIVE,
         ]);
 
-        factory(MasterProductVariant::class, 5)->create([
+        MasterProductVariantFactory::new()->count(5)->create([
             'master_product_id' => $master->id
         ])->each(function (MasterProductVariant $variant) use ($red) {
             $variant->addPropertyValue($red);
@@ -1335,57 +1331,57 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Products without taxons
-        factory(Product::class, 37)->create();
+        ProductFactory::new()->count(8)->create();
 
-        $taxon = factory(Taxon::class)->create();
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($taxon) {
+        $taxon = TaxonFactory::new()->create();
+        ProductFactory::new()->count(11)->create()->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
-        factory(Product::class, 4)->create([
+        ProductFactory::new()->count(4)->create([
             'name' => 'NER Posvany'
         ])->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
 
-        $propertyValue = factory(PropertyValue::class)->create();
-        factory(Product::class, 7)->create()->each(function (Product $product) use ($propertyValue) {
+        $propertyValue = PropertyValueFactory::new()->create();
+        ProductFactory::new()->count(3)->create()->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
-        factory(Product::class, 6)->create([
+        ProductFactory::new()->count(6)->create([
             'name' => 'Phillip NER'
         ])->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
 
-        factory(Product::class, 11)->create([
+        ProductFactory::new()->count(4)->create([
             'name' => 'Phillip NER'
         ])->each(function (Product $product) use ($propertyValue, $taxon) {
             $product->addTaxon($taxon);
             $product->addPropertyValue($propertyValue);
         });
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'name' => 'Master',
             'state' => ProductState::ACTIVE,
         ]);
 
         $master->addTaxon($taxon);
 
-        factory(MasterProductVariant::class, 4)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'name' => 'Phillip NER',
             'master_product_id' => $master->id,
         ])->each(function (MasterProductVariant $variant) use ($propertyValue) {
             $variant->addPropertyValue($propertyValue);
         });
 
-        factory(MasterProductVariant::class, 9)->create([
+        MasterProductVariantFactory::new()->count(5)->create([
             'master_product_id' => $master->id,
         ])->each(function (MasterProductVariant $variant) use ($propertyValue) {
             $variant->addPropertyValue($propertyValue);
         });
 
-        $this->assertCount(11, (new ProductSearch())->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER')->getResults());
-        $this->assertCount(15, (new ProductSearch())->includeVariants()->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER')->getResults());
+        $this->assertCount(4, (new ProductSearch())->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER')->getResults());
+        $this->assertCount(8, (new ProductSearch())->includeVariants()->withinTaxon($taxon)->havingPropertyValue($propertyValue)->nameContains('NER')->getResults());
     }
 
     #[Test] public function returns_variants_based_on_property_values_and_on_taxons()
@@ -1393,36 +1389,36 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Products without taxons
-        factory(Product::class, 90)->create();
+        ProductFactory::new()->count(9)->create();
 
-        $taxon = factory(Taxon::class)->create();
-        factory(Product::class, 45)->create()->each(function (Product $product) use ($taxon) {
+        $taxon = TaxonFactory::new()->create();
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
 
-        $propertyValue = factory(PropertyValue::class)->create();
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($propertyValue) {
+        $propertyValue = PropertyValueFactory::new()->create();
+        ProductFactory::new()->count(7)->create()->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
         $master->addTaxon($taxon);
 
-        factory(MasterProductVariant::class, 5)->create([
+        MasterProductVariantFactory::new()->count(2)->create([
             'master_product_id' => $master->id,
         ]);
 
-        factory(MasterProductVariant::class, 5)->create([
+        MasterProductVariantFactory::new()->count(8)->create([
             'master_product_id' => $master->id,
         ])->each(function (MasterProductVariant $variant) use ($propertyValue) {
             $variant->addPropertyValue($propertyValue);
         });
 
-        $this->assertCount(65, (new ProductSearch())->withinTaxon($taxon)->orHavingPropertyValue($propertyValue)->getResults());
-        $this->assertCount(75, (new ProductSearch())->includeVariants()->withinTaxon($taxon)->orHavingPropertyValue($propertyValue)->getResults());
+        $this->assertCount(12, (new ProductSearch())->withinTaxon($taxon)->orHavingPropertyValue($propertyValue)->getResults());
+        $this->assertCount(22, (new ProductSearch())->includeVariants()->withinTaxon($taxon)->orHavingPropertyValue($propertyValue)->getResults());
     }
 
     #[Test] public function returns_variants_based_on_several_property_values()
@@ -1430,41 +1426,41 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Background products without attributes
-        factory(Product::class, 25)->create();
+        ProductFactory::new()->count(11)->create();
 
-        $value1 = factory(PropertyValue::class)->create();
-        $value2 = factory(PropertyValue::class)->create();
+        $value1 = PropertyValueFactory::new()->create();
+        $value2 = PropertyValueFactory::new()->create();
 
-        factory(Product::class, 13)->create()->each(function (Product $product) use ($value1) {
+        ProductFactory::new()->count(8)->create()->each(function (Product $product) use ($value1) {
             $product->addPropertyValue($value1);
         });
 
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($value2) {
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($value2) {
             $product->addPropertyValue($value2);
         });
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
-        factory(MasterProductVariant::class, 10)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'master_product_id' => $master->id,
         ]);
 
-        factory(MasterProductVariant::class, 10)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'master_product_id' => $master->id,
         ])->each(function (MasterProductVariant $variant) use ($value1) {
             $variant->addPropertyValue($value1);
         });
 
-        factory(MasterProductVariant::class, 5)->create([
+        MasterProductVariantFactory::new()->count(5)->create([
             'master_product_id' => $master->id,
         ])->each(function (MasterProductVariant $variant) use ($value2) {
             $variant->addPropertyValue($value2);
         });
 
-        $this->assertCount(15, (new ProductSearch())->havingPropertyValues([$value1, $value2])->getResults());
-        $this->assertCount(30, (new ProductSearch())->includeVariants()->havingPropertyValues([$value1, $value2])->getResults());
+        $this->assertCount(10, (new ProductSearch())->havingPropertyValues([$value1, $value2])->getResults());
+        $this->assertCount(19, (new ProductSearch())->includeVariants()->havingPropertyValues([$value1, $value2])->getResults());
     }
 
     #[Test] public function returns_variants_based_on_a_single_property_name_and_several_value_names()
@@ -1472,55 +1468,55 @@ class ProductSearchTest extends TestCase
         $this->skipOnPostgres();
 
         // Background products without attributes
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(8)->create();
 
-        $property = factory(Property::class)->create([
+        $property = PropertyFactory::new()->create([
             'name' => 'Wheel Size',
             'slug' => 'wheel'
         ]);
 
-        $twentyseven = factory(PropertyValue::class)->create([
+        $twentyseven = PropertyValueFactory::new()->create([
             'value' => '27',
             'title' => '27"',
             'property_id' => $property
         ]);
 
-        $twentynine = factory(PropertyValue::class)->create([
+        $twentynine = PropertyValueFactory::new()->create([
             'value' => '29',
             'title' => '29"',
             'property_id' => $property
         ]);
 
-        factory(Product::class, 8)->create()->each(function (Product $product) use ($twentyseven) {
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($twentyseven) {
             $product->addPropertyValue($twentyseven);
         });
 
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($twentynine) {
+        ProductFactory::new()->count(5)->create()->each(function (Product $product) use ($twentynine) {
             $product->addPropertyValue($twentynine);
         });
 
-        $master = factory(MasterProduct::class)->create([
+        $master = MasterProductFactory::new()->create([
             'state' => ProductState::ACTIVE,
         ]);
 
-        factory(MasterProductVariant::class, 10)->create([
+        MasterProductVariantFactory::new()->count(1)->create([
             'master_product_id' => $master->id,
         ]);
 
-        factory(MasterProductVariant::class, 5)->create([
+        MasterProductVariantFactory::new()->count(5)->create([
             'master_product_id' => $master->id,
         ])->each(function (MasterProductVariant $variant) use ($twentyseven) {
             $variant->addPropertyValue($twentyseven);
         });
 
-        factory(MasterProductVariant::class, 10)->create([
+        MasterProductVariantFactory::new()->count(4)->create([
             'master_product_id' => $master->id,
         ])->each(function (MasterProductVariant $variant) use ($twentynine) {
             $variant->addPropertyValue($twentynine);
         });
 
-        $this->assertCount(27, (new ProductSearch())->havingPropertyValuesByName('wheel', ['27','29'])->getResults());
-        $this->assertCount(42, (new ProductSearch())->includeVariants()->havingPropertyValuesByName('wheel', ['27','29'])->getResults());
+        $this->assertCount(7, (new ProductSearch())->havingPropertyValuesByName('wheel', ['27','29'])->getResults());
+        $this->assertCount(16, (new ProductSearch())->includeVariants()->havingPropertyValuesByName('wheel', ['27','29'])->getResults());
     }
 
     private function skipOnPostgres(): void

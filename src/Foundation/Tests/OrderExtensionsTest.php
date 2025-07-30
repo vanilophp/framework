@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Foundation\Tests;
 
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Channel\Models\Channel;
 use Vanilo\Foundation\Models\Customer;
 use Vanilo\Foundation\Models\Order;
@@ -23,8 +24,7 @@ use Vanilo\Shipment\Models\ShippingMethod;
 
 class OrderExtensionsTest extends TestCase
 {
-    /** @test */
-    public function an_order_can_be_assigned_to_a_channel()
+    #[Test] public function an_order_can_be_assigned_to_a_channel()
     {
         $channel = Channel::create(['name' => 'Web Belgie']);
         $order = Order::create([
@@ -38,8 +38,7 @@ class OrderExtensionsTest extends TestCase
         $this->assertEquals('Web Belgie', $order->channel->name);
     }
 
-    /** @test */
-    public function an_order_can_be_assigned_to_a_customer()
+    #[Test] public function an_order_can_be_assigned_to_a_customer()
     {
         $customer = Customer::create(['name' => 'Nimfas Corporation']);
         $order = Order::create([
@@ -51,8 +50,7 @@ class OrderExtensionsTest extends TestCase
         $this->assertEquals($customer->id, $order->customer->id);
     }
 
-    /** @test */
-    public function a_shipping_method_can_be_assigned_to_an_order()
+    #[Test] public function a_shipping_method_can_be_assigned_to_an_order()
     {
         $shippingMethod = ShippingMethod::create(['name' => 'Awesome Drops']);
         $order = Order::create([
@@ -64,8 +62,7 @@ class OrderExtensionsTest extends TestCase
         $this->assertEquals($shippingMethod->id, $order->shippingMethod->id);
     }
 
-    /** @test */
-    public function the_in_channel_scope_works()
+    #[Test] public function the_in_channel_scope_works()
     {
         $channel = Channel::create(['name' => 'Trond Trollenstein']);
         Order::create([

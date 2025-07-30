@@ -17,9 +17,14 @@ namespace Vanilo\Foundation\Tests;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Models\Taxon;
 use Vanilo\Foundation\Search\ProductFinder;
+use Vanilo\Foundation\Tests\Factories\ProductFactory;
+use Vanilo\Foundation\Tests\Factories\PropertyFactory;
+use Vanilo\Foundation\Tests\Factories\PropertyValueFactory;
+use Vanilo\Foundation\Tests\Factories\TaxonFactory;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\Models\PropertyValue;
@@ -33,45 +38,43 @@ class ProductFinderTest extends TestCase
         Property::query()->delete();
     }
 
-    /** @test */
-    public function it_excludes_inactive_products_by_default()
+    #[Test] public function it_excludes_inactive_products_by_default()
     {
-        factory(Product::class, 11)->create([
+        ProductFactory::new()->count(9)->create([
             'state' => ProductState::ACTIVE
         ]);
-        factory(Product::class, 3)->create([
+        ProductFactory::new()->count(3)->create([
             'state' => ProductState::INACTIVE
         ]);
-        factory(Product::class, 1)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::DRAFT
         ]);
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::RETIRED
         ]);
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::UNAVAILABLE
         ]);
 
         $finder = new ProductFinder();
-        $this->assertCount(11, $finder->getResults());
+        $this->assertCount(9, $finder->getResults());
     }
 
-    /** @test */
-    public function inactive_products_can_be_included()
+    #[Test] public function inactive_products_can_be_included()
     {
-        factory(Product::class, 7)->create([
+        ProductFactory::new()->count(7)->create([
             'state' => ProductState::ACTIVE
         ]);
-        factory(Product::class, 1)->create([
+        ProductFactory::new()->count(1)->create([
             'state' => ProductState::INACTIVE
         ]);
-        factory(Product::class, 3)->create([
+        ProductFactory::new()->count(3)->create([
             'state' => ProductState::DRAFT
         ]);
-        factory(Product::class, 2)->create([
+        ProductFactory::new()->count(2)->create([
             'state' => ProductState::RETIRED
         ]);
-        factory(Product::class, 4)->create([
+        ProductFactory::new()->count(4)->create([
             'state' => ProductState::UNAVAILABLE
         ]);
 
@@ -79,11 +82,10 @@ class ProductFinderTest extends TestCase
         $this->assertCount(17, $finder->withInactiveProducts()->getResults());
     }
 
-    /** @test */
-    public function it_finds_a_product_by_exact_name()
+    #[Test] public function it_finds_a_product_by_exact_name()
     {
-        factory(Product::class, 83)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(3)->create();
+        ProductFactory::new()->create([
             'name' => 'Shiny Glue'
         ]);
 
@@ -97,11 +99,10 @@ class ProductFinderTest extends TestCase
         $this->assertEquals('Shiny Glue', $first->name);
     }
 
-    /** @test */
-    public function it_finds_a_product_where_name_begins_with()
+    #[Test] public function it_finds_a_product_where_name_begins_with()
     {
-        factory(Product::class, 35)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(5)->create();
+        ProductFactory::new()->create([
             'name' => 'Matured Cheese'
         ]);
 
@@ -115,11 +116,10 @@ class ProductFinderTest extends TestCase
         $this->assertEquals('Matured Cheese', $first->name);
     }
 
-    /** @test */
-    public function it_finds_a_product_where_name_ends_with()
+    #[Test] public function it_finds_a_product_where_name_ends_with()
     {
-        factory(Product::class, 27)->create();
-        factory(Product::class)->create([
+        ProductFactory::new()->count(7)->create();
+        ProductFactory::new()->create([
             'name' => 'Bobinated Transformator'
         ]);
 
@@ -133,50 +133,46 @@ class ProductFinderTest extends TestCase
         $this->assertEquals('Bobinated Transformator', $first->name);
     }
 
-    /** @test */
-    public function it_finds_multiple_results_where_name_contains_search_term()
+    #[Test] public function it_finds_multiple_results_where_name_contains_search_term()
     {
-        factory(Product::class, 11)->create();
-        factory(Product::class)->create(['name' => 'Mandarin As Language']);
-        factory(Product::class)->create(['name' => 'Crazy Mandarins']);
-        factory(Product::class)->create(['name' => 'Mandarin']);
+        ProductFactory::new()->count(4)->create();
+        ProductFactory::new()->create(['name' => 'Mandarin As Language']);
+        ProductFactory::new()->create(['name' => 'Crazy Mandarins']);
+        ProductFactory::new()->create(['name' => 'Mandarin']);
 
         $finder = new ProductFinder();
         $this->assertCount(3, $finder->nameContains('Mandarin')->getResults());
     }
 
-    /** @test */
-    public function it_finds_multiple_results_where_name_starts_with_search_term()
+    #[Test] public function it_finds_multiple_results_where_name_starts_with_search_term()
     {
-        factory(Product::class, 18)->create();
-        factory(Product::class)->create(['name' => 'Orange Is Good']);
-        factory(Product::class)->create(['name' => 'This Should Not Be Found']);
-        factory(Product::class)->create(['name' => 'Oranges From Morocco']);
+        ProductFactory::new()->count(5)->create();
+        ProductFactory::new()->create(['name' => 'Orange Is Good']);
+        ProductFactory::new()->create(['name' => 'This Should Not Be Found']);
+        ProductFactory::new()->create(['name' => 'Oranges From Morocco']);
 
         $finder = new ProductFinder();
         $this->assertCount(2, $finder->nameStartsWith('Orange')->getResults());
     }
 
-    /** @test */
-    public function it_finds_multiple_results_where_name_ends_with_search_term()
+    #[Test] public function it_finds_multiple_results_where_name_ends_with_search_term()
     {
-        factory(Product::class, 7)->create();
-        factory(Product::class)->create(['name' => 'Awesome Blueberries']);
-        factory(Product::class)->create(['name' => 'Blueberries Not Here']);
-        factory(Product::class)->create(['name' => 'Blueberries']);
-        factory(Product::class)->create(['name' => 'Vanilla + Blueberries']);
+        ProductFactory::new()->count(7)->create();
+        ProductFactory::new()->create(['name' => 'Awesome Blueberries']);
+        ProductFactory::new()->create(['name' => 'Blueberries Not Here']);
+        ProductFactory::new()->create(['name' => 'Blueberries']);
+        ProductFactory::new()->create(['name' => 'Vanilla + Blueberries']);
 
         $finder = new ProductFinder();
         $this->assertCount(3, $finder->nameEndsWith('Blueberries')->getResults());
     }
 
-    /** @test */
-    public function name_based_finders_can_be_combined()
+    #[Test] public function name_based_finders_can_be_combined()
     {
-        factory(Product::class, 21)->create();
-        factory(Product::class)->create(['name' => 'Waka Time']);
-        factory(Product::class)->create(['name' => 'Kaka Waka']);
-        factory(Product::class)->create(['name' => 'Tugo Waka Batagang']);
+        ProductFactory::new()->count(4)->create();
+        ProductFactory::new()->create(['name' => 'Waka Time']);
+        ProductFactory::new()->create(['name' => 'Kaka Waka']);
+        ProductFactory::new()->create(['name' => 'Tugo Waka Batagang']);
 
         $finder = new ProductFinder();
         $result = $finder
@@ -187,43 +183,41 @@ class ProductFinderTest extends TestCase
         $this->assertCount(2, $result);
     }
 
-    /** @test */
-    public function returns_products_based_on_a_single_taxon()
+    #[Test] public function returns_products_based_on_a_single_taxon()
     {
         // Products without taxons
-        factory(Product::class, 20)->create();
+        ProductFactory::new()->count(10)->create();
 
         // Products within taxon 1
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 7)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxon($taxon1);
         });
 
         // Products within taxon 2
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 3)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(3)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
-        $this->assertCount(7, (new ProductFinder())->withinTaxon($taxon1)->getResults());
+        $this->assertCount(4, (new ProductFinder())->withinTaxon($taxon1)->getResults());
         $this->assertCount(3, (new ProductFinder())->withinTaxon($taxon2)->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_two_taxons_set_in_two_consecutive_calls()
+    #[Test] public function returns_products_based_on_two_taxons_set_in_two_consecutive_calls()
     {
         // Products without taxons
-        factory(Product::class, 20)->create();
+        ProductFactory::new()->count(8)->create();
 
         // Products within taxon 1
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 4)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxon($taxon1);
         });
 
         // Products within taxon 2
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
@@ -232,38 +226,36 @@ class ProductFinderTest extends TestCase
         $this->assertCount(6, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_several_taxons()
+    #[Test] public function returns_products_based_on_several_taxons()
     {
         // Products without taxons
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(7)->create();
 
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 11)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(1)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxons([$taxon1]);
         });
 
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 5)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(5)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
-        $this->assertCount(16, (new ProductFinder())->withinTaxons([$taxon1, $taxon2])->getResults());
+        $this->assertCount(6, (new ProductFinder())->withinTaxons([$taxon1, $taxon2])->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_several_taxons_set_in_consecutive_calls()
+    #[Test] public function returns_products_based_on_several_taxons_set_in_consecutive_calls()
     {
         // Products without taxons
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(10)->create();
 
-        $taxon1 = factory(Taxon::class)->create();
-        factory(Product::class, 4)->create()->each(function (Product $product) use ($taxon1) {
+        $taxon1 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($taxon1) {
             $product->addTaxons([$taxon1]);
         });
 
-        $taxon2 = factory(Taxon::class)->create();
-        factory(Product::class, 8)->create()->each(function (Product $product) use ($taxon2) {
+        $taxon2 = TaxonFactory::new()->create();
+        ProductFactory::new()->count(8)->create()->each(function (Product $product) use ($taxon2) {
             $product->addTaxon($taxon2);
         });
 
@@ -272,132 +264,127 @@ class ProductFinderTest extends TestCase
         $this->assertCount(12, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_a_single_property_value()
+    #[Test] public function returns_products_based_on_a_single_property_value()
     {
         // Background products without attributes
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(3)->create();
 
-        $red = factory(PropertyValue::class)->create([
+        $red = PropertyValueFactory::new()->create([
             'value' => 'red',
             'title' => 'Red'
         ]);
 
-        factory(Product::class, 9)->create()->each(function (Product $product) use ($red) {
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($red) {
             $product->addPropertyValue($red);
         });
 
         $finder = new ProductFinder();
         $finder->havingPropertyValue($red);
-        $this->assertCount(9, $finder->getResults());
+        $this->assertCount(2, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_a_single_property_name_and_several_value_names()
+    #[Test] public function returns_products_based_on_a_single_property_name_and_several_value_names()
     {
         // Background products without attributes
-        factory(Product::class, 10)->create();
+        ProductFactory::new()->count(5)->create();
 
-        $property = factory(Property::class)->create([
+        $property = PropertyFactory::new()->create([
             'name' => 'Wheel Size',
             'slug' => 'wheel'
         ]);
 
-        $twentyseven = factory(PropertyValue::class)->create([
+        $twentyseven = PropertyValueFactory::new()->create([
             'value' => '27',
             'title' => '27"',
             'property_id' => $property
         ]);
 
-        $twentynine = factory(PropertyValue::class)->create([
+        $twentynine = PropertyValueFactory::new()->create([
             'value' => '29',
             'title' => '29"',
             'property_id' => $property
         ]);
 
-        factory(Product::class, 8)->create()->each(function (Product $product) use ($twentyseven) {
+        ProductFactory::new()->count(8)->create()->each(function (Product $product) use ($twentyseven) {
             $product->addPropertyValue($twentyseven);
         });
 
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($twentynine) {
+        ProductFactory::new()->count(9)->create()->each(function (Product $product) use ($twentynine) {
             $product->addPropertyValue($twentynine);
         });
 
         $finder = new ProductFinder();
         $finder->havingPropertyValuesByName('wheel', ['27','29']);
-        $this->assertCount(27, $finder->getResults());
+        $this->assertCount(17, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_several_property_values()
+    #[Test] public function returns_products_based_on_several_property_values()
     {
         // Background products without attributes
-        factory(Product::class, 25)->create();
+        ProductFactory::new()->count(6)->create();
 
-        $value1 = factory(PropertyValue::class)->create();
-        $value2 = factory(PropertyValue::class)->create();
+        $value1 = PropertyValueFactory::new()->create();
+        $value2 = PropertyValueFactory::new()->create();
 
-        factory(Product::class, 13)->create()->each(function (Product $product) use ($value1) {
+        ProductFactory::new()->count(3)->create()->each(function (Product $product) use ($value1) {
             $product->addPropertyValue($value1);
         });
 
-        factory(Product::class, 2)->create()->each(function (Product $product) use ($value2) {
+        ProductFactory::new()->count(2)->create()->each(function (Product $product) use ($value2) {
             $product->addPropertyValue($value2);
         });
 
         $finder = new ProductFinder();
         $finder->havingPropertyValues([$value1, $value2]);
-        $this->assertCount(15, $finder->getResults());
+        $this->assertCount(5, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_property_values_and_on_taxons()
+    #[Test] public function returns_products_based_on_property_values_and_on_taxons()
     {
         // Products without taxons
-        factory(Product::class, 90)->create();
+        ProductFactory::new()->count(3)->create();
 
-        $taxon = factory(Taxon::class)->create();
-        factory(Product::class, 45)->create()->each(function (Product $product) use ($taxon) {
+        $taxon = TaxonFactory::new()->create();
+        ProductFactory::new()->count(4)->create()->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
 
-        $propertyValue = factory(PropertyValue::class)->create();
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($propertyValue) {
+        $propertyValue = PropertyValueFactory::new()->create();
+        ProductFactory::new()->count(5)->create()->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
 
         $finder = new ProductFinder();
         $finder->withinTaxon($taxon)->orHavingPropertyValue($propertyValue);
-        $this->assertCount(64, $finder->getResults());
+        $this->assertCount(9, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_products_based_on_property_values_and_on_taxons_with_search_terms()
+    #[Test] public function returns_products_based_on_property_values_and_on_taxons_with_search_terms()
     {
         // Products without taxons
-        factory(Product::class, 37)->create();
+        ProductFactory::new()->count(7)->create();
 
-        $taxon = factory(Taxon::class)->create();
-        factory(Product::class, 19)->create()->each(function (Product $product) use ($taxon) {
+        $taxon = TaxonFactory::new()->create();
+        ProductFactory::new()->count(9)->create()->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
-        factory(Product::class, 4)->create([
+        ProductFactory::new()->count(4)->create([
             'name' => 'NER Posvany'
         ])->each(function (Product $product) use ($taxon) {
             $product->addTaxon($taxon);
         });
 
-        $propertyValue = factory(PropertyValue::class)->create();
-        factory(Product::class, 7)->create()->each(function (Product $product) use ($propertyValue) {
+        $propertyValue = PropertyValueFactory::new()->create();
+        ProductFactory::new()->count(7)->create()->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
-        factory(Product::class, 6)->create([
+        ProductFactory::new()->count(6)->create([
             'name' => 'Phillip NER'
         ])->each(function (Product $product) use ($propertyValue) {
             $product->addPropertyValue($propertyValue);
         });
 
-        factory(Product::class, 11)->create([
+        ProductFactory::new()->count(11)->create([
             'name' => 'Phillip NER'
         ])->each(function (Product $product) use ($propertyValue, $taxon) {
             $product->addTaxon($taxon);
@@ -409,34 +396,31 @@ class ProductFinderTest extends TestCase
         $this->assertCount(11, $finder->getResults());
     }
 
-    /** @test */
-    public function returns_query_builder()
+    #[Test] public function returns_query_builder()
     {
         $finder = new ProductFinder();
         $this->assertInstanceOf(Builder::class, $finder->getQueryBuilder());
     }
 
-    /** @test */
-    public function it_can_simple_paginate()
+    #[Test] public function it_can_simple_paginate()
     {
-        factory(Product::class, 15)->create();
+        ProductFactory::new()->count(5)->create();
 
         $finder = new ProductFinder();
-        $results = $finder->simplePaginate(8);
+        $results = $finder->simplePaginate(3);
 
         $this->assertInstanceOf(Paginator::class, $results);
-        $this->assertCount(8, $results->items());
+        $this->assertCount(3, $results->items());
     }
 
-    /** @test */
-    public function it_can_paginate()
+    #[Test] public function it_can_paginate()
     {
-        factory(Product::class, 15)->create();
+        ProductFactory::new()->count(7)->create();
 
         $finder = new ProductFinder();
-        $results = $finder->paginate(8);
+        $results = $finder->paginate(4);
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $results);
-        $this->assertCount(8, $results->items());
+        $this->assertCount(4, $results->items());
     }
 }

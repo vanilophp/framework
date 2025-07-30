@@ -14,21 +14,20 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Models\Order;
 
 class OrderTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_instantiated_and_it_implements_the_interface()
+    #[Test] public function it_can_be_instantiated_and_it_implements_the_interface()
     {
         $order = new Order();
 
         $this->assertInstanceOf(OrderContract::class, $order);
     }
 
-    /** @test */
-    public function it_finds_orders_by_number()
+    #[Test] public function it_finds_orders_by_number()
     {
         $order = Order::create([
             'number' => 'PO-77651231'
@@ -41,8 +40,7 @@ class OrderTest extends TestCase
         $this->assertEquals('PO-77651231', $foundOrder->number);
     }
 
-    /** @test */
-    public function find_by_number_returns_null_for_nonexisting_orders()
+    #[Test] public function find_by_number_returns_null_for_nonexisting_orders()
     {
         $this->assertNull(Order::findByNumber('HEY, no such order'));
     }

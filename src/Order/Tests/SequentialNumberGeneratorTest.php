@@ -14,12 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Factories\OrderFactory;
 use Vanilo\Order\Generators\SequentialNumberGenerator;
 
 class SequentialNumberGeneratorTest extends TestCase
 {
-    protected $item;
+    protected array $item;
 
     public function setUp(): void
     {
@@ -33,20 +35,14 @@ class SequentialNumberGeneratorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_1_with_default_ie_no_configuration()
+    #[Test] public function it_returns_1_with_default_ie_no_configuration()
     {
         $seq = new SequentialNumberGenerator();
 
         $this->assertEquals('1', $seq->generateNumber());
     }
 
-    /**
-     * @test
-     */
-    public function the_first_order_generated_with_has_number_1()
+    #[Test] public function the_first_order_generated_with_has_number_1()
     {
         $factory = new OrderFactory(new SequentialNumberGenerator());
 
@@ -55,10 +51,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals('1', $order->getNumber());
     }
 
-    /**
-     * @test
-     */
-    public function the_second_order_generated_with_has_number_2()
+    #[Test] public function the_second_order_generated_with_has_number_2()
     {
         $factory = new OrderFactory(new SequentialNumberGenerator());
 
@@ -68,10 +61,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals('2', $secondOrder->getNumber());
     }
 
-    /**
-     * @test
-     */
-    public function orders_get_consecutive_numbers()
+    #[Test] public function orders_get_consecutive_numbers()
     {
         $factory = new OrderFactory(new SequentialNumberGenerator());
 
@@ -81,10 +71,7 @@ class SequentialNumberGeneratorTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function order_numbers_can_be_prefixed_from_config()
+    #[Test] public function order_numbers_can_be_prefixed_from_config()
     {
         config(['vanilo.order.number.sequential_number.prefix' => 'PO']);
 
@@ -95,10 +82,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals('PO1', $order->getNumber());
     }
 
-    /**
-     * @test
-     */
-    public function order_numbers_can_be_padded_from_config()
+    #[Test] public function order_numbers_can_be_padded_from_config()
     {
         config(['vanilo.order.number.sequential_number.pad_length' => 4]);
 
@@ -109,10 +93,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals('0001', $order->getNumber());
     }
 
-    /**
-     * @test
-     */
-    public function number_pad_string_can_be_set_in_config()
+    #[Test] public function number_pad_string_can_be_set_in_config()
     {
         config(['vanilo.order.number.sequential_number.pad_length' => 4]);
         config(['vanilo.order.number.sequential_number.pad_string' => 'X']);
@@ -124,10 +105,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals('XXX1', $order->getNumber());
     }
 
-    /**
-     * @test
-     */
-    public function starting_number_can_be_set_in_config()
+    #[Test] public function starting_number_can_be_set_in_config()
     {
         config(['vanilo.order.number.sequential_number.start_sequence_from' => 10000]);
 
@@ -138,10 +116,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals('10000', $order->getNumber());
     }
 
-    /**
-     * @test
-     */
-    public function custom_starting_number_doesnt_break_sequentiality()
+    #[Test] public function custom_starting_number_doesnt_break_sequentiality()
     {
         config(['vanilo.order.number.sequential_number.start_sequence_from' => 1000]);
 
@@ -153,11 +128,7 @@ class SequentialNumberGeneratorTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @dataProvider versatileProvider
-     */
-    public function versatile_formatting_can_be_achieved($prefix, $start, $padLen, $padStr, $generateX, $expected)
+    #[DataProvider('versatileProvider')] #[Test] public function versatile_formatting_can_be_achieved($prefix, $start, $padLen, $padStr, $generateX, $expected)
     {
         config(['vanilo.order.number.sequential_number.prefix' => $prefix]);
         config(['vanilo.order.number.sequential_number.start_sequence_from' => $start]);
@@ -176,7 +147,7 @@ class SequentialNumberGeneratorTest extends TestCase
         $this->assertEquals($expected, $numbers);
     }
 
-    public static function versatileProvider()
+    public static function versatileProvider(): array
     {
         return [
             ['C', '100000', 1, '0', 1, ['C100000']],

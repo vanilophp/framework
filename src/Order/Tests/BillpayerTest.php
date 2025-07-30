@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Order\Tests;
 
 use Konekt\Address\Models\Country;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Tests\Dummies\Address;
 
@@ -33,8 +34,7 @@ class BillpayerTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_returns_proper_bool_types_when_the_model_is_empty()
+    #[Test] public function it_returns_proper_bool_types_when_the_model_is_empty()
     {
         $billPayer = new Billpayer();
 
@@ -43,8 +43,7 @@ class BillpayerTest extends TestCase
         $this->assertIsBool($billPayer->isIndividual());
     }
 
-    /** @test */
-    public function it_proxies_its_missing_address_fields_to_its_underlying_address_object()
+    #[Test] public function it_proxies_its_missing_address_fields_to_its_underlying_address_object()
     {
         $address = Address::create([
             'name' => 'Sample Name',

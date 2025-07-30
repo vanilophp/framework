@@ -14,20 +14,21 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Foundation\Models\Product;
 use Vanilo\Foundation\Shipping\PaymentDependentShippingFeeCalculator;
+use Vanilo\Foundation\Tests\Factories\ProductFactory;
 use Vanilo\Shipment\Models\ShippingFee;
 use Vanilo\Shipment\Models\ShippingMethod;
 
 class PaymentMethodDependentShippingFeeTest extends TestCase
 {
-    /** @test */
-    public function it_calculates_the_default_price_when_there_is_no_shipping_method_set()
+    #[Test] public function it_calculates_the_default_price_when_there_is_no_shipping_method_set()
     {
-        $product = factory(Product::class)->create(['price' => 23]);
+        $product = ProductFactory::new()->create(['price' => 23]);
 
         Cart::addItem($product);
         Checkout::setCart(Cart::getFacadeRoot());
@@ -39,10 +40,9 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $this->assertEquals(10, $result->amount()->getValue());
     }
 
-    /** @test */
-    public function it_calculates_the_default_price_when_the_shipping_method_is_not_in_the_configuration()
+    #[Test] public function it_calculates_the_default_price_when_the_shipping_method_is_not_in_the_configuration()
     {
-        $product = factory(Product::class)->create(['price' => 23]);
+        $product = ProductFactory::new()->create(['price' => 23]);
 
         Cart::addItem($product);
         Checkout::setCart(Cart::getFacadeRoot());
@@ -55,10 +55,9 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $this->assertEquals(10, $result->amount()->getValue());
     }
 
-    /** @test */
-    public function it_calculates_the_configured_price_when_the_shipping_method_is_present_in_the_configuration()
+    #[Test] public function it_calculates_the_configured_price_when_the_shipping_method_is_present_in_the_configuration()
     {
-        $product = factory(Product::class)->create(['price' => 23]);
+        $product = ProductFactory::new()->create(['price' => 23]);
 
         Cart::addItem($product);
         Checkout::setCart(Cart::getFacadeRoot());
@@ -71,10 +70,9 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $this->assertEquals(7.13, $result->amount()->getValue());
     }
 
-    /** @test */
-    public function it_calculates_the_default_price_when_the_shipping_method_has_no_explicitly_given_price()
+    #[Test] public function it_calculates_the_default_price_when_the_shipping_method_has_no_explicitly_given_price()
     {
-        $product = factory(Product::class)->create(['price' => 30]);
+        $product = ProductFactory::new()->create(['price' => 30]);
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Slow',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
@@ -97,10 +95,9 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $this->assertEquals(5.99, $result->amount()->getValue());
     }
 
-    /** @test */
-    public function it_creates_an_adjustment_with_the_default_price_when_there_is_no_payment_method_set()
+    #[Test] public function it_creates_an_adjustment_with_the_default_price_when_there_is_no_payment_method_set()
     {
-        $product = factory(Product::class)->create(['price' => 79.99]);
+        $product = ProductFactory::new()->create(['price' => 79.99]);
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Delivery Standard #1',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
@@ -134,10 +131,9 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $this->assertEquals(5.99, $shippingAdjustment->getAmount());
     }
 
-    /** @test */
-    public function it_creates_an_adjustment_with_the_default_price_when_the_payment_method_has_no_explicit_price_in_the_config()
+    #[Test] public function it_creates_an_adjustment_with_the_default_price_when_the_payment_method_has_no_explicit_price_in_the_config()
     {
-        $product = factory(Product::class)->create(['price' => 50]);
+        $product = ProductFactory::new()->create(['price' => 50]);
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Delivery X',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,
@@ -155,10 +151,9 @@ class PaymentMethodDependentShippingFeeTest extends TestCase
         $this->assertEquals(5.99, $shippingAdjustment->getAmount());
     }
 
-    /** @test */
-    public function it_changes_the_price_of_the_shipping_adjustment_when_the_payment_method_changes()
+    #[Test] public function it_changes_the_price_of_the_shipping_adjustment_when_the_payment_method_changes()
     {
-        $product = factory(Product::class)->create(['price' => 64]);
+        $product = ProductFactory::new()->create(['price' => 64]);
         $shippingMethod1 = ShippingMethod::create([
             'name' => 'Delivery Y',
             'calculator' => PaymentDependentShippingFeeCalculator::ID,

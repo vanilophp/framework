@@ -22,6 +22,7 @@ use Konekt\Address\Models\AddressType;
 use Konekt\Address\Models\Country;
 use Konekt\Enum\Enum;
 use Konekt\User\Models\User;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Order\Contracts\FulfillmentStatus as FulfillmentStatusContract;
 use Vanilo\Order\Contracts\Order as OrderContract;
 use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
@@ -29,13 +30,13 @@ use Vanilo\Order\Models\Billpayer;
 use Vanilo\Order\Models\FulfillmentStatus;
 use Vanilo\Order\Models\Order;
 use Vanilo\Order\Models\OrderStatus;
+use Vanilo\Order\Tests\Factories\AddressFactory;
+use Vanilo\Order\Tests\Factories\BillpayerFactory;
+use Vanilo\Order\Tests\Factories\UserFactory;
 
 class CreateOrderTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function order_can_be_created_with_minimal_data()
+    #[Test] public function order_can_be_created_with_minimal_data()
     {
         $order = Order::create([
             'number' => 'PO123456',
@@ -45,10 +46,7 @@ class CreateOrderTest extends TestCase
         $this->assertInstanceOf(OrderContract::class, $order);
     }
 
-    /**
-     * @test
-     */
-    public function order_cant_be_created_without_order_number()
+    #[Test] public function order_cant_be_created_without_order_number()
     {
         $this->expectException(\PDOException::class);
 
@@ -64,8 +62,7 @@ class CreateOrderTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function order_number_is_unique()
+    #[Test] public function order_number_is_unique()
     {
         $this->expectException(QueryException::class);
         $this->expectExceptionMessageMatches('/UNIQUE/i');
@@ -78,8 +75,7 @@ class CreateOrderTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function order_status_is_an_enum()
+    #[Test] public function order_status_is_an_enum()
     {
         $order = Order::create([
             'number' => 'LMN6G1',
@@ -90,8 +86,7 @@ class CreateOrderTest extends TestCase
         $this->assertInstanceOf(OrderStatusContract::class, $order->status);
     }
 
-    /** @test */
-    public function order_has_default_status_if_none_was_given()
+    #[Test] public function order_has_default_status_if_none_was_given()
     {
         $order = Order::create([
             'number' => 'XK012W44'
@@ -100,8 +95,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals(OrderStatus::defaultValue(), $order->status->value());
     }
 
-    /** @test */
-    public function order_status_can_be_set()
+    #[Test] public function order_status_can_be_set()
     {
         $order = Order::create([
             'number' => 'YHSIE',
@@ -111,8 +105,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals(OrderStatus::CANCELLED, $order->status->value());
     }
 
-    /** @test */
-    public function the_fulfillment_status_is_an_enum()
+    #[Test] public function the_fulfillment_status_is_an_enum()
     {
         $order = Order::create([
             'number' => 'LMN6G1',
@@ -123,8 +116,7 @@ class CreateOrderTest extends TestCase
         $this->assertInstanceOf(FulfillmentStatusContract::class, $order->fulfillment_status);
     }
 
-    /** @test */
-    public function it_has_a_default_fulfillment_status_if_none_was_given()
+    #[Test] public function it_has_a_default_fulfillment_status_if_none_was_given()
     {
         $order = Order::create([
             'number' => 'WK012X44'
@@ -133,8 +125,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals(FulfillmentStatus::defaultValue(), $order->fulfillment_status->value());
     }
 
-    /** @test */
-    public function the_fulfillment_status_can_be_set()
+    #[Test] public function the_fulfillment_status_can_be_set()
     {
         $order = Order::create([
             'number' => 'PHSFE',
@@ -144,8 +135,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals(FulfillmentStatus::PARTIALLY_FULFILLED, $order->fulfillment_status->value());
     }
 
-    /** @test */
-    public function the_language_can_be_set()
+    #[Test] public function the_language_can_be_set()
     {
         $order = Order::create([
             'number' => 'YAHRYHANI',
@@ -155,8 +145,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals('fa', $order->language);
     }
 
-    /** @test */
-    public function the_ordered_at_can_be_set_and_is_a_datetime()
+    #[Test] public function the_ordered_at_can_be_set_and_is_a_datetime()
     {
         $order = Order::create([
             'number' => 'USKH2',
@@ -167,8 +156,7 @@ class CreateOrderTest extends TestCase
         $this->assertEquals('2022-12-30T09:00:00', $order->ordered_at->format('Y-m-d\TH:i:s'));
     }
 
-    /** @test */
-    public function it_sets_the_ordered_at_date_to_be_the_same_as_the_created_at_if_no_explicit_ordered_at_date_is_passed()
+    #[Test] public function it_sets_the_ordered_at_date_to_be_the_same_as_the_created_at_if_no_explicit_ordered_at_date_is_passed()
     {
         $order = Order::create([
             'number' => 'DDKX$Z'
@@ -180,10 +168,7 @@ class CreateOrderTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function all_fields_can_be_properly_set()
+    #[Test] public function all_fields_can_be_properly_set()
     {
         Country::create([
             'id' => 'DE',
@@ -192,11 +177,19 @@ class CreateOrderTest extends TestCase
             'is_eu_member' => 1
         ]);
 
-        factory(User::class, 271)->create();
-        factory(Address::class, 8)->create(['type' => AddressType::SHIPPING]);
+        UserFactory::new()->createMany(4);
+        AddressFactory::new()->createMany(
+            [
+                ['type' => AddressType::SHIPPING],
+                ['type' => AddressType::SHIPPING],
+                ['type' => AddressType::SHIPPING],
+                ['type' => AddressType::SHIPPING],
+                ['type' => AddressType::SHIPPING],
+            ],
+        );
         $user = User::orderBy('id', 'desc')->first();
         $shippingAddress = Address::orderBy('id', 'desc')->first();
-        $billpayer = factory(Billpayer::class)->create();
+        $billpayer = BillpayerFactory::new()->create();
 
         $order = Order::create([
             'number' => 'UEOIP',

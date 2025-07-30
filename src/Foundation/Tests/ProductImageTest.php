@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Foundation\Models\Product;
 
@@ -21,8 +22,7 @@ class ProductImageTest extends TestCase
 {
     protected const TEST_IMAGE = __DIR__ . '/img/vanilo_640.png';
 
-    /** @test */
-    public function an_image_can_be_added_to_a_product()
+    #[Test] public function an_image_can_be_added_to_a_product()
     {
         /** @var Product $product */
         $product = Product::create([

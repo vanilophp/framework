@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Properties\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Properties\Exceptions\UnknownPropertyTypeException;
 use Vanilo\Properties\Models\Property;
 use Vanilo\Properties\PropertyTypes;
@@ -25,11 +27,7 @@ use Vanilo\Properties\Types\Text;
 
 class PropertyTypeTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider builtInTypesProvider
-     */
-    public function built_in_types_are_available(string $typeName, string $expectedClass)
+    #[DataProvider('builtInTypesProvider')] #[Test] public function built_in_types_are_available(string $typeName, string $expectedClass)
     {
         $property = Property::create([
             'name' => sprintf('Example %s property', ucfirst($typeName)),
@@ -39,8 +37,7 @@ class PropertyTypeTest extends TestCase
         $this->assertInstanceOf($expectedClass, $property->getType());
     }
 
-    /** @test */
-    public function new_types_can_be_registered()
+    #[Test] public function new_types_can_be_registered()
     {
         PropertyTypes::register('material', MaterialPropertyType::class);
 
@@ -52,8 +49,7 @@ class PropertyTypeTest extends TestCase
         $this->assertInstanceOf(MaterialPropertyType::class, $property->getType());
     }
 
-    /** @test */
-    public function attempting_to_retrieve_an_unregistered_property_type_throws_an_exception()
+    #[Test] public function attempting_to_retrieve_an_unregistered_property_type_throws_an_exception()
     {
         $property = Property::create([
             'name' => 'I am bad',
@@ -64,8 +60,7 @@ class PropertyTypeTest extends TestCase
         $property->getType();
     }
 
-    /** @test */
-    public function registering_a_property_type_without_implementing_the_interface_is_not_allowed()
+    #[Test] public function registering_a_property_type_without_implementing_the_interface_is_not_allowed()
     {
         $this->expectException(\InvalidArgumentException::class);
         PropertyTypes::register('whatever', \stdClass::class);
