@@ -24,7 +24,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0|^11.0",
-        "orchestra/testbench": "^8.0|^9.0|^10.0"
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "vanilo/master-product": "^5.0"
     },
     "autoload": {
         "psr-4": {
