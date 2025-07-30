@@ -7,7 +7,7 @@
 
 - Dropped PHP 8.2 Support
 - Changed the minimum Laravel 10 version to v10.48
-
+- Added Laravel 12 Support
 
 ## 4.x Series
 
