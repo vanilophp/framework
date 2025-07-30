@@ -25,7 +25,7 @@ class CarrierTest extends TestCase
         $dhl = Carrier::create(['name' => 'DHL Germany']);
 
         $this->assertInstanceOf(Carrier::class, $dhl);
-        $this->assertEquals('DHL Germany', $dhl->name());
+        $this->assertEquals('DHL Germany', $dhl->getName());
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class CarrierTest extends TestCase
     {
         $dhl = new Carrier();
 
-        $this->assertEquals('', $dhl->name());
+        $this->assertEquals('', $dhl->getName());
     }
 
     /** @test */

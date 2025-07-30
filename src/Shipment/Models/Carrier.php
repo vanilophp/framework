@@ -53,7 +53,13 @@ class Carrier extends Model implements CarrierContract
         return $query->where('is_active', false);
     }
 
+    /** @deprecated Use getName() instead. This method will be removed in v6.0 */
     public function name(): string
+    {
+        return $this->getName();
+    }
+
+    public function getName(): string
     {
         return $this->getRawOriginal('name') ?? '';
     }

@@ -18,5 +18,8 @@ use Vanilo\Contracts\Configurable;
 
 interface Carrier extends Configurable
 {
+    /** @deprecated Use getName() instead. This method will be removed in v6.0 */
     public function name(): string;
+
+    public function getName(): string;
 }

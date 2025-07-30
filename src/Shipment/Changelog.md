@@ -9,6 +9,8 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - Added ETA fields to Shipping Methods
+- BC: Added the `getName()` method to the `Carrier` interface
+- Marked the `Carrier::name()` method as deprecated in favor of the `getName()` method
 
 ## 4.x Series
 

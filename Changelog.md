@@ -17,6 +17,7 @@
     - `hasChildItems()`
     - `getChildItems()`
 - BC: Added the `getOriginalPrice()` and `hasAHigherOriginalPrice()` methods to the Buyable interface
+- BC: Added the `getName()` method to the `Carrier` interface
 - BC: Added the following methods to the `ProductState` interface:
     - `isListable()`
     - `isViewable()`
@@ -54,6 +55,7 @@
 - Added the dual-field logic + Enum conversion to the MasterProductVariant model's `state` field
 - Fixed linked products retrieval: linked products with the same ID but a different type are now returned correctly
 - Removed the enum constraint from the `product.state` database field
+- Marked the `Carrier::name()` method as deprecated in favor of the `getName()` method
 
 ## 4.x Series
 

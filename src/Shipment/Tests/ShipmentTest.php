@@ -150,7 +150,7 @@ class ShipmentTest extends TestCase
 
         $this->assertInstanceOf(Carrier::class, $shipment->getCarrier());
         $this->assertEquals('SEUR', $shipment->carrier->name);
-        $this->assertEquals('SEUR', $shipment->getCarrier()->name());
+        $this->assertEquals('SEUR', $shipment->getCarrier()->getName());
     }
 
     /** @test */
