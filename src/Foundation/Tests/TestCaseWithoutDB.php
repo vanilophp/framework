@@ -10,7 +10,6 @@ use Vanilo\Foundation\Providers\ModuleServiceProvider as VaniloModule;
 
 abstract class TestCaseWithoutDB extends Orchestra
 {
-
     protected function getPackageProviders($app)
     {
         return [
