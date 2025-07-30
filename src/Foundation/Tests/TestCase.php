@@ -18,11 +18,9 @@ use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Konekt\Search\Providers\SearchServiceProvider;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
-use Vanilo\Foundation\Providers\ModuleServiceProvider as VaniloModule;
 
-abstract class TestCase extends Orchestra
+abstract class TestCase extends TestCaseWithoutDB
 {
     protected function setUp(): void
     {
@@ -72,13 +70,5 @@ abstract class TestCase extends Orchestra
     {
         $this->loadLaravelMigrations();
         $this->artisan('migrate', ['--force' => true]);
-    }
-
-    protected function resolveApplicationConfiguration($app)
-    {
-        parent::resolveApplicationConfiguration($app);
-        $app['config']->set('concord.modules', [
-            VaniloModule::class
-        ]);
     }
 }

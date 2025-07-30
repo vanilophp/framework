@@ -16,7 +16,7 @@ namespace Vanilo\Foundation\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 
-class ModulesTest extends TestCase
+class ModulesTest extends TestCaseWithoutDB
 {
     #[Test] public function all_vanilo_modules_are_loaded()
     {

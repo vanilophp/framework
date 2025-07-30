@@ -20,7 +20,7 @@ use Vanilo\Foundation\Tests\Examples\IndependentMaster;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\Product\Models\Product as BaseProduct;
 
-class HelpersTest extends TestCase
+class HelpersTest extends TestCaseWithoutDB
 {
     #[Test] public function the_base_product_is_not_a_master_product()
     {
