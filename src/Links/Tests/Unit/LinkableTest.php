@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Unit;
 
-use Vanilo\MasterProduct\Models\MasterProduct;
-use Vanilo\MasterProduct\Models\MasterProductVariant;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
@@ -23,6 +21,8 @@ use Vanilo\Links\Tests\Dummies\TestLinkableProduct;
 use Vanilo\Links\Tests\TestCase;
 use Vanilo\Links\Tests\TestsDatabasePerformance;
 use Vanilo\Links\Traits\Linkable;
+use Vanilo\MasterProduct\Models\MasterProduct;
+use Vanilo\MasterProduct\Models\MasterProductVariant;
 
 class LinkableTest extends TestCase
 {
