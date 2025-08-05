@@ -59,7 +59,6 @@ class DummyCartItem implements CartItem, Adjustable
         return true;
     }
 
-
     public function hasParent(): bool
     {
         return false;
