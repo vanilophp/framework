@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\MasterProduct\Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant as MasterProductVariantContract;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Tests\Examples\VariantWithProperties;
