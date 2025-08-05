@@ -20,6 +20,7 @@ interface OrderItem extends SaleItem
 {
     public function getOrder(): Order;
 
+    /** @deprecated Use the `getBuyable()` method instead. Will be removed in Vanilo 6 */
     public function getProduct(): object;
 
     public function getFulfillmentStatus(): FulfillmentStatus;

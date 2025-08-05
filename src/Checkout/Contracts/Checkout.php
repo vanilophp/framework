@@ -93,7 +93,7 @@ interface Checkout extends Shippable, ArrayAccess
     /**
      * Update checkout data with an array of attributes
      *
-     * @deprecated
+     * @deprecated Will be removed in Vanilo 6
      *
      * @param array $data
      */
