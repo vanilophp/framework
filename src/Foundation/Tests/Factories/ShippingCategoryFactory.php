@@ -7,7 +7,6 @@ namespace Vanilo\Foundation\Tests\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Vanilo\Shipment\Models\ShippingCategory;
 
-
 class ShippingCategoryFactory extends Factory
 {
     protected $model = ShippingCategory::class;

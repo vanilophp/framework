@@ -50,7 +50,6 @@ class CartItem extends BaseCartItem implements Adjustable, Taxable
         return parent::isShippable(); // If we're unsure, just fall back to the parent implementation
     }
 
-
     public function preAdjustmentTotal(): float
     {
         return $this->price * $this->quantity;
