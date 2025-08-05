@@ -54,6 +54,12 @@ class DummyCartItem implements CartItem, Adjustable
         // TODO: Implement getBuyable() method.
     }
 
+    public function isShippable(): ?bool
+    {
+        return true;
+    }
+
+
     public function hasParent(): bool
     {
         return false;

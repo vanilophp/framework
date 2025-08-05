@@ -77,4 +77,9 @@ class CartItem implements CheckoutSubjectItem
     {
         return true;
     }
+
+    public function isShippable(): ?bool
+    {
+        return true;
+    }
 }

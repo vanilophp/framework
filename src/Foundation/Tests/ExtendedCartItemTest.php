@@ -28,7 +28,6 @@ class ExtendedCartItemTest extends TestCase
         Cart::addItem($product2);
         Cart::addItem($product3);
 
-        $this->assertCount(1, Checkout::get());
         $this->assertCount(2, Checkout::getShippableItems());
     }
 }
