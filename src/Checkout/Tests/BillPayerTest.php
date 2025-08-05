@@ -14,16 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Checkout\Tests\Example\Billpayer;
 
 class BillPayerTest extends TestCase
 {
-    /** @var Billpayer */
-    private $billpayer;
+    private Billpayer $billpayer;
 
-    /** @var array */
-    private $billpayerAttributes;
+    private array $billpayerAttributes;
 
     protected function setUp(): void
     {
@@ -48,10 +47,7 @@ class BillPayerTest extends TestCase
         $this->billpayer = new Billpayer($this->billpayerAttributes);
     }
 
-    /**
-     * @test
-     */
-    public function bill_payer_data_can_be_set_from_object_implementing_the_interface()
+    #[Test] public function bill_payer_data_can_be_set_from_object_implementing_the_interface()
     {
         Checkout::setBillPayer($this->billpayer);
 
@@ -91,10 +87,7 @@ class BillPayerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function billpayer_can_be_set_from_array_of_attributes()
+    #[Test] public function billpayer_can_be_set_from_array_of_attributes()
     {
         Checkout::update([
             'billpayer' => $this->billpayerAttributes

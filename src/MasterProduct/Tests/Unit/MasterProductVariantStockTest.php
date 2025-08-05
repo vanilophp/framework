@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductVariant;
 use Vanilo\MasterProduct\Tests\TestCase;
@@ -29,8 +30,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->master = MasterProduct::create(['name' => 'Yokka Magnitude Laptop']);
     }
 
-    /** @test */
-    public function the_stock_can_be_set()
+    #[Test] public function the_stock_can_be_set()
     {
         $product = MasterProductVariant::create([
             'master_product_id' => $this->master->id,
@@ -42,8 +42,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertEquals(50, $product->stock);
     }
 
-    /** @test */
-    public function the_stock_field_value_returns_a_numeric_value()
+    #[Test] public function the_stock_field_value_returns_a_numeric_value()
     {
         $createdProduct = MasterProductVariant::create([
             'master_product_id' => $this->master->id,
@@ -57,8 +56,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertTrue(\is_numeric($product->stock));
     }
 
-    /** @test */
-    public function stock_field_value_defaults_to_zero()
+    #[Test] public function stock_field_value_defaults_to_zero()
     {
         $product = MasterProductVariant::create([
             'master_product_id' => $this->master->id,
@@ -69,8 +67,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertEquals(0, $product->stock);
     }
 
-    /** @test */
-    public function is_on_stock_returns_false_if_the_stock_is_equal_to_zero()
+    #[Test] public function is_on_stock_returns_false_if_the_stock_is_equal_to_zero()
     {
         $product = MasterProductVariant::create([
             'master_product_id' => $this->master->id,
@@ -82,8 +79,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertFalse($product->isOnStock());
     }
 
-    /** @test */
-    public function is_on_stock_returns_false_if_the_stock_is_less_than_zero()
+    #[Test] public function is_on_stock_returns_false_if_the_stock_is_less_than_zero()
     {
         $product = MasterProductVariant::create([
             'master_product_id' => $this->master->id,
@@ -95,8 +91,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertFalse($product->isOnStock());
     }
 
-    /** @test */
-    public function backorder_value_can_be_specified()
+    #[Test] public function backorder_value_can_be_specified()
     {
         $product = MasterProductVariant::create([
             'master_product_id' => $this->master->id,
@@ -108,8 +103,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertEquals(16, $product->backorder);
     }
 
-    /** @test */
-    public function backorder_is_null_by_default()
+    #[Test] public function backorder_is_null_by_default()
     {
         $product = MasterProductVariant::create([
             'master_product_id' => $this->master->id,
@@ -121,8 +115,7 @@ class MasterProductVariantStockTest extends TestCase
         $this->assertNull($product->backorder);
     }
 
-    /** @test */
-    public function it_implements_the_stockable_interface()
+    #[Test] public function it_implements_the_stockable_interface()
     {
         $product = MasterProductVariant::create([
             'master_product_id' => $this->master->id,

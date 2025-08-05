@@ -14,13 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Category\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Category\Models\Taxon;
 use Vanilo\Category\Models\Taxonomy;
 
 class TaxonScopesTest extends TestCase
 {
-    /** @test */
-    public function the_by_taxonomy_scope_can_return_taxons_by_taxonomy_object()
+    #[Test] public function the_by_taxonomy_scope_can_return_taxons_by_taxonomy_object()
     {
         $category = Taxonomy::create(['name' => 'Category']);
 
@@ -39,8 +39,7 @@ class TaxonScopesTest extends TestCase
         $this->assertCount(4, Taxon::byTaxonomy($brand)->get());
     }
 
-    /** @test */
-    public function the_by_taxonomy_scope_can_return_taxons_by_taxonomy_id()
+    #[Test] public function the_by_taxonomy_scope_can_return_taxons_by_taxonomy_id()
     {
         $gadgets = Taxonomy::create(['name' => 'Gadgets']);
 
@@ -57,8 +56,7 @@ class TaxonScopesTest extends TestCase
         $this->assertCount(3, Taxon::byTaxonomy($brand->id)->get());
     }
 
-    /** @test */
-    public function can_be_sorted_by_priority()
+    #[Test] public function can_be_sorted_by_priority()
     {
         $category = Taxonomy::create(['name' => 'Category']);
 
@@ -73,8 +71,7 @@ class TaxonScopesTest extends TestCase
         $this->assertEquals('Cat 2', $taxons[2]->name);
     }
 
-    /** @test */
-    public function can_be_reverse_sorted_by_priority()
+    #[Test] public function can_be_reverse_sorted_by_priority()
     {
         $wines = Taxonomy::create(['name' => 'Wines']);
 
@@ -91,8 +88,7 @@ class TaxonScopesTest extends TestCase
         $this->assertEquals('Sparkling', $taxons[0]->name);
     }
 
-    /** @test */
-    public function root_level_taxons_can_be_retrieved_by_the_roots_scope()
+    #[Test] public function root_level_taxons_can_be_retrieved_by_the_roots_scope()
     {
         $taxonomy = Taxonomy::create(['name' => 'Category']);
 
@@ -121,8 +117,7 @@ class TaxonScopesTest extends TestCase
         $this->assertCount(2, Taxon::roots()->get());
     }
 
-    /** @test */
-    public function except_can_exclude_a_taxon_from_the_results()
+    #[Test] public function except_can_exclude_a_taxon_from_the_results()
     {
         $brands = Taxonomy::create(['name' => 'Brands']);
 

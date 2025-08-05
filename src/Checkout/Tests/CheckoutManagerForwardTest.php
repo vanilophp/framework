@@ -15,21 +15,20 @@ declare(strict_types=1);
 namespace Vanilo\Checkout\Tests;
 
 use BadMethodCallException;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Checkout\CheckoutManager;
 use Vanilo\Checkout\Tests\Example\MemoryStore;
 
 class CheckoutManagerForwardTest extends TestCase
 {
-    /** @test */
-    public function it_forwards_unknown_method_calls_to_the_underlying_checkout_store()
+    #[Test] public function it_forwards_unknown_method_calls_to_the_underlying_checkout_store()
     {
         $checkout = new CheckoutManager(new MemoryStore());
 
         $this->assertEquals('Hey I am a custom method', $checkout->customMethod());
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_the_store_has_no_method_of_the_given_name()
+    #[Test] public function it_throws_an_exception_if_the_store_has_no_method_of_the_given_name()
     {
         $checkout = new CheckoutManager(new MemoryStore());
 
@@ -37,16 +36,14 @@ class CheckoutManagerForwardTest extends TestCase
         $checkout->nonExistingMethod();
     }
 
-    /** @test */
-    public function it_returns_the_stores_attributes()
+    #[Test] public function it_returns_the_stores_attributes()
     {
         $checkout = new CheckoutManager(new MemoryStore());
 
         $this->assertEquals('Hey I am a store attribute', $checkout->storeAttribute);
     }
 
-    /** @test */
-    public function the_stores_magic_properties_are_returned_as_well()
+    #[Test] public function the_stores_magic_properties_are_returned_as_well()
     {
         $checkout = new CheckoutManager(new MemoryStore());
 

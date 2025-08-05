@@ -14,21 +14,20 @@ declare(strict_types=1);
 
 namespace Vanilo\Taxes\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxCategoryType;
 
 class TaxCategoryTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_instantiated()
+    #[Test] public function it_can_be_instantiated()
     {
         $taxCategory = new TaxCategory();
 
         $this->assertInstanceOf(TaxCategory::class, $taxCategory);
     }
 
-    /** @test */
-    public function it_can_be_created_with_minimal_data()
+    #[Test] public function it_can_be_created_with_minimal_data()
     {
         $taxCategory = TaxCategory::create(['name' => 'Reduced Rate']);
 
@@ -36,8 +35,7 @@ class TaxCategoryTest extends TestCase
         $this->assertEquals('Reduced Rate', $taxCategory->name);
     }
 
-    /** @test */
-    public function it_complies_with_the_interface()
+    #[Test] public function it_complies_with_the_interface()
     {
         $taxCategory = TaxCategory::create(['name' => 'Events', 'type' => TaxCategoryType::EVENT_RELATED_SERVICES])->fresh();
 
@@ -51,8 +49,7 @@ class TaxCategoryTest extends TestCase
         $this->assertEquals('Events', $instanceViaLookup->getName());
     }
 
-    /** @test */
-    public function it_is_active_by_default()
+    #[Test] public function it_is_active_by_default()
     {
         $taxCategory = TaxCategory::create(['name' => 'Normal Rate'])->fresh();
 
@@ -60,8 +57,7 @@ class TaxCategoryTest extends TestCase
         $this->assertTrue($taxCategory->is_active);
     }
 
-    /** @test */
-    public function it_can_be_deactivated()
+    #[Test] public function it_can_be_deactivated()
     {
         $taxCategory = TaxCategory::create(['name' => 'Legacy Rate', 'is_active' => false])->fresh();
 
@@ -69,8 +65,7 @@ class TaxCategoryTest extends TestCase
         $this->assertFalse($taxCategory->is_active);
     }
 
-    /** @test */
-    public function it_can_filter_active_only_items()
+    #[Test] public function it_can_filter_active_only_items()
     {
         foreach ([
             ['name' => 'Rate 1', 'is_active' => true],
@@ -92,8 +87,7 @@ class TaxCategoryTest extends TestCase
         $this->assertContains('Rate 5', $actives->pluck('name'));
     }
 
-    /** @test */
-    public function it_has_the_default_type_if_none_was_specified_at_creation()
+    #[Test] public function it_has_the_default_type_if_none_was_specified_at_creation()
     {
         $taxCategory = TaxCategory::create(['name' => 'Some Tax Category'])->fresh();
 
@@ -102,8 +96,7 @@ class TaxCategoryTest extends TestCase
         $this->assertEquals(TaxCategoryType::defaultValue(), $taxCategory->type->value());
     }
 
-    /** @test */
-    public function the_type_can_be_specified()
+    #[Test] public function the_type_can_be_specified()
     {
         $taxCategory = TaxCategory::create(['name' => 'Events', 'type' => TaxCategoryType::EVENT_RELATED_SERVICES])->fresh();
 

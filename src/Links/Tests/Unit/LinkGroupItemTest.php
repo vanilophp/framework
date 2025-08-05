@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Links\Tests\Unit;
 
 use Illuminate\Database\Eloquent\Collection;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Contracts\LinkGroupItem as LinkGroupItemContract;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
@@ -24,8 +25,7 @@ use Vanilo\Links\Tests\TestCase;
 
 class LinkGroupItemTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created()
+    #[Test] public function it_can_be_created()
     {
         $item = LinkGroupItem::create([
             'link_group_id' => LinkGroup::create([
@@ -39,8 +39,7 @@ class LinkGroupItemTest extends TestCase
         $this->assertInstanceOf(LinkGroupItemContract::class, $item);
     }
 
-    /** @test */
-    public function the_parent_group_is_accessible_as_model()
+    #[Test] public function the_parent_group_is_accessible_as_model()
     {
         $item = LinkGroupItem::create([
             'link_group_id' => LinkGroup::create([
@@ -54,8 +53,7 @@ class LinkGroupItemTest extends TestCase
         $this->assertEquals('Others are viewing', $item->group->type->name);
     }
 
-    /** @test */
-    public function one_model_can_only_be_added_once()
+    #[Test] public function one_model_can_only_be_added_once()
     {
         $group = LinkGroup::create([
             'link_type_id' => LinkType::create(['name' => 'Similar product'])->id
@@ -77,8 +75,7 @@ class LinkGroupItemTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function items_can_be_retrieved_from_the_parent_group_relation()
+    #[Test] public function items_can_be_retrieved_from_the_parent_group_relation()
     {
         $group = LinkGroup::create([
             'link_type_id' => LinkType::create(['name' => 'Variant'])->id
@@ -94,8 +91,7 @@ class LinkGroupItemTest extends TestCase
         $this->assertCount(2, $group->items);
     }
 
-    /** @test */
-    public function the_linkable_object_can_be_accessed_via_the_polymorphic_relationship()
+    #[Test] public function the_linkable_object_can_be_accessed_via_the_polymorphic_relationship()
     {
         $group = LinkGroup::create([
             'link_type_id' => LinkType::create(['name' => 'Designer'])->id

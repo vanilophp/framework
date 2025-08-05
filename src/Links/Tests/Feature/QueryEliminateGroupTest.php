@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Eliminate;
 use Vanilo\Links\Query\Establish;
@@ -23,8 +24,7 @@ use Vanilo\Links\Tests\TestCase;
 
 class QueryEliminateGroupTest extends TestCase
 {
-    /** @test */
-    public function it_removes_the_model_and_all_linked_models_from_the_existing_links()
+    #[Test] public function it_removes_the_model_and_all_linked_models_from_the_existing_links()
     {
         $productA = TestProduct::create(['name' => 'Product A'])->fresh();
         $productB = TestProduct::create(['name' => 'Product B'])->fresh();

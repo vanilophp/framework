@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\MasterProduct\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Contracts\Buyable;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductProxy;
@@ -21,8 +22,7 @@ use Vanilo\MasterProduct\Tests\TestCase;
 
 class MasterProductTest extends TestCase
 {
-    /** @test */
-    public function product_can_be_created_with_minimal_data()
+    #[Test] public function product_can_be_created_with_minimal_data()
     {
         $product = MasterProduct::create([
             'name' => 'Dell XPS 13 Laptop',
@@ -32,8 +32,7 @@ class MasterProductTest extends TestCase
         $this->assertEquals('Dell XPS 13 Laptop', $product->name);
     }
 
-    /** @test */
-    public function product_can_be_created_via_its_proxy()
+    #[Test] public function product_can_be_created_via_its_proxy()
     {
         $product = MasterProductProxy::create([
             'name' => 'Dell XPS 15',
@@ -43,8 +42,7 @@ class MasterProductTest extends TestCase
         $this->assertEquals('Dell XPS 15', $product->name);
     }
 
-    /** @test */
-    public function all_fields_can_be_properly_set()
+    #[Test] public function all_fields_can_be_properly_set()
     {
         $product = MasterProduct::create([
             'name' => 'Maxi Kukac 2020',
@@ -70,8 +68,7 @@ class MasterProductTest extends TestCase
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
     }
 
-    /** @test */
-    public function the_title_method_returns_name_if_no_ext_title_was_set()
+    #[Test] public function the_title_method_returns_name_if_no_ext_title_was_set()
     {
         $product = MasterProduct::create([
             'name' => 'Hello What?',
@@ -80,8 +77,7 @@ class MasterProductTest extends TestCase
         $this->assertEquals('Hello What?', $product->title());
     }
 
-    /** @test */
-    public function the_title_method_returns_the_title_if_the_field_is_set()
+    #[Test] public function the_title_method_returns_the_title_if_the_field_is_set()
     {
         $product = MasterProduct::create([
             'name' => 'Hello Why?',
@@ -91,8 +87,7 @@ class MasterProductTest extends TestCase
         $this->assertEquals('Buy the book Hello Why? with discount', $product->title());
     }
 
-    /** @test */
-    public function the_title_can_be_returned_via_property_returns_as_well()
+    #[Test] public function the_title_can_be_returned_via_property_returns_as_well()
     {
         $productWithTitle = MasterProduct::create([
             'name' => 'Hello When?',
@@ -110,8 +105,7 @@ class MasterProductTest extends TestCase
         $this->assertEquals($productWithoutTitle->title(), $productWithoutTitle->title);
     }
 
-    /** @test */
-    public function the_id_field_is_an_integer()
+    #[Test] public function the_id_field_is_an_integer()
     {
         $product = MasterProduct::create(['name' => 'Hey Hello']);
 
@@ -119,16 +113,14 @@ class MasterProductTest extends TestCase
         $this->assertIsInt($product->fresh()->id);
     }
 
-    /** @test */
-    public function the_master_product_does_not_have_an_sku()
+    #[Test] public function the_master_product_does_not_have_an_sku()
     {
         $product = MasterProduct::create(['name' => 'Fish Pizza', 'sku' => 'FP-123']);
 
         $this->assertNull($product->sku);
     }
 
-    /** @test */
-    public function the_master_product_does_not_have_sales_fields()
+    #[Test] public function the_master_product_does_not_have_sales_fields()
     {
         $product = MasterProduct::create([
             'name' => 'Kalamari Pizza',
@@ -140,8 +132,7 @@ class MasterProductTest extends TestCase
         $this->assertNull($product->last_sale_at);
     }
 
-    /** @test */
-    public function the_master_product_is_not_buyable()
+    #[Test] public function the_master_product_is_not_buyable()
     {
         $product = MasterProduct::create([
             'name' => 'Kalamari Pizza',
@@ -152,8 +143,7 @@ class MasterProductTest extends TestCase
         $this->assertFalse(method_exists($product, 'removeSale'));
     }
 
-    /** @test */
-    public function it_has_an_actives_query_builder_scope()
+    #[Test] public function it_has_an_actives_query_builder_scope()
     {
         MasterProduct::factory()->active()->count(4)->create();
         MasterProduct::factory()->inactive()->count(7)->create();

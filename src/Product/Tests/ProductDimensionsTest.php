@@ -14,21 +14,20 @@ declare(strict_types=1);
 
 namespace Vanilo\Product\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Contracts\Dimension;
 use Vanilo\Product\Models\Product;
 
 class ProductDimensionsTest extends TestCase
 {
-    /** @test */
-    public function the_weight_field_is_null_by_default()
+    #[Test] public function the_weight_field_is_null_by_default()
     {
         $product = Product::create(['sku' => 'SHOE123', 'name' => 'Shoe 123'])->fresh();
 
         $this->assertNull($product->weight);
     }
 
-    /** @test */
-    public function the_weight_field_is_a_float_if_it_has_a_value()
+    #[Test] public function the_weight_field_is_a_float_if_it_has_a_value()
     {
         $product = Product::create(['sku' => 'SHOE124', 'name' => 'Shoe 124', 'weight' => 2.56])->fresh();
 
@@ -36,16 +35,14 @@ class ProductDimensionsTest extends TestCase
         $this->assertEquals(2.56, $product->weight);
     }
 
-    /** @test */
-    public function the_height_field_is_null_by_default()
+    #[Test] public function the_height_field_is_null_by_default()
     {
         $product = Product::create(['sku' => 'SHOE125', 'name' => 'Shoe 125'])->fresh();
 
         $this->assertNull($product->height);
     }
 
-    /** @test */
-    public function the_height_field_is_a_float_if_it_has_a_value()
+    #[Test] public function the_height_field_is_a_float_if_it_has_a_value()
     {
         $product = Product::create(['sku' => 'SHOE126', 'name' => 'Shoe 126', 'height' => 3.14])->fresh();
 
@@ -53,16 +50,14 @@ class ProductDimensionsTest extends TestCase
         $this->assertEquals(3.14, $product->height);
     }
 
-    /** @test */
-    public function the_width_field_is_null_by_default()
+    #[Test] public function the_width_field_is_null_by_default()
     {
         $product = Product::create(['sku' => 'SHOE127', 'name' => 'Shoe 127'])->fresh();
 
         $this->assertNull($product->width);
     }
 
-    /** @test */
-    public function the_width_field_is_a_float_if_it_has_a_value()
+    #[Test] public function the_width_field_is_a_float_if_it_has_a_value()
     {
         $product = Product::create(['sku' => 'SHOE128', 'name' => 'Shoe 128', 'width' => 0.65])->fresh();
 
@@ -70,16 +65,14 @@ class ProductDimensionsTest extends TestCase
         $this->assertEquals(0.65, $product->width);
     }
 
-    /** @test */
-    public function the_length_field_is_null_by_default()
+    #[Test] public function the_length_field_is_null_by_default()
     {
         $product = Product::create(['sku' => 'SHOE129', 'name' => 'Shoe 129'])->fresh();
 
         $this->assertNull($product->length);
     }
 
-    /** @test */
-    public function the_length_field_is_a_float_if_it_has_a_value()
+    #[Test] public function the_length_field_is_a_float_if_it_has_a_value()
     {
         $product = Product::create(['sku' => 'SHOE12A', 'name' => 'Shoe 12A', 'length' => 1.2735])->fresh();
 
@@ -87,8 +80,7 @@ class ProductDimensionsTest extends TestCase
         $this->assertEquals(1.2735, $product->length);
     }
 
-    /** @test */
-    public function it_has_no_dimensions_if_any_of_the_3_dimensions_is_null()
+    #[Test] public function it_has_no_dimensions_if_any_of_the_3_dimensions_is_null()
     {
         $product = new Product();
 
@@ -107,8 +99,7 @@ class ProductDimensionsTest extends TestCase
         $this->assertTrue($product->hasDimensions());
     }
 
-    /** @test */
-    public function it_returns_a_dimension_object_containing_all_the_related_fields()
+    #[Test] public function it_returns_a_dimension_object_containing_all_the_related_fields()
     {
         $product = new Product();
 

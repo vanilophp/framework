@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
@@ -52,8 +53,7 @@ class LinkableTest extends TestCase
         $this->createTestData();
     }
 
-    /** @test */
-    public function it_returns_the_link_group_items()
+    #[Test] public function it_returns_the_link_group_items()
     {
         LinkGroupItem::create([
             'linkable_id' => $this->green->id,
@@ -73,8 +73,7 @@ class LinkableTest extends TestCase
         $this->assertInstanceOf(LinkGroupItem::class, $linkItems->last());
     }
 
-    /** @test */
-    public function it_returns_the_groups_the_model_is_part_of()
+    #[Test] public function it_returns_the_groups_the_model_is_part_of()
     {
         LinkGroupItem::create([
             'linkable_id' => $this->yellow->id,
@@ -95,8 +94,7 @@ class LinkableTest extends TestCase
         $this->assertInstanceOf(LinkGroup::class, $groups->last());
     }
 
-    /** @test */
-    public function it_doesnt_return_groups_that_the_model_is_not_part_of()
+    #[Test] public function it_doesnt_return_groups_that_the_model_is_not_part_of()
     {
         LinkGroupItem::create([
             'linkable_id' => $this->red->id,
@@ -117,8 +115,7 @@ class LinkableTest extends TestCase
         $this->assertEquals($this->group1->id, $groups->first()->id);
     }
 
-    /** @test */
-    public function it_doesnt_return_groups_that_the_model_is_not_part_of_but_another_model_that_the_model_shares_a_group_is_included_in()
+    #[Test] public function it_doesnt_return_groups_that_the_model_is_not_part_of_but_another_model_that_the_model_shares_a_group_is_included_in()
     {
         LinkGroupItem::create([
             'linkable_id' => $this->red->id,
@@ -145,8 +142,7 @@ class LinkableTest extends TestCase
         $this->assertEquals($this->group2->id, $groups->first()->id);
     }
 
-    /** @test */
-    public function it_returns_the_linked_models_within_a_specific_type()
+    #[Test] public function it_returns_the_linked_models_within_a_specific_type()
     {
         $attrs = ['link_group_id' => $this->group1->id, 'linkable_type' => TestLinkableProduct::class];
         LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->red->id]));
@@ -176,8 +172,7 @@ class LinkableTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_returns_the_linked_models_when_they_have_the_same_id_but_different_type()
+    #[Test] public function it_returns_the_linked_models_when_they_have_the_same_id_but_different_type()
     {
         $product = TestLinkableProduct::create(['name' => 'Simple Product']);
         $master = MasterProduct::create(['name' => 'Master Product']);
@@ -201,8 +196,7 @@ class LinkableTest extends TestCase
         $this->assertTrue($productLinks[1]->is($variant));
     }
 
-    /** @test */
-    public function it_returns_the_linked_models_within_a_specific_type_but_no_models_from_other_groups()
+    #[Test] public function it_returns_the_linked_models_within_a_specific_type_but_no_models_from_other_groups()
     {
         $attrs1 = ['link_group_id' => $this->group1->id, 'linkable_type' => TestLinkableProduct::class];
         $attrs2 = ['link_group_id' => $this->group2->id, 'linkable_type' => TestLinkableProduct::class];
@@ -244,8 +238,7 @@ class LinkableTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_uses_an_optimal_query_for_retrieving_links()
+    #[Test] public function it_uses_an_optimal_query_for_retrieving_links()
     {
         $attrs1 = ['link_group_id' => $this->group1->id, 'linkable_type' => TestLinkableProduct::class];
         $attrs2 = ['link_group_id' => $this->group2->id, 'linkable_type' => TestLinkableProduct::class];
@@ -282,8 +275,7 @@ class LinkableTest extends TestCase
 //        $this->assertDbQueryCountWasExactly(6);
     }
 
-    /** @test */
-    public function links_can_be_queried_consecutively_without_an_error()
+    #[Test] public function links_can_be_queried_consecutively_without_an_error()
     {
         $attrs = ['link_group_id' => $this->group1->id, 'linkable_type' => TestLinkableProduct::class];
         LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->red->id]));

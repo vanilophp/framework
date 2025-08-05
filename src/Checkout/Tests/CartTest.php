@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Checkout\Facades\Checkout;
 use Vanilo\Checkout\Tests\Example\Cart;
 use Vanilo\Checkout\Tests\Example\Product;
@@ -21,11 +22,9 @@ use Vanilo\Contracts\CheckoutSubject;
 
 class CartTest extends TestCase
 {
-    /** @var  Product */
-    protected $productEarly2018;
+    protected Product $productEarly2018;
 
-    /** @var  Product */
-    protected $productNormal2018;
+    protected Product $productNormal2018;
 
     protected function setUp(): void
     {
@@ -35,10 +34,7 @@ class CartTest extends TestCase
         $this->productNormal2018 = new Product(2, 'Laracon EU 2018 Ticket', 599);
     }
 
-    /**
-     * @test
-     */
-    public function an_arbitrary_object_implementing_checkoutsubject_can_be_set_as_cart()
+    #[Test] public function an_arbitrary_object_implementing_checkoutsubject_can_be_set_as_cart()
     {
         $cart = new Cart();
 
@@ -47,10 +43,7 @@ class CartTest extends TestCase
         $this->assertInstanceOf(CheckoutSubject::class, Checkout::getCart());
     }
 
-    /**
-     * @test
-     */
-    public function checkout_total_matches_cart_total()
+    #[Test] public function checkout_total_matches_cart_total()
     {
         $cart = new Cart();
 
@@ -69,10 +62,7 @@ class CartTest extends TestCase
         $this->assertEquals(2195, Checkout::total());
     }
 
-    /**
-     * @test
-     */
-    public function checkout_can_return_products()
+    #[Test] public function checkout_can_return_products()
     {
         $cart = new Cart();
 

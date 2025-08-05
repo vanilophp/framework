@@ -14,13 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Category\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Category\Models\Taxon;
 use Vanilo\Category\Models\Taxonomy;
 
 class TaxonNeighboursTest extends TestCase
 {
-    /** @test */
-    public function neighbours_return_taxons_with_the_same_parent()
+    #[Test] public function neighbours_return_taxons_with_the_same_parent()
     {
         $brands = Taxonomy::create(['name' => 'Brands']);
 
@@ -67,8 +67,7 @@ class TaxonNeighboursTest extends TestCase
         $this->assertCount(2, $fashion->neighbours);
     }
 
-    /** @test */
-    public function neighbour_with_the_highest_and_lowest_priority_can_be_returned()
+    #[Test] public function neighbour_with_the_highest_and_lowest_priority_can_be_returned()
     {
         $brands = Taxonomy::create(['name' => 'Brands']);
 

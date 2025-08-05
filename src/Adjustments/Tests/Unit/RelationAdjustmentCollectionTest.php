@@ -16,6 +16,7 @@ namespace Vanilo\Adjustments\Tests\Unit;
 
 use Countable;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\Test;
 use stdClass;
 use Vanilo\Adjustments\Adjusters\SimpleFee;
 use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
@@ -28,8 +29,7 @@ use Vanilo\Adjustments\Tests\TestCase;
 
 class RelationAdjustmentCollectionTest extends TestCase
 {
-    /** @test */
-    public function it_implements_the_interface()
+    #[Test] public function it_implements_the_interface()
     {
         $this->assertInstanceOf(
             AdjustmentCollection::class,
@@ -37,8 +37,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_is_empty_by_default()
+    #[Test] public function it_is_empty_by_default()
     {
         $c = new RelationAdjustmentCollection(new Order());
 
@@ -47,8 +46,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertFalse($c->isNotEmpty());
     }
 
-    /** @test */
-    public function it_is_countable()
+    #[Test] public function it_is_countable()
     {
         $c = new RelationAdjustmentCollection(new Order());
 
@@ -56,8 +54,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertCount(0, $c);
     }
 
-    /** @test */
-    public function items_can_be_added_to_it_using_adjusters()
+    #[Test] public function items_can_be_added_to_it_using_adjusters()
     {
         $order = Order::create(['items_total' => 11]);
         $collection = new RelationAdjustmentCollection($order);
@@ -68,8 +65,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertTrue($collection->isNotEmpty());
     }
 
-    /** @test */
-    public function items_can_be_added_to_it()
+    #[Test] public function items_can_be_added_to_it()
     {
         $order = Order::create(['items_total' => 15]);
         $collection = new RelationAdjustmentCollection($order);
@@ -83,8 +79,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertCount(2, $collection);
     }
 
-    /** @test */
-    public function an_item_can_be_removed_from_it()
+    #[Test] public function an_item_can_be_removed_from_it()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 22])
@@ -98,8 +93,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertCount(0, $collection);
     }
 
-    /** @test */
-    public function the_total_can_be_retrieved()
+    #[Test] public function the_total_can_be_retrieved()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 224])
@@ -111,8 +105,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertEquals(53.53, $collection->total());
     }
 
-    /** @test */
-    public function the_total_excludes_non_included_elements_by_default()
+    #[Test] public function the_total_excludes_non_included_elements_by_default()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 224])
@@ -124,8 +117,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertEquals(20, $collection->total());
     }
 
-    /** @test */
-    public function the_total_included_adjustments_can_be_incorporated_in_the_total()
+    #[Test] public function the_total_included_adjustments_can_be_incorporated_in_the_total()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 224])
@@ -137,8 +129,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertEquals(34, $collection->total(true));
     }
 
-    /** @test */
-    public function items_can_be_accessed_as_array_members()
+    #[Test] public function items_can_be_accessed_as_array_members()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 39])
@@ -156,8 +147,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertEquals(4.79, $collection[1]->getAmount());
     }
 
-    /** @test */
-    public function existence_of_array_items_can_be_checked_using_isset()
+    #[Test] public function existence_of_array_items_can_be_checked_using_isset()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 123])
@@ -171,8 +161,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertFalse(isset($collection[2]));
     }
 
-    /** @test */
-    public function items_can_directly_set_via_array_mutator()
+    #[Test] public function items_can_directly_set_via_array_mutator()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 444])
@@ -184,8 +173,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertCount(1, $collection);
     }
 
-    /** @test */
-    public function only_adjustment_object_instances_are_accepted_in_the_array_mutator()
+    #[Test] public function only_adjustment_object_instances_are_accepted_in_the_array_mutator()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 123])
@@ -195,8 +183,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $collection[0] = new stdClass();
     }
 
-    /** @test */
-    public function items_can_be_unset()
+    #[Test] public function items_can_be_unset()
     {
         $collection = new RelationAdjustmentCollection(
             Order::create(['items_total' => 59])
@@ -212,8 +199,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertEquals(3, $collection[0]->getAmount());
     }
 
-    /** @test */
-    public function items_can_be_filtered_by_type()
+    #[Test] public function items_can_be_filtered_by_type()
     {
         $c = new RelationAdjustmentCollection(
             Order::create(['items_total' => 59])

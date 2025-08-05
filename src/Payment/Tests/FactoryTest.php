@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Payment\Factories\PaymentFactory;
 use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentMethod;
@@ -21,8 +22,7 @@ use Vanilo\Payment\Tests\Examples\Order;
 
 class FactoryTest extends TestCase
 {
-    /** @var PaymentMethod */
-    private $paymentMethod;
+    private PaymentMethod $paymentMethod;
 
     protected function setUp(): void
     {
@@ -34,8 +34,7 @@ class FactoryTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_can_create_a_payment_from_a_payable_and_from_a_payment_method()
+    #[Test] public function it_can_create_a_payment_from_a_payable_and_from_a_payment_method()
     {
         $order = Order::create(['total' => 179]);
         $payment = PaymentFactory::createFromPayable($order, $this->paymentMethod);
@@ -43,8 +42,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf(Payment::class, $payment);
     }
 
-    /** @test */
-    public function payable_attributes_are_copied_to_the_payment()
+    #[Test] public function payable_attributes_are_copied_to_the_payment()
     {
         /** @var Order $order */
         $order = Order::create(['total' => 2899.79]);
@@ -56,8 +54,7 @@ class FactoryTest extends TestCase
         $this->assertEquals($order->fresh(), $payment->getPayable());
     }
 
-    /** @test */
-    public function payment_method_gets_assigned_to_the_payment()
+    #[Test] public function payment_method_gets_assigned_to_the_payment()
     {
         /** @var Order $order */
         $order = Order::create(['total' => 69.99]);
@@ -67,8 +64,7 @@ class FactoryTest extends TestCase
         $this->assertEquals($this->paymentMethod->fresh(), $payment->getMethod());
     }
 
-    /** @test */
-    public function extra_data_can_be_passed()
+    #[Test] public function extra_data_can_be_passed()
     {
         $order = Order::create(['total' => 2900]);
 

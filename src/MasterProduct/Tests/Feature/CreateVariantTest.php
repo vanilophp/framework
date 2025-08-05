@@ -19,8 +19,7 @@ use Vanilo\MasterProduct\Tests\TestCase;
 
 class CreateVariantTest extends TestCase
 {
-    /** @test */
-    public function a_variant_can_be_created_without_property()
+    #[Test] public function a_variant_can_be_created_without_property()
     {
         $pazolini = MasterProduct::create([
             'name' => 'Pazolini',
@@ -36,8 +35,7 @@ class CreateVariantTest extends TestCase
         $this->assertEquals(9, $size37->stock);
     }
 
-    /** @test */
-    public function multiple_variants_can_be_created_without_a_property()
+    #[Test] public function multiple_variants_can_be_created_without_a_property()
     {
         $pazolini = MasterProduct::create([
             'name' => 'Pazolini',

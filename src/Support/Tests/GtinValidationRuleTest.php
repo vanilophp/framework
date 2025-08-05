@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Translation\ArrayLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\Validator;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Vanilo\Support\Validation\Rules\MustBeAValidGtin;
 
@@ -20,8 +21,7 @@ class GtinValidationRuleTest extends TestCase
         app()->instance('translator', $this->translator);
     }
 
-    /** @test */
-    public function it_accepts_a_valid_gtin()
+    #[Test] public function it_accepts_a_valid_gtin()
     {
         $validator = new Validator(
             $this->translator,
@@ -32,8 +32,7 @@ class GtinValidationRuleTest extends TestCase
         $this->assertTrue($validator->passes());
     }
 
-    /** @test */
-    public function it_rejects_an_invalid_gtin()
+    #[Test] public function it_rejects_an_invalid_gtin()
     {
         $validator = new Validator(
             $this->translator,
@@ -44,8 +43,7 @@ class GtinValidationRuleTest extends TestCase
         $this->assertFalse($validator->passes());
     }
 
-    /** @test */
-    public function it_rejects_an_array_as_field_value()
+    #[Test] public function it_rejects_an_array_as_field_value()
     {
         $validator = new Validator(
             $this->translator,
@@ -56,8 +54,7 @@ class GtinValidationRuleTest extends TestCase
         $this->assertFalse($validator->passes());
     }
 
-    /** @test */
-    public function it_returns_the_correct_error_message()
+    #[Test] public function it_returns_the_correct_error_message()
     {
         $validator = new Validator(
             $this->translator,
@@ -71,8 +68,7 @@ class GtinValidationRuleTest extends TestCase
         );
     }
 
-    /** @test */
-    public function the_validation_message_can_be_overridden()
+    #[Test] public function the_validation_message_can_be_overridden()
     {
         $validator = new Validator(
             $this->translator,

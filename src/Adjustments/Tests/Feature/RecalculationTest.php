@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Adjustments\Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
 use Vanilo\Adjustments\Tests\Examples\Order;
 use Vanilo\Adjustments\Tests\TestCase;
 
 class RecalculationTest extends TestCase
 {
-    /** @test */
-    public function it_changes_the_value_on_recalculation_if_parameters_change()
+    #[Test] public function it_changes_the_value_on_recalculation_if_parameters_change()
     {
         $order = Order::create(['items_total' => 15]);
         $order->adjustments()->create(new SimpleShippingFee(3, 20));

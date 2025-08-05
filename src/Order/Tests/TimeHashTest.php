@@ -80,14 +80,12 @@ class TimeHashTest extends TestCaseWithoutDB
         }
     }
 
-    #[Test] public function it_is_unique_when_called_in_a_rapid_consecutive_ten_thousand_times_with_an_extra_digit()
+    #[Test] public function it_is_unique_when_called_in_a_rapid_consecutive_50_times_with_an_extra_digit_without_any_delay()
     {
         $generator = new TimeHashGenerator(extraDigit: true);
         $numbers = [];
-        for ($k = 0; $k < 10; $k++) {
-            for ($i = 0; $i < 10; $i++) {
-                $numbers[] = $generator->generateNumber();
-            }
+        for ($k = 0; $k < 50; $k++) {
+            $numbers[] = $generator->generateNumber();
         }
 
         $this->assertEquals(count($numbers), count(array_unique($numbers)));

@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Adjustments\Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Adjusters\SimpleFee;
 use Vanilo\Adjustments\Tests\Examples\Order;
 use Vanilo\Adjustments\Tests\TestCase;
 
 class SimpleFeeTest extends TestCase
 {
-    /** @test */
-    public function a_simple_fee_can_be_added_to_an_adjustable_order()
+    #[Test] public function a_simple_fee_can_be_added_to_an_adjustable_order()
     {
         $order = Order::create(['items_total' => 10.99]);
         $order->adjustments()->create(new SimpleFee(3.44));

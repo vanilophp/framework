@@ -14,20 +14,19 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Checkout\Facades\Checkout;
 
 class CustomDataTest extends TestCase
 {
-    /** @test */
-    public function a_custom_attribute_can_be_set()
+    #[Test] public function a_custom_attribute_can_be_set()
     {
         Checkout::setCustomAttribute('hello', 'kitty');
 
         $this->assertEquals('kitty', Checkout::getCustomAttribute('hello'));
     }
 
-    /** @test */
-    public function several_custom_attributes_can_be_set()
+    #[Test] public function several_custom_attributes_can_be_set()
     {
         Checkout::setCustomAttribute('cz', 'ahoj');
         Checkout::setCustomAttribute('hu', 'szia');
@@ -38,8 +37,7 @@ class CustomDataTest extends TestCase
         $this->assertEquals('hallo', Checkout::getCustomAttribute('de'));
     }
 
-    /** @test */
-    public function a_custom_attribute_can_be_updated()
+    #[Test] public function a_custom_attribute_can_be_updated()
     {
         Checkout::setCustomAttribute('eat', 'zucchini');
         $this->assertEquals('zucchini', Checkout::getCustomAttribute('eat'));
@@ -48,8 +46,7 @@ class CustomDataTest extends TestCase
         $this->assertEquals('mushroom', Checkout::getCustomAttribute('eat'));
     }
 
-    /** @test */
-    public function all_custom_attributes_can_be_retrieved_as_single_array()
+    #[Test] public function all_custom_attributes_can_be_retrieved_as_single_array()
     {
         Checkout::setCustomAttribute('en', 'Good morning');
         Checkout::setCustomAttribute('nl', 'Goede morgen');
@@ -62,8 +59,7 @@ class CustomDataTest extends TestCase
         $this->assertEquals('Buna dimineata', $data['ro']);
     }
 
-    /** @test */
-    public function put_custom_attributes_completely_replaces_all_existing_custom_data()
+    #[Test] public function put_custom_attributes_completely_replaces_all_existing_custom_data()
     {
         Checkout::setCustomAttribute('xx', '123XYZ');
         Checkout::setCustomAttribute('aa', '789ABC');

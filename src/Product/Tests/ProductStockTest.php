@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Vanilo\Product\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Product\Models\Product;
 
 class ProductStockTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function field_value_can_be_specified()
+    #[Test] public function field_value_can_be_specified()
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
@@ -22,10 +20,7 @@ class ProductStockTest extends TestCase
         $this->assertEquals(123.45, $product->stock);
     }
 
-    /**
-     * @test
-     */
-    public function field_value_returns_a_numeric_value()
+    #[Test] public function field_value_returns_a_numeric_value()
     {
         $createdProduct = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
@@ -38,10 +33,7 @@ class ProductStockTest extends TestCase
         $this->assertTrue(\is_numeric($product->stock));
     }
 
-    /**
-     * @test
-     */
-    public function field_value_defaults_to_zero()
+    #[Test] public function field_value_defaults_to_zero()
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
@@ -51,10 +43,7 @@ class ProductStockTest extends TestCase
         $this->assertEquals(0, $product->stock);
     }
 
-    /**
-     * @test
-     */
-    public function isOnStock_returns_true_if_the_stock_is_greater_than_zero()
+    #[Test] public function isOnStock_returns_true_if_the_stock_is_greater_than_zero()
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
@@ -65,10 +54,7 @@ class ProductStockTest extends TestCase
         $this->assertTrue($product->isOnStock());
     }
 
-    /**
-     * @test
-     */
-    public function isOnStock_returns_false_if_the_stock_is_equal_to_zero()
+    #[Test] public function isOnStock_returns_false_if_the_stock_is_equal_to_zero()
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
@@ -79,10 +65,7 @@ class ProductStockTest extends TestCase
         $this->assertFalse($product->isOnStock());
     }
 
-    /**
-     * @test
-     */
-    public function is_on_stock_returns_false_if_the_stock_is_less_than_zero()
+    #[Test] public function is_on_stock_returns_false_if_the_stock_is_less_than_zero()
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
@@ -93,8 +76,7 @@ class ProductStockTest extends TestCase
         $this->assertFalse($product->isOnStock());
     }
 
-    /** @test */
-    public function backorder_value_can_be_specified()
+    #[Test] public function backorder_value_can_be_specified()
     {
         $product = Product::create([
             'name' => 'Semperit 165/70 R 14',
@@ -105,8 +87,7 @@ class ProductStockTest extends TestCase
         $this->assertEquals(16, $product->backorder);
     }
 
-    /** @test */
-    public function backorder_is_null_by_default()
+    #[Test] public function backorder_is_null_by_default()
     {
         $product = Product::create([
             'name' => 'Semperit 165/70 R 15',
@@ -117,8 +98,7 @@ class ProductStockTest extends TestCase
         $this->assertNull($product->backorder);
     }
 
-    /** @test */
-    public function it_implements_the_stockable_interface()
+    #[Test] public function it_implements_the_stockable_interface()
     {
         $product = Product::create([
             'name' => 'Semperit 165/70 R 16',

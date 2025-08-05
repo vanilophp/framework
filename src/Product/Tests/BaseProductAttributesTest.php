@@ -14,15 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Product\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Product\Models\Product;
 use Vanilo\Product\Models\ProductProxy;
 
 class BaseProductAttributesTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function product_can_be_created_with_minimal_data()
+    #[Test] public function product_can_be_created_with_minimal_data()
     {
         $product = Product::create([
             'name' => 'Dell Latitude E7240 Laptop',
@@ -34,10 +32,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('DLL-74237', $product->sku);
     }
 
-    /**
-     * @test
-     */
-    public function product_can_be_created_via_its_proxy()
+    #[Test] public function product_can_be_created_via_its_proxy()
     {
         $product = ProductProxy::create([
             'name' => 'Dell Latitude E7440 Laptop',
@@ -49,10 +44,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('DLL-74234', $product->sku);
     }
 
-    /**
-     * @test
-     */
-    public function all_fields_can_be_properly_set()
+    #[Test] public function all_fields_can_be_properly_set()
     {
         $product = Product::create([
             'name' => 'Maxi Baxi 2000',
@@ -84,10 +76,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('8675309', $product->gtin);
     }
 
-    /**
-     * @test
-     */
-    public function the_title_method_returns_name_if_no_title_was_set()
+    #[Test] public function the_title_method_returns_name_if_no_title_was_set()
     {
         $product = Product::create([
             'name' => 'Hello What?',
@@ -97,10 +86,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('Hello What?', $product->title());
     }
 
-    /**
-     * @test
-     */
-    public function the_title_method_returns_the_title_if_the_field_is_set()
+    #[Test] public function the_title_method_returns_the_title_if_the_field_is_set()
     {
         $product = Product::create([
             'name' => 'Hello Why?',
@@ -111,10 +97,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('Buy the book Hello Why? with discount', $product->title());
     }
 
-    /**
-     * @test
-     */
-    public function the_title_can_be_returned_via_property_returns_as_well()
+    #[Test] public function the_title_can_be_returned_via_property_returns_as_well()
     {
         $productWithTitle = Product::create([
             'name' => 'Hello When?',
@@ -134,8 +117,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals($productWithoutTitle->title(), $productWithoutTitle->title);
     }
 
-    /** @test */
-    public function the_id_field_is_an_integer()
+    #[Test] public function the_id_field_is_an_integer()
     {
         $product = Product::create(['sku' => 'AAA', 'name' => 'Hey Hello']);
 
@@ -143,8 +125,7 @@ class BaseProductAttributesTest extends TestCase
         $this->assertIsInt($product->fresh()->id);
     }
 
-    /** @test */
-    public function product_can_be_retrieved_by_sku()
+    #[Test] public function product_can_be_retrieved_by_sku()
     {
         ProductProxy::create([
             'name' => 'Dell XPS 13 Developer Edition',
@@ -157,14 +138,12 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('DLL-XPS13DE', $product->sku);
     }
 
-    /** @test */
-    public function find_by_sku_returns_null_if_no_product_was_found_by_the_requested_sku()
+    #[Test] public function find_by_sku_returns_null_if_no_product_was_found_by_the_requested_sku()
     {
         $this->assertNull(Product::findBySku('Oh man such SKU could not exist in the Wild. Nor in a lab'));
     }
 
-    /** @test */
-    public function the_product_gtin_field_is_nullable(): void
+    #[Test] public function the_product_gtin_field_is_nullable(): void
     {
         $product = Product::create([
             'name' => 'Kosmodisk',

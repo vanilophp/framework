@@ -14,22 +14,17 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Checkout\Models\CheckoutState;
 
 class CheckoutStateTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function ready_is_a_submittable_state()
+    #[Test] public function ready_is_a_submittable_state()
     {
         $this->assertTrue(CheckoutState::READY()->canBeSubmitted());
     }
 
-    /**
-     * @test
-     */
-    public function the_default_state_is_not_submittable()
+    #[Test] public function the_default_state_is_not_submittable()
     {
         $this->assertFalse(CheckoutState::create()->canBeSubmitted());
     }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\MasterProduct\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\MasterProduct\Models\MasterProduct;
 use Vanilo\MasterProduct\Models\MasterProductVariant;
 use Vanilo\MasterProduct\Tests\TestCase;
@@ -21,8 +22,7 @@ use Vanilo\Product\Models\ProductState;
 
 class MasterProductVariantTest extends TestCase
 {
-    /** @test */
-    public function a_variant_can_be_created_with_minimal_data()
+    #[Test] public function a_variant_can_be_created_with_minimal_data()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -36,8 +36,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertEquals('B079M6TMTJ0', $variant->sku);
     }
 
-    /** @test */
-    public function a_variant_does_not_have_a_slug()
+    #[Test] public function a_variant_does_not_have_a_slug()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -51,8 +50,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertNull($variant->slug);
     }
 
-    /** @test */
-    public function a_variant_has_a_description()
+    #[Test] public function a_variant_has_a_description()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -66,8 +64,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertEquals('Variants have a description', $variant->description);
     }
 
-    /** @test */
-    public function a_variant_also_has_a_state()
+    #[Test] public function a_variant_also_has_a_state()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -81,8 +78,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertEquals(ProductState::ACTIVE(), $variant->state);
     }
 
-    /** @test */
-    public function a_variant_does_not_have_ext_title()
+    #[Test] public function a_variant_does_not_have_ext_title()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -96,8 +92,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertNull($variant->ext_title);
     }
 
-    /** @test */
-    public function a_variant_does_not_have_meta_keywords()
+    #[Test] public function a_variant_does_not_have_meta_keywords()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -111,8 +106,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertNull($variant->meta_keywords);
     }
 
-    /** @test */
-    public function a_variant_does_not_have_meta_description()
+    #[Test] public function a_variant_does_not_have_meta_description()
     {
         $master = MasterProduct::create([
             'name' => 'PUMA Men Super Liga OG Retro',
@@ -126,8 +120,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertNull($variant->meta_description);
     }
 
-    /** @test */
-    public function the_variant_gtin_field_can_be_set(): void
+    #[Test] public function the_variant_gtin_field_can_be_set(): void
     {
         $master = MasterProduct::create([
             'name' => 'Kosmodisk',
@@ -142,8 +135,7 @@ class MasterProductVariantTest extends TestCase
         $this->assertEquals('777888999', $variant->gtin);
     }
 
-    /** @test */
-    public function the_variant_gtin_field_is_nullable(): void
+    #[Test] public function the_variant_gtin_field_is_nullable(): void
     {
         $master = MasterProduct::create([
             'name' => 'Kosmodisk',

@@ -16,6 +16,7 @@ namespace Vanilo\Links\Tests\Feature;
 
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkGroupItem;
 use Vanilo\Links\Models\LinkType;
@@ -49,8 +50,7 @@ class QueryGetTest extends TestCase
         $this->createTestData();
     }
 
-    /** @test */
-    public function two_linked_products_can_be_queried()
+    #[Test] public function two_linked_products_can_be_queried()
     {
         $attrs = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
         LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->galaxyS22->id]));
@@ -65,8 +65,7 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Ultra->id, $linksOfS22->map->id);
     }
 
-    /** @test */
-    public function it_returns_the_linked_models_when_they_have_the_same_id_but_different_type()
+    #[Test] public function it_returns_the_linked_models_when_they_have_the_same_id_but_different_type()
     {
         $product = TestLinkableProduct::create(['name' => 'Simple Product']);
         $master = MasterProduct::create(['name' => 'Master Product']);
@@ -90,8 +89,7 @@ class QueryGetTest extends TestCase
         $this->assertTrue($linksOfProduct[1]->is($variant));
     }
 
-    /** @test */
-    public function it_returns_the_link_items_when_they_have_the_same_id_but_different_type()
+    #[Test] public function it_returns_the_link_items_when_they_have_the_same_id_but_different_type()
     {
         $product = TestLinkableProduct::create(['name' => 'Simple Product']);
         $master = MasterProduct::create(['name' => 'Master Product']);
@@ -113,8 +111,7 @@ class QueryGetTest extends TestCase
         $this->assertCount(2, $linkItemsOfProduct);
     }
 
-    /** @test */
-    public function calling_on_models_without_links_returns_an_empty_collection()
+    #[Test] public function calling_on_models_without_links_returns_an_empty_collection()
     {
         $seriesLinks = Get::the('series')->links()->of($this->galaxyS22);
 
@@ -122,8 +119,7 @@ class QueryGetTest extends TestCase
         $this->assertCount(0, $seriesLinks);
     }
 
-    /** @test */
-    public function calling_on_models_that_arent_in_a_group_returns_an_empty_collection()
+    #[Test] public function calling_on_models_that_arent_in_a_group_returns_an_empty_collection()
     {
         $attrs = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
         LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->galaxyS22Ultra->id]));
@@ -135,8 +131,7 @@ class QueryGetTest extends TestCase
         $this->assertCount(0, $seriesLinks);
     }
 
-    /** @test */
-    public function calling_on_models_that_arent_in_the_given_group_returns_an_empty_collection()
+    #[Test] public function calling_on_models_that_arent_in_the_given_group_returns_an_empty_collection()
     {
         $attrs = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
         LinkGroupItem::create(array_merge($attrs, ['linkable_id' => $this->galaxyS22->id]));
@@ -148,8 +143,7 @@ class QueryGetTest extends TestCase
         $this->assertCount(0, $variantLinks);
     }
 
-    /** @test */
-    public function groups_of_different_types_arent_mixed_up()
+    #[Test] public function groups_of_different_types_arent_mixed_up()
     {
         // Series Group
         $attrs1 = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
@@ -171,8 +165,7 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Ultra->id, $variantLinks->map->id);
     }
 
-    /** @test */
-    public function an_optional_property_can_be_specified_to_filter_groups_by()
+    #[Test] public function an_optional_property_can_be_specified_to_filter_groups_by()
     {
         $prop22 = Property::create(['name' => '22', 'type' => 'text']);
         $prop33 = Property::create(['name' => '33', 'type' => 'text']);
@@ -204,8 +197,7 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Ultra->id, $variants33->map->id);
     }
 
-    /** @test */
-    public function the_property_filter_can_be_passed_by_slug()
+    #[Test] public function the_property_filter_can_be_passed_by_slug()
     {
         Get::usePropertiesModel(Property::class);
 
@@ -237,8 +229,7 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Plus->id, $variantsByScreen->map->id);
     }
 
-    /** @test */
-    public function it_can_retrieve_the_link_groups_of_a_model()
+    #[Test] public function it_can_retrieve_the_link_groups_of_a_model()
     {
         // Series Group
         $attrs1 = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
@@ -252,8 +243,7 @@ class QueryGetTest extends TestCase
         $this->assertInstanceOf(LinkGroup::class, $seriesGroups->first());
     }
 
-    /** @test */
-    public function it_resolves_the_types_via_a_magic_method_call()
+    #[Test] public function it_resolves_the_types_via_a_magic_method_call()
     {
         $attrs1 = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
         LinkGroupItem::create(array_merge($attrs1, ['linkable_id' => $this->galaxyS22->id]));
@@ -265,22 +255,19 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Plus->id, $seriesLinks->map->id);
     }
 
-    /** @test */
-    public function it_throws_an_invalid_argument_exception_if_attempting_to_fetch_an_inexistent_link_type()
+    #[Test] public function it_throws_an_invalid_argument_exception_if_attempting_to_fetch_an_inexistent_link_type()
     {
         $this->expectException(InvalidArgumentException::class);
 
         Get::the('inexistent-link-type-slug');
     }
 
-    /** @test */
-    public function the_links_helper_function_returns_a_get_query()
+    #[Test] public function the_links_helper_function_returns_a_get_query()
     {
         $this->assertInstanceOf(Get::class, links('series'));
     }
 
-    /** @test */
-    public function the_links_helper_function_accepts_type_as_first_argument()
+    #[Test] public function the_links_helper_function_accepts_type_as_first_argument()
     {
         $attrs1 = ['link_group_id' => $this->groupSeries->id, 'linkable_type' => TestLinkableProduct::class];
         LinkGroupItem::create(array_merge($attrs1, ['linkable_id' => $this->galaxyS22->id]));
@@ -292,8 +279,7 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Plus->id, $seriesLinks->map->id);
     }
 
-    /** @test */
-    public function the_links_helper_function_accepts_an_optional_property_as_second_argument()
+    #[Test] public function the_links_helper_function_accepts_an_optional_property_as_second_argument()
     {
         Get::usePropertiesModel(Property::class);
 
@@ -310,8 +296,7 @@ class QueryGetTest extends TestCase
         $this->assertContains($this->galaxyS22Plus->id, $variantsByScreen->map->id);
     }
 
-    /** @test */
-    public function the_link_groups_helper_returns_link_groups_in_which_the_model_is_included()
+    #[Test] public function the_link_groups_helper_returns_link_groups_in_which_the_model_is_included()
     {
         LinkGroupItem::create([
             'link_group_id' => $this->groupSeries->id,
@@ -333,8 +318,7 @@ class QueryGetTest extends TestCase
         $this->assertInstanceOf(LinkGroup::class, $variantGroups->first());
     }
 
-    /** @test */
-    public function unidirectional_links_can_be_properly_queried()
+    #[Test] public function unidirectional_links_can_be_properly_queried()
     {
         $phone = TestLinkableProduct::create(['name' => 'iPhone 17'])->fresh();
         $caseX = TestLinkableProduct::create(['name' => 'iPhone 17 Plastic Case X'])->fresh();

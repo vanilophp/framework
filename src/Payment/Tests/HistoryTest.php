@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Payment\Contracts\PaymentHistory as PaymentHistoryContract;
 use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentHistory;
@@ -25,20 +26,19 @@ use Vanilo\Payment\Tests\Examples\SomePaymentResponse;
 
 class HistoryTest extends TestCase
 {
-    private $method;
+    private PaymentMethod $method;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->method = $method = PaymentMethod::create([
+        $this->method = PaymentMethod::create([
             'name' => 'Credit Card',
             'gateway' => 'plastic'
         ]);
     }
 
-    /** @test */
-    public function it_can_be_created_with_minimal_fields()
+    #[Test] public function it_can_be_created_with_minimal_fields()
     {
         $payment = $this->createPayment();
 
@@ -51,8 +51,7 @@ class HistoryTest extends TestCase
         $this->assertInstanceOf(PaymentHistoryContract::class, $entry);
     }
 
-    /** @test */
-    public function associated_payment_can_be_retrieved()
+    #[Test] public function associated_payment_can_be_retrieved()
     {
         $payment = $this->createPayment();
 
@@ -64,8 +63,7 @@ class HistoryTest extends TestCase
         $this->assertInstanceOf(Payment::class, $entry->payment);
     }
 
-    /** @test */
-    public function new_status_is_a_payment_status_enum()
+    #[Test] public function new_status_is_a_payment_status_enum()
     {
         $payment = $this->createPayment();
 
@@ -77,8 +75,7 @@ class HistoryTest extends TestCase
         $this->assertInstanceOf(PaymentStatus::class, $entry->new_status);
     }
 
-    /** @test */
-    public function old_status_is_a_payment_status_enum()
+    #[Test] public function old_status_is_a_payment_status_enum()
     {
         $payment = $this->createPayment();
 
@@ -91,8 +88,7 @@ class HistoryTest extends TestCase
         $this->assertInstanceOf(PaymentStatus::class, $entry->old_status);
     }
 
-    /** @test */
-    public function all_fields_can_be_written()
+    #[Test] public function all_fields_can_be_written()
     {
         $payment = $this->createPayment(19.99);
 
@@ -115,8 +111,7 @@ class HistoryTest extends TestCase
         $this->assertEquals('7sig72jf9hduvbcsuj02jdafxvb1sahkrjagf', $entry->transaction_number);
     }
 
-    /** @test */
-    public function it_can_be_begun_with_the_dedicated_method()
+    #[Test] public function it_can_be_begun_with_the_dedicated_method()
     {
         $payment = $this->createPayment(55.17);
         $entry = PaymentHistory::begin($payment);
@@ -128,8 +123,7 @@ class HistoryTest extends TestCase
         $this->assertNull($entry->transaction_number);
     }
 
-    /** @test */
-    public function it_can_be_written_from_a_payment_response()
+    #[Test] public function it_can_be_written_from_a_payment_response()
     {
         $payment = $this->createPayment(63.99);
         $paymentResponse = new SomePaymentResponse(
@@ -152,8 +146,7 @@ class HistoryTest extends TestCase
         $this->assertEquals('pampampam', $entry->transaction_number);
     }
 
-    /** @test */
-    public function the_add_event_static_factory_method_can_be_used_to_log_non_status_changing_events()
+    #[Test] public function the_add_event_static_factory_method_can_be_used_to_log_non_status_changing_events()
     {
         $payment = $this->createPayment(55.00);
         $entry = PaymentHistory::addEvent($payment, 'Yo! This is a message.');
@@ -167,8 +160,7 @@ class HistoryTest extends TestCase
         $this->assertNull($entry->transaction_number);
     }
 
-    /** @test */
-    public function the_transaction_number_and_the_native_status_can_be_explicitly_logged_with_the_add_event_static_factory_method()
+    #[Test] public function the_transaction_number_and_the_native_status_can_be_explicitly_logged_with_the_add_event_static_factory_method()
     {
         $payment = $this->createPayment(107);
         $entry = PaymentHistory::addEvent($payment, 'Log entry with extras', 'trid19192234194', SomeNativeStatus::CAPTURED());
@@ -182,8 +174,7 @@ class HistoryTest extends TestCase
         $this->assertEquals('trid19192234194', $entry->transaction_number);
     }
 
-    /** @test */
-    public function old_status_can_be_explicitly_specified_at_write_from_response_method()
+    #[Test] public function old_status_can_be_explicitly_specified_at_write_from_response_method()
     {
         $payment = $this->createPayment();
         $paymentResponse = new SomePaymentResponse('', true, 'x', 3.99, $payment->getPaymentId(), SomeNativeStatus::CAPTURED(), PaymentStatus::AUTHORIZED());
@@ -193,8 +184,7 @@ class HistoryTest extends TestCase
         $this->assertEquals(PaymentStatus::DECLINED, $entry->old_status->value());
     }
 
-    /** @test */
-    public function payment_can_return_its_history_entries()
+    #[Test] public function payment_can_return_its_history_entries()
     {
         $payment1 = $this->createPayment(19, 'EUR');
         $payment2 = $this->createPayment(38, 'EUR');

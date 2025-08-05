@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Category\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
 use Vanilo\Category\Models\Taxon;
@@ -22,8 +23,7 @@ use Vanilo\Category\Providers\ModuleServiceProvider;
 
 class ModuleTest extends TestCase
 {
-    /** @test */
-    public function module_loads()
+    #[Test] public function module_loads()
     {
         $this->assertInstanceOf(
             ModuleServiceProvider::class,
@@ -31,8 +31,7 @@ class ModuleTest extends TestCase
         );
     }
 
-    /** @test */
-    public function models_are_registered()
+    #[Test] public function models_are_registered()
     {
         $models = $this->app->concord->getModelBindings();
 
@@ -42,8 +41,7 @@ class ModuleTest extends TestCase
         $this->assertEquals(Taxon::class, $models->get(TaxonContract::class));
     }
 
-    /** @test */
-    public function shorts_are_registered()
+    #[Test] public function shorts_are_registered()
     {
         $this->assertEquals(TaxonContract::class, concord()->short('taxon'));
         $this->assertEquals(TaxonomyContract::class, concord()->short('taxonomy'));

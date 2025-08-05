@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Links\Tests\Feature;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Eliminate;
 use Vanilo\Links\Query\Establish;
@@ -25,8 +26,7 @@ use Vanilo\Links\Tests\TestCase;
 
 class QueryEliminateLinksTest extends TestCase
 {
-    /** @test */
-    public function it_removes_the_model_from_the_existing_links()
+    #[Test] public function it_removes_the_model_from_the_existing_links()
     {
         $product1 = TestProduct::create(['name' => 'Product 1']);
         $product2 = TestProduct::create(['name' => 'Product 2']);
@@ -40,8 +40,7 @@ class QueryEliminateLinksTest extends TestCase
         $this->assertCount(0, Get::the('see-also')->links()->of($product1));
     }
 
-    /** @test */
-    public function the_first_model_remains_in_the_group()
+    #[Test] public function the_first_model_remains_in_the_group()
     {
         $product3 = TestProduct::create(['name' => 'Product 3']);
         $product4 = TestProduct::create(['name' => 'Product 4']);
@@ -58,8 +57,7 @@ class QueryEliminateLinksTest extends TestCase
         $this->assertCount(0, Get::the('see-also')->groups()->of($product4));
     }
 
-    /** @test */
-    public function it_can_remove_multiple_model()
+    #[Test] public function it_can_remove_multiple_model()
     {
         $product5 = TestProduct::create(['name' => 'Product 5']);
         $product6 = TestProduct::create(['name' => 'Product 6']);
@@ -87,8 +85,7 @@ class QueryEliminateLinksTest extends TestCase
         $this->assertCount(0, Get::the('variant')->groups()->of($product8));
     }
 
-    /** @test */
-    public function it_can_remove_links_between_morphed_models()
+    #[Test] public function it_can_remove_links_between_morphed_models()
     {
         Relation::morphMap(['lmproduct' => TestLinkableMorphedProduct::class]);
 

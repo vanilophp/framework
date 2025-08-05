@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests;
 
 use Nette\Schema\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Promotion\Models\Promotion;
 use Vanilo\Promotion\Models\PromotionRule;
 use Vanilo\Promotion\Rules\CartQuantity;
@@ -13,8 +14,7 @@ use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
 class PromotionRuleTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created_with_minimal_data()
+    #[Test] public function it_can_be_created_with_minimal_data()
     {
         $rule = PromotionRule::create(
             ['type' => 'awesome', 'promotion_id' => PromotionFactory::new()->create()->id]
@@ -25,8 +25,7 @@ class PromotionRuleTest extends TestCase
         $this->assertEquals('awesome', $rule->type);
     }
 
-    /** @test */
-    public function it_can_store_and_retrieve_configuration()
+    #[Test] public function it_can_store_and_retrieve_configuration()
     {
         $rule = PromotionRule::create(
             [
@@ -39,8 +38,7 @@ class PromotionRuleTest extends TestCase
         $this->assertEquals(['count' => 10], $rule->configuration());
     }
 
-    /** @test */
-    public function it_can_run_the_type_passing()
+    #[Test] public function it_can_run_the_type_passing()
     {
         $ruleA = PromotionRule::create(
             [
@@ -65,8 +63,7 @@ class PromotionRuleTest extends TestCase
         $this->assertTrue($ruleB->isPassing(new DummyCart()));
     }
 
-    /** @test */
-    public function throws_exception_if_configuration_needed_but_its_not_there()
+    #[Test] public function throws_exception_if_configuration_needed_but_its_not_there()
     {
         $this->expectException(ValidationException::class);
 

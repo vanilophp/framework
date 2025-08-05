@@ -15,13 +15,13 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Tests;
 
 use Konekt\Address\Models\Zone;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxRate;
 
 class TaxRateTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created_with_minimal_data()
+    #[Test] public function it_can_be_created_with_minimal_data()
     {
         $rate = TaxRate::create(['name' => 'Manitoba HST', 'rate' => 7]);
 
@@ -30,8 +30,7 @@ class TaxRateTest extends TestCase
         $this->assertEquals(7, $rate->getRate());
     }
 
-    /** @test */
-    public function a_tax_category_can_be_assigned_to_it()
+    #[Test] public function a_tax_category_can_be_assigned_to_it()
     {
         $standard = TaxCategory::create(['name' => 'Standard']);
         $rate = TaxRate::create([
@@ -46,8 +45,7 @@ class TaxRateTest extends TestCase
         $this->assertEquals($standard->name, $rate->taxCategory->name);
     }
 
-    /** @test */
-    public function the_configuration_is_an_empty_array_by_default()
+    #[Test] public function the_configuration_is_an_empty_array_by_default()
     {
         $rate = TaxRate::create(['name' => 'VAT', 'rate' => 25]);
 
@@ -55,8 +53,7 @@ class TaxRateTest extends TestCase
         $this->assertEmpty($rate->configuration);
     }
 
-    /** @test */
-    public function the_configuration_can_be_set_as_an_array()
+    #[Test] public function the_configuration_can_be_set_as_an_array()
     {
         $rate = TaxRate::create(['name' => 'BC Sales Tax', 'rate' => 12]);
 
@@ -68,24 +65,21 @@ class TaxRateTest extends TestCase
         $this->assertEquals(5, $rate->configuration['gst']);
     }
 
-    /** @test */
-    public function it_is_active_by_default()
+    #[Test] public function it_is_active_by_default()
     {
         $rate = TaxRate::create(['name' => 'NS Sales Tax', 'rate' => 15])->fresh();
 
         $this->assertTrue($rate->is_active);
     }
 
-    /** @test */
-    public function it_can_be_set_to_inactive()
+    #[Test] public function it_can_be_set_to_inactive()
     {
         $rate = TaxRate::create(['name' => 'UK EU VAT', 'is_active' => false, 'rate' => 17])->fresh();
 
         $this->assertFalse($rate->is_active);
     }
 
-    /** @test */
-    public function active_ones_can_be_listed()
+    #[Test] public function active_ones_can_be_listed()
     {
         TaxRate::create(['name' => 'Rate 1', 'is_active' => true, 'rate' => 1]);
         TaxRate::create(['name' => 'Rate 2', 'is_active' => false, 'rate' => 1]);
@@ -97,8 +91,7 @@ class TaxRateTest extends TestCase
         $this->assertCount(4, TaxRate::actives()->get());
     }
 
-    /** @test */
-    public function inactive_ones_can_be_listed()
+    #[Test] public function inactive_ones_can_be_listed()
     {
         TaxRate::create(['name' => 'Rate A', 'is_active' => true, 'rate' => 1]);
         TaxRate::create(['name' => 'Rate B', 'is_active' => false, 'rate' => 1]);
@@ -107,8 +100,7 @@ class TaxRateTest extends TestCase
         $this->assertCount(2, TaxRate::inactives()->get());
     }
 
-    /** @test */
-    public function a_zone_can_be_assigned_to_a_tax_rate()
+    #[Test] public function a_zone_can_be_assigned_to_a_tax_rate()
     {
         $zone = Zone::create(['name' => 'Maritime']);
         $rate = TaxRate::create(['name' => '15% HST', 'zone_id' => $zone->id, 'rate' => 15])->fresh();
@@ -118,8 +110,7 @@ class TaxRateTest extends TestCase
         $this->assertEquals('Maritime', $rate->zone->name);
     }
 
-    /** @test */
-    public function the_tax_rates_available_for_a_zone_can_be_queried()
+    #[Test] public function the_tax_rates_available_for_a_zone_can_be_queried()
     {
         $zone = Zone::create(['name' => 'Maritime']);
         TaxRate::create(['name' => '5% for physical books', 'zone_id' => $zone->id, 'rate' => 5]);
@@ -133,8 +124,7 @@ class TaxRateTest extends TestCase
         $this->assertNotContains('Somewhere else', $rates->pluck('name'));
     }
 
-    /** @test */
-    public function the_available_tax_rate_list_for_a_zone_excludes_inactive_items()
+    #[Test] public function the_available_tax_rate_list_for_a_zone_excludes_inactive_items()
     {
         $zone = Zone::create(['name' => 'Newfoundland and Labrador']);
         TaxRate::create(['name' => '8% for physical books', 'zone_id' => $zone->id, 'rate' => 8]);
@@ -148,8 +138,7 @@ class TaxRateTest extends TestCase
         $this->assertNotContains('Some outdated rate', $rates->pluck('name'));
     }
 
-    /** @test */
-    public function the_tax_rates_available_for_multiple_zonse_can_be_queried()
+    #[Test] public function the_tax_rates_available_for_multiple_zonse_can_be_queried()
     {
         $europe = Zone::create(['name' => 'Europe']);
         $maritimes = Zone::create(['name' => 'Maritimes']);
@@ -171,8 +160,7 @@ class TaxRateTest extends TestCase
         $this->assertContains('EU Rate', $ratesForEU->pluck('name'));
     }
 
-    /** @test */
-    public function the_for_zones_scope_accepts_an_array_of_zone_ids()
+    #[Test] public function the_for_zones_scope_accepts_an_array_of_zone_ids()
     {
         $zoneA = Zone::create(['name' => 'Zone A']);
         $zoneB = Zone::create(['name' => 'Zone B']);
@@ -189,8 +177,7 @@ class TaxRateTest extends TestCase
         $this->assertNotContains('TR2', $methods->pluck('name'));
     }
 
-    /** @test */
-    public function the_for_zones_scope_accepts_an_array_of_zone_models()
+    #[Test] public function the_for_zones_scope_accepts_an_array_of_zone_models()
     {
         $zoneX = Zone::create(['name' => 'Zone X']);
         $zoneY = Zone::create(['name' => 'Zone Y']);
@@ -212,8 +199,7 @@ class TaxRateTest extends TestCase
         $this->assertNotContains('TR7', $methods->pluck('name'));
     }
 
-    /** @test */
-    public function the_for_zones_scope_accepts_a_collection_of_zone_models()
+    #[Test] public function the_for_zones_scope_accepts_a_collection_of_zone_models()
     {
         $zoneK = Zone::create(['name' => 'Zone K']);
         $zoneM = Zone::create(['name' => 'Zone M']);

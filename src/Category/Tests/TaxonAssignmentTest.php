@@ -17,6 +17,7 @@ namespace Vanilo\Category\Tests;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Category\Contracts\Taxon as TaxonContract;
 use Vanilo\Category\Models\Taxon;
 use Vanilo\Category\Models\Taxonomy;
@@ -25,11 +26,9 @@ use Vanilo\Category\Tests\Dummies\Taxon as TaxonExt;
 
 class TaxonAssignmentTest extends TestCase
 {
-    /** @var Taxonomy */
-    private $taxonomy;
+    private Taxonomy $taxonomy;
 
-    /** @test */
-    public function a_single_taxon_can_be_assigned_to_a_model()
+    #[Test] public function a_single_taxon_can_be_assigned_to_a_model()
     {
         $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Jams']);
 
@@ -43,8 +42,7 @@ class TaxonAssignmentTest extends TestCase
         $this->assertEquals('Jams', $product->taxons->first()->name);
     }
 
-    /** @test */
-    public function a_single_taxon_can_be_retracted_from_a_model()
+    #[Test] public function a_single_taxon_can_be_retracted_from_a_model()
     {
         $taxon = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Coffee']);
 
@@ -62,8 +60,7 @@ class TaxonAssignmentTest extends TestCase
         $this->assertCount(0, $product->taxons);
     }
 
-    /** @test */
-    public function multiple_taxons_can_be_assigned_to_a_model()
+    #[Test] public function multiple_taxons_can_be_assigned_to_a_model()
     {
         $jams = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Jams']);
         $strawberry = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Strawberry Products']);
@@ -79,8 +76,7 @@ class TaxonAssignmentTest extends TestCase
         $this->assertEquals('Strawberry Products', $product->taxons[1]->name);
     }
 
-    /** @test */
-    public function taxon_class_can_be_extended_so_that_it_retrieves_models_it_was_assigned_to()
+    #[Test] public function taxon_class_can_be_extended_so_that_it_retrieves_models_it_was_assigned_to()
     {
         concord()->registerModel(TaxonContract::class, TaxonExt::class);
 
@@ -97,8 +93,7 @@ class TaxonAssignmentTest extends TestCase
         $this->assertEquals('Pioneer Sofa III', $speakers->products[1]->name);
     }
 
-    /** @test */
-    public function models_can_be_added_to_an_extended_taxon_class_with_reverse_relationship_defined()
+    #[Test] public function models_can_be_added_to_an_extended_taxon_class_with_reverse_relationship_defined()
     {
         concord()->registerModel(TaxonContract::class, TaxonExt::class);
 
@@ -115,8 +110,7 @@ class TaxonAssignmentTest extends TestCase
         $this->assertEquals('Pioneer Sofa III', $speakers->products[1]->name);
     }
 
-    /** @test */
-    public function taxon_model_assignment_saves_the_short_morph_type_name_in_the_db_if_one_is_registered_with_morph_map()
+    #[Test] public function taxon_model_assignment_saves_the_short_morph_type_name_in_the_db_if_one_is_registered_with_morph_map()
     {
         Relation::morphMap(['product' => Product::class]);
         concord()->registerModel(TaxonContract::class, TaxonExt::class);

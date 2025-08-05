@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Payment\Tests;
 
 use Illuminate\Database\QueryException;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\Tests\Examples\Order;
@@ -33,8 +34,7 @@ class RemoteIdTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function remote_id_is_optional()
+    #[Test] public function remote_id_is_optional()
     {
         $payment = Payment::create([
             'amount' => 27,
@@ -47,8 +47,7 @@ class RemoteIdTest extends TestCase
         $this->assertNull($payment->remote_id);
     }
 
-    /** @test */
-    public function multiple_records_can_have_null_as_remote_id()
+    #[Test] public function multiple_records_can_have_null_as_remote_id()
     {
         $payment1 = Payment::create([
             'amount' => 27,
@@ -79,8 +78,7 @@ class RemoteIdTest extends TestCase
         $this->assertNull($payment3->remote_id);
     }
 
-    /** @test */
-    public function the_remote_id_must_be_unique_within_a_payment_method()
+    #[Test] public function the_remote_id_must_be_unique_within_a_payment_method()
     {
         Payment::create([
             'amount' => 27,
@@ -104,8 +102,7 @@ class RemoteIdTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function the_same_remote_id_can_be_used_with_another_payment_method()
+    #[Test] public function the_same_remote_id_can_be_used_with_another_payment_method()
     {
         $payment1 = Payment::create([
             'amount' => 27,
@@ -129,8 +126,7 @@ class RemoteIdTest extends TestCase
         $this->assertEquals('ABC', $payment2->remote_id);
     }
 
-    /** @test */
-    public function a_payment_can_be_fetched_by_its_remote_id_without_specifying_the_payment_method_id()
+    #[Test] public function a_payment_can_be_fetched_by_its_remote_id_without_specifying_the_payment_method_id()
     {
         Payment::create([
             'amount' => 42.10,
@@ -152,8 +148,7 @@ class RemoteIdTest extends TestCase
         $this->assertEquals('91458516NG935120K', $payment->remote_id);
     }
 
-    /** @test */
-    public function payment_can_be_retrieved_by_remote_id_and_payment_method_id()
+    #[Test] public function payment_can_be_retrieved_by_remote_id_and_payment_method_id()
     {
         $anotherPaymentMethod = PaymentMethod::create(['name' => 'A', 'gateway' => 'a']);
 

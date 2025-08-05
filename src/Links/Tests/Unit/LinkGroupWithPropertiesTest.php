@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Tests\Dummies\Property;
@@ -30,8 +31,7 @@ class LinkGroupWithPropertiesTest extends TestCase
         });
     }
 
-    /** @test */
-    public function a_property_can_be_assigned_to()
+    #[Test] public function a_property_can_be_assigned_to()
     {
         $variant = LinkType::create(['name' => 'Variant']);
         $size = Property::create(['name' => 'Size', 'type' => 'int'])->fresh();

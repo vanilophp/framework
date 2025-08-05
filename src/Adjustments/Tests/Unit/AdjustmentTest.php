@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Adjustments\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Adjusters\SimpleShippingFee;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Adjustments\Contracts\Adjustment as AdjustmentContract;
@@ -24,8 +25,7 @@ use Vanilo\Adjustments\Tests\TestCase;
 
 class AdjustmentTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created_with_minimal_fields()
+    #[Test] public function it_can_be_created_with_minimal_fields()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -39,8 +39,7 @@ class AdjustmentTest extends TestCase
         $this->assertInstanceOf(AdjustmentContract::class, $adjustment);
     }
 
-    /** @test */
-    public function the_type_field_is_an_enum()
+    #[Test] public function the_type_field_is_an_enum()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -54,8 +53,7 @@ class AdjustmentTest extends TestCase
         $this->assertTrue($adjustment->type->equals(AdjustmentType::TAX()));
     }
 
-    /** @test */
-    public function is_not_locked_by_default()
+    #[Test] public function is_not_locked_by_default()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -68,8 +66,7 @@ class AdjustmentTest extends TestCase
         $this->assertFalse($adjustment->is_locked);
     }
 
-    /** @test */
-    public function is_not_included_by_default()
+    #[Test] public function is_not_included_by_default()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -82,8 +79,7 @@ class AdjustmentTest extends TestCase
         $this->assertFalse($adjustment->is_included);
     }
 
-    /** @test */
-    public function all_mutable_fields_can_be_mass_assigned()
+    #[Test] public function all_mutable_fields_can_be_mass_assigned()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::SHIPPING,
@@ -112,8 +108,7 @@ class AdjustmentTest extends TestCase
         $this->assertTrue($adjustment->is_included);
     }
 
-    /** @test */
-    public function all_mutable_fields_can_be_set()
+    #[Test] public function all_mutable_fields_can_be_set()
     {
         $adjustment = new Adjustment();
 
@@ -146,8 +141,7 @@ class AdjustmentTest extends TestCase
         $this->assertTrue($adjustment->is_included);
     }
 
-    /** @test */
-    public function the_interface_getters_are_working_on_the_model()
+    #[Test] public function the_interface_getters_are_working_on_the_model()
     {
         /** @var Adjustment $adjustment */
         $adjustment = Adjustment::create([
@@ -174,8 +168,7 @@ class AdjustmentTest extends TestCase
         $this->assertTrue($adjustment->isIncluded());
     }
 
-    /** @test */
-    public function data_fields_can_be_obtained_using_the_dot_notation()
+    #[Test] public function data_fields_can_be_obtained_using_the_dot_notation()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::PROMOTION,
@@ -193,8 +186,7 @@ class AdjustmentTest extends TestCase
         $this->assertNull($adjustment->getData('meow'));
     }
 
-    /** @test */
-    public function it_can_be_locked()
+    #[Test] public function it_can_be_locked()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -213,8 +205,7 @@ class AdjustmentTest extends TestCase
         $this->assertTrue($adjustment->isLocked());
     }
 
-    /** @test */
-    public function it_can_be_unlocked()
+    #[Test] public function it_can_be_unlocked()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -234,8 +225,7 @@ class AdjustmentTest extends TestCase
         $this->assertFalse($adjustment->isLocked());
     }
 
-    /** @test */
-    public function it_resolves_the_adjustable_if_the_adjustable_type_is_a_fqcn()
+    #[Test] public function it_resolves_the_adjustable_if_the_adjustable_type_is_a_fqcn()
     {
         $order = Order::create(['items_total' => 120]);
 
@@ -253,8 +243,7 @@ class AdjustmentTest extends TestCase
         $this->assertEquals($order->id, $adjustment->getAdjustable()->id);
     }
 
-    /** @test */
-    public function it_resolves_the_adjuster_if_the_adjuster_is_a_fqcn()
+    #[Test] public function it_resolves_the_adjuster_if_the_adjuster_is_a_fqcn()
     {
         $order = Order::create(['items_total' => 120]);
         $adjustment = Adjustment::create([
@@ -270,8 +259,7 @@ class AdjustmentTest extends TestCase
         $this->assertInstanceOf(SimpleShippingFee::class, $adjustment->getAdjuster());
     }
 
-    /** @test */
-    public function it_is_a_charge_if_it_increases_the_total()
+    #[Test] public function it_is_a_charge_if_it_increases_the_total()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -286,8 +274,7 @@ class AdjustmentTest extends TestCase
         $this->assertTrue($adjustment->isCharge());
     }
 
-    /** @test */
-    public function it_is_a_credit_if_it_decreases_the_total()
+    #[Test] public function it_is_a_credit_if_it_decreases_the_total()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::PROMOTION,
@@ -302,8 +289,7 @@ class AdjustmentTest extends TestCase
         $this->assertTrue($adjustment->isCredit());
     }
 
-    /** @test */
-    public function it_converts_the_adjuster_fqcn_into_its_alias_when_saving_into_the_database_if_an_alias_exists()
+    #[Test] public function it_converts_the_adjuster_fqcn_into_its_alias_when_saving_into_the_database_if_an_alias_exists()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,
@@ -316,8 +302,7 @@ class AdjustmentTest extends TestCase
         $this->assertEquals('simple_shipping_fee', $adjustment->adjuster);
     }
 
-    /** @test */
-    public function the_adjuster_gets_properly_resolved_even_if_it_is_saved_as_an_alias()
+    #[Test] public function the_adjuster_gets_properly_resolved_even_if_it_is_saved_as_an_alias()
     {
         $adjustment = Adjustment::create([
             'type' => AdjustmentType::TAX,

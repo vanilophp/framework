@@ -15,16 +15,14 @@ declare(strict_types=1);
 namespace Vanilo\Product\Tests;
 
 use Konekt\Enum\Enum;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Product\Models\Product;
 use Vanilo\Product\Models\ProductState;
 use Vanilo\Product\Models\ProductStateProxy;
 
 class ProductStateTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function the_state_property_is_an_enum()
+    #[Test] public function the_state_property_is_an_enum()
     {
         $product = Product::create([
             'name' => 'The Big Enums Book',
@@ -35,10 +33,7 @@ class ProductStateTest extends TestCase
         $this->assertInstanceOf(ProductStateProxy::enumClass(), $product->state);
     }
 
-    /**
-     * @test
-     */
-    public function the_state_property_is_the_default_when_unset()
+    #[Test] public function the_state_property_is_the_default_when_unset()
     {
         $product = Product::create([
             'name' => 'The Medium Enums Book',
@@ -48,10 +43,7 @@ class ProductStateTest extends TestCase
         $this->assertEquals(ProductStateProxy::defaultValue(), $product->state->value());
     }
 
-    /**
-     * @test
-     */
-    public function the_state_can_be_set_via_enum_object()
+    #[Test] public function the_state_can_be_set_via_enum_object()
     {
         $product = Product::create([
             'name' => 'The Small Enums Book',
@@ -62,10 +54,7 @@ class ProductStateTest extends TestCase
         $this->assertTrue($product->state->equals(ProductState::ACTIVE()));
     }
 
-    /**
-     * @test
-     */
-    public function the_state_can_be_set_via_scalar()
+    #[Test] public function the_state_can_be_set_via_scalar()
     {
         $product = Product::create([
             'name' => 'The Small Enums Book',
@@ -76,10 +65,7 @@ class ProductStateTest extends TestCase
         $this->assertTrue($product->state->equals(ProductState::ACTIVE()));
     }
 
-    /**
-     * @test
-     */
-    public function the_products_is_active_method_returns_the_states_active_status()
+    #[Test] public function the_products_is_active_method_returns_the_states_active_status()
     {
         $product = Product::create([
             'name' => 'The Tiny Enums Book',
@@ -102,10 +88,7 @@ class ProductStateTest extends TestCase
         $this->assertTrue($product->isActive());
     }
 
-    /**
-     * @test
-     */
-    public function active_status_can_be_returned_by_the_is_active_property_as_well()
+    #[Test] public function active_status_can_be_returned_by_the_is_active_property_as_well()
     {
         $product = Product::create([
             'name' => 'The Micro Enum Book',

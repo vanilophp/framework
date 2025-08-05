@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\PaymentGateways;
@@ -21,8 +22,7 @@ use Vanilo\Payment\Tests\Examples\PlasticPayments;
 
 class PaymentMethodTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created()
+    #[Test] public function it_can_be_created()
     {
         $method = PaymentMethod::create([
             'name' => 'Credit Card',
@@ -34,8 +34,7 @@ class PaymentMethodTest extends TestCase
         $this->assertEquals('plastic', $method->gateway);
     }
 
-    /** @test */
-    public function it_has_a_default_timeout()
+    #[Test] public function it_has_a_default_timeout()
     {
         $method = PaymentMethod::create([
             'name' => 'Credit Card',
@@ -46,8 +45,7 @@ class PaymentMethodTest extends TestCase
         $this->assertEquals(PaymentMethodContract::DEFAULT_TIMEOUT, $method->getTimeout());
     }
 
-    /** @test */
-    public function the_configuration_field_is_an_array()
+    #[Test] public function the_configuration_field_is_an_array()
     {
         $method = PaymentMethod::create([
             'name' => 'Credit Card',
@@ -57,8 +55,7 @@ class PaymentMethodTest extends TestCase
         $this->assertIsArray($method->configuration);
     }
 
-    /** @test */
-    public function default_configuration_is_an_empty_array()
+    #[Test] public function default_configuration_is_an_empty_array()
     {
         $method = PaymentMethod::create([
             'name' => 'Credit Card',
@@ -69,8 +66,7 @@ class PaymentMethodTest extends TestCase
         $this->assertEmpty($method->configuration());
     }
 
-    /** @test */
-    public function configuration_can_be_set_as_array()
+    #[Test] public function configuration_can_be_set_as_array()
     {
         $method = PaymentMethod::create([
             'name' => 'Credit Card',
@@ -83,8 +79,7 @@ class PaymentMethodTest extends TestCase
         $this->assertEquals('qwe', $method->configuration['asd']);
     }
 
-    /** @test */
-    public function methods_can_be_enabled()
+    #[Test] public function methods_can_be_enabled()
     {
         $method = PaymentMethod::create([
             'name' => 'Credit Card',
@@ -96,8 +91,7 @@ class PaymentMethodTest extends TestCase
         $this->assertTrue($method->is_enabled);
     }
 
-    /** @test */
-    public function it_can_make_its_gateway()
+    #[Test] public function it_can_make_its_gateway()
     {
         PaymentGateways::register('plastic', PlasticPayments::class);
         $method = PaymentMethod::create([
@@ -110,8 +104,7 @@ class PaymentMethodTest extends TestCase
         $this->assertEquals(PlasticPayments::getName(), $gateway::getName());
     }
 
-    /** @test */
-    public function it_can_tell_its_gateway_name()
+    #[Test] public function it_can_tell_its_gateway_name()
     {
         PaymentGateways::register('plastic', PlasticPayments::class);
         $method = PaymentMethod::create([

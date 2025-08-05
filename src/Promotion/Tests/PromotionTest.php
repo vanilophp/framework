@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests;
 
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Promotion\Models\Promotion;
 use Vanilo\Promotion\PromotionRuleTypes;
 use Vanilo\Promotion\Rules\CartQuantity;
@@ -12,16 +13,14 @@ use Vanilo\Promotion\Tests\Factories\PromotionFactory;
 
 class PromotionTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created_with_minimal_data()
+    #[Test] public function it_can_be_created_with_minimal_data()
     {
         $promotion = Promotion::create(['name' => 'Sample Promotion']);
         $this->assertInstanceOf(Promotion::class, $promotion);
         $this->assertEquals('Sample Promotion', $promotion->name);
     }
 
-    /** @test */
-    public function all_mutable_fields_can_be_mass_assigned()
+    #[Test] public function all_mutable_fields_can_be_mass_assigned()
     {
         $now = Carbon::now()->startOfDay()->toDateTimeString();
         $nextMonth = Carbon::now()->addMonths(1)->endOfDay()->toDateTimeString();
@@ -51,8 +50,7 @@ class PromotionTest extends TestCase
         $this->assertFalse($promotion->applies_to_discounted);
     }
 
-    /** @test */
-    public function all_mutable_fields_can_be_set()
+    #[Test] public function all_mutable_fields_can_be_set()
     {
         $now = Carbon::now()->startOfDay()->startOfDay()->toDateTimeString();
         $nextMonth = Carbon::now()->addMonth()->endOfDay()->toDateTimeString();
@@ -82,8 +80,7 @@ class PromotionTest extends TestCase
         $this->assertFalse($promotion->applies_to_discounted);
     }
 
-    /** @test */
-    public function the_fields_are_of_proper_types()
+    #[Test] public function the_fields_are_of_proper_types()
     {
         $promotion = Promotion::create([
             'name' => 'Typed Promotion',
@@ -108,8 +105,7 @@ class PromotionTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $promotion->updated_at);
     }
 
-    /** @test */
-    public function can_determine_if_its_valid()
+    #[Test] public function can_determine_if_its_valid()
     {
         $validPromotionA = PromotionFactory::new([
             'ends_at' => Carbon::now()->addMonth(),
@@ -142,8 +138,7 @@ class PromotionTest extends TestCase
         $this->assertTrue($validPromotionA->isValid(Carbon::now()->addWeek()));
     }
 
-    /** @test */
-    public function it_can_add_rule_and_validate()
+    #[Test] public function it_can_add_rule_and_validate()
     {
         $promotion = PromotionFactory::new()->create();
         $promotion->addRule(PromotionRuleTypes::make(CartQuantity::ID), ['count' => 3]);

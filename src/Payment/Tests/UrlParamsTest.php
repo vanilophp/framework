@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentMethod;
 use Vanilo\Payment\Models\PaymentStatus;
@@ -34,8 +35,7 @@ class UrlParamsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_replaces_the_payment_id_in_the_path()
+    #[Test] public function it_replaces_the_payment_id_in_the_path()
     {
         $payment = $this->createATestPayment();
         $processor = new SomeUrlProcessor();
@@ -51,8 +51,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_replaces_the_payment_id_in_the_query()
+    #[Test] public function it_replaces_the_payment_id_in_the_query()
     {
         $payment = $this->createATestPayment();
         $processor = new SomeUrlProcessor();
@@ -73,8 +72,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_replaces_the_payable_id_in_the_path()
+    #[Test] public function it_replaces_the_payable_id_in_the_path()
     {
         $payment = $this->createATestPayment('6672');
         $processor = new SomeUrlProcessor();
@@ -90,8 +88,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_replaces_the_payable_id_in_the_query()
+    #[Test] public function it_replaces_the_payable_id_in_the_query()
     {
         $payment = $this->createATestPayment('2172');
         $processor = new SomeUrlProcessor();
@@ -112,8 +109,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_leaves_alone_urls_without_parameters()
+    #[Test] public function it_leaves_alone_urls_without_parameters()
     {
         $payment = $this->createATestPayment();
         $processor = new SomeUrlProcessor();
@@ -124,8 +120,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_converts_paths_to_full_urls()
+    #[Test] public function it_converts_paths_to_full_urls()
     {
         $payment = $this->createATestPayment();
         $processor = new SomeUrlProcessor();
@@ -136,8 +131,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_converts_paths_to_full_urls_even_without_parameters()
+    #[Test] public function it_converts_paths_to_full_urls_even_without_parameters()
     {
         $payment = $this->createATestPayment();
         $processor = new SomeUrlProcessor();
@@ -148,8 +142,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_preserves_query_parameters_when_path_gets_converted_to_url()
+    #[Test] public function it_preserves_query_parameters_when_path_gets_converted_to_url()
     {
         $payment = $this->createATestPayment('444');
         $processor = new SomeUrlProcessor();

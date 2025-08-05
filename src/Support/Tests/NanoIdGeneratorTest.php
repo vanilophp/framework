@@ -14,20 +14,19 @@ declare(strict_types=1);
 
 namespace Vanilo\Support\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Vanilo\Support\Generators\NanoIdGenerator;
 
 class NanoIdGeneratorTest extends TestCase
 {
-    /** @test */
-    public function it_generates_a_21_char_long_string_by_default()
+    #[Test] public function it_generates_a_21_char_long_string_by_default()
     {
         $nr = (new NanoIdGenerator())->generate();
         $this->assertEquals(21, strlen($nr));
     }
 
-    /** @test */
-    public function it_generates_21_char_long_strings_two_hundred_thousand_times()
+    #[Test] public function it_generates_21_char_long_strings_two_hundred_thousand_times()
     {
         $generator = new NanoIdGenerator();
 
@@ -36,8 +35,7 @@ class NanoIdGeneratorTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_is_unique_when_called_in_a_rapid_consecutive_100k_times()
+    #[Test] public function it_is_unique_when_called_in_a_rapid_consecutive_100k_times()
     {
         $numbers = [];
         $generator = new NanoIdGenerator();
@@ -49,8 +47,7 @@ class NanoIdGeneratorTest extends TestCase
         $this->assertEquals(count($numbers), count(array_unique($numbers)));
     }
 
-    /** @test */
-    public function size_of_the_id_can_be_specified_within_the_constructor()
+    #[Test] public function size_of_the_id_can_be_specified_within_the_constructor()
     {
         $generator = new NanoIdGenerator(9);
 
@@ -65,8 +62,7 @@ class NanoIdGeneratorTest extends TestCase
         }
     }
 
-    /** @test */
-    public function the_alphabet_can_be_specified_within_the_constructor()
+    #[Test] public function the_alphabet_can_be_specified_within_the_constructor()
     {
         $alphabetsAndSizes = [
             'abcdefghijklmnopqrstwxyz' => 12,

@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
+
 class AAASmokeTest extends TestCase
 {
     private const MIN_PHP_VERSION = '8.3.0';
 
-    /** @test */
-    public function smoke()
+    #[Test] public function smoke()
     {
         $this->assertTrue(true);
     }
 
-    /** @test */
-    public function php_version_satisfies_requirements()
+    #[Test] public function php_version_satisfies_requirements()
     {
         $this->assertFalse(
             version_compare(PHP_VERSION, self::MIN_PHP_VERSION, '<'),

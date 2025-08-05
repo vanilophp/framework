@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Category\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Category\Models\Taxon;
 use Vanilo\Category\Models\Taxonomy;
 
@@ -27,8 +28,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         }
     }
 
-    /** @test */
-    public function it_returns_the_taxon_by_its_taxonomy_slug_and_his_own_slug()
+    #[Test] public function it_returns_the_taxon_by_its_taxonomy_slug_and_his_own_slug()
     {
         $taxonomy = Taxonomy::create(['name' => 'Brand']);
         Taxon::create(['name' => 'Me me mee', 'taxonomy_id' => $taxonomy->id]);
@@ -38,8 +38,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertNull(Taxon::findOneByParentsAndSlug('no-such-taxonomy', 'me-me-mee'));
     }
 
-    /** @test */
-    public function it_returns_null_if_taxonomy_with_the_given_slug_does_not_exist()
+    #[Test] public function it_returns_null_if_taxonomy_with_the_given_slug_does_not_exist()
     {
         $taxonomy = Taxonomy::create(['name' => 'Seasons']);
         $taxon = Taxon::create(['name' => 'Spring', 'taxonomy_id' => $taxonomy->id]);
@@ -47,8 +46,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertNull(Taxon::findOneByParentsAndSlug('no-such-taxonomy', 'spring'));
     }
 
-    /** @test */
-    public function it_returns_null_if_the_passed_slug_exists_but_not_within_the_given_taxonomy()
+    #[Test] public function it_returns_null_if_the_passed_slug_exists_but_not_within_the_given_taxonomy()
     {
         $seasons = Taxonomy::create(['name' => 'Seasons']);
         $looks = Taxonomy::create(['name' => 'Looks']);
@@ -58,8 +56,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertNull(Taxon::findOneByParentsAndSlug('seasons', 'chaos-look'));
     }
 
-    /** @test */
-    public function it_returns_the_taxon_from_the_given_taxonomy_if_two_taxons_with_the_same_slug_exist()
+    #[Test] public function it_returns_the_taxon_from_the_given_taxonomy_if_two_taxons_with_the_same_slug_exist()
     {
         $seasons = Taxonomy::create(['name' => 'Seasons']);
         $looks = Taxonomy::create(['name' => 'Looks']);
@@ -81,8 +78,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertEquals($springLook->id, $foundSpringLook->id);
     }
 
-    /** @test */
-    public function it_returns_the_taxon_by_its_taxonomy_slug_his_own_slug_and_its_parent_taxon_slug()
+    #[Test] public function it_returns_the_taxon_by_its_taxonomy_slug_his_own_slug_and_its_parent_taxon_slug()
     {
         $taxonomy = Taxonomy::create(['name' => 'Wine Regions']);
         $hungary = Taxon::create(['name' => 'Hungary', 'taxonomy_id' => $taxonomy->id]);
@@ -111,8 +107,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertEquals($hungary->slug, $foundHuTokaj->parent->slug);
     }
 
-    /** @test */
-    public function it_returns_the_taxon_by_its_taxonomy_slug_his_own_slug_and_its_parent_taxon_slug_regardless_of_levels()
+    #[Test] public function it_returns_the_taxon_by_its_taxonomy_slug_his_own_slug_and_its_parent_taxon_slug_regardless_of_levels()
     {
         $locations = Taxonomy::create(['name' => 'Locations']);
         $usa = Taxon::create(['name' => 'USA', 'taxonomy_id' => $locations->id]);
@@ -144,8 +139,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertEquals($tennessee->slug, $foundmemphisTennessee->parent->slug);
     }
 
-    /** @test */
-    public function it_returns_null_if_the_passed_parent_taxon_does_not_exist()
+    #[Test] public function it_returns_null_if_the_passed_parent_taxon_does_not_exist()
     {
         $taxonomy = Taxonomy::create(['name' => 'Wine Regions']);
         $hungary = Taxon::create(['name' => 'Hungary', 'taxonomy_id' => $taxonomy->id]);
@@ -156,8 +150,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertNull(Taxon::findOneByParentsAndSlug('wine-regions', 'tokaj', 'romania'));
     }
 
-    /** @test */
-    public function it_returns_null_if_the_passed_parent_taxon_does_is_not_the_parent()
+    #[Test] public function it_returns_null_if_the_passed_parent_taxon_does_is_not_the_parent()
     {
         $taxonomy = Taxonomy::create(['name' => 'Countries']);
         $europe = Taxon::create(['name' => 'Europe', 'taxonomy_id' => $taxonomy->id]);
@@ -167,8 +160,7 @@ class TaxonFindByParentsAndSlugMethodTest extends TestCase
         $this->assertNull(Taxon::findOneByParentsAndSlug('countries', 'italy', 'america'));
     }
 
-    /** @test */
-    public function it_returns_null_if_there_is_a_passed_parent_taxon_but_the_taxon_with_the_given_taxon_has_no_parent()
+    #[Test] public function it_returns_null_if_there_is_a_passed_parent_taxon_but_the_taxon_with_the_given_taxon_has_no_parent()
     {
         $taxonomy = Taxonomy::create(['name' => 'Animals']);
         $mammals = Taxon::create(['name' => 'Mammals', 'taxonomy_id' => $taxonomy->id]);

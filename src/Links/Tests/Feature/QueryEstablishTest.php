@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Links\Tests\Feature;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Models\LinkType;
 use Vanilo\Links\Query\Establish;
 use Vanilo\Links\Query\Get;
@@ -26,8 +27,7 @@ use Vanilo\Links\Tests\TestCase;
 
 class QueryEstablishTest extends TestCase
 {
-    /** @test */
-    public function two_products_can_be_linked_together()
+    #[Test] public function two_products_can_be_linked_together()
     {
         $iphone12 = TestLinkableProduct::create(['name' => 'iPhone 12'])->fresh();
         $iphone13 = TestLinkableProduct::create(['name' => 'iPhone 13'])->fresh();
@@ -42,8 +42,7 @@ class QueryEstablishTest extends TestCase
         $this->assertEquals($iphone12->id, $iphone13->links('related-product')->first()->id);
     }
 
-    /** @test */
-    public function query_can_be_started_with_a_or_an()
+    #[Test] public function query_can_be_started_with_a_or_an()
     {
         $galaxyS22 = TestProduct::create(['name' => 'Galaxy S21'])->fresh();
         $galaxyS22Ultra = TestProduct::create(['name' => 'Galaxy S22 Ultra'])->fresh();
@@ -56,8 +55,7 @@ class QueryEstablishTest extends TestCase
         $this->assertEquals($galaxyS22Ultra->id, $upsells->first()->id);
     }
 
-    /** @test */
-    public function models_can_be_linked_by_type_and_property()
+    #[Test] public function models_can_be_linked_by_type_and_property()
     {
         $green = TestProduct::create(['name' => 'T-Shirt Green'])->fresh();
         $blue = TestProduct::create(['name' => 'T-Shirt Blue'])->fresh();
@@ -71,8 +69,7 @@ class QueryEstablishTest extends TestCase
         $this->assertEquals($blue->id, $variants->first()->id);
     }
 
-    /** @test */
-    public function models_can_be_linked_by_property_slug()
+    #[Test] public function models_can_be_linked_by_property_slug()
     {
         Establish::usePropertiesModel(Property::class);
         Get::usePropertiesModel(Property::class);
@@ -89,8 +86,7 @@ class QueryEstablishTest extends TestCase
         $this->assertEquals($laptop15->id, $variants->first()->id);
     }
 
-    /** @test */
-    public function multiple_products_can_be_linked_together()
+    #[Test] public function multiple_products_can_be_linked_together()
     {
         $iphone12 = TestLinkableProduct::create(['name' => 'iPhone 12'])->fresh();
         $iphone13 = TestLinkableProduct::create(['name' => 'iPhone 13'])->fresh();
@@ -104,8 +100,7 @@ class QueryEstablishTest extends TestCase
         $this->assertEquals($iphone14->id, $iphone12->links('series')->last()->id);
     }
 
-    /** @test */
-    public function morphed_models_can_be_linked_together()
+    #[Test] public function morphed_models_can_be_linked_together()
     {
         Relation::morphMap(['lmproduct' => TestLinkableMorphedProduct::class]);
 
@@ -119,8 +114,7 @@ class QueryEstablishTest extends TestCase
         $this->assertCount(1, Get::the('variant')->links()->of($prod2));
     }
 
-    /** @test */
-    public function unidirectional_links_can_be_established()
+    #[Test] public function unidirectional_links_can_be_established()
     {
         $phone = TestLinkableProduct::create(['name' => 'iPhone 15'])->fresh();
         $case1 = TestLinkableProduct::create(['name' => 'iPhone 15 Plastic Case 1'])->fresh();
@@ -134,8 +128,7 @@ class QueryEstablishTest extends TestCase
         $this->assertCount(0, $case1->links('accessory'));
     }
 
-    /** @test */
-    public function unidirectional_links_can_be_established_between_multiple_entries()
+    #[Test] public function unidirectional_links_can_be_established_between_multiple_entries()
     {
         $phone = TestLinkableProduct::create(['name' => 'iPhone 16'])->fresh();
         $case1 = TestLinkableProduct::create(['name' => 'iPhone 16 Plastic Case 1'])->fresh();
@@ -153,8 +146,7 @@ class QueryEstablishTest extends TestCase
         $this->assertCount(0, $case2->links('protection'));
     }
 
-    /** @test */
-    public function it_can_be_requested_to_create_new_groups_instead_of_reusing_existing_ones()
+    #[Test] public function it_can_be_requested_to_create_new_groups_instead_of_reusing_existing_ones()
     {
         $phone = TestLinkableProduct::create(['name' => 'iPhone 19'])->fresh();
         $caseBlue = TestLinkableProduct::create(['name' => 'iPhone 19 Silicon Case Blue'])->fresh();

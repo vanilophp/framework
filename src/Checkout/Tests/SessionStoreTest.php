@@ -18,6 +18,7 @@ use Konekt\Address\Models\AddressType;
 use Konekt\Address\Models\Country;
 use Konekt\Address\Models\Province;
 use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Checkout\Drivers\SessionStore;
 use Vanilo\Checkout\Models\CheckoutState;
@@ -28,8 +29,7 @@ use Vanilo\Checkout\Tests\Example\DataFactory;
 
 class SessionStoreTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_instantiated()
+    #[Test] public function it_can_be_instantiated()
     {
         $store = new SessionStore(new DataFactory());
 
@@ -37,8 +37,7 @@ class SessionStoreTest extends TestCase
         $this->assertInstanceOf(CheckoutStore::class, $store);
     }
 
-    /** @test */
-    public function it_works_with_an_explicitly_passed_array_driver()
+    #[Test] public function it_works_with_an_explicitly_passed_array_driver()
     {
         $this->assertInstanceOf(
             CheckoutStore::class,
@@ -46,8 +45,7 @@ class SessionStoreTest extends TestCase
         );
     }
 
-    /** @test */
-    public function a_cart_can_be_assigned_to()
+    #[Test] public function a_cart_can_be_assigned_to()
     {
         $cart = new Cart();
         $store = new SessionStore(new DataFactory());
@@ -56,14 +54,12 @@ class SessionStoreTest extends TestCase
         $this->assertEquals($cart, $store->getCart());
     }
 
-    /** @test */
-    public function it_is_in_virgin_state_by_default()
+    #[Test] public function it_is_in_virgin_state_by_default()
     {
         $this->assertEquals(CheckoutState::VIRGIN(), (new SessionStore(new DataFactory()))->getState());
     }
 
-    /** @test */
-    public function state_can_be_set()
+    #[Test] public function state_can_be_set()
     {
         $store = new SessionStore(new DataFactory());
         $store->setState(CheckoutState::READY);
@@ -71,8 +67,7 @@ class SessionStoreTest extends TestCase
         $this->assertEquals(CheckoutState::READY(), $store->getState());
     }
 
-    /** @test */
-    public function custom_attributes_can_be_assigned()
+    #[Test] public function custom_attributes_can_be_assigned()
     {
         $store = new SessionStore(new DataFactory());
         $store->setCustomAttribute('mama', 'mia');
@@ -80,8 +75,7 @@ class SessionStoreTest extends TestCase
         $this->assertEquals('mia', $store->getCustomAttribute('mama'));
     }
 
-    /** @test */
-    public function it_persists_its_data_in_the_session()
+    #[Test] public function it_persists_its_data_in_the_session()
     {
         $fileSessionStore = session()->driver('file');
 
@@ -94,8 +88,7 @@ class SessionStoreTest extends TestCase
         $this->assertEquals('Gatto', $storeAtALaterPoint->getCustomAttribute('Giovanni'));
     }
 
-    /** @test */
-    public function it_can_store_and_resume_the_billpayer_in_the_session()
+    #[Test] public function it_can_store_and_resume_the_billpayer_in_the_session()
     {
         Country::firstOrCreate(['id' => 'CA'], ['name' => 'Canada', 'phonecode' => '1', 'is_eu_member' => false]);
         $quebec = Province::firstOrCreate(['country_id' => 'CA', 'code' => 'QC'], ['name' => 'Quebec'])->fresh();

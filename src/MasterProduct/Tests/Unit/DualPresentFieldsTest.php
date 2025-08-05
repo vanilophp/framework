@@ -22,8 +22,7 @@ use Vanilo\Product\Models\ProductState;
 
 class DualPresentFieldsTest extends TestCase
 {
-    /** @test */
-    public function the_name_of_the_master_is_used_on_the_variant_if_the_variant_name_is_null()
+    #[Test] public function the_name_of_the_master_is_used_on_the_variant_if_the_variant_name_is_null()
     {
         $master = MasterProduct::create([
             'name' => 'Makita Cordless Driver Drill',
@@ -44,8 +43,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals('Makita Cordless Driver Drill', $variant2->name);
     }
 
-    /** @test */
-    public function own_name_is_used_on_the_variant_if_the_variant_has_its_own_name()
+    #[Test] public function own_name_is_used_on_the_variant_if_the_variant_has_its_own_name()
     {
         $master = MasterProduct::create([
             'name' => 'Makita Akku-Bohrschrauber LXT DDF485',
@@ -75,8 +73,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals('Makita Akku-Bohrschrauber LXT DDF485Z', $ddf485z->name);
     }
 
-    /** @test */
-    public function the_price_of_the_master_is_used_on_the_variant_if_the_variant_price_is_null()
+    #[Test] public function the_price_of_the_master_is_used_on_the_variant_if_the_variant_price_is_null()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',
@@ -98,8 +95,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals(22.79, $variant2->price);
     }
 
-    /** @test */
-    public function own_price_is_used_on_the_variant_if_the_variant_has_its_own_price()
+    #[Test] public function own_price_is_used_on_the_variant_if_the_variant_has_its_own_price()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',
@@ -130,8 +126,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals(28.99, $gin07->price);
     }
 
-    /** @test */
-    public function the_original_price_of_the_master_is_used_on_the_variant_if_the_variant_original_price_is_null()
+    #[Test] public function the_original_price_of_the_master_is_used_on_the_variant_if_the_variant_original_price_is_null()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',
@@ -153,8 +148,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals(22.79, $variant2->original_price);
     }
 
-    /** @test */
-    public function own_original_price_is_used_on_the_variant_if_the_variant_has_its_own_original_price()
+    #[Test] public function own_original_price_is_used_on_the_variant_if_the_variant_has_its_own_original_price()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',
@@ -185,8 +179,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals(28.99, $gin07->original_price);
     }
 
-    /** @test */
-    public function the_excerpt_of_the_master_is_used_on_the_variant_if_the_variant_excerpt_is_null()
+    #[Test] public function the_excerpt_of_the_master_is_used_on_the_variant_if_the_variant_excerpt_is_null()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',
@@ -208,8 +201,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals('Create the sweetest cocktails with this Gin.', $variant2->excerpt);
     }
 
-    /** @test */
-    public function own_excerpt_is_used_on_the_variant_if_the_variant_has_its_own_excerpt()
+    #[Test] public function own_excerpt_is_used_on_the_variant_if_the_variant_has_its_own_excerpt()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',
@@ -295,8 +287,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertTrue($varAgnostic->state->equals(ProductState::UNLISTED()));
     }
 
-    /** @test */
-    public function the_dimensions_of_the_master_is_used_on_the_variant_if_the_variant_dimensions_are_null()
+    #[Test] public function the_dimensions_of_the_master_is_used_on_the_variant_if_the_variant_dimensions_are_null()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',
@@ -320,8 +311,7 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals(2, $variant->weight);
     }
 
-    /** @test */
-    public function own_dimensions_are_used_on_the_variant_if_the_variant_has_its_own_dimensions()
+    #[Test] public function own_dimensions_are_used_on_the_variant_if_the_variant_has_its_own_dimensions()
     {
         $master = MasterProduct::create([
             'name' => 'Edinburgh Raspberry Gin',

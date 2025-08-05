@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Links\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Links\Contracts\LinkGroup as LinkGroupContract;
 use Vanilo\Links\Models\LinkGroup;
 use Vanilo\Links\Models\LinkType;
@@ -21,8 +22,7 @@ use Vanilo\Links\Tests\TestCase;
 
 class LinkGroupTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created()
+    #[Test] public function it_can_be_created()
     {
         $variant = LinkType::create(['name' => 'Variant']);
         $group = LinkGroup::create([
@@ -33,8 +33,7 @@ class LinkGroupTest extends TestCase
         $this->assertInstanceOf(LinkGroupContract::class, $group);
     }
 
-    /** @test */
-    public function the_variant_can_be_retrieved()
+    #[Test] public function the_variant_can_be_retrieved()
     {
         $upsell = LinkType::create(['name' => 'Upsell']);
         $group = LinkGroup::create([

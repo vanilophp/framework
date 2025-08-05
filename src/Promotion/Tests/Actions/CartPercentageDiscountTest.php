@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Promotion\Tests\Actions;
 
 use Nette\Schema\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Adjustments\Adjusters\PercentDiscount;
 use Vanilo\Promotion\Actions\CartPercentageDiscount;
 use Vanilo\Promotion\PromotionActionTypes;
@@ -13,22 +14,19 @@ use Vanilo\Promotion\Tests\TestCase;
 
 class CartPercentageDiscountTest extends TestCase
 {
-    /** @test */
-    public function it_has_a_name()
+    #[Test] public function it_has_a_name()
     {
         $this->assertNotEmpty(CartPercentageDiscount::getName());
     }
 
-    /** @test */
-    public function it_can_be_created_from_the_registry()
+    #[Test] public function it_can_be_created_from_the_registry()
     {
         $fixedDiscount = PromotionActionTypes::make(CartPercentageDiscount::DEFAULT_ID);
 
         $this->assertInstanceOf(CartPercentageDiscount::class, $fixedDiscount);
     }
 
-    /** @test */
-    public function it_throws_a_validation_exception_if_the_percent_is_missing_from_the_configuration()
+    #[Test] public function it_throws_a_validation_exception_if_the_percent_is_missing_from_the_configuration()
     {
         $this->expectException(ValidationException::class);
 
@@ -37,8 +35,7 @@ class CartPercentageDiscountTest extends TestCase
         $discount->getAdjuster([]);
     }
 
-    /** @test */
-    public function it_throws_a_validation_exception_if_the_configured_percent_is_higher_than_100()
+    #[Test] public function it_throws_a_validation_exception_if_the_configured_percent_is_higher_than_100()
     {
         $this->expectException(ValidationException::class);
 
@@ -47,8 +44,7 @@ class CartPercentageDiscountTest extends TestCase
         $discount->getAdjuster(['percent' => 101]);
     }
 
-    /** @test */
-    public function it_throws_a_validation_exception_if_the_configured_percent_is_negative()
+    #[Test] public function it_throws_a_validation_exception_if_the_configured_percent_is_negative()
     {
         $this->expectException(ValidationException::class);
 
@@ -57,26 +53,22 @@ class CartPercentageDiscountTest extends TestCase
         $discount->getAdjuster(['percent' => -3]);
     }
 
-    /** @test */
-    public function the_title_contains_the_configured_percent()
+    #[Test] public function the_title_contains_the_configured_percent()
     {
         $this->assertStringContainsString('7%', (new CartPercentageDiscount())->getTitle(['percent' => 7]));
     }
 
-    /** @test */
-    public function the_title_warns_if_the_percent_configuration_is_missing()
+    #[Test] public function the_title_warns_if_the_percent_configuration_is_missing()
     {
         $this->assertStringContainsString('Invalid', (new CartPercentageDiscount())->getTitle([]));
     }
 
-    /** @test */
-    public function it_returns_a_percent_discount_adjuster_if_the_configuration_is_correct()
+    #[Test] public function it_returns_a_percent_discount_adjuster_if_the_configuration_is_correct()
     {
         $this->assertInstanceOf(PercentDiscount::class, (new CartPercentageDiscount())->getAdjuster(['percent' => 20]));
     }
 
-    /** @test */
-    public function it_adds_a_promotion_adjustment_to_the_subject_if_applied()
+    #[Test] public function it_adds_a_promotion_adjustment_to_the_subject_if_applied()
     {
         $discount = new CartPercentageDiscount();
         $subject = new SampleAdjustable(179);
