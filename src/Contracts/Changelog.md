@@ -12,6 +12,8 @@
    - the `Schematized::getSchemaSample()` parameter is now explicitly nullable
 - Added the `Sale` and `SaleItem` interfaces
 - BC: Added the `getOriginalPrice()` and `hasAHigherOriginalPrice()` methods to the Buyable interface
+- BC: Added the `isShippable()` method to the `CheckoutSubjectItem` interface
+- BC: Added the `getShippableItems()` method to the `CheckoutSubject` interface
 
 ## 4.x Series
 

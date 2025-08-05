@@ -21,8 +21,7 @@ use Vanilo\Shipment\Models\TimeUnit;
 
 class ShippingMethodTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created_with_minimal_data()
+    #[Test] public function it_can_be_created_with_minimal_data()
     {
         $method = ShippingMethod::create(['name' => 'DHL']);
 
@@ -30,8 +29,7 @@ class ShippingMethodTest extends TestCase
         $this->assertEquals('DHL', $method->name);
     }
 
-    /** @test */
-    public function a_carrier_can_be_assigned_to_it()
+    #[Test] public function a_carrier_can_be_assigned_to_it()
     {
         $dhl = Carrier::create(['name' => 'DHL']);
         $method = ShippingMethod::create([
@@ -45,8 +43,7 @@ class ShippingMethodTest extends TestCase
         $this->assertEquals($dhl->name, $method->carrier->name);
     }
 
-    /** @test */
-    public function the_configuration_is_an_empty_array_by_default()
+    #[Test] public function the_configuration_is_an_empty_array_by_default()
     {
         $method = ShippingMethod::create(['name' => 'Pick-up']);
 
@@ -54,8 +51,7 @@ class ShippingMethodTest extends TestCase
         $this->assertEmpty($method->configuration);
     }
 
-    /** @test */
-    public function the_configuration_can_be_set_as_an_array()
+    #[Test] public function the_configuration_can_be_set_as_an_array()
     {
         $method = ShippingMethod::create(['name' => 'UPS Ground']);
 
@@ -67,24 +63,21 @@ class ShippingMethodTest extends TestCase
         $this->assertEquals(25, $method->configuration['free_threshold']);
     }
 
-    /** @test */
-    public function it_is_active_by_default()
+    #[Test] public function it_is_active_by_default()
     {
         $method = ShippingMethod::create(['name' => 'Bike Courier'])->fresh();
 
         $this->assertTrue($method->is_active);
     }
 
-    /** @test */
-    public function it_can_be_set_to_inactive()
+    #[Test] public function it_can_be_set_to_inactive()
     {
         $method = ShippingMethod::create(['name' => 'Dead Messenger', 'is_active' => false])->fresh();
 
         $this->assertFalse($method->is_active);
     }
 
-    /** @test */
-    public function active_ones_can_be_listed()
+    #[Test] public function active_ones_can_be_listed()
     {
         ShippingMethod::create(['name' => 'Messenger 1', 'is_active' => true]);
         ShippingMethod::create(['name' => 'Messenger 2', 'is_active' => false]);
@@ -95,8 +88,7 @@ class ShippingMethodTest extends TestCase
         $this->assertCount(2, ShippingMethod::actives()->get());
     }
 
-    /** @test */
-    public function inactive_ones_can_be_listed()
+    #[Test] public function inactive_ones_can_be_listed()
     {
         ShippingMethod::create(['name' => 'Messenger 1', 'is_active' => true]);
         ShippingMethod::create(['name' => 'Messenger 2', 'is_active' => false]);

@@ -15,13 +15,8 @@ declare(strict_types=1);
 namespace Vanilo\Shipment\Tests;
 
 use Konekt\Address\Contracts\Address;
-use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
-use Konekt\Concord\ConcordServiceProvider;
-use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
-use Orchestra\Testbench\TestCase as Orchestra;
-use Vanilo\Shipment\Providers\ModuleServiceProvider as ShipmentModule;
 
-abstract class TestCase extends Orchestra
+abstract class TestCase extends TestCaseWithoutDB
 {
     public function setUp(): void
     {
@@ -31,24 +26,6 @@ abstract class TestCase extends Orchestra
         concord()->registerModel(Address::class, Dummies\Address::class);
     }
 
-    /**
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
-    protected function getPackageProviders($app)
-    {
-        return [
-            LaravelMigrationCompatibilityProvider::class,
-            ConcordServiceProvider::class
-        ];
-    }
-
-    /**
-     * Set up the environment.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'sqlite');
@@ -59,27 +36,9 @@ abstract class TestCase extends Orchestra
         ]);
     }
 
-    /**
-     * Set up the database.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
     protected function setUpDatabase($app)
     {
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         \Artisan::call('migrate', ['--force' => true]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function resolveApplicationConfiguration($app)
-    {
-        parent::resolveApplicationConfiguration($app);
-
-        $app['config']->set('concord.modules', [
-            AddressModule::class,
-            ShipmentModule::class
-        ]);
     }
 }

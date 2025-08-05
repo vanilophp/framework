@@ -18,7 +18,12 @@
     - `getChildItems()`
 - BC: Added the `getOriginalPrice()` and `hasAHigherOriginalPrice()` methods to the Buyable interface
 - BC: Added the `isShippable()` method to the `CheckoutSubjectItem` interface
+- BC: Added the `getShippableItems()` method to the `CheckoutSubject` interface
 - BC: Added the `getName()` method to the `Carrier` interface
+- BC: Added the following methods to the `ShippingMethod` interface:
+    - `hasShippingCategory()`
+    - `getShippingCategory()`
+    - `getShippingCategoryMatchingCondition()`
 - BC: Added the following methods to the `ProductState` interface:
     - `isListable()`
     - `isViewable()`
@@ -35,6 +40,8 @@
 - Fixed PHP 8.4 deprecation notices
 - Added support for calculating item-level promotions on checkout
 - Added ETA fields to Shipping Methods
+- Added Shipping Categories
+- Added shipping category and matching condition fields to the shipping methods table
 - Added a customizable Shipping Method eligibility checker class
 - Added the Order::inChannel() scope (Foundation)
 - Added the Video module

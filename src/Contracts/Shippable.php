@@ -20,8 +20,8 @@ interface Shippable
 {
     public function getShippingAddress(): ?Address;
 
-//    /** @return Collection<ShippableItem> */
-//    public function getShippableItems(): Collection;
+    /** @return Collection<ShippableItem> */
+    public function getShippableItems(): Collection;
 
     public function weight(): float;
 

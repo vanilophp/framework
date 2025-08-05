@@ -18,6 +18,7 @@ use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Support\HasAdjustmentsViaRelation;
 use Vanilo\Adjustments\Support\RecalculatesAdjustments;
 use Vanilo\Cart\Models\CartItem as BaseCartItem;
+use Vanilo\Shipment\Contracts\ShippingCategory;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxCategory;
 
@@ -35,6 +36,20 @@ class CartItem extends BaseCartItem implements Adjustable, Taxable
 
         return null;
     }
+
+    public function isShippable(): ?bool
+    {
+        $product = $this->getBuyable();
+        if (method_exists($product, 'getShippingCategory')) { // Runtime type check with
+            $category = $product->getShippingCategory(); // cautious duck typing, but
+            if ($category instanceof ShippingCategory) { // only return if sure af
+                return !$category->isNotShippable();
+            }
+        }
+
+        return parent::isShippable(); // If we're unsure, just fall back to the parent implementation
+    }
+
 
     public function preAdjustmentTotal(): float
     {

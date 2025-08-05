@@ -15,12 +15,12 @@ declare(strict_types=1);
 namespace Vanilo\Shipment\Tests;
 
 use Konekt\Address\Models\Zone;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Shipment\Models\ShippingMethod;
 
 class ShippingMethodZonesTest extends TestCase
 {
-    /** @test */
-    public function a_zone_can_be_assigned_to_a_shipping_method()
+    #[Test] public function a_zone_can_be_assigned_to_a_shipping_method()
     {
         $zone = Zone::create(['name' => 'Maritime']);
         $method = ShippingMethod::create(['name' => 'Canada Post', 'zone_id' => $zone->id])->fresh();
@@ -30,8 +30,7 @@ class ShippingMethodZonesTest extends TestCase
         $this->assertEquals('Maritime', $method->zone->name);
     }
 
-    /** @test */
-    public function the_shipping_methods_available_for_a_zone_can_be_queried()
+    #[Test] public function the_shipping_methods_available_for_a_zone_can_be_queried()
     {
         $zone = Zone::create(['name' => 'Maritime']);
         ShippingMethod::create(['name' => 'Envoi régulier (3 jours)', 'zone_id' => $zone->id]);
@@ -45,8 +44,7 @@ class ShippingMethodZonesTest extends TestCase
         $this->assertNotContains('Avion (2 semaines)', $methods->pluck('name'));
     }
 
-    /** @test */
-    public function the_available_shipping_method_list_for_a_zone_excludes_inactive_items()
+    #[Test] public function the_available_shipping_method_list_for_a_zone_excludes_inactive_items()
     {
         $zone = Zone::create(['name' => 'etats-unis']);
         ShippingMethod::create(['name' => 'Envoi régulier (10 jours ouvrables)', 'zone_id' => $zone->id]);
@@ -58,8 +56,7 @@ class ShippingMethodZonesTest extends TestCase
         $this->assertNotContains('Expresspost (5-7 jours)', $methods->pluck('name'));
     }
 
-    /** @test */
-    public function the_shipping_methods_available_for_multiple_zonse_can_be_queried()
+    #[Test] public function the_shipping_methods_available_for_multiple_zonse_can_be_queried()
     {
         $europe = Zone::create(['name' => 'Europe']);
         $maritimes = Zone::create(['name' => 'Maritimes']);
@@ -81,8 +78,7 @@ class ShippingMethodZonesTest extends TestCase
         $this->assertContains('Avion (2 semaines)', $methodsForEU->pluck('name'));
     }
 
-    /** @test */
-    public function the_for_zones_scope_accepts_an_array_of_zone_ids()
+    #[Test] public function the_for_zones_scope_accepts_an_array_of_zone_ids()
     {
         $zone1 = Zone::create(['name' => 'Z1']);
         $zone2 = Zone::create(['name' => 'Z2']);
@@ -99,8 +95,7 @@ class ShippingMethodZonesTest extends TestCase
         $this->assertNotContains('SM2', $methods->pluck('name'));
     }
 
-    /** @test */
-    public function the_for_zones_scope_accepts_an_array_of_zone_models()
+    #[Test] public function the_for_zones_scope_accepts_an_array_of_zone_models()
     {
         $zone3 = Zone::create(['name' => 'Z3']);
         $zone4 = Zone::create(['name' => 'Z4']);
@@ -122,8 +117,7 @@ class ShippingMethodZonesTest extends TestCase
         $this->assertNotContains('SM7', $methods->pluck('name'));
     }
 
-    /** @test */
-    public function the_for_zones_scope_accepts_a_collection_of_zone_models()
+    #[Test] public function the_for_zones_scope_accepts_a_collection_of_zone_models()
     {
         $zone7 = Zone::create(['name' => 'Z7']);
         $zone8 = Zone::create(['name' => 'Z8']);

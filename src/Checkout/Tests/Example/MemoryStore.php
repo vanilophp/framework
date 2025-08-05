@@ -14,11 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests\Example;
 
+use Illuminate\Support\Collection;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\CheckoutSubjectItem;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
 
@@ -226,6 +228,11 @@ class MemoryStore implements CheckoutStore
     public function dimension(): ?Dimension
     {
         return new \Vanilo\Support\Dto\Dimension(0, 0, 0);
+    }
+
+    public function getShippableItems(): Collection
+    {
+        return $this->getCart()->getItems()->filter(fn (CheckoutSubjectItem $item) => $item->isShippable());
     }
 
     public function customMethod(): string

@@ -31,6 +31,7 @@ class ProductFactory extends Factory
             'stock' => fake()->numberBetween(10, 2000),
             'state' => ProductState::ACTIVE,
             'description' => fake()->optional(0.9)->paragraph(),
+            'shipping_category_id' => null,
         ];
     }
 }

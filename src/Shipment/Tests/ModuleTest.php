@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Shipment\Contracts\Carrier as CarrierContract;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShippingCategory as ShippingCategoryContract;
@@ -14,10 +15,9 @@ use Vanilo\Shipment\Models\ShippingCategory;
 use Vanilo\Shipment\Models\ShippingMethod;
 use Vanilo\Shipment\Providers\ModuleServiceProvider;
 
-class ModuleTest extends TestCase
+class ModuleTest extends TestCaseWithoutDB
 {
-    /** @test */
-    public function module_loads()
+    #[Test] public function module_loads()
     {
         $this->assertInstanceOf(
             ModuleServiceProvider::class,
@@ -25,8 +25,7 @@ class ModuleTest extends TestCase
         );
     }
 
-    /** @test */
-    public function models_are_registered()
+    #[Test] public function models_are_registered()
     {
         $models = $this->app->concord->getModelBindings();
 

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;
@@ -46,49 +47,31 @@ class CheckoutManager implements CheckoutContract
         return $this->store->{$name};
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getCart(): ?CheckoutSubject
     {
         return $this->store->getCart();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setCart(CheckoutSubject $cart)
     {
         $this->store->setCart($cart);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getState(): CheckoutStateContract
     {
         return $this->store->getState();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setState($state)
     {
         $this->store->setState($state);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getBillpayer(): Billpayer
     {
         return $this->store->getBillpayer();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setBillpayer(Billpayer $billpayer)
     {
         return $this->store->setBillpayer($billpayer);
@@ -174,17 +157,11 @@ class CheckoutManager implements CheckoutContract
         return $this->store->getCustomAttributes();
     }
 
-    /**
-     * @inheritdoc
-     */
     public function update(array $data)
     {
         $this->store->update($data);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function total()
     {
         return $this->store->total();
@@ -213,6 +190,11 @@ class CheckoutManager implements CheckoutContract
     public function setTaxesAmount(float|DetailedAmount $amount): void
     {
         $this->store->setTaxesAmount($amount);
+    }
+
+    public function getShippableItems(): Collection
+    {
+        return $this->store->getShippableItems();
     }
 
     public function weight(): float

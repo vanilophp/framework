@@ -8,6 +8,10 @@
 - Dropped PHP 8.2 Support
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
+- Added the `Checkout::getShippableItems()` method
+- BCs via the Contracts package:
+   - BC: Added the `isShippable()` method to the `CheckoutSubjectItem` interface
+   - BC: Added the `getShippableItems()` method to the `CheckoutSubject` interface
 
 ## 4.x Series
 

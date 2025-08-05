@@ -16,6 +16,8 @@ interface ShippingCategory
 
     public function isStackable(): bool;
 
+    public function isNotShippable(): bool;
+
     public function requiresTemperatureControl(): bool;
 
     public function requiresSignature(): bool;

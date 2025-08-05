@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;
@@ -30,6 +31,7 @@ use Vanilo\Checkout\Traits\EmulatesFillAttributes;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\CheckoutSubjectItem;
 use Vanilo\Contracts\Dimension;
 
 abstract class BaseCheckoutStore implements CheckoutStore
@@ -231,6 +233,11 @@ abstract class BaseCheckoutStore implements CheckoutStore
     {
         // @todo Calculate the dimensions from the items
         return null;
+    }
+
+    public function getShippableItems(): Collection
+    {
+        return $this->getCart()->getItems()->filter(fn (CheckoutSubjectItem $item) => $item->isShippable());
     }
 
     public function offsetSet(mixed $offset, mixed $value): void

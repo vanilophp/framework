@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Shipment\Models\Shipment;
 use Vanilo\Shipment\Tests\Dummies\Address;
 use Vanilo\Shipment\Tests\Dummies\ShippableDummyOrder;
 
 class ShippablesTest extends TestCase
 {
-    /** @test */
-    public function a_shipment_can_be_assigned_to_a_single_shippable()
+    #[Test] public function a_shipment_can_be_assigned_to_a_single_shippable()
     {
         $address = $this->createAddress();
         $order = ShippableDummyOrder::create(['address_id' => $address->id]);
@@ -33,8 +33,7 @@ class ShippablesTest extends TestCase
         $this->assertEquals($shipment->id, $order->shipments->first()->id);
     }
 
-    /** @test */
-    public function multiple_shipments_can_be_assigned_to_a_single_shippable()
+    #[Test] public function multiple_shipments_can_be_assigned_to_a_single_shippable()
     {
         $address = $this->createAddress();
         $order = ShippableDummyOrder::create(['address_id' => $address->id]);
@@ -48,8 +47,7 @@ class ShippablesTest extends TestCase
         $this->assertEquals($shipment2->id, $order->shipments->last()->id);
     }
 
-    /** @test */
-    public function one_shipment_can_belong_to_multiple_shippables()
+    #[Test] public function one_shipment_can_belong_to_multiple_shippables()
     {
         Shipment::resolveRelationUsing('orders', function (Shipment $shipment) {
             return $shipment->morphedByMany(ShippableDummyOrder::class, 'shippable');

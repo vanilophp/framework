@@ -16,6 +16,8 @@
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - Added SubItem support to the cart items
+- Added the `CartItem::isShippable()` method
+- Added the `items.shippable_by_default` configuration option (default: null) which is used to determine whether a cart item is shippable or not by default
 
 ## 4.x Series
 

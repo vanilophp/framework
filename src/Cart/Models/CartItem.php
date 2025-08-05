@@ -58,6 +58,13 @@ class CartItem extends Model implements CartItemContract
         return $this->product;
     }
 
+    public function isShippable(): ?bool
+    {
+        $result = config('vanilo.cart.items.shippable_by_default');
+
+        return (is_bool($result) || is_null($result)) ? $result : (bool) $result;
+    }
+
     public function parent(): BelongsTo
     {
         return $this->belongsTo(CartItemProxy::modelClass(), 'parent_id');

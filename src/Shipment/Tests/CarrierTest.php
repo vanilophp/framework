@@ -15,12 +15,12 @@ declare(strict_types=1);
 namespace Vanilo\Shipment\Tests;
 
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Shipment\Models\Carrier;
 
 class CarrierTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created_with_minimal_data()
+    #[Test] public function it_can_be_created_with_minimal_data()
     {
         $dhl = Carrier::create(['name' => 'DHL Germany']);
 
@@ -28,40 +28,35 @@ class CarrierTest extends TestCase
         $this->assertEquals('DHL Germany', $dhl->getName());
     }
 
-    /** @test */
-    public function the_name_field_is_accessible()
+    #[Test] public function the_name_field_is_accessible()
     {
         $dhl = Carrier::create(['name' => 'DHL Netherlands']);
 
         $this->assertEquals('DHL Netherlands', $dhl->name);
     }
 
-    /** @test */
-    public function the_name_method_returns_a_string_even_if_the_underlying_field_is_null()
+    #[Test] public function the_name_method_returns_a_string_even_if_the_underlying_field_is_null()
     {
         $dhl = new Carrier();
 
         $this->assertEquals('', $dhl->getName());
     }
 
-    /** @test */
-    public function is_active_is_true_by_default()
+    #[Test] public function is_active_is_true_by_default()
     {
         $budbee = Carrier::create(['name' => 'Budbee'])->fresh();
 
         $this->assertTrue($budbee->is_active);
     }
 
-    /** @test */
-    public function can_be_marked_as_inactive()
+    #[Test] public function can_be_marked_as_inactive()
     {
         $dpd = Carrier::create(['name' => 'Budbee', 'is_active' => false])->fresh();
 
         $this->assertFalse($dpd->is_active);
     }
 
-    /** @test */
-    public function active_and_inactive_entries_can_be_scoped()
+    #[Test] public function active_and_inactive_entries_can_be_scoped()
     {
         for ($i = 0; $i < 3; $i++) {
             Carrier::create(['name' => Str::uuid(), 'is_active' => false]);
@@ -76,8 +71,7 @@ class CarrierTest extends TestCase
         $this->assertCount(3, Carrier::inactives()->get());
     }
 
-    /** @test */
-    public function the_configuration_is_an_empty_array_by_default()
+    #[Test] public function the_configuration_is_an_empty_array_by_default()
     {
         $plPost = Carrier::create(['name' => 'Poczta Polska']);
 
@@ -85,8 +79,7 @@ class CarrierTest extends TestCase
         $this->assertEmpty($plPost->configuration);
     }
 
-    /** @test */
-    public function the_configuration_can_be_set_as_an_array()
+    #[Test] public function the_configuration_can_be_set_as_an_array()
     {
         $postNord = Carrier::create(['name' => 'Post Nord']);
 

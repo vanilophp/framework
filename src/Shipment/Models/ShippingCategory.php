@@ -13,6 +13,7 @@ use Vanilo\Shipment\Contracts\ShippingCategory as ShippingCategoryContract;
  * @property boolean $is_fragile
  * @property boolean $is_hazardous
  * @property boolean $is_stackable
+ * @property boolean $is_not_shippable
  * @property boolean $requires_temperature_control
  * @property boolean $requires_signature
  */
@@ -24,6 +25,7 @@ class ShippingCategory extends Model implements ShippingCategoryContract
         'is_fragile' => 'bool',
         'is_hazardous' => 'bool',
         'is_stackable' => 'bool',
+        'is_not_shippable' => 'bool',
         'requires_temperature_control' => 'bool',
         'requires_signature' => 'bool',
     ];
@@ -51,6 +53,11 @@ class ShippingCategory extends Model implements ShippingCategoryContract
     public function isStackable(): bool
     {
         return $this->is_stackable;
+    }
+
+    public function isNotShippable(): bool
+    {
+        return $this->is_not_shippable;
     }
 
     public function requiresTemperatureControl(): bool
