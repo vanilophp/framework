@@ -46,7 +46,7 @@ fi
 
 # Tag Framework
 git tag $VERSION
-git push origin --tags
+git push origin $VERSION
 
 # Tag Components
 for REMOTE in adjustments cart category channel checkout contracts links master-product order payment product promotion properties shipment support taxes translation video
@@ -68,6 +68,6 @@ do
         git checkout "$RELEASE_BRANCH";
 
         git tag $VERSION
-        git push origin --tags
+        git push origin $VERSION
     )
 done
