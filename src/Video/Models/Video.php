@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Arr;
-use Vanilo\Support\Generators\NanoIdGenerator;
+use Illuminate\Support\Str;
 use Vanilo\Video\Contracts\Video as VideoContract;
 use Vanilo\Video\Contracts\VideoDriver;
 use Vanilo\Video\Dto\Stats;
@@ -154,7 +154,7 @@ class Video extends Model implements VideoContract
             array_merge(
                 $this->attributes,
                 [
-                    'hash' => (new NanoIdGenerator())->generate()
+                    'hash' => Str::ulid()->toBase58(),
                 ]
             ),
             true
