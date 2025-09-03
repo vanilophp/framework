@@ -25,8 +25,6 @@ abstract class TestCase extends TestCaseWithoutDB
         $this->setUpDatabase($this->app);
     }
 
-
-
     protected function getEnvironmentSetUp($app)
     {
         //$app['path.lang'] = __DIR__ . '/lang';

@@ -117,7 +117,6 @@ class TaxonScopesTest extends TestCase
         $this->assertCount(2, Taxon::roots()->get());
     }
 
-
     /** @test */
     public function except_can_exclude_a_taxon_from_the_results()
     {
