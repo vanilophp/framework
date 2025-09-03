@@ -21,7 +21,7 @@ use Vanilo\Category\Models\Taxon;
 use Vanilo\Category\Models\Taxonomy;
 use Vanilo\Category\Providers\ModuleServiceProvider;
 
-class ModuleTest extends TestCase
+class ModuleTest extends TestCaseWithoutDB
 {
     #[Test] public function module_loads()
     {

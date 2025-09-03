@@ -20,14 +20,6 @@ use Vanilo\Category\Models\Taxonomy;
 
 class TaxonFindByParentsAndSlugMethodTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-        if ('6' === $this->app->version()[0]) {
-            $this->markTestSkipped('This method is incompatible with Laravel 6');
-        }
-    }
-
     #[Test] public function it_returns_the_taxon_by_its_taxonomy_slug_and_his_own_slug()
     {
         $taxonomy = Taxonomy::create(['name' => 'Brand']);

@@ -18,7 +18,7 @@ use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Cart\Exceptions\InvalidCartConfigurationException;
 use Vanilo\Cart\Facades\Cart;
 
-class SessionTest extends TestCase
+class SessionTest extends TestCaseWithoutDB
 {
     #[Test] public function a_session_has_no_cart_by_default()
     {

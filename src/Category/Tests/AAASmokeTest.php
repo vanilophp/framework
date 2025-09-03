@@ -16,7 +16,7 @@ namespace Vanilo\Category\Tests;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Test;
 
-class AAASmokeTest extends TestCase
+class AAASmokeTest extends TestCaseWithoutDB
 {
     private const MIN_PHP_VERSION = '8.3.0';
 
