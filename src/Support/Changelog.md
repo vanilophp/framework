@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-XX
+## 5.0.0
+##### 2025-09-03
 
 - Dropped PHP 8.2 Support
 - Changed the minimum Laravel 10 version to v10.48
@@ -12,6 +12,7 @@
 - Added the GTIN validator (standalone) and Laravel Validation rule classes
 - Added the MultiLanguage feature configuration wrapper
 - Added the `getOriginalPrice()` and `hasAHigherOriginalPrice()` methods to the Buyable interface
+- Added the possibility to extend the `Features` helper
 
 ## 4.x Series
 

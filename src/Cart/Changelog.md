@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-XX
+## 5.0.0
+##### 2025-09-03
 
 - BC: Added the `addSubItem()`, `getRootItems()` and `getState()` methods to the Cart interface
 - BC: Added the `$forceNewItem` (default false) parameter to the `Cart::addItem()` method

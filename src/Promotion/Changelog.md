@@ -2,14 +2,14 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-XX
+## 5.0.0
+##### 2025-09-03
 
 - Dropped PHP 8.2 Support
 - Changed the minimum Laravel 10 version to v10.48
 - Added Laravel 12 Support
 - PHP 8.4 deprecation fixes
-- Added the possibility to extend the `Features` helper
+- Added the `StaggeredDiscount` promotion action type
 
 ## 4.x Series
 
