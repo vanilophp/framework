@@ -49,7 +49,7 @@ git tag $VERSION
 git push origin --tags
 
 # Tag Components
-for REMOTE in adjustments cart category channel checkout contracts links master-product order payment product promotion properties shipment support taxes
+for REMOTE in adjustments cart category channel checkout contracts links master-product order payment product promotion properties shipment support taxes translation video
 do
     echo ""
     echo ""

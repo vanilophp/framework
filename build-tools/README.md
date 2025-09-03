@@ -3,7 +3,7 @@
 ## Release Checklist
 
 - Modify Changelog and manifest entries
-- Commit as `Release v4.x.y` (DO NOT TAG IT!)
+- Commit as `Release v5.x.y` (DO NOT TAG IT!)
 - Push to master
 - Run `build-tools/split.sh`
 - When not all the modules will be released, then change line 52 in `release.sh` temporarily 
