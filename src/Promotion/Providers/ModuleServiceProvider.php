@@ -6,6 +6,7 @@ namespace Vanilo\Promotion\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Promotion\Actions\CartFixedDiscount;
+use Vanilo\Promotion\Actions\CartItemPercentDiscount;
 use Vanilo\Promotion\Actions\CartPercentageDiscount;
 use Vanilo\Promotion\Actions\StaggeredDiscount;
 use Vanilo\Promotion\Models\Coupon;
@@ -35,5 +36,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         PromotionActionTypes::register(CartFixedDiscount::DEFAULT_ID, CartFixedDiscount::class);
         PromotionActionTypes::register(CartPercentageDiscount::DEFAULT_ID, CartPercentageDiscount::class);
         PromotionActionTypes::register(StaggeredDiscount::DEFAULT_ID, StaggeredDiscount::class);
+        PromotionActionTypes::register(CartItemPercentDiscount::DEFAULT_ID, CartItemPercentDiscount::class);
     }
 }

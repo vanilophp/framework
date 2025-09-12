@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 /**
- * Contains the CartPercentageDiscount class.
+ * Contains the CartItemPercentDiscount class.
  *
- * @copyright   Copyright (c) 2024 Attila Fulop
+ * @copyright   Copyright (c) 2025 Vanilo UG
  * @author      Attila Fulop
- * @license     MIT
- * @since       2024-08-25
+ * @license     Proprietary
+ * @since       2025-09-09
  *
  */
 
@@ -20,25 +20,25 @@ use Nette\Schema\Schema;
 use Vanilo\Adjustments\Adjusters\PercentDiscount;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
-use Vanilo\Contracts\CheckoutSubject;
+use Vanilo\Contracts\CheckoutSubjectItem;
 use Vanilo\Promotion\Contracts\PromotionActionType;
 
-class CartPercentageDiscount implements PromotionActionType
+class CartItemPercentDiscount implements PromotionActionType
 {
-    public const DEFAULT_ID = 'cart_percentage_discount';
+    public const DEFAULT_ID = 'cart_item_percentage_discount';
 
     public static function getName(): string
     {
-        return __('Cart Percentage Discount');
+        return __('Cart Item % Discount');
     }
 
     public function getTitle(array $configuration): string
     {
         if (null === $percent = $configuration['percent'] ?? null) {
-            return __('X% discount on the entire cart [Invalid Configuration: the `:parameter` parameter is missing]', ['parameter' => 'percent']);
+            return __('X% discount on a cart item [Invalid Configuration: the `percent` parameter is missing]');
         }
 
-        return __(':percent% discount on the entire cart', ['percent' => $percent]);
+        return __(':percent% cart item discount', ['percent' => $percent]);
     }
 
     public function getAdjuster(array $configuration): Adjuster
@@ -51,10 +51,9 @@ class CartPercentageDiscount implements PromotionActionType
     public function apply(object $subject, array $configuration): array
     {
         $result = [];
-        if ($subject instanceof Adjustable && $subject instanceof CheckoutSubject) {
+        if ($subject instanceof Adjustable && $subject instanceof CheckoutSubjectItem) {
             $result[] = $subject->adjustments()->create($this->getAdjuster($configuration));
         }
-        //@todo also set the origin
 
         return $result;
     }
@@ -70,7 +69,7 @@ class CartPercentageDiscount implements PromotionActionType
         ->castTo('array');
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         $sample = ['percent' => 10];
 

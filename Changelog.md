@@ -6,6 +6,8 @@
 ##### 2025-XX-YY
 
 - Added the registration of `promotion` entry to the Eloquent morph map
+- Added the cart item percent discount promotion action type
+- Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items
 
 ## 5.0.0
 ##### 2025-09-03

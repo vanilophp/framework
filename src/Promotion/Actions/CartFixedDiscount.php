@@ -10,6 +10,7 @@ use Nette\Schema\Schema;
 use Vanilo\Adjustments\Adjusters\SimpleDiscount;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
+use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Promotion\Contracts\PromotionActionType;
 
 class CartFixedDiscount implements PromotionActionType
@@ -40,7 +41,7 @@ class CartFixedDiscount implements PromotionActionType
     public function apply(object $subject, array $configuration): array
     {
         $result = [];
-        if ($subject instanceof Adjustable) {
+        if ($subject instanceof Adjustable && $subject instanceof CheckoutSubject) {
             $result[] = $subject->adjustments()->create($this->getAdjuster($configuration));
         }
         //@todo also set the origin
