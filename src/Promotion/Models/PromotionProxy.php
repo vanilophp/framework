@@ -14,8 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Models;
 
+use Illuminate\Support\Collection;
 use Konekt\Concord\Proxies\ModelProxy;
 
+/**
+ * @method static null|Promotion findByCouponCode(string $couponCode)
+ * @method static Collection getAvailableOnes(bool $includeCouponBasedOnes = false)
+ * @method static Collection getAvailableWithoutCoupon()
+ */
 class PromotionProxy extends ModelProxy
 {
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Promotion\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
@@ -53,6 +54,21 @@ class Promotion extends Model implements PromotionContract
     public static function findByCouponCode(string $couponCode): ?PromotionContract
     {
         return CouponProxy::findByCode($couponCode)?->getPromotion();
+    }
+
+    public static function getAvailableWithoutCoupon(): Collection
+    {
+        return static::getAvailableOnes(includeCouponBasedOnes: false);
+    }
+
+    public static function getAvailableOnes(bool $includeCouponBasedOnes = false): Collection
+    {
+        $query = PromotionProxy::active()->notDepleted();
+        if (!$includeCouponBasedOnes) {
+            $query->where('is_coupon_based', false);
+        }
+
+        return $query->get();
     }
 
     public function isCouponBased(): bool
@@ -184,5 +200,24 @@ class Promotion extends Model implements PromotionContract
         ]);
 
         return $this;
+    }
+
+    public function scopeNotDepleted(Builder $query): Builder
+    {
+        return $query->where(function (Builder $q) {
+            $q->whereNull('usage_limit')->orWhereColumn('usage_count', '<', 'usage_limit');
+        });
+    }
+
+    public function scopeActive(Builder $query, ?Carbon $at = null): Builder
+    {
+        $at = $at ?? Carbon::now();
+
+        return $query->where(function (Builder $q) use ($at) {
+                $q->whereNull('starts_at')->orWhere('starts_at', '<=', $at);
+            })
+            ->where(function (Builder $q) use ($at) {
+                $q->whereNull('ends_at')->orWhere('ends_at', '>=', $at);
+            });
     }
 }

@@ -17,6 +17,12 @@ namespace Vanilo\Promotion\Contracts;
 use Illuminate\Support\Collection;
 use Vanilo\Promotion\Models\PromotionStatus;
 
+/**
+ * @todo v6 interface candidates:
+ *
+ * @method static Collection getAvailableOnes(bool $includeCouponBasedOnes = false)
+ * @method static Collection getAvailableWithoutCoupon()
+ */
 interface Promotion
 {
     public static function findByCouponCode(string $couponCode): ?Promotion;
