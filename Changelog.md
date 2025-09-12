@@ -2,6 +2,11 @@
 
 ## 5.x Series
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added the registration of `promotion` entry to the Eloquent morph map
+
 ## 5.0.0
 ##### 2025-09-03
 

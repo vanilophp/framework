@@ -65,6 +65,7 @@ use Vanilo\Payment\Contracts\PaymentMethod as PaymentMethodContract;
 use Vanilo\Payment\Models\PaymentMethodProxy;
 use Vanilo\Product\Contracts\Product as ProductContract;
 use Vanilo\Product\Models\ProductProxy;
+use Vanilo\Promotion\Models\PromotionProxy;
 use Vanilo\Shipment\Contracts\Shipment as ShipmentContract;
 use Vanilo\Shipment\Contracts\ShippingMethod as ShippingMethodContract;
 use Vanilo\Shipment\Models\ShipmentProxy;
@@ -116,6 +117,7 @@ class ModuleServiceProvider extends BaseBoxServiceProvider
             'shipping_method' => ShippingMethodProxy::modelClass(),
             'payment_method' => PaymentMethodProxy::modelClass(),
             'channel' => ChannelProxy::modelClass(),
+            'promotion' => PromotionProxy::modelClass(),
         ]);
 
         ShippingFeeCalculators::register(FlatFeeCalculator::ID, FlatFeeCalculator::class);
