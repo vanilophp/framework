@@ -12,6 +12,9 @@
 - Added the `active()` and `notDepeleted()` scopes to the `Promotion` model
 - Added amount details to each promotion applied at the checkout (earlier it was a simple numeric grand total)
 - Added the processing of non-coupon-based promotions and individual cart items<sup>*</sup> to the `CalculatePromotions` listener
+- Added the polymorphic `source` relation/fields to the `Adjustment` model
+- Added the `getSource` and `setSource` methods to the `Adjustment` model
+- Changed the `setAdjustable` method to return the itself (was `void` before)
 
 > \*: Cart Item support was half-baked in v5.0
 

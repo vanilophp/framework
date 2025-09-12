@@ -14,6 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Adjustments\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @todo v6 interface method candidates:
+ * @method Model|null getSource()
+ * @method self setSource(Model|null $source)
+ * @method self setAdjustable(Adjustable $adjustable)
+ */
 interface Adjustment
 {
     public function getType(): AdjustmentType;

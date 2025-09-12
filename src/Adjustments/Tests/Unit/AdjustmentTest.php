@@ -21,6 +21,7 @@ use Vanilo\Adjustments\Contracts\Adjustment as AdjustmentContract;
 use Vanilo\Adjustments\Models\Adjustment;
 use Vanilo\Adjustments\Models\AdjustmentType;
 use Vanilo\Adjustments\Tests\Examples\Order;
+use Vanilo\Adjustments\Tests\Examples\SampleDiscount;
 use Vanilo\Adjustments\Tests\TestCase;
 
 class AdjustmentTest extends TestCase
@@ -86,6 +87,8 @@ class AdjustmentTest extends TestCase
             'adjustable_type' => 'order',
             'adjustable_id' => 22791,
             'adjuster' => 'fixed_amount',
+            'source_id' => 7,
+            'source_type' => 'shipping_method',
             'origin' => 'xgs123',
             'title' => 'Shipping',
             'description' => 'UPS Ground Delivery (1-3 days)',
@@ -98,6 +101,8 @@ class AdjustmentTest extends TestCase
         $this->assertEquals(AdjustmentType::SHIPPING, $adjustment->type->value());
         $this->assertEquals('order', $adjustment->adjustable_type);
         $this->assertEquals(22791, $adjustment->adjustable_id);
+        $this->assertEquals('shipping_method', $adjustment->source_type);
+        $this->assertEquals(7, $adjustment->source_id);
         $this->assertEquals('fixed_amount', $adjustment->adjuster);
         $this->assertEquals('xgs123', $adjustment->origin);
         $this->assertEquals('Shipping', $adjustment->title);
@@ -116,6 +121,8 @@ class AdjustmentTest extends TestCase
         $adjustment->adjustable_type = 'order_item';
         $adjustment->adjustable_id = 225487;
         $adjustment->adjuster = 'fixed_amount';
+        $adjustment->source_type = 'promotion';
+        $adjustment->source_id = 77;
         $adjustment->origin = 555;
         $adjustment->title = 'Discount';
         $adjustment->description = 'Boxing Day Sale';
@@ -130,6 +137,8 @@ class AdjustmentTest extends TestCase
         $this->assertEquals(AdjustmentType::PROMOTION, $adjustment->type->value());
         $this->assertEquals('order_item', $adjustment->adjustable_type);
         $this->assertEquals(225487, $adjustment->adjustable_id);
+        $this->assertEquals('promotion', $adjustment->source_type);
+        $this->assertEquals(77, $adjustment->source_id);
         $this->assertEquals('fixed_amount', $adjustment->adjuster);
         $this->assertEquals('555', $adjustment->origin);
         $this->assertEquals('Discount', $adjustment->title);
@@ -241,6 +250,48 @@ class AdjustmentTest extends TestCase
 
         $this->assertInstanceOf(Order::class, $adjustment->getAdjustable());
         $this->assertEquals($order->id, $adjustment->getAdjustable()->id);
+    }
+
+    #[Test] public function it_resolves_the_source_if_the_adjustable_type_is_a_fqcn()
+    {
+        $order = Order::create(['items_total' => 120]);
+        $discount = SampleDiscount::create(['name' => 'Sample Discount', 'percent' => 10]);
+
+        /** @var Adjustment $adjustment */
+        $adjustment = Adjustment::create([
+            'type' => AdjustmentType::PROMOTION,
+            'adjustable_type' => Order::class,
+            'adjustable_id' => $order->id,
+            'adjuster' => 'percent_discount',
+            'source_type' => SampleDiscount::class,
+            'source_id' => $discount->id,
+            'title' => 'Sample Promo',
+            'is_locked' => true,
+        ]);
+
+        $this->assertInstanceOf(SampleDiscount::class, $adjustment->getSource());
+        $this->assertEquals($discount->id, $adjustment->getSource()->id);
+    }
+
+    #[Test] public function the_source_can_be_set_using_the_setter_method()
+    {
+        $order = Order::create(['items_total' => 120]);
+        $discount = SampleDiscount::create(['name' => 'Mega Discount', 'percent' => 35]);
+
+        /** @var Adjustment $adjustment */
+        $adjustment = Adjustment::create([
+            'type' => AdjustmentType::PROMOTION,
+            'adjustable_type' => Order::class,
+            'adjustable_id' => $order->id,
+            'adjuster' => 'percent_discount',
+            'title' => 'Mega Promo',
+            'is_locked' => true,
+        ]);
+
+        $adjustment->setSource($discount);
+
+        $this->assertInstanceOf(SampleDiscount::class, $adjustment->getSource());
+        $this->assertEquals($discount->id, $adjustment->getSource()->id);
     }
 
     #[Test] public function it_resolves_the_adjuster_if_the_adjuster_is_a_fqcn()

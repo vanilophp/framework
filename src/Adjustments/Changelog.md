@@ -2,6 +2,13 @@
 
 ## 5.x Series
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added the polymorphic `source` relation/fields to the `Adjustment` model
+- Added the `getSource` and `setSource` methods to the `Adjustment` model
+- Changed the `setAdjustable` method to return the itself (was `void` before) 
+
 ## 5.0.0
 ##### 2025-09-03
 

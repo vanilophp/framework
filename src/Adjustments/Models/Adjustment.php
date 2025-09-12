@@ -32,6 +32,8 @@ use Vanilo\Adjustments\Contracts\AdjustmentType;
  * @property int $adjustable_id
  * @property string $adjuster
  * @property null|string $origin
+ * @property string|null $source_type
+ * @property int|null $source_id
  * @property array $data
  * @property string $title
  * @property null|string $description
@@ -40,6 +42,9 @@ use Vanilo\Adjustments\Contracts\AdjustmentType;
  * @property boolean $is_included
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @property-read Adjustable $adjustable
+ * @property-read Model|null $source
  *
  * @method static Adjustment create(array $attributes = [])
  */
@@ -84,6 +89,11 @@ class Adjustment extends Model implements AdjustmentContract
         return $this->morphTo();
     }
 
+    public function source(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
     public function getType(): AdjustmentType
     {
         return $this->type;
@@ -94,10 +104,12 @@ class Adjustment extends Model implements AdjustmentContract
         return $this->adjustable;
     }
 
-    public function setAdjustable(Adjustable $adjustable): void
+    public function setAdjustable(Adjustable $adjustable): self
     {
         $this->adjustable_type = $adjustable->getMorphClass();
         $this->adjustable_id = $adjustable->id;
+
+        return $this;
     }
 
     public function getAdjuster(): Adjuster
@@ -114,6 +126,19 @@ class Adjustment extends Model implements AdjustmentContract
     public function getOrigin(): ?string
     {
         return $this->origin;
+    }
+
+    public function getSource(): ?Model
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Model $source): self
+    {
+        $this->source_type = $source?->getMorphClass();
+        $this->source_id = $source?->id;
+
+        return $this;
     }
 
     public function getTitle(): string
