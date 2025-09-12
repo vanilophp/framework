@@ -214,8 +214,8 @@ class Promotion extends Model implements PromotionContract
         $at = $at ?? Carbon::now();
 
         return $query->where(function (Builder $q) use ($at) {
-                $q->whereNull('starts_at')->orWhere('starts_at', '<=', $at);
-            })
+            $q->whereNull('starts_at')->orWhere('starts_at', '<=', $at);
+        })
             ->where(function (Builder $q) use ($at) {
                 $q->whereNull('ends_at')->orWhere('ends_at', '>=', $at);
             });

@@ -29,7 +29,7 @@ class CalculatePromotions
         }
 
         $this->cart->adjustments()->deleteByType(AdjustmentTypeProxy::PROMOTION());
-        $this->cart->getItems()->each(fn($item) => $item->adjustments()->deleteByType(AdjustmentTypeProxy::PROMOTION()));
+        $this->cart->getItems()->each(fn ($item) => $item->adjustments()->deleteByType(AdjustmentTypeProxy::PROMOTION()));
 
         $cartPromotionsTotal = new DetailedAmount(0);
         // iterate through the checkout's coupons
