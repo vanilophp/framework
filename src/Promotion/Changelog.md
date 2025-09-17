@@ -9,6 +9,7 @@
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items
 - Added the static `getAvailableWithoutCoupon()` and `getAvailableOnes()` methods to the `Promotion` model (but not to the interface)
 - Added the `active()` and `notDepeleted()` scopes to the `Promotion` model
+- Added the `PromotionEvent` interface
 
 ## 5.0.0
 ##### 2025-09-03

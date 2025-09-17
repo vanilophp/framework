@@ -10,6 +10,7 @@
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items
 - Added the static `getAvailableWithoutCoupon()` and `getAvailableOnes()` methods to the `Promotion` model (but not to the interface)
 - Added the `active()` and `notDepeleted()` scopes to the `Promotion` model
+- Added the `PromotionEvent` interface
 - Added amount details to each promotion applied at the checkout (earlier it was a simple numeric grand total)
 - Added the processing of non-coupon-based promotions and individual cart items<sup>*</sup> to the `CalculatePromotions` listener
 - Added the polymorphic `source` relation/fields to the `Adjustment` model
