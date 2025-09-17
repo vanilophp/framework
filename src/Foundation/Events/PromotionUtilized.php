@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Events;
 
-class PromotionUtilized
+class PromotionUtilized extends BasePromotionEvent
 {
 }
