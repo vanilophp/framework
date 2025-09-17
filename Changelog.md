@@ -14,6 +14,7 @@
 - Added the `PromotionUtilized` event class (Foundation)
 - Added the `UpdatePromotionUsage` listener which is bound to the `PromotionUtilized` event (Foundation)
 - Changed the `UpdateCouponUsage` listener so that it no longer increments usage of the coupon's promotion
+- Added the storing of promotion as a source to the created adjustments in the `CalculatePromotions` listener
 - Added amount details to each promotion applied at the checkout (earlier it was a simple numeric grand total)
 - Added the processing of non-coupon-based promotions and individual cart items<sup>*</sup> to the `CalculatePromotions` listener
 - Added the polymorphic `source` relation/fields to the `Adjustment` model

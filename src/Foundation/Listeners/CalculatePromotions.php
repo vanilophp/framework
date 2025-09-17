@@ -78,7 +78,12 @@ class CalculatePromotions
             /** @var PromotionAction $action */
             foreach ($promotion->getActions() as $action) {
                 foreach ($action->execute($this->cartModel) as $adjustment) {
-                    $adjustment->update(['title' => $promotion->name, 'origin' => $coupon?->code]);
+                    $adjustment->update([
+                        'title' => $promotion->name,
+                        'origin' => $coupon?->code,
+                        'source_id' => $promotion->id,
+                        'source_type' => $promotion->getMorphClass(),
+                    ]);
                     if ($this->isAppliedToOurCart($adjustment)) {
                         $result[] = ['title' => $adjustment->getTitle(), 'amount' => $adjustment->getAmount()];
                     }
@@ -92,7 +97,11 @@ class CalculatePromotions
                 /** @var PromotionAction $action */
                 foreach ($promotion->getActions() as $action) {
                     foreach ($action->execute($item) as $adjustment) {
-                        $adjustment->update(['title' => $promotion->name]);
+                        $adjustment->update([
+                            'title' => $promotion->name,
+                            'source_id' => $promotion->id,
+                            'source_type' => $promotion->getMorphClass(),
+                        ]);
                         if ($this->isAppliedToOurCart($adjustment)) {
                             $result[] = ['title' => $adjustment->getTitle(), 'amount' => $adjustment->getAmount()];
                         }
