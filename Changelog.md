@@ -20,6 +20,7 @@
 - Added the polymorphic `source` relation/fields to the `Adjustment` model
 - Added the `getSource` and `setSource` methods to the `Adjustment` model
 - Changed the `setAdjustable` method to return the itself (was `void` before)
+- Changed the default-generated video hash to a base 58 ULID instead of nano id
 
 > \*: Cart Item support was half-baked in v5.0
 
