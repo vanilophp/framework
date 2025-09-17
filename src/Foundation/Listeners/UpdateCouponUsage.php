@@ -15,10 +15,7 @@ class UpdateCouponUsage
         if (null !== $coupon = CouponProxy::findByCode($event->getCouponCode())) {
             DB::transaction(function () use ($coupon) {
                 $coupon->usage_count += 1;
-                $promotion = $coupon->getPromotion();
-                $promotion->usage_count += 1;
                 $coupon->save();
-                $promotion->save();
             });
         }
     }

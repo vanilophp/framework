@@ -11,6 +11,9 @@
 - Added the static `getAvailableWithoutCoupon()` and `getAvailableOnes()` methods to the `Promotion` model (but not to the interface)
 - Added the `active()` and `notDepeleted()` scopes to the `Promotion` model
 - Added the `PromotionEvent` interface
+- Added the `PromotionUtilized` event class (Foundation)
+- Added the `UpdatePromotionUsage` listener which is bound to the `PromotionUtilized` event (Foundation)
+- Changed the `UpdateCouponUsage` listener so that it no longer increments usage of the coupon's promotion
 - Added amount details to each promotion applied at the checkout (earlier it was a simple numeric grand total)
 - Added the processing of non-coupon-based promotions and individual cart items<sup>*</sup> to the `CalculatePromotions` listener
 - Added the polymorphic `source` relation/fields to the `Adjustment` model

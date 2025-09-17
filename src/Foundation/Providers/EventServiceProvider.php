@@ -24,11 +24,13 @@ use Vanilo\Checkout\Events\CouponUtilized;
 use Vanilo\Checkout\Events\PaymentMethodSelected;
 use Vanilo\Checkout\Events\ShippingAddressChanged;
 use Vanilo\Checkout\Events\ShippingMethodSelected;
+use Vanilo\Foundation\Events\PromotionUtilized;
 use Vanilo\Foundation\Listeners\CalculatePromotions;
 use Vanilo\Foundation\Listeners\CalculateShippingFees;
 use Vanilo\Foundation\Listeners\CalculateTaxes;
 use Vanilo\Foundation\Listeners\DeleteCartAdjustments;
 use Vanilo\Foundation\Listeners\UpdateCouponUsage;
+use Vanilo\Foundation\Listeners\UpdatePromotionUsage;
 use Vanilo\Foundation\Listeners\UpdateSalesFigures;
 use Vanilo\Order\Events\OrderWasCreated;
 
@@ -67,6 +69,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CouponUtilized::class => [
             UpdateCouponUsage::class,
-        ]
+        ],
+        PromotionUtilized::class => [
+            UpdatePromotionUsage::class,
+        ],
     ];
 }
