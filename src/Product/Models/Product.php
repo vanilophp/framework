@@ -45,6 +45,7 @@ use Vanilo\Support\Dto\Dimension;
  * @property string|null $ext_title
  * @property string|null $meta_keywords
  * @property string|null $meta_description
+ * @property int $priority
  * @property null|Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at

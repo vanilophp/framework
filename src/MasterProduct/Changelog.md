@@ -2,6 +2,11 @@
 
 ## 5.x Series
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added the `priority` field to the `master_products` table
+
 ## 5.0.0
 ##### 2025-09-03
 

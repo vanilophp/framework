@@ -159,4 +159,27 @@ class BaseProductAttributesTest extends TestCase
 
         $this->assertNull($product->gtin);
     }
+
+    #[Test] public function they_can_be_sorted_by_priority()
+    {
+        Product::create(['sku' => 'PRIO-10', 'name' => 'Underdog', 'priority' => -10]);
+        Product::create(['sku' => 'PRIO0', 'name' => 'Plain Jane', 'priority' => 0]);
+        Product::create(['sku' => 'PRIO10', 'name' => 'Cash Cow', 'priority' => 10]);
+
+        $products = Product::orderBy('priority', 'desc')->get();
+
+        $this->assertCount(3, $products);
+
+        $cashCow = $products->first();
+        $this->assertEquals('Cash Cow', $cashCow->name);
+        $this->assertEquals(10, $cashCow->priority);
+
+        $underdog = $products->last();
+        $this->assertEquals('Underdog', $underdog->name);
+        $this->assertEquals(-10, $underdog->priority);
+
+        $plainJane = $products->get(1);
+        $this->assertEquals('Plain Jane', $plainJane->name);
+        $this->assertEquals(0, $plainJane->priority);
+    }
 }

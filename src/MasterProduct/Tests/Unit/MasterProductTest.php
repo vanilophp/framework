@@ -151,4 +151,27 @@ class MasterProductTest extends TestCase
         $this->assertCount(4, MasterProduct::actives()->get());
         $this->assertCount(7, MasterProduct::inactives()->get());
     }
+
+    #[Test] public function they_can_be_sorted_by_priority()
+    {
+        MasterProduct::factory()->active()->create(['name' => 'Underdog', 'priority' => -10]);
+        MasterProduct::factory()->active()->create(['name' => 'Plain Jane']);
+        MasterProduct::factory()->active()->create(['name' => 'Cash Cow', 'priority' => 10]);
+
+        $products = MasterProduct::actives()->orderBy('priority', 'desc')->get();
+
+        $this->assertCount(3, $products);
+
+        $cashCow = $products->first();
+        $this->assertEquals('Cash Cow', $cashCow->name);
+        $this->assertEquals(10, $cashCow->priority);
+
+        $underdog = $products->last();
+        $this->assertEquals('Underdog', $underdog->name);
+        $this->assertEquals(-10, $underdog->priority);
+
+        $plainJane = $products->get(1);
+        $this->assertEquals('Plain Jane', $plainJane->name);
+        $this->assertEquals(0, $plainJane->priority);
+    }
 }
