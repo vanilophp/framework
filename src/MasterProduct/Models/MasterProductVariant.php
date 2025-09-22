@@ -43,6 +43,7 @@ use Vanilo\Support\Dto\Dimension;
  * @property float|null $length
  * @property int|null $units_sold
  * @property null|Carbon $last_sale_at
+ * @property int $priority
  * @property null|Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at

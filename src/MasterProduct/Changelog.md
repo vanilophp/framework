@@ -5,7 +5,7 @@
 ## Unreleased
 ##### 2025-XX-YY
 
-- Added the `priority` field to the `master_products` table
+- Added the `priority` field to the `master_products` and `master_product_variants` tables
 
 ## 5.0.0
 ##### 2025-09-03
