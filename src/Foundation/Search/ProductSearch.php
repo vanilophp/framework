@@ -47,7 +47,7 @@ class ProductSearch
 
     protected ?Builder $variantQuery = null;
 
-    protected ?string $orderBy = null;
+    protected ?string $orderBy = 'priority:desc';
 
     public function __construct(bool $omitInactiveProducts = true)
     {
@@ -397,6 +397,13 @@ class ProductSearch
     public function orderBy(string $column, string $direction = 'asc'): self
     {
         $this->orderBy = "$column:$direction";
+
+        return $this;
+    }
+
+    public function unordered(): self
+    {
+        $this->orderBy = null;
 
         return $this;
     }
