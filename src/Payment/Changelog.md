@@ -2,6 +2,11 @@
 
 ## 5.x Series
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added the `SerializesModels` trait to the `BasePaymentEvent` class (thus it applies to all events)
+
 ## 5.0.0
 ##### 2025-09-03
 
