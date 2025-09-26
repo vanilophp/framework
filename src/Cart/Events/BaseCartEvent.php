@@ -14,11 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Cart\Events;
 
+use Illuminate\Queue\SerializesModels;
 use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartEvent;
 
 abstract class BaseCartEvent implements CartEvent
 {
+    use SerializesModels;
+
     public function __construct(protected Cart $cart)
     {
     }
