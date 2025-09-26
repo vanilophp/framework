@@ -14,11 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Events;
 
+use Illuminate\Queue\SerializesModels;
 use Vanilo\Checkout\Contracts\Checkout;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
 
 abstract class BaseCheckoutEvent implements CheckoutEvent
 {
+    use SerializesModels;
+
     public function __construct(protected Checkout $checkout)
     {
     }

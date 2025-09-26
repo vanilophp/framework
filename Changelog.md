@@ -5,7 +5,9 @@
 ## Unreleased
 ##### 2025-XX-YY
 
-- Added the `SerializesModels` trait to the `BaseCartEvent` class (thus applies to all events)
+- Added the `SerializesModels` trait to the following event classes:
+   - `BaseCartEvent` class => it applies to all cart events
+   - `BaseCheckoutEvent` class => it applies to all checkout events)
 - Added the registration of `promotion` entry to the Eloquent morph map
 - Added the cart item percent discount promotion action type
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items
