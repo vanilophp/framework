@@ -14,12 +14,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Events;
 
+use Illuminate\Queue\SerializesModels;
 use Vanilo\Order\Contracts\OrderItem;
 use Vanilo\Order\Contracts\OrderItemAwareEvent;
 
 class BaseOrderItemEvent implements OrderItemAwareEvent
 {
     use HasOrder;
+    use SerializesModels;
 
     protected OrderItem $orderItem;
 
