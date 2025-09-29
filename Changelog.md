@@ -10,6 +10,7 @@
    - `BaseCheckoutEvent` class => it applies to all checkout events
    - `BaseOrderEvent` and `BaseOrderItemEvent` classes => it applies to all order/order-item events
    - `BasePaymentEvent` class => it applies to all payment events
+- Added shipment event classes (created, delivered, ready, lost, etc)
 - Added the registration of `promotion` entry to the Eloquent morph map
 - Added the cart item percent discount promotion action type
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items

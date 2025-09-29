@@ -2,6 +2,11 @@
 
 ## 5.x Series
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added shipment event classes (created, delivered, ready, lost, etc)
+
 ## 5.0.0
 ##### 2025-09-03
 
