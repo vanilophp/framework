@@ -18,6 +18,7 @@ use Illuminate\Queue\SerializesModels;
 use Vanilo\Payment\Contracts\Payment;
 use Vanilo\Payment\Contracts\PaymentEvent;
 
+/** @todo v6 make this class abstract */
 class BasePaymentEvent implements PaymentEvent
 {
     use HasPayment;
