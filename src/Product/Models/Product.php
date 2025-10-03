@@ -29,6 +29,7 @@ use Vanilo\Support\Dto\Dimension;
  * @property int $id
  * @property string $name
  * @property string|null $slug
+ * @property string|null $subtitle
  * @property string $sku
  * @property string|null $gtin
  * @property float|null $price

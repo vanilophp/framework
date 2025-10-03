@@ -5,7 +5,7 @@
 ## Unreleased
 ##### 2025-XX-YY
 
-- Added the `priority` field to the `products` table
+- Added the `priority` and `subtitle` fields to the `products` table
 
 ## 5.0.0
 ##### 2025-09-03

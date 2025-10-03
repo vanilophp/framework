@@ -44,6 +44,7 @@ use Vanilo\Support\Dto\Dimension;
  * @property int|null $units_sold
  * @property null|Carbon $last_sale_at
  * @property int $priority
+ * @property string|null $subtitle
  * @property null|Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -158,6 +159,11 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
         return null !== $this->getRawOriginal('weight');
     }
 
+    public function hasOwnSubtitle(): bool
+    {
+        return null !== $this->getRawOriginal('subtitle');
+    }
+
     public function hasOwnState(): bool
     {
         return null !== $this->getRawOriginal('state');
@@ -216,6 +222,13 @@ class MasterProductVariant extends Model implements MasterProductVariantContract
     {
         return Attribute::make(
             get: fn ($value) => is_null($value) ? $this->masterProduct?->weight : floatval($value),
+        );
+    }
+
+    protected function subtitle(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => is_null($value) ? $this->masterProduct?->subtitle : $value,
         );
     }
 

@@ -224,6 +224,59 @@ class DualPresentFieldsTest extends TestCase
         $this->assertEquals('Create the sweetest cocktails with this Gin.', $gin05->excerpt);
     }
 
+    #[Test] public function the_subtitle_of_the_master_is_used_on_the_variant_if_the_variant_subtitle_is_null()
+    {
+        $master = MasterProduct::create([
+            'name' => 'C30 Unflavored Energy Gel',
+            'subtitle' => 'The gold standard',
+        ]);
+        $variant1 = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'unfl1',
+        ]);
+        $variant2 = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'unfl2',
+        ]);
+
+        $this->assertFalse($variant1->hasOwnSubtitle());
+        $this->assertEquals('The gold standard', $variant1->subtitle);
+
+        $this->assertFalse($variant2->hasOwnSubtitle());
+        $this->assertEquals('The gold standard', $variant2->subtitle);
+    }
+
+    #[Test] public function own_subtitle_is_used_on_the_variant_if_the_variant_has_its_own_subtitle()
+    {
+        $master = MasterProduct::create([
+            'name' => 'C30 Unflavored Energy Gel',
+            'subtitle' => 'The gold standard',
+        ]);
+        $unfl1 = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'unflv01',
+            'subtitle' => 'The white gold standard',
+        ]);
+        $unfl2 = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'unflv02',
+        ]);
+        $unfl3 = MasterProductVariant::create([
+            'master_product_id' => $master->id,
+            'sku' => 'unflv03',
+            'subtitle' => 'The double standard',
+        ]);
+
+        $this->assertTrue($unfl1->hasOwnSubtitle());
+        $this->assertEquals('The white gold standard', $unfl1->subtitle);
+
+        $this->assertFalse($unfl2->hasOwnSubtitle());
+        $this->assertEquals('The gold standard', $unfl2->subtitle);
+
+        $this->assertTrue($unfl3->hasOwnSubtitle());
+        $this->assertEquals('The double standard', $unfl3->subtitle);
+    }
+
     #[Test] public function the_state_of_the_master_is_used_on_the_variant_if_the_variant_state_is_null()
     {
         $master = MasterProduct::create([

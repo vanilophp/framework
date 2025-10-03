@@ -14,7 +14,7 @@
 - Added the registration of `promotion` entry to the Eloquent morph map
 - Added the cart item percent discount promotion action type
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items
-- Added the `priority` field to the `products`, `master_products` and `master_product_variants` tables
+- Added the `priority` and `subtitle` fields to the `products`, `master_products` and `master_product_variants` tables
 - Added default sorting to `ProductSearch`: by priority, descending
 - Added the static `getAvailableWithoutCoupon()` and `getAvailableOnes()` methods to the `Promotion` model (but not to the interface)
 - Added the `active()` and `notDepeleted()` scopes to the `Promotion` model

@@ -49,6 +49,8 @@ class MasterProductTest extends TestCase
             'slug' => 'maxi-kukac-2020',
             'price' => 79.99,
             'original_price' => 94.99,
+            'priority' => 10,
+            'subtitle' => 'Now, this is your mega-worm ever wanted',
             'excerpt' => 'Maxi Kukac 2020 is the THING you always have dreamt of',
             'description' => 'Maxi Kukac 2020 makes your dreams come to reality',
             'state' => 'active',
@@ -60,6 +62,8 @@ class MasterProductTest extends TestCase
         $this->assertEquals('Maxi Kukac 2020', $product->name);
         $this->assertEquals(79.99, $product->price);
         $this->assertEquals(94.99, $product->original_price);
+        $this->assertEquals(10, $product->priority);
+        $this->assertEquals('Now, this is your mega-worm ever wanted', $product->subtitle);
         $this->assertEquals('maxi-kukac-2020', $product->slug);
         $this->assertEquals('Maxi Kukac 2020 is the THING you always have dreamt of', $product->excerpt);
         $this->assertEquals('Maxi Kukac 2020 makes your dreams come to reality', $product->description);
@@ -150,6 +154,26 @@ class MasterProductTest extends TestCase
 
         $this->assertCount(4, MasterProduct::actives()->get());
         $this->assertCount(7, MasterProduct::inactives()->get());
+    }
+
+    #[Test] public function the_subtitle_field_is_nullable(): void
+    {
+        $product = MasterProduct::create([
+            'name' => 'Emirates',
+            'sku' => 'MRTS4',
+            'subtitle' => 'Rich Desert Experiences',
+        ]);
+
+        $product->fresh();
+        $this->assertEquals('Rich Desert Experiences', $product->subtitle);
+
+        $product->update([
+            'subtitle' => null,
+        ]);
+
+        $product->fresh();
+
+        $this->assertNull($product->subtitle);
     }
 
     #[Test] public function they_can_be_sorted_by_priority()

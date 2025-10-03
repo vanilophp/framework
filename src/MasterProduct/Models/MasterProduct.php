@@ -33,6 +33,7 @@ use Vanilo\Product\Models\ProductStateProxy;
  * @property int $id
  * @property string $name
  * @property string|null $slug
+ * @property string|null $subtitle
  * @property float|null $price
  * @property float|null $original_price
  * @property string|null $excerpt

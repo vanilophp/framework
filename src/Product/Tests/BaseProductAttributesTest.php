@@ -51,6 +51,8 @@ class BaseProductAttributesTest extends TestCase
             'sku' => 'MXB-2000',
             'stock' => 123.4567,
             'slug' => 'maxi-baxi-2000',
+            'priority' => 24,
+            'subtitle' => 'This is the REAL THING you always have dreamt of',
             'excerpt' => 'Maxi Baxi 2000 is the THING you always have dreamt of',
             'description' => 'Maxi Baxi 2000 makes your dreams come true. See: https://youtu.be/5RKM_VLEbOc',
             'state' => 'active',
@@ -74,6 +76,8 @@ class BaseProductAttributesTest extends TestCase
         $this->assertEquals('maxi, baxi, dreams', $product->meta_keywords);
         $this->assertEquals('The THING you always have dreamt of', $product->meta_description);
         $this->assertEquals('8675309', $product->gtin);
+        $this->assertEquals(24, $product->priority);
+        $this->assertEquals('This is the REAL THING you always have dreamt of', $product->subtitle);
     }
 
     #[Test] public function the_title_method_returns_name_if_no_title_was_set()
@@ -158,6 +162,26 @@ class BaseProductAttributesTest extends TestCase
         $product->fresh();
 
         $this->assertNull($product->gtin);
+    }
+
+    #[Test] public function the_subtitle_field_is_nullable(): void
+    {
+        $product = Product::create([
+            'name' => 'Kozmix',
+            'sku' => 'kozmix',
+            'subtitle' => 'Put your hands up in the air',
+        ]);
+
+        $product->fresh();
+        $this->assertEquals('Put your hands up in the air', $product->subtitle);
+
+        $product->update([
+            'subtitle' => null,
+        ]);
+
+        $product->fresh();
+
+        $this->assertNull($product->subtitle);
     }
 
     #[Test] public function they_can_be_sorted_by_priority()
