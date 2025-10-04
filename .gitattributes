@@ -8,6 +8,7 @@
 .styleci.yml export-ignore
 module-status.md export-ignore
 phpunit.xml export-ignore
+phpunit.xml.dist export-ignore
 SECURITY.md export-ignore
 
 /src/*/.github export-ignore
@@ -17,4 +18,5 @@ SECURITY.md export-ignore
 /src/*/composer.json export-ignore
 /src/*/LICENSE.md export-ignore
 /src/*/phpunit.xml export-ignore
+/src/*/phpunit.xml.dist export-ignore
 /src/*/README.md export-ignore
