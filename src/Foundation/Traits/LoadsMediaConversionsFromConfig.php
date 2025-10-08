@@ -35,6 +35,18 @@ trait LoadsMediaConversionsFromConfig
                    $settings['height'] ?? 250
                );
 
+            if (isset($settings['background'])) {
+                $conversion->background($settings['background']);
+            }
+
+            if (is_string($fmt = $settings['format'] ?? null)) {
+                if ('original' === strtolower($fmt)) {
+                    $conversion->keepOriginalImageFormat();
+                } else {
+                    $conversion->format($fmt);
+                }
+            }
+
             if (!($settings['queued'] ?? false)) {
                 $conversion->nonQueued();
             }
