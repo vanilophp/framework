@@ -43,14 +43,14 @@ class TaxEngineManager
     ) {
     }
 
-    public static function getDrivers(): array
-    {
-        return self::$drivers;
-    }
-
     public function __call(string $method, array $arguments)
     {
         return $this->driver()->$method(...$arguments);
+    }
+
+    public static function getDrivers(): array
+    {
+        return self::$drivers;
     }
 
     public function driverExists(string $driverName): bool
