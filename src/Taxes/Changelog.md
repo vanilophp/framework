@@ -2,6 +2,11 @@
 
 ## 5.x Series
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added the `TaxEngineManager::getDrivers()` static method
+
 ## 5.0.0
 ##### 2025-09-03
 
