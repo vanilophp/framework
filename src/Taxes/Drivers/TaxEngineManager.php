@@ -46,6 +46,11 @@ class TaxEngineManager
     ) {
     }
 
+    public function __call(string $method, array $arguments)
+    {
+        return $this->driver()->$method(...$arguments);
+    }
+
     public static function getDrivers(): array
     {
         return self::$drivers;
@@ -58,17 +63,12 @@ class TaxEngineManager
 
     public static function choices(): array
     {
-        return array_map(function($driver) {
-            return match(method_exists($driver, 'getName') && (new ReflectionMethod($driver, 'getName'))->isStatic()) {
+        return array_map(function ($driver) {
+            return match (method_exists($driver, 'getName') && (new ReflectionMethod($driver, 'getName'))->isStatic()) {
                 true => $driver::getName(),
                 default => ucwords(Str::replace('_', ' ', Str::snake(Str::replaceLast('Driver', '', class_basename($driver))))),
             };
         }, self::$drivers);
-    }
-
-    public function __call(string $method, array $arguments)
-    {
-        return $this->driver()->$method(...$arguments);
     }
 
     public function driverExists(string $driverName): bool
