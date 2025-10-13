@@ -5,7 +5,8 @@
 ## Unreleased
 ##### 2025-XX-YY
 
-- Added the `TaxEngineManager::getDrivers()` static method
+- Added the `getDrivers()`, `choices()` and `ids()` static methods to the `TaxEngineManager` class
+- Added `Registerable` to all tax engine drivers (using the [konekt/xtend](https://github.com/artkonekt/xtend) interface)
 
 ## 5.0.0
 ##### 2025-09-03

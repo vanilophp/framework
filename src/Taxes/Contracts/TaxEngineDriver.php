@@ -20,4 +20,6 @@ use Vanilo\Contracts\Billpayer;
 interface TaxEngineDriver
 {
     public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate;
+
+    /** @todo Add this in v6 by extending `Registerable`: "public static function getName(): string;" */
 }

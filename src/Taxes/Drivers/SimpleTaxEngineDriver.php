@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Drivers;
 
 use Konekt\Address\Query\Zones;
+use Konekt\Extend\Contracts\Registerable;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
@@ -22,11 +23,16 @@ use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Models\TaxRateProxy;
 
-class SimpleTaxEngineDriver implements TaxEngineDriver
+class SimpleTaxEngineDriver implements TaxEngineDriver, Registerable
 {
     public function __construct(
         private readonly bool $useShippingAddress = false,
     ) {
+    }
+
+    public static function getName(): string
+    {
+        return __('Default Tax Handling (based on rates & categories)');
     }
 
     public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate

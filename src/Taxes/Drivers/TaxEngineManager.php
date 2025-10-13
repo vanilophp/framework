@@ -15,8 +15,10 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Drivers;
 
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use LogicException;
+use ReflectionMethod;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
@@ -24,6 +26,7 @@ use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Exceptions\InvalidTaxConfigurationException;
 
+/** @todo Check in v6 if this class can be made a Registry from konekt/xtend */
 class TaxEngineManager
 {
     public const NULL_DRIVER = 'none';
@@ -43,14 +46,29 @@ class TaxEngineManager
     ) {
     }
 
-    public function __call(string $method, array $arguments)
-    {
-        return $this->driver()->$method(...$arguments);
-    }
-
     public static function getDrivers(): array
     {
         return self::$drivers;
+    }
+
+    public static function ids(): array
+    {
+        return array_keys(self::$drivers);
+    }
+
+    public static function choices(): array
+    {
+        return array_map(function($driver) {
+            return match(method_exists($driver, 'getName') && (new ReflectionMethod($driver, 'getName'))->isStatic()) {
+                true => $driver::getName(),
+                default => ucwords(Str::replace('_', ' ', Str::snake(Str::replaceLast('Driver', '', class_basename($driver))))),
+            };
+        }, self::$drivers);
+    }
+
+    public function __call(string $method, array $arguments)
+    {
+        return $this->driver()->$method(...$arguments);
     }
 
     public function driverExists(string $driverName): bool
