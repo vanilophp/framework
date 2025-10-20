@@ -97,6 +97,11 @@ class TaxEngineManager
         throw new InvalidArgumentException("Can not register the [{$name}] Tax engine driver, since the passed driver is neither callable, nor a `TaxRateResolver` class");
     }
 
+    public function dropResolvedInstances(): void
+    {
+        $this->instances = [];
+    }
+
     public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
         return $this->driver()->resolveTaxRate($taxable, $billpayer, $shippingAddress);
