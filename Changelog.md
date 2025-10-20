@@ -14,6 +14,7 @@
 - Added support to media settings `background` and `format` (passing "original" calls `keepOriginalFormat()`)
 - Added the `getDrivers()`, `choices()` and `ids()` static methods to the `TaxEngineManager` class
 - Added `Registerable` to all tax engine drivers (using the [konekt/xtend](https://github.com/artkonekt/xtend) interface)
+- Added the passing of `vanilo.taxes.engine.use_shipping_address` config flag to the Simple Tax Engine driver's constructor
 - Added the registration of `promotion` entry to the Eloquent morph map
 - Added the cart item percent discount promotion action type
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items

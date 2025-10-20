@@ -126,7 +126,7 @@ class TaxEngineManager
 
         throw new LogicException(
             sprintf(
-                'The tax engine driver [%s] is flawed. It should be an instanceof `TaxRateResolver`, but it is `%s`',
+                'The tax engine driver [%s] is flawed. It should be an instanceof `TaxEngineDriver`, but it is `%s`',
                 $name,
                 get_debug_type($instance),
             )

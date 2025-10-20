@@ -19,6 +19,7 @@ use Vanilo\Taxes\Calculators\DeductiveTaxCalculator;
 use Vanilo\Taxes\Calculators\DefaultTaxCalculator;
 use Vanilo\Taxes\Calculators\NullTaxCalculator;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
+use Vanilo\Taxes\Drivers\SimpleTaxEngineDriver;
 use Vanilo\Taxes\Drivers\TaxEngineManager;
 use Vanilo\Taxes\Models\TaxCategory;
 use Vanilo\Taxes\Models\TaxCategoryType;
@@ -40,6 +41,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     {
         parent::register();
 
+        $this->app->bind(SimpleTaxEngineDriver::class, fn ($app) => new SimpleTaxEngineDriver((bool) config('vanilo.taxes.engine.use_shipping_address', false)));
         $this->app->singleton(TaxEngineManager::class, fn ($app) => new TaxEngineManager($app));
         $this->app->bind(TaxEngineDriver::class, fn ($app) => $app->make(TaxEngineManager::class)->driver());
 

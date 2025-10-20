@@ -7,6 +7,7 @@
 
 - Added the `getDrivers()`, `choices()` and `ids()` static methods to the `TaxEngineManager` class
 - Added `Registerable` to all tax engine drivers (using the [konekt/xtend](https://github.com/artkonekt/xtend) interface)
+- Added the passing of `vanilo.taxes.engine.use_shipping_address` config flag to the Simple Tax Engine driver's constructor
 
 ## 5.0.0
 ##### 2025-09-03
