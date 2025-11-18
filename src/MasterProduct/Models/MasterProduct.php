@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -55,6 +56,7 @@ use Vanilo\Product\Models\ProductStateProxy;
  * @property-read string|null $title
  *
  * @property-read Collection|MasterProductVariant[] $variants
+ * @property-read Collection|MasterProductVariant[] $listable_variants
  *
  * @method static MasterProduct create(array $attributes = [])
  */
@@ -82,7 +84,7 @@ class MasterProduct extends Model implements MasterProductContract
 
     public function variants(): HasMany
     {
-        return $this->hasMany(MasterProductVariantProxy::modelClass(), 'master_product_id', 'id');
+        return $this->hasMany(MasterProductVariantProxy::modelClass(), 'master_product_id', 'id')->orderBy('priority');
     }
 
     public function createVariant(array $attributes): MasterProductVariant
@@ -99,6 +101,11 @@ class MasterProduct extends Model implements MasterProductContract
         }
 
         return $variant;
+    }
+
+    public function getListableVariants(): Collection
+    {
+        return $this->variants->filter(fn (MasterProductVariant $variant) => $variant->state->isListable())->sortBy('priority');
     }
 
     public function isActive(): bool
@@ -138,6 +145,13 @@ class MasterProduct extends Model implements MasterProductContract
                 'source' => 'name'
             ]
         ];
+    }
+
+    protected function listableVariants(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->getListableVariants(),
+        );
     }
 
     protected static function newFactory()
