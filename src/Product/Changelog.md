@@ -6,6 +6,7 @@
 ##### 2025-XX-YY
 
 - Added the `priority` and `subtitle` fields to the `products` table
+- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
 
 ## 5.0.0
 ##### 2025-09-03

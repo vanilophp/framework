@@ -7,6 +7,7 @@
 
 - Added the `priority` and `subtitle` fields to the `master_products` and `master_product_variants` tables
 - Added the `getListableVariants()` method / `$listable_variants` property to the `MasterProduct` model
+- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
 
 ## 5.0.0
 ##### 2025-09-03

@@ -2,6 +2,11 @@
 
 ## 5.x Series
 
+## Unreleased
+##### 2025-XX-YY
+
+- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
+
 ## 5.0.0
 ##### 2025-09-03
 
