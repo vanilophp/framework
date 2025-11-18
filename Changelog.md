@@ -11,6 +11,7 @@
    - `BaseOrderEvent` and `BaseOrderItemEvent` classes => it applies to all order/order-item events
    - `BasePaymentEvent` class => it applies to all payment events
 - Added shipment event classes (created, delivered, ready, lost, etc)
+- Added index to the `status` column in the `payments` table as `payments_status_index`
 - Added support to media settings `background` and `format` (passing "original" calls `keepOriginalFormat()`)
 - Added the `getDrivers()`, `choices()` and `ids()` static methods to the `TaxEngineManager` class
 - Added the `TaxEngineManager::dropResolvedInstances()` method

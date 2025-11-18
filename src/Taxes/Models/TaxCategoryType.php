@@ -50,6 +50,7 @@ class TaxCategoryType extends Enum implements TaxCategoryTypeContract
     public const EVENT_RELATED_SERVICES = 'event_related_services';
     public const TELECOM_SERVICES = 'telecom_services';
     public const BROADCASTING = 'broadcasting';
+    public const MEDICAL = 'medical';
 
     protected static array $labels = [];
 
@@ -65,6 +66,7 @@ class TaxCategoryType extends Enum implements TaxCategoryTypeContract
             self::INTANGIBLE_SERVICES => __('Services where the place of supply is not tied to a physical location, like consulting, legal, advertising or data processing services. Such services can be remote: they can be performed remotely without needing to be at a specific location.'),
             self::REAL_ESTATE_SERVICES => __('Activities related to the selling, buying, leasing, or managing of land and buildings. These services include property management, real estate brokerage, appraisal, and legal services associated with property transactions and management.'),
             self::EVENT_RELATED_SERVICES => __('Admission to cultural, artistic, sporting, scientific, educational, entertainment or similar events, such as fairs and exhibitions; and of ancillary services related to the admission like planning, organizing, and managing of events.'),
+            self::MEDICAL => __('Services and certain goods related to healthcare and medical treatment (The followings usualy ARE EXCLUDED: cosmetic or aesthetic procedures, gym, wellness, supplements, medical report services).'),
         };
     }
 
@@ -80,6 +82,7 @@ class TaxCategoryType extends Enum implements TaxCategoryTypeContract
             self::INTANGIBLE_SERVICES => __('Intangible/Remote Services'),
             self::REAL_ESTATE_SERVICES => __('Real Estate Services'),
             self::EVENT_RELATED_SERVICES => __('Event-Related Services'),
+            self::MEDICAL => __('Medical Services & Certain Goods'),
         ];
     }
 }
