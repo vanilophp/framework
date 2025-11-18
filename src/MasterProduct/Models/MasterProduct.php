@@ -26,7 +26,7 @@ use Illuminate\Support\Arr;
 use Konekt\Enum\Eloquent\CastsEnums;
 use Vanilo\MasterProduct\Contracts\MasterProduct as MasterProductContract;
 use Vanilo\MasterProduct\Tests\Factories\MasterProductFactory;
-use Vanilo\Product\Models\ProductState;
+use Vanilo\Product\Contracts\ProductState;
 use Vanilo\Product\Models\ProductStateProxy;
 
 /**

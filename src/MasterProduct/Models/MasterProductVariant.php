@@ -37,6 +37,7 @@ use Vanilo\Support\Dto\Dimension;
  * @property float|null $price
  * @property float|null $original_price
  * @property string|null $excerpt
+ * @property ProductState $state
  * @property float|null $weight
  * @property float|null $width
  * @property float|null $height
