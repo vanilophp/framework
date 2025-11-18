@@ -117,8 +117,7 @@ class TaxonScopesTest extends TestCase
         $this->assertCount(2, Taxon::roots()->get());
     }
 
-    /** @test */
-    public function except_can_exclude_a_taxon_from_the_results()
+    #[Test] public function except_can_exclude_a_taxon_from_the_results()
     {
         $brands = Taxonomy::create(['name' => 'Brands']);
 
@@ -131,7 +130,7 @@ class TaxonScopesTest extends TestCase
 
         $puma = Taxon::where('name', 'Puma')->first();
 
-        $others = Taxon::except($puma)->get();
+        $others = Taxon::all()->reject($puma);
         $this->assertCount(3, $others);
     }
 }
