@@ -19,6 +19,7 @@ use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Vanilo\Adjustments\Providers\ModuleServiceProvider as AdjustmentsModule;
 use Vanilo\Taxes\Providers\ModuleServiceProvider as TaxesModule;
 
 abstract class TestCase extends Orchestra
@@ -61,7 +62,8 @@ abstract class TestCase extends Orchestra
 
         $app['config']->set('concord.modules', [
             AddressModule::class,
-            TaxesModule::class
+            AdjustmentsModule::class,
+            TaxesModule::class,
         ]);
     }
 }

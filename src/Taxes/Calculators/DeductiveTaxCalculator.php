@@ -17,6 +17,7 @@ namespace Vanilo\Taxes\Calculators;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use Vanilo\Adjustments\Adjusters\SimpleTaxDeduction;
+use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
 use Vanilo\Taxes\Contracts\TaxCalculator;
@@ -28,10 +29,10 @@ class DeductiveTaxCalculator implements TaxCalculator
         return __('Deductive');
     }
 
-    public function getAdjuster(?array $configuration = null): ?object
+    public function getAdjuster(?array $configuration = null): SimpleTaxDeduction
     {
         $rate = floatval($configuration['rate'] ?? 0);
-        $adjuster = new SimpleTaxDeduction($rate);
+        $adjuster = new SimpleTaxDeduction($rate, (bool) ($configuration['included'] ?? false));
         $adjuster->setTitle($configuration['title'] ?? "Tax deduction $rate%");
 
         return $adjuster;
@@ -39,14 +40,16 @@ class DeductiveTaxCalculator implements TaxCalculator
 
     public function calculate(?object $subject = null, ?array $configuration = null): DetailedAmount
     {
-        $rate = floatval($configuration['rate'] ?? 0);
+        if (!$subject instanceof Adjustable) {
+            return new DetailedAmountDto(0);
+        }
 
-        return DetailedAmountDto::fromArray([
-            [
-                'title' => $configuration['title'] ?? "Tax deduction $rate%",
-                'amount' => -1 * $subject->preAdjustmentTotal() * $rate / 100,
-            ]
-        ]);
+        $adjuster = $this->getAdjuster($configuration);
+
+        return DetailedAmountDto::fromArray([[
+            'title' => $adjuster->getTitle(),
+            'amount' => $adjuster->createAdjustment($subject)->getAmount(),
+        ]]);
     }
 
     public function getSchema(): Schema
@@ -54,6 +57,7 @@ class DeductiveTaxCalculator implements TaxCalculator
         return Expect::structure([
             'rate' => Expect::float()->required(),
             'title' => Expect::string()->nullable(),
+            'included' => Expect::bool()->nullable(),
         ]);
     }
 
@@ -62,6 +66,7 @@ class DeductiveTaxCalculator implements TaxCalculator
         return [
             'rate' => 19,
             'title' => 'Tax deduction',
+            'included' => false,
         ];
     }
 }

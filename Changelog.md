@@ -5,7 +5,6 @@
 ## Unreleased
 ##### 2025-XX-YY
 
-- Added the `vanilo/adjustments` dependency to composer.json. In fact, parts of the code were dependent on it anyways
 - Added the `SerializesModels` trait to the following event classes:
    - `BaseCartEvent` class => it applies to all cart events
    - `BaseCheckoutEvent` class => it applies to all checkout events
@@ -18,6 +17,8 @@
 - Added the `TaxEngineManager::dropResolvedInstances()` method
 - Added `Registerable` to all tax engine drivers (using the [konekt/xtend](https://github.com/artkonekt/xtend) interface)
 - Added the passing of `vanilo.taxes.engine.use_shipping_address` config flag to the Simple Tax Engine driver's constructor
+- Added the `vanilo/adjustments` dependency to the Tax module. In fact, parts of the code were dependent on it anyways
+- Added support for the `included` config parameter for the `DefaultTaxCalculator` and the `DeductiveTaxCalculator` classes
 - Added the registration of `promotion` entry to the Eloquent morph map
 - Added the cart item percent discount promotion action type
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items

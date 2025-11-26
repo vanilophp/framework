@@ -6,6 +6,7 @@
 ##### 2025-XX-YY
 
 - Added the `vanilo/adjustments` dependency to composer.json. In fact, parts of the code were dependent on it anyways
+- Added support for the `included` config parameter for the `DefaultTaxCalculator` and the `DeductiveTaxCalculator` classes
 - Added the `getDrivers()`, `choices()` and `ids()` static methods to the `TaxEngineManager` class
 - Added the `TaxEngineManager::dropResolvedInstances()` method
 - Added `Registerable` to all tax engine drivers (using the [konekt/xtend](https://github.com/artkonekt/xtend) interface)
