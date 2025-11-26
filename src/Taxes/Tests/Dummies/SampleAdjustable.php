@@ -12,7 +12,8 @@ class SampleAdjustable implements Adjustable
 {
     public function __construct(
         public float $fakePreadjustmentTotal
-    ) {}
+    ) {
+    }
 
     public function preAdjustmentTotal(): float
     {
