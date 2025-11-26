@@ -61,7 +61,10 @@ final class SimpleTax implements Adjuster
 
     private function calculateTaxAmount(Adjustable $adjustable): float
     {
-        return $adjustable->preAdjustmentTotal() * $this->rate / 100;
+        return match ($this->isIncluded) {
+            true => $adjustable->preAdjustmentTotal() / (100 +  $this->rate) *  $this->rate,
+            false => $adjustable->preAdjustmentTotal() *  $this->rate / 100,
+        };
     }
 
     private function getModelAttributes(Adjustable $adjustable): array
