@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2025-XX-YY
 
+- Added the `vanilo/adjustments` dependency to composer.json. In fact, parts of the code were dependent on it anyways
 - Added the `SerializesModels` trait to the following event classes:
    - `BaseCartEvent` class => it applies to all cart events
    - `BaseCheckoutEvent` class => it applies to all checkout events
