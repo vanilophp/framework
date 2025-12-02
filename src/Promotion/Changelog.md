@@ -10,7 +10,7 @@
 - Added the static `getAvailableWithoutCoupon()` and `getAvailableOnes()` methods to the `Promotion` model (but not to the interface)
 - Added the `active()` and `notDepeleted()` scopes to the `Promotion` model
 - Added the `PromotionEvent` interface
-- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
+- Changed the minimum Laravel version requirements to v10.48, v11.46.2 and v12.38 respectively
 
 ## 5.0.0
 ##### 2025-09-03

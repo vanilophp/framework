@@ -8,7 +8,7 @@
 - Added the polymorphic `source` relation/fields to the `Adjustment` model
 - Added the `getSource` and `setSource` methods to the `Adjustment` model
 - Changed the `setAdjustable` method to return the itself (was `void` before)
-- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
+- Changed the minimum Laravel version requirements to v10.48, v11.46.2 and v12.38 respectively
 - Changed (fixed, in fact) the `SimpleTax`/`SimpleTaxDeduction` adjusters to properly calculate the tax amount when it is included in the price
 
 ## 5.0.0

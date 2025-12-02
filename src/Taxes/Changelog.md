@@ -11,7 +11,7 @@
 - Added the `TaxEngineManager::dropResolvedInstances()` method
 - Added `Registerable` to all tax engine drivers (using the [konekt/xtend](https://github.com/artkonekt/xtend) interface)
 - Added the passing of `vanilo.taxes.engine.use_shipping_address` config flag to the Simple Tax Engine driver's constructor
-- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
+- Changed the minimum Laravel version requirements to v10.48, v11.46.2 and v12.38 respectively
 
 ## 5.0.0
 ##### 2025-09-03

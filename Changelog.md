@@ -39,7 +39,7 @@
 - Changed the `setAdjustable` method to return the itself (was `void` before)
 - Changed (fixed, in fact) the `SimpleTax`/`SimpleTaxDeduction` adjusters to properly calculate the tax amount when it is included in the price
 - Changed the default-generated video hash to a base 58 ULID instead of nano id
-- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
+- Changed the minimum Laravel version requirements to v10.48, v11.46.2 and v12.38 respectively
 
 > \*: Cart Item support was half-baked in v5.0
 

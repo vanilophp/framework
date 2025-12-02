@@ -7,7 +7,7 @@
 
 - Added the `SerializesModels` trait to the `BasePaymentEvent` class (thus it applies to all events)
 - Added index to the `status` column in the `payments` table as `payments_status_index`
-- Changed the minimum Laravel version requirements to v10.48, v11.44 and v12.2 respectively
+- Changed the minimum Laravel version requirements to v10.48, v11.46.2 and v12.38 respectively
 
 ## 5.0.0
 ##### 2025-09-03
