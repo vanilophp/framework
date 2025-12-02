@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-YY
+## 5.1.0
+##### 2025-12-02
 
 - Added the `priority` and `subtitle` fields to the `master_products` and `master_product_variants` tables
 - Added the `getListableVariants()` method / `$listable_variants` property to the `MasterProduct` model

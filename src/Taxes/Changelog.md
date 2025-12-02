@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-YY
+## 5.1.0
+##### 2025-12-02
 
 - Added the `vanilo/adjustments` dependency to composer.json. In fact, parts of the code were dependent on it anyways
 - Added support for the `included` config parameter for the `DefaultTaxCalculator` and the `DeductiveTaxCalculator` classes

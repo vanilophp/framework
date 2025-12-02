@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-YY
+## 5.1.0
+##### 2025-12-02
 
 - Added the `SerializesModels` trait to the following event classes:
    - `BaseCartEvent` class => it applies to all cart events

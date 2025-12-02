@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-YY
+## 5.1.0
+##### 2025-12-02
 
 - Added the cart item percent discount promotion action type
 - Changed the cart fixed and percent discount promotion action types to only act on carts, not on cart items

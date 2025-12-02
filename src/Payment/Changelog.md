@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-YY
+## 5.1.0
+##### 2025-12-02
 
 - Added the `SerializesModels` trait to the `BasePaymentEvent` class (thus it applies to all events)
 - Added index to the `status` column in the `payments` table as `payments_status_index`
