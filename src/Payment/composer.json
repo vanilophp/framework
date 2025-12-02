@@ -21,8 +21,8 @@
         "konekt/concord": "^1.15",
         "konekt/enum": "^4.2",
         "laravel/framework": "^10.48|^11.46.2|^12.38",
-        "vanilo/contracts": "^5.0",
-        "vanilo/support": "^5.0"
+        "vanilo/contracts": "^5.1",
+        "vanilo/support": "^5.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0|^11.0",

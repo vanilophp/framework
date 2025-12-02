@@ -23,9 +23,9 @@
         "konekt/enum": "^4.2",
         "konekt/enum-eloquent": "^1.9",
         "laravel/framework": "^10.48|^11.46.2|^12.38",
-        "vanilo/contracts": "^5.0",
-        "vanilo/product": "^5.0",
-        "vanilo/support": "^5.0"
+        "vanilo/contracts": "^5.1",
+        "vanilo/product": "^5.1",
+        "vanilo/support": "^5.1"
     },
     "suggest": {
         "vanilo/properties": "Allows establishing variants based on properties like color, size, etc"
