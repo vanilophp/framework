@@ -14,8 +14,8 @@ Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce ap
 
 #### 5.x
 
-The latest stable release is **5.0.0**, and it was released on September 3rd, 2025.
-Vanilo v5 supports Laravel 10.48, 11.x and 12.x versions and PHP 8.3 - 8.4
+The latest stable release is **5.1.0**, and it was released on December 2, 2025.
+Vanilo v5.1 supports Laravel 10.48+, 11.46.2+ and 12.38+ versions and PHP 8.3 - 8.5
 
 Refer to the [Roadmap](https://vanilo.io/docs/5.x/roadmap) for upcoming versions.
 
