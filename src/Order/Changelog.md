@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2025-XX-YY
+## 5.1.1
+##### 2025-12-16
 
 - Fixed the dynamic resolution of the order number generator, when the config is changed after the app has booted
 
