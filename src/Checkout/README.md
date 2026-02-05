@@ -1,6 +1,6 @@
 # Vanilo Checkout Module
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/checkout/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/checkout/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/checkout/tests.yml?branch=5.x&style=flat-square)](https://github.com/vanilophp/checkout/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/checkout.svg?style=flat-square)](https://packagist.org/packages/vanilo/checkout)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/checkout.svg?style=flat-square)](https://packagist.org/packages/vanilo/checkout)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)

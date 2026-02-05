@@ -1,6 +1,6 @@
 # Vanilo Video Module
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/video/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/video/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/video/tests.yml?branch=5.x&style=flat-square)](https://github.com/vanilophp/video/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/video.svg?style=flat-square)](https://packagist.org/packages/vanilo/video)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/video.svg?style=flat-square)](https://packagist.org/packages/vanilo/video)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)

@@ -1,6 +1,6 @@
 # Vanilo Taxes Module
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/taxes/tests.yml?branch=master&style=flat-square)](https://github.com/vanilophp/taxes/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/vanilophp/taxes/tests.yml?branch=5.x&style=flat-square)](https://github.com/vanilophp/taxes/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/vanilo/taxes.svg?style=flat-square)](https://packagist.org/packages/vanilo/taxes)
 [![Packagist downloads](https://img.shields.io/packagist/dt/vanilo/taxes.svg?style=flat-square)](https://packagist.org/packages/vanilo/taxes)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
