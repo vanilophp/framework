@@ -153,7 +153,7 @@ class UrlParamsTest extends TestCase
         );
     }
 
-    private function createATestPayment(string $orderId = null): Payment
+    private function createATestPayment(?string $orderId = null): Payment
     {
         $order = Order::create([
             'total' => 35,
