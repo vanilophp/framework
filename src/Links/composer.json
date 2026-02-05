@@ -17,15 +17,15 @@
         }
     ],
     "require": {
-        "php": "^8.3",
-        "cviebrock/eloquent-sluggable": "^10.0|^11.0|^12.0",
-        "illuminate/support": "^10.48|^11.46.2|^12.38",
+        "php": "^8.4",
+        "cviebrock/eloquent-sluggable": "^12.0",
+        "illuminate/support": "^12.50",
         "konekt/concord": "^1.15"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0|^11.0",
-        "orchestra/testbench": "^8.0|^9.0|^10.0",
-        "vanilo/master-product": "^5.1"
+        "phpunit/phpunit": "^11.0|^12.0",
+        "orchestra/testbench": "^10.0",
+        "vanilo/master-product": "^6.0"
     },
     "autoload": {
         "psr-4": {

@@ -21,17 +21,17 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "konekt/concord": "^1.13",
         "konekt/xtend": "^2.0",
-        "laravel/framework": "^10.48|^11.46.2|^12.38",
-        "vanilo/support": "^5.1",
-        "vanilo/adjustments": "^5.1"
+        "laravel/framework": "^12.50",
+        "vanilo/support": "^6.0",
+        "vanilo/adjustments": "^6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0|^11.0",
-        "orchestra/testbench": "^8.0|^9.0|^10.0",
-        "vanilo/cart": "^5.0"
+        "phpunit/phpunit": "^11.0|^12.0",
+        "orchestra/testbench": "^10.0",
+        "vanilo/cart": "^6.0"
     },
     "autoload": {
         "psr-4": { "Vanilo\\Promotion\\": "" }
