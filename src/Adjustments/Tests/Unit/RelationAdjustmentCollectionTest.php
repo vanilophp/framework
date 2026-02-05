@@ -229,7 +229,7 @@ class RelationAdjustmentCollectionTest extends TestCase
         $this->assertCount(1, $shippingFees);
     }
 
-    private function makeAnAdjustment(float $amount = 4.99, AdjustmentType $type = null, bool $included = false): Adjustment
+    private function makeAnAdjustment(float $amount = 4.99, ?AdjustmentType $type = null, bool $included = false): Adjustment
     {
         return new Adjustment([
             'type' => $type ?? AdjustmentType::SHIPPING(),
