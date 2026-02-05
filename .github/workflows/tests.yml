@@ -35,39 +35,45 @@ jobs:
         run: php vendor/bin/phpunit --stop-on-defect --testdox
         env:
           TEST_DB_ENGINE: sqlite
-      - name: Run Tests [postgres]
+      - name: Run Tests [postgres 15]
         run: php vendor/bin/phpunit --stop-on-defect --testdox
         env:
           TEST_DB_ENGINE: pgsql
-          TEST_DB_PORT: ${{ job.services.postgres.ports[5432] }}
+          TEST_DB_PORT: ${{ job.services.postgres15.ports[5432] }}
           TEST_DB_PASSWORD: postgres
-      - name: Run Tests [mysql 5.7]
+      - name: Run Tests [postgres 18]
         run: php vendor/bin/phpunit --stop-on-defect --testdox
         env:
-          TEST_DB_ENGINE: mysql
-          TEST_DB_PORT: ${{ job.services.mysql.ports[3306] }}
-      - name: Run Tests [mysql 8.0]
+          TEST_DB_ENGINE: pgsql
+          TEST_DB_PORT: ${{ job.services.postgres18.ports[5432] }}
+          TEST_DB_PASSWORD: postgres
+      - name: Run Tests [mysql 8.4]
         run: php vendor/bin/phpunit --stop-on-defect --testdox
         env:
           TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql8.ports[3306] }}
     services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: vanilo_test
-        ports:
-          - 3306
       mysql8:
-        image: mysql:8.0
+        image: mysql:8.4
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: vanilo_test
         ports:
           - 3306
-      postgres:
-        image: postgres
+      postgres15:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: vanilo_test
+        ports:
+          - 5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      postgres18:
+        image: postgres:18
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: vanilo_test
