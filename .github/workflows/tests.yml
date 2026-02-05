@@ -32,23 +32,23 @@ jobs:
       - name: Create SQLite Database
         run: mkdir -p database && touch database/database.sqlite
       - name: Run Tests [sqlite]
-        run: php vendor/bin/phpunit --stop-on-defect --testdox
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
         env:
           TEST_DB_ENGINE: sqlite
       - name: Run Tests [postgres 15]
-        run: php vendor/bin/phpunit --stop-on-defect --testdox
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
         env:
           TEST_DB_ENGINE: pgsql
           TEST_DB_PORT: ${{ job.services.postgres15.ports[5432] }}
           TEST_DB_PASSWORD: postgres
       - name: Run Tests [postgres 18]
-        run: php vendor/bin/phpunit --stop-on-defect --testdox
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
         env:
           TEST_DB_ENGINE: pgsql
           TEST_DB_PORT: ${{ job.services.postgres18.ports[5432] }}
           TEST_DB_PASSWORD: postgres
       - name: Run Tests [mysql 8.4]
-        run: php vendor/bin/phpunit --stop-on-defect --testdox
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
         env:
           TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql8.ports[3306] }}
