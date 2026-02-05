@@ -10,6 +10,18 @@
 
 Vanilo's aim is that **Laravel developers** can **rapidly** create E-commerce applications with **pleasure**.
 
+## Development Version
+
+> [!WARNING]  
+> You are browsing the unstable, v6.x version of this repository!
+>
+> Do not use this branch in any real projects yet, as it's a subject of heavy changes!
+
+> [!NOTE]  
+> Vanilo v6 is expected to be released in March-April 2026, but there's no final deadline yet.
+
+For the stable version see the `5.x` branch.
+
 ## Stable Version
 
 #### 5.x

@@ -26,6 +26,9 @@
         "vanilo/contracts": "^5.1",
         "vanilo/product": "^5.1",
         "vanilo/support": "^5.1"
+        "vanilo/contracts": "^6.0",
+        "vanilo/product": "^6.0",
+        "vanilo/support": "^6.0"
     },
     "suggest": {
         "vanilo/properties": "Allows establishing variants based on properties like color, size, etc"
@@ -40,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.1.x-dev"
+            "dev-master": "6.0.x-dev"
         }
     }
 }
