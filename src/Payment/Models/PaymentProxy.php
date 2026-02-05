@@ -18,7 +18,7 @@ use Konekt\Concord\Proxies\ModelProxy;
 
 /**
  * @method static null|Payment findByHash(string $hash)
- * @method static null|Payment findByRemoteId(string $remoteId, int $paymentMethodId = null)
+ * @method static null|Payment findByRemoteId(string $remoteId, ?int $paymentMethodId = null)
  */
 class PaymentProxy extends ModelProxy
 {

@@ -42,7 +42,7 @@ class NullTaxCalculator implements TaxCalculator
         return Expect::array();
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return [];
     }

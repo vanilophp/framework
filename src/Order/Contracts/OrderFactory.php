@@ -19,5 +19,5 @@ interface OrderFactory
     /**
      * Creates a new order from simple data arrays
      */
-    public function createFromDataArray(array $data, array $items, array|callable $hooks = null, array|callable $itemHooks = null): Order;
+    public function createFromDataArray(array $data, array $items, array|callable|null $hooks = null, array|callable|null $itemHooks = null): Order;
 }

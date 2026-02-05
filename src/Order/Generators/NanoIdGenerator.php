@@ -26,7 +26,7 @@ final class NanoIdGenerator extends BaseNanoIdGenerator implements OrderNumberGe
 
     private $size = 12;
 
-    public function __construct(int $size = null, string $alphabet = null)
+    public function __construct(?int $size = null, ?string $alphabet = null)
     {
         parent::__construct(
             $size ?? $this->config('size', $this->size),

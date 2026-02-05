@@ -33,7 +33,7 @@ class SessionStore extends BaseCheckoutStore
 
     protected string $prefix;
 
-    public function __construct(CheckoutDataFactory $factory, Session $session = null, string $prefix = null)
+    public function __construct(CheckoutDataFactory $factory, ?Session $session = null, ?string $prefix = null)
     {
         parent::__construct($factory);
         $this->session = $session ?? app('session.store');

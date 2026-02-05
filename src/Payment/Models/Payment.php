@@ -103,7 +103,7 @@ class Payment extends Model implements PaymentContract
         return static::where('hash', $hash)->first();
     }
 
-    public static function findByRemoteId(string $remoteId, int $paymentMethodId = null): ?Payment
+    public static function findByRemoteId(string $remoteId, ?int $paymentMethodId = null): ?Payment
     {
         if (null === $paymentMethodId) {
             return static::where('remote_id', $remoteId)->first();

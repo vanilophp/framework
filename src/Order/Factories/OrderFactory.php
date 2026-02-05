@@ -43,7 +43,7 @@ class OrderFactory implements OrderFactoryContract
         $this->orderNumberGenerator = $generator;
     }
 
-    public function createFromDataArray(array $data, array $items, array|callable $hooks = null, array|callable $itemHooks = null): Order
+    public function createFromDataArray(array $data, array $items, array|callable|null $hooks = null, array|callable $itemHooks = null): Order
     {
         if (empty($items)) {
             throw new CreateOrderException(__('Can not create an order without items'));

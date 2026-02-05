@@ -29,7 +29,7 @@ class NthOrderRule implements PromotionRuleType
         // TODO: Implement getSchema() method.
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         // TODO: Implement getSchemaSample() method.
     }

@@ -48,7 +48,7 @@ class ExampleTaxCalculator implements TaxCalculator
         return Expect::structure(['rate' => Expect::float(0)->required()]);
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return ['rate' => 19];
     }

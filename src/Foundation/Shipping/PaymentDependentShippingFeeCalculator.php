@@ -69,7 +69,7 @@ class PaymentDependentShippingFeeCalculator implements ShippingFeeCalculator
         ]);
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return [
             'title' => __('Shipping fee'),

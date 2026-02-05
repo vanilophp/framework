@@ -26,7 +26,7 @@ class NullShippingFeeCalculator implements ShippingFeeCalculator
         return __('No shipping fee');
     }
 
-    public function calculate(object $subject = null, ?array $configuration = null): ShippingFee
+    public function calculate(?object $subject = null, ?array $configuration = null): ShippingFee
     {
         return new ShippingFee(0);
     }
@@ -41,7 +41,7 @@ class NullShippingFeeCalculator implements ShippingFeeCalculator
         return Expect::array();
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return [];
     }

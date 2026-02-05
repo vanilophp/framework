@@ -162,7 +162,7 @@ class Adjustment extends Model implements AdjustmentContract
         $this->save();
     }
 
-    public function getData(string $key = null)
+    public function getData(?string $key = null)
     {
         return Arr::get($this->data, $key);
     }

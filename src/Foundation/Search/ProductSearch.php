@@ -442,7 +442,7 @@ class ProductSearch
         return $this;
     }
 
-    public function getSearcher(string|array $columns = null): Searcher
+    public function getSearcher(string|array|null $columns = null): Searcher
     {
         [$orderBy, $direction] = is_null($this->orderBy) ? [null, 'asc'] : explode(':', $this->orderBy);
         if ('desc' === strtolower($direction)) {
@@ -455,18 +455,18 @@ class ProductSearch
             ->when(null !== $this->variantQuery, fn ($search) => $search->add($this->variantQuery, $columns, $orderBy));
     }
 
-    public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
+    public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', ?int $page = null): Paginator
     {
         return $this->getSearcher()->simplePaginate($perPage, $pageName, $page)->search();
     }
 
     /** @see Builder::paginate() */
-    public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): LengthAwarePaginator
+    public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', ?int $page = null): LengthAwarePaginator
     {
         return $this->getSearcher()->paginate($perPage, $pageName, $page)->search();
     }
 
-    public function getResults(int $limit = null): Collection
+    public function getResults(?int $limit = null): Collection
     {
         return is_null($limit) ? $this->getSearcher()->search() : $this->getSearcher()->simplePaginate($limit)->search()->getCollection();
     }

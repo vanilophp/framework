@@ -110,7 +110,7 @@ class StaggeredDiscount implements PromotionActionType
         ])->castTo('array');
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         $sample = [
             'discount' => [

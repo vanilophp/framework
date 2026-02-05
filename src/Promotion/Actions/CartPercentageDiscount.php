@@ -70,7 +70,7 @@ class CartPercentageDiscount implements PromotionActionType
         ->castTo('array');
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         $sample = ['percent' => 10];
 

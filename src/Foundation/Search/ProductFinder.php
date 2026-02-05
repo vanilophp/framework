@@ -185,13 +185,13 @@ class ProductFinder
     }
 
     /** @see Builder::simplePaginate() */
-    public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): Paginator
+    public function simplePaginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', ?int $page = null): Paginator
     {
         return $this->queryBuilder->simplePaginate($perPage, $columns, $pageName, $page);
     }
 
     /** @see Builder::paginate() */
-    public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', int $page = null): LengthAwarePaginator
+    public function paginate(int $perPage = 15, array $columns = ['*'], string $pageName = 'page', ?int $page = null): LengthAwarePaginator
     {
         return $this->queryBuilder->paginate($perPage, $columns, $pageName, $page);
     }

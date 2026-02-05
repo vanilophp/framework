@@ -42,7 +42,7 @@ class CartMinimumValue implements PromotionRuleType
         return Expect::structure(['amount' => Expect::anyOf(Expect::float(0), Expect::int(0))->required()])->castTo('array');
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return ['amount' => 19.99];
     }

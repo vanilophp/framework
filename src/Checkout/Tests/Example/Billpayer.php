@@ -25,7 +25,7 @@ class Billpayer implements \Vanilo\Contracts\Billpayer, Arrayable
 
     protected $data;
 
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->data = $data ? Arr::except($data, 'address') : [];
 

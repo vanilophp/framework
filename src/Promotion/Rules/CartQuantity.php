@@ -32,7 +32,7 @@ class CartQuantity implements PromotionRuleType
         return Expect::structure(['count' => Expect::int(0)->required()])->castTo('array');
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return ['count' => 2];
     }

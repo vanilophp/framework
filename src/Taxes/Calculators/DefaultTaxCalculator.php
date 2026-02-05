@@ -61,7 +61,7 @@ class DefaultTaxCalculator implements TaxCalculator
         ]);
     }
 
-    public function getSchemaSample(array $mergeWith = null): array
+    public function getSchemaSample(?array $mergeWith = null): array
     {
         return [
             'rate' => 19,
