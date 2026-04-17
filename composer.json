@@ -20,7 +20,7 @@
         "ext-pdo": "*",
         "laravel/framework": "^12.50",
         "konekt/enum": "^4.2",
-        "konekt/concord": "^1.15",
+        "konekt/concord": "^1.16",
         "konekt/xtend": "^2.0",
         "spatie/laravel-medialibrary": "^11.9",
         "cviebrock/eloquent-sluggable": "^12.0",

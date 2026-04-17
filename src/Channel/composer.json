@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "konekt/concord": "^1.15",
+        "konekt/concord": "^1.16",
         "cviebrock/eloquent-sluggable": "^12.0",
         "laravel/framework": "^12.50",
         "vanilo/support": "^6.0"

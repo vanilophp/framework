@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "konekt/concord": "^1.15",
+        "konekt/concord": "^1.16",
         "konekt/address": "^3.4.1",
         "konekt/enum": "^4.2",
         "konekt/xtend": "^2.0",
