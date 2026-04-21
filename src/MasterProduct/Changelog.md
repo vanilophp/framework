@@ -2,8 +2,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2026-XX-YY
+## 5.2.0
+##### 2026-04-21
 
 - Added Laravel 13 support
 - Changed the minimal Laravel 12 versions from 12.38 to 12.5. Minimums for 10.48, and 11.46.2 have not changed.
