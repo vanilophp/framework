@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0|^11.0",
-        "illuminate/database": "^10.48|^11.46.2|^12.38"
+        "illuminate/database": "^10.48|^11.46.2|^12.50|^13.0"
     },
     "autoload": {
         "psr-4": {

@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "illuminate/support": "^10.48|^11.46.2|^12.38",
+        "illuminate/support": "^10.48|^11.46.2|^12.50|^13.0",
         "nette/schema": "^1.2.5"
     },
     "require-dev": {
