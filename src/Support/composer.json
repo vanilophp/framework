@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "laravel/framework": "^10.48|^11.46.2|^12.38",
+        "laravel/framework": "^10.48|^11.46.2|^12.50|^13.0",
         "nette/schema": "^1.2",
         "vanilo/contracts": "^5.1"
     },
@@ -38,7 +38,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.1.x-dev"
+            "dev-master": "5.2.x-dev"
         }
     }
 }
