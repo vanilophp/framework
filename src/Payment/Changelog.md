@@ -7,7 +7,6 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
-- Changed the minimum Laravel 12 version to v12.50
 
 ## 5.x Series
 

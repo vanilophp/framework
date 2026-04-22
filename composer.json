@@ -18,12 +18,12 @@
         "php": "^8.4",
         "ext-json": "*",
         "ext-pdo": "*",
-        "laravel/framework": "^12.50",
+        "laravel/framework": "^12.50|^13.0",
         "konekt/enum": "^4.2",
         "konekt/concord": "^1.16",
         "konekt/xtend": "^2.0",
         "spatie/laravel-medialibrary": "^11.9",
-        "cviebrock/eloquent-sluggable": "^12.0",
+        "cviebrock/eloquent-sluggable": "^12.0|^13.0",
         "konekt/laravel-migration-compatibility": "^1.9",
         "konekt/address": "^3.6.0",
         "konekt/customer": "^3.2",
@@ -61,7 +61,7 @@
         ]
     },
     "require-dev": {
-        "orchestra/testbench": "^10.0",
+        "orchestra/testbench": "^10.0|^11.0",
         "phpunit/phpunit" : "^11.0|^12.0"
     },
     "scripts": {
