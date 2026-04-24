@@ -14,34 +14,28 @@ declare(strict_types=1);
 
 namespace Vanilo\Taxes;
 
+use Konekt\Extend\Concerns\HasRegistry;
+use Konekt\Extend\Concerns\RequiresClassOrInterface;
+use Konekt\Extend\Contracts\Registry;
 use Vanilo\Taxes\Contracts\TaxCalculator;
 use Vanilo\Taxes\Exceptions\InexistentTaxCalculatorException;
 
-final class TaxCalculators
+final class TaxCalculators implements Registry
 {
-    private static array $registry = [];
+    use HasRegistry;
+    use RequiresClassOrInterface;
 
-    public static function register(string $id, string $class)
+    private static string $requiredInterface = TaxCalculator::class;
+
+    /**
+     * @deprecated Use the add() method instead
+     */
+    public static function register(string $id, string $class): bool
     {
-        if (array_key_exists($id, self::$registry)) {
-            return;
-        }
-
-        if (!in_array(TaxCalculator::class, class_implements($class))) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The class you are trying to register (%s) as tax calculator, ' .
-                    'must implement the %s interface.',
-                    $class,
-                    TaxCalculator::class
-                )
-            );
-        }
-
-        self::$registry[$id] = $class;
+        return self::add($id, $class);
     }
 
-    public static function make(string $id): TaxCalculator
+    public static function make(string $id, array $parameters = []): TaxCalculator
     {
         $class = self::getClass($id);
 
@@ -54,29 +48,11 @@ final class TaxCalculators
         return app()->make($class);
     }
 
-    public static function reset(): void
-    {
-        self::$registry = [];
-    }
-
+    /**
+     * @deprecated Use the getClassOf() method instead
+     */
     public static function getClass(string $id): ?string
     {
-        return self::$registry[$id] ?? null;
-    }
-
-    public static function ids(): array
-    {
-        return array_keys(self::$registry);
-    }
-
-    public static function choices(): array
-    {
-        $result = [];
-
-        foreach (self::$registry as $type => $class) {
-            $result[$type] = $class::getName();
-        }
-
-        return $result;
+        return self::getClassOf($id);
     }
 }
