@@ -7,6 +7,8 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Added the konekt/xtend package dependency (v2.0)
+- Added the `LineItemTypes` registry class
 
 ## 5.x Series
 

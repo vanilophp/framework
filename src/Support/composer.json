@@ -19,6 +19,7 @@
     "require": {
         "php": "^8.4",
         "laravel/framework": "^12.50|^13.0",
+        "konekt/xtend": "^2.0",
         "nette/schema": "^1.2",
         "vanilo/contracts": "^6.0"
     },

@@ -11,8 +11,9 @@
 - Dropped MySQL 5.7 support (it still works, but it is no longer included in the CI tests)
 - Dropped MySQL 8.0 support (it still works, but it is no longer included in the CI tests)
 - Added explicit MySQL 8.4 support (being actively tested against in the CI)
-- Added the konekt/enum package dependency (v4.2) to the contracts module
-- Added the `LineItemType` interface (Contracts
+- Added the konekt/xtend package dependency (v2.0) to the contracts and support modules
+- Added the `LineItemType` interface (Contracts)
+- Added the `LineItemTypes` registry class (Support)
 - Changed the Postgres testing policy to use v15 and v18
 - Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface)
 

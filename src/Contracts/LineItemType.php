@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
-interface LineItemType extends \Konekt\Enum\EnumInterface
+use Konekt\Extend\Contracts\Registerable;
+
+interface LineItemType extends Registerable
 {
     public function isShippable(): bool;
 
