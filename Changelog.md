@@ -13,6 +13,7 @@
 - Added explicit MySQL 8.4 support (being actively tested against in the CI)
 - Added the konekt/enum package dependency (v4.2) to the contracts module
 - Changed the Postgres testing policy to use v15 and v18
+- Added the `LineItemType` interface (Contracts)
 
 ## 5.x Series
 
