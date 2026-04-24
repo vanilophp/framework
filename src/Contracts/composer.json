@@ -19,6 +19,7 @@
     "require": {
         "php": "^8.4",
         "illuminate/support": "^12.50|^13.0",
+        "konekt/enum": "^4.2",
         "nette/schema": "^1.2.5"
     },
     "require-dev": {
