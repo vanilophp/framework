@@ -16,8 +16,11 @@ namespace Vanilo\Foundation\Models;
 
 use Vanilo\Channel\Traits\Channelable;
 use Vanilo\Shipment\Models\ShippingMethod as BaseShippingMethod;
+use Vanilo\Taxes\Contracts\Taxable;
+use Vanilo\Taxes\Traits\BelongsToTaxCategory;
 
-class ShippingMethod extends BaseShippingMethod
+class ShippingMethod extends BaseShippingMethod implements Taxable
 {
+    use BelongsToTaxCategory;
     use Channelable;
 }
