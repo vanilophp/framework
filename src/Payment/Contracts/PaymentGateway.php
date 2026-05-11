@@ -17,7 +17,7 @@ namespace Vanilo\Payment\Contracts;
 use Illuminate\Http\Request;
 use Vanilo\Contracts\Address;
 
-interface PaymentGateway
+interface PaymentGateway // @todo make this Registerable
 {
     public static function getName(): string;
 
