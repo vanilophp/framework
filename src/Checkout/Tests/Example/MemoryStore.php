@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout\Tests\Example;
 
-use Illuminate\Support\Collection;
 use Vanilo\Checkout\Contracts\CheckoutState;
 use Vanilo\Checkout\Contracts\CheckoutStore;
 use Vanilo\Contracts\Address;

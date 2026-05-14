@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Checkout;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Vanilo\Checkout\Contracts\Checkout as CheckoutContract;
 use Vanilo\Checkout\Contracts\CheckoutState as CheckoutStateContract;

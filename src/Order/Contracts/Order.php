@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Order\Contracts;
 
-use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Sale;
 
 interface Order extends Sale

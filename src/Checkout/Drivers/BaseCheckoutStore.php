@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Vanilo\Checkout\Drivers;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Vanilo\Checkout\Contracts\CheckoutDataFactory;

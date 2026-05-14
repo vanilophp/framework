@@ -12,4 +12,3 @@ interface ItemCollection extends \IteratorAggregate, \ArrayAccess, \Countable
 
     public function clear(): void;
 }
-

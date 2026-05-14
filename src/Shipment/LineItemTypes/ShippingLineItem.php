@@ -8,5 +8,4 @@ use Vanilo\Contracts\LineItem;
 
 class ShippingLineItem implements LineItem
 {
-
 }

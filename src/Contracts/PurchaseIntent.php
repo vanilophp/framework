@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vanilo\Contracts;
 
 interface PurchaseIntent extends LineItemContainer, Shippable, Billable

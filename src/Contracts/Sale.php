@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
-use Traversable;
-
 /**
  * A Sale represents a completed commercial exchange
  * Typically orders, but it can be a subscription
