@@ -24,6 +24,7 @@ use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
+use Vanilo\Contracts\ShippableItemCollection;
 
 class CheckoutManager implements CheckoutContract
 {
@@ -192,9 +193,14 @@ class CheckoutManager implements CheckoutContract
         $this->store->setTaxesAmount($amount);
     }
 
-    public function getShippableItems(): Collection
+    public function getShippableItems(): ShippableItemCollection
     {
         return $this->store->getShippableItems();
+    }
+
+    public function needsShipping(): bool
+    {
+        return $this->store->needsShipping();
     }
 
     public function weight(): float

@@ -23,6 +23,7 @@ use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\CheckoutSubjectItem;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Dimension;
+use Vanilo\Contracts\ShippableItemCollection;
 
 class MemoryStore implements CheckoutStore
 {
@@ -230,9 +231,14 @@ class MemoryStore implements CheckoutStore
         return new \Vanilo\Support\Dto\Dimension(0, 0, 0);
     }
 
-    public function getShippableItems(): Collection
+    public function getShippableItems(): ShippableItemCollection
     {
         return $this->getCart()->getItems()->filter(fn (CheckoutSubjectItem $item) => $item->isShippable());
+    }
+
+    public function needsShipping(): bool
+    {
+        return $this->getShippableItems()->isNotEmpty();
     }
 
     public function customMethod(): string

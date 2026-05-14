@@ -11,13 +11,9 @@ use Traversable;
  * Typically orders, but it can be a subscription
  * a POS transaction, subscription renewal, etc
  */
-interface Sale
+interface Sale extends PurchaseIntent, Document
 {
-    public function getBillpayer(): ?BillPayer;
-
-    public function getItems(): Traversable;
-
-    public function itemsTotal(): float;
-
-    public function total(): float;
+//    public function getSoldAt();
+//
+//    public function getMerchant(): ?Merchant;
 }

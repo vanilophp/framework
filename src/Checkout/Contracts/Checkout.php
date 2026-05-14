@@ -48,8 +48,6 @@ interface Checkout extends Shippable, ArrayAccess
 
     public function setShipToBillingAddress(bool $value): void;
 
-    public function getShippingMethodId(): null|int|string;
-
     public function setShippingMethodId(null|int|string $shippingMethodId): void;
 
     public function getPaymentMethodId(): null|int|string;

@@ -28,7 +28,7 @@ interface Buyable extends HasImages
 
     public function hasAHigherOriginalPrice(): bool;
 
-    public function addSale(Carbon $date, int|float $units = 1): void;
+    public function addSale(Carbon $date, int|float $units = 1): void;// @todo v6.0 replace Carbon with DateTimeInterface
 
     public function removeSale(int|float $units = 1): void;
 

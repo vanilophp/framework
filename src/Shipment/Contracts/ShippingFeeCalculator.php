@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Contracts;
 
+use Vanilo\Contracts\PurchaseIntent;
 use Vanilo\Contracts\Schematized;
+use Vanilo\Contracts\Shippable;
 use Vanilo\Shipment\Models\ShippingFee;
 
 interface ShippingFeeCalculator extends Schematized
@@ -29,5 +31,5 @@ interface ShippingFeeCalculator extends Schematized
      */
     public function getAdjuster(?array $configuration = null): ?object;
 
-    public function calculate(?object $subject = null, ?array $configuration = null): ShippingFee;
+    public function calculate(null|PurchaseIntent|Shippable $subject = null, ?array $configuration = null): ShippingFee;
 }

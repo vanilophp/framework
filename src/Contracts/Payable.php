@@ -16,19 +16,15 @@ namespace Vanilo\Contracts;
 
 use Traversable;
 
-interface Payable
+interface Payable extends Billable, Document
 {
     public function getPayableId(): string;
 
     public function getPayableType(): string;
 
-    public function getAmount(): float;
+    // Add getPaymentMethodId method
 
-    public function getCurrency(): string;
-
-    public function getBillpayer(): ?Billpayer;
-
-    public function getNumber(): string;
+    public function getAmount(): float; // @todo v6.0 replace with settleable + total()
 
     public function getPayableRemoteId(): ?string;
 
@@ -36,10 +32,7 @@ interface Payable
 
     public static function findByPayableRemoteId(string $remoteId): ?Payable;
 
-    public function hasItems(): bool;
+    public function hasItems(): bool; // @todo v6.0 check: it's redundant from LineItemContainer
 
     public function getItems(): Traversable;
-
-    /** The human readable representation, eg.: "Order no. ABC-123" */
-    public function getTitle(): string;
 }

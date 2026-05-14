@@ -19,14 +19,7 @@ use Vanilo\Contracts\Sale;
 
 interface Order extends Sale
 {
-    public function getNumber(): string;
-
     public function getStatus(): OrderStatus;
 
     public function getFulfillmentStatus(): FulfillmentStatus;
-
-    public function getShippingAddress(): ?Address;
-
-    /** The two-letter ISO 639-1 code */
-    public function getLanguage(): ?string;
 }

@@ -33,6 +33,7 @@ use Vanilo\Contracts\Billpayer;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\CheckoutSubjectItem;
 use Vanilo\Contracts\Dimension;
+use Vanilo\Contracts\ShippableItemCollection;
 
 abstract class BaseCheckoutStore implements CheckoutStore
 {
@@ -235,9 +236,14 @@ abstract class BaseCheckoutStore implements CheckoutStore
         return null;
     }
 
-    public function getShippableItems(): Collection
+    public function getShippableItems(): ShippableItemCollection
     {
         return $this->getCart()->getItems()->filter(fn (CheckoutSubjectItem $item) => $item->isShippable());
+    }
+
+    public function needsShipping(): bool
+    {
+        return $this->getShippableItems()->isNotEmpty();
     }
 
     public function offsetSet(mixed $offset, mixed $value): void

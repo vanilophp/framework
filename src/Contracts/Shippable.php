@@ -14,14 +14,15 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
-use Illuminate\Support\Collection;
-
 interface Shippable
 {
     public function getShippingAddress(): ?Address;
 
-    /** @return Collection<ShippableItem> */
-    public function getShippableItems(): Collection;
+    public function needsShipping(): bool;
+
+    public function getShippableItems(): ShippableItemCollection;
+
+    public function getShippingMethodId(): null|int|string;
 
     public function weight(): float;
 

@@ -96,6 +96,11 @@ class Order extends Model implements OrderContract
         return (string) $this->number;
     }
 
+    public function getTitle(): string
+    {
+        return $this->number;
+    }
+
     public function getStatus(): OrderStatus
     {
         return $this->status;
@@ -163,6 +168,11 @@ class Order extends Model implements OrderContract
     public function getFulfillmentStatus(): FulfillmentStatus
     {
         return $this->fulfillment_status;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->currency ?? config('vanilo.foundation.currency.code', '');
     }
 
     public function scopeOpen(Builder $query)

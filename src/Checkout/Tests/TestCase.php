@@ -24,6 +24,8 @@ abstract class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
         parent::setUp();
 
         $this->app->bind(CheckoutDataFactory::class, DataFactory::class);
@@ -82,6 +84,6 @@ abstract class TestCase extends Orchestra
             CheckoutModule::class
         ]);
 
-        $app['config']->set('session.drive', 'array');
+        $app['config']->set('session.driver', 'array');
     }
 }

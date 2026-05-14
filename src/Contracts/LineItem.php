@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
-interface LineItem
+interface LineItem extends Identifiable, Configurable, Priceable
 {
     public function getName(): string;
 

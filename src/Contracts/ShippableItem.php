@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Vanilo\Contracts;
 
-interface ShippableItem extends Configurable
+interface ShippableItem extends LineItem
 {
     public function getShippingCategoryId(): null|int|string;
-
-    public function getQuantity(): int;
 
     public function weight(): float;
 
