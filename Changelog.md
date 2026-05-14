@@ -15,7 +15,8 @@
 - Added the `LineItem` interface (Contracts)
 - Added the `LineItemType` interface (Contracts)
 - Added the `LineItemTypes` registry class (Support)
-- Added `Taxable` to the ShippingMethod model (Foundation)
+- Added `Taxable` and `Buyable` to the ShippingMethod model (Foundation)
+- Added support for shipping line items, where the Buyable is a ShippingMethod (opt-in via the `foundation.use_shipping_lines` config flag)
 - Changed the Postgres testing policy to use v15 and v18
 - Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface)
 

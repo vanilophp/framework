@@ -131,7 +131,7 @@ class OrderFactory implements OrderFactoryContract
             $item = array_merge($item, [
                 'product_type' => $product->morphTypeName(),
                 'product_id' => $product->getId(),
-                'price' => $product->getPrice(),
+                'price' => ('shipping_method' === $product->morphTypeName() && isset($item['price'])) ? $item['price'] : $product->getPrice(), // @todo Fix this temporary hack
                 'name' => $product->getName()
             ]);
             unset($item['product']);

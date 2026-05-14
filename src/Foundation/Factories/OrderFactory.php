@@ -20,6 +20,7 @@ use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Checkout\Contracts\Checkout;
 use Vanilo\Contracts\CheckoutSubject;
 use Vanilo\Contracts\Configurable;
+use Vanilo\Foundation\Models\ShippingMethod;
 use Vanilo\Order\Contracts\Order;
 use Vanilo\Order\Contracts\OrderItem;
 use Vanilo\Order\Factories\OrderFactory as BaseOrderFactory;
@@ -79,6 +80,10 @@ class OrderFactory extends BaseOrderFactory
                 'configuration' => $item instanceof Configurable ? $item->configuration() : null,
                 'adjustments' => $item instanceof Adjustable ? $item->adjustments() : [],
             ];
+
+            if ($item->getBuyable() instanceof ShippingMethod) { // @todo Fix this temporary hack
+                $result['price'] = $item->price;
+            }
 
             if (isset($item->id)) {
                 $result['id'] = $item->id;

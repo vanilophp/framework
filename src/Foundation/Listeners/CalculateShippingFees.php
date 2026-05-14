@@ -17,6 +17,7 @@ namespace Vanilo\Foundation\Listeners;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Cart\Contracts\CartEvent;
 use Vanilo\Checkout\Contracts\CheckoutEvent;
+use Vanilo\Contracts\Buyable;
 use Vanilo\Shipment\Contracts\ShippingMethod;
 use Vanilo\Shipment\Models\ShippingMethodProxy;
 
@@ -32,6 +33,12 @@ class CalculateShippingFees
             return;
         }
 
+        if (config('vanilo.foundation.use_shipping_lines', false)) {
+            $this->recreateShippingLines();
+
+            return;
+        }
+
         $this->cart->adjustments()->deleteByType(AdjustmentTypeProxy::SHIPPING());
 
         /** @var ShippingMethod $shippingMethod */
@@ -44,5 +51,24 @@ class CalculateShippingFees
             $this->cart->adjustments()->create($adjuster);
         }
         $this->checkout->setShippingAmount($shippingMethod->estimate($this->checkout)->amount());
+    }
+
+    protected function recreateShippingLines(): void
+    {
+        $this->cart->getItems()->each(function ($item) {
+            if ('shipping_method' === $item->product_type) {
+                $this->cart->removeItem($item);
+            }
+        });
+
+        /** @var ShippingMethod $shippingMethod */
+        $shippingMethod = ShippingMethodProxy::find($this->checkout->getShippingMethodId());
+        if (!$shippingMethod instanceof Buyable) {
+            return;
+        }
+
+        $fee = $shippingMethod->getCalculator()->calculate($this->checkout, $shippingMethod->configuration());
+        $this->cart->addItem($shippingMethod, 1, ['attributes' => ['price' => $fee->amount()->getValue()]]);
+        $this->checkout->setShippingAmount($fee->amount()->getValue());
     }
 }

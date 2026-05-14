@@ -14,13 +14,55 @@ declare(strict_types=1);
 
 namespace Vanilo\Foundation\Models;
 
+use Carbon\Carbon;
 use Vanilo\Channel\Traits\Channelable;
+use Vanilo\Contracts\Buyable;
 use Vanilo\Shipment\Models\ShippingMethod as BaseShippingMethod;
+use Vanilo\Support\Traits\BuyableNoImage;
 use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Traits\BelongsToTaxCategory;
 
-class ShippingMethod extends BaseShippingMethod implements Taxable
+class ShippingMethod extends BaseShippingMethod implements Taxable, Buyable
 {
     use BelongsToTaxCategory;
+    use BuyableNoImage;
     use Channelable;
+
+    public function getId(): int|string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getPrice(): float
+    {
+        return 0;
+    }
+
+    public function getOriginalPrice(): ?float
+    {
+        return null;
+    }
+
+    public function hasAHigherOriginalPrice(): bool
+    {
+        return false;
+    }
+
+    public function addSale(Carbon $date, int|float $units = 1): void
+    {
+    }
+
+    public function removeSale(int|float $units = 1): void
+    {
+    }
+
+    public function morphTypeName(): string
+    {
+        return 'shipping_method';
+    }
 }

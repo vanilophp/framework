@@ -49,4 +49,5 @@ return [
             'is_enabled' => false,
         ],
     ],
+    'use_shipping_lines' => false,
 ];
