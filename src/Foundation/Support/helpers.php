@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use Vanilo\Contracts\Feature;
 use Vanilo\MasterProduct\Contracts\MasterProduct;
 use Vanilo\MasterProduct\Contracts\MasterProductVariant;
+use Vanilo\Support\Features;
 
 /**
  * Returns the price formatted
@@ -37,4 +39,19 @@ function is_master_product(object $product): bool
 function is_master_product_variant(object $product): bool
 {
     return $product instanceof MasterProductVariant;
+}
+
+function feature(string $name): ?Feature
+{
+    return Features::findByName($name);
+}
+
+function feature_is_enabled(string $name): bool
+{
+    return Features::isEnabled($name);
+}
+
+function feature_is_disabled(string $name): bool
+{
+    return Features::isDisabled($name);
 }

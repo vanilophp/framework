@@ -9,6 +9,7 @@
 - Dropped Laravel 10 & 11 support
 - Added the konekt/xtend package dependency (v2.0)
 - Added the `LineItemTypes` registry class
+- Added the `feature()`, `feature_is_enabled()`, and `feature_is_disabled()` helpers
 
 ## 5.x Series
 
