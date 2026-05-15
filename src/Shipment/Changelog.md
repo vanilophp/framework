@@ -7,6 +7,7 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Added `usage_count` and `last_usage_at` fields to shipping methods
 
 ## 5.x Series
 

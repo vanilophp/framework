@@ -55,10 +55,15 @@ class ShippingMethod extends BaseShippingMethod implements Taxable, Buyable
 
     public function addSale(Carbon $date, int|float $units = 1): void
     {
+        $this->last_usage_at = $date;
+        $this->usage_count += $units;
+        $this->save();
     }
 
     public function removeSale(int|float $units = 1): void
     {
+        $this->usage_count -= $units;
+        $this->save();
     }
 
     public function morphTypeName(): string
