@@ -36,7 +36,7 @@ class UpdateSalesFigures
                     } else {
                         $item->product->removeSale(-1 * $item->quantity);
                     }
-                    if ($item->product_type === 'shipping_method') {
+                    if ('shipping_method' === $item->product_type) {
                         $shippingLineDetected = true;
                     }
                 }
