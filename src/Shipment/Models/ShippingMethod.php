@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Shipment\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -44,6 +45,12 @@ use Vanilo\Support\Traits\ConfigurableModel;
  * @property string|null $eta_units
  * @property array $configuration
  * @property int|null $shipping_category_id
+ *
+ * @property Carbon $last_usage_at
+ * @property int $usage_count
+ *
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
  * @property ShippingCategoryMatchingCondition $shipping_category_matching_condition
  *
  * @method static Builder actives()
