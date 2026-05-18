@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Vanilo\Adjustments\Support;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Models\AdjustmentProxy;
@@ -29,7 +30,11 @@ trait HasAdjustmentsViaRelation
 
     public function invalidateAdjustments(): void
     {
-        $this->refresh();
+        try {
+            $this->refresh();
+        } catch (ModelNotFoundException $e) {
+            // The model was deleted. But we don't die here
+        }
         $this->adjustmentCollection = null;
     }
 

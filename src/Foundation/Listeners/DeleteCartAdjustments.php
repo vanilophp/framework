@@ -28,7 +28,9 @@ class DeleteCartAdjustments
         }
 
         $cart->invalidateAdjustments();
-        $cart->fresh()->adjustments()->clear();
-        $cart->getItems()->each(fn (CartItem $item) => $item instanceof Adjustable ? $item->adjustments()->clear() : null);
+        if (null !== $cart = $cart->fresh()) { // To prevent race conditions
+            $cart->adjustments()?->clear();
+            $cart->getItems()->each(fn (CartItem $item) => $item instanceof Adjustable ? $item->adjustments()->clear() : null);
+        }
     }
 }

@@ -22,6 +22,7 @@
 - Added the `feature()`, `feature_is_enabled()`, and `feature_is_disabled()` helpers
 - Changed the Postgres testing policy to use v15 and v18
 - Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface)
+- Fixed errors in a possible race condition scenario (cart, adjustments)
 
 ## 5.x Series
 

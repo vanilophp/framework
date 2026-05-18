@@ -7,6 +7,7 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Fixed the possible error in a race condition scenario when invalidating an adjustment collection
 
 ## 5.x Series
 
