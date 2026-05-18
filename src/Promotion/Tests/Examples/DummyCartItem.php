@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\AdjustmentCollection;
 use Vanilo\Adjustments\Support\ArrayAdjustmentCollection;
+use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Contracts\Schematized;
@@ -22,6 +23,11 @@ class DummyCartItem implements CartItem, Adjustable
         private int $quantity
     ) {
         $this->adjustments = new ArrayAdjustmentCollection($this);
+    }
+
+    public function getCart(): Cart
+    {
+        return new DummyCart();
     }
 
     public function preAdjustmentTotal(): float
