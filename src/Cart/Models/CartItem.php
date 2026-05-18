@@ -70,7 +70,6 @@ class CartItem extends Model implements CartItemContract
         return $this->cart;
     }
 
-
     public function isShippable(): ?bool
     {
         $result = config('vanilo.cart.items.shippable_by_default');
