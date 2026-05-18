@@ -19,6 +19,8 @@ use Vanilo\Contracts\CheckoutSubjectItem;
 
 interface CartItem extends CheckoutSubjectItem
 {
+    public function getCart(): Cart;
+
     public function hasParent(): bool;
 
     public function getParent(): ?self;

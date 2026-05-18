@@ -12,6 +12,7 @@
 - Dropped MySQL 8.0 support (it still works, but it is no longer included in the CI tests)
 - Added explicit MySQL 8.4 support (being actively tested against in the CI)
 - Added the konekt/xtend package dependency (v2.0) to the contracts and support modules
+- Added the `getCart()` method to the `CartItem` interface
 - Added the `LineItem` interface (Contracts)
 - Added the `LineItemType` interface (Contracts)
 - Added the `LineItemTypes` registry class (Support)

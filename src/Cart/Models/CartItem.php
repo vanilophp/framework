@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Vanilo\Cart\Contracts\Cart;
 use Vanilo\Cart\Contracts\CartItem as CartItemContract;
 use Vanilo\Contracts\Buyable;
 use Vanilo\Support\Traits\ConfigurableModel;
@@ -34,6 +35,7 @@ use Vanilo\Support\Traits\ConfigurationHasNoSchema;
  * @property int $quantity
  * @property array|null $configuration
  * @property-read Buyable $product
+ * @property-read Cart $cart
  * @property-read float $total
  * @property-read CartItem|null $parent
  */
@@ -57,6 +59,17 @@ class CartItem extends Model implements CartItemContract
     {
         return $this->product;
     }
+
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(CartProxy::modelClass(), 'cart_id');
+    }
+
+    public function getCart(): Cart
+    {
+        return $this->cart;
+    }
+
 
     public function isShippable(): ?bool
     {
