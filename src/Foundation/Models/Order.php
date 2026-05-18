@@ -195,7 +195,7 @@ class Order extends BaseOrder implements Payable, Adjustable
     protected function shippingTotal(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value) => $this->adjustments()->byType(AdjustmentType::SHIPPING())->total(true),
+            get: fn (mixed $value) => $this->items()->where('product_type', 'shipping_method')->get()->sum('total') + $this->adjustments()->byType(AdjustmentType::SHIPPING())->total(true),
         );
     }
 
