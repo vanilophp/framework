@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         php: [ '8.5', '8.5' ]
-        laravel: [ '12.50', '12.56', '13.0', '13.6' ]
+        laravel: [ '12.50', '12.59', '13.0', '13.9' ]
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
