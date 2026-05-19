@@ -22,7 +22,6 @@ use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Adjustments\Support\HasWriteableTitleAndDescription;
 use Vanilo\Adjustments\Support\IsLockable;
 use Vanilo\Adjustments\Support\RoundsAdjustments;
-use Vanilo\Support\Rounding;
 
 final class SimpleTax implements Adjuster
 {
