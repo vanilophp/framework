@@ -10,6 +10,7 @@
 - Added the konekt/xtend package dependency (v2.0)
 - Added the `LineItemTypes` registry class
 - Added the `feature()`, `feature_is_enabled()`, and `feature_is_disabled()` helpers
+- Added the `Rounding` class that acts as a system-wide, configurable rounding handler
 
 ## 5.x Series
 

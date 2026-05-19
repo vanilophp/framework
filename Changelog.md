@@ -12,7 +12,8 @@
 - Dropped MySQL 8.0 support (it still works, but it is no longer included in the CI tests)
 - Added explicit MySQL 8.4 support (being actively tested against in the CI)
 - Added the konekt/xtend package dependency (v2.0) to the contracts and support modules
-- Added the `getCart()` method to the `CartItem` interface
+- Added the `Rounding` class that acts as a system-wide, configurable rounding handler
+- BC: Added the `getCart()` method to the `CartItem` interface
 - Added the `LineItem` interface (Contracts)
 - Added the `LineItemType` interface (Contracts)
 - Added the `LineItemTypes` registry class (Support)
@@ -22,7 +23,7 @@
 - Added the update of shipping method's usage count both for line-based and adjustment-based shipping fee modes
 - Added the `feature()`, `feature_is_enabled()`, and `feature_is_disabled()` helpers
 - Changed the Postgres testing policy to use v15 and v18
-- Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface)
+- BC: Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface
 - Fixed errors in a possible race condition scenario (cart, adjustments)
 
 ## 5.x Series
