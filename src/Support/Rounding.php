@@ -54,7 +54,7 @@ final class Rounding
 
     private static function instance(): self
     {
-        if (self::$_instance === null) {
+        if (null === self::$_instance) {
             self::$_instance = new self();
         }
         return self::$_instance;
