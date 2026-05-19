@@ -11,17 +11,17 @@ use Vanilo\Support\Rounding;
 
 trait RoundsAdjustments
 {
-    protected function round(float $value, ?RoundingLevel $level = null, ?AdjustmentType $type = null): float
+    protected function round(float $value, RoundingLevel $level = RoundingLevel::Any, ?AdjustmentType $type = null): float
     {
         return Rounding::roundAdjustment($value, $level, $type->value());
     }
 
-    protected function roundTax(float $value, ?RoundingLevel $level = null): float
+    protected function roundTax(float $value, RoundingLevel $level = RoundingLevel::Any): float
     {
         return $this->round($value, $level, AdjustmentTypeProxy::TAX());
     }
 
-    protected function roundPromotion(float $value, ?RoundingLevel $level = null): float
+    protected function roundPromotion(float $value, RoundingLevel $level = RoundingLevel::Any): float
     {
         return $this->round($value, $level, AdjustmentTypeProxy::PROMOTION());
     }

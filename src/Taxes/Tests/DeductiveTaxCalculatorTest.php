@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Contracts\DetailedAmount;
+use Vanilo\Support\Models\RoundingLevel;
+use Vanilo\Support\Models\RoundingTarget;
+use Vanilo\Support\Rounding;
 use Vanilo\Taxes\Calculators\DeductiveTaxCalculator;
 use Vanilo\Taxes\TaxCalculators;
 use Vanilo\Taxes\Tests\Dummies\SampleAdjustable;
@@ -36,9 +39,12 @@ class DeductiveTaxCalculatorTest extends TestCase
 
     #[Test] public function it_can_properly_calculate_the_included_tax()
     {
+        $originalPrecision = Rounding::getRoundingRuleFor(RoundingTarget::Adjustment, RoundingLevel::Any);
+        Rounding::setRoundingRuleFor(RoundingTarget::Adjustment, RoundingLevel::Any, 4);
         $calculator = TaxCalculators::make('deductive');
 
         $taxAmount = $calculator->calculate(new SampleAdjustable(100), ['rate' => 20, 'included' => true]);
-        $this->assertEquals(-16.6667, round($taxAmount->getValue(), 4));
+        Rounding::setRoundingRuleFor(RoundingTarget::Adjustment, RoundingLevel::Any, $originalPrecision);// Revert
+        $this->assertEquals(-16.6667, $taxAmount->getValue());
     }
 }
