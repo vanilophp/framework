@@ -8,6 +8,8 @@
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
 - Fixed the possible error in a race condition scenario when invalidating an adjustment collection
+- Added rounding to all tax and the percentage discount adjusters (based on Support\Rounding)
+- Added vanilo/support dependency
 
 ## 5.x Series
 

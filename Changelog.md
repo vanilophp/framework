@@ -12,7 +12,9 @@
 - Dropped MySQL 8.0 support (it still works, but it is no longer included in the CI tests)
 - Added explicit MySQL 8.4 support (being actively tested against in the CI)
 - Added the konekt/xtend package dependency (v2.0) to the contracts and support modules
+- Added vanilo/support dependency to the adjustments module
 - Added the `Rounding` class that acts as a system-wide, configurable rounding handler
+- Added rounding to all tax and the percentage discount adjusters (via Support\Rounding)
 - BC: Added the `getCart()` method to the `CartItem` interface
 - Added the `LineItem` interface (Contracts)
 - Added the `LineItemType` interface (Contracts)

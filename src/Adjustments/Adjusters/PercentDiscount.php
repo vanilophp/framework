@@ -12,12 +12,14 @@ use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Adjustments\Support\HasWriteableTitleAndDescription;
 use Vanilo\Adjustments\Support\IsLockable;
 use Vanilo\Adjustments\Support\IsNotIncluded;
+use Vanilo\Adjustments\Support\RoundsAdjustments;
 
 final class PercentDiscount implements Adjuster
 {
     use HasWriteableTitleAndDescription;
     use IsLockable;
     use IsNotIncluded;
+    use RoundsAdjustments;
 
     private ?float $threshold;
 
@@ -49,7 +51,7 @@ final class PercentDiscount implements Adjuster
 
     private function calculateAmount(Adjustable $adjustable): float
     {
-        return -1 * round($adjustable->preAdjustmentTotal() / 100  * $this->percent, 2);
+        return -1 * $this->roundPromotion($adjustable->preAdjustmentTotal() / 100  * $this->percent);
     }
 
     private function getModelAttributes(Adjustable $adjustable): array

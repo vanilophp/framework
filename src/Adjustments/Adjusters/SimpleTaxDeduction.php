@@ -21,11 +21,13 @@ use Vanilo\Adjustments\Models\AdjustmentProxy;
 use Vanilo\Adjustments\Models\AdjustmentTypeProxy;
 use Vanilo\Adjustments\Support\HasWriteableTitleAndDescription;
 use Vanilo\Adjustments\Support\IsLockable;
+use Vanilo\Adjustments\Support\RoundsAdjustments;
 
 final class SimpleTaxDeduction implements Adjuster
 {
     use HasWriteableTitleAndDescription;
     use IsLockable;
+    use RoundsAdjustments;
 
     public function __construct(
         private float $rate,
@@ -61,10 +63,10 @@ final class SimpleTaxDeduction implements Adjuster
 
     private function calculateTaxAmount(Adjustable $adjustable): float
     {
-        return -1 * match ($this->isIncluded) {
+        return -1 * $this->roundTax(match ($this->isIncluded) {
             true => $adjustable->preAdjustmentTotal() / (100 +  $this->rate) *  $this->rate,
             false => $adjustable->preAdjustmentTotal() *  $this->rate / 100,
-        };
+        });
     }
 
     private function getModelAttributes(Adjustable $adjustable): array
