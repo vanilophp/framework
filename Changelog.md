@@ -24,6 +24,7 @@
 - Added `usage_count` and `last_usage_at` fields to shipping methods
 - Added the update of shipping method's usage count both for line-based and adjustment-based shipping fee modes
 - Added the `feature()`, `feature_is_enabled()`, and `feature_is_disabled()` helpers
+- Added the `OrderStateChangedToPending` event
 - Changed the Postgres testing policy to use v15 and v18
 - BC: Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface
 - Fixed errors in a possible race condition scenario (cart, adjustments)
