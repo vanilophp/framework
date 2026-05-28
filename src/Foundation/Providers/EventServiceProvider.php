@@ -74,4 +74,8 @@ class EventServiceProvider extends ServiceProvider
             UpdatePromotionUsage::class,
         ],
     ];
+
+    protected function configureEmailVerification(): void
+    {
+    }
 }
