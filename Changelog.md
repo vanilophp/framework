@@ -31,8 +31,8 @@
 
 ## 5.x Series
 
-## Unreleased
-##### 2026-XX-YY
+## 5.2.1
+##### 2026-05-28
 
 - Fixed the duplicate `SendEmailVerificationNotification` registration by adding an empty
   `configureEmailVerification()` method to the `EventServiceProvider` classes -   
