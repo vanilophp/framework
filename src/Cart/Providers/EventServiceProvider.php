@@ -41,4 +41,8 @@ class EventServiceProvider extends ServiceProvider
             DissociateUserFromCart::class
         ]
     ];
+
+    protected function configureEmailVerification(): void
+    {
+    }
 }
