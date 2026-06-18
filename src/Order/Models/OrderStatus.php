@@ -22,16 +22,19 @@ use Vanilo\Order\Contracts\OrderStatus as OrderStatusContract;
  * @method static OrderStatus PROCESSING();
  * @method static OrderStatus COMPLETED();
  * @method static OrderStatus CANCELLED();
+ * @method static OrderStatus WITHDRAWN();
  *
  * @method bool isPending()
  * @method bool isProcessing()
  * @method bool isCompleted()
  * @method bool isCancelled()
+ * @method bool isWithdrawn()
  *
  * @property-read bool $is_pending
  * @property-read bool $is_processing
  * @property-read bool $is_completed
  * @property-read bool $is_cancelled
+ * @property-read bool $is_withdrawn
  */
 class OrderStatus extends Enum implements OrderStatusContract
 {
@@ -51,9 +54,12 @@ class OrderStatus extends Enum implements OrderStatusContract
     public const COMPLETED = 'completed';
 
     /**
-     * Order that has been cancelled.
+     * Order that has been canceled.
      */
     public const CANCELLED = 'cancelled';
+
+    /** The order was withdrawn by the customer */
+    public const WITHDRAWN = 'withdrawn';
 
     // $labels static property needs to be defined
     public static $labels = [];
@@ -76,7 +82,8 @@ class OrderStatus extends Enum implements OrderStatusContract
             self::PENDING => __('Pending'),
             self::PROCESSING => __('Processing'),
             self::COMPLETED => __('Completed'),
-            self::CANCELLED => __('Cancelled')
+            self::CANCELLED => __('Cancelled'),
+            self::WITHDRAWN => __('Withdrawn'),
         ];
     }
 }
