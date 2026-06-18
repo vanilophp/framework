@@ -6,5 +6,4 @@ namespace Vanilo\Order\Events;
 
 class OrderWasWithdrawn extends BaseOrderEvent
 {
-
 }
