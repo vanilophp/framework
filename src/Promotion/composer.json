@@ -24,7 +24,7 @@
         "php": "^8.4",
         "konekt/concord": "^1.13",
         "konekt/xtend": "^2.0",
-        "laravel/framework": "^12.60|^13.10",
+        "laravel/framework": "^12.61.1|^13.12",
         "vanilo/support": "^6.0",
         "vanilo/adjustments": "^6.0"
     },

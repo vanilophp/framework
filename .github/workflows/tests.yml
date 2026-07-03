@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         php: [ '8.4', '8.5' ]
-        laravel: [ '12.60', '12.62', '13.10', '13.18' ]
+        laravel: [ '12.61', '12.62', '13.12', '13.18' ]
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout

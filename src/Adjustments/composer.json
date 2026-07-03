@@ -21,7 +21,7 @@
         "konekt/concord": "^1.16",
         "konekt/enum": "^4.2",
         "konekt/enum-eloquent": "^1.9",
-        "laravel/framework": "^12.60|^13.10",
+        "laravel/framework": "^12.61.1|^13.12",
         "vanilo/support": "^6.0"
     },
     "require-dev": {
