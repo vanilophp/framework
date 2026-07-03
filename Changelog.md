@@ -29,6 +29,8 @@
 - Added the `OrderStateChangedToPending` and `OrderWasWithdrawn` events
 - Changed the order of tax and promotion calculations so that promotions are applied before taxes
 - Changed the Postgres testing policy to use v15 and v18
+- Changed the Tax adjusters to take the adjusted amount as base for the tax calculation (taking discounts and other adjustments into account)
+- BC: Added the `total()` method to the `Adjustable` interface
 - BC: Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface
 - Fixed errors in a possible race condition scenario (cart, adjustments)
 

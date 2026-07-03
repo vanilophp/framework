@@ -20,6 +20,11 @@ class SampleAdjustable implements Adjustable
         return $this->fakePreadjustmentTotal;
     }
 
+    public function total(): float
+    {
+        return 0;
+    }
+
     public function invalidateAdjustments(): void
     {
         // TODO: Implement invalidateAdjustments() method.

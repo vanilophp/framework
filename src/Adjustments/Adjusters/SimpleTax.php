@@ -64,8 +64,8 @@ final class SimpleTax implements Adjuster
     private function calculateTaxAmount(Adjustable $adjustable): float
     {
         return $this->roundTax(match ($this->isIncluded) {
-            true => $adjustable->preAdjustmentTotal() / (100 +  $this->rate) *  $this->rate,
-            false => $adjustable->preAdjustmentTotal() *  $this->rate / 100,
+            true => $adjustable->total() / (100 +  $this->rate) *  $this->rate,
+            false => $adjustable->total() *  $this->rate / 100,
         });
     }
 

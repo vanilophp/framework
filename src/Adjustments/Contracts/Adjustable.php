@@ -20,6 +20,8 @@ interface Adjustable
 {
     public function preAdjustmentTotal(): float;
 
+    public function total(): float;
+
     public function invalidateAdjustments(): void;
 
     public function adjustments(): AdjustmentCollection;
