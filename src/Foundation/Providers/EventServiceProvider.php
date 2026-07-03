@@ -48,24 +48,29 @@ class EventServiceProvider extends ServiceProvider
         ],
         ShippingAddressChanged::class => [
             CalculateShippingFees::class,
+            CalculatePromotions::class,
             CalculateTaxes::class,
         ],
         BillpayerChanged::class => [
+            CalculateShippingFees::class,
+            CalculatePromotions::class,
             CalculateTaxes::class,
         ],
         CartUpdated::class => [
             CalculateShippingFees::class,
-            CalculateTaxes::class,
             CalculatePromotions::class,
+            CalculateTaxes::class,
         ],
         CartDeleting::class => [
             DeleteCartAdjustments::class,
         ],
         CouponAdded::class => [
             CalculatePromotions::class,
+            CalculateTaxes::class,
         ],
         CouponRemoved::class => [
             CalculatePromotions::class,
+            CalculateTaxes::class,
         ],
         CouponUtilized::class => [
             UpdateCouponUsage::class,
