@@ -36,6 +36,6 @@ class Order extends Model implements Adjustable
 
     public function total(): float
     {
-        return $this->preAdjustmentTotal() + $this->adjustments()->total();
+        return round($this->preAdjustmentTotal() + $this->adjustments()->total(), 2);
     }
 }

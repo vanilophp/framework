@@ -33,6 +33,7 @@
 - BC: Added the `total()` method to the `Adjustable` interface
 - BC: Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface
 - Fixed errors in a possible race condition scenario (cart, adjustments)
+- Fixed the stale data issue when removing adjustments by type from a relation-based adjustment collection
 
 ## 5.x Series
 

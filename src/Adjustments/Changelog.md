@@ -9,6 +9,7 @@
 - Dropped Laravel 10 & 11 support
 - BC: Added the `total()` method to the `Adjustable` interface
 - Fixed the possible error in a race condition scenario when invalidating an adjustment collection
+- Fixed the stale data issue when removing adjustments by type from a relation-based adjustment collection
 - Changed the Tax adjusters to take the adjusted amount as base for the tax calculation (taking discounts and other adjustments into account)
 - Added rounding to all tax and the percentage discount adjusters (based on Support\Rounding)
 - Added vanilo/support dependency

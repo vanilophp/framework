@@ -102,6 +102,9 @@ class RelationAdjustmentCollection implements AdjustmentCollection
                 $adjustment->delete();
             }
         });
+
+        // Refresh the collection so that no stale items remain in memory
+        $this->model->load('adjustmentsRelation');
     }
 
     public function byType(AdjustmentType $type): AdjustmentCollection
