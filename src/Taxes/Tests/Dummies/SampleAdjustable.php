@@ -22,7 +22,7 @@ class SampleAdjustable implements Adjustable
 
     public function total(): float
     {
-        return 0;
+        return $this->preAdjustmentTotal();
     }
 
     public function invalidateAdjustments(): void
