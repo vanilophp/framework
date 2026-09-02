@@ -69,8 +69,9 @@ class ExtendedOrderFactoryTest extends TestCase
 
     #[Test] public function it_maps_the_parent_relationships_correctly()
     {
-        $product = ProductFactory::new()->create(['price' => 25]);
+        $product1 = ProductFactory::new()->create(['price' => 25]);
         $product2 = ProductFactory::new()->create(['price' => 50]);
+        $product3 = ProductFactory::new()->create(['price' => 90]);
 
         $shippingMethod = ShippingMethod::create([
             'name' => 'Delivery to your Door',
@@ -78,8 +79,11 @@ class ExtendedOrderFactoryTest extends TestCase
             'configuration' => ['cost' => 5],
         ]);
 
-        $mainItem = Cart::addItem($product);
-        $subItem = Cart::addSubItem($mainItem, $product2);
+        $irrelevantItem1 = Cart::addItem($product3);
+        $irrelevantItem1->delete(); // Test hardening, so that 1,2,3 IDs are not matched between cart item/order item
+        $mainItem = Cart::addItem($product1);
+        Cart::addSubItem($mainItem, $product2);
+        Cart::addItem($product3);
 
         Checkout::setCart(Cart::getFacadeRoot());
         $this->completeCheckout($shippingMethod->id);
@@ -87,9 +91,11 @@ class ExtendedOrderFactoryTest extends TestCase
         $factory = new OrderFactory(new NanoIdGenerator());
         $order = $factory->createFromCheckout(Checkout::getFacadeRoot());
 
-        $item1 = $order->getItems()[0];
-        $item2 = $order->getItems()[1];
+        $item1 = $order->getItems()->where('product_id', $product1->id)->first();
+        $item2 = $order->getItems()->where('product_id', $product2->id)->first();
+        $item3 = $order->getItems()->where('product_id', $product3->id)->first();
         $this->assertEquals($item1->id, $item2->parent_id);
+        $this->assertNull($item3->parent_id);
     }
 
     private function completeCheckout(int $useShippingMethodId): void

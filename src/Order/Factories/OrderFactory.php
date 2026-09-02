@@ -35,8 +35,8 @@ class OrderFactory implements OrderFactoryContract
     /** @var OrderNumberGenerator */
     protected $orderNumberGenerator;
 
-    /** @var array|int[] Contains the mapping of the original item IDs to the created order item IDs  */
-    private array $sourceItemToOrderItemIdMap = [];
+    /** @var array|int[] Contains the mapping of the item refs to the created order item IDs  */
+    private array $itemRefIdMap = [];
 
     public function __construct(OrderNumberGenerator $generator)
     {
@@ -137,9 +137,13 @@ class OrderFactory implements OrderFactoryContract
             unset($item['product']);
         }
 
-        $orderItem = $order->items()->create($item);
+        // The following fields are not persisted:
+        // - parent_id: it cannot be known until the parent item is created. 99.9999% Garbage data would be inserted. Use ref/parent_ref instead
+        // - ref: it is a special field used to identify order items before persisting them.
+        // - parent_ref: a special field used only during creating to identify the parent item.
+        $orderItem = $order->items()->create(Arr::except($item, ['ref', 'parent_ref', 'parent_id']));
 
-        $this->addToSourceItemIdMap($item, $orderItem);
+        $this->addToItemRefIdMap($item, $orderItem);
 
         return $orderItem;
     }
@@ -217,24 +221,26 @@ class OrderFactory implements OrderFactoryContract
         return AddressProxy::create($address);
     }
 
-    private function addToSourceItemIdMap(array $sourceItem, OrderItem $createdOrderItem): void
+    private function addToItemRefIdMap(array $sourceItem, OrderItem $createdOrderItem): void
     {
-        if (isset($sourceItem['id'])) {
-            $this->sourceItemToOrderItemIdMap[(string) $sourceItem['id']] = $createdOrderItem->id;
+        if (isset($sourceItem['ref'])) {
+            $this->itemRefIdMap[(string) $sourceItem['ref']] = $createdOrderItem->id;
         }
     }
 
     private function setOrderItemParentRelationships(Order $order, array $sourceItems): void
     {
         foreach ($sourceItems as $sourceItem) {
-            if (isset($sourceItem['id']) && isset($sourceItem['parent_id'])) {
-                $idOfTheOrderItemThatHasToHaveAParent = $this->sourceItemToOrderItemIdMap[(string) $sourceItem['id']] ?? null;
-                $idOfTheParentOrderItem = $this->sourceItemToOrderItemIdMap[(string) $sourceItem['parent_id']] ?? null;
+            if (isset($sourceItem['ref']) && isset($sourceItem['parent_ref'])) {
+                $idOfTheOrderItemThatHasToHaveAParent = $this->itemRefIdMap[(string) $sourceItem['ref']] ?? null;
+                $idOfTheParentOrderItem = $this->itemRefIdMap[(string) $sourceItem['parent_ref']] ?? null;
 
                 // If we have the right ID mappings, we can properly set the parent order item relationship based on the source item relationship
                 if ($idOfTheOrderItemThatHasToHaveAParent && $idOfTheParentOrderItem) {
-                    $orderItem = $order->items()->find($idOfTheOrderItemThatHasToHaveAParent);
-                    $orderItem->update(['parent_id' => $idOfTheParentOrderItem]);
+                    $order
+                        ->items()
+                        ->find($idOfTheOrderItemThatHasToHaveAParent)
+                        ?->update(['parent_id' => $idOfTheParentOrderItem]);
                 }
             }
         }

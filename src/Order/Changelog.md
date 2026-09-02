@@ -9,6 +9,8 @@
 - Dropped Laravel 10 & 11 support
 - Added the `WITHDRAWN` order status
 - Added the `OrderStateChangedToPending` and `OrderWasWithdrawn` events
+- BC: Changed the OrderFactory to use `ref`/`parent_ref` fields internally, instead of `id`/`parent_id` for setting `order_item.parent_id` relationships on the fly
+- Changed the OrderFactory to remove the `ref`, `parent_ref`, and `parent_id` fields from raw order items before saving them to the database. These fields are not persisted and should only be used internally.
 
 ## 5.x Series
 

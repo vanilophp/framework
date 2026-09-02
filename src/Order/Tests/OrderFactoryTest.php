@@ -225,7 +225,7 @@ class OrderFactoryTest extends TestCase
         $this->assertNull($item->parent_id);
     }
 
-    #[Test] public function item_parent_id_is_mapped_properly_if_specified()
+    #[Test] public function item_id_and_parent_id_field_are_ignored_when_passed()
     {
         $order = $this->factory->createFromDataArray(
             [],
@@ -241,10 +241,41 @@ class OrderFactoryTest extends TestCase
                 [
                     'id' => 112,
                     'product_type' => 'product',
+                    'product_id' => $this->z650rs->getId(),
+                    'name' => $this->z650rs->getName(),
+                    'price' => $this->z650rs->getPrice(),
+                    'parent_id' => 111
+                ]
+            ]
+        );
+
+        $item1 = $order->getItems()->where('product_id', $this->mazdaRX8->getId())->first();
+        $item2 = $order->getItems()->where('product_id', $this->z650rs->getId())->first();
+        $this->assertNotEquals(111, (int) $item1->id);
+        $this->assertNotEquals(112, (int) $item2->id);
+        $this->assertNull($item1->parent_id);
+        $this->assertNull($item2->parent_id);
+    }
+
+    #[Test] public function item_parent_id_is_mapped_properly_if_refs_are_specified()
+    {
+        $order = $this->factory->createFromDataArray(
+            [],
+            [
+                [
+                    'product_type' => 'product',
                     'product_id' => $this->mazdaRX8->getId(),
                     'name' => $this->mazdaRX8->getName(),
                     'price' => $this->mazdaRX8->getPrice(),
-                    'parent_id' => 111
+                    'ref' => 'aaa_111',
+                ],
+                [
+                    'product_type' => 'product',
+                    'product_id' => $this->mazdaRX8->getId(),
+                    'name' => $this->mazdaRX8->getName(),
+                    'price' => $this->mazdaRX8->getPrice(),
+                    'ref' => 'aaa_112',
+                    'parent_ref' => 'aaa_111',
                 ]
             ]
         );

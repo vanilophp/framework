@@ -32,6 +32,8 @@
 - Changed the Tax adjusters to take the adjusted amount as base for the tax calculation (taking discounts and other adjustments into account)
 - BC: Added the `total()` method to the `Adjustable` interface
 - BC: Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface
+- BC: Changed the OrderFactory to use `ref`/`parent_ref` fields internally, instead of `id`/`parent_id` for setting `order_item.parent_id` relationships on the fly
+- Changed the OrderFactory to remove the `ref`, `parent_ref`, and `parent_id` fields from raw order items before saving them to the database. These fields are not persisted and should only be used internally.
 - Fixed errors in a possible race condition scenario (cart, adjustments)
 - Fixed the stale data issue when removing adjustments by type from a relation-based adjustment collection
 
