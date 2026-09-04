@@ -37,7 +37,7 @@ final class TaxCalculators implements Registry
 
     public static function make(string $id, array $parameters = []): TaxCalculator
     {
-        $class = self::getClass($id);
+        $class = self::getClassOf($id);
 
         if (null === $class) {
             throw new InexistentTaxCalculatorException(
