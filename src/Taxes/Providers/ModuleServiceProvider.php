@@ -45,8 +45,8 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         $this->app->singleton(TaxEngineManager::class, fn ($app) => new TaxEngineManager($app));
         $this->app->bind(TaxEngineDriver::class, fn ($app) => $app->make(TaxEngineManager::class)->driver());
 
-        TaxCalculators::register('none', NullTaxCalculator::class);
-        TaxCalculators::register('default', DefaultTaxCalculator::class);
-        TaxCalculators::register('deductive', DeductiveTaxCalculator::class);
+        TaxCalculators::add('none', NullTaxCalculator::class);
+        TaxCalculators::add('default', DefaultTaxCalculator::class);
+        TaxCalculators::add('deductive', DeductiveTaxCalculator::class);
     }
 }

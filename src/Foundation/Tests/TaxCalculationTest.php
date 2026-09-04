@@ -35,7 +35,7 @@ class TaxCalculationTest extends TestCase
         parent::setUp();
 
         TaxEngine::extend(ExampleTaxEngine::ID, ExampleTaxEngine::class);
-        TaxCalculators::register('example', ExampleTaxCalculator::class);
+        TaxCalculators::add('example', ExampleTaxCalculator::class);
     }
 
     #[Test] public function no_tax_adjustment_gets_created_if_there_is_no_tax_engine_configured()
