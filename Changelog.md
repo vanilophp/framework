@@ -27,6 +27,7 @@
 - Added the `feature()`, `feature_is_enabled()`, and `feature_is_disabled()` helpers
 - Added the `WITHDRAWN` order status
 - Added the `OrderStateChangedToPending` and `OrderWasWithdrawn` events
+- Added the `taxonsIn()` and `firstTaxonIn()` methods to the `HasTaxons` trait.
 - Changed the order of tax and promotion calculations so that promotions are applied before taxes
 - Changed the Postgres testing policy to use v15 and v18
 - Changed the Tax adjusters to take the adjusted amount as base for the tax calculation (taking discounts and other adjustments into account)

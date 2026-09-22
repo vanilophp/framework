@@ -14,8 +14,10 @@ declare(strict_types=1);
 
 namespace Vanilo\Category\Traits;
 
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Vanilo\Category\Contracts\Taxon;
+use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Category\Models\TaxonProxy;
 
 trait HasTaxons
@@ -55,5 +57,29 @@ trait HasTaxons
     public function removeTaxon(Taxon $taxon)
     {
         return $this->taxons()->detach($taxon);
+    }
+
+    public function taxonsIn(string $taxonomySlug): Collection
+    {
+        if (null === $taxonomy = TaxonomyProxy::findOneBySlug($taxonomySlug)) {
+            return collect();
+        }
+
+        return $this
+            ->taxons()
+            ->where('taxonomy_id', $taxonomy->id)
+            ->get();
+    }
+
+    public function firstTaxonIn(string $taxonomySlug): ?Taxon
+    {
+        if (null === $taxonomy = TaxonomyProxy::findOneBySlug($taxonomySlug)) {
+            return null;
+        }
+
+        return $this
+            ->taxons()
+            ->where('taxonomy_id', $taxonomy->id)
+            ->first();
     }
 }

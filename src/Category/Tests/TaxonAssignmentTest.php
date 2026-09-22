@@ -131,6 +131,53 @@ class TaxonAssignmentTest extends TestCase
         $this->assertEquals('product', $assignment->model_type);
     }
 
+    #[Test] public function a_list_of_taxons_within_a_given_taxonomy_can_be_retrieved_with_the_designated_method()
+    {
+        $tools = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Tools']);
+        $pruners = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Pruners']);
+        $gloves = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Gloves']);
+
+        $seasons = Taxonomy::create(['name' => 'Seasons']);
+        $summer = Taxon::create(['taxonomy_id' => $seasons->id, 'name' => 'Summer']);
+        $spring = Taxon::create(['taxonomy_id' => $seasons->id, 'name' => 'Spring']);
+
+        /** @var Product $greenRake */
+        $greenRake = Product::create(['name' => 'Green Rake']);
+
+        $greenRake->addTaxons([$tools, $pruners, $spring]);
+        $greenRake = $greenRake->fresh();
+
+        $categories = $greenRake->taxonsIn($this->taxonomy->slug);
+
+        $this->assertCount(2, $categories);
+        $this->assertContains('Tools', $categories->pluck('name'));
+        $this->assertContains('Pruners', $categories->pluck('name'));
+
+        $season = $greenRake->taxonsIn($seasons->slug);
+
+        $this->assertCount(1, $season);
+        $this->assertContains('Spring', $season->pluck('name'));
+    }
+
+    #[Test] public function a_single_taxon_within_a_given_taxonomy_can_be_retrieved_with_the_designated_method()
+    {
+        $green = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Green']);
+        $red = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Red']);
+        $yellow = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Yello']);
+        $blue = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Blue']);
+
+        /** @var Product $jamaica */
+        $jamaica = Product::create(['name' => 'Jamaica']);
+
+        $jamaica->addTaxons([$green, $red, $yellow]);
+        $jamaica = $jamaica->fresh();
+
+        $aColor = $jamaica->firstTaxonIn($this->taxonomy->slug);
+
+        $this->assertInstanceOf(Taxon::class, $aColor);
+        $this->assertContains($aColor->name, ['Green', 'Red', 'Yellow']);
+    }
+
     /**
      * Set up the database.
      *

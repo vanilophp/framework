@@ -7,6 +7,7 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Added the `taxonsIn()` and `firstTaxonIn()` methods to the `HasTaxons` trait.
 
 ## 5.x Series
 
