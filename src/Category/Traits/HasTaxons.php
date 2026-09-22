@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Vanilo\Category\Traits;
 
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon;
 use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Category\Models\TaxonProxy;
