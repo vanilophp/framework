@@ -29,6 +29,8 @@ use Vanilo\Properties\PropertyTypes;
  * @property string     $name
  * @property string     $slug
  * @property string     $type
+ * @property null|string $excerpt
+ * @property null|string $description
  * @property array      $configuration
  * @property bool       $is_hidden
  * @property Collection $propertyValues

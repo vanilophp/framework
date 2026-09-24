@@ -26,13 +26,17 @@ class PropertyTest extends TestCase
             'name' => 'Funkiness',
             'type' => 'text',
             'slug' => 'funkiness',
+            'excerpt' => 'Short description',
+            'description' => 'Long description',
             'is_hidden' => true,
             'configuration' => ['x' => 'y', 'a' => 'b']
-        ]);
+        ])->fresh();
 
         $this->assertEquals('Funkiness', $property->name);
         $this->assertEquals('text', $property->type);
         $this->assertEquals('funkiness', $property->slug);
+        $this->assertEquals('Short description', $property->excerpt);
+        $this->assertEquals('Long description', $property->description);
         $this->assertEquals(['x' => 'y', 'a' => 'b'], $property->configuration);
         $this->assertTrue($property->is_hidden);
     }
@@ -44,6 +48,8 @@ class PropertyTest extends TestCase
         $property->name = 'Creepiness';
         $property->type = 'number';
         $property->slug = 'creepiness';
+        $property->excerpt = 'Short description 2';
+        $property->description = 'Long description 2';
         $property->is_hidden = true;
         $property->configuration = ['bam' => 'zdish', 'bumm' => 'tsish'];
 
@@ -54,6 +60,8 @@ class PropertyTest extends TestCase
         $this->assertEquals('number', $property->type);
         $this->assertTrue($property->is_hidden);
         $this->assertEquals('creepiness', $property->slug);
+        $this->assertEquals('Short description 2', $property->excerpt);
+        $this->assertEquals('Long description 2', $property->description);
 
         $cfg = $property->configuration;
         $this->assertIsArray($cfg);
