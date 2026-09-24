@@ -9,6 +9,7 @@
 - Dropped Laravel 10 & 11 support
 - Added the `taxonsIn()` and `firstTaxonIn()` methods to the `HasTaxons` trait.
 - Added the `is_active` field to the `Taxon` model/table
+- Added the `activeRootLevelTaxons()` method to the `Taxonomy` model
 
 ## 5.x Series
 

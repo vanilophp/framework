@@ -57,6 +57,15 @@ class Taxonomy extends Model implements TaxonomyContract
                          ->get();
     }
 
+    public function activeRootLevelTaxons(): Collection
+    {
+        return TaxonProxy::byTaxonomy($this)
+            ->roots()
+            ->activeOnes()
+            ->sort()
+            ->get();
+    }
+
     public function sluggable(): array
     {
         return [

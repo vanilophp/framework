@@ -80,6 +80,28 @@ class TaxonomyTest extends TestCase
         $this->assertArrayHasKey($root4->name, $roots->keyBy('name'));
     }
 
+    #[Test] public function it_can_return_the_active_root_level_taxons()
+    {
+        $brand = Taxonomy::create(['name' => 'Category']);
+
+        $root1 = Taxon::create(['taxonomy_id' => $brand->id, 'name' => 'Root 1', 'is_active' => true]);
+        $root2 = Taxon::create(['taxonomy_id' => $brand->id, 'name' => 'Root 2', 'is_active' => false]);
+        $root3 = Taxon::create(['taxonomy_id' => $brand->id, 'name' => 'Root 3', 'is_active' => true]);
+        $root4 = Taxon::create(['taxonomy_id' => $brand->id, 'name' => 'Root 4', 'is_active' => true]);
+
+        Taxon::create(['taxonomy_id' => $brand->id, 'name' => 'Child of Root 1', 'parent_id' => $root1]);
+        Taxon::create(['taxonomy_id' => $brand->id, 'name' => 'Second Child of Root 1', 'parent_id' => $root1]);
+        Taxon::create(['taxonomy_id' => $brand->id, 'name' => 'Child of Root 3', 'parent_id' => $root3]);
+
+        $activeRoots = $brand->activeRootLevelTaxons();
+
+        $this->assertCount(3, $activeRoots);
+        $this->assertArrayHasKey($root1->name, $activeRoots->keyBy('name'));
+        $this->assertArrayNotHasKey($root2->name, $activeRoots->keyBy('name'));
+        $this->assertArrayHasKey($root3->name, $activeRoots->keyBy('name'));
+        $this->assertArrayHasKey($root4->name, $activeRoots->keyBy('name'));
+    }
+
     #[Test] public function root_level_taxons_method_returns_an_empty_collection_if_no_taxons_are_defined()
     {
         $category = Taxonomy::create(['name' => 'Category']);
