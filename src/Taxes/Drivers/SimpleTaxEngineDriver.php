@@ -23,7 +23,7 @@ use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Contracts\TaxRate;
 use Vanilo\Taxes\Models\TaxRateProxy;
 
-class SimpleTaxEngineDriver implements TaxEngineDriver, Registerable
+class SimpleTaxEngineDriver implements TaxEngineDriver
 {
     public function __construct(
         private readonly bool $useShippingAddress = false,

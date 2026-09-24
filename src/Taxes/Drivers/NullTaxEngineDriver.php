@@ -21,7 +21,7 @@ use Vanilo\Taxes\Contracts\Taxable;
 use Vanilo\Taxes\Contracts\TaxEngineDriver;
 use Vanilo\Taxes\Contracts\TaxRate;
 
-class NullTaxEngineDriver implements TaxEngineDriver, Registerable
+class NullTaxEngineDriver implements TaxEngineDriver
 {
     public const ID = 'none';
 

@@ -33,6 +33,11 @@ class ExampleTaxEngine implements TaxEngineDriver
 {
     public const ID = 'example';
 
+    public static function getName(): string
+    {
+        return 'example';
+    }
+
     public function resolveTaxRate(Taxable $taxable, ?Billpayer $billpayer = null, ?Address $shippingAddress = null): ?TaxRate
     {
         $rate = match ($taxable->getTaxCategory()->getType()->value()) {

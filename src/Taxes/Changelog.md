@@ -12,6 +12,8 @@
 - BC: Changed the `TaxCalculator` interface method signatures:
    - The `calculate()` method now requires the `$subject` argument to be an instance of `Adjustable` (instead of `?object`)
    - The `getAdjuster()` method has `?Adjuster` return type instead of `?object`
+   - The interface extends the `Registerable` interface
+- BC: Changed the `TaxEngineDriver` interface to extend the `Registerable` interface
 
 ## 5.x Series
 

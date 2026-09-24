@@ -37,6 +37,8 @@
 - BC: Changed the `TaxCalculator` interface method signatures:
     - The `calculate()` method now requires the `$subject` argument to be an instance of `Adjustable` (instead of `?object`)
     - The `getAdjuster()` method has `?Adjuster` return type instead of `?object`
+  - The interface extends the `Registerable` interface
+- BC: Changed the `TaxEngineDriver` interface to extend the `Registerable` interface 
 - BC: Changed the OrderFactory to use `ref`/`parent_ref` fields internally, instead of `id`/`parent_id` for setting `order_item.parent_id` relationships on the fly
 - Changed the OrderFactory to remove the `ref`, `parent_ref`, and `parent_id` fields from raw order items before saving them to the database. These fields are not persisted and should only be used internally.
 - Fixed errors in a possible race condition scenario (cart, adjustments)

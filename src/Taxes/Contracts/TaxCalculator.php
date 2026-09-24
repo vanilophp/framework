@@ -14,12 +14,13 @@ declare(strict_types=1);
 
 namespace Vanilo\Taxes\Contracts;
 
+use Konekt\Extend\Contracts\Registerable;
 use Vanilo\Adjustments\Contracts\Adjustable;
 use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Contracts\Schematized;
 
-interface TaxCalculator extends Schematized
+interface TaxCalculator extends Schematized, Registerable
 {
     public static function getName(): string;
 
