@@ -378,4 +378,33 @@ class TaxonTest extends TestCase
         $this->assertEquals('Hey I am an html content above the product list', $taxon->top_content);
         $this->assertEquals('I am a markdown content below the product list', $taxon->bottom_content);
     }
+
+    #[Test] public function it_can_be_activated_and_deactivated()
+    {
+        $taxonomy = Taxonomy::create(['name' => 'Motorcycle Type']);
+        $superMoto = Taxon::create([
+            'name' => 'Super Moto',
+            'taxonomy_id' => $taxonomy->id,
+            'is_active' => true,
+        ])->fresh();
+
+        $chopper = Taxon::create([
+            'name' => 'Chopper',
+            'taxonomy_id' => $taxonomy->id,
+            'is_active' => false,
+        ])->fresh();
+
+        $naked = Taxon::create([
+            'name' => 'Naked Bike',
+            'taxonomy_id' => $taxonomy->id,
+            'is_active' => true,
+        ])->fresh();
+
+        $this->assertTrue($superMoto->is_active);
+        $this->assertFalse($chopper->is_active);
+        $this->assertTrue($naked->is_active);
+
+        $this->assertCount(2, $taxonomy->taxons()->activeOnes()->get());
+        $this->assertCount(1, $taxonomy->taxons()->inactives()->get());
+    }
 }

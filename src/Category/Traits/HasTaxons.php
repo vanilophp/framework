@@ -17,6 +17,7 @@ namespace Vanilo\Category\Traits;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Vanilo\Category\Contracts\Taxon;
+use Vanilo\Category\Contracts\Taxonomy;
 use Vanilo\Category\Models\TaxonomyProxy;
 use Vanilo\Category\Models\TaxonProxy;
 
@@ -59,27 +60,39 @@ trait HasTaxons
         return $this->taxons()->detach($taxon);
     }
 
-    public function taxonsIn(string $taxonomySlug): Collection
+    public function taxonsIn(string|Taxonomy $taxonomy, bool $withInactive = false): Collection
     {
-        if (null === $taxonomy = TaxonomyProxy::findOneBySlug($taxonomySlug)) {
+        $taxonomy = match (true) {
+            is_string($taxonomy) => TaxonomyProxy::findOneBySlug($taxonomy),
+            default => $taxonomy,
+        };
+
+        if (null === $taxonomy) {
             return collect();
         }
 
         return $this
             ->taxons()
             ->where('taxonomy_id', $taxonomy->id)
+            ->when(!$withInactive, fn ($query) => $query->activeOnes())
             ->get();
     }
 
-    public function firstTaxonIn(string $taxonomySlug): ?Taxon
+    public function firstTaxonIn(string|Taxonomy $taxonomy, bool $withInactive = false): ?Taxon
     {
-        if (null === $taxonomy = TaxonomyProxy::findOneBySlug($taxonomySlug)) {
+        $taxonomy = match (true) {
+            is_string($taxonomy) => TaxonomyProxy::findOneBySlug($taxonomy),
+            default => $taxonomy,
+        };
+
+        if (null === $taxonomy) {
             return null;
         }
 
         return $this
             ->taxons()
             ->where('taxonomy_id', $taxonomy->id)
+            ->when(!$withInactive, fn ($query) => $query->activeOnes())
             ->first();
     }
 }

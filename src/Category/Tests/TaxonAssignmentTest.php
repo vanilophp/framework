@@ -133,13 +133,13 @@ class TaxonAssignmentTest extends TestCase
 
     #[Test] public function a_list_of_taxons_within_a_given_taxonomy_can_be_retrieved_with_the_designated_method()
     {
-        $tools = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Tools']);
-        $pruners = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Pruners']);
-        $gloves = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Gloves']);
+        $tools = $this->createTaxon($this->taxonomy, 'Tools');
+        $pruners = $this->createTaxon($this->taxonomy, 'Pruners');
+        $gloves = $this->createTaxon($this->taxonomy, 'Gloves');
 
         $seasons = Taxonomy::create(['name' => 'Seasons']);
-        $summer = Taxon::create(['taxonomy_id' => $seasons->id, 'name' => 'Summer']);
-        $spring = Taxon::create(['taxonomy_id' => $seasons->id, 'name' => 'Spring']);
+        $summer = $this->createTaxon($seasons, 'Summer');
+        $spring = $this->createTaxon($seasons, 'Spring');
 
         /** @var Product $greenRake */
         $greenRake = Product::create(['name' => 'Green Rake']);
@@ -161,10 +161,10 @@ class TaxonAssignmentTest extends TestCase
 
     #[Test] public function a_single_taxon_within_a_given_taxonomy_can_be_retrieved_with_the_designated_method()
     {
-        $green = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Green']);
-        $red = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Red']);
-        $yellow = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Yello']);
-        $blue = Taxon::create(['taxonomy_id' => $this->taxonomy->id, 'name' => 'Blue']);
+        $green = $this->createTaxon($this->taxonomy, 'Green');
+        $red = $this->createTaxon($this->taxonomy, 'Red');
+        $yellow = $this->createTaxon($this->taxonomy, 'Yellow');
+        $this->createTaxon($this->taxonomy, 'Blue');
 
         /** @var Product $jamaica */
         $jamaica = Product::create(['name' => 'Jamaica']);
@@ -176,6 +176,103 @@ class TaxonAssignmentTest extends TestCase
 
         $this->assertInstanceOf(Taxon::class, $aColor);
         $this->assertContains($aColor->name, ['Green', 'Red', 'Yellow']);
+    }
+
+    #[Test] public function only_active_taxons_within_a_given_taxonomy_are_be_retrieved_with_the_designated_method_by_default()
+    {
+        $makes = Taxonomy::create(['name' => 'Make']);
+        $polestar = $this->createTaxon($makes, 'Polestar');
+        $koenigsegg = $this->createTaxon($makes, 'Koenigsegg');
+        $saab = $this->createTaxon($makes, 'Saab', false);
+
+        $kings = Taxonomy::create(['name' => 'Kings']);
+        $henry8 = $this->createTaxon($kings, 'Henry VIII', false);
+        $elizabeth2 = $this->createTaxon($kings, 'Elizabeth II', false);
+        $charles3 = $this->createTaxon($kings, 'Charles III');
+
+        /** @var Product $ukKing */
+        $ukKing = Product::create(['name' => 'A living King']);
+
+        $ukKing->addTaxons([$henry8, $elizabeth2, $charles3]);
+        $ukKing = $ukKing->fresh();
+
+        $kingTaxons = $ukKing->taxonsIn($kings);
+
+        $this->assertCount(1, $kingTaxons);
+        $this->assertContains('Charles III', $kingTaxons->pluck('name'));
+
+        /** @var Product $swedishCar */
+        $swedishCar = Product::create(['name' => 'Swedish Car']);
+
+        $swedishCar->addTaxons([$polestar, $koenigsegg, $saab]);
+        $swedishCar = $swedishCar->fresh();
+
+        $carTaxons = $swedishCar->taxonsIn($makes);
+
+        $this->assertCount(2, $carTaxons);
+        $this->assertNotContains('Saab', $carTaxons->pluck('name'));
+    }
+
+    #[Test] public function only_an_active_single_taxon_within_a_given_taxonomy_is_retrieved_with_the_designated_method_by_default()
+    {
+        $hugeMammals = Taxonomy::create(['name' => 'Mammals']);
+        $elephant = $this->createTaxon($hugeMammals, 'Elephant');
+        $mammoth = $this->createTaxon($hugeMammals, 'Mammoth', false);
+        $this->createTaxon($hugeMammals, 'Whale');
+
+        /** @var Product $animal */
+        $animal = Product::create(['name' => 'It looks like an Elephant or a Mammoth']);
+
+        $animal->addTaxon($mammoth);
+
+        $this->assertEmpty($animal->fresh()->firstTaxonIn($hugeMammals));
+
+        $animal->addTaxon($elephant);
+        $mammal = $animal->fresh()->firstTaxonIn($hugeMammals);
+
+        $this->assertInstanceOf(Taxon::class, $mammal);
+        $this->assertEquals('Elephant', $mammal->name);
+    }
+
+    #[Test] public function inactive_taxons_within_a_given_taxonomy_can_be_retrieved_using_an_explicit_parameter()
+    {
+        $resemblesTo = Taxonomy::create(['name' => 'Resembles To']);
+        $fireblade = $this->createTaxon($resemblesTo, 'CBR900RR', false);
+        $genesis = $this->createTaxon($resemblesTo, 'FZR1000', false);
+        $r1 = $this->createTaxon($resemblesTo, 'YZF-R1');
+
+        /** @var Product $bike */
+        $bike = Product::create(['name' => 'A Supersport Bike']);
+        $bike->addTaxons([$r1, $fireblade, $genesis]);
+        $currentClassicAncestors = $bike->fresh()->taxonsIn($resemblesTo);
+        $this->assertCount(1, $currentClassicAncestors);
+        $this->assertContains('YZF-R1', $currentClassicAncestors->pluck('name'));
+
+        $allClassicAncestors = $bike->fresh()->taxonsIn($resemblesTo, true);
+        $this->assertCount(3, $allClassicAncestors);
+
+        $this->assertContains('YZF-R1', $allClassicAncestors->pluck('name'));
+        $this->assertContains('CBR900RR', $allClassicAncestors->pluck('name'));
+        $this->assertContains('FZR1000', $allClassicAncestors->pluck('name'));
+    }
+
+    #[Test] public function a_single_inactive_taxon_within_a_given_taxonomy_can_be_retrieved_using_an_explicit_parameter()
+    {
+        $fashionablePoliticalSystems = Taxonomy::create(['name' => 'Fashionable Political Systems']);
+        $autocracy = $this->createTaxon($fashionablePoliticalSystems, 'Autocracy');
+        $communism = $this->createTaxon($fashionablePoliticalSystems, 'Communism', false);
+
+        /** @var Product $yearOf1938 */
+        $yearOf1938 = Product::create(['name' => 'It is 1938']);
+
+        $yearOf1938->addTaxon($communism);
+
+        $this->assertEmpty($yearOf1938->fresh()->firstTaxonIn($fashionablePoliticalSystems));
+
+        $commRetrieved = $yearOf1938->fresh()->firstTaxonIn($fashionablePoliticalSystems, true);
+
+        $this->assertInstanceOf(Taxon::class, $commRetrieved);
+        $this->assertEquals('Communism', $commRetrieved->name);
     }
 
     /**
@@ -197,5 +294,10 @@ class TaxonAssignmentTest extends TestCase
         );
 
         $this->taxonomy = Taxonomy::create(['name' => 'Category']);
+    }
+
+    private function createTaxon(Taxonomy $taxonomy, string $name, bool $isActive = true): Taxon
+    {
+        return Taxon::create(['taxonomy_id' => $taxonomy->id, 'name' => $name, 'is_active' => $isActive]);
     }
 }

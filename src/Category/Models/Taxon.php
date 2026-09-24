@@ -16,6 +16,7 @@ namespace Vanilo\Category\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,6 +31,7 @@ use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
  * @property string $slug
  * @property int|null $parent_id
  * @property int|null $priority
+ * @property bool $is_active
  * @property string|null $ext_title
  * @property string|null $meta_keywords
  * @property string|null $meta_description
@@ -52,6 +54,10 @@ class Taxon extends Model implements TaxonContract
     protected $table = 'taxons';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     /** @var Collection */
     private $_parents;
@@ -202,6 +208,16 @@ class Taxon extends Model implements TaxonContract
     public function scopeExcept($query, TaxonContract $taxon)
     {
         return $query->where('id', '<>', $taxon->id);
+    }
+
+    public function scopeActiveOnes(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeInactives(Builder $query): Builder
+    {
+        return $query->where('is_active', false);
     }
 
     public function sluggable(): array

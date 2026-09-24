@@ -17,6 +17,7 @@
 - Added vanilo/support dependency to the adjustments module
 - Added the `Rounding` class that acts as a system-wide, configurable rounding handler
 - Added rounding to all tax and the percentage discount adjusters (via Support\Rounding)
+- Added the `is_active` field to the `Taxon` model/table
 - BC: Added the `getCart()` method to the `CartItem` interface
 - Added the `LineItem` interface (Contracts)
 - Added the `LineItemType` interface (Contracts)
