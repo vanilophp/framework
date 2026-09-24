@@ -9,6 +9,7 @@
 - Dropped Laravel 10 & 11 support
 - Changed the minimum Laravel 12 version to v12.61.1
 - Changed the minimum Laravel 13 version to v13.12
+- Changed the minimum konekt/address module requirement to v3.9 (adds the `notes` field to addresses)
 - Dropped MySQL 5.7 support (it still works, but it is no longer included in the CI tests)
 - Dropped MySQL 8.0 support (it still works, but it is no longer included in the CI tests)
 - Added explicit MySQL 8.4 support (being actively tested against in the CI)

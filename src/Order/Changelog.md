@@ -7,6 +7,7 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Changed the minimum konekt/address module requirement to v3.9 (adds the `notes` field to addresses)
 - Added the `WITHDRAWN` order status
 - Added the `OrderStateChangedToPending` and `OrderWasWithdrawn` events
 - BC: Changed the OrderFactory to use `ref`/`parent_ref` fields internally, instead of `id`/`parent_id` for setting `order_item.parent_id` relationships on the fly

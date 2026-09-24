@@ -7,6 +7,7 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Changed the minimum konekt/address module requirement to v3.9 (adds the `notes` field to addresses)
 - Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface
 
 ## 5.x Series
