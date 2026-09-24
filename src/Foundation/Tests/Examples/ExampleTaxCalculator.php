@@ -17,6 +17,8 @@ namespace Vanilo\Foundation\Tests\Examples;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use Vanilo\Adjustments\Adjusters\SimpleTax;
+use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Taxes\Contracts\TaxCalculator;
 
@@ -27,7 +29,7 @@ class ExampleTaxCalculator implements TaxCalculator
         return 'Example';
     }
 
-    public function getAdjuster(?array $configuration = null): ?object
+    public function getAdjuster(?array $configuration = null): ?Adjuster
     {
         $rate = floatval($configuration['rate'] ?? 0);
         $adjuster = new SimpleTax($rate, false);
@@ -36,11 +38,11 @@ class ExampleTaxCalculator implements TaxCalculator
         return $adjuster;
     }
 
-    public function calculate(?object $subject = null, ?array $configuration = null): DetailedAmount
+    public function calculate(Adjustable $subject, ?array $configuration = null): DetailedAmount
     {
         $rate = floatval($configuration['rate'] ?? 0);
 
-        return \Vanilo\Support\Dto\DetailedAmount::fromArray([['title' => "$rate%", 'amount' => $subject->itemsTotal() * $rate / 100]]);
+        return \Vanilo\Support\Dto\DetailedAmount::fromArray([['title' => "$rate%", 'amount' => $subject->preAdjustmentTotal() * $rate / 100]]);
     }
 
     public function getSchema(): Schema
