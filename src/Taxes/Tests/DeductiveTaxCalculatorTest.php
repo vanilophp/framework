@@ -3,14 +3,12 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\Attributes\Test;
-use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Support\Models\RoundingLevel;
 use Vanilo\Support\Models\RoundingTarget;
 use Vanilo\Support\Rounding;
 use Vanilo\Taxes\Calculators\DeductiveTaxCalculator;
 use Vanilo\Taxes\TaxCalculators;
 use Vanilo\Taxes\Tests\Dummies\SampleAdjustable;
-use Vanilo\Taxes\Tests\Dummies\SampleTaxable;
 use Vanilo\Taxes\Tests\TestCase;
 
 class DeductiveTaxCalculatorTest extends TestCase
