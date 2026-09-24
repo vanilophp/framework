@@ -19,6 +19,7 @@
 - Added rounding to all tax and the percentage discount adjusters (via Support\Rounding)
 - Added the `is_active` field to the `Taxon` model/table
 - Added the `activeRootLevelTaxons()` method to the `Taxonomy` model
+- Added the `activeChildren` relationship to the `Taxon` model
 - Added the `excerpt` and `description` fields to the `Property` model/table
 - BC: Added the `getCart()` method to the `CartItem` interface
 - Added the `LineItem` interface (Contracts)

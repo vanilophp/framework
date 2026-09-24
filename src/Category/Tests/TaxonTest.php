@@ -191,6 +191,20 @@ class TaxonTest extends TestCase
         $this->assertCount(3, $taxon->children);
     }
 
+    #[Test] public function taxons_active_only_children_can_be_retrieved()
+    {
+        $foxonomy = Taxonomy::create(['name' => 'Foxes']);
+
+        $karak = Taxon::create(['name' => 'Karak', 'taxonomy_id' => $foxonomy->id]);
+
+        Taxon::create(['name' => 'Vuk', 'parent_id' => $karak->id, 'taxonomy_id' => $foxonomy->id, 'is_active' => true]);
+        Taxon::create(['name' => 'Kag', 'parent_id' => $karak->id, 'taxonomy_id' => $foxonomy->id, 'is_active' => false]);
+        Taxon::create(['name' => 'Iny', 'parent_id' => $karak->id, 'taxonomy_id' => $foxonomy->id, 'is_active' => false]);
+
+        $this->assertCount(1, $karak->activeChildren);
+        $this->assertEquals('Vuk', $karak->activeChildren->first()->name);
+    }
+
     #[Test] public function taxons_can_tell_their_level_in_the_tree()
     {
         $taxonomy = Taxonomy::create(['name' => 'Category']);

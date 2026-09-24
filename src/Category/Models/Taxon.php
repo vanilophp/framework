@@ -45,6 +45,8 @@ use Vanilo\Category\Contracts\Taxonomy as TaxonomyContract;
  *
  * @property-read Taxonomy $taxonomy
  * @property-read Taxon|null $parent
+ * @property-read Collection|Taxon[] $children
+ * @property-read Collection|Taxon[] $activeChildren
  */
 class Taxon extends Model implements TaxonContract
 {
@@ -181,6 +183,11 @@ class Taxon extends Model implements TaxonContract
     public function children(): HasMany
     {
         return $this->hasMany(TaxonProxy::modelClass(), 'parent_id')->sort();
+    }
+
+    public function activeChildren(): HasMany
+    {
+        return $this->hasMany(TaxonProxy::modelClass(), 'parent_id')->activeOnes()->sort();
     }
 
     public function scopeByTaxonomy($query, $taxonomy)
