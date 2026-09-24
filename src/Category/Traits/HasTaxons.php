@@ -34,6 +34,11 @@ trait HasTaxons
         );
     }
 
+    public function activeTaxons(): MorphToMany
+    {
+        return $this->taxons()->where('is_active', true);
+    }
+
     public function addTaxon(Taxon $taxon): void
     {
         $this->taxons()->attach($taxon);
