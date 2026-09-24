@@ -18,7 +18,7 @@
         "php": "^8.4",
         "ext-json": "*",
         "ext-pdo": "*",
-        "laravel/framework": "^12.50|^13.0",
+        "laravel/framework": "^12.61.1|^13.12",
         "konekt/enum": "^4.2",
         "konekt/concord": "^1.16",
         "konekt/xtend": "^2.0",
