@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Vanilo\Taxes\Drivers;
 
 use Konekt\Address\Query\Zones;
-use Konekt\Extend\Contracts\Registerable;
 use Vanilo\Contracts\Address;
 use Vanilo\Contracts\Billpayer;
 use Vanilo\Taxes\Contracts\Taxable;
