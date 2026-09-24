@@ -9,6 +9,9 @@
 - Dropped Laravel 10 & 11 support
 - Changed the minimum konekt/address module requirement to v3.9 (adds the `notes` field to addresses)
 - Changed the implementation of the `TaxCalculators` to comply with the Extend's Registry interface
+- BC: Changed the `TaxCalculator` interface method signatures:
+   - The `calculate()` method now requires the `$subject` argument to be an instance of `Adjustable` (instead of `?object`)
+   - The `getAdjuster()` method has `?Adjuster` return type instead of `?object`
 
 ## 5.x Series
 

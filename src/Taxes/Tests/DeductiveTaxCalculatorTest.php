@@ -20,15 +20,6 @@ class DeductiveTaxCalculatorTest extends TestCase
         $this->assertInstanceOf(DeductiveTaxCalculator::class, TaxCalculators::make('deductive'));
     }
 
-    #[Test] public function passing_a_non_adjustable_subject_returns_a_dto_with_zero_amount()
-    {
-        $calculator = TaxCalculators::make('deductive');
-
-        $dto = $calculator->calculate(new SampleTaxable());
-        $this->assertInstanceOf(DetailedAmount::class, $dto);
-        $this->assertEquals(0, $dto->getValue());
-    }
-
     #[Test] public function it_can_properly_calculate_the_non_included_tax()
     {
         $calculator = TaxCalculators::make('deductive');

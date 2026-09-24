@@ -16,6 +16,8 @@ namespace Vanilo\Taxes\Calculators;
 
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
+use Vanilo\Adjustments\Contracts\Adjustable;
+use Vanilo\Adjustments\Contracts\Adjuster;
 use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
 use Vanilo\Taxes\Contracts\TaxCalculator;
@@ -27,12 +29,12 @@ class NullTaxCalculator implements TaxCalculator
         return __('No taxes');
     }
 
-    public function getAdjuster(?array $configuration = null): ?object
+    public function getAdjuster(?array $configuration = null): ?Adjuster
     {
         return null;
     }
 
-    public function calculate(?object $subject = null, ?array $configuration = null): DetailedAmount
+    public function calculate(Adjustable $subject, ?array $configuration = null): DetailedAmount
     {
         return new DetailedAmountDto(0);
     }

@@ -38,12 +38,8 @@ class DefaultTaxCalculator implements TaxCalculator
         return $adjuster;
     }
 
-    public function calculate(?object $subject = null, ?array $configuration = null): DetailedAmount
+    public function calculate(Adjustable $subject, ?array $configuration = null): DetailedAmount
     {
-        if (!$subject instanceof Adjustable) {
-            return new DetailedAmountDto(0);
-        }
-
         $adjuster = $this->getAdjuster($configuration);
 
         return DetailedAmountDto::fromArray([[
