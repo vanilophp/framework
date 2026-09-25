@@ -7,6 +7,8 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Changed the minimum Laravel 12 version to v12.61.1
+- Changed the minimum Laravel 13 version to v13.12
 - Added the konekt/xtend package dependency (v2.0)
 - Added the `LineItemTypes` registry class
 - Added the `feature()`, `feature_is_enabled()`, and `feature_is_disabled()` helpers

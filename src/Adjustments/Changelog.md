@@ -7,6 +7,8 @@
 
 - Dropped PHP 8.3 support
 - Dropped Laravel 10 & 11 support
+- Changed the minimum Laravel 12 version to v12.61.1
+- Changed the minimum Laravel 13 version to v13.12
 - BC: Added the `total()` method to the `Adjustable` interface
 - Fixed the possible error in a race condition scenario when invalidating an adjustment collection
 - Fixed the stale data issue when removing adjustments by type from a relation-based adjustment collection

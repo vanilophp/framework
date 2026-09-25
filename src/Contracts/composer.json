@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "illuminate/support": "^12.50|^13.0",
+        "illuminate/support": "^12.61.1|^13.12",
         "konekt/xtend": "^2.0",
         "nette/schema": "^1.2.5"
     },
