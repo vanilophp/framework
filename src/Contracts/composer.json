@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "illuminate/support": "^12.61.1|^13.12",
+        "illuminate/support": "^12.69.0|^13.30",
         "konekt/xtend": "^2.0",
         "nette/schema": "^1.2.5"
     },
@@ -30,7 +30,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.0.x-dev"
+            "dev-master": "6.1.x-dev"
         }
     }
 }

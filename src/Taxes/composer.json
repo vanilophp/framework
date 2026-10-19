@@ -23,7 +23,7 @@
         "konekt/enum": "^4.2",
         "konekt/xtend": "^2.0",
         "konekt/laravel-migration-compatibility": "^1.6",
-        "laravel/framework": "^12.61.1|^13.12",
+        "laravel/framework": "^12.69.0|^13.30",
         "nette/schema": "^1.2.5",
         "vanilo/contracts": "^6.0",
         "vanilo/support": "^6.0",
@@ -38,7 +38,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.0.x-dev"
+            "dev-master": "6.1.x-dev"
         }
     }
 }
