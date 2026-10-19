@@ -92,6 +92,11 @@ class Order extends Model implements OrderContract
         return static::where('number', $orderNumber)->first();
     }
 
+    public static function findByCartId(string|int $cartId): ?OrderContract
+    {
+        return static::where('cart_id', (int) $cartId)->first();
+    }
+
     public function getNumber(): string
     {
         return (string) $this->number;

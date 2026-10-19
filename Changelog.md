@@ -6,6 +6,7 @@
 ##### 2026-XX-YY
 
 - Added the `cart_id` field to the `orders` table along with a unique constraint. The scope is to prevent two orders from a single cart when a race condition occurs.
+- Added the `findByCartId` method to the `Order` model
 - Changed the minimum Laravel versions to v12.69.0 and v13.30, respectively
 
 ## 6.0.0

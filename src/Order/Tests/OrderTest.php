@@ -58,6 +58,12 @@ class OrderTest extends TestCase
         $order = Order::create(['number' => 'WITH_CART_ID_1234', 'cart_id' => 1234]);
 
         $this->assertEquals(1234, $order->fresh()->cart_id);
+
+        $order = Order::findByCartId(1234);
+        $this->assertEquals(1234, $order->cart_id);
+
+        $order = Order::findByCartId('1234');
+        $this->assertEquals(1234, $order->cart_id);
     }
 
     #[Test] public function two_orders_can_not_have_the_same_cart_id()
