@@ -2,6 +2,11 @@
 
 ## 6.x Series
 
+## Unreleased
+##### 2026-XX-YY
+
+- Added the `cart_id` field to the `orders` table along with a unique constraint. The scope is to prevent two orders from a single cart when a race condition occurs.
+
 ## 6.0.0
 ##### 2026-09-25
 
