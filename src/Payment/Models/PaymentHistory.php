@@ -53,7 +53,7 @@ class PaymentHistory extends Model implements PaymentHistoryContract
     public static function addPaymentResponse(
         Payment $payment,
         PaymentResponse $response,
-        PaymentStatus $oldStatus = null
+        ?PaymentStatus $oldStatus = null
     ): PaymentHistoryContract {
         return PaymentHistoryProxy::create([
            'payment_id' => $payment->id,

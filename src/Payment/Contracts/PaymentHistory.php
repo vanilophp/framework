@@ -21,6 +21,6 @@ interface PaymentHistory
     public static function addPaymentResponse(
         Payment $payment,
         PaymentResponse $response,
-        PaymentStatus $oldStatus = null
+        ?PaymentStatus $oldStatus = null
     ): PaymentHistory;
 }
