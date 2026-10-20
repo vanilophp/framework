@@ -8,8 +8,6 @@ use DateTimeImmutable;
 
 interface Snapshot
 {
-    public function type(): string;
-
     public function version(): int;
 
     public function takenAt(): DateTimeImmutable;

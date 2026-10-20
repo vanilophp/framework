@@ -9,6 +9,4 @@ interface Snapshottable
     public function toSnapshot(): Snapshot;
 
     public static function fromSnapshot(Snapshot $snapshot): static;
-
-    public static function snapshotType(): string;
 }
