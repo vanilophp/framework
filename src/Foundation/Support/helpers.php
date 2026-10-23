@@ -22,9 +22,22 @@ function format_price($price, ?string $currency = null)
         $currency ?? config('vanilo.foundation.currency.sign')
     );
 
-    if (is_string($decimalSeparator = config('vanilo.foundation.currency.decimal_separator')) && 1 === strlen($decimalSeparator)) {
-        $phpDecimalSeparator = localeconv()['decimal_point'] ?? '.';
+    $decimalSeparator = config('vanilo.foundation.currency.decimal_separator');
+    $thousandSeparator = config('vanilo.foundation.currency.thousand_separator');
+    $phpDecimalSeparator = localeconv()['decimal_point'] ?? '.';
 
+    $hasThousandSeparator = is_string($thousandSeparator) && 1 === strlen($thousandSeparator);
+    $hasDecimalSeparator = is_string($decimalSeparator) && 1 === strlen($decimalSeparator);
+
+    if ($hasThousandSeparator) {
+        $parts = explode($phpDecimalSeparator, $result, 2);
+        $parts[0] = preg_replace('/(?<=\d)(?=(\d{3})+(?!\d))/', $thousandSeparator, $parts[0]);
+        if ($hasDecimalSeparator) {
+            $result = implode($decimalSeparator, $parts);
+        } else {
+            $result = implode($phpDecimalSeparator, $parts);
+        }
+    } elseif ($hasDecimalSeparator) {
         $result = str_replace($phpDecimalSeparator, $decimalSeparator, $result);
     }
 
