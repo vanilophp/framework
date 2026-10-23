@@ -55,7 +55,7 @@ jobs:
       - name: Run Tests [mysql 9.7]
         run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
         env:
-          TEST_DB_ENGINE: mysql9
+          TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql9.ports[3306] }}
     services:
       mysql8:
