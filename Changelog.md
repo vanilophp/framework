@@ -5,6 +5,7 @@
 ## Unreleased
 ##### 2026-XX-YY
 
+- Added MySQL 9.7 support
 - Added the `cart_id` field to the `orders` table along with a unique constraint. The scope is to prevent two orders from a single cart when a race condition occurs.
 - Added the `findByCartId` method to the `Order` model
 - Added the `Snapshot` and `Snapshottable` interfaces

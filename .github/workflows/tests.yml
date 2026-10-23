@@ -52,9 +52,21 @@ jobs:
         env:
           TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql8.ports[3306] }}
+      - name: Run Tests [mysql 9.7]
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
+        env:
+          TEST_DB_ENGINE: mysql9
+          TEST_DB_PORT: ${{ job.services.mysql9.ports[3306] }}
     services:
       mysql8:
         image: mysql:8.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: vanilo_test
+        ports:
+          - 3306
+      mysql9:
+        image: mysql:9.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: vanilo_test
