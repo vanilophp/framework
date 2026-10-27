@@ -12,7 +12,6 @@ use Vanilo\Support\SnapshotTypes;
 use Vanilo\Support\Tests\Dummies\DummySnapshotV1;
 use Vanilo\Support\Tests\Dummies\DummySnapshotVersionable;
 
-
 class SnapshotRegistryTest extends TestCase
 {
     #[Test]
