@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Contracts;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 
 interface Snapshot
 {
@@ -16,5 +17,11 @@ interface Snapshot
 
     public function data(): array;
 
-    public static function from(array $rawData): static;
+    public static function create(
+        DateTimeInterface $takenAt,
+        DateTimeInterface $validUntil,
+        int $version = 1,
+    ): static;
+
+    public function load(array $data): void;
 }
