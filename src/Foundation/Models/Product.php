@@ -20,6 +20,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Traits\HasTaxons;
 use Vanilo\Channel\Traits\Channelable;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Foundation\Traits\HasAttachmentsFromMediaLibrary;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\Product\Models\Product as BaseProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
@@ -38,6 +39,7 @@ class Product extends BaseProduct implements Buyable, HasMedia, Taxable
     use Channelable;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
+    use HasAttachmentsFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;
     use HasTaxons;
     use HasPropertyValues;
@@ -56,8 +58,17 @@ class Product extends BaseProduct implements Buyable, HasMedia, Taxable
         'last_sale_at' => 'datetime',
     ];
 
+    public function registerMediaCollections(): void
+    {
+        $this->registerAttachmentsMediaCollection();
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
+        if ($this->isAttachment($media)) {
+            return;
+        }
+
         $this->loadConversionsFromVaniloConfig();
     }
 }

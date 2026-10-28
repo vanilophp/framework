@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Category\Traits\HasTaxons;
 use Vanilo\Channel\Traits\Channelable;
+use Vanilo\Foundation\Traits\HasAttachmentsFromMediaLibrary;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\MasterProduct\Models\MasterProduct as BaseMasterProduct;
 use Vanilo\Properties\Traits\HasPropertyValues;
@@ -40,13 +41,23 @@ class MasterProduct extends BaseMasterProduct implements HasMedia
     use Channelable;
     use InteractsWithMedia;
     use HasImagesFromMediaLibrary;
+    use HasAttachmentsFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;
     use HasTaxons;
     use HasPropertyValues;
     use HasVideos;
 
+    public function registerMediaCollections(): void
+    {
+        $this->registerAttachmentsMediaCollection();
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
+        if ($this->isAttachment($media)) {
+            return;
+        }
+
         $this->loadConversionsFromVaniloConfig();
     }
 

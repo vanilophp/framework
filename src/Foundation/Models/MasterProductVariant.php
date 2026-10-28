@@ -20,6 +20,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Vanilo\Contracts\Buyable;
+use Vanilo\Foundation\Traits\HasAttachmentsFromMediaLibrary;
 use Vanilo\Foundation\Traits\LoadsMediaConversionsFromConfig;
 use Vanilo\MasterProduct\Models\MasterProductVariant as BaseMasterProductVariant;
 use Vanilo\Properties\Traits\HasPropertyValues;
@@ -44,11 +45,21 @@ class MasterProductVariant extends BaseMasterProductVariant implements Buyable, 
     use HasPropertyValues;
     use HasImagesFromMediaLibrary;
     use InteractsWithMedia;
+    use HasAttachmentsFromMediaLibrary;
     use LoadsMediaConversionsFromConfig;
     use HasVideos;
 
+    public function registerMediaCollections(): void
+    {
+        $this->registerAttachmentsMediaCollection();
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
+        if ($this->isAttachment($media)) {
+            return;
+        }
+
         $this->loadConversionsFromVaniloConfig();
     }
 

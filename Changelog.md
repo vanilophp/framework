@@ -10,6 +10,7 @@
 - Added the `findByCartId` method to the `Order` model
 - Added the `Snapshot` and `Snapshottable` interfaces
 - Added the `SnapshotTypes` registry
+- Added file attachment support (via the `attachments` media collection) to the Foundation `Product`, `MasterProduct` and `MasterProductVariant` models
 - Added support for configurable thousand separator (`vanilo.foundation.currency.thousand_separator`) used by the `format_price()` helper function
 - Changed the minimum Laravel versions to v12.69.0 and v13.30, respectively
 
