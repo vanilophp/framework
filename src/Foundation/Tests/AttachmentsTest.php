@@ -19,7 +19,6 @@ use Illuminate\Http\UploadedFile;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Vanilo\Foundation\Models\MasterProduct;
 use Vanilo\Foundation\Models\MasterProductVariant;
