@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vanilo\Support\Exceptions;
+namespace Vanilo\Snapshot\Exceptions;
 
 class UnknownSnapshotTypeException extends \RuntimeException
 {

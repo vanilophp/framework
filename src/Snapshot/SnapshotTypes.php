@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vanilo\Support;
+namespace Vanilo\Snapshot;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Konekt\Extend\Concerns\HasRegistry;
 use Konekt\Extend\Concerns\RequiresClassOrInterface;
 use Konekt\Extend\Contracts\Registry;
-use Vanilo\Contracts\Snapshot;
-use Vanilo\Support\Exceptions\UnknownSnapshotTypeException;
+use Vanilo\Snapshot\Contracts\Snapshot;
+use Vanilo\Snapshot\Exceptions\UnknownSnapshotTypeException;
 
 class SnapshotTypes implements Registry
 {

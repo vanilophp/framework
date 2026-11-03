@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vanilo\Contracts;
+namespace Vanilo\Snapshot\Contracts;
 
 interface Snapshottable
 {

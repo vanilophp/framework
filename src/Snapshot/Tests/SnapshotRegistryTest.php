@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vanilo\Support\Tests;
+namespace Vanilo\Snapshot\Tests;
 
 use Illuminate\Support\Carbon;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Vanilo\Support\SnapshotTypes;
-use Vanilo\Support\Tests\Dummies\DummySnapshotV1;
-use Vanilo\Support\Tests\Dummies\DummySnapshotVersionable;
+use Vanilo\Snapshot\SnapshotTypes;
+use Vanilo\Snapshot\Tests\Dummies\DummySnapshotV1;
+use Vanilo\Snapshot\Tests\Dummies\DummySnapshotVersionable;
 
 class SnapshotRegistryTest extends TestCase
 {

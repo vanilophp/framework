@@ -38,6 +38,7 @@ remote product
 remote promotion
 remote properties
 remote shipment
+remote snapshot
 remote support
 remote taxes
 remote translation
@@ -57,6 +58,7 @@ split 'src/Product' product
 split 'src/Promotion' promotion
 split 'src/Properties' properties
 split 'src/Shipment' shipment
+split 'src/Snapshot' snapshot
 split 'src/Support' support 8683e47dd2dbd15ac2ceac4dcfae405c4b271aff
 split 'src/Taxes' taxes
 split 'src/Translation' translation

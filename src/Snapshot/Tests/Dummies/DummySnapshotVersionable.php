@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vanilo\Support\Tests\Dummies;
+namespace Vanilo\Snapshot\Tests\Dummies;
 
 use DateTimeImmutable;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
-use Vanilo\Contracts\Snapshot;
+use Vanilo\Snapshot\Contracts\Snapshot;
 
 class DummySnapshotVersionable implements Snapshot
 {
