@@ -33,7 +33,7 @@ class DummySnapshotV1 implements Snapshot
         return $this->validUntil;
     }
 
-    public function data(): array
+    public function getData(): array
     {
         return $this->data ?? [];
     }

@@ -15,7 +15,7 @@ interface Snapshot
 
     public function validUntil(): DateTimeImmutable;
 
-    public function data(): array;
+    public function getData(): array;
 
     public static function create(
         DateTimeInterface $takenAt,

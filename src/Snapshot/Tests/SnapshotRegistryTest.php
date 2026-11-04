@@ -37,7 +37,7 @@ class SnapshotRegistryTest extends TestCase
         $this->assertInstanceOf(DummySnapshotV1::class, $snapshot);
         $this->assertTrue(Carbon::make($rawArray['taken_at'])->eq($snapshot->takenAt()));
         $this->assertTrue(Carbon::make($rawArray['valid_until'])->eq($snapshot->validUntil()));
-        $this->assertEquals($rawArray['data'], $snapshot->data());
+        $this->assertEquals($rawArray['data'], $snapshot->getData());
         $this->assertEquals(1, $snapshot->version());
     }
 
@@ -68,8 +68,8 @@ class SnapshotRegistryTest extends TestCase
         $this->assertTrue(Carbon::make($dataV3['taken_at'])->eq($snapshot3->takenAt()));
         $this->assertTrue(Carbon::make($dataV2['valid_until'])->eq($snapshot2->validUntil()));
         $this->assertTrue(Carbon::make($dataV3['valid_until'])->eq($snapshot3->validUntil()));
-        $this->assertEquals($dataV2['data'], $snapshot2->data());
-        $this->assertEquals($dataV3['data'], $snapshot3->data());
+        $this->assertEquals($dataV2['data'], $snapshot2->getData());
+        $this->assertEquals($dataV3['data'], $snapshot3->getData());
         $this->assertEquals(2, $snapshot2->version());
         $this->assertEquals(3, $snapshot3->version());
     }
@@ -88,7 +88,7 @@ class SnapshotRegistryTest extends TestCase
         $this->assertInstanceOf(DummySnapshotV1::class, $snapshot);
         $this->assertTrue(Carbon::make($rawArray['taken_at'])->eq($snapshot->takenAt()));
         $this->assertTrue(Carbon::make($rawArray['valid_until'])->eq($snapshot->validUntil()));
-        $this->assertEquals([], $snapshot->data());
+        $this->assertEquals([], $snapshot->getData());
     }
 
     #[Test]
