@@ -7,7 +7,7 @@ namespace Vanilo\Snapshot\Contracts;
 use DateTimeImmutable;
 use DateTimeInterface;
 
-interface Snapshot
+interface SnapshotPayload
 {
     public function version(): int;
 
