@@ -9,9 +9,13 @@ use DateTimeImmutable;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\Test;
 use Vanilo\Snapshot\Contracts\Snapshot as SnapshotContract;
+use Vanilo\Snapshot\Contracts\SnapshotPayload;
+use Vanilo\Snapshot\Contracts\Snapshottable;
 use Vanilo\Snapshot\Models\Snapshot;
 use Vanilo\Snapshot\Models\SnapshotProxy;
-use Vanilo\Snapshot\SnapshotTypes;
+use Vanilo\Snapshot\SnapshotMetadata;
+use Vanilo\Snapshot\SnapshotPayloadTypes;
+use Vanilo\Snapshot\Tests\Dummies\DummySnapshotV1;
 
 class SnapshotModelTest extends TestCase
 {
@@ -24,14 +28,17 @@ class SnapshotModelTest extends TestCase
     }
 
     #[Test]
-    public function it_can_be_instantiated_via_the_create_factory_method(): void
+    public function it_can_be_instantiated_with_attributes(): void
     {
         $takenAt = new DateTimeImmutable('2026-11-03 12:00:00');
         $validUntil = new DateTimeImmutable('2026-11-03 13:00:00');
 
-        $snapshot = Snapshot::create($takenAt, $validUntil, 2);
+        $snapshot = new Snapshot([
+            'taken_at' => $takenAt,
+            'valid_until' => $validUntil,
+            'version' => 2,
+        ]);
 
-        $this->assertInstanceOf(Snapshot::class, $snapshot);
         $this->assertEquals($takenAt, $snapshot->takenAt());
         $this->assertEquals($validUntil, $snapshot->validUntil());
         $this->assertEquals(2, $snapshot->version());
@@ -40,8 +47,7 @@ class SnapshotModelTest extends TestCase
     #[Test]
     public function default_version_is_one(): void
     {
-        $takenAt = now();
-        $snapshot = Snapshot::create($takenAt, $takenAt);
+        $snapshot = new Snapshot();
 
         $this->assertEquals(1, $snapshot->version());
     }
@@ -52,7 +58,10 @@ class SnapshotModelTest extends TestCase
         $takenAt = Carbon::parse('2026-11-03 10:00:00');
         $validUntil = Carbon::parse('2026-11-03 11:00:00');
 
-        $snapshot = Snapshot::create($takenAt, $validUntil);
+        $snapshot = new Snapshot([
+            'taken_at' => $takenAt,
+            'valid_until' => $validUntil,
+        ]);
 
         $this->assertInstanceOf(DateTimeImmutable::class, $snapshot->takenAt());
         $this->assertInstanceOf(DateTimeImmutable::class, $snapshot->validUntil());
@@ -61,52 +70,96 @@ class SnapshotModelTest extends TestCase
     }
 
     #[Test]
-    public function data_returns_empty_array_when_not_set(): void
+    public function raw_data_returns_empty_array_when_not_set(): void
     {
         $snapshot = new Snapshot();
 
-        $this->assertSame([], $snapshot->getData());
+        $this->assertSame([], $snapshot->getRawData());
     }
 
     #[Test]
-    public function data_can_be_loaded(): void
+    public function raw_data_returns_the_data_attribute(): void
     {
-        $snapshot = new Snapshot();
-        $payload = ['sku' => 'PROD-1', 'price' => 19.99];
+        $data = ['sku' => 'PROD-1', 'price' => 19.99];
+        $snapshot = new Snapshot(['data' => $data]);
 
-        $snapshot->load($payload);
-
-        $this->assertSame($payload, $snapshot->getData());
-        $this->assertSame($payload, $snapshot->data);
+        $this->assertSame($data, $snapshot->getRawData());
+        $this->assertSame($data, $snapshot->data);
     }
 
     #[Test]
     public function it_can_be_persisted_to_the_database(): void
     {
-        $snapshot = Snapshot::create(
-            now()->toImmutable(),
-            now()->addHour()->toImmutable(),
-            1
-        );
-        $snapshot->type = 'product';
-        $snapshot->model_type = 'product';
-        $snapshot->model_id = 42;
-        $snapshot->load(['name' => 'Awesome Product', 'price' => 99.99]);
-        $snapshot->save();
+        $snapshot = Snapshot::create([
+            'taken_at' => now()->toImmutable(),
+            'valid_until' => now()->addHour()->toImmutable(),
+            'version' => 1,
+            'type' => 'product',
+            'snapshottable_type' => 'product',
+            'snapshottable_id' => 42,
+            'data' => ['name' => 'Awesome Product', 'price' => 99.99],
+        ]);
 
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot->id,
             'type' => 'product',
             'version' => 1,
-            'model_type' => 'product',
-            'model_id' => 42,
+            'snapshottable_type' => 'product',
+            'snapshottable_id' => 42,
         ]);
 
         $fresh = Snapshot::find($snapshot->id);
         $this->assertInstanceOf(Snapshot::class, $fresh);
-        $this->assertEquals(['name' => 'Awesome Product', 'price' => 99.99], $fresh->getData());
+        $this->assertEquals(['name' => 'Awesome Product', 'price' => 99.99], $fresh->getRawData());
         $this->assertInstanceOf(DateTimeImmutable::class, $fresh->takenAt());
         $this->assertInstanceOf(DateTimeImmutable::class, $fresh->validUntil());
+    }
+
+    #[Test]
+    public function valid_until_can_be_null(): void
+    {
+        $snapshot = Snapshot::create([
+            'taken_at' => now()->toImmutable(),
+            'type' => 'cart',
+            'data' => ['items' => []],
+        ]);
+
+        $this->assertNull($snapshot->validUntil());
+        $this->assertNull(Snapshot::find($snapshot->id)->validUntil());
+    }
+
+    #[Test]
+    public function it_takes_the_metadata_and_the_data_from_the_payload_of_the_source(): void
+    {
+        SnapshotPayloadTypes::register('dummy_v1', DummySnapshotV1::class);
+        $takenAt = new DateTimeImmutable('2026-11-04 10:00:00');
+        $validUntil = new DateTimeImmutable('2026-11-04 10:15:00');
+
+        $snapshot = Snapshot::take($this->snapshottable(new SnapshotMetadata(1, $takenAt, $validUntil), ['a' => 1]));
+
+        $this->assertEquals('dummy_v1', $snapshot->type);
+        $this->assertEquals(1, $snapshot->version());
+        $this->assertEquals($takenAt, $snapshot->takenAt());
+        $this->assertEquals($validUntil, $snapshot->validUntil());
+        $this->assertEquals(['a' => 1], $snapshot->getRawData());
+        $this->assertNull($snapshot->snapshottable_type);
+    }
+
+    #[Test]
+    public function the_payload_can_be_restored_from_a_persisted_snapshot(): void
+    {
+        SnapshotPayloadTypes::register('dummy_v1', DummySnapshotV1::class);
+        $takenAt = new DateTimeImmutable('2026-11-04 10:00:00');
+        $validUntil = new DateTimeImmutable('2026-11-04 10:15:00');
+
+        Snapshot::take($this->snapshottable(new SnapshotMetadata(1, $takenAt, $validUntil), ['a' => 1]))->save();
+
+        $payload = Snapshot::first()->payload();
+        $this->assertInstanceOf(DummySnapshotV1::class, $payload);
+        $this->assertEquals(['a' => 1], $payload->toArray());
+        $this->assertEquals(1, $payload->version());
+        $this->assertEquals($takenAt->getTimestamp(), $payload->takenAt()->getTimestamp());
+        $this->assertEquals($validUntil->getTimestamp(), $payload->validUntil()->getTimestamp());
     }
 
     #[Test]
@@ -115,22 +168,22 @@ class SnapshotModelTest extends TestCase
         $this->assertEquals(Snapshot::class, SnapshotProxy::modelClass());
     }
 
-    #[Test]
-    public function it_can_be_registered_in_the_snapshot_types_registry(): void
+    private function snapshottable(SnapshotMetadata $meta, array $data): Snapshottable
     {
-        SnapshotTypes::register('eloquent_snapshot', Snapshot::class);
+        return new class ($meta, $data) implements Snapshottable {
+            public function __construct(private SnapshotMetadata $meta, private array $data)
+            {
+            }
 
-        $snapshot = SnapshotTypes::make('eloquent_snapshot', [
-            'taken_at' => '2026-11-03 14:00:00',
-            'valid_until' => '2026-11-03 15:00:00',
-            'version' => 3,
-            'data' => ['key' => 'value'],
-        ]);
+            public function toSnapshotPayload(): SnapshotPayload
+            {
+                return new DummySnapshotV1($this->meta, $this->data);
+            }
 
-        $this->assertInstanceOf(Snapshot::class, $snapshot);
-        $this->assertEquals(3, $snapshot->version());
-        $this->assertEquals(['key' => 'value'], $snapshot->getData());
-        $this->assertInstanceOf(DateTimeImmutable::class, $snapshot->takenAt());
-        $this->assertInstanceOf(DateTimeImmutable::class, $snapshot->validUntil());
+            public static function fromSnapshotPayload(SnapshotPayload $payload): static
+            {
+                return new static(new SnapshotMetadata($payload->version(), $payload->takenAt()), $payload->toArray());
+            }
+        };
     }
 }

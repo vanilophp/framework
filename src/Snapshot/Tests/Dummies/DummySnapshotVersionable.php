@@ -4,52 +4,27 @@ declare(strict_types=1);
 
 namespace Vanilo\Snapshot\Tests\Dummies;
 
-use DateTimeImmutable;
-use DateTimeInterface;
-use Illuminate\Support\Carbon;
-use Vanilo\Snapshot\Contracts\Snapshot;
+use Vanilo\Snapshot\Concerns\HasSnapshotMetadata;
+use Vanilo\Snapshot\Contracts\SnapshotPayload;
+use Vanilo\Snapshot\SnapshotMetadata;
 
-class DummySnapshotVersionable implements Snapshot
+class DummySnapshotVersionable implements SnapshotPayload
 {
+    use HasSnapshotMetadata;
+
     public function __construct(
-        private DateTimeImmutable $takenAt,
-        private DateTimeImmutable $validUntil,
-        private int $version,
-        private ?array $data = null,
+        protected readonly SnapshotMetadata $meta,
+        private readonly array $data = [],
     ) {
     }
 
-    public function version(): int
+    public static function fromArray(array $data, SnapshotMetadata $meta): static
     {
-        return $this->version;
+        return new static($meta, $data);
     }
 
-    public function takenAt(): DateTimeImmutable
+    public function toArray(): array
     {
-        return $this->takenAt;
-    }
-
-    public function validUntil(): DateTimeImmutable
-    {
-        return $this->validUntil;
-    }
-
-    public function getData(): array
-    {
-        return $this->data ?? [];
-    }
-
-    public static function create(DateTimeInterface $takenAt, DateTimeInterface $validUntil, int $version = 1): static
-    {
-        return new static(
-            $takenAt instanceof DateTimeImmutable ? $takenAt : Carbon::instance($takenAt)->toImmutable(),
-            $validUntil instanceof DateTimeImmutable ? $validUntil : Carbon::instance($validUntil)->toImmutable(),
-            $version,
-        );
-    }
-
-    public function load(array $data): void
-    {
-        $this->data = $data;
+        return $this->data;
     }
 }

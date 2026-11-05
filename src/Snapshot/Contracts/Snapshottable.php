@@ -6,7 +6,7 @@ namespace Vanilo\Snapshot\Contracts;
 
 interface Snapshottable
 {
-    public function toSnapshot(): Snapshot;
+    public function toSnapshotPayload(): SnapshotPayload;
 
-    public static function fromSnapshot(Snapshot $snapshot): static;
+    public static function fromSnapshotPayload(SnapshotPayload $payload): static;
 }

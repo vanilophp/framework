@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Snapshot\Contracts;
 
 use DateTimeImmutable;
-use DateTimeInterface;
+use Vanilo\Snapshot\SnapshotMetadata;
 
 interface SnapshotPayload
 {
@@ -13,15 +13,11 @@ interface SnapshotPayload
 
     public function takenAt(): DateTimeImmutable;
 
-    public function validUntil(): DateTimeImmutable;
+    /** A null value means the snapshot never expires */
+    public function validUntil(): ?DateTimeImmutable;
 
-    public function getData(): array;
+    public static function fromArray(array $data, SnapshotMetadata $meta): static;
 
-    public static function create(
-        DateTimeInterface $takenAt,
-        DateTimeInterface $validUntil,
-        int $version = 1,
-    ): static;
-
-    public function load(array $data): void;
+    /** Must contain the content only, the metadata (version, dates) must not be part of it */
+    public function toArray(): array;
 }

@@ -6,28 +6,29 @@ namespace Vanilo\Snapshot\Models;
 
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
-use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 use Vanilo\Snapshot\Contracts\Snapshot as SnapshotContract;
-use Vanilo\Snapshot\SnapshotTypes;
+use Vanilo\Snapshot\Contracts\SnapshotPayload;
+use Vanilo\Snapshot\Contracts\Snapshottable;
+use Vanilo\Snapshot\Exceptions\UnknownSnapshotTypeException;
+use Vanilo\Snapshot\SnapshotMetadata;
+use Vanilo\Snapshot\SnapshotPayloadTypes;
 
 /**
  * @property int $id
  * @property CarbonImmutable $taken_at
- * @property CarbonImmutable $valid_until
+ * @property CarbonImmutable|null $valid_until
  * @property string $type
  * @property int $version
- * @property string $model_type
- * @property int|string $model_id
+ * @property string $snapshottable_type
+ * @property int|string $snapshottable_id
  * @property array $data
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
  *
- * @property-read Model $model
- *
- * @method static Snapshot create(DateTimeInterface $takenAt, DateTimeInterface $validUntil, int $version = 1)
+ * @property-read Model|null $snapshottable
  */
 class Snapshot extends Model implements SnapshotContract
 {
@@ -39,6 +40,8 @@ class Snapshot extends Model implements SnapshotContract
         'data' => 'array',
         'version' => 'integer',
     ];
+
+    protected ?SnapshotPayload $payload = null;
 
     public function version(): int
     {
@@ -54,48 +57,48 @@ class Snapshot extends Model implements SnapshotContract
         return Carbon::make($this->taken_at)->toImmutable();
     }
 
-    public function validUntil(): DateTimeImmutable
+    public function validUntil(): ?DateTimeImmutable
     {
-        if ($this->valid_until instanceof DateTimeImmutable) {
+        if (null === $this->valid_until || $this->valid_until instanceof DateTimeImmutable) {
             return $this->valid_until;
         }
 
         return Carbon::make($this->valid_until)->toImmutable();
     }
 
-    public function getData(): array
+    public function getRawData(): array
     {
         return $this->data ?? [];
     }
 
-    public function asTypedSnapshot(): SnapshotContract
+    public static function take(Snapshottable $source): static
     {
-        SnapshotTypes::make($this->type, [
-            'taken_at' => $this->taken_at,
-            'valid_until' => $this->valid_until,
-            'data' => $this->data,
-            'version' => $this->version,
+        $payload = $source->toSnapshotPayload();
+
+        $snapshot = new static([
+            'type' => SnapshotPayloadTypes::getIdOf($payload::class) ?? throw new UnknownSnapshotTypeException('Snapshot payload type not found'),
+            'version' => $payload->version(),
+            'taken_at' => $payload->takenAt(),
+            'valid_until' => $payload->validUntil(),
+            'data' => $payload->toArray(),
+        ]);
+
+        if ($source instanceof Model) {
+            $snapshot->snapshottable()->associate($source);
+        }
+
+        return $snapshot; // the caller decides when to save()
+    }
+
+    public function payload(): SnapshotPayload
+    {
+        return $this->payload ??= SnapshotPayloadTypes::make($this->type, [
+            'data' => $this->data ?? [],
+            'meta' => new SnapshotMetadata($this->version(), $this->takenAt(), $this->validUntil()),
         ]);
     }
 
-    public static function create(
-        DateTimeInterface $takenAt,
-        DateTimeInterface $validUntil,
-        int $version = 1,
-    ): static {
-        return new static([
-            'taken_at' => $takenAt,
-            'valid_until' => $validUntil,
-            'version' => $version,
-        ]);
-    }
-
-    public function load(array $data): void
-    {
-        $this->data = $data;
-    }
-
-    public function model(): MorphTo
+    public function snapshottable(): MorphTo
     {
         return $this->morphTo();
     }

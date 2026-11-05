@@ -4,52 +4,29 @@ declare(strict_types=1);
 
 namespace Vanilo\Snapshot\Tests\Dummies;
 
-use DateTimeImmutable;
-use DateTimeInterface;
-use Illuminate\Support\Carbon;
-use Vanilo\Snapshot\Contracts\Snapshot;
+use Vanilo\Snapshot\Concerns\HasSnapshotMetadata;
+use Vanilo\Snapshot\Contracts\SnapshotPayload;
+use Vanilo\Snapshot\SnapshotMetadata;
 
-class DummySnapshotV1 implements Snapshot
+class DummySnapshotV1 implements SnapshotPayload
 {
+    use HasSnapshotMetadata;
+
     public function __construct(
-        private DateTimeImmutable $takenAt,
-        private DateTimeImmutable $validUntil,
-        private ?array $data = null,
+        protected readonly SnapshotMetadata $meta,
+        private readonly array $data = [],
     ) {
     }
 
-    public function version(): int
-    {
-        return 1;
-    }
-
-    public function takenAt(): DateTimeImmutable
-    {
-        return $this->takenAt;
-    }
-
-    public function validUntil(): DateTimeImmutable
-    {
-        return $this->validUntil;
-    }
-
-    public function getData(): array
-    {
-        return $this->data ?? [];
-    }
-
-    public static function create(DateTimeInterface $takenAt, DateTimeInterface $validUntil, int $version = 1): static
-    {
-        return new static(
-            $takenAt instanceof DateTimeImmutable ? $takenAt : Carbon::instance($takenAt)->toImmutable(),
-            $validUntil instanceof DateTimeImmutable ? $validUntil : Carbon::instance($validUntil)->toImmutable(),
-        );
-    }
-
-    public function load(array $data): void
+    public static function fromArray(array $data, SnapshotMetadata $meta): static
     {
         // No processing here, just 1:1 throughput
         // Real classes will do the hydration legwork here
-        $this->data = $data;
+        return new static($meta, $data);
+    }
+
+    public function toArray(): array
+    {
+        return $this->data;
     }
 }

@@ -5,5 +5,6 @@
 ## Unreleased
 ##### 2026-XX-YY
 
-- Added the `Snapshot` and `Snapshottable` interfaces
-- Added the `SnapshotTypes` registry
+- Added the `Snapshot`, `SnapshotPayload`, and `Snapshottable` interfaces
+- Added the `SnapshotPayloadTypes` registry
+- Added the `SnapshotMetadata` value object and the `HasSnapshotMetadata` trait for payload classes

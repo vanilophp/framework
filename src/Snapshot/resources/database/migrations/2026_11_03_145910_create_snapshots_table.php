@@ -12,7 +12,7 @@ return new class () extends Migration {
         Schema::create('snapshots', static function (Blueprint $table) {
             $table->id();
             $table->timestamp('taken_at');
-            $table->timestamp('valid_until');
+            $table->timestamp('valid_until')->nullable();
             $table->string('type');
             $table->unsignedInteger('version')->default(1);
             $table->nullableMorphs('snapshottable');
