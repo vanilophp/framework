@@ -43,7 +43,7 @@ class IssuedPaymentRequest extends Model implements IssuedPaymentRequestContract
 
     public function hasSnapshot(): bool
     {
-        return $this->snapshot_id !== null;
+        return null !== $this->snapshot_id;
     }
 
     public function payment(): BelongsTo
