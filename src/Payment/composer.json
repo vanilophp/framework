@@ -28,6 +28,9 @@
         "phpunit/phpunit": "^11.0|^12.0",
         "orchestra/testbench": "^10.0|^11.0"
     },
+    "suggest": {
+        "vanilo/snapshot": "For Gateways that support taking/restoring message snapshots"
+    },
     "autoload": {
         "psr-4": { "Vanilo\\Payment\\": "" }
     },
