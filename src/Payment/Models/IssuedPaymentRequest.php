@@ -17,7 +17,6 @@ namespace Vanilo\Payment\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Collection;
 use Vanilo\Payment\Contracts\IssuedPaymentRequest as IssuedPaymentRequestContract;
 use Vanilo\Payment\Contracts\Payment;
 
