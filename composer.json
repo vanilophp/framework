@@ -46,6 +46,7 @@
         "vanilo/promotion": "self.version",
         "vanilo/properties": "self.version",
         "vanilo/shipment": "self.version",
+        "vanilo/snapshot": "self.version",
         "vanilo/support": "self.version",
         "vanilo/taxes": "self.version",
         "vanilo/video": "self.version"
