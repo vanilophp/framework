@@ -9,11 +9,10 @@ use LogicException;
 
 trait CalculatesSnapshotValidity
 {
-
     public function isValid(?DateTimeInterface $at = null): bool
     {
         if (!method_exists($this, 'validUntil')) {
-            throw new LogicException(sprintf('The %s class does not implement the validUntil() method', static::class ));
+            throw new LogicException(sprintf('The %s class does not implement the validUntil() method', static::class));
         }
 
         if (null === $this->validUntil()) {
