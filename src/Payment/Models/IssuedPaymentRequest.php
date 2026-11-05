@@ -36,14 +36,19 @@ class IssuedPaymentRequest extends Model implements IssuedPaymentRequestContract
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public static function ofPayment(Payment $payment): Collection
-    {
-        return self::where('payment_id', $payment->id)->get();
-    }
-
     public function hasSnapshot(): bool
     {
         return null !== $this->snapshot_id;
+    }
+
+    public function getPayment(): Payment
+    {
+        return $this->payment;
+    }
+
+    public function getSnapshotId(): ?int
+    {
+        return $this->snapshot_id;
     }
 
     public function payment(): BelongsTo

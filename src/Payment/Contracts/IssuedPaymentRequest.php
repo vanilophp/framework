@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace Vanilo\Payment\Contracts;
 
-use Illuminate\Support\Collection;
-
 interface IssuedPaymentRequest
 {
-    public static function ofPayment(Payment $payment): Collection;
+    public function getPayment(): Payment;
 
     public function hasSnapshot(): bool;
+
+    public function getSnapshotId(): ?int;
 }
