@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vanilo\Snapshot\Contracts;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 
 interface Snapshot
 {
@@ -13,6 +14,8 @@ interface Snapshot
     public function takenAt(): DateTimeImmutable;
 
     public function validUntil(): ?DateTimeImmutable;
+
+    public function isValid(?DateTimeInterface $at = null): bool;
 
     public function getRawData(): array;
 

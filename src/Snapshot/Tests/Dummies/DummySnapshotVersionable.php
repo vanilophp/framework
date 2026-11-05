@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Vanilo\Snapshot\Tests\Dummies;
 
+use Vanilo\Snapshot\Concerns\CalculatesSnapshotValidity;
 use Vanilo\Snapshot\Concerns\HasSnapshotMetadata;
 use Vanilo\Snapshot\Contracts\SnapshotPayload;
 use Vanilo\Snapshot\SnapshotMetadata;
 
 class DummySnapshotVersionable implements SnapshotPayload
 {
+    use CalculatesSnapshotValidity;
     use HasSnapshotMetadata;
 
     public function __construct(

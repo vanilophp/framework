@@ -9,6 +9,7 @@ use DateTimeImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
+use Vanilo\Snapshot\Concerns\CalculatesSnapshotValidity;
 use Vanilo\Snapshot\Contracts\Snapshot as SnapshotContract;
 use Vanilo\Snapshot\Contracts\SnapshotPayload;
 use Vanilo\Snapshot\Contracts\Snapshottable;
@@ -32,6 +33,8 @@ use Vanilo\Snapshot\SnapshotPayloadTypes;
  */
 class Snapshot extends Model implements SnapshotContract
 {
+    use CalculatesSnapshotValidity;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
