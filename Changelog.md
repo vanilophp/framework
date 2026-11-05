@@ -11,6 +11,8 @@
 - Added the **Snapshot** module 
 - Added the `Snapshot`, `SnapshotPayload`, and `Snapshottable` interfaces
 - Added the `SnapshotPayloadTypes` registry
+- Added the `IssuedPaymentRequest` model/table
+- Added the `issuedRequests` relation to the `Payment` model
 - Added file attachment support (via the `attachments` media collection) to the Foundation `Product`, `MasterProduct` and `MasterProductVariant` models
 - Added support for configurable thousand separator (`vanilo.foundation.currency.thousand_separator`) used by the `format_price()` helper function
 - Changed the minimum Laravel versions to v12.69.0 and v13.30, respectively

@@ -36,6 +36,7 @@ use Vanilo\Support\Generators\NanoIdGenerator;
  * @property PaymentMethod $method
  * @property PaymentStatus $status
  * @property Collection $history
+ * @property Collection $issuedRequests
  * @property null|string $status_message
  * @property null|string $hash
  * @property null|string $remote_id
@@ -177,6 +178,11 @@ class Payment extends Model implements PaymentContract
     public function history(): HasMany
     {
         return $this->hasMany(PaymentHistoryProxy::modelClass(), 'payment_id', 'id');
+    }
+
+    public function issuedRequests(): HasMany
+    {
+        return $this->hasMany(IssuedPaymentRequestProxy::modelClass(), 'payment_id', 'id');
     }
 
     public function method(): BelongsTo

@@ -6,6 +6,8 @@
 ##### 2026-XX-YY
 
 - Changed the minimum Laravel versions to v12.69.0 and v13.30, respectively
+- Added the `IssuedPaymentRequest` model/table
+- Added the `issuedRequests` relation to the `Payment` model
 
 ## 6.0.0
 ##### 2026-09-25

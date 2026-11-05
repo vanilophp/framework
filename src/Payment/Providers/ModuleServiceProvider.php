@@ -16,6 +16,7 @@ namespace Vanilo\Payment\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
 use Vanilo\Payment\Gateways\NullGateway;
+use Vanilo\Payment\Models\IssuedPaymentRequest;
 use Vanilo\Payment\Models\Payment;
 use Vanilo\Payment\Models\PaymentHistory;
 use Vanilo\Payment\Models\PaymentMethod;
@@ -28,6 +29,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         PaymentMethod::class,
         Payment::class,
         PaymentHistory::class,
+        IssuedPaymentRequest::class,
     ];
 
     protected $enums = [
