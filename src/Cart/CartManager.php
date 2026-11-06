@@ -228,8 +228,13 @@ class CartManager implements CartManagerContract
 
     public function mergeLastActiveCartWithSessionCart($user): void
     {
+        $query = CartProxy::ofUser($user)->actives();
+        if ($currentCartId = $this->getCartId()) {
+            $query->where('id', '!=', $currentCartId);
+        }
+
         /** @var Cart $lastActiveCart */
-        if ($lastActiveCart = CartProxy::ofUser($user)->actives()->latest()->first()) {
+        if ($lastActiveCart = $query->latest()->first()) {
             /** @var CartItem $item */
             foreach ($lastActiveCart->getItems() as $item) {
                 $this->addItem($item->getBuyable(), $item->getQuantity());
