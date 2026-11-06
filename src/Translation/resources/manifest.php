@@ -4,5 +4,5 @@ declare(strict_types=1);
 
 return [
     'name' => 'Vanilo Translation Module',
-    'version' => '6.1-dev',
+    'version' => '6.1.0',
 ];

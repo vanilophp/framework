@@ -2,8 +2,8 @@
 
 ## 6.x Series
 
-## Unreleased
-##### 2026-XX-YY
+## 6.1.0
+##### 2026-11-06
 
 - Added MySQL 9.7 support
 - Added the `cart_id` field to the `orders` table along with a unique constraint. The scope is to prevent two orders from a single cart when a race condition occurs.
