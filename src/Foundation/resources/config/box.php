@@ -23,6 +23,7 @@ return [
         Vanilo\Promotion\Providers\ModuleServiceProvider::class => [],
         Vanilo\Video\Providers\ModuleServiceProvider::class => [],
         Vanilo\Translation\Providers\ModuleServiceProvider::class => [],
+        Vanilo\Snapshot\Providers\ModuleServiceProvider::class => [],
     ],
     'event_listeners' => true,
     'image' => [
