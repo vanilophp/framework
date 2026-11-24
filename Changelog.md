@@ -6,6 +6,7 @@
 ##### 2026-XX-YY
 
 - Changed the minimum Laravel versions to v12.71 and v13.40, respectively
+- Added PHP 8.6 support
 - Added the `EmbeddedTaxDeduction` adjuster with the aim of applying tax deductions to gross priced items
 - Deprecated the `SimpleTaxDeduction` adjuster due to its possibly incorrect calculations, and potential for confusion
 - Fixed the missing Snapshot module from Foundation's box configuration
