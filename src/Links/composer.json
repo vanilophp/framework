@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.4",
         "cviebrock/eloquent-sluggable": "^12.0|^13.0",
-        "laravel/framework": "^12.69.0|^13.30",
+        "laravel/framework": "^12.71|^13.40",
         "konekt/concord": "^1.16"
     },
     "require-dev": {
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.1.x-dev"
+            "dev-master": "6.2.x-dev"
         }
     }
 }

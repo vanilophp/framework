@@ -2,6 +2,11 @@
 
 ## 6.x Series
 
+## Unreleased
+##### 2026-XX-YY
+
+- Changed the minimum Laravel versions to v12.71 and v13.40, respectively
+
 ## 6.1.0
 ##### 2026-11-06
 

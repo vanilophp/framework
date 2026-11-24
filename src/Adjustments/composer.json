@@ -21,7 +21,7 @@
         "konekt/concord": "^1.16",
         "konekt/enum": "^4.2",
         "konekt/enum-eloquent": "^1.9",
-        "laravel/framework": "^12.69.0|^13.30",
+        "laravel/framework": "^12.71|^13.40",
         "vanilo/support": "^6.1"
     },
     "require-dev": {
@@ -33,7 +33,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.1.x-dev"
+            "dev-master": "6.2.x-dev"
         }
     }
 }

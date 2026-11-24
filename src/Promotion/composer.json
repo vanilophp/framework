@@ -24,7 +24,7 @@
         "php": "^8.4",
         "konekt/concord": "^1.13",
         "konekt/xtend": "^2.0",
-        "laravel/framework": "^12.69.0|^13.30",
+        "laravel/framework": "^12.71|^13.40",
         "vanilo/support": "^6.1",
         "vanilo/adjustments": "^6.1"
     },
@@ -38,7 +38,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.1.x-dev"
+            "dev-master": "6.2.x-dev"
         }
     }
 }

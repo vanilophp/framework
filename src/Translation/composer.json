@@ -14,7 +14,7 @@
         "php": "^8.4",
         "konekt/concord": "^1.16",
         "konekt/xtend": "^2.0",
-        "laravel/framework": "^12.69.0|^13.30"
+        "laravel/framework": "^12.71|^13.40"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.0|^12.0",
@@ -28,7 +28,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.1.x-dev"
+            "dev-master": "6.2.x-dev"
         }
     }
 }
