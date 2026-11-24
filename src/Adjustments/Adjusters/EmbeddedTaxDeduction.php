@@ -33,7 +33,8 @@ final class EmbeddedTaxDeduction implements Adjuster
 
     public function __construct(
         private float $rate,
-    ) {}
+    ) {
+    }
 
     public static function reproduceFromAdjustment(Adjustment $adjustment): Adjuster
     {
