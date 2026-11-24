@@ -23,6 +23,7 @@ use Vanilo\Adjustments\Support\HasWriteableTitleAndDescription;
 use Vanilo\Adjustments\Support\IsLockable;
 use Vanilo\Adjustments\Support\RoundsAdjustments;
 
+/** @deprecated as of Vanilo v6.2.0. Use the EmbeddedTaxDeduction adjuster instead */
 final class SimpleTaxDeduction implements Adjuster
 {
     use HasWriteableTitleAndDescription;

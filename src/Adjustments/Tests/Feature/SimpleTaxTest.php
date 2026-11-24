@@ -33,7 +33,7 @@ class SimpleTaxTest extends TestCase
         $this->assertEquals(19, $order->adjustments()->first()->getAmount());
     }
 
-    #[Test] public function a_simple_non_included_tax_deductaion_can_be_added_to_an_adjustable_order()
+    #[Test] public function a_simple_non_included_tax_deduction_can_be_added_to_an_adjustable_order()
     {
         $order = Order::create(['items_total' => 100]);
         $order->adjustments()->create(new SimpleTaxDeduction(20, false));
@@ -43,7 +43,7 @@ class SimpleTaxTest extends TestCase
         $this->assertEquals(80, $order->total());
     }
 
-    #[Test] public function an_included_tax_deducation_gets_calculated_correctly_based_on_the_rate_and_order_items_total()
+    #[Test] public function an_included_tax_deduction_gets_calculated_correctly_based_on_the_rate_and_order_items_total()
     {
         $order = Order::create(['items_total' => 119]);
         $order->adjustments()->create(new SimpleTaxDeduction(19, true));

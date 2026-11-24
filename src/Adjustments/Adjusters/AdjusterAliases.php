@@ -22,6 +22,7 @@ final class AdjusterAliases
         'simple_shipping_fee' => SimpleShippingFee::class,
         'simple_tax' => SimpleTax::class,
         'percent_discount' => PercentDiscount::class,
+        'embedded_tax_deduction' => EmbeddedTaxDeduction::class,
     ];
 
     public static function add(string $alias, string $fqcn): void
