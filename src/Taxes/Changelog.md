@@ -7,6 +7,7 @@
 
 - Changed the minimum Laravel versions to v12.71 and v13.40, respectively
 - Added PHP 8.6 support
+- Deprecated the `DeductiveTaxCalculator` - will be removed in Vanilo 7
 
 ## 6.1.0
 ##### 2026-11-06

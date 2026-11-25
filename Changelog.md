@@ -9,6 +9,7 @@
 - Added PHP 8.6 support
 - Added the `EmbeddedTaxDeduction` adjuster with the aim of applying tax deductions to gross priced items
 - Deprecated the `SimpleTaxDeduction` adjuster due to its possibly incorrect calculations, and potential for confusion
+- Deprecated the `DeductiveTaxCalculator` - will be removed in Vanilo 7
 - Fixed the missing Snapshot module from Foundation's box configuration
 
 ## 6.1.0

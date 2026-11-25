@@ -22,11 +22,12 @@ use Vanilo\Contracts\DetailedAmount;
 use Vanilo\Support\Dto\DetailedAmount as DetailedAmountDto;
 use Vanilo\Taxes\Contracts\TaxCalculator;
 
+/** @deprecated will be removed in Vanilo 7 */
 class DeductiveTaxCalculator implements TaxCalculator
 {
     public static function getName(): string
     {
-        return __('Deductive');
+        return __('Deductive [DEPRECATED]');
     }
 
     public function getAdjuster(?array $configuration = null): SimpleTaxDeduction
