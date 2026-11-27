@@ -54,7 +54,7 @@ class MasterProductVariant extends BaseMasterProductVariant implements Buyable, 
         $this->registerAttachmentsMediaCollection();
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         if ($this->isAttachment($media)) {
             return;

@@ -52,7 +52,7 @@ class MasterProduct extends BaseMasterProduct implements HasMedia
         $this->registerAttachmentsMediaCollection();
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         if ($this->isAttachment($media)) {
             return;
